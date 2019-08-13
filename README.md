@@ -1,4 +1,4 @@
-# Infineon's OPTIGA&trade; Trust M Get Started Guide
+# OPTIGA&trade; Trust M Get Started Guide
 
 ## Description
 

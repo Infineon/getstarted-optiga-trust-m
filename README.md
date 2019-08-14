@@ -5,6 +5,7 @@
 This repository contains one of Application Notes for [OPTIGA™ Trust M](https://github.com/Infineon/optiga-trust-m) security chip.
 
 * You can find more information about the security chip in the core [repository](https://github.com/Infineon/optiga-trust-m)
+* Below you can find the Quickstart guide, on wiki a [step-by-step guidance](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 
 ## Summary
 In this guide you may find the following steps:
@@ -77,6 +78,11 @@ In this guide you may find the following steps:
 * `optiga --rsaencsession`- rsa encrypt session
 * `optiga --rsadecstore`  - rsa decrypt and store data on chip
 * `optiga --rsaencexp`    - rsa decrypt and export data
+
+## Compile and Debug
+
+The guidance on how to compile and denug the setup you can find [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
+
 
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.

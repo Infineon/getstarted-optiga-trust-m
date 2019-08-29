@@ -21,7 +21,7 @@ In this guide you may find the following steps:
 <img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="600">
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
-    * Link to download DAVE 4.4.2: [Dave Download](https://www.segger.com/downloads/jlink/#Documentation)
+    * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)
     * Note: The path where DAVE tool is extracted is henceforth referred to as <DAVE_PATH>.
 *	Segger J-Link tool v6.00 or greater for flashing software on XMC. 
     * Link to download Segger: J-Link tool [Download for Windows, Linux, Mac](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack)

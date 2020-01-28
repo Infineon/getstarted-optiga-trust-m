@@ -9,7 +9,7 @@ Below you can find the instructions on how to compile the code yourself and flas
 * You can find more information about the security chip in the core [repository](https://github.com/Infineon/optiga-trust-m)
 * Below you can find the Quickstart guide, on wiki a [step-by-step guidance](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 
-Note: Please be aware that a direct download of the repository as zip **will NOT work** please see section [Hardware and Software](https://github.com/Infineon/getstarted-optiga-trust-m/blob/master/README.md#hardware-and-software) below for details.
+Note: Please be aware that a direct download of the repository as zip **will NOT work** please see section [Hardware and Software](#hardware-and-software) below for details.
 
 ## Summary
 In this guide you may find the following steps:

@@ -29,7 +29,7 @@ In this guide you may find the following steps:
     * Link to download Segger: J-Link tool [Download for Windows, Linux, Mac](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack)
     * Link to download manual: J-Link manual [Download](https://www.segger.com/downloads/jlink/)
 * Download and install [Tera Term](https://osdn.net/projects/ttssh2/releases/) (recommended)
-* This repository either via a direct [Download](https://github.com/Infineon/getstarted-optiga-trust-m/releases) or a git clone 
+* Download this repository either via a direct [Download](https://github.com/Infineon/getstarted-optiga-trust-m/releases) or clone using git clone --recursive
 
 ## Quickstart
 

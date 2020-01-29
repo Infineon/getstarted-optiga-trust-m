@@ -4,7 +4,8 @@
 
 This repository contains one of Application Notes for [OPTIGA™ Trust M](https://github.com/Infineon/optiga-trust-m) security chip.
 Your evaluation kit comes ready to use with an interactive shell to understand the basic functions offered by the security chip.
-Below you can find the instructions on how to compile the code yourself and flash your evaluation kit (optional).
+Below you can find the instructions on how to compile the code yourself and flash your evaluation kit (optional). 
+*Be aware that the interactive shall is very primitive. You need to type in the commands in one go without using the delete key.*
 
 * You can find more information about the security chip in the core [repository](https://github.com/Infineon/optiga-trust-m)
 * Below you can find the Quickstart guide, on wiki a [step-by-step guidance](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)

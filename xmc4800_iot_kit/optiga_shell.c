@@ -383,7 +383,7 @@ optiga_example_cmd_t optiga_cmds [] =
 		{"    protected update          : "OPTIGA_SHELL,"protected",	optiga_shell_util_protected_update},
 
 		{"    hashing of data           : "OPTIGA_SHELL,"hash",			optiga_shell_crypt_hash},
-		{"    tls pfr sha256            : "OPTIGA_SHELL,"prf",			optiga_shell_crypt_tls_prf_sha256},
+		{"    tls prf sha256            : "OPTIGA_SHELL,"prf",			optiga_shell_crypt_tls_prf_sha256},
 		{"    random number generation  : "OPTIGA_SHELL,"random",		optiga_shell_crypt_random},
 
 		{"    ecc key pair generation   : "OPTIGA_SHELL,"ecckeygen",	optiga_shell_crypt_ecc_generate_keypair},
@@ -392,7 +392,7 @@ optiga_example_cmd_t optiga_cmds [] =
 		{"    ecc diffie hellman        : "OPTIGA_SHELL,"ecdh",			optiga_shell_crypt_ecdh},
 
 		{"    rsa key pair generation   : "OPTIGA_SHELL,"rsakeygen",	optiga_shell_crypt_generate_keypair},
-		{"    rsa sign                  : "OPTIGA_SHELL,"rsaasign",		optiga_shell_crypt_rsa_sign},
+		{"    rsa sign                  : "OPTIGA_SHELL,"rsasign",		optiga_shell_crypt_rsa_sign},
 		{"    rsa verify sign           : "OPTIGA_SHELL,"rsaverify",	optiga_shell_crypt_rsa_verify},
 		{"    rsa encrypt message       : "OPTIGA_SHELL,"rsaencmsg",	optiga_shell_crypt_rsa_encrypt_message},
 		{"    rsa encrypt session       : "OPTIGA_SHELL,"rsaencsession",optiga_shell_crypt_rsa_encrypt_session},

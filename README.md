@@ -69,14 +69,14 @@ In this guide you may find the following steps:
 * `optiga --counter`      - update counter
 * `optiga --protected`    - protected update
 * `optiga --hash`         - hashing of data
-* `optiga --prf`          - tls pfr sha256
+* `optiga --prf`          - tls prf sha256
 * `optiga --random`       - random number generation
 * `optiga --ecckeygen`    - ecc key pair generation
 * `optiga --ecdsasign`    - ecdsa sign
 * `optiga --ecdsaverify`  - ecdsa sign and verify signature
 * `optiga --ecdh`         - ecc diffie hellman
 * `optiga --rsakeygen`    - rsa key pair generation
-* `optiga --rsaasign`     - rsa sign
+* `optiga --rsasign`     - rsa sign
 * `optiga --rsaverify`    - rsa sign and verify signature
 * `optiga --rsaencmsg`    - rsa encrypt message
 * `optiga --rsaencsession`- rsa encrypt session

@@ -21,9 +21,13 @@ In this guide you may find the following steps:
 
 ## Hardware and Software
 
-* This get started guide uses the OPTIGA™ Trust M evaluation kit
+* This get started guide uses the OPTIGA™ Trust M evaluation kit or the XCM1400 XTREME End-to-End Security Connectivity Kit
 
-<img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="600">
+### OPTIGA™ Trust M evaluation kit
+<img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
+
+### XCM1400 XTREME End-to-End Security Connectivity Kit
+<img src="https://github.com/oscarcreativeshop/Assets/blob/master/Pictures/xtreme-connectivity-kit.png" title="XCM1400 XTREME End-to-End Security Connectivity Kit" width="400">
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
     * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)

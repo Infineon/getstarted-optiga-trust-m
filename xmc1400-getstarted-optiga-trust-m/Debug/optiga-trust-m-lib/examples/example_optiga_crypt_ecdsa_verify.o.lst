@@ -1,0 +1,605 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "example_optiga_crypt_ecdsa_verify.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_crypt_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_crypt_callback:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga/example_optiga_crypt_ecdsa_verify.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \file example_optiga_crypt_ecdsa_verify.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \brief   This file provides the example for ECDSA verify operation using #optiga_crypt_ecdsa_veri
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * \ingroup grOptigaExamples
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** *
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** * @{
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** */
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** #include "optiga/optiga_crypt.h"
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** #include "optiga_example.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** #ifdef OPTIGA_CRYPT_ECDSA_VERIFY_ENABLED
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** /**
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  * Callback when optiga_crypt_xxxx operation is completed asynchronously
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  */
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** static volatile optiga_lib_status_t optiga_lib_status;
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** //lint --e{818} suppress "argument "context" is not used in the sample provided"
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** static void optiga_crypt_callback(void * context, optiga_lib_status_t return_status)
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** {
+  25              	 .loc 1 49 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     optiga_lib_status = return_status;
+  28              	 .loc 1 50 0
+  29 0000 014B     	 ldr r3,.L2
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     if (NULL != context)
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     {
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         // callback to upper layer here
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     }
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** }
+  30              	 .loc 1 55 0
+  31              	 
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     optiga_lib_status = return_status;
+  32              	 .loc 1 50 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 55 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE0:
+  43              	 .section .text.example_optiga_crypt_ecdsa_verify,"ax",%progbits
+  44              	 .align 1
+  45              	 .global example_optiga_crypt_ecdsa_verify
+  46              	 .code 16
+  47              	 .thumb_func
+  49              	example_optiga_crypt_ecdsa_verify:
+  50              	.LFB1:
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** static uint8_t public_key [] =
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** {
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     //BitString Format
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     0x03,
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         //Remaining length
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         0x42,
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //unused bits
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x00,
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //Compression format
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x04,
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //NIST-256 Public Key
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x8b,0x88,0x9c,0x1d,0xd6,0x07,0x58,0x2e,
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0xd6,0xf8,0x2c,0xc2,0xd9,0xbe,0xd0,0xfe,
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x64,0xf3,0x24,0x5e,0x94,0x7d,0x54,0xcd,
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x20,0xdc,0x58,0x98,0xcf,0x51,0x31,0x44,
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x22,0xea,0x01,0xd4,0x0b,0x23,0xb2,0x45,
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x7c,0x42,0xdf,0x3c,0xfb,0x0d,0x33,0x10,
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0xb8,0x49,0xb7,0xaa,0x0a,0x85,0xde,0xe7,
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x6a,0xf1,0xac,0x31,0x31,0x1e,0x8c,0x4b
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** };
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** //SHA-256 Digest
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** static uint8_t digest [] =
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** {
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     0xE9,0x5F,0xB3,0xB1,0x9F,0xA4,0xDD,0x27,0xFE,0xAE,0xB3,0x33,0x40,0x80,0xCE,0x35,
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     0xDF,0x3E,0x08,0xF1,0x6F,0x36,0xF3,0x24,0x0E,0xB0,0xB3,0x2F,0xAB,0xD0,0x90,0xCA,
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** };
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** // ECDSA Signature
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** static uint8_t signature [] =
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** {
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     //DER INTEGER Format
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     0x02,
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         //Length
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         0x20,
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x39,0xA4,0x70,0xE9,0x32,0x30,0xF5,0x5F,
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0xA4,0xDF,0x8A,0x07,0x36,0x58,0x65,0xC6,
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0xE6,0x1B,0x07,0x51,0xFB,0xC6,0x16,0x05,
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0xEB,0xDF,0x56,0x6D,0xA9,0x50,0x3B,0x24,
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     //DER INTEGER Format
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     0x02,
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         //Length
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         0x1E,
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x49,0x33,0x6C,0x07,0x2B,0xD0,0x40,0x20,
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x0F,0xD4,0xE0,0x7E,0x67,0x66,0xC4,0xF5,
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x7F,0x98,0xEC,0x38,0xB8,0xEF,0x44,0x8F,
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             0x6A,0xE1,0xFD,0x1E,0x92,0xB4,
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** };
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** /**
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  * The below example demonstrates the verification of signature using
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  * the public key provided by host.
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  *
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  * Example for #optiga_crypt_ecdsa_verify
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  *
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****  */
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** void example_optiga_crypt_ecdsa_verify(void)
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** {
+  51              	 .loc 1 114 0
+  52              	 .cfi_startproc
+  53 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  54              	.LCFI0:
+  55              	 .cfi_def_cfa_offset 20
+  56              	 .cfi_offset 4,-20
+  57              	 .cfi_offset 5,-16
+  58              	 .cfi_offset 6,-12
+  59              	 .cfi_offset 7,-8
+  60              	 .cfi_offset 14,-4
+  61 0002 89B0     	 sub sp,sp,#36
+  62              	.LCFI1:
+  63              	 .cfi_def_cfa_offset 56
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     public_key_from_host_t public_key_details = {
+  64              	 .loc 1 115 0
+  65 0004 06AF     	 add r7,sp,#24
+  66 0006 3A1C     	 mov r2,r7
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                  public_key,
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                  sizeof(public_key),
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                  (uint8_t)OPTIGA_ECC_CURVE_NIST_P_256
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                 };
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     optiga_lib_status_t return_status = 0;
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     optiga_crypt_t * me = NULL;
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     OPTIGA_EXAMPLE_LOG_MESSAGE(__FUNCTION__);
+  67              	 .loc 1 124 0
+  68 0008 204D     	 ldr r5,.L26
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     public_key_from_host_t public_key_details = {
+  69              	 .loc 1 115 0
+  70 000a 214B     	 ldr r3,.L26+4
+  71              	 .loc 1 124 0
+  72 000c 214C     	 ldr r4,.L26+8
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     public_key_from_host_t public_key_details = {
+  73              	 .loc 1 115 0
+  74 000e 03CB     	 ldmia r3!,{r0,r1}
+  75 0010 03C2     	 stmia r2!,{r0,r1}
+  76              	.LVL1:
+  77              	 .loc 1 124 0
+  78 0012 2148     	 ldr r0,.L26+12
+  79 0014 211C     	 mov r1,r4
+  80 0016 2A1C     	 mov r2,r5
+  81 0018 FFF7FEFF 	 bl optiga_lib_print_message
+  82              	.LVL2:
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     do
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     {
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         /**
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****          * 1. Create OPTIGA Crypt Instance
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****          */
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         me = optiga_crypt_create(0, optiga_crypt_callback, NULL);
+  83              	 .loc 1 130 0
+  84 001c 0020     	 mov r0,#0
+  85 001e 1F49     	 ldr r1,.L26+16
+  86 0020 021C     	 mov r2,r0
+  87 0022 FFF7FEFF 	 bl optiga_crypt_create
+  88              	.LVL3:
+  89 0026 0595     	 str r5,[sp,#20]
+  90 0028 061E     	 sub r6,r0,#0
+  91              	.LVL4:
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         if (NULL == me)
+  92              	 .loc 1 131 0
+  93 002a 1CD0     	 beq .L8
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         {
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             break;
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         }
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         /**
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****          * 2. Verify ECDSA signature using public key from host
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****          */
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+  94              	 .loc 1 139 0
+  95 002c 0123     	 mov r3,#1
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         return_status = optiga_crypt_ecdsa_verify (me,
+  96              	 .loc 1 140 0
+  97 002e 4222     	 mov r2,#66
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         return_status = optiga_crypt_ecdsa_verify (me,
+  98              	 .loc 1 139 0
+  99 0030 1B4D     	 ldr r5,.L26+20
+ 100              	 .loc 1 140 0
+ 101 0032 1C49     	 ldr r1,.L26+24
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         return_status = optiga_crypt_ecdsa_verify (me,
+ 102              	 .loc 1 139 0
+ 103 0034 2B80     	 strh r3,[r5]
+ 104              	 .loc 1 140 0
+ 105 0036 0092     	 str r2,[sp]
+ 106 0038 0193     	 str r3,[sp,#4]
+ 107 003a 223A     	 sub r2,r2,#34
+ 108 003c 0297     	 str r7,[sp,#8]
+ 109 003e 1A4B     	 ldr r3,.L26+28
+ 110 0040 FFF7FEFF 	 bl optiga_crypt_ecdsa_verify
+ 111              	.LVL5:
+ 112 0044 021E     	 sub r2,r0,#0
+ 113              	.LVL6:
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    digest,
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    sizeof(digest),
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    signature,
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    sizeof(signature),
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    OPTIGA_CRYPT_HOST_DATA,
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****                                                    &public_key_details);
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 114              	 .loc 1 148 0
+ 115 0046 09D1     	 bne .L6
+ 116              	.L7:
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         {
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             break;
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         }
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 117              	 .loc 1 153 0 discriminator 1
+ 118 0048 2B88     	 ldrh r3,[r5]
+ 119 004a 012B     	 cmp r3,#1
+ 120 004c FCD0     	 beq .L7
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         {
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //Wait until the optiga_crypt_ecdsa_verify operation is completed
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         }
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** 
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         if ((OPTIGA_LIB_SUCCESS != optiga_lib_status))
+ 121              	 .loc 1 158 0
+ 122 004e 2B88     	 ldrh r3,[r5]
+ 123 0050 002B     	 cmp r3,#0
+ 124 0052 08D0     	 beq .L8
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         {
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //Signature verification failed.
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             return_status = optiga_lib_status;
+ 125              	 .loc 1 161 0
+ 126 0054 2A88     	 ldrh r2,[r5]
+ 127 0056 92B2     	 uxth r2,r2
+ 128              	.LVL7:
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             break;
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         }
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         return_status = OPTIGA_LIB_SUCCESS;
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     } while (FALSE);
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 129              	 .loc 1 166 0
+ 130 0058 002A     	 cmp r2,#0
+ 131 005a 04D0     	 beq .L8
+ 132              	.LVL8:
+ 133              	.L6:
+ 134              	 .loc 1 166 0 is_stmt 0 discriminator 1
+ 135 005c 201C     	 mov r0,r4
+ 136 005e 1349     	 ldr r1,.L26+32
+ 137 0060 FFF7FEFF 	 bl optiga_lib_print_status
+ 138              	.LVL9:
+ 139 0064 06E0     	 b .L9
+ 140              	.L8:
+ 141              	 .loc 1 166 0 discriminator 2
+ 142 0066 201C     	 mov r0,r4
+ 143 0068 0599     	 ldr r1,[sp,#20]
+ 144 006a 0022     	 mov r2,#0
+ 145 006c FFF7FEFF 	 bl optiga_lib_print_status
+ 146              	.LVL10:
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     if (me)
+ 147              	 .loc 1 168 0 is_stmt 1 discriminator 2
+ 148 0070 002E     	 cmp r6,#0
+ 149 0072 08D0     	 beq .L4
+ 150              	.L9:
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     {
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         //Destroy the instance after the completion of usecase if not required.
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         return_status = optiga_crypt_destroy(me);
+ 151              	 .loc 1 171 0
+ 152 0074 301C     	 mov r0,r6
+ 153 0076 FFF7FEFF 	 bl optiga_crypt_destroy
+ 154              	.LVL11:
+ 155 007a 021E     	 sub r2,r0,#0
+ 156              	.LVL12:
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 157              	 .loc 1 172 0
+ 158 007c 03D0     	 beq .L4
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         {
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             //lint --e{774} suppress This is a generic macro
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 159              	 .loc 1 175 0 discriminator 1
+ 160 007e 201C     	 mov r0,r4
+ 161              	.LVL13:
+ 162 0080 0A49     	 ldr r1,.L26+32
+ 163 0082 FFF7FEFF 	 bl optiga_lib_print_status
+ 164              	.LVL14:
+ 165              	.L4:
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****         }
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     }
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c ****     
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecdsa_verify.c **** }
+ 166              	 .loc 1 179 0
+ 167 0086 09B0     	 add sp,sp,#36
+ 168              	 
+ 169              	.LVL15:
+ 170 0088 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 171              	.L27:
+ 172 008a C046     	 .align 2
+ 173              	.L26:
+ 174 008c 15000000 	 .word .LC7
+ 175 0090 00000000 	 .word .LANCHOR1
+ 176 0094 00000000 	 .word .LC5
+ 177 0098 00000000 	 .word .LANCHOR2
+ 178 009c 00000000 	 .word optiga_crypt_callback
+ 179 00a0 00000000 	 .word .LANCHOR0
+ 180 00a4 00000000 	 .word .LANCHOR3
+ 181 00a8 00000000 	 .word .LANCHOR4
+ 182 00ac 1A000000 	 .word .LC13
+ 183              	 .cfi_endproc
+ 184              	.LFE1:
+ 186              	 .section .rodata
+ 187              	 .align 2
+ 188              	 .set .LANCHOR1,.+0
+ 189              	.LC2:
+ 190 0000 00000000 	 .word public_key
+ 191 0004 4400     	 .short 68
+ 192 0006 03       	 .byte 3
+ 193 0007 00       	 .space 1
+ 194              	 .section .data.signature,"aw",%progbits
+ 195              	 .set .LANCHOR4,.+0
+ 198              	signature:
+ 199 0000 02       	 .byte 2
+ 200 0001 20       	 .byte 32
+ 201 0002 39       	 .byte 57
+ 202 0003 A4       	 .byte -92
+ 203 0004 70       	 .byte 112
+ 204 0005 E9       	 .byte -23
+ 205 0006 32       	 .byte 50
+ 206 0007 30       	 .byte 48
+ 207 0008 F5       	 .byte -11
+ 208 0009 5F       	 .byte 95
+ 209 000a A4       	 .byte -92
+ 210 000b DF       	 .byte -33
+ 211 000c 8A       	 .byte -118
+ 212 000d 07       	 .byte 7
+ 213 000e 36       	 .byte 54
+ 214 000f 58       	 .byte 88
+ 215 0010 65       	 .byte 101
+ 216 0011 C6       	 .byte -58
+ 217 0012 E6       	 .byte -26
+ 218 0013 1B       	 .byte 27
+ 219 0014 07       	 .byte 7
+ 220 0015 51       	 .byte 81
+ 221 0016 FB       	 .byte -5
+ 222 0017 C6       	 .byte -58
+ 223 0018 16       	 .byte 22
+ 224 0019 05       	 .byte 5
+ 225 001a EB       	 .byte -21
+ 226 001b DF       	 .byte -33
+ 227 001c 56       	 .byte 86
+ 228 001d 6D       	 .byte 109
+ 229 001e A9       	 .byte -87
+ 230 001f 50       	 .byte 80
+ 231 0020 3B       	 .byte 59
+ 232 0021 24       	 .byte 36
+ 233 0022 02       	 .byte 2
+ 234 0023 1E       	 .byte 30
+ 235 0024 49       	 .byte 73
+ 236 0025 33       	 .byte 51
+ 237 0026 6C       	 .byte 108
+ 238 0027 07       	 .byte 7
+ 239 0028 2B       	 .byte 43
+ 240 0029 D0       	 .byte -48
+ 241 002a 40       	 .byte 64
+ 242 002b 20       	 .byte 32
+ 243 002c 0F       	 .byte 15
+ 244 002d D4       	 .byte -44
+ 245 002e E0       	 .byte -32
+ 246 002f 7E       	 .byte 126
+ 247 0030 67       	 .byte 103
+ 248 0031 66       	 .byte 102
+ 249 0032 C4       	 .byte -60
+ 250 0033 F5       	 .byte -11
+ 251 0034 7F       	 .byte 127
+ 252 0035 98       	 .byte -104
+ 253 0036 EC       	 .byte -20
+ 254 0037 38       	 .byte 56
+ 255 0038 B8       	 .byte -72
+ 256 0039 EF       	 .byte -17
+ 257 003a 44       	 .byte 68
+ 258 003b 8F       	 .byte -113
+ 259 003c 6A       	 .byte 106
+ 260 003d E1       	 .byte -31
+ 261 003e FD       	 .byte -3
+ 262 003f 1E       	 .byte 30
+ 263 0040 92       	 .byte -110
+ 264 0041 B4       	 .byte -76
+ 265              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 266              	.LC5:
+ 267 0000 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 267      69676120 
+ 267      6578616D 
+ 267      706C655D 
+ 267      20203A20 
+ 268              	.LC7:
+ 269 0015 1B5B306D 	 .ascii "\033[0m\000"
+ 269      00
+ 270              	.LC13:
+ 271 001a 1B5B3331 	 .ascii "\033[31m\000"
+ 271      6D00
+ 272              	 .section .rodata.__FUNCTION__.6004,"a",%progbits
+ 273              	 .set .LANCHOR2,.+0
+ 276              	__FUNCTION__.6004:
+ 277 0000 6578616D 	 .ascii "example_optiga_crypt_ecdsa_verify\000"
+ 277      706C655F 
+ 277      6F707469 
+ 277      67615F63 
+ 277      72797074 
+ 278              	 .section .data.public_key,"aw",%progbits
+ 281              	public_key:
+ 282 0000 03       	 .byte 3
+ 283 0001 42       	 .byte 66
+ 284 0002 00       	 .byte 0
+ 285 0003 04       	 .byte 4
+ 286 0004 8B       	 .byte -117
+ 287 0005 88       	 .byte -120
+ 288 0006 9C       	 .byte -100
+ 289 0007 1D       	 .byte 29
+ 290 0008 D6       	 .byte -42
+ 291 0009 07       	 .byte 7
+ 292 000a 58       	 .byte 88
+ 293 000b 2E       	 .byte 46
+ 294 000c D6       	 .byte -42
+ 295 000d F8       	 .byte -8
+ 296 000e 2C       	 .byte 44
+ 297 000f C2       	 .byte -62
+ 298 0010 D9       	 .byte -39
+ 299 0011 BE       	 .byte -66
+ 300 0012 D0       	 .byte -48
+ 301 0013 FE       	 .byte -2
+ 302 0014 64       	 .byte 100
+ 303 0015 F3       	 .byte -13
+ 304 0016 24       	 .byte 36
+ 305 0017 5E       	 .byte 94
+ 306 0018 94       	 .byte -108
+ 307 0019 7D       	 .byte 125
+ 308 001a 54       	 .byte 84
+ 309 001b CD       	 .byte -51
+ 310 001c 20       	 .byte 32
+ 311 001d DC       	 .byte -36
+ 312 001e 58       	 .byte 88
+ 313 001f 98       	 .byte -104
+ 314 0020 CF       	 .byte -49
+ 315 0021 51       	 .byte 81
+ 316 0022 31       	 .byte 49
+ 317 0023 44       	 .byte 68
+ 318 0024 22       	 .byte 34
+ 319 0025 EA       	 .byte -22
+ 320 0026 01       	 .byte 1
+ 321 0027 D4       	 .byte -44
+ 322 0028 0B       	 .byte 11
+ 323 0029 23       	 .byte 35
+ 324 002a B2       	 .byte -78
+ 325 002b 45       	 .byte 69
+ 326 002c 7C       	 .byte 124
+ 327 002d 42       	 .byte 66
+ 328 002e DF       	 .byte -33
+ 329 002f 3C       	 .byte 60
+ 330 0030 FB       	 .byte -5
+ 331 0031 0D       	 .byte 13
+ 332 0032 33       	 .byte 51
+ 333 0033 10       	 .byte 16
+ 334 0034 B8       	 .byte -72
+ 335 0035 49       	 .byte 73
+ 336 0036 B7       	 .byte -73
+ 337 0037 AA       	 .byte -86
+ 338 0038 0A       	 .byte 10
+ 339 0039 85       	 .byte -123
+ 340 003a DE       	 .byte -34
+ 341 003b E7       	 .byte -25
+ 342 003c 6A       	 .byte 106
+ 343 003d F1       	 .byte -15
+ 344 003e AC       	 .byte -84
+ 345 003f 31       	 .byte 49
+ 346 0040 31       	 .byte 49
+ 347 0041 1E       	 .byte 30
+ 348 0042 8C       	 .byte -116
+ 349 0043 4B       	 .byte 75
+ 350              	 .section .data.digest,"aw",%progbits
+ 351              	 .set .LANCHOR3,.+0
+ 354              	digest:
+ 355 0000 E9       	 .byte -23
+ 356 0001 5F       	 .byte 95
+ 357 0002 B3       	 .byte -77
+ 358 0003 B1       	 .byte -79
+ 359 0004 9F       	 .byte -97
+ 360 0005 A4       	 .byte -92
+ 361 0006 DD       	 .byte -35
+ 362 0007 27       	 .byte 39
+ 363 0008 FE       	 .byte -2
+ 364 0009 AE       	 .byte -82
+ 365 000a B3       	 .byte -77
+ 366 000b 33       	 .byte 51
+ 367 000c 40       	 .byte 64
+ 368 000d 80       	 .byte -128
+ 369 000e CE       	 .byte -50
+ 370 000f 35       	 .byte 53
+ 371 0010 DF       	 .byte -33
+ 372 0011 3E       	 .byte 62
+ 373 0012 08       	 .byte 8
+ 374 0013 F1       	 .byte -15
+ 375 0014 6F       	 .byte 111
+ 376 0015 36       	 .byte 54
+ 377 0016 F3       	 .byte -13
+ 378 0017 24       	 .byte 36
+ 379 0018 0E       	 .byte 14
+ 380 0019 B0       	 .byte -80
+ 381 001a B3       	 .byte -77
+ 382 001b 2F       	 .byte 47
+ 383 001c AB       	 .byte -85
+ 384 001d D0       	 .byte -48
+ 385 001e 90       	 .byte -112
+ 386 001f CA       	 .byte -54
+ 387              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 388              	 .align 1
+ 389              	 .set .LANCHOR0,.+0
+ 392              	optiga_lib_status:
+ 393 0000 0000     	 .space 2
+ 394              	 .text
+ 395              	.Letext0:
+ 396              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 397              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 398              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 399              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 400              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 401              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_crypt.h"
+ 402              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 example_optiga_crypt_ecdsa_verify.c
+    {standard input}:18     .text.optiga_crypt_callback:00000000 $t
+    {standard input}:22     .text.optiga_crypt_callback:00000000 optiga_crypt_callback
+    {standard input}:39     .text.optiga_crypt_callback:00000008 $d
+    {standard input}:44     .text.example_optiga_crypt_ecdsa_verify:00000000 $t
+    {standard input}:49     .text.example_optiga_crypt_ecdsa_verify:00000000 example_optiga_crypt_ecdsa_verify
+    {standard input}:174    .text.example_optiga_crypt_ecdsa_verify:0000008c $d
+    {standard input}:187    .rodata:00000000 $d
+    {standard input}:281    .data.public_key:00000000 public_key
+    {standard input}:198    .data.signature:00000000 signature
+    {standard input}:276    .rodata.__FUNCTION__.6004:00000000 __FUNCTION__.6004
+    {standard input}:354    .data.digest:00000000 digest
+    {standard input}:388    .bss.optiga_lib_status:00000000 $d
+    {standard input}:392    .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+optiga_lib_print_message
+optiga_crypt_create
+optiga_crypt_ecdsa_verify
+optiga_lib_print_status
+optiga_crypt_destroy

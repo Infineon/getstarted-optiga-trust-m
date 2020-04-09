@@ -1,0 +1,165 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "main.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.startup.main,"ax",%progbits
+  18              	 .align 1
+  19              	 .global main
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	main:
+  24              	.LFB276:
+  25              	 .file 1 "../main.c"
+   1:../main.c     **** /**
+   2:../main.c     **** INFINEON_OPTIGA_SOURCE_CODE_BOILER_PLATE
+   3:../main.c     **** *
+   4:../main.c     **** * \file main_xmc4800_sample.c
+   5:../main.c     **** *
+   6:../main.c     **** * \brief   This sample demonstrates OPTIGA use cases.
+   7:../main.c     **** *
+   8:../main.c     **** * \ingroup grOptigaExamples
+   9:../main.c     **** *
+  10:../main.c     **** * @{
+  11:../main.c     **** */
+  12:../main.c     **** //Declarations from DAVE Code Generation (includes SFR declaration)
+  13:../main.c     **** #include <DAVE.h>
+  14:../main.c     **** #include "optiga/optiga_crypt.h"
+  15:../main.c     **** #include "optiga/optiga_util.h"
+  16:../main.c     **** #include "optiga/common/optiga_lib_logger.h"
+  17:../main.c     **** #include "optiga/pal/pal_os_event.h"
+  18:../main.c     **** #include "optiga/pal/pal.h"
+  19:../main.c     **** #include "optiga/pal/pal_os_timer.h"
+  20:../main.c     **** #include "optiga_example.h"
+  21:../main.c     **** #include "optiga/pal/pal_logger.h"
+  22:../main.c     **** 
+  23:../main.c     **** extern void optiga_shell_wait_for_user(void);
+  24:../main.c     **** extern void optiga_shell_begin(void);
+  25:../main.c     **** 
+  26:../main.c     **** extern pal_logger_t cunit_console;
+  27:../main.c     **** 
+  28:../main.c     **** 
+  29:../main.c     **** /**
+  30:../main.c     ****  * This function is the entry point of sample.
+  31:../main.c     ****  *
+  32:../main.c     ****  * \retval
+  33:../main.c     ****  *  0 on success
+  34:../main.c     ****  *  1 on failure
+  35:../main.c     ****  */
+  36:../main.c     **** 
+  37:../main.c     **** int main(void)
+  38:../main.c     **** {
+  26              	 .loc 1 38 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 08B5     	 push {r3,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 8
+  32              	 .cfi_offset 3,-8
+  33              	 .cfi_offset 14,-4
+  39:../main.c     ****     DAVE_STATUS_t status;
+  40:../main.c     ****     uint8_t return_value = 0;
+  41:../main.c     **** 
+  42:../main.c     ****     // Initialization of DAVE Apps
+  43:../main.c     ****     status = DAVE_Init(); /* Initialization of DAVE APPs  */
+  34              	 .loc 1 43 0
+  35 0002 FFF7FEFF 	 bl DAVE_Init
+  36              	.LVL1:
+  44:../main.c     ****     if (status == DAVE_STATUS_FAILURE)
+  37              	 .loc 1 44 0
+  38 0006 0128     	 cmp r0,#1
+  39 0008 00D1     	 bne .L2
+  40              	.L3:
+  45:../main.c     ****     {
+  46:../main.c     ****         /* Placeholder for error handler code. The while loop below can be replaced with an user er
+  47:../main.c     ****         XMC_DEBUG("DAVE APPs initialization failed\n");
+  48:../main.c     **** 
+  49:../main.c     ****         while (1U)
+  50:../main.c     ****         {
+  51:../main.c     **** 
+  52:../main.c     ****         }
+  41              	 .loc 1 52 0 discriminator 1
+  42 000a FEE7     	 b .L3
+  43              	.L2:
+  53:../main.c     ****     }
+  54:../main.c     **** 
+  55:../main.c     ****     do
+  56:../main.c     ****     {
+  57:../main.c     **** 
+  58:../main.c     ****         if(PAL_STATUS_SUCCESS != pal_logger_init(&cunit_console))
+  44              	 .loc 1 58 0
+  45 000c 0648     	 ldr r0,.L6
+  46              	.LVL2:
+  47 000e FFF7FEFF 	 bl pal_logger_init
+  48              	.LVL3:
+  49 0012 0028     	 cmp r0,#0
+  50 0014 06D1     	 bne .L4
+  59:../main.c     ****         {
+  60:../main.c     ****             break;
+  61:../main.c     ****         }
+  62:../main.c     **** 
+  63:../main.c     ****         pal_os_timer_delay_in_milliseconds(100);
+  51              	 .loc 1 63 0
+  52 0016 6430     	 add r0,r0,#100
+  53 0018 FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+  54              	.LVL4:
+  64:../main.c     **** 
+  65:../main.c     ****         optiga_shell_wait_for_user();
+  55              	 .loc 1 65 0
+  56 001c FFF7FEFF 	 bl optiga_shell_wait_for_user
+  57              	.LVL5:
+  66:../main.c     ****         optiga_shell_begin();
+  58              	 .loc 1 66 0
+  59 0020 FFF7FEFF 	 bl optiga_shell_begin
+  60              	.LVL6:
+  61              	.L4:
+  67:../main.c     **** 
+  68:../main.c     ****     }while (FALSE);
+  69:../main.c     **** 
+  70:../main.c     ****     return return_value;
+  71:../main.c     **** }
+  62              	 .loc 1 71 0
+  63 0024 0020     	 mov r0,#0
+  64              	 
+  65 0026 08BD     	 pop {r3,pc}
+  66              	.L7:
+  67              	 .align 2
+  68              	.L6:
+  69 0028 00000000 	 .word cunit_console
+  70              	 .cfi_endproc
+  71              	.LFE276:
+  73              	 .text
+  74              	.Letext0:
+  75              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+  76              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+  77              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/DAVE.h"
+  78              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal.h"
+  79              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_logger.h"
+  80              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+  81              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+  82              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_os_timer.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+    {standard input}:18     .text.startup.main:00000000 $t
+    {standard input}:23     .text.startup.main:00000000 main
+    {standard input}:69     .text.startup.main:00000028 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+DAVE_Init
+pal_logger_init
+pal_os_timer_delay_in_milliseconds
+optiga_shell_wait_for_user
+optiga_shell_begin
+cunit_console

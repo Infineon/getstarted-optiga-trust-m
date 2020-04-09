@@ -1,0 +1,1144 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "example_optiga_util_write_data.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_util_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_util_callback:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga/example_optiga_util_write_data.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \file example_optiga_util_write_data.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \brief   This file provides the example for writing data/metadata to OPTIGA using
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *          #optiga_util_write_data and #optiga_util_write_metadata.
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * \ingroup grOptigaExamples
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** *
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** * @{
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** */
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** #include "optiga/optiga_util.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** #include "optiga_example.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** /**
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  * Sample Trust Anchor
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  */
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** static uint8_t trust_anchor [] = {
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     //00    01    02    03    04    05    06    07    08    09    0A    0B    0C    0D    0E    0F
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x30, 0x82, 0x02, 0x7E, 0x30, 0x82, 0x02, 0x05, 0xA0, 0x03, 0x02, 0x01, 0x02, 0x02, 0x09, 0x00,
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x9B, 0x0C, 0x24, 0xB4, 0x5E, 0x7D, 0xE3, 0x73, 0x30, 0x0A, 0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE,
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x3D, 0x04, 0x03, 0x02, 0x30, 0x74, 0x31, 0x0B, 0x30, 0x09, 0x06, 0x03, 0x55, 0x04, 0x06, 0x13,
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x02, 0x44, 0x45, 0x31, 0x21, 0x30, 0x1F, 0x06, 0x03, 0x55, 0x04, 0x0A, 0x0C, 0x18, 0x49, 0x6E,
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x66, 0x69, 0x6E, 0x65, 0x6F, 0x6E, 0x20, 0x54, 0x65, 0x63, 0x68, 0x6E, 0x6F, 0x6C, 0x6F, 0x67,
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x69, 0x65, 0x73, 0x20, 0x41, 0x47, 0x31, 0x1B, 0x30, 0x19, 0x06, 0x03, 0x55, 0x04, 0x0B, 0x0C,
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x12, 0x4F, 0x50, 0x54, 0x49, 0x47, 0x41, 0x28, 0x54, 0x4D, 0x29, 0x20, 0x54, 0x72, 0x75, 0x73,
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x74, 0x20, 0x58, 0x31, 0x25, 0x30, 0x23, 0x06, 0x03, 0x55, 0x04, 0x03, 0x0C, 0x1C, 0x49, 0x6E,
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x66, 0x69, 0x6E, 0x65, 0x6F, 0x6E, 0x20, 0x54, 0x65, 0x73, 0x74, 0x20, 0x53, 0x65, 0x72, 0x76,
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x65, 0x72, 0x20, 0x52, 0x6F, 0x6F, 0x74, 0x20, 0x43, 0x41, 0x30, 0x1E, 0x17, 0x0D, 0x31, 0x36,
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x31, 0x30, 0x31, 0x34, 0x30, 0x33, 0x35, 0x38, 0x33, 0x36, 0x5A, 0x17, 0x0D, 0x34, 0x31, 0x31,
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x30, 0x30, 0x38, 0x30, 0x33, 0x35, 0x38, 0x33, 0x36, 0x5A, 0x30, 0x74, 0x31, 0x0B, 0x30, 0x09,
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x06, 0x03, 0x55, 0x04, 0x06, 0x13, 0x02, 0x44, 0x45, 0x31, 0x21, 0x30, 0x1F, 0x06, 0x03, 0x55,
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x04, 0x0A, 0x0C, 0x18, 0x49, 0x6E, 0x66, 0x69, 0x6E, 0x65, 0x6F, 0x6E, 0x20, 0x54, 0x65, 0x63,
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x68, 0x6E, 0x6F, 0x6C, 0x6F, 0x67, 0x69, 0x65, 0x73, 0x20, 0x41, 0x47, 0x31, 0x1B, 0x30, 0x19,
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x06, 0x03, 0x55, 0x04, 0x0B, 0x0C, 0x12, 0x4F, 0x50, 0x54, 0x49, 0x47, 0x41, 0x28, 0x54, 0x4D,
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x29, 0x20, 0x54, 0x72, 0x75, 0x73, 0x74, 0x20, 0x58, 0x31, 0x25, 0x30, 0x23, 0x06, 0x03, 0x55,
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x04, 0x03, 0x0C, 0x1C, 0x49, 0x6E, 0x66, 0x69, 0x6E, 0x65, 0x6F, 0x6E, 0x20, 0x54, 0x65, 0x73,
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x74, 0x20, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x20, 0x52, 0x6F, 0x6F, 0x74, 0x20, 0x43, 0x41,
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x30, 0x76, 0x30, 0x10, 0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01, 0x06, 0x05, 0x2B,
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x81, 0x04, 0x00, 0x22, 0x03, 0x62, 0x00, 0x04, 0x7B, 0x2E, 0xE6, 0xFB, 0xBD, 0x6F, 0x40, 0x0F,
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x41, 0x9F, 0xE5, 0xF0, 0x8C, 0x97, 0x21, 0xB0, 0x07, 0xB5, 0xBB, 0xD2, 0xB8, 0x5A, 0x14, 0x3B,
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x75, 0x54, 0x7E, 0xEA, 0xFE, 0xF2, 0x8D, 0x5A, 0xB8, 0x54, 0xE0, 0xC8, 0xAD, 0xED, 0xF1, 0xD5,
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x8B, 0x97, 0xBA, 0x02, 0x3E, 0xD9, 0x25, 0xE0, 0x00, 0x86, 0x17, 0x35, 0xE6, 0xE6, 0xD9, 0x12,
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x0F, 0x8A, 0x21, 0x1C, 0x62, 0xFA, 0xCE, 0xF6, 0x9E, 0xB1, 0xF8, 0x8C, 0xA3, 0xDC, 0x52, 0x04,
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x83, 0xEB, 0xA0, 0xB3, 0xFA, 0xB0, 0xCA, 0x02, 0x30, 0xB1, 0xFE, 0x53, 0x4E, 0xAD, 0xFB, 0xE0,
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x88, 0x05, 0x86, 0x4E, 0x5E, 0x67, 0xEB, 0x7B, 0xA3, 0x63, 0x30, 0x61, 0x30, 0x1D, 0x06, 0x03,
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x55, 0x1D, 0x0E, 0x04, 0x16, 0x04, 0x14, 0x91, 0x4A, 0x4B, 0x07, 0x58, 0xB2, 0xC6, 0x4B, 0x37,
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0xFD, 0x91, 0x62, 0xD8, 0x8A, 0x17, 0x28, 0xAA, 0x94, 0x18, 0x62, 0x30, 0x1F, 0x06, 0x03, 0x55,
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x1D, 0x23, 0x04, 0x18, 0x30, 0x16, 0x80, 0x14, 0x91, 0x4A, 0x4B, 0x07, 0x58, 0xB2, 0xC6, 0x4B,
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x37, 0xFD, 0x91, 0x62, 0xD8, 0x8A, 0x17, 0x28, 0xAA, 0x94, 0x18, 0x62, 0x30, 0x0F, 0x06, 0x03,
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x55, 0x1D, 0x13, 0x01, 0x01, 0xFF, 0x04, 0x05, 0x30, 0x03, 0x01, 0x01, 0xFF, 0x30, 0x0E, 0x06,
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x03, 0x55, 0x1D, 0x0F, 0x01, 0x01, 0xFF, 0x04, 0x04, 0x03, 0x02, 0x02, 0x04, 0x30, 0x0A, 0x06,
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x02, 0x03, 0x67, 0x00, 0x30, 0x64, 0x02, 0x30,
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x20, 0x1C, 0x7A, 0x21, 0x50, 0x50, 0xC9, 0x15, 0x1C, 0xC5, 0x14, 0x8D, 0x46, 0x5C, 0xA6, 0xD3,
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x81, 0xCE, 0x57, 0x06, 0x1A, 0xAE, 0x39, 0x10, 0x27, 0x51, 0x42, 0xEF, 0xCD, 0x64, 0x75, 0x99,
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0xDE, 0x0D, 0x3D, 0x01, 0x47, 0x69, 0xFC, 0x93, 0x6D, 0x99, 0xC7, 0xF0, 0xF8, 0x8C, 0xAA, 0xD1,
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x02, 0x30, 0x68, 0xC3, 0x27, 0xD9, 0x0F, 0x52, 0xAD, 0x3A, 0xA8, 0xDB, 0xF8, 0x53, 0x11, 0x1D,
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0xF1, 0x30, 0x6B, 0x39, 0xF3, 0x3F, 0xEF, 0x65, 0x61, 0xBE, 0xC4, 0xDD, 0x19, 0x11, 0x1E, 0x83,
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0xF9, 0xE8, 0x3F, 0x41, 0x97, 0x45, 0xFC, 0x61, 0xE0, 0x06, 0xD0, 0xE6, 0xF7, 0x5C, 0x9F, 0xE2,
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x57, 0xC2,
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     };
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** /**
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  * Sample metadata
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  */
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** static uint8_t metadata [] = {
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     //Metadata tag in the data object
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     0x20, 0x05,
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         //Read tag in the metadata
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         0xD1, 0x03,
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //LcsO < Operation
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             0xE1 , 0xFB, 0x03,
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** };
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** /**
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  * Callback when optiga_util_xxxx operation is completed asynchronously
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  */
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** static volatile optiga_lib_status_t optiga_lib_status;
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** //lint --e{818} suppress "argument "context" is not used in the sample provided"
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** static void optiga_util_callback(void * context, optiga_lib_status_t return_status)
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** {
+  25              	 .loc 1 108 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     optiga_lib_status = return_status;
+  28              	 .loc 1 109 0
+  29 0000 014B     	 ldr r3,.L2
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     if (NULL != context)
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     {
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         // callback to upper layer here
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     }
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** }
+  30              	 .loc 1 114 0
+  31              	 
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     optiga_lib_status = return_status;
+  32              	 .loc 1 109 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 114 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE0:
+  43              	 .section .text.example_optiga_util_write_data,"ax",%progbits
+  44              	 .align 1
+  45              	 .global example_optiga_util_write_data
+  46              	 .code 16
+  47              	 .thumb_func
+  49              	example_optiga_util_write_data:
+  50              	.LFB1:
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** /**
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  * The below example demonstrates write data/metadata functionalities
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  *
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  * Example for #optiga_util_write_data and #optiga_util_write_metadata
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  *
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****  */
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** void example_optiga_util_write_data(void)
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** {
+  51              	 .loc 1 123 0
+  52              	 .cfi_startproc
+  53              	.LVL1:
+  54 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+  55              	.LCFI0:
+  56              	 .cfi_def_cfa_offset 32
+  57              	 .cfi_offset 0,-32
+  58              	 .cfi_offset 1,-28
+  59              	 .cfi_offset 2,-24
+  60              	 .cfi_offset 4,-20
+  61              	 .cfi_offset 5,-16
+  62              	 .cfi_offset 6,-12
+  63              	 .cfi_offset 7,-8
+  64              	 .cfi_offset 14,-4
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     uint16_t optiga_oid;
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     uint16_t offset;
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     optiga_lib_status_t return_status = 0;
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     optiga_util_t * me = NULL;
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     OPTIGA_EXAMPLE_LOG_MESSAGE(__FUNCTION__);
+  65              	 .loc 1 129 0
+  66 0002 284D     	 ldr r5,.L32
+  67 0004 284F     	 ldr r7,.L32+4
+  68 0006 2948     	 ldr r0,.L32+8
+  69 0008 291C     	 mov r1,r5
+  70 000a 3A1C     	 mov r2,r7
+  71 000c FFF7FEFF 	 bl optiga_lib_print_message
+  72              	.LVL2:
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     do
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     {
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         /**
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * 1. Create OPTIGA Util Instance
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          */
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         me = optiga_util_create(0, optiga_util_callback, NULL);
+  73              	 .loc 1 136 0
+  74 0010 0020     	 mov r0,#0
+  75 0012 2749     	 ldr r1,.L32+12
+  76 0014 021C     	 mov r2,r0
+  77 0016 FFF7FEFF 	 bl optiga_util_create
+  78              	.LVL3:
+  79 001a 061E     	 sub r6,r0,#0
+  80              	.LVL4:
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if (NULL == me)
+  81              	 .loc 1 137 0
+  82 001c 31D0     	 beq .L11
+  83              	.LVL5:
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             break;
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         /**
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * Write Trust Anchor to a Trust Anchor object (e.g. E0E8)
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * using optiga_util_write_data with no shielded connection protection.
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          *
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * Use Erase and Write (OPTIGA_UTIL_ERASE_AND_WRITE) option,
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * to clear the remaining data in the object
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          */
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         optiga_oid = 0xE0E8;
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         offset = 0x00;
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         OPTIGA_UTIL_SET_COMMS_PROTECTION_LEVEL(me, OPTIGA_COMMS_NO_PROTECTION);
+  84              	 .loc 1 152 0
+  85 001e 0121     	 mov r1,#1
+  86 0020 0022     	 mov r2,#0
+  87 0022 FFF7FEFF 	 bl optiga_util_set_comms_params
+  88              	.LVL6:
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+  89              	 .loc 1 154 0
+  90 0026 0123     	 mov r3,#1
+  91 0028 224C     	 ldr r4,.L32+16
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = optiga_util_write_data(me,
+  92              	 .loc 1 155 0
+  93 002a 4022     	 mov r2,#64
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = optiga_util_write_data(me,
+  94              	 .loc 1 154 0
+  95 002c 2380     	 strh r3,[r4]
+  96              	 .loc 1 155 0
+  97 002e 224B     	 ldr r3,.L32+20
+  98 0030 301C     	 mov r0,r6
+  99 0032 0093     	 str r3,[sp]
+ 100 0034 214B     	 ldr r3,.L32+24
+ 101 0036 2249     	 ldr r1,.L32+28
+ 102 0038 0193     	 str r3,[sp,#4]
+ 103 003a 0023     	 mov r3,#0
+ 104 003c FFF7FEFF 	 bl optiga_util_write_data
+ 105              	.LVL7:
+ 106 0040 021E     	 sub r2,r0,#0
+ 107              	.LVL8:
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                optiga_oid,
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                OPTIGA_UTIL_ERASE_AND_WRITE,
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                offset,
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                trust_anchor,
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                sizeof(trust_anchor));
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 108              	 .loc 1 162 0
+ 109 0042 19D1     	 bne .L15
+ 110              	.L7:
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             break;
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 111              	 .loc 1 167 0 discriminator 1
+ 112 0044 2388     	 ldrh r3,[r4]
+ 113 0046 012B     	 cmp r3,#1
+ 114 0048 FCD0     	 beq .L7
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //Wait until the optiga_util_write_data operation is completed
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 115              	 .loc 1 172 0
+ 116 004a 2388     	 ldrh r3,[r4]
+ 117 004c 002B     	 cmp r3,#0
+ 118 004e 0FD1     	 bne .L30
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //writing data to a data object failed.
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             return_status = optiga_lib_status;
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             break;
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         /**
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          *
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * Write metadata to Trust Anchor to a Trust Anchor object (e.g. E0E8)
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * using optiga_util_write_metadata.
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          *
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          * Sample metadata: write "Read" access condition as LcsO < Operational
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          *
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****          */
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+ 119              	 .loc 1 187 0
+ 120 0050 0123     	 mov r3,#1
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = optiga_util_write_metadata(me,
+ 121              	 .loc 1 188 0
+ 122 0052 1C4A     	 ldr r2,.L32+32
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = optiga_util_write_metadata(me,
+ 123              	 .loc 1 187 0
+ 124 0054 2380     	 strh r3,[r4]
+ 125              	 .loc 1 188 0
+ 126 0056 301C     	 mov r0,r6
+ 127              	.LVL9:
+ 128 0058 1949     	 ldr r1,.L32+28
+ 129 005a 0633     	 add r3,r3,#6
+ 130 005c FFF7FEFF 	 bl optiga_util_write_metadata
+ 131              	.LVL10:
+ 132 0060 021E     	 sub r2,r0,#0
+ 133              	.LVL11:
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                    0xE0E8,
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                    metadata,
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****                                                    sizeof(metadata));
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 134              	 .loc 1 193 0
+ 135 0062 09D1     	 bne .L15
+ 136              	.L10:
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             break;
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 137              	 .loc 1 198 0 discriminator 1
+ 138 0064 2388     	 ldrh r3,[r4]
+ 139 0066 012B     	 cmp r3,#1
+ 140 0068 FCD0     	 beq .L10
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //Wait until the optiga_util_write_metadata operation is completed
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 141              	 .loc 1 203 0
+ 142 006a 2388     	 ldrh r3,[r4]
+ 143 006c 002B     	 cmp r3,#0
+ 144 006e 08D0     	 beq .L11
+ 145              	.LVL12:
+ 146              	.L30:
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //writing metadata to a data object failed.
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             return_status = optiga_lib_status;
+ 147              	 .loc 1 206 0
+ 148 0070 2288     	 ldrh r2,[r4]
+ 149 0072 92B2     	 uxth r2,r2
+ 150              	.LVL13:
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             break;
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = OPTIGA_LIB_SUCCESS;
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** 
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     } while (FALSE);
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 151              	 .loc 1 212 0
+ 152 0074 002A     	 cmp r2,#0
+ 153 0076 04D0     	 beq .L11
+ 154              	.LVL14:
+ 155              	.L15:
+ 156              	 .loc 1 212 0 is_stmt 0 discriminator 1
+ 157 0078 281C     	 mov r0,r5
+ 158 007a 1349     	 ldr r1,.L32+36
+ 159 007c FFF7FEFF 	 bl optiga_lib_print_status
+ 160              	.LVL15:
+ 161 0080 06E0     	 b .L12
+ 162              	.LVL16:
+ 163              	.L11:
+ 164              	 .loc 1 212 0 discriminator 2
+ 165 0082 281C     	 mov r0,r5
+ 166 0084 391C     	 mov r1,r7
+ 167 0086 0022     	 mov r2,#0
+ 168 0088 FFF7FEFF 	 bl optiga_lib_print_status
+ 169              	.LVL17:
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     if (me)
+ 170              	 .loc 1 214 0 is_stmt 1 discriminator 2
+ 171 008c 002E     	 cmp r6,#0
+ 172 008e 08D0     	 beq .L4
+ 173              	.L12:
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     {
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         //Destroy the instance after the completion of usecase if not required.
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         return_status = optiga_util_destroy(me);
+ 174              	 .loc 1 217 0
+ 175 0090 301C     	 mov r0,r6
+ 176 0092 FFF7FEFF 	 bl optiga_util_destroy
+ 177              	.LVL18:
+ 178 0096 021E     	 sub r2,r0,#0
+ 179              	.LVL19:
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 180              	 .loc 1 218 0
+ 181 0098 03D0     	 beq .L4
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         {
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             //lint --e{774} suppress This is a generic macro
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 182              	 .loc 1 221 0 discriminator 1
+ 183 009a 281C     	 mov r0,r5
+ 184              	.LVL20:
+ 185 009c 0A49     	 ldr r1,.L32+36
+ 186 009e FFF7FEFF 	 bl optiga_lib_print_status
+ 187              	.LVL21:
+ 188              	.L4:
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****         }
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c ****     }
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_util_write_data.c **** }
+ 189              	 .loc 1 224 0
+ 190              	 
+ 191              	.LVL22:
+ 192 00a2 F7BD     	 pop {r0,r1,r2,r4,r5,r6,r7,pc}
+ 193              	.L33:
+ 194              	 .align 2
+ 195              	.L32:
+ 196 00a4 00000000 	 .word .LC2
+ 197 00a8 15000000 	 .word .LC4
+ 198 00ac 00000000 	 .word .LANCHOR1
+ 199 00b0 00000000 	 .word optiga_util_callback
+ 200 00b4 00000000 	 .word .LANCHOR0
+ 201 00b8 00000000 	 .word .LANCHOR2
+ 202 00bc 82020000 	 .word 642
+ 203 00c0 E8E00000 	 .word 57576
+ 204 00c4 00000000 	 .word .LANCHOR3
+ 205 00c8 1A000000 	 .word .LC10
+ 206              	 .cfi_endproc
+ 207              	.LFE1:
+ 209              	 .section .data.trust_anchor,"aw",%progbits
+ 210              	 .set .LANCHOR2,.+0
+ 213              	trust_anchor:
+ 214 0000 30       	 .byte 48
+ 215 0001 82       	 .byte -126
+ 216 0002 02       	 .byte 2
+ 217 0003 7E       	 .byte 126
+ 218 0004 30       	 .byte 48
+ 219 0005 82       	 .byte -126
+ 220 0006 02       	 .byte 2
+ 221 0007 05       	 .byte 5
+ 222 0008 A0       	 .byte -96
+ 223 0009 03       	 .byte 3
+ 224 000a 02       	 .byte 2
+ 225 000b 01       	 .byte 1
+ 226 000c 02       	 .byte 2
+ 227 000d 02       	 .byte 2
+ 228 000e 09       	 .byte 9
+ 229 000f 00       	 .byte 0
+ 230 0010 9B       	 .byte -101
+ 231 0011 0C       	 .byte 12
+ 232 0012 24       	 .byte 36
+ 233 0013 B4       	 .byte -76
+ 234 0014 5E       	 .byte 94
+ 235 0015 7D       	 .byte 125
+ 236 0016 E3       	 .byte -29
+ 237 0017 73       	 .byte 115
+ 238 0018 30       	 .byte 48
+ 239 0019 0A       	 .byte 10
+ 240 001a 06       	 .byte 6
+ 241 001b 08       	 .byte 8
+ 242 001c 2A       	 .byte 42
+ 243 001d 86       	 .byte -122
+ 244 001e 48       	 .byte 72
+ 245 001f CE       	 .byte -50
+ 246 0020 3D       	 .byte 61
+ 247 0021 04       	 .byte 4
+ 248 0022 03       	 .byte 3
+ 249 0023 02       	 .byte 2
+ 250 0024 30       	 .byte 48
+ 251 0025 74       	 .byte 116
+ 252 0026 31       	 .byte 49
+ 253 0027 0B       	 .byte 11
+ 254 0028 30       	 .byte 48
+ 255 0029 09       	 .byte 9
+ 256 002a 06       	 .byte 6
+ 257 002b 03       	 .byte 3
+ 258 002c 55       	 .byte 85
+ 259 002d 04       	 .byte 4
+ 260 002e 06       	 .byte 6
+ 261 002f 13       	 .byte 19
+ 262 0030 02       	 .byte 2
+ 263 0031 44       	 .byte 68
+ 264 0032 45       	 .byte 69
+ 265 0033 31       	 .byte 49
+ 266 0034 21       	 .byte 33
+ 267 0035 30       	 .byte 48
+ 268 0036 1F       	 .byte 31
+ 269 0037 06       	 .byte 6
+ 270 0038 03       	 .byte 3
+ 271 0039 55       	 .byte 85
+ 272 003a 04       	 .byte 4
+ 273 003b 0A       	 .byte 10
+ 274 003c 0C       	 .byte 12
+ 275 003d 18       	 .byte 24
+ 276 003e 49       	 .byte 73
+ 277 003f 6E       	 .byte 110
+ 278 0040 66       	 .byte 102
+ 279 0041 69       	 .byte 105
+ 280 0042 6E       	 .byte 110
+ 281 0043 65       	 .byte 101
+ 282 0044 6F       	 .byte 111
+ 283 0045 6E       	 .byte 110
+ 284 0046 20       	 .byte 32
+ 285 0047 54       	 .byte 84
+ 286 0048 65       	 .byte 101
+ 287 0049 63       	 .byte 99
+ 288 004a 68       	 .byte 104
+ 289 004b 6E       	 .byte 110
+ 290 004c 6F       	 .byte 111
+ 291 004d 6C       	 .byte 108
+ 292 004e 6F       	 .byte 111
+ 293 004f 67       	 .byte 103
+ 294 0050 69       	 .byte 105
+ 295 0051 65       	 .byte 101
+ 296 0052 73       	 .byte 115
+ 297 0053 20       	 .byte 32
+ 298 0054 41       	 .byte 65
+ 299 0055 47       	 .byte 71
+ 300 0056 31       	 .byte 49
+ 301 0057 1B       	 .byte 27
+ 302 0058 30       	 .byte 48
+ 303 0059 19       	 .byte 25
+ 304 005a 06       	 .byte 6
+ 305 005b 03       	 .byte 3
+ 306 005c 55       	 .byte 85
+ 307 005d 04       	 .byte 4
+ 308 005e 0B       	 .byte 11
+ 309 005f 0C       	 .byte 12
+ 310 0060 12       	 .byte 18
+ 311 0061 4F       	 .byte 79
+ 312 0062 50       	 .byte 80
+ 313 0063 54       	 .byte 84
+ 314 0064 49       	 .byte 73
+ 315 0065 47       	 .byte 71
+ 316 0066 41       	 .byte 65
+ 317 0067 28       	 .byte 40
+ 318 0068 54       	 .byte 84
+ 319 0069 4D       	 .byte 77
+ 320 006a 29       	 .byte 41
+ 321 006b 20       	 .byte 32
+ 322 006c 54       	 .byte 84
+ 323 006d 72       	 .byte 114
+ 324 006e 75       	 .byte 117
+ 325 006f 73       	 .byte 115
+ 326 0070 74       	 .byte 116
+ 327 0071 20       	 .byte 32
+ 328 0072 58       	 .byte 88
+ 329 0073 31       	 .byte 49
+ 330 0074 25       	 .byte 37
+ 331 0075 30       	 .byte 48
+ 332 0076 23       	 .byte 35
+ 333 0077 06       	 .byte 6
+ 334 0078 03       	 .byte 3
+ 335 0079 55       	 .byte 85
+ 336 007a 04       	 .byte 4
+ 337 007b 03       	 .byte 3
+ 338 007c 0C       	 .byte 12
+ 339 007d 1C       	 .byte 28
+ 340 007e 49       	 .byte 73
+ 341 007f 6E       	 .byte 110
+ 342 0080 66       	 .byte 102
+ 343 0081 69       	 .byte 105
+ 344 0082 6E       	 .byte 110
+ 345 0083 65       	 .byte 101
+ 346 0084 6F       	 .byte 111
+ 347 0085 6E       	 .byte 110
+ 348 0086 20       	 .byte 32
+ 349 0087 54       	 .byte 84
+ 350 0088 65       	 .byte 101
+ 351 0089 73       	 .byte 115
+ 352 008a 74       	 .byte 116
+ 353 008b 20       	 .byte 32
+ 354 008c 53       	 .byte 83
+ 355 008d 65       	 .byte 101
+ 356 008e 72       	 .byte 114
+ 357 008f 76       	 .byte 118
+ 358 0090 65       	 .byte 101
+ 359 0091 72       	 .byte 114
+ 360 0092 20       	 .byte 32
+ 361 0093 52       	 .byte 82
+ 362 0094 6F       	 .byte 111
+ 363 0095 6F       	 .byte 111
+ 364 0096 74       	 .byte 116
+ 365 0097 20       	 .byte 32
+ 366 0098 43       	 .byte 67
+ 367 0099 41       	 .byte 65
+ 368 009a 30       	 .byte 48
+ 369 009b 1E       	 .byte 30
+ 370 009c 17       	 .byte 23
+ 371 009d 0D       	 .byte 13
+ 372 009e 31       	 .byte 49
+ 373 009f 36       	 .byte 54
+ 374 00a0 31       	 .byte 49
+ 375 00a1 30       	 .byte 48
+ 376 00a2 31       	 .byte 49
+ 377 00a3 34       	 .byte 52
+ 378 00a4 30       	 .byte 48
+ 379 00a5 33       	 .byte 51
+ 380 00a6 35       	 .byte 53
+ 381 00a7 38       	 .byte 56
+ 382 00a8 33       	 .byte 51
+ 383 00a9 36       	 .byte 54
+ 384 00aa 5A       	 .byte 90
+ 385 00ab 17       	 .byte 23
+ 386 00ac 0D       	 .byte 13
+ 387 00ad 34       	 .byte 52
+ 388 00ae 31       	 .byte 49
+ 389 00af 31       	 .byte 49
+ 390 00b0 30       	 .byte 48
+ 391 00b1 30       	 .byte 48
+ 392 00b2 38       	 .byte 56
+ 393 00b3 30       	 .byte 48
+ 394 00b4 33       	 .byte 51
+ 395 00b5 35       	 .byte 53
+ 396 00b6 38       	 .byte 56
+ 397 00b7 33       	 .byte 51
+ 398 00b8 36       	 .byte 54
+ 399 00b9 5A       	 .byte 90
+ 400 00ba 30       	 .byte 48
+ 401 00bb 74       	 .byte 116
+ 402 00bc 31       	 .byte 49
+ 403 00bd 0B       	 .byte 11
+ 404 00be 30       	 .byte 48
+ 405 00bf 09       	 .byte 9
+ 406 00c0 06       	 .byte 6
+ 407 00c1 03       	 .byte 3
+ 408 00c2 55       	 .byte 85
+ 409 00c3 04       	 .byte 4
+ 410 00c4 06       	 .byte 6
+ 411 00c5 13       	 .byte 19
+ 412 00c6 02       	 .byte 2
+ 413 00c7 44       	 .byte 68
+ 414 00c8 45       	 .byte 69
+ 415 00c9 31       	 .byte 49
+ 416 00ca 21       	 .byte 33
+ 417 00cb 30       	 .byte 48
+ 418 00cc 1F       	 .byte 31
+ 419 00cd 06       	 .byte 6
+ 420 00ce 03       	 .byte 3
+ 421 00cf 55       	 .byte 85
+ 422 00d0 04       	 .byte 4
+ 423 00d1 0A       	 .byte 10
+ 424 00d2 0C       	 .byte 12
+ 425 00d3 18       	 .byte 24
+ 426 00d4 49       	 .byte 73
+ 427 00d5 6E       	 .byte 110
+ 428 00d6 66       	 .byte 102
+ 429 00d7 69       	 .byte 105
+ 430 00d8 6E       	 .byte 110
+ 431 00d9 65       	 .byte 101
+ 432 00da 6F       	 .byte 111
+ 433 00db 6E       	 .byte 110
+ 434 00dc 20       	 .byte 32
+ 435 00dd 54       	 .byte 84
+ 436 00de 65       	 .byte 101
+ 437 00df 63       	 .byte 99
+ 438 00e0 68       	 .byte 104
+ 439 00e1 6E       	 .byte 110
+ 440 00e2 6F       	 .byte 111
+ 441 00e3 6C       	 .byte 108
+ 442 00e4 6F       	 .byte 111
+ 443 00e5 67       	 .byte 103
+ 444 00e6 69       	 .byte 105
+ 445 00e7 65       	 .byte 101
+ 446 00e8 73       	 .byte 115
+ 447 00e9 20       	 .byte 32
+ 448 00ea 41       	 .byte 65
+ 449 00eb 47       	 .byte 71
+ 450 00ec 31       	 .byte 49
+ 451 00ed 1B       	 .byte 27
+ 452 00ee 30       	 .byte 48
+ 453 00ef 19       	 .byte 25
+ 454 00f0 06       	 .byte 6
+ 455 00f1 03       	 .byte 3
+ 456 00f2 55       	 .byte 85
+ 457 00f3 04       	 .byte 4
+ 458 00f4 0B       	 .byte 11
+ 459 00f5 0C       	 .byte 12
+ 460 00f6 12       	 .byte 18
+ 461 00f7 4F       	 .byte 79
+ 462 00f8 50       	 .byte 80
+ 463 00f9 54       	 .byte 84
+ 464 00fa 49       	 .byte 73
+ 465 00fb 47       	 .byte 71
+ 466 00fc 41       	 .byte 65
+ 467 00fd 28       	 .byte 40
+ 468 00fe 54       	 .byte 84
+ 469 00ff 4D       	 .byte 77
+ 470 0100 29       	 .byte 41
+ 471 0101 20       	 .byte 32
+ 472 0102 54       	 .byte 84
+ 473 0103 72       	 .byte 114
+ 474 0104 75       	 .byte 117
+ 475 0105 73       	 .byte 115
+ 476 0106 74       	 .byte 116
+ 477 0107 20       	 .byte 32
+ 478 0108 58       	 .byte 88
+ 479 0109 31       	 .byte 49
+ 480 010a 25       	 .byte 37
+ 481 010b 30       	 .byte 48
+ 482 010c 23       	 .byte 35
+ 483 010d 06       	 .byte 6
+ 484 010e 03       	 .byte 3
+ 485 010f 55       	 .byte 85
+ 486 0110 04       	 .byte 4
+ 487 0111 03       	 .byte 3
+ 488 0112 0C       	 .byte 12
+ 489 0113 1C       	 .byte 28
+ 490 0114 49       	 .byte 73
+ 491 0115 6E       	 .byte 110
+ 492 0116 66       	 .byte 102
+ 493 0117 69       	 .byte 105
+ 494 0118 6E       	 .byte 110
+ 495 0119 65       	 .byte 101
+ 496 011a 6F       	 .byte 111
+ 497 011b 6E       	 .byte 110
+ 498 011c 20       	 .byte 32
+ 499 011d 54       	 .byte 84
+ 500 011e 65       	 .byte 101
+ 501 011f 73       	 .byte 115
+ 502 0120 74       	 .byte 116
+ 503 0121 20       	 .byte 32
+ 504 0122 53       	 .byte 83
+ 505 0123 65       	 .byte 101
+ 506 0124 72       	 .byte 114
+ 507 0125 76       	 .byte 118
+ 508 0126 65       	 .byte 101
+ 509 0127 72       	 .byte 114
+ 510 0128 20       	 .byte 32
+ 511 0129 52       	 .byte 82
+ 512 012a 6F       	 .byte 111
+ 513 012b 6F       	 .byte 111
+ 514 012c 74       	 .byte 116
+ 515 012d 20       	 .byte 32
+ 516 012e 43       	 .byte 67
+ 517 012f 41       	 .byte 65
+ 518 0130 30       	 .byte 48
+ 519 0131 76       	 .byte 118
+ 520 0132 30       	 .byte 48
+ 521 0133 10       	 .byte 16
+ 522 0134 06       	 .byte 6
+ 523 0135 07       	 .byte 7
+ 524 0136 2A       	 .byte 42
+ 525 0137 86       	 .byte -122
+ 526 0138 48       	 .byte 72
+ 527 0139 CE       	 .byte -50
+ 528 013a 3D       	 .byte 61
+ 529 013b 02       	 .byte 2
+ 530 013c 01       	 .byte 1
+ 531 013d 06       	 .byte 6
+ 532 013e 05       	 .byte 5
+ 533 013f 2B       	 .byte 43
+ 534 0140 81       	 .byte -127
+ 535 0141 04       	 .byte 4
+ 536 0142 00       	 .byte 0
+ 537 0143 22       	 .byte 34
+ 538 0144 03       	 .byte 3
+ 539 0145 62       	 .byte 98
+ 540 0146 00       	 .byte 0
+ 541 0147 04       	 .byte 4
+ 542 0148 7B       	 .byte 123
+ 543 0149 2E       	 .byte 46
+ 544 014a E6       	 .byte -26
+ 545 014b FB       	 .byte -5
+ 546 014c BD       	 .byte -67
+ 547 014d 6F       	 .byte 111
+ 548 014e 40       	 .byte 64
+ 549 014f 0F       	 .byte 15
+ 550 0150 41       	 .byte 65
+ 551 0151 9F       	 .byte -97
+ 552 0152 E5       	 .byte -27
+ 553 0153 F0       	 .byte -16
+ 554 0154 8C       	 .byte -116
+ 555 0155 97       	 .byte -105
+ 556 0156 21       	 .byte 33
+ 557 0157 B0       	 .byte -80
+ 558 0158 07       	 .byte 7
+ 559 0159 B5       	 .byte -75
+ 560 015a BB       	 .byte -69
+ 561 015b D2       	 .byte -46
+ 562 015c B8       	 .byte -72
+ 563 015d 5A       	 .byte 90
+ 564 015e 14       	 .byte 20
+ 565 015f 3B       	 .byte 59
+ 566 0160 75       	 .byte 117
+ 567 0161 54       	 .byte 84
+ 568 0162 7E       	 .byte 126
+ 569 0163 EA       	 .byte -22
+ 570 0164 FE       	 .byte -2
+ 571 0165 F2       	 .byte -14
+ 572 0166 8D       	 .byte -115
+ 573 0167 5A       	 .byte 90
+ 574 0168 B8       	 .byte -72
+ 575 0169 54       	 .byte 84
+ 576 016a E0       	 .byte -32
+ 577 016b C8       	 .byte -56
+ 578 016c AD       	 .byte -83
+ 579 016d ED       	 .byte -19
+ 580 016e F1       	 .byte -15
+ 581 016f D5       	 .byte -43
+ 582 0170 8B       	 .byte -117
+ 583 0171 97       	 .byte -105
+ 584 0172 BA       	 .byte -70
+ 585 0173 02       	 .byte 2
+ 586 0174 3E       	 .byte 62
+ 587 0175 D9       	 .byte -39
+ 588 0176 25       	 .byte 37
+ 589 0177 E0       	 .byte -32
+ 590 0178 00       	 .byte 0
+ 591 0179 86       	 .byte -122
+ 592 017a 17       	 .byte 23
+ 593 017b 35       	 .byte 53
+ 594 017c E6       	 .byte -26
+ 595 017d E6       	 .byte -26
+ 596 017e D9       	 .byte -39
+ 597 017f 12       	 .byte 18
+ 598 0180 0F       	 .byte 15
+ 599 0181 8A       	 .byte -118
+ 600 0182 21       	 .byte 33
+ 601 0183 1C       	 .byte 28
+ 602 0184 62       	 .byte 98
+ 603 0185 FA       	 .byte -6
+ 604 0186 CE       	 .byte -50
+ 605 0187 F6       	 .byte -10
+ 606 0188 9E       	 .byte -98
+ 607 0189 B1       	 .byte -79
+ 608 018a F8       	 .byte -8
+ 609 018b 8C       	 .byte -116
+ 610 018c A3       	 .byte -93
+ 611 018d DC       	 .byte -36
+ 612 018e 52       	 .byte 82
+ 613 018f 04       	 .byte 4
+ 614 0190 83       	 .byte -125
+ 615 0191 EB       	 .byte -21
+ 616 0192 A0       	 .byte -96
+ 617 0193 B3       	 .byte -77
+ 618 0194 FA       	 .byte -6
+ 619 0195 B0       	 .byte -80
+ 620 0196 CA       	 .byte -54
+ 621 0197 02       	 .byte 2
+ 622 0198 30       	 .byte 48
+ 623 0199 B1       	 .byte -79
+ 624 019a FE       	 .byte -2
+ 625 019b 53       	 .byte 83
+ 626 019c 4E       	 .byte 78
+ 627 019d AD       	 .byte -83
+ 628 019e FB       	 .byte -5
+ 629 019f E0       	 .byte -32
+ 630 01a0 88       	 .byte -120
+ 631 01a1 05       	 .byte 5
+ 632 01a2 86       	 .byte -122
+ 633 01a3 4E       	 .byte 78
+ 634 01a4 5E       	 .byte 94
+ 635 01a5 67       	 .byte 103
+ 636 01a6 EB       	 .byte -21
+ 637 01a7 7B       	 .byte 123
+ 638 01a8 A3       	 .byte -93
+ 639 01a9 63       	 .byte 99
+ 640 01aa 30       	 .byte 48
+ 641 01ab 61       	 .byte 97
+ 642 01ac 30       	 .byte 48
+ 643 01ad 1D       	 .byte 29
+ 644 01ae 06       	 .byte 6
+ 645 01af 03       	 .byte 3
+ 646 01b0 55       	 .byte 85
+ 647 01b1 1D       	 .byte 29
+ 648 01b2 0E       	 .byte 14
+ 649 01b3 04       	 .byte 4
+ 650 01b4 16       	 .byte 22
+ 651 01b5 04       	 .byte 4
+ 652 01b6 14       	 .byte 20
+ 653 01b7 91       	 .byte -111
+ 654 01b8 4A       	 .byte 74
+ 655 01b9 4B       	 .byte 75
+ 656 01ba 07       	 .byte 7
+ 657 01bb 58       	 .byte 88
+ 658 01bc B2       	 .byte -78
+ 659 01bd C6       	 .byte -58
+ 660 01be 4B       	 .byte 75
+ 661 01bf 37       	 .byte 55
+ 662 01c0 FD       	 .byte -3
+ 663 01c1 91       	 .byte -111
+ 664 01c2 62       	 .byte 98
+ 665 01c3 D8       	 .byte -40
+ 666 01c4 8A       	 .byte -118
+ 667 01c5 17       	 .byte 23
+ 668 01c6 28       	 .byte 40
+ 669 01c7 AA       	 .byte -86
+ 670 01c8 94       	 .byte -108
+ 671 01c9 18       	 .byte 24
+ 672 01ca 62       	 .byte 98
+ 673 01cb 30       	 .byte 48
+ 674 01cc 1F       	 .byte 31
+ 675 01cd 06       	 .byte 6
+ 676 01ce 03       	 .byte 3
+ 677 01cf 55       	 .byte 85
+ 678 01d0 1D       	 .byte 29
+ 679 01d1 23       	 .byte 35
+ 680 01d2 04       	 .byte 4
+ 681 01d3 18       	 .byte 24
+ 682 01d4 30       	 .byte 48
+ 683 01d5 16       	 .byte 22
+ 684 01d6 80       	 .byte -128
+ 685 01d7 14       	 .byte 20
+ 686 01d8 91       	 .byte -111
+ 687 01d9 4A       	 .byte 74
+ 688 01da 4B       	 .byte 75
+ 689 01db 07       	 .byte 7
+ 690 01dc 58       	 .byte 88
+ 691 01dd B2       	 .byte -78
+ 692 01de C6       	 .byte -58
+ 693 01df 4B       	 .byte 75
+ 694 01e0 37       	 .byte 55
+ 695 01e1 FD       	 .byte -3
+ 696 01e2 91       	 .byte -111
+ 697 01e3 62       	 .byte 98
+ 698 01e4 D8       	 .byte -40
+ 699 01e5 8A       	 .byte -118
+ 700 01e6 17       	 .byte 23
+ 701 01e7 28       	 .byte 40
+ 702 01e8 AA       	 .byte -86
+ 703 01e9 94       	 .byte -108
+ 704 01ea 18       	 .byte 24
+ 705 01eb 62       	 .byte 98
+ 706 01ec 30       	 .byte 48
+ 707 01ed 0F       	 .byte 15
+ 708 01ee 06       	 .byte 6
+ 709 01ef 03       	 .byte 3
+ 710 01f0 55       	 .byte 85
+ 711 01f1 1D       	 .byte 29
+ 712 01f2 13       	 .byte 19
+ 713 01f3 01       	 .byte 1
+ 714 01f4 01       	 .byte 1
+ 715 01f5 FF       	 .byte -1
+ 716 01f6 04       	 .byte 4
+ 717 01f7 05       	 .byte 5
+ 718 01f8 30       	 .byte 48
+ 719 01f9 03       	 .byte 3
+ 720 01fa 01       	 .byte 1
+ 721 01fb 01       	 .byte 1
+ 722 01fc FF       	 .byte -1
+ 723 01fd 30       	 .byte 48
+ 724 01fe 0E       	 .byte 14
+ 725 01ff 06       	 .byte 6
+ 726 0200 03       	 .byte 3
+ 727 0201 55       	 .byte 85
+ 728 0202 1D       	 .byte 29
+ 729 0203 0F       	 .byte 15
+ 730 0204 01       	 .byte 1
+ 731 0205 01       	 .byte 1
+ 732 0206 FF       	 .byte -1
+ 733 0207 04       	 .byte 4
+ 734 0208 04       	 .byte 4
+ 735 0209 03       	 .byte 3
+ 736 020a 02       	 .byte 2
+ 737 020b 02       	 .byte 2
+ 738 020c 04       	 .byte 4
+ 739 020d 30       	 .byte 48
+ 740 020e 0A       	 .byte 10
+ 741 020f 06       	 .byte 6
+ 742 0210 08       	 .byte 8
+ 743 0211 2A       	 .byte 42
+ 744 0212 86       	 .byte -122
+ 745 0213 48       	 .byte 72
+ 746 0214 CE       	 .byte -50
+ 747 0215 3D       	 .byte 61
+ 748 0216 04       	 .byte 4
+ 749 0217 03       	 .byte 3
+ 750 0218 02       	 .byte 2
+ 751 0219 03       	 .byte 3
+ 752 021a 67       	 .byte 103
+ 753 021b 00       	 .byte 0
+ 754 021c 30       	 .byte 48
+ 755 021d 64       	 .byte 100
+ 756 021e 02       	 .byte 2
+ 757 021f 30       	 .byte 48
+ 758 0220 20       	 .byte 32
+ 759 0221 1C       	 .byte 28
+ 760 0222 7A       	 .byte 122
+ 761 0223 21       	 .byte 33
+ 762 0224 50       	 .byte 80
+ 763 0225 50       	 .byte 80
+ 764 0226 C9       	 .byte -55
+ 765 0227 15       	 .byte 21
+ 766 0228 1C       	 .byte 28
+ 767 0229 C5       	 .byte -59
+ 768 022a 14       	 .byte 20
+ 769 022b 8D       	 .byte -115
+ 770 022c 46       	 .byte 70
+ 771 022d 5C       	 .byte 92
+ 772 022e A6       	 .byte -90
+ 773 022f D3       	 .byte -45
+ 774 0230 81       	 .byte -127
+ 775 0231 CE       	 .byte -50
+ 776 0232 57       	 .byte 87
+ 777 0233 06       	 .byte 6
+ 778 0234 1A       	 .byte 26
+ 779 0235 AE       	 .byte -82
+ 780 0236 39       	 .byte 57
+ 781 0237 10       	 .byte 16
+ 782 0238 27       	 .byte 39
+ 783 0239 51       	 .byte 81
+ 784 023a 42       	 .byte 66
+ 785 023b EF       	 .byte -17
+ 786 023c CD       	 .byte -51
+ 787 023d 64       	 .byte 100
+ 788 023e 75       	 .byte 117
+ 789 023f 99       	 .byte -103
+ 790 0240 DE       	 .byte -34
+ 791 0241 0D       	 .byte 13
+ 792 0242 3D       	 .byte 61
+ 793 0243 01       	 .byte 1
+ 794 0244 47       	 .byte 71
+ 795 0245 69       	 .byte 105
+ 796 0246 FC       	 .byte -4
+ 797 0247 93       	 .byte -109
+ 798 0248 6D       	 .byte 109
+ 799 0249 99       	 .byte -103
+ 800 024a C7       	 .byte -57
+ 801 024b F0       	 .byte -16
+ 802 024c F8       	 .byte -8
+ 803 024d 8C       	 .byte -116
+ 804 024e AA       	 .byte -86
+ 805 024f D1       	 .byte -47
+ 806 0250 02       	 .byte 2
+ 807 0251 30       	 .byte 48
+ 808 0252 68       	 .byte 104
+ 809 0253 C3       	 .byte -61
+ 810 0254 27       	 .byte 39
+ 811 0255 D9       	 .byte -39
+ 812 0256 0F       	 .byte 15
+ 813 0257 52       	 .byte 82
+ 814 0258 AD       	 .byte -83
+ 815 0259 3A       	 .byte 58
+ 816 025a A8       	 .byte -88
+ 817 025b DB       	 .byte -37
+ 818 025c F8       	 .byte -8
+ 819 025d 53       	 .byte 83
+ 820 025e 11       	 .byte 17
+ 821 025f 1D       	 .byte 29
+ 822 0260 F1       	 .byte -15
+ 823 0261 30       	 .byte 48
+ 824 0262 6B       	 .byte 107
+ 825 0263 39       	 .byte 57
+ 826 0264 F3       	 .byte -13
+ 827 0265 3F       	 .byte 63
+ 828 0266 EF       	 .byte -17
+ 829 0267 65       	 .byte 101
+ 830 0268 61       	 .byte 97
+ 831 0269 BE       	 .byte -66
+ 832 026a C4       	 .byte -60
+ 833 026b DD       	 .byte -35
+ 834 026c 19       	 .byte 25
+ 835 026d 11       	 .byte 17
+ 836 026e 1E       	 .byte 30
+ 837 026f 83       	 .byte -125
+ 838 0270 F9       	 .byte -7
+ 839 0271 E8       	 .byte -24
+ 840 0272 3F       	 .byte 63
+ 841 0273 41       	 .byte 65
+ 842 0274 97       	 .byte -105
+ 843 0275 45       	 .byte 69
+ 844 0276 FC       	 .byte -4
+ 845 0277 61       	 .byte 97
+ 846 0278 E0       	 .byte -32
+ 847 0279 06       	 .byte 6
+ 848 027a D0       	 .byte -48
+ 849 027b E6       	 .byte -26
+ 850 027c F7       	 .byte -9
+ 851 027d 5C       	 .byte 92
+ 852 027e 9F       	 .byte -97
+ 853 027f E2       	 .byte -30
+ 854 0280 57       	 .byte 87
+ 855 0281 C2       	 .byte -62
+ 856              	 .section .rodata.__FUNCTION__.5919,"a",%progbits
+ 857              	 .set .LANCHOR1,.+0
+ 860              	__FUNCTION__.5919:
+ 861 0000 6578616D 	 .ascii "example_optiga_util_write_data\000"
+ 861      706C655F 
+ 861      6F707469 
+ 861      67615F75 
+ 861      74696C5F 
+ 862              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 863              	.LC2:
+ 864 0000 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 864      69676120 
+ 864      6578616D 
+ 864      706C655D 
+ 864      20203A20 
+ 865              	.LC4:
+ 866 0015 1B5B306D 	 .ascii "\033[0m\000"
+ 866      00
+ 867              	.LC10:
+ 868 001a 1B5B3331 	 .ascii "\033[31m\000"
+ 868      6D00
+ 869              	 .section .data.metadata,"aw",%progbits
+ 870              	 .set .LANCHOR3,.+0
+ 873              	metadata:
+ 874 0000 20       	 .byte 32
+ 875 0001 05       	 .byte 5
+ 876 0002 D1       	 .byte -47
+ 877 0003 03       	 .byte 3
+ 878 0004 E1       	 .byte -31
+ 879 0005 FB       	 .byte -5
+ 880 0006 03       	 .byte 3
+ 881              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 882              	 .align 1
+ 883              	 .set .LANCHOR0,.+0
+ 886              	optiga_lib_status:
+ 887 0000 0000     	 .space 2
+ 888              	 .text
+ 889              	.Letext0:
+ 890              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 891              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 892              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 893              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 894              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 895              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_util.h"
+ 896              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 example_optiga_util_write_data.c
+    {standard input}:18     .text.optiga_util_callback:00000000 $t
+    {standard input}:22     .text.optiga_util_callback:00000000 optiga_util_callback
+    {standard input}:39     .text.optiga_util_callback:00000008 $d
+    {standard input}:44     .text.example_optiga_util_write_data:00000000 $t
+    {standard input}:49     .text.example_optiga_util_write_data:00000000 example_optiga_util_write_data
+    {standard input}:196    .text.example_optiga_util_write_data:000000a4 $d
+    {standard input}:213    .data.trust_anchor:00000000 trust_anchor
+    {standard input}:860    .rodata.__FUNCTION__.5919:00000000 __FUNCTION__.5919
+    {standard input}:873    .data.metadata:00000000 metadata
+    {standard input}:882    .bss.optiga_lib_status:00000000 $d
+    {standard input}:886    .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+optiga_lib_print_message
+optiga_util_create
+optiga_util_set_comms_params
+optiga_util_write_data
+optiga_util_write_metadata
+optiga_lib_print_status
+optiga_util_destroy

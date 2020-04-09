@@ -1,0 +1,1059 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "cipher_wrap.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.ccm_ctx_free,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	ccm_ctx_free:
+  23              	.LFB8:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/cipher_wrap.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  * \file cipher_wrap.c
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  * \brief Generic cipher wrapper for mbed TLS
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  * \author Adriaan de Jong <dejong@fox-it.com>
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  SPDX-License-Identifier: Apache-2.0
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  not use this file except in compliance with the License.
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  You may obtain a copy of the License at
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  Unless required by applicable law or agreed to in writing, software
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  See the License for the specific language governing permissions and
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  limitations under the License.
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****  */
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/config.h"
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #else
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include MBEDTLS_CONFIG_FILE
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_C)
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/cipher_internal.h"
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CHACHAPOLY_C)
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/chachapoly.h"
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_AES_C)
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/aes.h"
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_ARC4_C)
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/arc4.h"
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CAMELLIA_C)
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/camellia.h"
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_ARIA_C)
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/aria.h"
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_DES_C)
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/des.h"
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_BLOWFISH_C)
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/blowfish.h"
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CHACHA20_C)
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/chacha20.h"
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_GCM_C)
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/gcm.h"
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CCM_C)
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/ccm.h"
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_NULL_CIPHER)
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include <string.h>
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_PLATFORM_C)
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include "mbedtls/platform.h"
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #else
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #include <stdlib.h>
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #define mbedtls_calloc    calloc
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #define mbedtls_free       free
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_GCM_C)
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** /* shared by all GCM ciphers */
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void *gcm_ctx_alloc( void )
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_gcm_context ) );
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     if( ctx != NULL )
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         mbedtls_gcm_init( (mbedtls_gcm_context *) ctx );
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( ctx );
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void gcm_ctx_free( void *ctx )
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_gcm_free( ctx );
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_free( ctx );
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_GCM_C */
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CCM_C)
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** /* shared by all CCM ciphers */
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void *ccm_ctx_alloc( void )
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_ccm_context ) );
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     if( ctx != NULL )
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         mbedtls_ccm_init( (mbedtls_ccm_context *) ctx );
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( ctx );
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void ccm_ctx_free( void *ctx )
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+  25              	 .loc 1 120 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  28 0000 10B5     	 push {r4,lr}
+  29              	.LCFI0:
+  30              	 .cfi_def_cfa_offset 8
+  31              	 .cfi_offset 4,-8
+  32              	 .cfi_offset 14,-4
+  33              	 .loc 1 120 0
+  34 0002 041C     	 mov r4,r0
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_ccm_free( ctx );
+  35              	 .loc 1 121 0
+  36 0004 FFF7FEFF 	 bl mbedtls_ccm_free
+  37              	.LVL1:
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_free( ctx );
+  38              	 .loc 1 122 0
+  39 0008 201C     	 mov r0,r4
+  40 000a FFF7FEFF 	 bl free
+  41              	.LVL2:
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+  42              	 .loc 1 123 0
+  43              	 
+  44              	.LVL3:
+  45 000e 10BD     	 pop {r4,pc}
+  46              	 .cfi_endproc
+  47              	.LFE8:
+  49              	 .section .text.ccm_ctx_alloc,"ax",%progbits
+  50              	 .align 1
+  51              	 .code 16
+  52              	 .thumb_func
+  54              	ccm_ctx_alloc:
+  55              	.LFB7:
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_ccm_context ) );
+  56              	 .loc 1 110 0
+  57              	 .cfi_startproc
+  58 0000 10B5     	 push {r4,lr}
+  59              	.LCFI1:
+  60              	 .cfi_def_cfa_offset 8
+  61              	 .cfi_offset 4,-8
+  62              	 .cfi_offset 14,-4
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  63              	 .loc 1 111 0
+  64 0002 0120     	 mov r0,#1
+  65 0004 3821     	 mov r1,#56
+  66 0006 FFF7FEFF 	 bl calloc
+  67              	.LVL4:
+  68 000a 041E     	 sub r4,r0,#0
+  69              	.LVL5:
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         mbedtls_ccm_init( (mbedtls_ccm_context *) ctx );
+  70              	 .loc 1 113 0
+  71 000c 01D0     	 beq .L3
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  72              	 .loc 1 114 0
+  73 000e FFF7FEFF 	 bl mbedtls_ccm_init
+  74              	.LVL6:
+  75              	.L3:
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+  76              	 .loc 1 117 0
+  77 0012 201C     	 mov r0,r4
+  78              	 
+  79              	.LVL7:
+  80 0014 10BD     	 pop {r4,pc}
+  81              	 .cfi_endproc
+  82              	.LFE7:
+  84              	 .section .text.ccm_aes_setkey_wrap,"ax",%progbits
+  85              	 .align 1
+  86              	 .code 16
+  87              	 .thumb_func
+  89              	ccm_aes_setkey_wrap:
+  90              	.LFB14:
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CCM_C */
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_AES_C)
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_ecb_wrap( void *ctx, mbedtls_operation_t operation,
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         const unsigned char *input, unsigned char *output )
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_ecb( (mbedtls_aes_context *) ctx, operation, input, output );
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CBC)
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_cbc_wrap( void *ctx, mbedtls_operation_t operation, size_t length,
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         unsigned char *iv, const unsigned char *input, unsigned char *output )
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_cbc( (mbedtls_aes_context *) ctx, operation, length, iv, input,
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                           output );
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CBC */
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CFB)
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_cfb128_wrap( void *ctx, mbedtls_operation_t operation,
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         size_t length, size_t *iv_off, unsigned char *iv,
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         const unsigned char *input, unsigned char *output )
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_cfb128( (mbedtls_aes_context *) ctx, operation, length, iv_off, iv,
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                              input, output );
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CFB */
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_OFB)
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_ofb_wrap( void *ctx, size_t length, size_t *iv_off,
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         unsigned char *iv, const unsigned char *input, unsigned char *output )
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_ofb( (mbedtls_aes_context *) ctx, length, iv_off,
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                     iv, input, output );
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_OFB */
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CTR)
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_ctr_wrap( void *ctx, size_t length, size_t *nc_off,
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         unsigned char *nonce_counter, unsigned char *stream_block,
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         const unsigned char *input, unsigned char *output )
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_ctr( (mbedtls_aes_context *) ctx, length, nc_off, nonce_counter,
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                           stream_block, input, output );
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CTR */
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_XTS)
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_crypt_xts_wrap( void *ctx, mbedtls_operation_t operation,
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                size_t length,
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                const unsigned char data_unit[16],
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                const unsigned char *input,
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                unsigned char *output )
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_context *xts_ctx = ctx;
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     int mode;
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     switch( operation )
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     {
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         case MBEDTLS_ENCRYPT:
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****             mode = MBEDTLS_AES_ENCRYPT;
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****             break;
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         case MBEDTLS_DECRYPT:
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****             mode = MBEDTLS_AES_DECRYPT;
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****             break;
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         default:
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****             return MBEDTLS_ERR_CIPHER_BAD_INPUT_DATA;
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     }
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_xts( xts_ctx, mode, length,
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                   data_unit, input, output );
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_XTS */
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_setkey_dec_wrap( void *ctx, const unsigned char *key,
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                 unsigned int key_bitlen )
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_setkey_dec( (mbedtls_aes_context *) ctx, key, key_bitlen );
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int aes_setkey_enc_wrap( void *ctx, const unsigned char *key,
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                 unsigned int key_bitlen )
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_setkey_enc( (mbedtls_aes_context *) ctx, key, key_bitlen );
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void * aes_ctx_alloc( void )
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_context *aes = mbedtls_calloc( 1, sizeof( mbedtls_aes_context ) );
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     if( aes == NULL )
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         return( NULL );
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_init( aes );
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( aes );
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void aes_ctx_free( void *ctx )
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_free( (mbedtls_aes_context *) ctx );
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_free( ctx );
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_base_t aes_info = {
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_ID_AES,
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_ecb_wrap,
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CBC)
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_cbc_wrap,
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CFB)
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_cfb128_wrap,
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_OFB)
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_ofb_wrap,
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CTR)
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_ctr_wrap,
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_XTS)
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_STREAM)
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_setkey_enc_wrap,
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_setkey_dec_wrap,
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_ctx_alloc,
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_ctx_free
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_ecb_info = {
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_ECB,
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_ECB,
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-ECB",
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_ecb_info = {
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_ECB,
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_ECB,
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-ECB",
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_ecb_info = {
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_ECB,
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_ECB,
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-ECB",
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CBC)
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_cbc_info = {
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_CBC,
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CBC,
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-CBC",
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_cbc_info = {
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_CBC,
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CBC,
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-CBC",
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_cbc_info = {
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_CBC,
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CBC,
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-CBC",
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CBC */
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CFB)
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_cfb128_info = {
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_CFB128,
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CFB,
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-CFB128",
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_cfb128_info = {
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_CFB128,
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CFB,
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-CFB128",
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_cfb128_info = {
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_CFB128,
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CFB,
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-CFB128",
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CFB */
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_OFB)
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_ofb_info = {
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_OFB,
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_OFB,
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-OFB",
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_ofb_info = {
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_OFB,
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_OFB,
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-OFB",
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_ofb_info = {
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_OFB,
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_OFB,
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-OFB",
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_OFB */
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CTR)
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_ctr_info = {
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_CTR,
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CTR,
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-CTR",
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_ctr_info = {
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_CTR,
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CTR,
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-CTR",
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_ctr_info = {
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_CTR,
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_CTR,
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-CTR",
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &aes_info
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_CTR */
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_XTS)
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int xts_aes_setkey_enc_wrap( void *ctx, const unsigned char *key,
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                     unsigned int key_bitlen )
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_context *xts_ctx = ctx;
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( mbedtls_aes_xts_setkey_enc( xts_ctx, key, key_bitlen ) );
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int xts_aes_setkey_dec_wrap( void *ctx, const unsigned char *key,
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                     unsigned int key_bitlen )
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_context *xts_ctx = ctx;
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( mbedtls_aes_xts_setkey_dec( xts_ctx, key, key_bitlen ) );
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void *xts_aes_ctx_alloc( void )
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_context *xts_ctx = mbedtls_calloc( 1, sizeof( *xts_ctx ) );
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     if( xts_ctx != NULL )
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         mbedtls_aes_xts_init( xts_ctx );
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return( xts_ctx );
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static void xts_aes_ctx_free( void *ctx )
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_context *xts_ctx = ctx;
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     if( xts_ctx == NULL )
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         return;
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_xts_free( xts_ctx );
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_free( xts_ctx );
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_base_t xts_aes_info = {
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_ID_AES,
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CBC)
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CFB)
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_OFB)
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CTR)
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_XTS)
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     aes_crypt_xts_wrap,
+ 482:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 483:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_STREAM)
+ 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 485:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 486:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     xts_aes_setkey_enc_wrap,
+ 487:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     xts_aes_setkey_dec_wrap,
+ 488:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     xts_aes_ctx_alloc,
+ 489:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     xts_aes_ctx_free
+ 490:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 492:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_xts_info = {
+ 493:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_XTS,
+ 494:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_XTS,
+ 495:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-XTS",
+ 497:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 498:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 499:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 500:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &xts_aes_info
+ 501:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 503:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_xts_info = {
+ 504:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_XTS,
+ 505:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_XTS,
+ 506:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     512,
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-XTS",
+ 508:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     0,
+ 510:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 511:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &xts_aes_info
+ 512:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_CIPHER_MODE_XTS */
+ 514:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_GCM_C)
+ 516:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int gcm_aes_setkey_wrap( void *ctx, const unsigned char *key,
+ 517:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                 unsigned int key_bitlen )
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_gcm_setkey( (mbedtls_gcm_context *) ctx, MBEDTLS_CIPHER_ID_AES,
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                      key, key_bitlen );
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 522:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 523:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_base_t gcm_aes_info = {
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_ID_AES,
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CBC)
+ 527:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CFB)
+ 530:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 532:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_OFB)
+ 533:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 535:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_CTR)
+ 536:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 537:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 538:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_XTS)
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CIPHER_MODE_STREAM)
+ 542:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     NULL,
+ 543:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif
+ 544:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     gcm_aes_setkey_wrap,
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     gcm_aes_setkey_wrap,
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     gcm_ctx_alloc,
+ 547:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     gcm_ctx_free,
+ 548:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 549:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 550:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_128_gcm_info = {
+ 551:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_128_GCM,
+ 552:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_GCM,
+ 553:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     128,
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-128-GCM",
+ 555:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     12,
+ 556:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_VARIABLE_IV_LEN,
+ 557:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 558:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &gcm_aes_info
+ 559:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 560:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 561:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_192_gcm_info = {
+ 562:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_192_GCM,
+ 563:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_GCM,
+ 564:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     192,
+ 565:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-192-GCM",
+ 566:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     12,
+ 567:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_VARIABLE_IV_LEN,
+ 568:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 569:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &gcm_aes_info
+ 570:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 571:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 572:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static const mbedtls_cipher_info_t aes_256_gcm_info = {
+ 573:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_AES_256_GCM,
+ 574:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_MODE_GCM,
+ 575:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     256,
+ 576:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     "AES-256-GCM",
+ 577:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     12,
+ 578:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     MBEDTLS_CIPHER_VARIABLE_IV_LEN,
+ 579:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     16,
+ 580:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     &gcm_aes_info
+ 581:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** };
+ 582:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #endif /* MBEDTLS_GCM_C */
+ 583:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 584:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** #if defined(MBEDTLS_CCM_C)
+ 585:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** static int ccm_aes_setkey_wrap( void *ctx, const unsigned char *key,
+ 586:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                                 unsigned int key_bitlen )
+ 587:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** {
+  91              	 .loc 1 587 0
+  92              	 .cfi_startproc
+  93              	.LVL8:
+  94 0000 10B5     	 push {r4,lr}
+  95              	.LCFI2:
+  96              	 .cfi_def_cfa_offset 8
+  97              	 .cfi_offset 4,-8
+  98              	 .cfi_offset 14,-4
+  99              	 .loc 1 587 0
+ 100 0002 0C1C     	 mov r4,r1
+ 101 0004 131C     	 mov r3,r2
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_ccm_setkey( (mbedtls_ccm_context *) ctx, MBEDTLS_CIPHER_ID_AES,
+ 102              	 .loc 1 588 0
+ 103 0006 0221     	 mov r1,#2
+ 104              	.LVL9:
+ 105 0008 221C     	 mov r2,r4
+ 106              	.LVL10:
+ 107 000a FFF7FEFF 	 bl mbedtls_ccm_setkey
+ 108              	.LVL11:
+ 589:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****                      key, key_bitlen );
+ 590:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 109              	 .loc 1 590 0
+ 110              	 
+ 111              	.LVL12:
+ 112 000e 10BD     	 pop {r4,pc}
+ 113              	 .cfi_endproc
+ 114              	.LFE14:
+ 116              	 .section .text.aes_ctx_free,"ax",%progbits
+ 117              	 .align 1
+ 118              	 .code 16
+ 119              	 .thumb_func
+ 121              	aes_ctx_free:
+ 122              	.LFB13:
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_free( (mbedtls_aes_context *) ctx );
+ 123              	 .loc 1 224 0
+ 124              	 .cfi_startproc
+ 125              	.LVL13:
+ 126 0000 10B5     	 push {r4,lr}
+ 127              	.LCFI3:
+ 128              	 .cfi_def_cfa_offset 8
+ 129              	 .cfi_offset 4,-8
+ 130              	 .cfi_offset 14,-4
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_free( (mbedtls_aes_context *) ctx );
+ 131              	 .loc 1 224 0
+ 132 0002 041C     	 mov r4,r0
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_free( ctx );
+ 133              	 .loc 1 225 0
+ 134 0004 FFF7FEFF 	 bl mbedtls_aes_free
+ 135              	.LVL14:
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 136              	 .loc 1 226 0
+ 137 0008 201C     	 mov r0,r4
+ 138 000a FFF7FEFF 	 bl free
+ 139              	.LVL15:
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 140              	 .loc 1 227 0
+ 141              	 
+ 142              	.LVL16:
+ 143 000e 10BD     	 pop {r4,pc}
+ 144              	 .cfi_endproc
+ 145              	.LFE13:
+ 147              	 .section .text.aes_ctx_alloc,"ax",%progbits
+ 148              	 .align 1
+ 149              	 .code 16
+ 150              	 .thumb_func
+ 152              	aes_ctx_alloc:
+ 153              	.LFB12:
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_context *aes = mbedtls_calloc( 1, sizeof( mbedtls_aes_context ) );
+ 154              	 .loc 1 212 0
+ 155              	 .cfi_startproc
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 156              	 .loc 1 213 0
+ 157 0000 8C21     	 mov r1,#140
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     mbedtls_aes_context *aes = mbedtls_calloc( 1, sizeof( mbedtls_aes_context ) );
+ 158              	 .loc 1 212 0
+ 159 0002 10B5     	 push {r4,lr}
+ 160              	.LCFI4:
+ 161              	 .cfi_def_cfa_offset 8
+ 162              	 .cfi_offset 4,-8
+ 163              	 .cfi_offset 14,-4
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 164              	 .loc 1 213 0
+ 165 0004 0120     	 mov r0,#1
+ 166 0006 4900     	 lsl r1,r1,#1
+ 167 0008 FFF7FEFF 	 bl calloc
+ 168              	.LVL17:
+ 169 000c 041E     	 sub r4,r0,#0
+ 170              	.LVL18:
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****         return( NULL );
+ 171              	 .loc 1 215 0
+ 172 000e 01D0     	 beq .L11
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 173              	 .loc 1 218 0
+ 174 0010 FFF7FEFF 	 bl mbedtls_aes_init
+ 175              	.LVL19:
+ 176              	.L11:
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 177              	 .loc 1 221 0
+ 178 0014 201C     	 mov r0,r4
+ 179              	 
+ 180              	.LVL20:
+ 181 0016 10BD     	 pop {r4,pc}
+ 182              	 .cfi_endproc
+ 183              	.LFE12:
+ 185              	 .section .text.aes_setkey_dec_wrap,"ax",%progbits
+ 186              	 .align 1
+ 187              	 .code 16
+ 188              	 .thumb_func
+ 190              	aes_setkey_dec_wrap:
+ 191              	.LFB10:
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_setkey_dec( (mbedtls_aes_context *) ctx, key, key_bitlen );
+ 192              	 .loc 1 201 0
+ 193              	 .cfi_startproc
+ 194              	.LVL21:
+ 195 0000 08B5     	 push {r3,lr}
+ 196              	.LCFI5:
+ 197              	 .cfi_def_cfa_offset 8
+ 198              	 .cfi_offset 3,-8
+ 199              	 .cfi_offset 14,-4
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 200              	 .loc 1 202 0
+ 201 0002 FFF7FEFF 	 bl mbedtls_aes_setkey_dec
+ 202              	.LVL22:
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 203              	 .loc 1 203 0
+ 204              	 
+ 205 0006 08BD     	 pop {r3,pc}
+ 206              	 .cfi_endproc
+ 207              	.LFE10:
+ 209              	 .section .text.aes_setkey_enc_wrap,"ax",%progbits
+ 210              	 .align 1
+ 211              	 .code 16
+ 212              	 .thumb_func
+ 214              	aes_setkey_enc_wrap:
+ 215              	.LFB11:
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_setkey_enc( (mbedtls_aes_context *) ctx, key, key_bitlen );
+ 216              	 .loc 1 207 0
+ 217              	 .cfi_startproc
+ 218              	.LVL23:
+ 219 0000 08B5     	 push {r3,lr}
+ 220              	.LCFI6:
+ 221              	 .cfi_def_cfa_offset 8
+ 222              	 .cfi_offset 3,-8
+ 223              	 .cfi_offset 14,-4
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 224              	 .loc 1 208 0
+ 225 0002 FFF7FEFF 	 bl mbedtls_aes_setkey_enc
+ 226              	.LVL24:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 227              	 .loc 1 209 0
+ 228              	 
+ 229 0006 08BD     	 pop {r3,pc}
+ 230              	 .cfi_endproc
+ 231              	.LFE11:
+ 233              	 .section .text.aes_crypt_ecb_wrap,"ax",%progbits
+ 234              	 .align 1
+ 235              	 .code 16
+ 236              	 .thumb_func
+ 238              	aes_crypt_ecb_wrap:
+ 239              	.LFB9:
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c ****     return mbedtls_aes_crypt_ecb( (mbedtls_aes_context *) ctx, operation, input, output );
+ 240              	 .loc 1 130 0
+ 241              	 .cfi_startproc
+ 242              	.LVL25:
+ 243 0000 08B5     	 push {r3,lr}
+ 244              	.LCFI7:
+ 245              	 .cfi_def_cfa_offset 8
+ 246              	 .cfi_offset 3,-8
+ 247              	 .cfi_offset 14,-4
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** }
+ 248              	 .loc 1 131 0
+ 249 0002 FFF7FEFF 	 bl mbedtls_aes_crypt_ecb
+ 250              	.LVL26:
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\cipher_wrap.c **** 
+ 251              	 .loc 1 132 0
+ 252              	 
+ 253 0006 08BD     	 pop {r3,pc}
+ 254              	 .cfi_endproc
+ 255              	.LFE9:
+ 257              	 .comm mbedtls_cipher_supported,28,4
+ 258              	 .global mbedtls_cipher_definitions
+ 259              	 .section .rodata.aes_info,"a",%progbits
+ 260              	 .align 2
+ 263              	aes_info:
+ 264 0000 02       	 .byte 2
+ 265 0001 000000   	 .space 3
+ 266 0004 00000000 	 .word aes_crypt_ecb_wrap
+ 267 0008 00000000 	 .word aes_setkey_enc_wrap
+ 268 000c 00000000 	 .word aes_setkey_dec_wrap
+ 269 0010 00000000 	 .word aes_ctx_alloc
+ 270 0014 00000000 	 .word aes_ctx_free
+ 271              	 .section .rodata.aes_192_ccm_info,"a",%progbits
+ 272              	 .align 2
+ 275              	aes_192_ccm_info:
+ 276 0000 2C       	 .byte 44
+ 277 0001 08       	 .byte 8
+ 278 0002 0000     	 .space 2
+ 279 0004 C0000000 	 .word 192
+ 280 0008 0C000000 	 .word .LC1
+ 281 000c 0C000000 	 .word 12
+ 282 0010 01000000 	 .word 1
+ 283 0014 10000000 	 .word 16
+ 284 0018 00000000 	 .word ccm_aes_info
+ 285              	 .section .rodata.mbedtls_cipher_definitions,"a",%progbits
+ 286              	 .align 2
+ 289              	mbedtls_cipher_definitions:
+ 290 0000 02       	 .byte 2
+ 291 0001 000000   	 .space 3
+ 292 0004 00000000 	 .word aes_128_ecb_info
+ 293 0008 03       	 .byte 3
+ 294 0009 000000   	 .space 3
+ 295 000c 00000000 	 .word aes_192_ecb_info
+ 296 0010 04       	 .byte 4
+ 297 0011 000000   	 .space 3
+ 298 0014 00000000 	 .word aes_256_ecb_info
+ 299 0018 2B       	 .byte 43
+ 300 0019 000000   	 .space 3
+ 301 001c 00000000 	 .word aes_128_ccm_info
+ 302 0020 2C       	 .byte 44
+ 303 0021 000000   	 .space 3
+ 304 0024 00000000 	 .word aes_192_ccm_info
+ 305 0028 2D       	 .byte 45
+ 306 0029 000000   	 .space 3
+ 307 002c 00000000 	 .word aes_256_ccm_info
+ 308 0030 00       	 .byte 0
+ 309 0031 000000   	 .space 3
+ 310 0034 00000000 	 .word 0
+ 311              	 .section .rodata.aes_128_ccm_info,"a",%progbits
+ 312              	 .align 2
+ 315              	aes_128_ccm_info:
+ 316 0000 2B       	 .byte 43
+ 317 0001 08       	 .byte 8
+ 318 0002 0000     	 .space 2
+ 319 0004 80000000 	 .word 128
+ 320 0008 18000000 	 .word .LC2
+ 321 000c 0C000000 	 .word 12
+ 322 0010 01000000 	 .word 1
+ 323 0014 10000000 	 .word 16
+ 324 0018 00000000 	 .word ccm_aes_info
+ 325              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 326              	.LC0:
+ 327 0000 4145532D 	 .ascii "AES-256-CCM\000"
+ 327      3235362D 
+ 327      43434D00 
+ 328              	.LC1:
+ 329 000c 4145532D 	 .ascii "AES-192-CCM\000"
+ 329      3139322D 
+ 329      43434D00 
+ 330              	.LC2:
+ 331 0018 4145532D 	 .ascii "AES-128-CCM\000"
+ 331      3132382D 
+ 331      43434D00 
+ 332              	.LC3:
+ 333 0024 4145532D 	 .ascii "AES-256-ECB\000"
+ 333      3235362D 
+ 333      45434200 
+ 334              	.LC4:
+ 335 0030 4145532D 	 .ascii "AES-192-ECB\000"
+ 335      3139322D 
+ 335      45434200 
+ 336              	.LC5:
+ 337 003c 4145532D 	 .ascii "AES-128-ECB\000"
+ 337      3132382D 
+ 337      45434200 
+ 338              	 .section .rodata.ccm_aes_info,"a",%progbits
+ 339              	 .align 2
+ 342              	ccm_aes_info:
+ 343 0000 02       	 .byte 2
+ 344 0001 000000   	 .space 3
+ 345 0004 00000000 	 .word 0
+ 346 0008 00000000 	 .word ccm_aes_setkey_wrap
+ 347 000c 00000000 	 .word ccm_aes_setkey_wrap
+ 348 0010 00000000 	 .word ccm_ctx_alloc
+ 349 0014 00000000 	 .word ccm_ctx_free
+ 350              	 .section .rodata.aes_256_ccm_info,"a",%progbits
+ 351              	 .align 2
+ 354              	aes_256_ccm_info:
+ 355 0000 2D       	 .byte 45
+ 356 0001 08       	 .byte 8
+ 357 0002 0000     	 .space 2
+ 358 0004 00010000 	 .word 256
+ 359 0008 00000000 	 .word .LC0
+ 360 000c 0C000000 	 .word 12
+ 361 0010 01000000 	 .word 1
+ 362 0014 10000000 	 .word 16
+ 363 0018 00000000 	 .word ccm_aes_info
+ 364              	 .section .rodata.aes_192_ecb_info,"a",%progbits
+ 365              	 .align 2
+ 368              	aes_192_ecb_info:
+ 369 0000 03       	 .byte 3
+ 370 0001 01       	 .byte 1
+ 371 0002 0000     	 .space 2
+ 372 0004 C0000000 	 .word 192
+ 373 0008 30000000 	 .word .LC4
+ 374 000c 00000000 	 .word 0
+ 375 0010 00000000 	 .word 0
+ 376 0014 10000000 	 .word 16
+ 377 0018 00000000 	 .word aes_info
+ 378              	 .section .rodata.aes_256_ecb_info,"a",%progbits
+ 379              	 .align 2
+ 382              	aes_256_ecb_info:
+ 383 0000 04       	 .byte 4
+ 384 0001 01       	 .byte 1
+ 385 0002 0000     	 .space 2
+ 386 0004 00010000 	 .word 256
+ 387 0008 24000000 	 .word .LC3
+ 388 000c 00000000 	 .word 0
+ 389 0010 00000000 	 .word 0
+ 390 0014 10000000 	 .word 16
+ 391 0018 00000000 	 .word aes_info
+ 392              	 .section .rodata.aes_128_ecb_info,"a",%progbits
+ 393              	 .align 2
+ 396              	aes_128_ecb_info:
+ 397 0000 02       	 .byte 2
+ 398 0001 01       	 .byte 1
+ 399 0002 0000     	 .space 2
+ 400 0004 80000000 	 .word 128
+ 401 0008 3C000000 	 .word .LC5
+ 402 000c 00000000 	 .word 0
+ 403 0010 00000000 	 .word 0
+ 404 0014 10000000 	 .word 16
+ 405 0018 00000000 	 .word aes_info
+ 406              	 .text
+ 407              	.Letext0:
+ 408              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 409              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/cipher.h"
+ 410              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/cipher_internal.h"
+ 411              	 .file 5 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 412              	 .file 6 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 413              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/aes.h"
+ 414              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/ccm.h"
+ 415              	 .file 9 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdlib.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 cipher_wrap.c
+    {standard input}:18     .text.ccm_ctx_free:00000000 $t
+    {standard input}:22     .text.ccm_ctx_free:00000000 ccm_ctx_free
+    {standard input}:50     .text.ccm_ctx_alloc:00000000 $t
+    {standard input}:54     .text.ccm_ctx_alloc:00000000 ccm_ctx_alloc
+    {standard input}:85     .text.ccm_aes_setkey_wrap:00000000 $t
+    {standard input}:89     .text.ccm_aes_setkey_wrap:00000000 ccm_aes_setkey_wrap
+    {standard input}:117    .text.aes_ctx_free:00000000 $t
+    {standard input}:121    .text.aes_ctx_free:00000000 aes_ctx_free
+    {standard input}:148    .text.aes_ctx_alloc:00000000 $t
+    {standard input}:152    .text.aes_ctx_alloc:00000000 aes_ctx_alloc
+    {standard input}:186    .text.aes_setkey_dec_wrap:00000000 $t
+    {standard input}:190    .text.aes_setkey_dec_wrap:00000000 aes_setkey_dec_wrap
+    {standard input}:210    .text.aes_setkey_enc_wrap:00000000 $t
+    {standard input}:214    .text.aes_setkey_enc_wrap:00000000 aes_setkey_enc_wrap
+    {standard input}:234    .text.aes_crypt_ecb_wrap:00000000 $t
+    {standard input}:238    .text.aes_crypt_ecb_wrap:00000000 aes_crypt_ecb_wrap
+                            *COM*:0000001c mbedtls_cipher_supported
+    {standard input}:289    .rodata.mbedtls_cipher_definitions:00000000 mbedtls_cipher_definitions
+    {standard input}:260    .rodata.aes_info:00000000 $d
+    {standard input}:263    .rodata.aes_info:00000000 aes_info
+    {standard input}:272    .rodata.aes_192_ccm_info:00000000 $d
+    {standard input}:275    .rodata.aes_192_ccm_info:00000000 aes_192_ccm_info
+    {standard input}:342    .rodata.ccm_aes_info:00000000 ccm_aes_info
+    {standard input}:286    .rodata.mbedtls_cipher_definitions:00000000 $d
+    {standard input}:396    .rodata.aes_128_ecb_info:00000000 aes_128_ecb_info
+    {standard input}:368    .rodata.aes_192_ecb_info:00000000 aes_192_ecb_info
+    {standard input}:382    .rodata.aes_256_ecb_info:00000000 aes_256_ecb_info
+    {standard input}:315    .rodata.aes_128_ccm_info:00000000 aes_128_ccm_info
+    {standard input}:354    .rodata.aes_256_ccm_info:00000000 aes_256_ccm_info
+    {standard input}:312    .rodata.aes_128_ccm_info:00000000 $d
+    {standard input}:339    .rodata.ccm_aes_info:00000000 $d
+    {standard input}:351    .rodata.aes_256_ccm_info:00000000 $d
+    {standard input}:365    .rodata.aes_192_ecb_info:00000000 $d
+    {standard input}:379    .rodata.aes_256_ecb_info:00000000 $d
+    {standard input}:393    .rodata.aes_128_ecb_info:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+mbedtls_ccm_free
+free
+calloc
+mbedtls_ccm_init
+mbedtls_ccm_setkey
+mbedtls_aes_free
+mbedtls_aes_init
+mbedtls_aes_setkey_dec
+mbedtls_aes_setkey_enc
+mbedtls_aes_crypt_ecb

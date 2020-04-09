@@ -1,0 +1,69 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "digital_io_conf.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .global io_test
+  18              	 .global vdd_pin
+  19              	 .global reset_pin
+  20              	 .section .rodata.io_test,"a",%progbits
+  21              	 .align 2
+  24              	io_test:
+  25 0000 00020440 	 .word 1074004480
+  26 0004 00       	 .byte 0
+  27 0005 00       	 .byte 0
+  28 0006 00000000 	 .space 6
+  28      0000
+  29 000c 09       	 .byte 9
+  30 000d 00       	 .byte 0
+  31 000e 0000     	 .space 2
+  32              	 .section .rodata.reset_pin,"a",%progbits
+  33              	 .align 2
+  36              	reset_pin:
+  37 0000 00030440 	 .word 1074004736
+  38 0004 80       	 .byte -128
+  39 0005 000000   	 .space 3
+  40 0008 01000000 	 .word 1
+  41 000c 02       	 .byte 2
+  42 000d 00       	 .byte 0
+  43 000e 0000     	 .space 2
+  44              	 .section .rodata.vdd_pin,"a",%progbits
+  45              	 .align 2
+  48              	vdd_pin:
+  49 0000 00020440 	 .word 1074004480
+  50 0004 80       	 .byte -128
+  51 0005 000000   	 .space 3
+  52 0008 00000100 	 .word 65536
+  53 000c 0A       	 .byte 10
+  54 000d 00       	 .byte 0
+  55 000e 0000     	 .space 2
+  56              	 .text
+  57              	.Letext0:
+  58              	 .file 1 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+  59              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+  60              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_gpio.h"
+  61              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_gpio.h"
+  62              	 .file 5 "../Dave/Generated/DIGITAL_IO/digital_io.h"
+  63              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+  64              	 .file 7 "../Dave/Generated/DIGITAL_IO/digital_io_conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 digital_io_conf.c
+    {standard input}:24     .rodata.io_test:00000000 io_test
+    {standard input}:48     .rodata.vdd_pin:00000000 vdd_pin
+    {standard input}:36     .rodata.reset_pin:00000000 reset_pin
+    {standard input}:21     .rodata.io_test:00000000 $d
+    {standard input}:33     .rodata.reset_pin:00000000 $d
+    {standard input}:45     .rodata.vdd_pin:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1722 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "ecdh.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.mbedtls_ecdh_gen_public,"ax",%progbits
+  18              	 .align 1
+  19              	 .global mbedtls_ecdh_gen_public
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	mbedtls_ecdh_gen_public:
+  24              	.LFB1:
+  25              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/ecdh.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  Elliptic curve Diffie-Hellman
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  SPDX-License-Identifier: Apache-2.0
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  not use this file except in compliance with the License.
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  You may obtain a copy of the License at
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  Unless required by applicable law or agreed to in writing, software
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  See the License for the specific language governing permissions and
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  limitations under the License.
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * References:
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * SEC1 http://www.secg.org/index.php?action=secg,docs_secg
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * RFC 4492
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #include "mbedtls/config.h"
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #include MBEDTLS_CONFIG_FILE
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_C)
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #include "mbedtls/ecdh.h"
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #include "mbedtls/platform_util.h"
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #include <string.h>
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /* Parameter validation macros based on platform_util.h */
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #define ECDH_VALIDATE_RET( cond )    \
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     MBEDTLS_INTERNAL_VALIDATE_RET( cond, MBEDTLS_ERR_ECP_BAD_INPUT_DATA )
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #define ECDH_VALIDATE( cond )        \
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     MBEDTLS_INTERNAL_VALIDATE( cond )
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** typedef mbedtls_ecdh_context mbedtls_ecdh_context_mbed;
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if !defined(MBEDTLS_ECDH_GEN_PUBLIC_ALT)
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Generate public key (restartable version)
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Note: this internal function relies on its caller preserving the value of
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * the output parameter 'd' across continuation calls. This would not be
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * acceptable for a public function but is OK here as we control call sites.
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_gen_public_restartable( mbedtls_ecp_group *grp,
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                     mbedtls_mpi *d, mbedtls_ecp_point *Q,
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                     int (*f_rng)(void *, unsigned char *, size_t),
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                     void *p_rng,
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                     mbedtls_ecp_restart_ctx *rs_ctx )
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     /* If multiplication is in progress, we already generated a privkey */
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( rs_ctx == NULL || rs_ctx->rsm == NULL )
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         MBEDTLS_MPI_CHK( mbedtls_ecp_gen_privkey( grp, d, f_rng, p_rng ) );
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     MBEDTLS_MPI_CHK( mbedtls_ecp_mul_restartable( grp, Q, d, &grp->G,
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                   f_rng, p_rng, rs_ctx ) );
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** cleanup:
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ret );
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Generate public key
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_gen_public( mbedtls_ecp_group *grp, mbedtls_mpi *d, mbedtls_ecp_point *Q,
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                      int (*f_rng)(void *, unsigned char *, size_t),
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                      void *p_rng )
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+  26              	 .loc 1 87 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 20
+  32              	 .cfi_offset 4,-20
+  33              	 .cfi_offset 5,-16
+  34              	 .cfi_offset 6,-12
+  35              	 .cfi_offset 7,-8
+  36              	 .cfi_offset 14,-4
+  37 0002 85B0     	 sub sp,sp,#20
+  38              	.LCFI1:
+  39              	 .cfi_def_cfa_offset 40
+  40              	 .loc 1 87 0
+  41 0004 171C     	 mov r7,r2
+  42              	.LVL1:
+  43 0006 1E1C     	 mov r6,r3
+  44              	.LBB8:
+  45              	.LBB9:
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  46              	 .loc 1 72 0
+  47 0008 1A1C     	 mov r2,r3
+  48              	.LVL2:
+  49 000a 0A9B     	 ldr r3,[sp,#40]
+  50              	.LVL3:
+  51              	.LBE9:
+  52              	.LBE8:
+  53              	 .loc 1 87 0
+  54 000c 041C     	 mov r4,r0
+  55 000e 0D1C     	 mov r5,r1
+  56              	.LBB11:
+  57              	.LBB10:
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  58              	 .loc 1 72 0
+  59 0010 FFF7FEFF 	 bl mbedtls_ecp_gen_privkey
+  60              	.LVL4:
+  61 0014 0028     	 cmp r0,#0
+  62 0016 0AD1     	 bne .L2
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                   f_rng, p_rng, rs_ctx ) );
+  63              	 .loc 1 74 0
+  64 0018 231C     	 mov r3,r4
+  65 001a 0A9A     	 ldr r2,[sp,#40]
+  66 001c 0290     	 str r0,[sp,#8]
+  67 001e 0192     	 str r2,[sp,#4]
+  68 0020 2833     	 add r3,r3,#40
+  69 0022 0096     	 str r6,[sp]
+  70 0024 201C     	 mov r0,r4
+  71              	.LVL5:
+  72 0026 391C     	 mov r1,r7
+  73 0028 2A1C     	 mov r2,r5
+  74 002a FFF7FEFF 	 bl mbedtls_ecp_mul_restartable
+  75              	.LVL6:
+  76              	.L2:
+  77              	.LBE10:
+  78              	.LBE11:
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( grp != NULL );
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( d != NULL );
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( Q != NULL );
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( f_rng != NULL );
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_gen_public_restartable( grp, d, Q, f_rng, p_rng, NULL ) );
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+  79              	 .loc 1 93 0
+  80 002e 05B0     	 add sp,sp,#20
+  81              	 
+  82              	.LVL7:
+  83              	.LVL8:
+  84              	.LVL9:
+  85              	.LVL10:
+  86 0030 F0BD     	 pop {r4,r5,r6,r7,pc}
+  87              	 .cfi_endproc
+  88              	.LFE1:
+  90              	 .section .text.mbedtls_ecdh_compute_shared,"ax",%progbits
+  91              	 .align 1
+  92              	 .global mbedtls_ecdh_compute_shared
+  93              	 .code 16
+  94              	 .thumb_func
+  96              	mbedtls_ecdh_compute_shared:
+  97              	.LFB3:
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif /* !MBEDTLS_ECDH_GEN_PUBLIC_ALT */
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if !defined(MBEDTLS_ECDH_COMPUTE_SHARED_ALT)
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Compute shared secret (SEC1 3.3.1)
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_compute_shared_restartable( mbedtls_ecp_group *grp,
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          mbedtls_mpi *z,
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          const mbedtls_ecp_point *Q, const mbedtls_mpi *d,
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          int (*f_rng)(void *, unsigned char *, size_t),
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          void *p_rng,
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          mbedtls_ecp_restart_ctx *rs_ctx )
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point P;
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &P );
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     MBEDTLS_MPI_CHK( mbedtls_ecp_mul_restartable( grp, &P, d, Q,
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                   f_rng, p_rng, rs_ctx ) );
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( mbedtls_ecp_is_zero( &P ) )
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         ret = MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         goto cleanup;
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     MBEDTLS_MPI_CHK( mbedtls_mpi_copy( z, &P.X ) );
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** cleanup:
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &P );
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ret );
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Compute shared secret (SEC1 3.3.1)
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_compute_shared( mbedtls_ecp_group *grp, mbedtls_mpi *z,
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          const mbedtls_ecp_point *Q, const mbedtls_mpi *d,
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          int (*f_rng)(void *, unsigned char *, size_t),
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                          void *p_rng )
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+  98              	 .loc 1 136 0
+  99              	 .cfi_startproc
+ 100              	.LVL11:
+ 101 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 102              	.LCFI2:
+ 103              	 .cfi_def_cfa_offset 20
+ 104              	 .cfi_offset 4,-20
+ 105              	 .cfi_offset 5,-16
+ 106              	 .cfi_offset 6,-12
+ 107              	 .cfi_offset 7,-8
+ 108              	 .cfi_offset 14,-4
+ 109 0002 8FB0     	 sub sp,sp,#60
+ 110              	.LCFI3:
+ 111              	 .cfi_def_cfa_offset 80
+ 112              	 .loc 1 136 0
+ 113 0004 071C     	 mov r7,r0
+ 114              	.LVL12:
+ 115              	.LBB14:
+ 116              	.LBB15:
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 117              	 .loc 1 110 0
+ 118 0006 05A8     	 add r0,sp,#20
+ 119              	.LVL13:
+ 120              	.LBE15:
+ 121              	.LBE14:
+ 122              	 .loc 1 136 0
+ 123 0008 141C     	 mov r4,r2
+ 124 000a 1E1C     	 mov r6,r3
+ 125 000c 0D1C     	 mov r5,r1
+ 126              	.LVL14:
+ 127              	.LBB17:
+ 128              	.LBB16:
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 129              	 .loc 1 110 0
+ 130 000e FFF7FEFF 	 bl mbedtls_ecp_point_init
+ 131              	.LVL15:
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                   f_rng, p_rng, rs_ctx ) );
+ 132              	 .loc 1 112 0
+ 133 0012 149B     	 ldr r3,[sp,#80]
+ 134 0014 381C     	 mov r0,r7
+ 135 0016 0093     	 str r3,[sp]
+ 136 0018 159B     	 ldr r3,[sp,#84]
+ 137 001a 05A9     	 add r1,sp,#20
+ 138 001c 0193     	 str r3,[sp,#4]
+ 139 001e 0023     	 mov r3,#0
+ 140 0020 321C     	 mov r2,r6
+ 141 0022 0293     	 str r3,[sp,#8]
+ 142 0024 231C     	 mov r3,r4
+ 143 0026 FFF7FEFF 	 bl mbedtls_ecp_mul_restartable
+ 144              	.LVL16:
+ 145 002a 041E     	 sub r4,r0,#0
+ 146              	.LVL17:
+ 147 002c 0BD1     	 bne .L5
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 148              	 .loc 1 115 0
+ 149 002e 05A8     	 add r0,sp,#20
+ 150              	.LVL18:
+ 151 0030 FFF7FEFF 	 bl mbedtls_ecp_is_zero
+ 152              	.LVL19:
+ 153 0034 0028     	 cmp r0,#0
+ 154 0036 05D1     	 bne .L6
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 155              	 .loc 1 121 0
+ 156 0038 281C     	 mov r0,r5
+ 157 003a 05A9     	 add r1,sp,#20
+ 158 003c FFF7FEFF 	 bl mbedtls_mpi_copy
+ 159              	.LVL20:
+ 160 0040 041C     	 mov r4,r0
+ 161              	.LVL21:
+ 162 0042 00E0     	 b .L5
+ 163              	.LVL22:
+ 164              	.L6:
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         goto cleanup;
+ 165              	 .loc 1 117 0
+ 166 0044 034C     	 ldr r4,.L7
+ 167              	.LVL23:
+ 168              	.L5:
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 169              	 .loc 1 124 0
+ 170 0046 05A8     	 add r0,sp,#20
+ 171 0048 FFF7FEFF 	 bl mbedtls_ecp_point_free
+ 172              	.LVL24:
+ 173              	.LBE16:
+ 174              	.LBE17:
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( grp != NULL );
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( Q != NULL );
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( d != NULL );
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( z != NULL );
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_compute_shared_restartable( grp, z, Q, d,
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              f_rng, p_rng, NULL ) );
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 175              	 .loc 1 143 0
+ 176 004c 201C     	 mov r0,r4
+ 177 004e 0FB0     	 add sp,sp,#60
+ 178              	 
+ 179              	.LVL25:
+ 180              	.LVL26:
+ 181              	.LVL27:
+ 182              	.LVL28:
+ 183 0050 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 184              	.L8:
+ 185 0052 C046     	 .align 2
+ 186              	.L7:
+ 187 0054 80B0FFFF 	 .word -20352
+ 188              	 .cfi_endproc
+ 189              	.LFE3:
+ 191              	 .section .text.mbedtls_ecdh_init,"ax",%progbits
+ 192              	 .align 1
+ 193              	 .global mbedtls_ecdh_init
+ 194              	 .code 16
+ 195              	 .thumb_func
+ 197              	mbedtls_ecdh_init:
+ 198              	.LFB5:
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif /* !MBEDTLS_ECDH_COMPUTE_SHARED_ALT */
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static void ecdh_init_internal( mbedtls_ecdh_context_mbed *ctx )
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_group_init( &ctx->grp );
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_init( &ctx->d  );
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Q   );
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Qp  );
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_init( &ctx->z  );
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_restart_init( &ctx->rs );
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Initialize context
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** void mbedtls_ecdh_init( mbedtls_ecdh_context *ctx )
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 199              	 .loc 1 163 0
+ 200              	 .cfi_startproc
+ 201              	.LVL29:
+ 202 0000 10B5     	 push {r4,lr}
+ 203              	.LCFI4:
+ 204              	 .cfi_def_cfa_offset 8
+ 205              	 .cfi_offset 4,-8
+ 206              	 .cfi_offset 14,-4
+ 207              	 .loc 1 163 0
+ 208 0002 041C     	 mov r4,r0
+ 209              	.LBB20:
+ 210              	.LBB21:
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_init( &ctx->d  );
+ 211              	 .loc 1 148 0
+ 212 0004 FFF7FEFF 	 bl mbedtls_ecp_group_init
+ 213              	.LVL30:
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Q   );
+ 214              	 .loc 1 149 0
+ 215 0008 201C     	 mov r0,r4
+ 216 000a 7C30     	 add r0,r0,#124
+ 217 000c FFF7FEFF 	 bl mbedtls_mpi_init
+ 218              	.LVL31:
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Qp  );
+ 219              	 .loc 1 150 0
+ 220 0010 201C     	 mov r0,r4
+ 221 0012 8830     	 add r0,r0,#136
+ 222 0014 FFF7FEFF 	 bl mbedtls_ecp_point_init
+ 223              	.LVL32:
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_init( &ctx->z  );
+ 224              	 .loc 1 151 0
+ 225 0018 201C     	 mov r0,r4
+ 226 001a AC30     	 add r0,r0,#172
+ 227 001c FFF7FEFF 	 bl mbedtls_ecp_point_init
+ 228              	.LVL33:
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 229              	 .loc 1 152 0
+ 230 0020 201C     	 mov r0,r4
+ 231 0022 D030     	 add r0,r0,#208
+ 232 0024 FFF7FEFF 	 bl mbedtls_mpi_init
+ 233              	.LVL34:
+ 234              	.LBE21:
+ 235              	.LBE20:
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE( ctx != NULL );
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ecdh_init_internal( ctx );
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Vi  );
+ 236              	 .loc 1 168 0
+ 237 0028 201C     	 mov r0,r4
+ 238 002a E030     	 add r0,r0,#224
+ 239 002c FFF7FEFF 	 bl mbedtls_ecp_point_init
+ 240              	.LVL35:
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_init( &ctx->Vf  );
+ 241              	 .loc 1 169 0
+ 242 0030 601D     	 add r0,r4,#5
+ 243 0032 FF30     	 add r0,r0,#255
+ 244 0034 FFF7FEFF 	 bl mbedtls_ecp_point_init
+ 245              	.LVL36:
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_init( &ctx->_d );
+ 246              	 .loc 1 170 0
+ 247 0038 201C     	 mov r0,r4
+ 248 003a 2930     	 add r0,r0,#41
+ 249 003c FF30     	 add r0,r0,#255
+ 250 003e FFF7FEFF 	 bl mbedtls_mpi_init
+ 251              	.LVL37:
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     memset( ctx, 0, sizeof( mbedtls_ecdh_context ) );
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->var = MBEDTLS_ECDH_VARIANT_NONE;
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->point_format = MBEDTLS_ECP_PF_UNCOMPRESSED;
+ 252              	 .loc 1 176 0
+ 253 0042 0023     	 mov r3,#0
+ 254 0044 DC34     	 add r4,r4,#220
+ 255              	.LVL38:
+ 256 0046 2360     	 str r3,[r4]
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->restart_enabled = 0;
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 257              	 .loc 1 180 0
+ 258              	 
+ 259              	.LVL39:
+ 260 0048 10BD     	 pop {r4,pc}
+ 261              	 .cfi_endproc
+ 262              	.LFE5:
+ 264              	 .section .text.mbedtls_ecdh_setup,"ax",%progbits
+ 265              	 .align 1
+ 266              	 .global mbedtls_ecdh_setup
+ 267              	 .code 16
+ 268              	 .thumb_func
+ 270              	mbedtls_ecdh_setup:
+ 271              	.LFB7:
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_setup_internal( mbedtls_ecdh_context_mbed *ctx,
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                 mbedtls_ecp_group_id grp_id )
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ret = mbedtls_ecp_group_load( &ctx->grp, grp_id );
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ret != 0 )
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE );
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( 0 );
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Setup context
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_setup( mbedtls_ecdh_context *ctx, mbedtls_ecp_group_id grp_id )
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 272              	 .loc 1 200 0
+ 273              	 .cfi_startproc
+ 274              	.LVL40:
+ 275 0000 08B5     	 push {r3,lr}
+ 276              	.LCFI5:
+ 277              	 .cfi_def_cfa_offset 8
+ 278              	 .cfi_offset 3,-8
+ 279              	 .cfi_offset 14,-4
+ 280              	.LBB24:
+ 281              	.LBB25:
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ret != 0 )
+ 282              	 .loc 1 187 0
+ 283 0002 FFF7FEFF 	 bl mbedtls_ecp_group_load
+ 284              	.LVL41:
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 285              	 .loc 1 188 0
+ 286 0006 0028     	 cmp r0,#0
+ 287 0008 00D0     	 beq .L11
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 288              	 .loc 1 190 0
+ 289 000a 0148     	 ldr r0,.L13
+ 290              	.LVL42:
+ 291              	.L11:
+ 292              	.LBE25:
+ 293              	.LBE24:
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_setup_internal( ctx, grp_id ) );
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( grp_id )
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             ctx->point_format = MBEDTLS_ECP_PF_UNCOMPRESSED;
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             ctx->var = MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0;
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             ctx->grp_id = grp_id;
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             ecdh_init_internal( &ctx->ctx.mbed_ecdh );
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_setup_internal( &ctx->ctx.mbed_ecdh, grp_id ) );
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 294              	 .loc 1 216 0
+ 295              	 
+ 296 000c 08BD     	 pop {r3,pc}
+ 297              	.L14:
+ 298 000e C046     	 .align 2
+ 299              	.L13:
+ 300 0010 80B1FFFF 	 .word -20096
+ 301              	 .cfi_endproc
+ 302              	.LFE7:
+ 304              	 .section .text.mbedtls_ecdh_free,"ax",%progbits
+ 305              	 .align 1
+ 306              	 .global mbedtls_ecdh_free
+ 307              	 .code 16
+ 308              	 .thumb_func
+ 310              	mbedtls_ecdh_free:
+ 311              	.LFB9:
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static void ecdh_free_internal( mbedtls_ecdh_context_mbed *ctx )
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_group_free( &ctx->grp );
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_free( &ctx->d  );
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Q   );
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Qp  );
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_free( &ctx->z  );
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_restart_free( &ctx->rs );
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Enable restartable operations for context
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** void mbedtls_ecdh_enable_restart( mbedtls_ecdh_context *ctx )
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE( ctx != NULL );
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->restart_enabled = 1;
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Free context
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** void mbedtls_ecdh_free( mbedtls_ecdh_context *ctx )
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 312              	 .loc 1 247 0
+ 313              	 .cfi_startproc
+ 314              	.LVL43:
+ 315 0000 10B5     	 push {r4,lr}
+ 316              	.LCFI6:
+ 317              	 .cfi_def_cfa_offset 8
+ 318              	 .cfi_offset 4,-8
+ 319              	 .cfi_offset 14,-4
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ctx == NULL )
+ 320              	 .loc 1 248 0
+ 321 0002 0028     	 cmp r0,#0
+ 322 0004 1FD0     	 beq .L15
+ 323 0006 041C     	 mov r4,r0
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return;
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Vi );
+ 324              	 .loc 1 252 0
+ 325 0008 E030     	 add r0,r0,#224
+ 326              	.LVL44:
+ 327 000a FFF7FEFF 	 bl mbedtls_ecp_point_free
+ 328              	.LVL45:
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Vf );
+ 329              	 .loc 1 253 0
+ 330 000e 601D     	 add r0,r4,#5
+ 331 0010 FF30     	 add r0,r0,#255
+ 332 0012 FFF7FEFF 	 bl mbedtls_ecp_point_free
+ 333              	.LVL46:
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_free( &ctx->_d );
+ 334              	 .loc 1 254 0
+ 335 0016 201C     	 mov r0,r4
+ 336 0018 2930     	 add r0,r0,#41
+ 337 001a FF30     	 add r0,r0,#255
+ 338 001c FFF7FEFF 	 bl mbedtls_mpi_free
+ 339              	.LVL47:
+ 340              	.LBB28:
+ 341              	.LBB29:
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_free( &ctx->d  );
+ 342              	 .loc 1 220 0
+ 343 0020 201C     	 mov r0,r4
+ 344 0022 FFF7FEFF 	 bl mbedtls_ecp_group_free
+ 345              	.LVL48:
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Q   );
+ 346              	 .loc 1 221 0
+ 347 0026 201C     	 mov r0,r4
+ 348 0028 7C30     	 add r0,r0,#124
+ 349 002a FFF7FEFF 	 bl mbedtls_mpi_free
+ 350              	.LVL49:
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_point_free( &ctx->Qp  );
+ 351              	 .loc 1 222 0
+ 352 002e 201C     	 mov r0,r4
+ 353 0030 8830     	 add r0,r0,#136
+ 354 0032 FFF7FEFF 	 bl mbedtls_ecp_point_free
+ 355              	.LVL50:
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_mpi_free( &ctx->z  );
+ 356              	 .loc 1 223 0
+ 357 0036 201C     	 mov r0,r4
+ 358 0038 AC30     	 add r0,r0,#172
+ 359 003a FFF7FEFF 	 bl mbedtls_ecp_point_free
+ 360              	.LVL51:
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 361              	 .loc 1 224 0
+ 362 003e 201C     	 mov r0,r4
+ 363 0040 D030     	 add r0,r0,#208
+ 364 0042 FFF7FEFF 	 bl mbedtls_mpi_free
+ 365              	.LVL52:
+ 366              	.L15:
+ 367              	.LBE29:
+ 368              	.LBE28:
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ecdh_free_internal( ctx );
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             ecdh_free_internal( &ctx->ctx.mbed_ecdh );
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             break;
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             break;
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->point_format = MBEDTLS_ECP_PF_UNCOMPRESSED;
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->var = MBEDTLS_ECDH_VARIANT_NONE;
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ctx->grp_id = MBEDTLS_ECP_DP_NONE;
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 369              	 .loc 1 270 0
+ 370              	 
+ 371 0046 10BD     	 pop {r4,pc}
+ 372              	 .cfi_endproc
+ 373              	.LFE9:
+ 375              	 .section .text.mbedtls_ecdh_make_params,"ax",%progbits
+ 376              	 .align 1
+ 377              	 .global mbedtls_ecdh_make_params
+ 378              	 .code 16
+ 379              	 .thumb_func
+ 381              	mbedtls_ecdh_make_params:
+ 382              	.LFB11:
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_make_params_internal( mbedtls_ecdh_context_mbed *ctx,
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       size_t *olen, int point_format,
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       unsigned char *buf, size_t blen,
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int (*f_rng)(void *,
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    unsigned char *,
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    size_t),
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       void *p_rng,
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int restart_enabled )
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     size_t grp_len, pt_len;
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_restart_ctx *rs_ctx = NULL;
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ctx->grp.pbits == 0 )
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( restart_enabled )
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         rs_ctx = &ctx->rs;
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     (void) restart_enabled;
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = ecdh_gen_public_restartable( &ctx->grp, &ctx->d, &ctx->Q,
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              f_rng, p_rng, rs_ctx ) ) != 0 )
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecdh_gen_public( &ctx->grp, &ctx->d, &ctx->Q,
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                          f_rng, p_rng ) ) != 0 )
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif /* MBEDTLS_ECP_RESTARTABLE */
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecp_tls_write_group( &ctx->grp, &grp_len, buf,
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              blen ) ) != 0 )
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     buf += grp_len;
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     blen -= grp_len;
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecp_tls_write_point( &ctx->grp, &ctx->Q, point_format,
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &pt_len, buf, blen ) ) != 0 )
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     *olen = grp_len + pt_len;
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( 0 );
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Setup and write the ServerKeyExhange parameters (RFC 4492)
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *      struct {
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *          ECParameters    curve_params;
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *          ECPoint         public;
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *      } ServerECDHParams;
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_make_params( mbedtls_ecdh_context *ctx, size_t *olen,
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               unsigned char *buf, size_t blen,
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               int (*f_rng)(void *, unsigned char *, size_t),
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               void *p_rng )
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 383              	 .loc 1 334 0
+ 384              	 .cfi_startproc
+ 385              	.LVL53:
+ 386 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 387              	.LCFI7:
+ 388              	 .cfi_def_cfa_offset 20
+ 389              	 .cfi_offset 4,-20
+ 390              	 .cfi_offset 5,-16
+ 391              	 .cfi_offset 6,-12
+ 392              	 .cfi_offset 7,-8
+ 393              	 .cfi_offset 14,-4
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int restart_enabled = 0;
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( olen != NULL );
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( buf != NULL );
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( f_rng != NULL );
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     restart_enabled = ctx->restart_enabled;
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     (void) restart_enabled;
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_make_params_internal( ctx, olen, ctx->point_format, buf, blen,
+ 394              	 .loc 1 348 0
+ 395 0002 041C     	 mov r4,r0
+ 396 0004 DC34     	 add r4,r4,#220
+ 397 0006 2468     	 ldr r4,[r4]
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int restart_enabled = 0;
+ 398              	 .loc 1 334 0
+ 399 0008 87B0     	 sub sp,sp,#28
+ 400              	.LCFI8:
+ 401              	 .cfi_def_cfa_offset 48
+ 402              	 .loc 1 348 0
+ 403 000a 0294     	 str r4,[sp,#8]
+ 404              	.LVL54:
+ 405              	.LBB32:
+ 406              	.LBB33:
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 407              	 .loc 1 287 0
+ 408 000c 846D     	 ldr r4,[r0,#88]
+ 409              	.LVL55:
+ 410 000e 002C     	 cmp r4,#0
+ 411 0010 2AD0     	 beq .L22
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                          f_rng, p_rng ) ) != 0 )
+ 412              	 .loc 1 303 0
+ 413 0012 071C     	 mov r7,r0
+ 414 0014 0391     	 str r1,[sp,#12]
+ 415 0016 011C     	 mov r1,r0
+ 416              	.LVL56:
+ 417 0018 1D1C     	 mov r5,r3
+ 418 001a 0D9B     	 ldr r3,[sp,#52]
+ 419              	.LVL57:
+ 420 001c 8837     	 add r7,r7,#136
+ 421 001e 161C     	 mov r6,r2
+ 422 0020 0093     	 str r3,[sp]
+ 423              	.LVL58:
+ 424 0022 7C31     	 add r1,r1,#124
+ 425 0024 3A1C     	 mov r2,r7
+ 426              	.LVL59:
+ 427 0026 0C9B     	 ldr r3,[sp,#48]
+ 428 0028 041C     	 mov r4,r0
+ 429 002a FFF7FEFF 	 bl mbedtls_ecdh_gen_public
+ 430              	.LVL60:
+ 431 002e 0028     	 cmp r0,#0
+ 432 0030 1BD1     	 bne .L21
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              blen ) ) != 0 )
+ 433              	 .loc 1 308 0
+ 434 0032 201C     	 mov r0,r4
+ 435              	.LVL61:
+ 436 0034 04A9     	 add r1,sp,#16
+ 437 0036 321C     	 mov r2,r6
+ 438 0038 2B1C     	 mov r3,r5
+ 439 003a FFF7FEFF 	 bl mbedtls_ecp_tls_write_group
+ 440              	.LVL62:
+ 441 003e 0028     	 cmp r0,#0
+ 442 0040 13D1     	 bne .L21
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     blen -= grp_len;
+ 443              	 .loc 1 312 0
+ 444 0042 049B     	 ldr r3,[sp,#16]
+ 445              	.LVL63:
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &pt_len, buf, blen ) ) != 0 )
+ 446              	 .loc 1 315 0
+ 447 0044 201C     	 mov r0,r4
+ 448              	.LVL64:
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     blen -= grp_len;
+ 449              	 .loc 1 312 0
+ 450 0046 F618     	 add r6,r6,r3
+ 451              	.LVL65:
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 452              	 .loc 1 313 0
+ 453 0048 ED1A     	 sub r5,r5,r3
+ 454              	.LVL66:
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &pt_len, buf, blen ) ) != 0 )
+ 455              	 .loc 1 315 0
+ 456 004a 0096     	 str r6,[sp]
+ 457 004c 0195     	 str r5,[sp,#4]
+ 458 004e 391C     	 mov r1,r7
+ 459 0050 029A     	 ldr r2,[sp,#8]
+ 460 0052 05AB     	 add r3,sp,#20
+ 461 0054 FFF7FEFF 	 bl mbedtls_ecp_tls_write_point
+ 462              	.LVL67:
+ 463 0058 0028     	 cmp r0,#0
+ 464 005a 06D1     	 bne .L21
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( 0 );
+ 465              	 .loc 1 319 0
+ 466 005c 049A     	 ldr r2,[sp,#16]
+ 467 005e 059B     	 ldr r3,[sp,#20]
+ 468 0060 9B18     	 add r3,r3,r2
+ 469 0062 039A     	 ldr r2,[sp,#12]
+ 470 0064 1360     	 str r3,[r2]
+ 471 0066 00E0     	 b .L21
+ 472              	.LVL68:
+ 473              	.L22:
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 474              	 .loc 1 288 0
+ 475 0068 0148     	 ldr r0,.L26
+ 476              	.LVL69:
+ 477              	.L21:
+ 478              	.LBE33:
+ 479              	.LBE32:
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                        f_rng, p_rng, restart_enabled ) );
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_make_params_internal( &ctx->ctx.mbed_ecdh, olen,
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                ctx->point_format, buf, blen,
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                f_rng, p_rng,
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                restart_enabled ) );
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 480              	 .loc 1 362 0
+ 481 006a 07B0     	 add sp,sp,#28
+ 482              	 
+ 483 006c F0BD     	 pop {r4,r5,r6,r7,pc}
+ 484              	.L27:
+ 485 006e C046     	 .align 2
+ 486              	.L26:
+ 487 0070 80B0FFFF 	 .word -20352
+ 488              	 .cfi_endproc
+ 489              	.LFE11:
+ 491              	 .section .text.mbedtls_ecdh_read_params,"ax",%progbits
+ 492              	 .align 1
+ 493              	 .global mbedtls_ecdh_read_params
+ 494              	 .code 16
+ 495              	 .thumb_func
+ 497              	mbedtls_ecdh_read_params:
+ 498              	.LFB13:
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_read_params_internal( mbedtls_ecdh_context_mbed *ctx,
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       const unsigned char **buf,
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       const unsigned char *end )
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( mbedtls_ecp_tls_read_point( &ctx->grp, &ctx->Qp, buf,
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         end - *buf ) );
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Read the ServerKeyExhange parameters (RFC 4492)
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *      struct {
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *          ECParameters    curve_params;
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *          ECPoint         public;
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  *      } ServerECDHParams;
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_read_params( mbedtls_ecdh_context *ctx,
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               const unsigned char **buf,
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               const unsigned char *end )
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 499              	 .loc 1 382 0
+ 500              	 .cfi_startproc
+ 501              	.LVL70:
+ 502 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 503              	.LCFI9:
+ 504              	 .cfi_def_cfa_offset 32
+ 505              	 .cfi_offset 0,-32
+ 506              	 .cfi_offset 1,-28
+ 507              	 .cfi_offset 2,-24
+ 508              	 .cfi_offset 4,-20
+ 509              	 .cfi_offset 5,-16
+ 510              	 .cfi_offset 6,-12
+ 511              	 .cfi_offset 7,-8
+ 512              	 .cfi_offset 14,-4
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_group_id grp_id;
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( buf != NULL );
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( *buf != NULL );
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( end != NULL );
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecp_tls_read_group_id( &grp_id, buf, end - *buf ) )
+ 513              	 .loc 1 390 0
+ 514 0002 6B46     	 mov r3,sp
+ 515 0004 DF1D     	 add r7,r3,#7
+ 516 0006 0B68     	 ldr r3,[r1]
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 517              	 .loc 1 382 0
+ 518 0008 061C     	 mov r6,r0
+ 519 000a 141C     	 mov r4,r2
+ 520              	 .loc 1 390 0
+ 521 000c 381C     	 mov r0,r7
+ 522              	.LVL71:
+ 523 000e D21A     	 sub r2,r2,r3
+ 524              	.LVL72:
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 525              	 .loc 1 382 0
+ 526 0010 0D1C     	 mov r5,r1
+ 527              	 .loc 1 390 0
+ 528 0012 FFF7FEFF 	 bl mbedtls_ecp_tls_read_group_id
+ 529              	.LVL73:
+ 530 0016 0028     	 cmp r0,#0
+ 531 0018 0FD1     	 bne .L32
+ 532              	.LVL74:
+ 533              	.LBB40:
+ 534              	.LBB41:
+ 535              	.LBB42:
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ret != 0 )
+ 536              	 .loc 1 187 0
+ 537 001a 3978     	 ldrb r1,[r7]
+ 538 001c 301C     	 mov r0,r6
+ 539              	.LVL75:
+ 540 001e FFF7FEFF 	 bl mbedtls_ecp_group_load
+ 541              	.LVL76:
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 542              	 .loc 1 188 0
+ 543 0022 0028     	 cmp r0,#0
+ 544 0024 01D0     	 beq .L30
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 545              	 .loc 1 190 0
+ 546 0026 0548     	 ldr r0,.L33
+ 547              	.LVL77:
+ 548 0028 07E0     	 b .L32
+ 549              	.LVL78:
+ 550              	.L30:
+ 551              	.LBE42:
+ 552              	.LBE41:
+ 553              	.LBE40:
+ 554              	.LBB43:
+ 555              	.LBB44:
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         end - *buf ) );
+ 556              	 .loc 1 368 0
+ 557 002a 311C     	 mov r1,r6
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 558              	 .loc 1 369 0
+ 559 002c 2B68     	 ldr r3,[r5]
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         end - *buf ) );
+ 560              	 .loc 1 368 0
+ 561 002e AC31     	 add r1,r1,#172
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 562              	 .loc 1 369 0
+ 563 0030 E31A     	 sub r3,r4,r3
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         end - *buf ) );
+ 564              	 .loc 1 368 0
+ 565 0032 301C     	 mov r0,r6
+ 566              	.LVL79:
+ 567 0034 2A1C     	 mov r2,r5
+ 568 0036 FFF7FEFF 	 bl mbedtls_ecp_tls_read_point
+ 569              	.LVL80:
+ 570              	.L32:
+ 571              	.LBE44:
+ 572              	.LBE43:
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             != 0 )
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecdh_setup( ctx, grp_id ) ) != 0 )
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_read_params_internal( ctx, buf, end ) );
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_read_params_internal( &ctx->ctx.mbed_ecdh,
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                buf, end ) );
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 573              	 .loc 1 409 0
+ 574              	 
+ 575              	.LVL81:
+ 576              	.LVL82:
+ 577              	.LVL83:
+ 578 003a FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 579              	.L34:
+ 580              	 .align 2
+ 581              	.L33:
+ 582 003c 80B1FFFF 	 .word -20096
+ 583              	 .cfi_endproc
+ 584              	.LFE13:
+ 586              	 .section .text.mbedtls_ecdh_get_params,"ax",%progbits
+ 587              	 .align 1
+ 588              	 .global mbedtls_ecdh_get_params
+ 589              	 .code 16
+ 590              	 .thumb_func
+ 592              	mbedtls_ecdh_get_params:
+ 593              	.LFB15:
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_get_params_internal( mbedtls_ecdh_context_mbed *ctx,
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                      const mbedtls_ecp_keypair *key,
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                      mbedtls_ecdh_side side )
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     /* If it's not our key, just import the public part as Qp */
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( side == MBEDTLS_ECDH_THEIRS )
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( mbedtls_ecp_copy( &ctx->Qp, &key->Q ) );
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     /* Our key: import public (as Q) and private parts */
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( side != MBEDTLS_ECDH_OURS )
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecp_copy( &ctx->Q, &key->Q ) ) != 0 ||
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         ( ret = mbedtls_mpi_copy( &ctx->d, &key->d ) ) != 0 )
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( 0 );
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Get parameters from a keypair
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_get_params( mbedtls_ecdh_context *ctx,
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                              const mbedtls_ecp_keypair *key,
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                              mbedtls_ecdh_side side )
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 594              	 .loc 1 438 0
+ 595              	 .cfi_startproc
+ 596              	.LVL84:
+ 597 0000 70B5     	 push {r4,r5,r6,lr}
+ 598              	.LCFI10:
+ 599              	 .cfi_def_cfa_offset 16
+ 600              	 .cfi_offset 4,-16
+ 601              	 .cfi_offset 5,-12
+ 602              	 .cfi_offset 6,-8
+ 603              	 .cfi_offset 14,-4
+ 604              	 .loc 1 438 0
+ 605 0002 0D1C     	 mov r5,r1
+ 606              	.LBB51:
+ 607              	.LBB52:
+ 608              	.LBB53:
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ret != 0 )
+ 609              	 .loc 1 187 0
+ 610 0004 0978     	 ldrb r1,[r1]
+ 611              	.LVL85:
+ 612              	.LBE53:
+ 613              	.LBE52:
+ 614              	.LBE51:
+ 615              	 .loc 1 438 0
+ 616 0006 041C     	 mov r4,r0
+ 617 0008 161C     	 mov r6,r2
+ 618              	.LBB56:
+ 619              	.LBB55:
+ 620              	.LBB54:
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ret != 0 )
+ 621              	 .loc 1 187 0
+ 622 000a FFF7FEFF 	 bl mbedtls_ecp_group_load
+ 623              	.LVL86:
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 624              	 .loc 1 188 0
+ 625 000e 0028     	 cmp r0,#0
+ 626 0010 01D0     	 beq .L44
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 627              	 .loc 1 190 0
+ 628 0012 0F48     	 ldr r0,.L46
+ 629              	.LVL87:
+ 630 0014 1AE0     	 b .L43
+ 631              	.LVL88:
+ 632              	.L44:
+ 633              	.LBE54:
+ 634              	.LBE55:
+ 635              	.LBE56:
+ 636              	.LBB57:
+ 637              	.LBB58:
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( mbedtls_ecp_copy( &ctx->Qp, &key->Q ) );
+ 638              	 .loc 1 418 0
+ 639 0016 012E     	 cmp r6,#1
+ 640 0018 06D1     	 bne .L45
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 641              	 .loc 1 419 0
+ 642 001a 201C     	 mov r0,r4
+ 643              	.LVL89:
+ 644 001c 291C     	 mov r1,r5
+ 645 001e AC30     	 add r0,r0,#172
+ 646 0020 8831     	 add r1,r1,#136
+ 647 0022 FFF7FEFF 	 bl mbedtls_ecp_copy
+ 648              	.LVL90:
+ 649 0026 11E0     	 b .L43
+ 650              	.LVL91:
+ 651              	.L45:
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 652              	 .loc 1 422 0
+ 653 0028 002E     	 cmp r6,#0
+ 654 002a 0ED1     	 bne .L41
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         ( ret = mbedtls_mpi_copy( &ctx->d, &key->d ) ) != 0 )
+ 655              	 .loc 1 425 0
+ 656 002c 201C     	 mov r0,r4
+ 657              	.LVL92:
+ 658 002e 291C     	 mov r1,r5
+ 659 0030 8830     	 add r0,r0,#136
+ 660 0032 8831     	 add r1,r1,#136
+ 661 0034 FFF7FEFF 	 bl mbedtls_ecp_copy
+ 662              	.LVL93:
+ 663 0038 0028     	 cmp r0,#0
+ 664 003a 07D1     	 bne .L43
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 665              	 .loc 1 426 0
+ 666 003c 201C     	 mov r0,r4
+ 667              	.LVL94:
+ 668 003e 291C     	 mov r1,r5
+ 669 0040 7C30     	 add r0,r0,#124
+ 670 0042 7C31     	 add r1,r1,#124
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         ( ret = mbedtls_mpi_copy( &ctx->d, &key->d ) ) != 0 )
+ 671              	 .loc 1 425 0
+ 672 0044 FFF7FEFF 	 bl mbedtls_mpi_copy
+ 673              	.LVL95:
+ 674 0048 00E0     	 b .L43
+ 675              	.LVL96:
+ 676              	.L41:
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 677              	 .loc 1 423 0
+ 678 004a 0248     	 ldr r0,.L46+4
+ 679              	.LVL97:
+ 680              	.L43:
+ 681              	.LBE58:
+ 682              	.LBE57:
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( key != NULL );
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( side == MBEDTLS_ECDH_OURS ||
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                        side == MBEDTLS_ECDH_THEIRS );
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecdh_setup( ctx, key->grp.id ) ) != 0 )
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_get_params_internal( ctx, key, side ) );
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_get_params_internal( &ctx->ctx.mbed_ecdh,
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                               key, side ) );
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 683              	 .loc 1 460 0
+ 684              	 
+ 685              	.LVL98:
+ 686              	.LVL99:
+ 687 004c 70BD     	 pop {r4,r5,r6,pc}
+ 688              	.L47:
+ 689 004e C046     	 .align 2
+ 690              	.L46:
+ 691 0050 80B1FFFF 	 .word -20096
+ 692 0054 80B0FFFF 	 .word -20352
+ 693              	 .cfi_endproc
+ 694              	.LFE15:
+ 696              	 .section .text.mbedtls_ecdh_make_public,"ax",%progbits
+ 697              	 .align 1
+ 698              	 .global mbedtls_ecdh_make_public
+ 699              	 .code 16
+ 700              	 .thumb_func
+ 702              	mbedtls_ecdh_make_public:
+ 703              	.LFB17:
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_make_public_internal( mbedtls_ecdh_context_mbed *ctx,
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       size_t *olen, int point_format,
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       unsigned char *buf, size_t blen,
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int (*f_rng)(void *,
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    unsigned char *,
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    size_t),
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       void *p_rng,
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int restart_enabled )
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_restart_ctx *rs_ctx = NULL;
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ctx->grp.pbits == 0 )
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( restart_enabled )
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         rs_ctx = &ctx->rs;
+ 482:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 483:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     (void) restart_enabled;
+ 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 485:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 486:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 487:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = ecdh_gen_public_restartable( &ctx->grp, &ctx->d, &ctx->Q,
+ 488:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              f_rng, p_rng, rs_ctx ) ) != 0 )
+ 489:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 490:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecdh_gen_public( &ctx->grp, &ctx->d, &ctx->Q,
+ 492:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                          f_rng, p_rng ) ) != 0 )
+ 493:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 494:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif /* MBEDTLS_ECP_RESTARTABLE */
+ 495:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return mbedtls_ecp_tls_write_point( &ctx->grp, &ctx->Q, point_format, olen,
+ 497:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         buf, blen );
+ 498:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 499:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 500:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 501:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Setup and export the client public value
+ 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 503:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_make_public( mbedtls_ecdh_context *ctx, size_t *olen,
+ 504:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               unsigned char *buf, size_t blen,
+ 505:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               int (*f_rng)(void *, unsigned char *, size_t),
+ 506:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               void *p_rng )
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 704              	 .loc 1 507 0
+ 705              	 .cfi_startproc
+ 706              	.LVL100:
+ 707 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 708              	.LCFI11:
+ 709              	 .cfi_def_cfa_offset 20
+ 710              	 .cfi_offset 4,-20
+ 711              	 .cfi_offset 5,-16
+ 712              	 .cfi_offset 6,-12
+ 713              	 .cfi_offset 7,-8
+ 714              	 .cfi_offset 14,-4
+ 508:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int restart_enabled = 0;
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 510:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( olen != NULL );
+ 511:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( buf != NULL );
+ 512:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( f_rng != NULL );
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 514:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     restart_enabled = ctx->restart_enabled;
+ 516:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 517:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_make_public_internal( ctx, olen, ctx->point_format, buf, blen,
+ 715              	 .loc 1 519 0
+ 716 0002 041C     	 mov r4,r0
+ 717 0004 DC34     	 add r4,r4,#220
+ 718 0006 2768     	 ldr r7,[r4]
+ 719              	.LVL101:
+ 720              	.LBB61:
+ 721              	.LBB62:
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 722              	 .loc 1 476 0
+ 723 0008 846D     	 ldr r4,[r0,#88]
+ 724              	.LBE62:
+ 725              	.LBE61:
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int restart_enabled = 0;
+ 726              	 .loc 1 507 0
+ 727 000a 85B0     	 sub sp,sp,#20
+ 728              	.LCFI12:
+ 729              	 .cfi_def_cfa_offset 40
+ 730              	.LVL102:
+ 731              	.LBB64:
+ 732              	.LBB63:
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 733              	 .loc 1 476 0
+ 734 000c 002C     	 cmp r4,#0
+ 735 000e 1AD0     	 beq .L50
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                          f_rng, p_rng ) ) != 0 )
+ 736              	 .loc 1 491 0
+ 737 0010 061C     	 mov r6,r0
+ 738 0012 0D1C     	 mov r5,r1
+ 739 0014 011C     	 mov r1,r0
+ 740              	.LVL103:
+ 741 0016 0393     	 str r3,[sp,#12]
+ 742 0018 0B9B     	 ldr r3,[sp,#44]
+ 743              	.LVL104:
+ 744 001a 8836     	 add r6,r6,#136
+ 745 001c 0292     	 str r2,[sp,#8]
+ 746 001e 0093     	 str r3,[sp]
+ 747 0020 7C31     	 add r1,r1,#124
+ 748 0022 321C     	 mov r2,r6
+ 749              	.LVL105:
+ 750 0024 0A9B     	 ldr r3,[sp,#40]
+ 751 0026 041C     	 mov r4,r0
+ 752 0028 FFF7FEFF 	 bl mbedtls_ecdh_gen_public
+ 753              	.LVL106:
+ 754 002c 0028     	 cmp r0,#0
+ 755 002e 0BD1     	 bne .L49
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                         buf, blen );
+ 756              	 .loc 1 496 0
+ 757 0030 029B     	 ldr r3,[sp,#8]
+ 758 0032 201C     	 mov r0,r4
+ 759              	.LVL107:
+ 760 0034 0093     	 str r3,[sp]
+ 761 0036 039B     	 ldr r3,[sp,#12]
+ 762 0038 311C     	 mov r1,r6
+ 763 003a 0193     	 str r3,[sp,#4]
+ 764 003c 3A1C     	 mov r2,r7
+ 765 003e 2B1C     	 mov r3,r5
+ 766 0040 FFF7FEFF 	 bl mbedtls_ecp_tls_write_point
+ 767              	.LVL108:
+ 768 0044 00E0     	 b .L49
+ 769              	.LVL109:
+ 770              	.L50:
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 771              	 .loc 1 477 0
+ 772 0046 0148     	 ldr r0,.L52
+ 773              	.LVL110:
+ 774              	.L49:
+ 775              	.LBE63:
+ 776              	.LBE64:
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                        f_rng, p_rng, restart_enabled ) );
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 522:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 523:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_make_public_internal( &ctx->ctx.mbed_ecdh, olen,
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                ctx->point_format, buf, blen,
+ 527:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                f_rng, p_rng,
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                restart_enabled ) );
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 530:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 532:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 533:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 777              	 .loc 1 533 0
+ 778 0048 05B0     	 add sp,sp,#20
+ 779              	 
+ 780              	.LVL111:
+ 781 004a F0BD     	 pop {r4,r5,r6,r7,pc}
+ 782              	.L53:
+ 783              	 .align 2
+ 784              	.L52:
+ 785 004c 80B0FFFF 	 .word -20352
+ 786              	 .cfi_endproc
+ 787              	.LFE17:
+ 789              	 .section .text.mbedtls_ecdh_read_public,"ax",%progbits
+ 790              	 .align 1
+ 791              	 .global mbedtls_ecdh_read_public
+ 792              	 .code 16
+ 793              	 .thumb_func
+ 795              	mbedtls_ecdh_read_public:
+ 796              	.LFB19:
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 535:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_read_public_internal( mbedtls_ecdh_context_mbed *ctx,
+ 536:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       const unsigned char *buf, size_t blen )
+ 537:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 538:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     const unsigned char *p = buf;
+ 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecp_tls_read_point( &ctx->grp, &ctx->Qp, &p,
+ 542:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                             blen ) ) != 0 )
+ 543:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 544:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( (size_t)( p - buf ) != blen )
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 547:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 548:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( 0 );
+ 549:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 550:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 551:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 552:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Parse and import the client's public value
+ 553:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_read_public( mbedtls_ecdh_context *ctx,
+ 555:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               const unsigned char *buf, size_t blen )
+ 556:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 797              	 .loc 1 556 0
+ 798              	 .cfi_startproc
+ 799              	.LVL112:
+ 800 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 801              	.LCFI13:
+ 802              	 .cfi_def_cfa_offset 24
+ 803              	 .cfi_offset 0,-24
+ 804              	 .cfi_offset 1,-20
+ 805              	 .cfi_offset 2,-16
+ 806              	 .cfi_offset 4,-12
+ 807              	 .cfi_offset 5,-8
+ 808              	 .cfi_offset 14,-4
+ 809              	 .loc 1 556 0
+ 810 0002 141C     	 mov r4,r2
+ 811              	.LVL113:
+ 812 0004 0D1C     	 mov r5,r1
+ 813              	.LBB67:
+ 814              	.LBB68:
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 815              	 .loc 1 539 0
+ 816 0006 0191     	 str r1,[sp,#4]
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                             blen ) ) != 0 )
+ 817              	 .loc 1 541 0
+ 818 0008 011C     	 mov r1,r0
+ 819              	.LVL114:
+ 820 000a 01AA     	 add r2,sp,#4
+ 821              	.LVL115:
+ 822 000c AC31     	 add r1,r1,#172
+ 823 000e 231C     	 mov r3,r4
+ 824 0010 FFF7FEFF 	 bl mbedtls_ecp_tls_read_point
+ 825              	.LVL116:
+ 826 0014 0028     	 cmp r0,#0
+ 827 0016 04D1     	 bne .L55
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 828              	 .loc 1 545 0
+ 829 0018 019B     	 ldr r3,[sp,#4]
+ 830 001a 591B     	 sub r1,r3,r5
+ 831 001c A142     	 cmp r1,r4
+ 832 001e 00D0     	 beq .L55
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 833              	 .loc 1 546 0
+ 834 0020 0048     	 ldr r0,.L58
+ 835              	.LVL117:
+ 836              	.L55:
+ 837              	.LBE68:
+ 838              	.LBE67:
+ 557:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 558:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( buf != NULL );
+ 559:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 560:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 561:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_read_public_internal( ctx, buf, blen ) );
+ 562:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 563:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 564:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 565:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 566:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_read_public_internal( &ctx->ctx.mbed_ecdh,
+ 567:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                        buf, blen ) );
+ 568:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 569:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
+ 570:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 571:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 572:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 839              	 .loc 1 572 0
+ 840              	 
+ 841              	.LVL118:
+ 842              	.LVL119:
+ 843 0022 3EBD     	 pop {r1,r2,r3,r4,r5,pc}
+ 844              	.L59:
+ 845              	 .align 2
+ 846              	.L58:
+ 847 0024 80B0FFFF 	 .word -20352
+ 848              	 .cfi_endproc
+ 849              	.LFE19:
+ 851              	 .section .text.mbedtls_ecdh_calc_secret,"ax",%progbits
+ 852              	 .align 1
+ 853              	 .global mbedtls_ecdh_calc_secret
+ 854              	 .code 16
+ 855              	 .thumb_func
+ 857              	mbedtls_ecdh_calc_secret:
+ 858              	.LFB21:
+ 573:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 574:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** static int ecdh_calc_secret_internal( mbedtls_ecdh_context_mbed *ctx,
+ 575:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       size_t *olen, unsigned char *buf,
+ 576:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       size_t blen,
+ 577:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int (*f_rng)(void *,
+ 578:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    unsigned char *,
+ 579:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                    size_t),
+ 580:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       void *p_rng,
+ 581:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                       int restart_enabled )
+ 582:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 583:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int ret;
+ 584:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 585:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     mbedtls_ecp_restart_ctx *rs_ctx = NULL;
+ 586:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 587:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ctx == NULL || ctx->grp.pbits == 0 )
+ 589:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 590:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 591:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 592:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( restart_enabled )
+ 593:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         rs_ctx = &ctx->rs;
+ 594:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 595:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     (void) restart_enabled;
+ 596:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 597:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 598:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 599:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = ecdh_compute_shared_restartable( &ctx->grp, &ctx->z, &ctx->Qp,
+ 600:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                  &ctx->d, f_rng, p_rng,
+ 601:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                  rs_ctx ) ) != 0 )
+ 602:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 603:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 604:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 605:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 606:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( ( ret = mbedtls_ecdh_compute_shared( &ctx->grp, &ctx->z, &ctx->Qp,
+ 607:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &ctx->d, f_rng, p_rng ) ) != 0 )
+ 608:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 609:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( ret );
+ 610:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 611:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif /* MBEDTLS_ECP_RESTARTABLE */
+ 612:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 613:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     if( mbedtls_mpi_size( &ctx->z ) > blen )
+ 614:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 615:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 616:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     *olen = ctx->grp.pbits / 8 + ( ( ctx->grp.pbits % 8 ) != 0 );
+ 617:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return mbedtls_mpi_write_binary( &ctx->z, buf, *olen );
+ 618:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 619:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 620:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** /*
+ 621:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  * Derive and export the shared secret
+ 622:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****  */
+ 623:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** int mbedtls_ecdh_calc_secret( mbedtls_ecdh_context *ctx, size_t *olen,
+ 624:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               unsigned char *buf, size_t blen,
+ 625:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               int (*f_rng)(void *, unsigned char *, size_t),
+ 626:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                               void *p_rng )
+ 627:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** {
+ 859              	 .loc 1 627 0
+ 860              	 .cfi_startproc
+ 861              	.LVL120:
+ 862 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 863              	.LCFI14:
+ 864              	 .cfi_def_cfa_offset 20
+ 865              	 .cfi_offset 4,-20
+ 866              	 .cfi_offset 5,-16
+ 867              	 .cfi_offset 6,-12
+ 868              	 .cfi_offset 7,-8
+ 869              	 .cfi_offset 14,-4
+ 870 0002 85B0     	 sub sp,sp,#20
+ 871              	.LCFI15:
+ 872              	 .cfi_def_cfa_offset 40
+ 873              	.LVL121:
+ 874              	.LBB71:
+ 875              	.LBB72:
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 876              	 .loc 1 588 0
+ 877 0004 0028     	 cmp r0,#0
+ 878 0006 01D1     	 bne .L61
+ 879              	.LVL122:
+ 880              	.L63:
+ 589:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 881              	 .loc 1 589 0
+ 882 0008 1548     	 ldr r0,.L68
+ 883 000a 27E0     	 b .L62
+ 884              	.LVL123:
+ 885              	.L61:
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 886              	 .loc 1 588 0
+ 887 000c 846D     	 ldr r4,[r0,#88]
+ 888 000e 002C     	 cmp r4,#0
+ 889 0010 FAD0     	 beq .L63
+ 606:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &ctx->d, f_rng, p_rng ) ) != 0 )
+ 890              	 .loc 1 606 0
+ 891 0012 061C     	 mov r6,r0
+ 892 0014 0393     	 str r3,[sp,#12]
+ 893 0016 151C     	 mov r5,r2
+ 607:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 894              	 .loc 1 607 0
+ 895 0018 031C     	 mov r3,r0
+ 896              	.LVL124:
+ 606:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &ctx->d, f_rng, p_rng ) ) != 0 )
+ 897              	 .loc 1 606 0
+ 898 001a 021C     	 mov r2,r0
+ 899              	.LVL125:
+ 900 001c 0F1C     	 mov r7,r1
+ 901 001e 0A99     	 ldr r1,[sp,#40]
+ 902              	.LVL126:
+ 903 0020 D036     	 add r6,r6,#208
+ 904 0022 0091     	 str r1,[sp]
+ 905 0024 0B99     	 ldr r1,[sp,#44]
+ 906 0026 AC32     	 add r2,r2,#172
+ 907 0028 0191     	 str r1,[sp,#4]
+ 607:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 908              	 .loc 1 607 0
+ 909 002a 7C33     	 add r3,r3,#124
+ 606:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                              &ctx->d, f_rng, p_rng ) ) != 0 )
+ 910              	 .loc 1 606 0
+ 911 002c 311C     	 mov r1,r6
+ 912 002e 041C     	 mov r4,r0
+ 913 0030 FFF7FEFF 	 bl mbedtls_ecdh_compute_shared
+ 914              	.LVL127:
+ 915 0034 0028     	 cmp r0,#0
+ 916 0036 11D1     	 bne .L62
+ 613:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 917              	 .loc 1 613 0
+ 918 0038 301C     	 mov r0,r6
+ 919              	.LVL128:
+ 920 003a FFF7FEFF 	 bl mbedtls_mpi_size
+ 921              	.LVL129:
+ 922 003e 039B     	 ldr r3,[sp,#12]
+ 923 0040 9842     	 cmp r0,r3
+ 924 0042 E1D8     	 bhi .L63
+ 616:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return mbedtls_mpi_write_binary( &ctx->z, buf, *olen );
+ 925              	 .loc 1 616 0
+ 926 0044 0722     	 mov r2,#7
+ 927 0046 A36D     	 ldr r3,[r4,#88]
+ 617:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 928              	 .loc 1 617 0
+ 929 0048 301C     	 mov r0,r6
+ 616:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return mbedtls_mpi_write_binary( &ctx->z, buf, *olen );
+ 930              	 .loc 1 616 0
+ 931 004a 1A40     	 and r2,r3
+ 932 004c 511E     	 sub r1,r2,#1
+ 933 004e 8A41     	 sbc r2,r2,r1
+ 934 0050 DB08     	 lsr r3,r3,#3
+ 935 0052 D218     	 add r2,r2,r3
+ 936 0054 3A60     	 str r2,[r7]
+ 617:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 937              	 .loc 1 617 0
+ 938 0056 291C     	 mov r1,r5
+ 939 0058 FFF7FEFF 	 bl mbedtls_mpi_write_binary
+ 940              	.LVL130:
+ 941              	.L62:
+ 942              	.LBE72:
+ 943              	.LBE71:
+ 628:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     int restart_enabled = 0;
+ 629:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( ctx != NULL );
+ 630:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( olen != NULL );
+ 631:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     ECDH_VALIDATE_RET( buf != NULL );
+ 632:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 633:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECP_RESTARTABLE)
+ 634:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     restart_enabled = ctx->restart_enabled;
+ 635:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 636:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** 
+ 637:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
+ 638:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     return( ecdh_calc_secret_internal( ctx, olen, buf, blen, f_rng, p_rng,
+ 639:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                        restart_enabled ) );
+ 640:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #else
+ 641:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     switch( ctx->var )
+ 642:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     {
+ 643:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         case MBEDTLS_ECDH_VARIANT_MBEDTLS_2_0:
+ 644:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( ecdh_calc_secret_internal( &ctx->ctx.mbed_ecdh, olen, buf,
+ 645:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                blen, f_rng, p_rng,
+ 646:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****                                                restart_enabled ) );
+ 647:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****         default:
+ 648:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****             return( MBEDTLS_ERR_ECP_BAD_INPUT_DATA );
+ 649:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c ****     }
+ 650:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** #endif
+ 651:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\ecdh.c **** }
+ 944              	 .loc 1 651 0
+ 945 005c 05B0     	 add sp,sp,#20
+ 946              	 
+ 947 005e F0BD     	 pop {r4,r5,r6,r7,pc}
+ 948              	.L69:
+ 949              	 .align 2
+ 950              	.L68:
+ 951 0060 80B0FFFF 	 .word -20352
+ 952              	 .cfi_endproc
+ 953              	.LFE21:
+ 955              	 .text
+ 956              	.Letext0:
+ 957              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 958              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 959              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 960              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/bignum.h"
+ 961              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/ecp.h"
+ 962              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/ecdh.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ecdh.c
+    {standard input}:18     .text.mbedtls_ecdh_gen_public:00000000 $t
+    {standard input}:23     .text.mbedtls_ecdh_gen_public:00000000 mbedtls_ecdh_gen_public
+    {standard input}:91     .text.mbedtls_ecdh_compute_shared:00000000 $t
+    {standard input}:96     .text.mbedtls_ecdh_compute_shared:00000000 mbedtls_ecdh_compute_shared
+    {standard input}:187    .text.mbedtls_ecdh_compute_shared:00000054 $d
+    {standard input}:192    .text.mbedtls_ecdh_init:00000000 $t
+    {standard input}:197    .text.mbedtls_ecdh_init:00000000 mbedtls_ecdh_init
+    {standard input}:265    .text.mbedtls_ecdh_setup:00000000 $t
+    {standard input}:270    .text.mbedtls_ecdh_setup:00000000 mbedtls_ecdh_setup
+    {standard input}:300    .text.mbedtls_ecdh_setup:00000010 $d
+    {standard input}:305    .text.mbedtls_ecdh_free:00000000 $t
+    {standard input}:310    .text.mbedtls_ecdh_free:00000000 mbedtls_ecdh_free
+    {standard input}:376    .text.mbedtls_ecdh_make_params:00000000 $t
+    {standard input}:381    .text.mbedtls_ecdh_make_params:00000000 mbedtls_ecdh_make_params
+    {standard input}:487    .text.mbedtls_ecdh_make_params:00000070 $d
+    {standard input}:492    .text.mbedtls_ecdh_read_params:00000000 $t
+    {standard input}:497    .text.mbedtls_ecdh_read_params:00000000 mbedtls_ecdh_read_params
+    {standard input}:582    .text.mbedtls_ecdh_read_params:0000003c $d
+    {standard input}:587    .text.mbedtls_ecdh_get_params:00000000 $t
+    {standard input}:592    .text.mbedtls_ecdh_get_params:00000000 mbedtls_ecdh_get_params
+    {standard input}:691    .text.mbedtls_ecdh_get_params:00000050 $d
+    {standard input}:697    .text.mbedtls_ecdh_make_public:00000000 $t
+    {standard input}:702    .text.mbedtls_ecdh_make_public:00000000 mbedtls_ecdh_make_public
+    {standard input}:785    .text.mbedtls_ecdh_make_public:0000004c $d
+    {standard input}:790    .text.mbedtls_ecdh_read_public:00000000 $t
+    {standard input}:795    .text.mbedtls_ecdh_read_public:00000000 mbedtls_ecdh_read_public
+    {standard input}:847    .text.mbedtls_ecdh_read_public:00000024 $d
+    {standard input}:852    .text.mbedtls_ecdh_calc_secret:00000000 $t
+    {standard input}:857    .text.mbedtls_ecdh_calc_secret:00000000 mbedtls_ecdh_calc_secret
+    {standard input}:951    .text.mbedtls_ecdh_calc_secret:00000060 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+mbedtls_ecp_gen_privkey
+mbedtls_ecp_mul_restartable
+mbedtls_ecp_point_init
+mbedtls_ecp_is_zero
+mbedtls_mpi_copy
+mbedtls_ecp_point_free
+mbedtls_ecp_group_init
+mbedtls_mpi_init
+mbedtls_ecp_group_load
+mbedtls_mpi_free
+mbedtls_ecp_group_free
+mbedtls_ecp_tls_write_group
+mbedtls_ecp_tls_write_point
+mbedtls_ecp_tls_read_group_id
+mbedtls_ecp_tls_read_point
+mbedtls_ecp_copy
+mbedtls_mpi_size
+mbedtls_mpi_write_binary

@@ -1,0 +1,886 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_eru.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_ERU_ETL_Init,"ax",%progbits
+  18              	 .align 1
+  19              	 .global XMC_ERU_ETL_Init
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	XMC_ERU_ETL_Init:
+  24              	.LFB51:
+  25              	 .file 1 "../Libraries/XMCLib/src/xmc_eru.c"
+   1:../Libraries/XMCLib/src/xmc_eru.c **** /**
+   2:../Libraries/XMCLib/src/xmc_eru.c ****  * @file xmc_eru.c
+   3:../Libraries/XMCLib/src/xmc_eru.c ****  * @date 2016-03-10
+   4:../Libraries/XMCLib/src/xmc_eru.c ****  *
+   5:../Libraries/XMCLib/src/xmc_eru.c ****  * @cond
+   6:../Libraries/XMCLib/src/xmc_eru.c ****  **************************************************************************************************
+   7:../Libraries/XMCLib/src/xmc_eru.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:../Libraries/XMCLib/src/xmc_eru.c ****  *
+   9:../Libraries/XMCLib/src/xmc_eru.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:../Libraries/XMCLib/src/xmc_eru.c ****  * All rights reserved.                        
+  11:../Libraries/XMCLib/src/xmc_eru.c ****  *                                             
+  12:../Libraries/XMCLib/src/xmc_eru.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:../Libraries/XMCLib/src/xmc_eru.c ****  * following conditions are met:   
+  14:../Libraries/XMCLib/src/xmc_eru.c ****  *                                                                              
+  15:../Libraries/XMCLib/src/xmc_eru.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:../Libraries/XMCLib/src/xmc_eru.c ****  * disclaimer.                        
+  17:../Libraries/XMCLib/src/xmc_eru.c ****  * 
+  18:../Libraries/XMCLib/src/xmc_eru.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:../Libraries/XMCLib/src/xmc_eru.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:../Libraries/XMCLib/src/xmc_eru.c ****  * 
+  21:../Libraries/XMCLib/src/xmc_eru.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:../Libraries/XMCLib/src/xmc_eru.c ****  * products derived from this software without specific prior written permission.                  
+  23:../Libraries/XMCLib/src/xmc_eru.c ****  *                                                                              
+  24:../Libraries/XMCLib/src/xmc_eru.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:../Libraries/XMCLib/src/xmc_eru.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:../Libraries/XMCLib/src/xmc_eru.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:../Libraries/XMCLib/src/xmc_eru.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:../Libraries/XMCLib/src/xmc_eru.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:../Libraries/XMCLib/src/xmc_eru.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:../Libraries/XMCLib/src/xmc_eru.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:../Libraries/XMCLib/src/xmc_eru.c ****  *                                                                              
+  32:../Libraries/XMCLib/src/xmc_eru.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:../Libraries/XMCLib/src/xmc_eru.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:../Libraries/XMCLib/src/xmc_eru.c ****  **************************************************************************************************
+  35:../Libraries/XMCLib/src/xmc_eru.c ****  *
+  36:../Libraries/XMCLib/src/xmc_eru.c ****  * Change History
+  37:../Libraries/XMCLib/src/xmc_eru.c ****  * --------------
+  38:../Libraries/XMCLib/src/xmc_eru.c ****  *
+  39:../Libraries/XMCLib/src/xmc_eru.c ****  * 2015-02-20:
+  40:../Libraries/XMCLib/src/xmc_eru.c ****  *     - Initial <br>
+  41:../Libraries/XMCLib/src/xmc_eru.c ****  *
+  42:../Libraries/XMCLib/src/xmc_eru.c ****  * 2015-06-20:
+  43:../Libraries/XMCLib/src/xmc_eru.c ****  *     - Removed definition of GetDriverVersion API <br>
+  44:../Libraries/XMCLib/src/xmc_eru.c ****  *
+  45:../Libraries/XMCLib/src/xmc_eru.c ****  * 2016-03-10:
+  46:../Libraries/XMCLib/src/xmc_eru.c ****  *     - XMC_ERU_ETL_GetEdgeDetection() API is added to get the configured edge for event generatio
+  47:../Libraries/XMCLib/src/xmc_eru.c ****  *
+  48:../Libraries/XMCLib/src/xmc_eru.c ****  * @endcond
+  49:../Libraries/XMCLib/src/xmc_eru.c ****  */
+  50:../Libraries/XMCLib/src/xmc_eru.c **** 
+  51:../Libraries/XMCLib/src/xmc_eru.c **** /**************************************************************************************************
+  52:../Libraries/XMCLib/src/xmc_eru.c ****  * HEADER FILES
+  53:../Libraries/XMCLib/src/xmc_eru.c ****  **************************************************************************************************
+  54:../Libraries/XMCLib/src/xmc_eru.c **** 
+  55:../Libraries/XMCLib/src/xmc_eru.c **** #include "xmc_eru.h"
+  56:../Libraries/XMCLib/src/xmc_eru.c **** 
+  57:../Libraries/XMCLib/src/xmc_eru.c **** /**************************************************************************************************
+  58:../Libraries/XMCLib/src/xmc_eru.c ****  * MACROS
+  59:../Libraries/XMCLib/src/xmc_eru.c ****  **************************************************************************************************
+  60:../Libraries/XMCLib/src/xmc_eru.c **** 
+  61:../Libraries/XMCLib/src/xmc_eru.c **** #define ERU_EXISEL_BITSIZE (4UL) /* Used to set the input for path A and path B based on the channe
+  62:../Libraries/XMCLib/src/xmc_eru.c **** #define ERU_EXISEL_INPUT_BITSIZE (2UL)
+  63:../Libraries/XMCLib/src/xmc_eru.c **** 
+  64:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_INPUT_A(input) \
+  65:../Libraries/XMCLib/src/xmc_eru.c ****     ((input == XMC_ERU_ETL_INPUT_A0) || \
+  66:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_A1) || \
+  67:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_A2) || \
+  68:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_A3))
+  69:../Libraries/XMCLib/src/xmc_eru.c **** 
+  70:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_INPUT_B(input) \
+  71:../Libraries/XMCLib/src/xmc_eru.c ****     ((input == XMC_ERU_ETL_INPUT_B0) || \
+  72:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_B1) || \
+  73:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_B2) || \
+  74:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_ETL_INPUT_B3))
+  75:../Libraries/XMCLib/src/xmc_eru.c **** 
+  76:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_STATUS_FLAG_MODE(mode) \
+  77:../Libraries/XMCLib/src/xmc_eru.c ****     ((mode == XMC_ERU_ETL_STATUS_FLAG_MODE_SWCTRL) || \
+  78:../Libraries/XMCLib/src/xmc_eru.c ****      (mode == XMC_ERU_ETL_STATUS_FLAG_MODE_HWCTRL))
+  79:../Libraries/XMCLib/src/xmc_eru.c **** 
+  80:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_EVENT_SOURCE(source) \
+  81:../Libraries/XMCLib/src/xmc_eru.c ****     ((source == XMC_ERU_ETL_SOURCE_A)              || \
+  82:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_B)              || \
+  83:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_A_OR_B)         || \
+  84:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_A_AND_B)        || \
+  85:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_A)          || \
+  86:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_A_OR_B)     || \
+  87:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_A_AND_B)    || \
+  88:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_B)          || \
+  89:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_A_OR_NOT_B)     || \
+  90:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_A_AND_NOT_B)    || \
+  91:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_A_OR_NOT_B) || \
+  92:../Libraries/XMCLib/src/xmc_eru.c ****      (source == XMC_ERU_ETL_SOURCE_NOT_A_AND_NOT_B))
+  93:../Libraries/XMCLib/src/xmc_eru.c **** 
+  94:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_TRIGGER_EDGE(edge) \
+  95:../Libraries/XMCLib/src/xmc_eru.c ****     ((edge == XMC_ERU_ETL_EDGE_DETECTION_DISABLED) || \
+  96:../Libraries/XMCLib/src/xmc_eru.c ****      (edge == XMC_ERU_ETL_EDGE_DETECTION_RISING) || \
+  97:../Libraries/XMCLib/src/xmc_eru.c ****      (edge == XMC_ERU_ETL_EDGE_DETECTION_FALLING) || \
+  98:../Libraries/XMCLib/src/xmc_eru.c ****      (edge == XMC_ERU_ETL_EDGE_DETECTION_BOTH))
+  99:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 100:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_ETL_CHECK_TRIGGER_CHANNEL(channel) \
+ 101:../Libraries/XMCLib/src/xmc_eru.c ****     ((channel == XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL0) || \
+ 102:../Libraries/XMCLib/src/xmc_eru.c ****      (channel == XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL1) || \
+ 103:../Libraries/XMCLib/src/xmc_eru.c ****      (channel == XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL2) || \
+ 104:../Libraries/XMCLib/src/xmc_eru.c ****      (channel == XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL3))
+ 105:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 106:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_OGU_CHECK_PATTERN_INPUT(input) \
+ 107:../Libraries/XMCLib/src/xmc_eru.c ****     ((input == XMC_ERU_OGU_PATTERN_DETECTION_INPUT0) || \
+ 108:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_OGU_PATTERN_DETECTION_INPUT1) || \
+ 109:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_OGU_PATTERN_DETECTION_INPUT2) || \
+ 110:../Libraries/XMCLib/src/xmc_eru.c ****      (input == XMC_ERU_OGU_PATTERN_DETECTION_INPUT3))
+ 111:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 112:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_OGU_CHECK_PERIPHERAL_TRIGGER(trigger) \
+ 113:../Libraries/XMCLib/src/xmc_eru.c ****     ((trigger == XMC_ERU_OGU_PERIPHERAL_TRIGGER1) || \
+ 114:../Libraries/XMCLib/src/xmc_eru.c ****      (trigger == XMC_ERU_OGU_PERIPHERAL_TRIGGER2) || \
+ 115:../Libraries/XMCLib/src/xmc_eru.c ****      (trigger == XMC_ERU_OGU_PERIPHERAL_TRIGGER3))
+ 116:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 117:../Libraries/XMCLib/src/xmc_eru.c **** #define XMC_ERU_OGU_CHECK_SERIVCE_REQUEST(service) \
+ 118:../Libraries/XMCLib/src/xmc_eru.c ****     ((service == XMC_ERU_OGU_SERVICE_REQUEST_DISABLED) || \
+ 119:../Libraries/XMCLib/src/xmc_eru.c ****      (service == XMC_ERU_OGU_SERVICE_REQUEST_ON_TRIGGER) || \
+ 120:../Libraries/XMCLib/src/xmc_eru.c ****      (service == XMC_ERU_OGU_SERVICE_REQUEST_ON_TRIGGER_AND_PATTERN_MATCH) || \
+ 121:../Libraries/XMCLib/src/xmc_eru.c ****      (service == XMC_ERU_OGU_SERVICE_REQUEST_ON_TRIGGER_AND_PATTERN_MISMATCH))
+ 122:../Libraries/XMCLib/src/xmc_eru.c ****  
+ 123:../Libraries/XMCLib/src/xmc_eru.c **** /**************************************************************************************************
+ 124:../Libraries/XMCLib/src/xmc_eru.c ****  * API IMPLEMENTATION
+ 125:../Libraries/XMCLib/src/xmc_eru.c ****  **************************************************************************************************
+ 126:../Libraries/XMCLib/src/xmc_eru.c **** /* Initializes the selected ERU_ETLx channel with the config structure.  */
+ 127:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_Init(XMC_ERU_t *const eru,
+ 128:../Libraries/XMCLib/src/xmc_eru.c ****                       const uint8_t channel,
+ 129:../Libraries/XMCLib/src/xmc_eru.c ****                       const XMC_ERU_ETL_CONFIG_t *const config)
+ 130:../Libraries/XMCLib/src/xmc_eru.c **** { 
+  26              	 .loc 1 130 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 70B5     	 push {r4,r5,r6,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 16
+  32              	 .cfi_offset 4,-16
+  33              	 .cfi_offset 5,-12
+  34              	 .cfi_offset 6,-8
+  35              	 .cfi_offset 14,-4
+  36              	 .loc 1 130 0
+  37 0002 0C1C     	 mov r4,r1
+  38 0004 051C     	 mov r5,r0
+  39 0006 161C     	 mov r6,r2
+ 131:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_Init:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 132:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_Init:Invalid Channel Number", (channel < 4U));
+ 133:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 134:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ERU_Enable(eru);
+  40              	 .loc 1 134 0
+  41 0008 FFF7FEFF 	 bl XMC_ERU_Enable
+  42              	.LVL1:
+ 135:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 136:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXISEL = (eru->EXISEL & 
+ 137:../Libraries/XMCLib/src/xmc_eru.c ****                  ~((uint32_t)(ERU_EXISEL_EXS0A_Msk | ERU_EXISEL_EXS0B_Msk) << (channel * ERU_EXISEL
+  43              	 .loc 1 137 0
+  44 000c 0F21     	 mov r1,#15
+  45 000e A200     	 lsl r2,r4,#2
+  46 0010 9140     	 lsl r1,r1,r2
+ 136:../Libraries/XMCLib/src/xmc_eru.c ****                  ~((uint32_t)(ERU_EXISEL_EXS0A_Msk | ERU_EXISEL_EXS0B_Msk) << (channel * ERU_EXISEL
+  47              	 .loc 1 136 0
+  48 0012 2B68     	 ldr r3,[r5]
+ 138:../Libraries/XMCLib/src/xmc_eru.c ****                 (config->input << (channel * (uint32_t)ERU_EXISEL_BITSIZE));
+ 139:../Libraries/XMCLib/src/xmc_eru.c ****   
+ 140:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON[channel] = config->raw;
+  49              	 .loc 1 140 0
+  50 0014 0434     	 add r4,r4,#4
+ 136:../Libraries/XMCLib/src/xmc_eru.c ****                  ~((uint32_t)(ERU_EXISEL_EXS0A_Msk | ERU_EXISEL_EXS0B_Msk) << (channel * ERU_EXISEL
+  51              	 .loc 1 136 0
+  52 0016 8B43     	 bic r3,r1
+ 138:../Libraries/XMCLib/src/xmc_eru.c ****                 (config->input << (channel * (uint32_t)ERU_EXISEL_BITSIZE));
+  53              	 .loc 1 138 0
+  54 0018 3168     	 ldr r1,[r6]
+  55              	 .loc 1 140 0
+  56 001a A400     	 lsl r4,r4,#2
+ 138:../Libraries/XMCLib/src/xmc_eru.c ****                 (config->input << (channel * (uint32_t)ERU_EXISEL_BITSIZE));
+  57              	 .loc 1 138 0
+  58 001c 9140     	 lsl r1,r1,r2
+ 137:../Libraries/XMCLib/src/xmc_eru.c ****                 (config->input << (channel * (uint32_t)ERU_EXISEL_BITSIZE));
+  59              	 .loc 1 137 0
+  60 001e 0B43     	 orr r3,r1
+ 136:../Libraries/XMCLib/src/xmc_eru.c ****                  ~((uint32_t)(ERU_EXISEL_EXS0A_Msk | ERU_EXISEL_EXS0B_Msk) << (channel * ERU_EXISEL
+  61              	 .loc 1 136 0
+  62 0020 2B60     	 str r3,[r5]
+  63              	 .loc 1 140 0
+  64 0022 7368     	 ldr r3,[r6,#4]
+ 141:../Libraries/XMCLib/src/xmc_eru.c **** }
+  65              	 .loc 1 141 0
+  66              	 
+ 140:../Libraries/XMCLib/src/xmc_eru.c **** }
+  67              	 .loc 1 140 0
+  68 0024 6351     	 str r3,[r4,r5]
+  69              	.LVL2:
+  70              	.LVL3:
+  71              	 .loc 1 141 0
+  72 0026 70BD     	 pop {r4,r5,r6,pc}
+  73              	 .cfi_endproc
+  74              	.LFE51:
+  76              	 .section .text.XMC_ERU_OGU_Init,"ax",%progbits
+  77              	 .align 1
+  78              	 .global XMC_ERU_OGU_Init
+  79              	 .code 16
+  80              	 .thumb_func
+  82              	XMC_ERU_OGU_Init:
+  83              	.LFB52:
+ 142:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 143:../Libraries/XMCLib/src/xmc_eru.c **** /* Initializes the selected ERU_OGUy channel with the config structure.  */
+ 144:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_Init(XMC_ERU_t *const eru,
+ 145:../Libraries/XMCLib/src/xmc_eru.c ****                       const uint8_t channel,
+ 146:../Libraries/XMCLib/src/xmc_eru.c ****                       const XMC_ERU_OGU_CONFIG_t *const config)
+ 147:../Libraries/XMCLib/src/xmc_eru.c **** {
+  84              	 .loc 1 147 0
+  85              	 .cfi_startproc
+  86              	.LVL4:
+  87 0000 70B5     	 push {r4,r5,r6,lr}
+  88              	.LCFI1:
+  89              	 .cfi_def_cfa_offset 16
+  90              	 .cfi_offset 4,-16
+  91              	 .cfi_offset 5,-12
+  92              	 .cfi_offset 6,-8
+  93              	 .cfi_offset 14,-4
+  94              	 .loc 1 147 0
+  95 0002 161C     	 mov r6,r2
+  96 0004 0C1C     	 mov r4,r1
+  97 0006 051C     	 mov r5,r0
+ 148:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_Init:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 149:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_Init:Invalid Channel Number", (channel < 4U));
+ 150:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 151:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ERU_Enable(eru);
+ 152:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 153:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON[channel] = config->raw;
+  98              	 .loc 1 153 0
+  99 0008 0834     	 add r4,r4,#8
+ 151:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 100              	 .loc 1 151 0
+ 101 000a FFF7FEFF 	 bl XMC_ERU_Enable
+ 102              	.LVL5:
+ 103              	 .loc 1 153 0
+ 104 000e 3368     	 ldr r3,[r6]
+ 105 0010 A400     	 lsl r4,r4,#2
+ 106 0012 6351     	 str r3,[r4,r5]
+ 154:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 107              	 .loc 1 154 0
+ 108              	 
+ 109              	.LVL6:
+ 110              	.LVL7:
+ 111 0014 70BD     	 pop {r4,r5,r6,pc}
+ 112              	 .cfi_endproc
+ 113              	.LFE52:
+ 115              	 .section .text.XMC_ERU_ETL_SetInput,"ax",%progbits
+ 116              	 .align 1
+ 117              	 .global XMC_ERU_ETL_SetInput
+ 118              	 .code 16
+ 119              	 .thumb_func
+ 121              	XMC_ERU_ETL_SetInput:
+ 122              	.LFB53:
+ 155:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 156:../Libraries/XMCLib/src/xmc_eru.c **** /* Configures the event source for path A and path B, with selected input_a and input_b respectivel
+ 157:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_SetInput(XMC_ERU_t *const eru,
+ 158:../Libraries/XMCLib/src/xmc_eru.c ****                           const uint8_t channel,
+ 159:../Libraries/XMCLib/src/xmc_eru.c ****                           const XMC_ERU_ETL_INPUT_A_t input_a,
+ 160:../Libraries/XMCLib/src/xmc_eru.c ****                           const XMC_ERU_ETL_INPUT_B_t input_b)
+ 161:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 123              	 .loc 1 161 0
+ 124              	 .cfi_startproc
+ 125              	.LVL8:
+ 126 0000 30B5     	 push {r4,r5,lr}
+ 127              	.LCFI2:
+ 128              	 .cfi_def_cfa_offset 12
+ 129              	 .cfi_offset 4,-12
+ 130              	 .cfi_offset 5,-8
+ 131              	 .cfi_offset 14,-4
+ 162:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetInput:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 163:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetInput:Invalid Channel Number", (channel < 4U));
+ 164:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetInput:Invalid A", XMC_ERU_ETL_CHECK_INPUT_A(input_a));
+ 165:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetInput:Invalid B", XMC_ERU_ETL_CHECK_INPUT_B(input_b));
+ 166:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 167:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXISEL = (eru->EXISEL & ~((uint32_t)(ERU_EXISEL_EXS0A_Msk | ERU_EXISEL_EXS0B_Msk) << (channe
+ 132              	 .loc 1 167 0
+ 133 0002 8C00     	 lsl r4,r1,#2
+ 134 0004 0F21     	 mov r1,#15
+ 135              	.LVL9:
+ 136 0006 A140     	 lsl r1,r1,r4
+ 137 0008 0568     	 ldr r5,[r0]
+ 168:../Libraries/XMCLib/src/xmc_eru.c ****                 (((uint32_t)input_a | (uint32_t)(input_b << ERU_EXISEL_INPUT_BITSIZE))  << (channel
+ 138              	 .loc 1 168 0
+ 139 000a 9B00     	 lsl r3,r3,#2
+ 140              	.LVL10:
+ 167:../Libraries/XMCLib/src/xmc_eru.c ****                 (((uint32_t)input_a | (uint32_t)(input_b << ERU_EXISEL_INPUT_BITSIZE))  << (channel
+ 141              	 .loc 1 167 0
+ 142 000c 8D43     	 bic r5,r1
+ 143              	 .loc 1 168 0
+ 144 000e 1343     	 orr r3,r2
+ 145 0010 A340     	 lsl r3,r3,r4
+ 167:../Libraries/XMCLib/src/xmc_eru.c ****                 (((uint32_t)input_a | (uint32_t)(input_b << ERU_EXISEL_INPUT_BITSIZE))  << (channel
+ 146              	 .loc 1 167 0
+ 147 0012 2A1C     	 mov r2,r5
+ 148              	.LVL11:
+ 149 0014 1A43     	 orr r2,r3
+ 150 0016 0260     	 str r2,[r0]
+ 169:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 151              	 .loc 1 169 0
+ 152              	 
+ 153 0018 30BD     	 pop {r4,r5,pc}
+ 154              	 .cfi_endproc
+ 155              	.LFE53:
+ 157              	 .section .text.XMC_ERU_ETL_SetSource,"ax",%progbits
+ 158              	 .align 1
+ 159              	 .global XMC_ERU_ETL_SetSource
+ 160              	 .code 16
+ 161              	 .thumb_func
+ 163              	XMC_ERU_ETL_SetSource:
+ 164              	.LFB54:
+ 170:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 171:../Libraries/XMCLib/src/xmc_eru.c **** /* Select input path combination along with polarity for event generation by setting (SS, NA, NB) b
+ 172:../Libraries/XMCLib/src/xmc_eru.c ****    EXICONx(x = [0 to 3]) register */
+ 173:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_SetSource(XMC_ERU_t *const eru,
+ 174:../Libraries/XMCLib/src/xmc_eru.c ****                           const uint8_t channel,
+ 175:../Libraries/XMCLib/src/xmc_eru.c ****                           const XMC_ERU_ETL_SOURCE_t source)
+ 176:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 165              	 .loc 1 176 0
+ 166              	 .cfi_startproc
+ 167              	.LVL12:
+ 177:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetSource:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 178:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetSource:Invalid Channel Number", (channel < 4U));
+ 179:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetSource:Invalid Source", XMC_ERU_ETL_CHECK_EVENT_SOURCE(source));
+ 180:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 181:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].SS = (uint8_t)source;
+ 168              	 .loc 1 181 0
+ 169 0000 0F23     	 mov r3,#15
+ 170 0002 0431     	 add r1,r1,#4
+ 171              	.LVL13:
+ 176:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetSource:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 172              	 .loc 1 176 0
+ 173 0004 10B5     	 push {r4,lr}
+ 174              	.LCFI3:
+ 175              	 .cfi_def_cfa_offset 8
+ 176              	 .cfi_offset 4,-8
+ 177              	 .cfi_offset 14,-4
+ 178              	 .loc 1 181 0
+ 179 0006 8900     	 lsl r1,r1,#2
+ 180 0008 1A40     	 and r2,r3
+ 181              	.LVL14:
+ 182 000a 1302     	 lsl r3,r2,#8
+ 183 000c 0C58     	 ldr r4,[r1,r0]
+ 184 000e 024A     	 ldr r2,.L5
+ 182:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 185              	 .loc 1 182 0
+ 186              	 
+ 181:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 187              	 .loc 1 181 0
+ 188 0010 2240     	 and r2,r4
+ 189 0012 1A43     	 orr r2,r3
+ 190 0014 0A50     	 str r2,[r1,r0]
+ 191              	 .loc 1 182 0
+ 192 0016 10BD     	 pop {r4,pc}
+ 193              	.L6:
+ 194              	 .align 2
+ 195              	.L5:
+ 196 0018 FFF0FFFF 	 .word -3841
+ 197              	 .cfi_endproc
+ 198              	.LFE54:
+ 200              	 .section .text.XMC_ERU_ETL_SetEdgeDetection,"ax",%progbits
+ 201              	 .align 1
+ 202              	 .global XMC_ERU_ETL_SetEdgeDetection
+ 203              	 .code 16
+ 204              	 .thumb_func
+ 206              	XMC_ERU_ETL_SetEdgeDetection:
+ 207              	.LFB55:
+ 183:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 184:../Libraries/XMCLib/src/xmc_eru.c **** /* Configure event trigger edge/s by setting (RE, FE) bits of EXICONx(x = [0 to 3]) register.*/
+ 185:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_SetEdgeDetection(XMC_ERU_t *const eru,
+ 186:../Libraries/XMCLib/src/xmc_eru.c ****                                   const uint8_t channel,
+ 187:../Libraries/XMCLib/src/xmc_eru.c ****                                   const XMC_ERU_ETL_EDGE_DETECTION_t edge_detection)
+ 188:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 208              	 .loc 1 188 0
+ 209              	 .cfi_startproc
+ 210              	.LVL15:
+ 189:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetEdgeDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 190:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetEdgeDetection:Invalid Channel Number", (channel < 4U));
+ 191:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetEdgeDetection:Invalid Trigger Edge", XMC_ERU_ETL_CHECK_TRIGGER_EDGE(ed
+ 192:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 193:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].ED = (uint8_t)edge_detection;
+ 211              	 .loc 1 193 0
+ 212 0000 0323     	 mov r3,#3
+ 188:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetEdgeDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 213              	 .loc 1 188 0
+ 214 0002 10B5     	 push {r4,lr}
+ 215              	.LCFI4:
+ 216              	 .cfi_def_cfa_offset 8
+ 217              	 .cfi_offset 4,-8
+ 218              	 .cfi_offset 14,-4
+ 219              	 .loc 1 193 0
+ 220 0004 0C24     	 mov r4,#12
+ 221 0006 0431     	 add r1,r1,#4
+ 222              	.LVL16:
+ 223 0008 8900     	 lsl r1,r1,#2
+ 224 000a 1A40     	 and r2,r3
+ 225              	.LVL17:
+ 226 000c 9300     	 lsl r3,r2,#2
+ 227 000e 0A58     	 ldr r2,[r1,r0]
+ 194:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 228              	 .loc 1 194 0
+ 229              	 
+ 193:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 230              	 .loc 1 193 0
+ 231 0010 A243     	 bic r2,r4
+ 232 0012 1A43     	 orr r2,r3
+ 233 0014 0A50     	 str r2,[r1,r0]
+ 234              	 .loc 1 194 0
+ 235 0016 10BD     	 pop {r4,pc}
+ 236              	 .cfi_endproc
+ 237              	.LFE55:
+ 239              	 .section .text.XMC_ERU_ETL_GetEdgeDetection,"ax",%progbits
+ 240              	 .align 1
+ 241              	 .global XMC_ERU_ETL_GetEdgeDetection
+ 242              	 .code 16
+ 243              	 .thumb_func
+ 245              	XMC_ERU_ETL_GetEdgeDetection:
+ 246              	.LFB56:
+ 195:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 196:../Libraries/XMCLib/src/xmc_eru.c **** /* Returns the configured event trigger edge/s by reading (RE, FE) bits of EXICONx(x = [0 to 3]) re
+ 197:../Libraries/XMCLib/src/xmc_eru.c **** XMC_ERU_ETL_EDGE_DETECTION_t XMC_ERU_ETL_GetEdgeDetection(XMC_ERU_t *const eru, const uint8_t chann
+ 198:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 247              	 .loc 1 198 0
+ 248              	 .cfi_startproc
+ 249              	.LVL18:
+ 199:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_GetEdgeDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru));
+ 200:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_GetEdgeDetection:Invalid Channel Number", (channel < 4U));
+ 201:../Libraries/XMCLib/src/xmc_eru.c ****   return ((XMC_ERU_ETL_EDGE_DETECTION_t)(eru->EXICON_b[channel].ED));
+ 250              	 .loc 1 201 0
+ 251 0000 0431     	 add r1,r1,#4
+ 252              	.LVL19:
+ 253 0002 8900     	 lsl r1,r1,#2
+ 254 0004 0858     	 ldr r0,[r1,r0]
+ 255              	.LVL20:
+ 202:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 256              	 .loc 1 202 0
+ 257              	 
+ 201:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 258              	 .loc 1 201 0
+ 259 0006 0007     	 lsl r0,r0,#28
+ 260 0008 800F     	 lsr r0,r0,#30
+ 261              	 .loc 1 202 0
+ 262 000a 7047     	 bx lr
+ 263              	 .cfi_endproc
+ 264              	.LFE56:
+ 266              	 .section .text.XMC_ERU_ETL_SetStatusFlagMode,"ax",%progbits
+ 267              	 .align 1
+ 268              	 .global XMC_ERU_ETL_SetStatusFlagMode
+ 269              	 .code 16
+ 270              	 .thumb_func
+ 272              	XMC_ERU_ETL_SetStatusFlagMode:
+ 273              	.LFB57:
+ 203:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 204:../Libraries/XMCLib/src/xmc_eru.c **** /* Set the status flag bit(FL) in EXICONx(x = [0 to 3]). */
+ 205:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_SetStatusFlagMode(XMC_ERU_t *const eru,
+ 206:../Libraries/XMCLib/src/xmc_eru.c ****                                    const uint8_t channel,
+ 207:../Libraries/XMCLib/src/xmc_eru.c ****                                    const XMC_ERU_ETL_STATUS_FLAG_MODE_t mode)
+ 208:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 274              	 .loc 1 208 0
+ 275              	 .cfi_startproc
+ 276              	.LVL21:
+ 209:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetStatusFlagMode:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru))
+ 210:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetStatusFlagMode:Invalid Channel Number", (channel < 4U));
+ 211:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetStatusFlagMode:Invalid Status Flag Mode", XMC_ERU_ETL_CHECK_STATUS_FLA
+ 212:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 213:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].LD = (uint8_t)mode;
+ 277              	 .loc 1 213 0
+ 278 0000 0123     	 mov r3,#1
+ 208:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_SetStatusFlagMode:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru))
+ 279              	 .loc 1 208 0
+ 280 0002 10B5     	 push {r4,lr}
+ 281              	.LCFI5:
+ 282              	 .cfi_def_cfa_offset 8
+ 283              	 .cfi_offset 4,-8
+ 284              	 .cfi_offset 14,-4
+ 285              	 .loc 1 213 0
+ 286 0004 0224     	 mov r4,#2
+ 287 0006 0431     	 add r1,r1,#4
+ 288              	.LVL22:
+ 289 0008 8900     	 lsl r1,r1,#2
+ 290 000a 1A40     	 and r2,r3
+ 291              	.LVL23:
+ 292 000c 5300     	 lsl r3,r2,#1
+ 293 000e 0A58     	 ldr r2,[r1,r0]
+ 214:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 294              	 .loc 1 214 0
+ 295              	 
+ 213:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 296              	 .loc 1 213 0
+ 297 0010 A243     	 bic r2,r4
+ 298 0012 1A43     	 orr r2,r3
+ 299 0014 0A50     	 str r2,[r1,r0]
+ 300              	 .loc 1 214 0
+ 301 0016 10BD     	 pop {r4,pc}
+ 302              	 .cfi_endproc
+ 303              	.LFE57:
+ 305              	 .section .text.XMC_ERU_ETL_EnableOutputTrigger,"ax",%progbits
+ 306              	 .align 1
+ 307              	 .global XMC_ERU_ETL_EnableOutputTrigger
+ 308              	 .code 16
+ 309              	 .thumb_func
+ 311              	XMC_ERU_ETL_EnableOutputTrigger:
+ 312              	.LFB58:
+ 215:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 216:../Libraries/XMCLib/src/xmc_eru.c **** /* Configure which Channel of OGUy(Output gating unit y = [0 to 3]) to be mapped by the trigger pul
+ 217:../Libraries/XMCLib/src/xmc_eru.c ****  * ETLx(Event Trigger Logic, x = [0 to 3]) by setting (OCS and PE) bit fields. */
+ 218:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_EnableOutputTrigger(XMC_ERU_t *const eru,
+ 219:../Libraries/XMCLib/src/xmc_eru.c ****                                      const uint8_t channel,
+ 220:../Libraries/XMCLib/src/xmc_eru.c ****                                      const XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL_t trigger)
+ 221:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 313              	 .loc 1 221 0
+ 314              	 .cfi_startproc
+ 315              	.LVL24:
+ 222:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_EnableOutputTrigger:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru
+ 223:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_EnableOutputTrigger:Invalid Channel Number", (channel < 4U));
+ 224:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_EnableOutputTrigger:Invalid Output Channel", XMC_ERU_ETL_CHECK_TRIGGER_CH
+ 225:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 226:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].OCS = (uint8_t)trigger;
+ 316              	 .loc 1 226 0
+ 317 0000 0723     	 mov r3,#7
+ 221:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_EnableOutputTrigger:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(eru
+ 318              	 .loc 1 221 0
+ 319 0002 10B5     	 push {r4,lr}
+ 320              	.LCFI6:
+ 321              	 .cfi_def_cfa_offset 8
+ 322              	 .cfi_offset 4,-8
+ 323              	 .cfi_offset 14,-4
+ 324              	 .loc 1 226 0
+ 325 0004 7024     	 mov r4,#112
+ 326 0006 0431     	 add r1,r1,#4
+ 327              	.LVL25:
+ 328 0008 8900     	 lsl r1,r1,#2
+ 329 000a 1A40     	 and r2,r3
+ 330              	.LVL26:
+ 331 000c 1301     	 lsl r3,r2,#4
+ 332 000e 0A58     	 ldr r2,[r1,r0]
+ 227:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].PE = (uint8_t)true;
+ 228:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 333              	 .loc 1 228 0
+ 334              	 
+ 226:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].PE = (uint8_t)true;
+ 335              	 .loc 1 226 0
+ 336 0010 A243     	 bic r2,r4
+ 337 0012 1A43     	 orr r2,r3
+ 338 0014 0A50     	 str r2,[r1,r0]
+ 227:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].PE = (uint8_t)true;
+ 339              	 .loc 1 227 0
+ 340 0016 0122     	 mov r2,#1
+ 341 0018 0B58     	 ldr r3,[r1,r0]
+ 342 001a 1343     	 orr r3,r2
+ 343 001c 0B50     	 str r3,[r1,r0]
+ 344              	 .loc 1 228 0
+ 345 001e 10BD     	 pop {r4,pc}
+ 346              	 .cfi_endproc
+ 347              	.LFE58:
+ 349              	 .section .text.XMC_ERU_ETL_DisableOutputTrigger,"ax",%progbits
+ 350              	 .align 1
+ 351              	 .global XMC_ERU_ETL_DisableOutputTrigger
+ 352              	 .code 16
+ 353              	 .thumb_func
+ 355              	XMC_ERU_ETL_DisableOutputTrigger:
+ 356              	.LFB59:
+ 229:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 230:../Libraries/XMCLib/src/xmc_eru.c **** /* Disables the trigger pulse generation by clearing the (PE) of the EXICONx(x = [0 to 3]). */
+ 231:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_ETL_DisableOutputTrigger(XMC_ERU_t *const eru, const uint8_t channel)
+ 232:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 357              	 .loc 1 232 0
+ 358              	 .cfi_startproc
+ 359              	.LVL27:
+ 233:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_DisableOutputTrigger:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(er
+ 234:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_ETL_DisableOutputTrigger:Invalid Channel Number", (channel < 4U));
+ 235:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 236:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXICON_b[channel].PE = false;
+ 360              	 .loc 1 236 0
+ 361 0000 0122     	 mov r2,#1
+ 362 0002 0431     	 add r1,r1,#4
+ 363              	.LVL28:
+ 364 0004 8900     	 lsl r1,r1,#2
+ 365 0006 0B58     	 ldr r3,[r1,r0]
+ 237:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 366              	 .loc 1 237 0
+ 367              	 
+ 236:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 368              	 .loc 1 236 0
+ 369 0008 9343     	 bic r3,r2
+ 370 000a 0B50     	 str r3,[r1,r0]
+ 371              	 .loc 1 237 0
+ 372 000c 7047     	 bx lr
+ 373              	 .cfi_endproc
+ 374              	.LFE59:
+ 376              	 .section .text.XMC_ERU_OGU_EnablePatternDetection,"ax",%progbits
+ 377              	 .align 1
+ 378              	 .global XMC_ERU_OGU_EnablePatternDetection
+ 379              	 .code 16
+ 380              	 .thumb_func
+ 382              	XMC_ERU_OGU_EnablePatternDetection:
+ 383              	.LFB60:
+ 238:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 239:../Libraries/XMCLib/src/xmc_eru.c **** /* Configures ERU_ETLx(x = [0 to 3]) for pattern match detection by setting IPENx(x = [0 to 3) and 
+ 240:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_EnablePatternDetection(XMC_ERU_t *const eru,
+ 241:../Libraries/XMCLib/src/xmc_eru.c ****                                         const uint8_t channel,
+ 242:../Libraries/XMCLib/src/xmc_eru.c ****                                         const XMC_ERU_OGU_PATTERN_DETECTION_INPUT_t input)
+ 243:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 384              	 .loc 1 243 0
+ 385              	 .cfi_startproc
+ 386              	.LVL29:
+ 244:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePatternDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(
+ 245:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePatternDetection:Invalid Channel Number", (channel < 4U));
+ 246:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePatternDetection:Invalid Pattern input", XMC_ERU_OGU_CHECK_PATTERN_
+ 247:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 248:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].IPEN = (uint8_t)input;
+ 387              	 .loc 1 248 0
+ 388 0000 0F23     	 mov r3,#15
+ 389 0002 0831     	 add r1,r1,#8
+ 390              	.LVL30:
+ 391 0004 8900     	 lsl r1,r1,#2
+ 392 0006 1A40     	 and r2,r3
+ 393              	.LVL31:
+ 243:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePatternDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(
+ 394              	 .loc 1 243 0
+ 395 0008 10B5     	 push {r4,lr}
+ 396              	.LCFI7:
+ 397              	 .cfi_def_cfa_offset 8
+ 398              	 .cfi_offset 4,-8
+ 399              	 .cfi_offset 14,-4
+ 400              	 .loc 1 248 0
+ 401 000a 1303     	 lsl r3,r2,#12
+ 402 000c 0C58     	 ldr r4,[r1,r0]
+ 403 000e 044A     	 ldr r2,.L13
+ 249:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].GEEN = true;
+ 250:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 404              	 .loc 1 250 0
+ 405              	 
+ 248:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].GEEN = true;
+ 406              	 .loc 1 248 0
+ 407 0010 2240     	 and r2,r4
+ 408 0012 1A43     	 orr r2,r3
+ 409 0014 0A50     	 str r2,[r1,r0]
+ 249:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].GEEN = true;
+ 410              	 .loc 1 249 0
+ 411 0016 0422     	 mov r2,#4
+ 412 0018 0B58     	 ldr r3,[r1,r0]
+ 413 001a 1343     	 orr r3,r2
+ 414 001c 0B50     	 str r3,[r1,r0]
+ 415              	 .loc 1 250 0
+ 416 001e 10BD     	 pop {r4,pc}
+ 417              	.L14:
+ 418              	 .align 2
+ 419              	.L13:
+ 420 0020 FF0FFFFF 	 .word -61441
+ 421              	 .cfi_endproc
+ 422              	.LFE60:
+ 424              	 .section .text.XMC_ERU_OGU_DisablePatternDetection,"ax",%progbits
+ 425              	 .align 1
+ 426              	 .global XMC_ERU_OGU_DisablePatternDetection
+ 427              	 .code 16
+ 428              	 .thumb_func
+ 430              	XMC_ERU_OGU_DisablePatternDetection:
+ 431              	.LFB61:
+ 251:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 252:../Libraries/XMCLib/src/xmc_eru.c **** /* Disable the pattern detection by clearing (GEEN) bit. */
+ 253:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_DisablePatternDetection(XMC_ERU_t *const eru, const uint8_t channel)
+ 254:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 432              	 .loc 1 254 0
+ 433              	 .cfi_startproc
+ 434              	.LVL32:
+ 255:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_DisablePatternDetection:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR
+ 256:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_DisablePatternDetection:Invalid Channel Number", (channel < 4U));
+ 257:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 258:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].GEEN = false;
+ 435              	 .loc 1 258 0
+ 436 0000 0422     	 mov r2,#4
+ 437 0002 0831     	 add r1,r1,#8
+ 438              	.LVL33:
+ 439 0004 8900     	 lsl r1,r1,#2
+ 440 0006 0B58     	 ldr r3,[r1,r0]
+ 259:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 441              	 .loc 1 259 0
+ 442              	 
+ 258:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 443              	 .loc 1 258 0
+ 444 0008 9343     	 bic r3,r2
+ 445 000a 0B50     	 str r3,[r1,r0]
+ 446              	 .loc 1 259 0
+ 447 000c 7047     	 bx lr
+ 448              	 .cfi_endproc
+ 449              	.LFE61:
+ 451              	 .section .text.XMC_ERU_OGU_EnablePeripheralTrigger,"ax",%progbits
+ 452              	 .align 1
+ 453              	 .global XMC_ERU_OGU_EnablePeripheralTrigger
+ 454              	 .code 16
+ 455              	 .thumb_func
+ 457              	XMC_ERU_OGU_EnablePeripheralTrigger:
+ 458              	.LFB62:
+ 260:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 261:../Libraries/XMCLib/src/xmc_eru.c **** /* Configures peripheral trigger input, by setting (ISS) bit. */
+ 262:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_EnablePeripheralTrigger(XMC_ERU_t *const eru,
+ 263:../Libraries/XMCLib/src/xmc_eru.c ****                                          const uint8_t channel,
+ 264:../Libraries/XMCLib/src/xmc_eru.c ****                                          const XMC_ERU_OGU_PERIPHERAL_TRIGGER_t peripheral_trigger)
+ 265:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 459              	 .loc 1 265 0
+ 460              	 .cfi_startproc
+ 461              	.LVL34:
+ 462 0000 10B5     	 push {r4,lr}
+ 463              	.LCFI8:
+ 464              	 .cfi_def_cfa_offset 8
+ 465              	 .cfi_offset 4,-8
+ 466              	 .cfi_offset 14,-4
+ 266:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePeripheralTrigger:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR
+ 267:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePeripheralTrigger:Invalid Channel Number", (channel < 4U));
+ 268:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_EnablePeripheralTrigger:Invalid Peripheral Trigger Input", 
+ 269:../Libraries/XMCLib/src/xmc_eru.c ****               XMC_ERU_OGU_CHECK_PERIPHERAL_TRIGGER(peripheral_trigger));
+ 270:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 271:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].ISS = (uint8_t)peripheral_trigger;
+ 467              	 .loc 1 271 0
+ 468 0002 0324     	 mov r4,#3
+ 469 0004 0831     	 add r1,r1,#8
+ 470              	.LVL35:
+ 471 0006 8900     	 lsl r1,r1,#2
+ 472 0008 0B58     	 ldr r3,[r1,r0]
+ 473 000a 2240     	 and r2,r4
+ 474              	.LVL36:
+ 475 000c A343     	 bic r3,r4
+ 476 000e 1A43     	 orr r2,r3
+ 477 0010 0A50     	 str r2,[r1,r0]
+ 272:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 478              	 .loc 1 272 0
+ 479              	 
+ 480 0012 10BD     	 pop {r4,pc}
+ 481              	 .cfi_endproc
+ 482              	.LFE62:
+ 484              	 .section .text.XMC_ERU_OGU_DisablePeripheralTrigger,"ax",%progbits
+ 485              	 .align 1
+ 486              	 .global XMC_ERU_OGU_DisablePeripheralTrigger
+ 487              	 .code 16
+ 488              	 .thumb_func
+ 490              	XMC_ERU_OGU_DisablePeripheralTrigger:
+ 491              	.LFB63:
+ 273:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 274:../Libraries/XMCLib/src/xmc_eru.c **** /* Disables event generation based on peripheral trigger by clearing (ISS) bit. */
+ 275:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_DisablePeripheralTrigger(XMC_ERU_t *const eru,
+ 276:../Libraries/XMCLib/src/xmc_eru.c ****                                           const uint8_t channel)
+ 277:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 492              	 .loc 1 277 0
+ 493              	 .cfi_startproc
+ 494              	.LVL37:
+ 278:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_DisablePeripheralTrigger:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PT
+ 279:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_DisablePeripheralTrigger:Invalid Channel Number", (channel < 4U));
+ 280:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 281:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].ISS = (uint8_t)0;
+ 495              	 .loc 1 281 0
+ 496 0000 0322     	 mov r2,#3
+ 497 0002 0831     	 add r1,r1,#8
+ 498              	.LVL38:
+ 499 0004 8900     	 lsl r1,r1,#2
+ 500 0006 0B58     	 ldr r3,[r1,r0]
+ 282:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 501              	 .loc 1 282 0
+ 502              	 
+ 281:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 503              	 .loc 1 281 0
+ 504 0008 9343     	 bic r3,r2
+ 505 000a 0B50     	 str r3,[r1,r0]
+ 506              	 .loc 1 282 0
+ 507 000c 7047     	 bx lr
+ 508              	 .cfi_endproc
+ 509              	.LFE63:
+ 511              	 .section .text.XMC_ERU_OGU_SetServiceRequestMode,"ax",%progbits
+ 512              	 .align 1
+ 513              	 .global XMC_ERU_OGU_SetServiceRequestMode
+ 514              	 .code 16
+ 515              	 .thumb_func
+ 517              	XMC_ERU_OGU_SetServiceRequestMode:
+ 518              	.LFB64:
+ 283:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 284:../Libraries/XMCLib/src/xmc_eru.c **** /* Configures the gating scheme for service request generation by setting (GP) bit. */
+ 285:../Libraries/XMCLib/src/xmc_eru.c **** void XMC_ERU_OGU_SetServiceRequestMode(XMC_ERU_t *const eru,
+ 286:../Libraries/XMCLib/src/xmc_eru.c ****                                        const uint8_t channel,
+ 287:../Libraries/XMCLib/src/xmc_eru.c ****                                        const XMC_ERU_OGU_SERVICE_REQUEST_t mode)
+ 288:../Libraries/XMCLib/src/xmc_eru.c **** {
+ 519              	 .loc 1 288 0
+ 520              	 .cfi_startproc
+ 521              	.LVL39:
+ 289:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_SetServiceRequestMode:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(e
+ 290:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_SetServiceRequestMode:Invalid Channel Number", (channel < 4U));
+ 291:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_SetServiceRequestMode:Invalid Service Request Mode", XMC_ERU_OGU_CHECK_SE
+ 292:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 293:../Libraries/XMCLib/src/xmc_eru.c ****   eru->EXOCON_b[channel].GP = (uint8_t)mode;
+ 522              	 .loc 1 293 0
+ 523 0000 0323     	 mov r3,#3
+ 288:../Libraries/XMCLib/src/xmc_eru.c ****   XMC_ASSERT("XMC_ERU_OGU_SetServiceRequestMode:Invalid Module Pointer", XMC_ERU_CHECK_MODULE_PTR(e
+ 524              	 .loc 1 288 0
+ 525 0002 10B5     	 push {r4,lr}
+ 526              	.LCFI9:
+ 527              	 .cfi_def_cfa_offset 8
+ 528              	 .cfi_offset 4,-8
+ 529              	 .cfi_offset 14,-4
+ 530              	 .loc 1 293 0
+ 531 0004 3024     	 mov r4,#48
+ 532 0006 0831     	 add r1,r1,#8
+ 533              	.LVL40:
+ 534 0008 8900     	 lsl r1,r1,#2
+ 535 000a 1A40     	 and r2,r3
+ 536              	.LVL41:
+ 537 000c 1301     	 lsl r3,r2,#4
+ 538 000e 0A58     	 ldr r2,[r1,r0]
+ 294:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 295:../Libraries/XMCLib/src/xmc_eru.c **** }
+ 539              	 .loc 1 295 0
+ 540              	 
+ 293:../Libraries/XMCLib/src/xmc_eru.c **** 
+ 541              	 .loc 1 293 0
+ 542 0010 A243     	 bic r2,r4
+ 543 0012 1A43     	 orr r2,r3
+ 544 0014 0A50     	 str r2,[r1,r0]
+ 545              	 .loc 1 295 0
+ 546 0016 10BD     	 pop {r4,pc}
+ 547              	 .cfi_endproc
+ 548              	.LFE64:
+ 550              	 .text
+ 551              	.Letext0:
+ 552              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 553              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 554              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_eru.h"
+ 555              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_eru.c
+    {standard input}:18     .text.XMC_ERU_ETL_Init:00000000 $t
+    {standard input}:23     .text.XMC_ERU_ETL_Init:00000000 XMC_ERU_ETL_Init
+    {standard input}:77     .text.XMC_ERU_OGU_Init:00000000 $t
+    {standard input}:82     .text.XMC_ERU_OGU_Init:00000000 XMC_ERU_OGU_Init
+    {standard input}:116    .text.XMC_ERU_ETL_SetInput:00000000 $t
+    {standard input}:121    .text.XMC_ERU_ETL_SetInput:00000000 XMC_ERU_ETL_SetInput
+    {standard input}:158    .text.XMC_ERU_ETL_SetSource:00000000 $t
+    {standard input}:163    .text.XMC_ERU_ETL_SetSource:00000000 XMC_ERU_ETL_SetSource
+    {standard input}:196    .text.XMC_ERU_ETL_SetSource:00000018 $d
+    {standard input}:201    .text.XMC_ERU_ETL_SetEdgeDetection:00000000 $t
+    {standard input}:206    .text.XMC_ERU_ETL_SetEdgeDetection:00000000 XMC_ERU_ETL_SetEdgeDetection
+    {standard input}:240    .text.XMC_ERU_ETL_GetEdgeDetection:00000000 $t
+    {standard input}:245    .text.XMC_ERU_ETL_GetEdgeDetection:00000000 XMC_ERU_ETL_GetEdgeDetection
+    {standard input}:267    .text.XMC_ERU_ETL_SetStatusFlagMode:00000000 $t
+    {standard input}:272    .text.XMC_ERU_ETL_SetStatusFlagMode:00000000 XMC_ERU_ETL_SetStatusFlagMode
+    {standard input}:306    .text.XMC_ERU_ETL_EnableOutputTrigger:00000000 $t
+    {standard input}:311    .text.XMC_ERU_ETL_EnableOutputTrigger:00000000 XMC_ERU_ETL_EnableOutputTrigger
+    {standard input}:350    .text.XMC_ERU_ETL_DisableOutputTrigger:00000000 $t
+    {standard input}:355    .text.XMC_ERU_ETL_DisableOutputTrigger:00000000 XMC_ERU_ETL_DisableOutputTrigger
+    {standard input}:377    .text.XMC_ERU_OGU_EnablePatternDetection:00000000 $t
+    {standard input}:382    .text.XMC_ERU_OGU_EnablePatternDetection:00000000 XMC_ERU_OGU_EnablePatternDetection
+    {standard input}:420    .text.XMC_ERU_OGU_EnablePatternDetection:00000020 $d
+    {standard input}:425    .text.XMC_ERU_OGU_DisablePatternDetection:00000000 $t
+    {standard input}:430    .text.XMC_ERU_OGU_DisablePatternDetection:00000000 XMC_ERU_OGU_DisablePatternDetection
+    {standard input}:452    .text.XMC_ERU_OGU_EnablePeripheralTrigger:00000000 $t
+    {standard input}:457    .text.XMC_ERU_OGU_EnablePeripheralTrigger:00000000 XMC_ERU_OGU_EnablePeripheralTrigger
+    {standard input}:485    .text.XMC_ERU_OGU_DisablePeripheralTrigger:00000000 $t
+    {standard input}:490    .text.XMC_ERU_OGU_DisablePeripheralTrigger:00000000 XMC_ERU_OGU_DisablePeripheralTrigger
+    {standard input}:512    .text.XMC_ERU_OGU_SetServiceRequestMode:00000000 $t
+    {standard input}:517    .text.XMC_ERU_OGU_SetServiceRequestMode:00000000 XMC_ERU_OGU_SetServiceRequestMode
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_ERU_Enable

@@ -1,0 +1,828 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "example_optiga_crypt_tls_prf_sha256.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_lib_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_lib_callback:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga/example_optiga_crypt_tls_prf_sha256.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \file example_optiga_crypt_tls_prf_sha256.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \brief   This file provides the example for key derivation (PRF SHA256 as per TLS v1.2) using
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *          #optiga_crypt_tls_prf_sha256.
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * \ingroup grOptigaExamples
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** *
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** * @{
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** */
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** #include "optiga/optiga_crypt.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** #include "optiga/optiga_util.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** #include "optiga_example.h"
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** #ifdef OPTIGA_CRYPT_TLS_PRF_SHA256_ENABLED
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** /**
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  * Sample metadata
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  */
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static uint8_t metadata [] = {
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     //Metadata tag in the data object
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x20, 0x06,
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         //Data object type set to PRESSEC
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         0xE8, 0x01, 0x21,
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         0xD3, 0x01, 0x00,
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** };
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** /**
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  * Default metadata
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  */
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static uint8_t default_metadata [] = {
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     //Metadata tag in the data object
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x20, 0x06,
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         //Data object type set to BSTR
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         0xE8, 0x01, 0x00,
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         0xD3, 0x01, 0xFF,
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** };
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** /**
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  * Callback when optiga_crypt_xxxx operation is completed asynchronously
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  */
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static volatile optiga_lib_status_t optiga_lib_status;
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** //lint --e{818} suppress "argument "context" is not used in the sample provided"
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static void optiga_lib_callback(void * context, optiga_lib_status_t return_status)
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** {
+  25              	 .loc 1 72 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_lib_status = return_status;
+  28              	 .loc 1 73 0
+  29 0000 014B     	 ldr r3,.L2
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     if (NULL != context)
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     {
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         // callback to upper layer here
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     }
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** }
+  30              	 .loc 1 78 0
+  31              	 
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_lib_status = return_status;
+  32              	 .loc 1 73 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 78 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE0:
+  43              	 .section .text.example_optiga_crypt_tls_prf_sha256,"ax",%progbits
+  44              	 .align 1
+  45              	 .global example_optiga_crypt_tls_prf_sha256
+  46              	 .code 16
+  47              	 .thumb_func
+  49              	example_optiga_crypt_tls_prf_sha256:
+  50              	.LFB1:
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static uint8_t label [] = "Firmware update";
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static uint8_t random_seed [] = {
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x61, 0xC7, 0xDE, 0xF9, 0x0F, 0xD5, 0xCD, 0x7A,
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x8B, 0x7A, 0x36, 0x41, 0x04, 0xE0, 0x0D, 0x82,
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x38, 0x46, 0xBF, 0xB7, 0x70, 0xEE, 0xBF, 0x8F,
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x40, 0x25, 0x2E, 0x0A, 0x21, 0x42, 0xAF, 0x9C,
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** };
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** // Secret to be written to data object which will be
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** // later used as part of TLS PRF SHA256 key derivation
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** static uint8_t secret_to_be_written [] = {
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0xBF, 0xB7, 0x70, 0xEE, 0xBF, 0x8F, 0x61, 0xC7,
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x04, 0xE0, 0x0D, 0x82, 0x8B, 0x7A, 0x36, 0x41,
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0xD5, 0xCD, 0x7A, 0x38, 0x46, 0xDE, 0xF9, 0x0F,
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     0x21, 0x42, 0x40, 0x25, 0x0A, 0xAF, 0x9C, 0x2E,
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** };
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** /**
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  * The below example demonstrates the key derivation using #optiga_crypt_tls_prf_sha256.
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  *
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****  */
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** void example_optiga_crypt_tls_prf_sha256(void)
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** {
+  51              	 .loc 1 102 0
+  52              	 .cfi_startproc
+  53 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  54              	.LCFI0:
+  55              	 .cfi_def_cfa_offset 20
+  56              	 .cfi_offset 4,-20
+  57              	 .cfi_offset 5,-16
+  58              	 .cfi_offset 6,-12
+  59              	 .cfi_offset 7,-8
+  60              	 .cfi_offset 14,-4
+  61 0002 8DB0     	 sub sp,sp,#52
+  62              	.LCFI1:
+  63              	 .cfi_def_cfa_offset 72
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     uint8_t decryption_key [16] = {0};
+  64              	 .loc 1 103 0
+  65 0004 0021     	 mov r1,#0
+  66 0006 1022     	 mov r2,#16
+  67 0008 08A8     	 add r0,sp,#32
+  68 000a FFF7FEFF 	 bl memset
+  69              	.LVL1:
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_lib_status_t return_status = 0;
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_crypt_t * me = NULL;
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_util_t * me_util = NULL;
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     OPTIGA_EXAMPLE_LOG_MESSAGE(__FUNCTION__);
+  70              	 .loc 1 109 0
+  71 000e 574C     	 ldr r4,.L50
+  72 0010 574D     	 ldr r5,.L50+4
+  73 0012 5848     	 ldr r0,.L50+8
+  74 0014 291C     	 mov r1,r5
+  75 0016 221C     	 mov r2,r4
+  76 0018 FFF7FEFF 	 bl optiga_lib_print_message
+  77              	.LVL2:
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     do
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     {
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         me_util = optiga_util_create(0, optiga_lib_callback, NULL);
+  78              	 .loc 1 113 0
+  79 001c 0020     	 mov r0,#0
+  80 001e 564F     	 ldr r7,.L50+12
+  81 0020 021C     	 mov r2,r0
+  82 0022 391C     	 mov r1,r7
+  83 0024 FFF7FEFF 	 bl optiga_util_create
+  84              	.LVL3:
+  85 0028 0794     	 str r4,[sp,#28]
+  86 002a 0690     	 str r0,[sp,#24]
+  87              	.LVL4:
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (NULL == me_util)
+  88              	 .loc 1 114 0
+  89 002c 0028     	 cmp r0,#0
+  90 002e 6AD0     	 beq .L5
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         /**
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 1. Write the shared secret to the Arbitrary data object F1D0
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *       - This is typically a one time activity and
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *       - use the this OID as input secret to derive keys further
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 2. Use Erase and Write (OPTIGA_UTIL_ERASE_AND_WRITE) option,
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *    to clear the remaining data in the object
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          */
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+  91              	 .loc 1 126 0
+  92 0030 0123     	 mov r3,#1
+  93 0032 524C     	 ldr r4,.L50+16
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_data(me_util,
+  94              	 .loc 1 127 0
+  95 0034 4022     	 mov r2,#64
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_data(me_util,
+  96              	 .loc 1 126 0
+  97 0036 2380     	 strh r3,[r4]
+  98              	 .loc 1 127 0
+  99 0038 514B     	 ldr r3,.L50+20
+ 100 003a 5249     	 ldr r1,.L50+24
+ 101 003c 0093     	 str r3,[sp]
+ 102 003e 2023     	 mov r3,#32
+ 103 0040 0193     	 str r3,[sp,#4]
+ 104 0042 0023     	 mov r3,#0
+ 105 0044 FFF7FEFF 	 bl optiga_util_write_data
+ 106              	.LVL5:
+ 107 0048 231C     	 mov r3,r4
+ 108 004a 021E     	 sub r2,r0,#0
+ 109              	.LVL6:
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                0xF1D0,
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                OPTIGA_UTIL_ERASE_AND_WRITE ,
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                0x00,
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                secret_to_be_written,
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                sizeof(secret_to_be_written));
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 110              	 .loc 1 134 0
+ 111 004c 00D0     	 beq .LCB79
+ 112 004e 78E0     	 b .L27
+ 113              	.LCB79:
+ 114              	.L7:
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 115              	 .loc 1 139 0 discriminator 1
+ 116 0050 1A88     	 ldrh r2,[r3]
+ 117 0052 012A     	 cmp r2,#1
+ 118 0054 FCD0     	 beq .L7
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Wait until the optiga_util_write_data operation is completed
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 119              	 .loc 1 144 0
+ 120 0056 1C88     	 ldrh r4,[r3]
+ 121 0058 A4B2     	 uxth r4,r4
+ 122 005a 002C     	 cmp r4,#0
+ 123 005c 01D0     	 beq .L8
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Write to data object is failed.
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             return_status = optiga_lib_status;
+ 124              	 .loc 1 147 0
+ 125 005e 1A88     	 ldrh r2,[r3]
+ 126 0060 12E0     	 b .L45
+ 127              	.L8:
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         /**
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 2. Change data object type to PRESSEC
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          */
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+ 128              	 .loc 1 156 0
+ 129 0062 0122     	 mov r2,#1
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_metadata(me_util,
+ 130              	 .loc 1 157 0
+ 131 0064 0698     	 ldr r0,[sp,#24]
+ 132              	.LVL7:
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_metadata(me_util,
+ 133              	 .loc 1 156 0
+ 134 0066 1A80     	 strh r2,[r3]
+ 135              	 .loc 1 157 0
+ 136 0068 4649     	 ldr r1,.L50+24
+ 137 006a 474A     	 ldr r2,.L50+28
+ 138 006c 0823     	 mov r3,#8
+ 139 006e FFF7FEFF 	 bl optiga_util_write_metadata
+ 140              	.LVL8:
+ 141 0072 021E     	 sub r2,r0,#0
+ 142              	.LVL9:
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    0xF1D0,
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    metadata,
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    sizeof(metadata));
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 143              	 .loc 1 162 0
+ 144 0074 66D1     	 bne .L6
+ 145              	.L10:
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 146              	 .loc 1 167 0 discriminator 1
+ 147 0076 414E     	 ldr r6,.L50+16
+ 148 0078 3388     	 ldrh r3,[r6]
+ 149 007a 012B     	 cmp r3,#1
+ 150 007c FBD0     	 beq .L10
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Wait until the optiga_util_write_metadata operation is completed
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 151              	 .loc 1 172 0
+ 152 007e 3288     	 ldrh r2,[r6]
+ 153 0080 92B2     	 uxth r2,r2
+ 154 0082 002A     	 cmp r2,#0
+ 155 0084 04D0     	 beq .L11
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //writing metadata to a data object failed.
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             return_status = optiga_lib_status;
+ 156              	 .loc 1 175 0
+ 157 0086 3288     	 ldrh r2,[r6]
+ 158              	.LVL10:
+ 159              	.L45:
+ 160 0088 92B2     	 uxth r2,r2
+ 161              	.LVL11:
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         /**
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 3. Create OPTIGA Crypt Instance
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          */
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         me = optiga_crypt_create(0, optiga_lib_callback, NULL);
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (NULL == me)
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         /**
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 4. Derive key (e.g. decryption key) using optiga_crypt_tls_prf_sha256 with protected I2C
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *       - Use shared secret from F1D0 data object
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          */
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         OPTIGA_CRYPT_SET_COMMS_PROTOCOL_VERSION(me, OPTIGA_COMMS_PROTOCOL_VERSION_PRE_SHARED_SECRET
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         // Default protecition for this API is OPTIGA_COMMS_COMMAND_PROTECTION
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_crypt_tls_prf_sha256(me,
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     0xF1D0, /* Input secret OID */
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     label,
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     sizeof(label),
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     random_seed,
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     sizeof(random_seed),
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     sizeof(decryption_key),
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     TRUE,
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     decryption_key);
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Wait until the optiga_crypt_tls_prf_sha256 operation is completed
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Derive key operation failed.
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             return_status = optiga_lib_status;
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         /**
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          * 5. Change meta data to default value
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          *
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****          */
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_metadata(me_util,
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    0xF1D0,
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    default_metadata,
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    sizeof(default_metadata));
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //Wait until the optiga_util_write_metadata operation is completed
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //writing metadata to a data object failed.
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             return_status = optiga_lib_status;
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = OPTIGA_LIB_SUCCESS;
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     } while (FALSE);
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 162              	 .loc 1 254 0
+ 163 008a 141E     	 sub r4,r2,#0
+ 164 008c 3CD0     	 beq .L24
+ 165 008e 60E0     	 b .L48
+ 166              	.LVL12:
+ 167              	.L11:
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if (NULL == me)
+ 168              	 .loc 1 183 0
+ 169 0090 101C     	 mov r0,r2
+ 170              	.LVL13:
+ 171 0092 391C     	 mov r1,r7
+ 172 0094 FFF7FEFF 	 bl optiga_crypt_create
+ 173              	.LVL14:
+ 174 0098 041E     	 sub r4,r0,#0
+ 175              	.LVL15:
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 176              	 .loc 1 184 0
+ 177 009a 34D0     	 beq .L5
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 178              	 .loc 1 193 0
+ 179 009c 0127     	 mov r7,#1
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         // Default protecition for this API is OPTIGA_COMMS_COMMAND_PROTECTION
+ 180              	 .loc 1 195 0
+ 181 009e 0221     	 mov r1,#2
+ 182 00a0 3A1C     	 mov r2,r7
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 183              	 .loc 1 193 0
+ 184 00a2 3780     	 strh r7,[r6]
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         // Default protecition for this API is OPTIGA_COMMS_COMMAND_PROTECTION
+ 185              	 .loc 1 195 0
+ 186 00a4 FFF7FEFF 	 bl optiga_crypt_set_comms_params
+ 187              	.LVL16:
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                     0xF1D0, /* Input secret OID */
+ 188              	 .loc 1 197 0
+ 189 00a8 384B     	 ldr r3,.L50+32
+ 190 00aa 08AA     	 add r2,sp,#32
+ 191 00ac 0093     	 str r3,[sp]
+ 192 00ae 2023     	 mov r3,#32
+ 193 00b0 0193     	 str r3,[sp,#4]
+ 194 00b2 103B     	 sub r3,r3,#16
+ 195 00b4 0492     	 str r2,[sp,#16]
+ 196 00b6 0293     	 str r3,[sp,#8]
+ 197 00b8 354A     	 ldr r2,.L50+36
+ 198 00ba 0397     	 str r7,[sp,#12]
+ 199 00bc 201C     	 mov r0,r4
+ 200 00be 3149     	 ldr r1,.L50+24
+ 201 00c0 FFF7FEFF 	 bl optiga_crypt_tls_prf_sha256
+ 202              	.LVL17:
+ 203 00c4 021E     	 sub r2,r0,#0
+ 204              	.LVL18:
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 205              	 .loc 1 207 0
+ 206 00c6 3DD1     	 bne .L6
+ 207              	.L12:
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 208              	 .loc 1 212 0 discriminator 1
+ 209 00c8 2C4B     	 ldr r3,.L50+16
+ 210 00ca 1A88     	 ldrh r2,[r3]
+ 211 00cc 1E1C     	 mov r6,r3
+ 212 00ce 012A     	 cmp r2,#1
+ 213 00d0 FAD0     	 beq .L12
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 214              	 .loc 1 217 0
+ 215 00d2 1A88     	 ldrh r2,[r3]
+ 216 00d4 002A     	 cmp r2,#0
+ 217 00d6 01D0     	 beq .L13
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 218              	 .loc 1 220 0
+ 219 00d8 1A88     	 ldrh r2,[r3]
+ 220 00da 10E0     	 b .L46
+ 221              	.L13:
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_metadata(me_util,
+ 222              	 .loc 1 229 0
+ 223 00dc 0123     	 mov r3,#1
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    0xF1D0,
+ 224              	 .loc 1 230 0
+ 225 00de 2D4A     	 ldr r2,.L50+40
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_write_metadata(me_util,
+ 226              	 .loc 1 229 0
+ 227 00e0 3380     	 strh r3,[r6]
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****                                                    0xF1D0,
+ 228              	 .loc 1 230 0
+ 229 00e2 0698     	 ldr r0,[sp,#24]
+ 230              	.LVL19:
+ 231 00e4 2749     	 ldr r1,.L50+24
+ 232 00e6 0733     	 add r3,r3,#7
+ 233 00e8 FFF7FEFF 	 bl optiga_util_write_metadata
+ 234              	.LVL20:
+ 235 00ec 021E     	 sub r2,r0,#0
+ 236              	.LVL21:
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 237              	 .loc 1 235 0
+ 238 00ee 29D1     	 bne .L6
+ 239              	.L15:
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 240              	 .loc 1 240 0 discriminator 1
+ 241 00f0 3388     	 ldrh r3,[r6]
+ 242 00f2 012B     	 cmp r3,#1
+ 243 00f4 FCD0     	 beq .L15
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 244              	 .loc 1 245 0
+ 245 00f6 3388     	 ldrh r3,[r6]
+ 246 00f8 002B     	 cmp r3,#0
+ 247 00fa 05D0     	 beq .L24
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             break;
+ 248              	 .loc 1 248 0
+ 249 00fc 3288     	 ldrh r2,[r6]
+ 250              	.LVL22:
+ 251              	.L46:
+ 252 00fe 92B2     	 uxth r2,r2
+ 253              	.LVL23:
+ 254              	 .loc 1 254 0
+ 255 0100 002A     	 cmp r2,#0
+ 256 0102 01D0     	 beq .L24
+ 257 0104 2AE0     	 b .L49
+ 258              	.LVL24:
+ 259              	.L5:
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_util_t * me_util = NULL;
+ 260              	 .loc 1 107 0
+ 261 0106 0024     	 mov r4,#0
+ 262              	.LVL25:
+ 263              	.L24:
+ 264              	 .loc 1 254 0 discriminator 2
+ 265 0108 281C     	 mov r0,r5
+ 266 010a 0799     	 ldr r1,[sp,#28]
+ 267 010c 0022     	 mov r2,#0
+ 268 010e FFF7FEFF 	 bl optiga_lib_print_status
+ 269              	.LVL26:
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     if (me)
+ 270              	 .loc 1 256 0 discriminator 2
+ 271 0112 002C     	 cmp r4,#0
+ 272 0114 08D0     	 beq .L20
+ 273              	.L19:
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     {
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         //Destroy the instance after the completion of usecase if not required.
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_crypt_destroy(me);
+ 274              	 .loc 1 259 0
+ 275 0116 201C     	 mov r0,r4
+ 276 0118 FFF7FEFF 	 bl optiga_crypt_destroy
+ 277              	.LVL27:
+ 278 011c 021E     	 sub r2,r0,#0
+ 279              	.LVL28:
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 280              	 .loc 1 260 0
+ 281 011e 03D0     	 beq .L20
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //lint --e{774} suppress This is a generic macro
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 282              	 .loc 1 263 0 discriminator 1
+ 283 0120 281C     	 mov r0,r5
+ 284              	.LVL29:
+ 285 0122 1D49     	 ldr r1,.L50+44
+ 286 0124 FFF7FEFF 	 bl optiga_lib_print_status
+ 287              	.LVL30:
+ 288              	.L20:
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     }
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** 
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     if (me_util)
+ 289              	 .loc 1 267 0
+ 290 0128 069B     	 ldr r3,[sp,#24]
+ 291 012a 002B     	 cmp r3,#0
+ 292 012c 1BD0     	 beq .L4
+ 293              	.LVL31:
+ 294              	.L22:
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     {
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         //Destroy the instance after the completion of usecase if not required.
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         return_status = optiga_util_destroy(me_util);
+ 295              	 .loc 1 270 0
+ 296 012e 0698     	 ldr r0,[sp,#24]
+ 297 0130 FFF7FEFF 	 bl optiga_util_destroy
+ 298              	.LVL32:
+ 299 0134 021E     	 sub r2,r0,#0
+ 300              	.LVL33:
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 301              	 .loc 1 271 0
+ 302 0136 16D0     	 beq .L4
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         {
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             //lint --e{774} suppress This is a generic macro
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 303              	 .loc 1 274 0 discriminator 1
+ 304 0138 281C     	 mov r0,r5
+ 305              	.LVL34:
+ 306 013a 1749     	 ldr r1,.L50+44
+ 307 013c FFF7FEFF 	 bl optiga_lib_print_status
+ 308              	.LVL35:
+ 309 0140 11E0     	 b .L4
+ 310              	.LVL36:
+ 311              	.L27:
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     optiga_util_t * me_util = NULL;
+ 312              	 .loc 1 107 0
+ 313 0142 0024     	 mov r4,#0
+ 314              	.LVL37:
+ 315              	.L6:
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     
+ 316              	 .loc 1 254 0
+ 317 0144 281C     	 mov r0,r5
+ 318 0146 1449     	 ldr r1,.L50+44
+ 319 0148 FFF7FEFF 	 bl optiga_lib_print_status
+ 320              	.LVL38:
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     {
+ 321              	 .loc 1 256 0
+ 322 014c 002C     	 cmp r4,#0
+ 323 014e E2D1     	 bne .L19
+ 324 0150 EDE7     	 b .L22
+ 325              	.LVL39:
+ 326              	.L48:
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     
+ 327              	 .loc 1 254 0
+ 328 0152 281C     	 mov r0,r5
+ 329 0154 1049     	 ldr r1,.L50+44
+ 330 0156 FFF7FEFF 	 bl optiga_lib_print_status
+ 331              	.LVL40:
+ 332 015a E8E7     	 b .L22
+ 333              	.LVL41:
+ 334              	.L49:
+ 335 015c 281C     	 mov r0,r5
+ 336 015e 0E49     	 ldr r1,.L50+44
+ 337 0160 FFF7FEFF 	 bl optiga_lib_print_status
+ 338              	.LVL42:
+ 339 0164 D7E7     	 b .L19
+ 340              	.LVL43:
+ 341              	.L4:
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****         }
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c ****     }
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_tls_prf_sha256.c **** }
+ 342              	 .loc 1 277 0
+ 343 0166 0DB0     	 add sp,sp,#52
+ 344              	 
+ 345 0168 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 346              	.L51:
+ 347 016a C046     	 .align 2
+ 348              	.L50:
+ 349 016c 15000000 	 .word .LC4
+ 350 0170 00000000 	 .word .LC2
+ 351 0174 00000000 	 .word .LANCHOR1
+ 352 0178 00000000 	 .word optiga_lib_callback
+ 353 017c 00000000 	 .word .LANCHOR0
+ 354 0180 00000000 	 .word .LANCHOR2
+ 355 0184 D0F10000 	 .word 61904
+ 356 0188 00000000 	 .word .LANCHOR3
+ 357 018c 00000000 	 .word .LANCHOR5
+ 358 0190 00000000 	 .word .LANCHOR4
+ 359 0194 00000000 	 .word .LANCHOR6
+ 360 0198 1A000000 	 .word .LC13
+ 361              	 .cfi_endproc
+ 362              	.LFE1:
+ 364              	 .section .data.default_metadata,"aw",%progbits
+ 365              	 .set .LANCHOR6,.+0
+ 368              	default_metadata:
+ 369 0000 20       	 .byte 32
+ 370 0001 06       	 .byte 6
+ 371 0002 E8       	 .byte -24
+ 372 0003 01       	 .byte 1
+ 373 0004 00       	 .byte 0
+ 374 0005 D3       	 .byte -45
+ 375 0006 01       	 .byte 1
+ 376 0007 FF       	 .byte -1
+ 377              	 .section .data.label,"aw",%progbits
+ 378              	 .set .LANCHOR4,.+0
+ 381              	label:
+ 382 0000 4669726D 	 .ascii "Firmware update\000"
+ 382      77617265 
+ 382      20757064 
+ 382      61746500 
+ 383              	 .section .rodata.__FUNCTION__.6077,"a",%progbits
+ 384              	 .set .LANCHOR1,.+0
+ 387              	__FUNCTION__.6077:
+ 388 0000 6578616D 	 .ascii "example_optiga_crypt_tls_prf_sha256\000"
+ 388      706C655F 
+ 388      6F707469 
+ 388      67615F63 
+ 388      72797074 
+ 389              	 .section .data.secret_to_be_written,"aw",%progbits
+ 390              	 .set .LANCHOR2,.+0
+ 393              	secret_to_be_written:
+ 394 0000 BF       	 .byte -65
+ 395 0001 B7       	 .byte -73
+ 396 0002 70       	 .byte 112
+ 397 0003 EE       	 .byte -18
+ 398 0004 BF       	 .byte -65
+ 399 0005 8F       	 .byte -113
+ 400 0006 61       	 .byte 97
+ 401 0007 C7       	 .byte -57
+ 402 0008 04       	 .byte 4
+ 403 0009 E0       	 .byte -32
+ 404 000a 0D       	 .byte 13
+ 405 000b 82       	 .byte -126
+ 406 000c 8B       	 .byte -117
+ 407 000d 7A       	 .byte 122
+ 408 000e 36       	 .byte 54
+ 409 000f 41       	 .byte 65
+ 410 0010 D5       	 .byte -43
+ 411 0011 CD       	 .byte -51
+ 412 0012 7A       	 .byte 122
+ 413 0013 38       	 .byte 56
+ 414 0014 46       	 .byte 70
+ 415 0015 DE       	 .byte -34
+ 416 0016 F9       	 .byte -7
+ 417 0017 0F       	 .byte 15
+ 418 0018 21       	 .byte 33
+ 419 0019 42       	 .byte 66
+ 420 001a 40       	 .byte 64
+ 421 001b 25       	 .byte 37
+ 422 001c 0A       	 .byte 10
+ 423 001d AF       	 .byte -81
+ 424 001e 9C       	 .byte -100
+ 425 001f 2E       	 .byte 46
+ 426              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 427              	.LC2:
+ 428 0000 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 428      69676120 
+ 428      6578616D 
+ 428      706C655D 
+ 428      20203A20 
+ 429              	.LC4:
+ 430 0015 1B5B306D 	 .ascii "\033[0m\000"
+ 430      00
+ 431              	.LC13:
+ 432 001a 1B5B3331 	 .ascii "\033[31m\000"
+ 432      6D00
+ 433              	 .section .data.random_seed,"aw",%progbits
+ 434              	 .set .LANCHOR5,.+0
+ 437              	random_seed:
+ 438 0000 61       	 .byte 97
+ 439 0001 C7       	 .byte -57
+ 440 0002 DE       	 .byte -34
+ 441 0003 F9       	 .byte -7
+ 442 0004 0F       	 .byte 15
+ 443 0005 D5       	 .byte -43
+ 444 0006 CD       	 .byte -51
+ 445 0007 7A       	 .byte 122
+ 446 0008 8B       	 .byte -117
+ 447 0009 7A       	 .byte 122
+ 448 000a 36       	 .byte 54
+ 449 000b 41       	 .byte 65
+ 450 000c 04       	 .byte 4
+ 451 000d E0       	 .byte -32
+ 452 000e 0D       	 .byte 13
+ 453 000f 82       	 .byte -126
+ 454 0010 38       	 .byte 56
+ 455 0011 46       	 .byte 70
+ 456 0012 BF       	 .byte -65
+ 457 0013 B7       	 .byte -73
+ 458 0014 70       	 .byte 112
+ 459 0015 EE       	 .byte -18
+ 460 0016 BF       	 .byte -65
+ 461 0017 8F       	 .byte -113
+ 462 0018 40       	 .byte 64
+ 463 0019 25       	 .byte 37
+ 464 001a 2E       	 .byte 46
+ 465 001b 0A       	 .byte 10
+ 466 001c 21       	 .byte 33
+ 467 001d 42       	 .byte 66
+ 468 001e AF       	 .byte -81
+ 469 001f 9C       	 .byte -100
+ 470              	 .section .data.metadata,"aw",%progbits
+ 471              	 .set .LANCHOR3,.+0
+ 474              	metadata:
+ 475 0000 20       	 .byte 32
+ 476 0001 06       	 .byte 6
+ 477 0002 E8       	 .byte -24
+ 478 0003 01       	 .byte 1
+ 479 0004 21       	 .byte 33
+ 480 0005 D3       	 .byte -45
+ 481 0006 01       	 .byte 1
+ 482 0007 00       	 .byte 0
+ 483              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 484              	 .align 1
+ 485              	 .set .LANCHOR0,.+0
+ 488              	optiga_lib_status:
+ 489 0000 0000     	 .space 2
+ 490              	 .text
+ 491              	.Letext0:
+ 492              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 493              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 494              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 495              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 496              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 497              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_crypt.h"
+ 498              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_util.h"
+ 499              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 example_optiga_crypt_tls_prf_sha256.c
+    {standard input}:18     .text.optiga_lib_callback:00000000 $t
+    {standard input}:22     .text.optiga_lib_callback:00000000 optiga_lib_callback
+    {standard input}:39     .text.optiga_lib_callback:00000008 $d
+    {standard input}:44     .text.example_optiga_crypt_tls_prf_sha256:00000000 $t
+    {standard input}:49     .text.example_optiga_crypt_tls_prf_sha256:00000000 example_optiga_crypt_tls_prf_sha256
+    {standard input}:349    .text.example_optiga_crypt_tls_prf_sha256:0000016c $d
+    {standard input}:368    .data.default_metadata:00000000 default_metadata
+    {standard input}:381    .data.label:00000000 label
+    {standard input}:387    .rodata.__FUNCTION__.6077:00000000 __FUNCTION__.6077
+    {standard input}:393    .data.secret_to_be_written:00000000 secret_to_be_written
+    {standard input}:437    .data.random_seed:00000000 random_seed
+    {standard input}:474    .data.metadata:00000000 metadata
+    {standard input}:484    .bss.optiga_lib_status:00000000 $d
+    {standard input}:488    .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memset
+optiga_lib_print_message
+optiga_util_create
+optiga_util_write_data
+optiga_util_write_metadata
+optiga_crypt_create
+optiga_crypt_set_comms_params
+optiga_crypt_tls_prf_sha256
+optiga_lib_print_status
+optiga_crypt_destroy
+optiga_util_destroy

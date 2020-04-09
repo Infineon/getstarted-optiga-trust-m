@@ -1,0 +1,4063 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "optiga_shell.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_util_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_util_callback:
+  23              	.LFB276:
+  24              	 .file 1 "../optiga_shell.c"
+   1:../optiga_shell.c **** /**
+   2:../optiga_shell.c **** * \copyright
+   3:../optiga_shell.c **** * MIT License
+   4:../optiga_shell.c **** *
+   5:../optiga_shell.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:../optiga_shell.c **** *
+   7:../optiga_shell.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:../optiga_shell.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:../optiga_shell.c **** * in the Software without restriction, including without limitation the rights
+  10:../optiga_shell.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:../optiga_shell.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:../optiga_shell.c **** * furnished to do so, subject to the following conditions:
+  13:../optiga_shell.c **** *
+  14:../optiga_shell.c **** * The above copyright notice and this permission notice shall be included in all
+  15:../optiga_shell.c **** * copies or substantial portions of the Software.
+  16:../optiga_shell.c **** *
+  17:../optiga_shell.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:../optiga_shell.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:../optiga_shell.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:../optiga_shell.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:../optiga_shell.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:../optiga_shell.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:../optiga_shell.c **** * SOFTWARE
+  24:../optiga_shell.c **** *
+  25:../optiga_shell.c **** * \endcopyright
+  26:../optiga_shell.c **** *
+  27:../optiga_shell.c **** * \author Infineon Technologies AG
+  28:../optiga_shell.c **** **/
+  29:../optiga_shell.c **** 
+  30:../optiga_shell.c **** #include <DAVE.h>
+  31:../optiga_shell.c **** #include "optiga/optiga_crypt.h"
+  32:../optiga_shell.c **** #include "optiga/optiga_util.h"
+  33:../optiga_shell.c **** #include "optiga/common/optiga_lib_logger.h"
+  34:../optiga_shell.c **** #include "optiga/pal/pal_os_event.h"
+  35:../optiga_shell.c **** #include "optiga/pal/pal.h"
+  36:../optiga_shell.c **** #include "optiga/pal/pal_os_timer.h"
+  37:../optiga_shell.c **** #include "optiga_example.h"
+  38:../optiga_shell.c **** #include "optiga/pal/pal_logger.h"
+  39:../optiga_shell.c **** 
+  40:../optiga_shell.c **** #define OPTIGA_SHELL		"optiga --"
+  41:../optiga_shell.c **** #define OPTIGA_SHELL_MODULE "[optiga shell]  : "
+  42:../optiga_shell.c **** #define OPTIGA_SHELL_LOG_MESSAGE(msg) \
+  43:../optiga_shell.c **** 							optiga_lib_print_message(msg, OPTIGA_SHELL_MODULE, OPTIGA_LIB_LOGGER_COLOR_LIGHT_GREEN);
+  44:../optiga_shell.c **** 
+  45:../optiga_shell.c **** void example_optiga_crypt_hash (void);
+  46:../optiga_shell.c **** void example_optiga_crypt_ecc_generate_keypair(void);
+  47:../optiga_shell.c **** void example_optiga_crypt_ecdsa_sign(void);
+  48:../optiga_shell.c **** void example_optiga_crypt_ecdsa_verify(void);
+  49:../optiga_shell.c **** void example_optiga_crypt_ecdh(void);
+  50:../optiga_shell.c **** void example_optiga_crypt_random(void);
+  51:../optiga_shell.c **** void example_optiga_crypt_tls_prf_sha256(void);
+  52:../optiga_shell.c **** void example_optiga_util_read_data(void);
+  53:../optiga_shell.c **** void example_optiga_util_write_data(void);
+  54:../optiga_shell.c **** void example_optiga_crypt_rsa_generate_keypair(void);
+  55:../optiga_shell.c **** void example_optiga_crypt_rsa_sign(void);
+  56:../optiga_shell.c **** void example_optiga_crypt_rsa_verify(void);
+  57:../optiga_shell.c **** void example_optiga_crypt_rsa_decrypt_and_export(void);
+  58:../optiga_shell.c **** void example_optiga_crypt_rsa_decrypt_and_store(void);
+  59:../optiga_shell.c **** void example_optiga_crypt_rsa_encrypt_message(void);
+  60:../optiga_shell.c **** void example_optiga_crypt_rsa_encrypt_session(void);
+  61:../optiga_shell.c **** void example_optiga_util_update_count(void);
+  62:../optiga_shell.c **** void example_optiga_util_protected_update(void);
+  63:../optiga_shell.c **** void example_pair_host_and_optiga_using_pre_shared_secret(void);
+  64:../optiga_shell.c **** void example_optiga_util_hibernate_restore(void);
+  65:../optiga_shell.c **** 
+  66:../optiga_shell.c **** extern pal_logger_t cunit_console;
+  67:../optiga_shell.c **** /**
+  68:../optiga_shell.c ****  * Callback when optiga_util_xxxx operation is completed asynchronously
+  69:../optiga_shell.c ****  */
+  70:../optiga_shell.c **** static volatile optiga_lib_status_t optiga_lib_status;
+  71:../optiga_shell.c **** static void optiga_util_callback(void * context, optiga_lib_status_t return_status)
+  72:../optiga_shell.c **** {
+  25              	 .loc 1 72 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  73:../optiga_shell.c **** 	optiga_lib_status = return_status;
+  28              	 .loc 1 73 0
+  29 0000 014B     	 ldr r3,.L2
+  74:../optiga_shell.c **** }
+  30              	 .loc 1 74 0
+  31              	 
+  73:../optiga_shell.c **** 	optiga_lib_status = return_status;
+  32              	 .loc 1 73 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 74 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE276:
+  43              	 .section .text.optiga_shell_crypt_rsa_decrypt_and_export,"ax",%progbits
+  44              	 .align 1
+  45              	 .code 16
+  46              	 .thumb_func
+  48              	optiga_shell_crypt_rsa_decrypt_and_export:
+  49              	.LFB295:
+  75:../optiga_shell.c **** 
+  76:../optiga_shell.c **** optiga_util_t * me_util = NULL;
+  77:../optiga_shell.c **** 
+  78:../optiga_shell.c **** typedef struct optiga_example_cmd
+  79:../optiga_shell.c **** {
+  80:../optiga_shell.c **** 	const char_t * cmd_description;
+  81:../optiga_shell.c **** 	const char_t * cmd_options;
+  82:../optiga_shell.c **** 	void (*cmd_handler)();
+  83:../optiga_shell.c **** }optiga_example_cmd_t;
+  84:../optiga_shell.c **** 
+  85:../optiga_shell.c **** static void optiga_shell_init()
+  86:../optiga_shell.c **** {
+  87:../optiga_shell.c **** 	optiga_lib_status_t return_status;
+  88:../optiga_shell.c **** 	uint16_t optiga_oid = 0xE0C4;
+  89:../optiga_shell.c **** 	uint8_t required_current = 0x0F;
+  90:../optiga_shell.c **** 
+  91:../optiga_shell.c **** 	do
+  92:../optiga_shell.c **** 	{
+  93:../optiga_shell.c **** 		//Create an instance of optiga_util to open the application on OPTIGA.
+  94:../optiga_shell.c **** 		me_util = optiga_util_create(0, optiga_util_callback, NULL);
+  95:../optiga_shell.c **** 
+  96:../optiga_shell.c **** 		OPTIGA_EXAMPLE_LOG_MESSAGE("Initializing OPTIGA for example demonstration...\n");
+  97:../optiga_shell.c **** 		/**
+  98:../optiga_shell.c **** 		 * Open the application on OPTIGA which is a precondition to perform any other operations
+  99:../optiga_shell.c **** 		 * using optiga_util_open_application
+ 100:../optiga_shell.c **** 		 */
+ 101:../optiga_shell.c **** 		optiga_lib_status = OPTIGA_LIB_BUSY;
+ 102:../optiga_shell.c **** 		return_status = optiga_util_open_application(me_util, 0);
+ 103:../optiga_shell.c **** 
+ 104:../optiga_shell.c **** 		if (OPTIGA_LIB_SUCCESS != return_status)
+ 105:../optiga_shell.c **** 		{
+ 106:../optiga_shell.c **** 			break;
+ 107:../optiga_shell.c **** 		}
+ 108:../optiga_shell.c **** 		while (optiga_lib_status == OPTIGA_LIB_BUSY)
+ 109:../optiga_shell.c **** 		{
+ 110:../optiga_shell.c **** 			//Wait until the optiga_util_open_application is completed
+ 111:../optiga_shell.c **** 		}
+ 112:../optiga_shell.c **** 		if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 113:../optiga_shell.c **** 		{
+ 114:../optiga_shell.c **** 			//optiga util open application failed
+ 115:../optiga_shell.c **** 			break;
+ 116:../optiga_shell.c **** 		}
+ 117:../optiga_shell.c **** 
+ 118:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE("Initializing OPTIGA completed...\n\n");
+ 119:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE("Begin pairing of host and OPTIGA...");
+ 120:../optiga_shell.c **** 		// Usercase: Generate the pre-shared secret on host and write it to OPTIGA
+ 121:../optiga_shell.c **** 		example_pair_host_and_optiga_using_pre_shared_secret();
+ 122:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE("Pairing of host and OPTIGA completed...");
+ 123:../optiga_shell.c **** 		// Usercase: Generate the pre-shared secret on host and write it to OPTIGA
+ 124:../optiga_shell.c ****         return_status = optiga_util_write_data(me_util,
+ 125:../optiga_shell.c ****                                                optiga_oid,
+ 126:../optiga_shell.c ****                                                OPTIGA_UTIL_ERASE_AND_WRITE,
+ 127:../optiga_shell.c ****                                                0,
+ 128:../optiga_shell.c **** 											   &required_current,
+ 129:../optiga_shell.c ****                                                1);
+ 130:../optiga_shell.c **** 
+ 131:../optiga_shell.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 132:../optiga_shell.c ****         {
+ 133:../optiga_shell.c ****             break;
+ 134:../optiga_shell.c ****         }
+ 135:../optiga_shell.c **** 
+ 136:../optiga_shell.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 137:../optiga_shell.c ****         {
+ 138:../optiga_shell.c ****             //Wait until the optiga_util_write_data operation is completed
+ 139:../optiga_shell.c ****         }
+ 140:../optiga_shell.c **** 
+ 141:../optiga_shell.c ****         OPTIGA_SHELL_LOG_MESSAGE("Setting current limitation to minimum...");
+ 142:../optiga_shell.c ****         OPTIGA_SHELL_LOG_MESSAGE("Starting OPTIGA example demonstration..\n");
+ 143:../optiga_shell.c **** 	}while(FALSE);
+ 144:../optiga_shell.c **** }
+ 145:../optiga_shell.c **** 
+ 146:../optiga_shell.c **** static void optiga_shell_deinit()
+ 147:../optiga_shell.c **** {
+ 148:../optiga_shell.c **** 	optiga_lib_status_t return_status;
+ 149:../optiga_shell.c **** 	do
+ 150:../optiga_shell.c **** 	{
+ 151:../optiga_shell.c **** 		/**
+ 152:../optiga_shell.c **** 		 * Close the application on OPTIGA after all the operations are executed
+ 153:../optiga_shell.c **** 		 * using optiga_util_close_application
+ 154:../optiga_shell.c **** 		 */
+ 155:../optiga_shell.c **** 		optiga_lib_status = OPTIGA_LIB_BUSY;
+ 156:../optiga_shell.c **** 		return_status = optiga_util_close_application(me_util, 0);
+ 157:../optiga_shell.c **** 
+ 158:../optiga_shell.c **** 		if (OPTIGA_LIB_SUCCESS != return_status)
+ 159:../optiga_shell.c **** 		{
+ 160:../optiga_shell.c **** 			break;
+ 161:../optiga_shell.c **** 		}
+ 162:../optiga_shell.c **** 
+ 163:../optiga_shell.c **** 		while (optiga_lib_status == OPTIGA_LIB_BUSY)
+ 164:../optiga_shell.c **** 		{
+ 165:../optiga_shell.c **** 			//Wait until the optiga_util_close_application is completed
+ 166:../optiga_shell.c **** 		}
+ 167:../optiga_shell.c **** 
+ 168:../optiga_shell.c **** 		if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 169:../optiga_shell.c **** 		{
+ 170:../optiga_shell.c **** 			//optiga util close application failed
+ 171:../optiga_shell.c **** 			break;
+ 172:../optiga_shell.c **** 		}
+ 173:../optiga_shell.c **** 
+ 174:../optiga_shell.c **** 		// destroy util and crypt instances
+ 175:../optiga_shell.c **** 		optiga_util_destroy(me_util);
+ 176:../optiga_shell.c **** 	}while(FALSE);
+ 177:../optiga_shell.c **** }
+ 178:../optiga_shell.c **** 
+ 179:../optiga_shell.c **** static void optiga_shell_util_read_data()
+ 180:../optiga_shell.c **** {
+ 181:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Read Data/Metadata Example");
+ 182:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Read Certificate (~500 bytes)");
+ 183:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Read Certificate Metadata");
+ 184:../optiga_shell.c **** 	example_optiga_util_read_data();
+ 185:../optiga_shell.c **** }
+ 186:../optiga_shell.c **** static void optiga_shell_util_write_data()
+ 187:../optiga_shell.c **** {
+ 188:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Write Data/Metadata Example");
+ 189:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write Sample Certificate in Trust Anchor Data Object (640 bytes)
+ 190:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Write new Metadata");
+ 191:../optiga_shell.c **** 	example_optiga_util_write_data();
+ 192:../optiga_shell.c **** }
+ 193:../optiga_shell.c **** static void optiga_shell_pair_host_optiga()
+ 194:../optiga_shell.c **** {
+ 195:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Pairing of Host and Trust M Example");
+ 196:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Read and Check existing Metadata for the Binding Secret");
+ 197:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Generate Random for the new Binding Secret");
+ 198:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Write new Binding Secret");
+ 199:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Store new Binding Secret on the Host");
+ 200:../optiga_shell.c **** 	example_pair_host_and_optiga_using_pre_shared_secret();
+ 201:../optiga_shell.c **** }
+ 202:../optiga_shell.c **** static void optiga_shell_util_hibernate_restore()
+ 203:../optiga_shell.c **** {
+ 204:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Hibernate and Restore Example");
+ 205:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Open Application on the security chip");
+ 206:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Pair the host and the security chip");
+ 207:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+ 208:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Generate ECC NIST P-256 Key pair and store it in Session Data Ob
+ 209:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("5 Step: Check Security Event Counter and wait till it reaches 0");
+ 210:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("6 Step: Perform Close application with Hibernate parameter set to True")
+ 211:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("7 Step: Open Application on the security chip");
+ 212:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("8 Step: Sign prepared data with private key stored in Session Data Objec
+ 213:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("9 Step: Verify the signature with the public key generated previously");
+ 214:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("10 Step: Close Applicaiton on the chip");
+ 215:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Important note: To continue with other examples you need to call the ini
+ 216:../optiga_shell.c **** 	example_optiga_util_hibernate_restore();
+ 217:../optiga_shell.c **** }
+ 218:../optiga_shell.c **** static void optiga_shell_util_update_count()
+ 219:../optiga_shell.c **** {
+ 220:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Update Counter Example");
+ 221:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write Initial Counter Value");
+ 222:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Increase Counter Object");
+ 223:../optiga_shell.c **** 	example_optiga_util_update_count();
+ 224:../optiga_shell.c **** }
+ 225:../optiga_shell.c **** static void optiga_shell_util_protected_update()
+ 226:../optiga_shell.c **** {
+ 227:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Protected Update Example");
+ 228:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Update Metadata for the Object to be updated and the Trust Ancho
+ 229:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Write Trust Anchor used by the Trust M to verify the update");
+ 230:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Start Protected update with prepared manifest and fragments");
+ 231:../optiga_shell.c **** 	example_optiga_util_protected_update();
+ 232:../optiga_shell.c **** }
+ 233:../optiga_shell.c **** static void optiga_shell_crypt_hash()
+ 234:../optiga_shell.c **** {
+ 235:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Hash Example");
+ 236:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Hash given data with Start, Update and Finalize calls");
+ 237:../optiga_shell.c **** 	example_optiga_crypt_hash();
+ 238:../optiga_shell.c **** }
+ 239:../optiga_shell.c **** static void optiga_shell_crypt_tls_prf_sha256()
+ 240:../optiga_shell.c **** {
+ 241:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting TLS PRF SHA256 (Key Deriviation) Example");
+ 242:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write prepared Shared Secret into an Arbitrary Data Object");
+ 243:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Update Metadata of the Object to use the Arbitrary Data Object o
+ 244:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Generate Shared Secret using the Shared Secret from the Arbitrar
+ 245:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Restore Metadata of the Arbitrary Data Object");
+ 246:../optiga_shell.c **** 	example_optiga_crypt_tls_prf_sha256();
+ 247:../optiga_shell.c **** }
+ 248:../optiga_shell.c **** static void optiga_shell_crypt_random()
+ 249:../optiga_shell.c **** {
+ 250:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Generate Random Example");
+ 251:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate 32 bytes random");
+ 252:../optiga_shell.c **** 	example_optiga_crypt_random();
+ 253:../optiga_shell.c **** }
+ 254:../optiga_shell.c **** static void optiga_shell_crypt_ecc_generate_keypair()
+ 255:../optiga_shell.c **** {
+ 256:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting generate ECC Key Example");
+ 257:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate ECC NIST P-256 Key Pair and export the public key");
+ 258:../optiga_shell.c **** 	example_optiga_crypt_ecc_generate_keypair();
+ 259:../optiga_shell.c **** }
+ 260:../optiga_shell.c **** static void optiga_shell_crypt_ecdh()
+ 261:../optiga_shell.c **** {
+ 262:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Elliptic-curve Diffie–Hellman (ECDH) Key Agreement Protocol E
+ 263:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Select Protected I2C Connection");
+ 264:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Generate new ECC NIST P-256 Key Pair");
+ 265:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+ 266:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Generate Shared Secret and export it");
+ 267:../optiga_shell.c **** 	example_optiga_crypt_ecdh();
+ 268:../optiga_shell.c **** }
+ 269:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_sign()
+ 270:../optiga_shell.c **** {
+ 271:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for Elliptic-curve Digital Signature Algorithm 
+ 272:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Sign prepared Data and export the signature");
+ 273:../optiga_shell.c **** 	example_optiga_crypt_ecdsa_sign();
+ 274:../optiga_shell.c **** }
+ 275:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_verify()
+ 276:../optiga_shell.c **** {
+ 277:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting verification example for Elliptic-curve Digital Signature Algor
+ 278:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Verify prepared signature, with prepared public key and digest")
+ 279:../optiga_shell.c **** 	example_optiga_crypt_ecdsa_verify();
+ 280:../optiga_shell.c **** }
+ 281:../optiga_shell.c **** static void optiga_shell_crypt_rsa_sign()
+ 282:../optiga_shell.c **** {
+ 283:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for PKCS#1 Ver1.5 SHA256 Signature scheme (RSA)
+ 284:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Sign prepared Data and export the signature");
+ 285:../optiga_shell.c **** 	example_optiga_crypt_rsa_sign();
+ 286:../optiga_shell.c **** }
+ 287:../optiga_shell.c **** static void optiga_shell_crypt_rsa_verify()
+ 288:../optiga_shell.c **** {
+ 289:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for PKCS#1 Ver1.5 SHA256 Signature scheme (RSA)
+ 290:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Verify prepared signature, with prepared public key and digest")
+ 291:../optiga_shell.c **** 	example_optiga_crypt_rsa_verify();
+ 292:../optiga_shell.c **** }
+ 293:../optiga_shell.c **** static void optiga_shell_crypt_generate_keypair()
+ 294:../optiga_shell.c **** {
+ 295:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting generate RSA Key Example");
+ 296:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate RSA 1024 Key Pair and export the public key");
+ 297:../optiga_shell.c **** 	example_optiga_crypt_rsa_generate_keypair();
+ 298:../optiga_shell.c **** }
+ 299:../optiga_shell.c **** static void optiga_shell_crypt_rsa_decrypt_and_export()
+ 300:../optiga_shell.c **** {
+  50              	 .loc 1 300 0
+  51              	 .cfi_startproc
+  52 0000 38B5     	 push {r3,r4,r5,lr}
+  53              	.LCFI0:
+  54              	 .cfi_def_cfa_offset 16
+  55              	 .cfi_offset 3,-16
+  56              	 .cfi_offset 4,-12
+  57              	 .cfi_offset 5,-8
+  58              	 .cfi_offset 14,-4
+ 301:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Decrypt and Export Data with RSA Key Example");
+  59              	 .loc 1 301 0
+  60 0002 0F4D     	 ldr r5,.L5
+  61 0004 0F4C     	 ldr r4,.L5+4
+  62 0006 291C     	 mov r1,r5
+  63 0008 221C     	 mov r2,r4
+  64 000a 0F48     	 ldr r0,.L5+8
+  65 000c FFF7FEFF 	 bl optiga_lib_print_message
+  66              	.LVL1:
+ 302:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate RSA 1024 Key Pair and export the public key");
+  67              	 .loc 1 302 0
+  68 0010 291C     	 mov r1,r5
+  69 0012 221C     	 mov r2,r4
+  70 0014 0D48     	 ldr r0,.L5+12
+  71 0016 FFF7FEFF 	 bl optiga_lib_print_message
+  72              	.LVL2:
+ 303:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 Scheme");
+  73              	 .loc 1 303 0
+  74 001a 291C     	 mov r1,r5
+  75 001c 221C     	 mov r2,r4
+  76 001e 0C48     	 ldr r0,.L5+16
+  77 0020 FFF7FEFF 	 bl optiga_lib_print_message
+  78              	.LVL3:
+ 304:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+  79              	 .loc 1 304 0
+  80 0024 291C     	 mov r1,r5
+  81 0026 221C     	 mov r2,r4
+  82 0028 0A48     	 ldr r0,.L5+20
+  83 002a FFF7FEFF 	 bl optiga_lib_print_message
+  84              	.LVL4:
+ 305:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Decrypt the message with RSAES PKCS#1 Ver1.5 Scheme and export i
+  85              	 .loc 1 305 0
+  86 002e 291C     	 mov r1,r5
+  87 0030 0948     	 ldr r0,.L5+24
+  88 0032 221C     	 mov r2,r4
+  89 0034 FFF7FEFF 	 bl optiga_lib_print_message
+  90              	.LVL5:
+ 306:../optiga_shell.c **** 	example_optiga_crypt_rsa_decrypt_and_export();
+ 307:../optiga_shell.c **** }
+  91              	 .loc 1 307 0
+  92              	 
+ 306:../optiga_shell.c **** 	example_optiga_crypt_rsa_decrypt_and_export();
+  93              	 .loc 1 306 0
+  94 0038 FFF7FEFF 	 bl example_optiga_crypt_rsa_decrypt_and_export
+  95              	.LVL6:
+  96              	 .loc 1 307 0
+  97 003c 38BD     	 pop {r3,r4,r5,pc}
+  98              	.L6:
+  99 003e C046     	 .align 2
+ 100              	.L5:
+ 101 0040 36000000 	 .word .LC3
+ 102 0044 49000000 	 .word .LC5
+ 103 0048 00000000 	 .word .LC1
+ 104 004c 4F000000 	 .word .LC7
+ 105 0050 8C000000 	 .word .LC9
+ 106 0054 C6000000 	 .word .LC11
+ 107 0058 EE000000 	 .word .LC13
+ 108              	 .cfi_endproc
+ 109              	.LFE295:
+ 111              	 .section .text.optiga_shell_crypt_rsa_decrypt_and_store,"ax",%progbits
+ 112              	 .align 1
+ 113              	 .code 16
+ 114              	 .thumb_func
+ 116              	optiga_shell_crypt_rsa_decrypt_and_store:
+ 117              	.LFB296:
+ 308:../optiga_shell.c **** static void optiga_shell_crypt_rsa_decrypt_and_store()
+ 309:../optiga_shell.c **** {
+ 118              	 .loc 1 309 0
+ 119              	 .cfi_startproc
+ 120 0000 38B5     	 push {r3,r4,r5,lr}
+ 121              	.LCFI1:
+ 122              	 .cfi_def_cfa_offset 16
+ 123              	 .cfi_offset 3,-16
+ 124              	 .cfi_offset 4,-12
+ 125              	 .cfi_offset 5,-8
+ 126              	 .cfi_offset 14,-4
+ 310:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Decrypt and Store Data on the chip with RSA Key Example");
+ 127              	 .loc 1 310 0
+ 128 0002 114D     	 ldr r5,.L8
+ 129 0004 114C     	 ldr r4,.L8+4
+ 130 0006 291C     	 mov r1,r5
+ 131 0008 221C     	 mov r2,r4
+ 132 000a 1148     	 ldr r0,.L8+8
+ 133 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 134              	.LVL7:
+ 311:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate RSA 1024 Key Pair and export the public key");
+ 135              	 .loc 1 311 0
+ 136 0010 291C     	 mov r1,r5
+ 137 0012 221C     	 mov r2,r4
+ 138 0014 0F48     	 ldr r0,.L8+12
+ 139 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 140              	.LVL8:
+ 312:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Generate 70 bytes RSA Pre master secret which is stored in acqui
+ 141              	 .loc 1 312 0
+ 142 001a 291C     	 mov r1,r5
+ 143 001c 221C     	 mov r2,r4
+ 144 001e 0E48     	 ldr r0,.L8+16
+ 145 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 146              	.LVL9:
+ 313:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+ 147              	 .loc 1 313 0
+ 148 0024 291C     	 mov r1,r5
+ 149 0026 221C     	 mov r2,r4
+ 150 0028 0C48     	 ldr r0,.L8+20
+ 151 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 152              	.LVL10:
+ 314:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Encrypt Session Data with RSA Public Key");
+ 153              	 .loc 1 314 0
+ 154 002e 291C     	 mov r1,r5
+ 155 0030 221C     	 mov r2,r4
+ 156 0032 0B48     	 ldr r0,.L8+24
+ 157 0034 FFF7FEFF 	 bl optiga_lib_print_message
+ 158              	.LVL11:
+ 315:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("5 Step: Decrypt the message with RSAES PKCS#1 Ver1.5 Scheme and store it
+ 159              	 .loc 1 315 0
+ 160 0038 291C     	 mov r1,r5
+ 161 003a 0A48     	 ldr r0,.L8+28
+ 162 003c 221C     	 mov r2,r4
+ 163 003e FFF7FEFF 	 bl optiga_lib_print_message
+ 164              	.LVL12:
+ 316:../optiga_shell.c **** 	example_optiga_crypt_rsa_decrypt_and_store();
+ 317:../optiga_shell.c **** }
+ 165              	 .loc 1 317 0
+ 166              	 
+ 316:../optiga_shell.c **** 	example_optiga_crypt_rsa_decrypt_and_store();
+ 167              	 .loc 1 316 0
+ 168 0042 FFF7FEFF 	 bl example_optiga_crypt_rsa_decrypt_and_store
+ 169              	.LVL13:
+ 170              	 .loc 1 317 0
+ 171 0046 38BD     	 pop {r3,r4,r5,pc}
+ 172              	.L9:
+ 173              	 .align 2
+ 174              	.L8:
+ 175 0048 36000000 	 .word .LC3
+ 176 004c 49000000 	 .word .LC5
+ 177 0050 38010000 	 .word .LC15
+ 178 0054 4F000000 	 .word .LC7
+ 179 0058 79010000 	 .word .LC20
+ 180 005c C6000000 	 .word .LC11
+ 181 0060 D1010000 	 .word .LC23
+ 182 0064 02020000 	 .word .LC25
+ 183              	 .cfi_endproc
+ 184              	.LFE296:
+ 186              	 .section .text.optiga_shell_crypt_rsa_encrypt_session,"ax",%progbits
+ 187              	 .align 1
+ 188              	 .code 16
+ 189              	 .thumb_func
+ 191              	optiga_shell_crypt_rsa_encrypt_session:
+ 192              	.LFB298:
+ 318:../optiga_shell.c **** static void optiga_shell_crypt_rsa_encrypt_message()
+ 319:../optiga_shell.c **** {
+ 320:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Encrypt Data with RSA Key Example");
+ 321:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 Scheme");
+ 322:../optiga_shell.c **** 	example_optiga_crypt_rsa_encrypt_message();
+ 323:../optiga_shell.c **** }
+ 324:../optiga_shell.c **** static void optiga_shell_crypt_rsa_encrypt_session()
+ 325:../optiga_shell.c **** {
+ 193              	 .loc 1 325 0
+ 194              	 .cfi_startproc
+ 195 0000 38B5     	 push {r3,r4,r5,lr}
+ 196              	.LCFI2:
+ 197              	 .cfi_def_cfa_offset 16
+ 198              	 .cfi_offset 3,-16
+ 199              	 .cfi_offset 4,-12
+ 200              	 .cfi_offset 5,-8
+ 201              	 .cfi_offset 14,-4
+ 326:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Encrypt Data in Session Object on chip with RSA Key Example");
+ 202              	 .loc 1 326 0
+ 203 0002 074D     	 ldr r5,.L11
+ 204 0004 074C     	 ldr r4,.L11+4
+ 205 0006 291C     	 mov r1,r5
+ 206 0008 221C     	 mov r2,r4
+ 207 000a 0748     	 ldr r0,.L11+8
+ 208 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 209              	.LVL14:
+ 327:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 Scheme stored on chip
+ 210              	 .loc 1 327 0
+ 211 0010 291C     	 mov r1,r5
+ 212 0012 0648     	 ldr r0,.L11+12
+ 213 0014 221C     	 mov r2,r4
+ 214 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 215              	.LVL15:
+ 328:../optiga_shell.c **** 	example_optiga_crypt_rsa_encrypt_session();
+ 329:../optiga_shell.c **** }
+ 216              	 .loc 1 329 0
+ 217              	 
+ 328:../optiga_shell.c **** 	example_optiga_crypt_rsa_encrypt_session();
+ 218              	 .loc 1 328 0
+ 219 001a FFF7FEFF 	 bl example_optiga_crypt_rsa_encrypt_session
+ 220              	.LVL16:
+ 221              	 .loc 1 329 0
+ 222 001e 38BD     	 pop {r3,r4,r5,pc}
+ 223              	.L12:
+ 224              	 .align 2
+ 225              	.L11:
+ 226 0020 36000000 	 .word .LC3
+ 227 0024 49000000 	 .word .LC5
+ 228 0028 53020000 	 .word .LC27
+ 229 002c 98020000 	 .word .LC31
+ 230              	 .cfi_endproc
+ 231              	.LFE298:
+ 233              	 .section .text.optiga_shell_crypt_rsa_encrypt_message,"ax",%progbits
+ 234              	 .align 1
+ 235              	 .code 16
+ 236              	 .thumb_func
+ 238              	optiga_shell_crypt_rsa_encrypt_message:
+ 239              	.LFB297:
+ 319:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Encrypt Data with RSA Key Example");
+ 240              	 .loc 1 319 0
+ 241              	 .cfi_startproc
+ 242 0000 38B5     	 push {r3,r4,r5,lr}
+ 243              	.LCFI3:
+ 244              	 .cfi_def_cfa_offset 16
+ 245              	 .cfi_offset 3,-16
+ 246              	 .cfi_offset 4,-12
+ 247              	 .cfi_offset 5,-8
+ 248              	 .cfi_offset 14,-4
+ 320:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 Scheme");
+ 249              	 .loc 1 320 0
+ 250 0002 074D     	 ldr r5,.L14
+ 251 0004 074C     	 ldr r4,.L14+4
+ 252 0006 291C     	 mov r1,r5
+ 253 0008 221C     	 mov r2,r4
+ 254 000a 0748     	 ldr r0,.L14+8
+ 255 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 256              	.LVL17:
+ 321:../optiga_shell.c **** 	example_optiga_crypt_rsa_encrypt_message();
+ 257              	 .loc 1 321 0
+ 258 0010 291C     	 mov r1,r5
+ 259 0012 0648     	 ldr r0,.L14+12
+ 260 0014 221C     	 mov r2,r4
+ 261 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 262              	.LVL18:
+ 323:../optiga_shell.c **** static void optiga_shell_crypt_rsa_encrypt_session()
+ 263              	 .loc 1 323 0
+ 264              	 
+ 322:../optiga_shell.c **** }
+ 265              	 .loc 1 322 0
+ 266 001a FFF7FEFF 	 bl example_optiga_crypt_rsa_encrypt_message
+ 267              	.LVL19:
+ 323:../optiga_shell.c **** static void optiga_shell_crypt_rsa_encrypt_session()
+ 268              	 .loc 1 323 0
+ 269 001e 38BD     	 pop {r3,r4,r5,pc}
+ 270              	.L15:
+ 271              	 .align 2
+ 272              	.L14:
+ 273 0020 36000000 	 .word .LC3
+ 274 0024 49000000 	 .word .LC5
+ 275 0028 F3020000 	 .word .LC33
+ 276 002c 1E030000 	 .word .LC37
+ 277              	 .cfi_endproc
+ 278              	.LFE297:
+ 280              	 .section .text.optiga_shell_crypt_rsa_verify,"ax",%progbits
+ 281              	 .align 1
+ 282              	 .code 16
+ 283              	 .thumb_func
+ 285              	optiga_shell_crypt_rsa_verify:
+ 286              	.LFB293:
+ 288:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for PKCS#1 Ver1.5 SHA256 Signature scheme (RSA)
+ 287              	 .loc 1 288 0
+ 288              	 .cfi_startproc
+ 289 0000 38B5     	 push {r3,r4,r5,lr}
+ 290              	.LCFI4:
+ 291              	 .cfi_def_cfa_offset 16
+ 292              	 .cfi_offset 3,-16
+ 293              	 .cfi_offset 4,-12
+ 294              	 .cfi_offset 5,-8
+ 295              	 .cfi_offset 14,-4
+ 289:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Verify prepared signature, with prepared public key and digest")
+ 296              	 .loc 1 289 0
+ 297 0002 074D     	 ldr r5,.L17
+ 298 0004 074C     	 ldr r4,.L17+4
+ 299 0006 291C     	 mov r1,r5
+ 300 0008 221C     	 mov r2,r4
+ 301 000a 0748     	 ldr r0,.L17+8
+ 302 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 303              	.LVL20:
+ 290:../optiga_shell.c **** 	example_optiga_crypt_rsa_verify();
+ 304              	 .loc 1 290 0
+ 305 0010 291C     	 mov r1,r5
+ 306 0012 0648     	 ldr r0,.L17+12
+ 307 0014 221C     	 mov r2,r4
+ 308 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 309              	.LVL21:
+ 292:../optiga_shell.c **** static void optiga_shell_crypt_generate_keypair()
+ 310              	 .loc 1 292 0
+ 311              	 
+ 291:../optiga_shell.c **** }
+ 312              	 .loc 1 291 0
+ 313 001a FFF7FEFF 	 bl example_optiga_crypt_rsa_verify
+ 314              	.LVL22:
+ 292:../optiga_shell.c **** static void optiga_shell_crypt_generate_keypair()
+ 315              	 .loc 1 292 0
+ 316 001e 38BD     	 pop {r3,r4,r5,pc}
+ 317              	.L18:
+ 318              	 .align 2
+ 319              	.L17:
+ 320 0020 36000000 	 .word .LC3
+ 321 0024 49000000 	 .word .LC5
+ 322 0028 58030000 	 .word .LC39
+ 323 002c A1030000 	 .word .LC43
+ 324              	 .cfi_endproc
+ 325              	.LFE293:
+ 327              	 .section .text.optiga_shell_crypt_rsa_sign,"ax",%progbits
+ 328              	 .align 1
+ 329              	 .code 16
+ 330              	 .thumb_func
+ 332              	optiga_shell_crypt_rsa_sign:
+ 333              	.LFB292:
+ 282:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for PKCS#1 Ver1.5 SHA256 Signature scheme (RSA)
+ 334              	 .loc 1 282 0
+ 335              	 .cfi_startproc
+ 336 0000 38B5     	 push {r3,r4,r5,lr}
+ 337              	.LCFI5:
+ 338              	 .cfi_def_cfa_offset 16
+ 339              	 .cfi_offset 3,-16
+ 340              	 .cfi_offset 4,-12
+ 341              	 .cfi_offset 5,-8
+ 342              	 .cfi_offset 14,-4
+ 283:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Sign prepared Data and export the signature");
+ 343              	 .loc 1 283 0
+ 344 0002 074D     	 ldr r5,.L20
+ 345 0004 074C     	 ldr r4,.L20+4
+ 346 0006 291C     	 mov r1,r5
+ 347 0008 221C     	 mov r2,r4
+ 348 000a 0748     	 ldr r0,.L20+8
+ 349 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 350              	.LVL23:
+ 284:../optiga_shell.c **** 	example_optiga_crypt_rsa_sign();
+ 351              	 .loc 1 284 0
+ 352 0010 291C     	 mov r1,r5
+ 353 0012 0648     	 ldr r0,.L20+12
+ 354 0014 221C     	 mov r2,r4
+ 355 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 356              	.LVL24:
+ 286:../optiga_shell.c **** static void optiga_shell_crypt_rsa_verify()
+ 357              	 .loc 1 286 0
+ 358              	 
+ 285:../optiga_shell.c **** }
+ 359              	 .loc 1 285 0
+ 360 001a FFF7FEFF 	 bl example_optiga_crypt_rsa_sign
+ 361              	.LVL25:
+ 286:../optiga_shell.c **** static void optiga_shell_crypt_rsa_verify()
+ 362              	 .loc 1 286 0
+ 363 001e 38BD     	 pop {r3,r4,r5,pc}
+ 364              	.L21:
+ 365              	 .align 2
+ 366              	.L20:
+ 367 0020 36000000 	 .word .LC3
+ 368 0024 49000000 	 .word .LC5
+ 369 0028 58030000 	 .word .LC39
+ 370 002c E8030000 	 .word .LC48
+ 371              	 .cfi_endproc
+ 372              	.LFE292:
+ 374              	 .section .text.optiga_shell_crypt_generate_keypair,"ax",%progbits
+ 375              	 .align 1
+ 376              	 .code 16
+ 377              	 .thumb_func
+ 379              	optiga_shell_crypt_generate_keypair:
+ 380              	.LFB294:
+ 294:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting generate RSA Key Example");
+ 381              	 .loc 1 294 0
+ 382              	 .cfi_startproc
+ 383 0000 38B5     	 push {r3,r4,r5,lr}
+ 384              	.LCFI6:
+ 385              	 .cfi_def_cfa_offset 16
+ 386              	 .cfi_offset 3,-16
+ 387              	 .cfi_offset 4,-12
+ 388              	 .cfi_offset 5,-8
+ 389              	 .cfi_offset 14,-4
+ 295:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate RSA 1024 Key Pair and export the public key");
+ 390              	 .loc 1 295 0
+ 391 0002 074D     	 ldr r5,.L23
+ 392 0004 074C     	 ldr r4,.L23+4
+ 393 0006 291C     	 mov r1,r5
+ 394 0008 221C     	 mov r2,r4
+ 395 000a 0748     	 ldr r0,.L23+8
+ 396 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 397              	.LVL26:
+ 296:../optiga_shell.c **** 	example_optiga_crypt_rsa_generate_keypair();
+ 398              	 .loc 1 296 0
+ 399 0010 291C     	 mov r1,r5
+ 400 0012 0648     	 ldr r0,.L23+12
+ 401 0014 221C     	 mov r2,r4
+ 402 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 403              	.LVL27:
+ 298:../optiga_shell.c **** static void optiga_shell_crypt_rsa_decrypt_and_export()
+ 404              	 .loc 1 298 0
+ 405              	 
+ 297:../optiga_shell.c **** }
+ 406              	 .loc 1 297 0
+ 407 001a FFF7FEFF 	 bl example_optiga_crypt_rsa_generate_keypair
+ 408              	.LVL28:
+ 298:../optiga_shell.c **** static void optiga_shell_crypt_rsa_decrypt_and_export()
+ 409              	 .loc 1 298 0
+ 410 001e 38BD     	 pop {r3,r4,r5,pc}
+ 411              	.L24:
+ 412              	 .align 2
+ 413              	.L23:
+ 414 0020 36000000 	 .word .LC3
+ 415 0024 49000000 	 .word .LC5
+ 416 0028 1C040000 	 .word .LC50
+ 417 002c 4F000000 	 .word .LC7
+ 418              	 .cfi_endproc
+ 419              	.LFE294:
+ 421              	 .section .text.optiga_shell_crypt_ecdh,"ax",%progbits
+ 422              	 .align 1
+ 423              	 .code 16
+ 424              	 .thumb_func
+ 426              	optiga_shell_crypt_ecdh:
+ 427              	.LFB289:
+ 261:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Elliptic-curve Diffie–Hellman (ECDH) Key Agreement Protocol E
+ 428              	 .loc 1 261 0
+ 429              	 .cfi_startproc
+ 430 0000 38B5     	 push {r3,r4,r5,lr}
+ 431              	.LCFI7:
+ 432              	 .cfi_def_cfa_offset 16
+ 433              	 .cfi_offset 3,-16
+ 434              	 .cfi_offset 4,-12
+ 435              	 .cfi_offset 5,-8
+ 436              	 .cfi_offset 14,-4
+ 262:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Select Protected I2C Connection");
+ 437              	 .loc 1 262 0
+ 438 0002 0F4D     	 ldr r5,.L26
+ 439 0004 0F4C     	 ldr r4,.L26+4
+ 440 0006 291C     	 mov r1,r5
+ 441 0008 221C     	 mov r2,r4
+ 442 000a 0F48     	 ldr r0,.L26+8
+ 443 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 444              	.LVL29:
+ 263:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Generate new ECC NIST P-256 Key Pair");
+ 445              	 .loc 1 263 0
+ 446 0010 291C     	 mov r1,r5
+ 447 0012 221C     	 mov r2,r4
+ 448 0014 0D48     	 ldr r0,.L26+12
+ 449 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 450              	.LVL30:
+ 264:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+ 451              	 .loc 1 264 0
+ 452 001a 291C     	 mov r1,r5
+ 453 001c 221C     	 mov r2,r4
+ 454 001e 0C48     	 ldr r0,.L26+16
+ 455 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 456              	.LVL31:
+ 265:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Generate Shared Secret and export it");
+ 457              	 .loc 1 265 0
+ 458 0024 291C     	 mov r1,r5
+ 459 0026 221C     	 mov r2,r4
+ 460 0028 0A48     	 ldr r0,.L26+20
+ 461 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 462              	.LVL32:
+ 266:../optiga_shell.c **** 	example_optiga_crypt_ecdh();
+ 463              	 .loc 1 266 0
+ 464 002e 291C     	 mov r1,r5
+ 465 0030 0948     	 ldr r0,.L26+24
+ 466 0032 221C     	 mov r2,r4
+ 467 0034 FFF7FEFF 	 bl optiga_lib_print_message
+ 468              	.LVL33:
+ 268:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_sign()
+ 469              	 .loc 1 268 0
+ 470              	 
+ 267:../optiga_shell.c **** }
+ 471              	 .loc 1 267 0
+ 472 0038 FFF7FEFF 	 bl example_optiga_crypt_ecdh
+ 473              	.LVL34:
+ 268:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_sign()
+ 474              	 .loc 1 268 0
+ 475 003c 38BD     	 pop {r3,r4,r5,pc}
+ 476              	.L27:
+ 477 003e C046     	 .align 2
+ 478              	.L26:
+ 479 0040 36000000 	 .word .LC3
+ 480 0044 49000000 	 .word .LC5
+ 481 0048 3E040000 	 .word .LC55
+ 482 004c 8D040000 	 .word .LC59
+ 483 0050 B5040000 	 .word .LC61
+ 484 0054 C6000000 	 .word .LC11
+ 485 0058 E2040000 	 .word .LC64
+ 486              	 .cfi_endproc
+ 487              	.LFE289:
+ 489              	 .section .text.optiga_shell_crypt_ecdsa_verify,"ax",%progbits
+ 490              	 .align 1
+ 491              	 .code 16
+ 492              	 .thumb_func
+ 494              	optiga_shell_crypt_ecdsa_verify:
+ 495              	.LFB291:
+ 276:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting verification example for Elliptic-curve Digital Signature Algor
+ 496              	 .loc 1 276 0
+ 497              	 .cfi_startproc
+ 498 0000 38B5     	 push {r3,r4,r5,lr}
+ 499              	.LCFI8:
+ 500              	 .cfi_def_cfa_offset 16
+ 501              	 .cfi_offset 3,-16
+ 502              	 .cfi_offset 4,-12
+ 503              	 .cfi_offset 5,-8
+ 504              	 .cfi_offset 14,-4
+ 277:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Verify prepared signature, with prepared public key and digest")
+ 505              	 .loc 1 277 0
+ 506 0002 074D     	 ldr r5,.L29
+ 507 0004 074C     	 ldr r4,.L29+4
+ 508 0006 291C     	 mov r1,r5
+ 509 0008 221C     	 mov r2,r4
+ 510 000a 0748     	 ldr r0,.L29+8
+ 511 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 512              	.LVL35:
+ 278:../optiga_shell.c **** 	example_optiga_crypt_ecdsa_verify();
+ 513              	 .loc 1 278 0
+ 514 0010 291C     	 mov r1,r5
+ 515 0012 0648     	 ldr r0,.L29+12
+ 516 0014 221C     	 mov r2,r4
+ 517 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 518              	.LVL36:
+ 280:../optiga_shell.c **** static void optiga_shell_crypt_rsa_sign()
+ 519              	 .loc 1 280 0
+ 520              	 
+ 279:../optiga_shell.c **** }
+ 521              	 .loc 1 279 0
+ 522 001a FFF7FEFF 	 bl example_optiga_crypt_ecdsa_verify
+ 523              	.LVL37:
+ 280:../optiga_shell.c **** static void optiga_shell_crypt_rsa_sign()
+ 524              	 .loc 1 280 0
+ 525 001e 38BD     	 pop {r3,r4,r5,pc}
+ 526              	.L30:
+ 527              	 .align 2
+ 528              	.L29:
+ 529 0020 36000000 	 .word .LC3
+ 530 0024 49000000 	 .word .LC5
+ 531 0028 0F050000 	 .word .LC66
+ 532 002c A1030000 	 .word .LC43
+ 533              	 .cfi_endproc
+ 534              	.LFE291:
+ 536              	 .section .text.optiga_shell_crypt_ecdsa_sign,"ax",%progbits
+ 537              	 .align 1
+ 538              	 .code 16
+ 539              	 .thumb_func
+ 541              	optiga_shell_crypt_ecdsa_sign:
+ 542              	.LFB290:
+ 270:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting signing example for Elliptic-curve Digital Signature Algorithm 
+ 543              	 .loc 1 270 0
+ 544              	 .cfi_startproc
+ 545 0000 38B5     	 push {r3,r4,r5,lr}
+ 546              	.LCFI9:
+ 547              	 .cfi_def_cfa_offset 16
+ 548              	 .cfi_offset 3,-16
+ 549              	 .cfi_offset 4,-12
+ 550              	 .cfi_offset 5,-8
+ 551              	 .cfi_offset 14,-4
+ 271:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Sign prepared Data and export the signature");
+ 552              	 .loc 1 271 0
+ 553 0002 074D     	 ldr r5,.L32
+ 554 0004 074C     	 ldr r4,.L32+4
+ 555 0006 291C     	 mov r1,r5
+ 556 0008 221C     	 mov r2,r4
+ 557 000a 0748     	 ldr r0,.L32+8
+ 558 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 559              	.LVL38:
+ 272:../optiga_shell.c **** 	example_optiga_crypt_ecdsa_sign();
+ 560              	 .loc 1 272 0
+ 561 0010 291C     	 mov r1,r5
+ 562 0012 0648     	 ldr r0,.L32+12
+ 563 0014 221C     	 mov r2,r4
+ 564 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 565              	.LVL39:
+ 274:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_verify()
+ 566              	 .loc 1 274 0
+ 567              	 
+ 273:../optiga_shell.c **** }
+ 568              	 .loc 1 273 0
+ 569 001a FFF7FEFF 	 bl example_optiga_crypt_ecdsa_sign
+ 570              	.LVL40:
+ 274:../optiga_shell.c **** static void optiga_shell_crypt_ecdsa_verify()
+ 571              	 .loc 1 274 0
+ 572 001e 38BD     	 pop {r3,r4,r5,pc}
+ 573              	.L33:
+ 574              	 .align 2
+ 575              	.L32:
+ 576 0020 36000000 	 .word .LC3
+ 577 0024 49000000 	 .word .LC5
+ 578 0028 64050000 	 .word .LC71
+ 579 002c E8030000 	 .word .LC48
+ 580              	 .cfi_endproc
+ 581              	.LFE290:
+ 583              	 .section .text.optiga_shell_crypt_ecc_generate_keypair,"ax",%progbits
+ 584              	 .align 1
+ 585              	 .code 16
+ 586              	 .thumb_func
+ 588              	optiga_shell_crypt_ecc_generate_keypair:
+ 589              	.LFB288:
+ 255:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting generate ECC Key Example");
+ 590              	 .loc 1 255 0
+ 591              	 .cfi_startproc
+ 592 0000 38B5     	 push {r3,r4,r5,lr}
+ 593              	.LCFI10:
+ 594              	 .cfi_def_cfa_offset 16
+ 595              	 .cfi_offset 3,-16
+ 596              	 .cfi_offset 4,-12
+ 597              	 .cfi_offset 5,-8
+ 598              	 .cfi_offset 14,-4
+ 256:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate ECC NIST P-256 Key Pair and export the public key");
+ 599              	 .loc 1 256 0
+ 600 0002 074D     	 ldr r5,.L35
+ 601 0004 074C     	 ldr r4,.L35+4
+ 602 0006 291C     	 mov r1,r5
+ 603 0008 221C     	 mov r2,r4
+ 604 000a 0748     	 ldr r0,.L35+8
+ 605 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 606              	.LVL41:
+ 257:../optiga_shell.c **** 	example_optiga_crypt_ecc_generate_keypair();
+ 607              	 .loc 1 257 0
+ 608 0010 291C     	 mov r1,r5
+ 609 0012 0648     	 ldr r0,.L35+12
+ 610 0014 221C     	 mov r2,r4
+ 611 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 612              	.LVL42:
+ 259:../optiga_shell.c **** static void optiga_shell_crypt_ecdh()
+ 613              	 .loc 1 259 0
+ 614              	 
+ 258:../optiga_shell.c **** }
+ 615              	 .loc 1 258 0
+ 616 001a FFF7FEFF 	 bl example_optiga_crypt_ecc_generate_keypair
+ 617              	.LVL43:
+ 259:../optiga_shell.c **** static void optiga_shell_crypt_ecdh()
+ 618              	 .loc 1 259 0
+ 619 001e 38BD     	 pop {r3,r4,r5,pc}
+ 620              	.L36:
+ 621              	 .align 2
+ 622              	.L35:
+ 623 0020 36000000 	 .word .LC3
+ 624 0024 49000000 	 .word .LC5
+ 625 0028 B4050000 	 .word .LC76
+ 626 002c D6050000 	 .word .LC80
+ 627              	 .cfi_endproc
+ 628              	.LFE288:
+ 630              	 .section .text.optiga_shell_crypt_random,"ax",%progbits
+ 631              	 .align 1
+ 632              	 .code 16
+ 633              	 .thumb_func
+ 635              	optiga_shell_crypt_random:
+ 636              	.LFB287:
+ 249:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Generate Random Example");
+ 637              	 .loc 1 249 0
+ 638              	 .cfi_startproc
+ 639 0000 38B5     	 push {r3,r4,r5,lr}
+ 640              	.LCFI11:
+ 641              	 .cfi_def_cfa_offset 16
+ 642              	 .cfi_offset 3,-16
+ 643              	 .cfi_offset 4,-12
+ 644              	 .cfi_offset 5,-8
+ 645              	 .cfi_offset 14,-4
+ 250:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Generate 32 bytes random");
+ 646              	 .loc 1 250 0
+ 647 0002 074D     	 ldr r5,.L38
+ 648 0004 074C     	 ldr r4,.L38+4
+ 649 0006 291C     	 mov r1,r5
+ 650 0008 221C     	 mov r2,r4
+ 651 000a 0748     	 ldr r0,.L38+8
+ 652 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 653              	.LVL44:
+ 251:../optiga_shell.c **** 	example_optiga_crypt_random();
+ 654              	 .loc 1 251 0
+ 655 0010 291C     	 mov r1,r5
+ 656 0012 0648     	 ldr r0,.L38+12
+ 657 0014 221C     	 mov r2,r4
+ 658 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 659              	.LVL45:
+ 253:../optiga_shell.c **** static void optiga_shell_crypt_ecc_generate_keypair()
+ 660              	 .loc 1 253 0
+ 661              	 
+ 252:../optiga_shell.c **** }
+ 662              	 .loc 1 252 0
+ 663 001a FFF7FEFF 	 bl example_optiga_crypt_random
+ 664              	.LVL46:
+ 253:../optiga_shell.c **** static void optiga_shell_crypt_ecc_generate_keypair()
+ 665              	 .loc 1 253 0
+ 666 001e 38BD     	 pop {r3,r4,r5,pc}
+ 667              	.L39:
+ 668              	 .align 2
+ 669              	.L38:
+ 670 0020 36000000 	 .word .LC3
+ 671 0024 49000000 	 .word .LC5
+ 672 0028 19060000 	 .word .LC82
+ 673 002c 3A060000 	 .word .LC86
+ 674              	 .cfi_endproc
+ 675              	.LFE287:
+ 677              	 .section .text.optiga_shell_crypt_tls_prf_sha256,"ax",%progbits
+ 678              	 .align 1
+ 679              	 .code 16
+ 680              	 .thumb_func
+ 682              	optiga_shell_crypt_tls_prf_sha256:
+ 683              	.LFB286:
+ 240:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting TLS PRF SHA256 (Key Deriviation) Example");
+ 684              	 .loc 1 240 0
+ 685              	 .cfi_startproc
+ 686 0000 38B5     	 push {r3,r4,r5,lr}
+ 687              	.LCFI12:
+ 688              	 .cfi_def_cfa_offset 16
+ 689              	 .cfi_offset 3,-16
+ 690              	 .cfi_offset 4,-12
+ 691              	 .cfi_offset 5,-8
+ 692              	 .cfi_offset 14,-4
+ 241:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write prepared Shared Secret into an Arbitrary Data Object");
+ 693              	 .loc 1 241 0
+ 694 0002 0F4D     	 ldr r5,.L41
+ 695 0004 0F4C     	 ldr r4,.L41+4
+ 696 0006 291C     	 mov r1,r5
+ 697 0008 221C     	 mov r2,r4
+ 698 000a 0F48     	 ldr r0,.L41+8
+ 699 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 700              	.LVL47:
+ 242:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Update Metadata of the Object to use the Arbitrary Data Object o
+ 701              	 .loc 1 242 0
+ 702 0010 291C     	 mov r1,r5
+ 703 0012 221C     	 mov r2,r4
+ 704 0014 0D48     	 ldr r0,.L41+12
+ 705 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 706              	.LVL48:
+ 243:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Generate Shared Secret using the Shared Secret from the Arbitrar
+ 707              	 .loc 1 243 0
+ 708 001a 291C     	 mov r1,r5
+ 709 001c 221C     	 mov r2,r4
+ 710 001e 0C48     	 ldr r0,.L41+16
+ 711 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 712              	.LVL49:
+ 244:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Restore Metadata of the Arbitrary Data Object");
+ 713              	 .loc 1 244 0
+ 714 0024 291C     	 mov r1,r5
+ 715 0026 221C     	 mov r2,r4
+ 716 0028 0A48     	 ldr r0,.L41+20
+ 717 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 718              	.LVL50:
+ 245:../optiga_shell.c **** 	example_optiga_crypt_tls_prf_sha256();
+ 719              	 .loc 1 245 0
+ 720 002e 291C     	 mov r1,r5
+ 721 0030 0948     	 ldr r0,.L41+24
+ 722 0032 221C     	 mov r2,r4
+ 723 0034 FFF7FEFF 	 bl optiga_lib_print_message
+ 724              	.LVL51:
+ 247:../optiga_shell.c **** static void optiga_shell_crypt_random()
+ 725              	 .loc 1 247 0
+ 726              	 
+ 246:../optiga_shell.c **** }
+ 727              	 .loc 1 246 0
+ 728 0038 FFF7FEFF 	 bl example_optiga_crypt_tls_prf_sha256
+ 729              	.LVL52:
+ 247:../optiga_shell.c **** static void optiga_shell_crypt_random()
+ 730              	 .loc 1 247 0
+ 731 003c 38BD     	 pop {r3,r4,r5,pc}
+ 732              	.L42:
+ 733 003e C046     	 .align 2
+ 734              	.L41:
+ 735 0040 36000000 	 .word .LC3
+ 736 0044 49000000 	 .word .LC5
+ 737 0048 5B060000 	 .word .LC88
+ 738 004c 8D060000 	 .word .LC92
+ 739 0050 D0060000 	 .word .LC94
+ 740 0054 38070000 	 .word .LC96
+ 741 0058 8E070000 	 .word .LC98
+ 742              	 .cfi_endproc
+ 743              	.LFE286:
+ 745              	 .section .text.optiga_shell_crypt_hash,"ax",%progbits
+ 746              	 .align 1
+ 747              	 .code 16
+ 748              	 .thumb_func
+ 750              	optiga_shell_crypt_hash:
+ 751              	.LFB285:
+ 234:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Hash Example");
+ 752              	 .loc 1 234 0
+ 753              	 .cfi_startproc
+ 754 0000 38B5     	 push {r3,r4,r5,lr}
+ 755              	.LCFI13:
+ 756              	 .cfi_def_cfa_offset 16
+ 757              	 .cfi_offset 3,-16
+ 758              	 .cfi_offset 4,-12
+ 759              	 .cfi_offset 5,-8
+ 760              	 .cfi_offset 14,-4
+ 235:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Hash given data with Start, Update and Finalize calls");
+ 761              	 .loc 1 235 0
+ 762 0002 074D     	 ldr r5,.L44
+ 763 0004 074C     	 ldr r4,.L44+4
+ 764 0006 291C     	 mov r1,r5
+ 765 0008 221C     	 mov r2,r4
+ 766 000a 0748     	 ldr r0,.L44+8
+ 767 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 768              	.LVL53:
+ 236:../optiga_shell.c **** 	example_optiga_crypt_hash();
+ 769              	 .loc 1 236 0
+ 770 0010 291C     	 mov r1,r5
+ 771 0012 0648     	 ldr r0,.L44+12
+ 772 0014 221C     	 mov r2,r4
+ 773 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 774              	.LVL54:
+ 238:../optiga_shell.c **** static void optiga_shell_crypt_tls_prf_sha256()
+ 775              	 .loc 1 238 0
+ 776              	 
+ 237:../optiga_shell.c **** }
+ 777              	 .loc 1 237 0
+ 778 001a FFF7FEFF 	 bl example_optiga_crypt_hash
+ 779              	.LVL55:
+ 238:../optiga_shell.c **** static void optiga_shell_crypt_tls_prf_sha256()
+ 780              	 .loc 1 238 0
+ 781 001e 38BD     	 pop {r3,r4,r5,pc}
+ 782              	.L45:
+ 783              	 .align 2
+ 784              	.L44:
+ 785 0020 36000000 	 .word .LC3
+ 786 0024 49000000 	 .word .LC5
+ 787 0028 C4070000 	 .word .LC100
+ 788 002c DA070000 	 .word .LC104
+ 789              	 .cfi_endproc
+ 790              	.LFE285:
+ 792              	 .section .text.optiga_shell_util_protected_update,"ax",%progbits
+ 793              	 .align 1
+ 794              	 .code 16
+ 795              	 .thumb_func
+ 797              	optiga_shell_util_protected_update:
+ 798              	.LFB284:
+ 226:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Protected Update Example");
+ 799              	 .loc 1 226 0
+ 800              	 .cfi_startproc
+ 801 0000 38B5     	 push {r3,r4,r5,lr}
+ 802              	.LCFI14:
+ 803              	 .cfi_def_cfa_offset 16
+ 804              	 .cfi_offset 3,-16
+ 805              	 .cfi_offset 4,-12
+ 806              	 .cfi_offset 5,-8
+ 807              	 .cfi_offset 14,-4
+ 227:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Update Metadata for the Object to be updated and the Trust Ancho
+ 808              	 .loc 1 227 0
+ 809 0002 0C4D     	 ldr r5,.L47
+ 810 0004 0C4C     	 ldr r4,.L47+4
+ 811 0006 291C     	 mov r1,r5
+ 812 0008 221C     	 mov r2,r4
+ 813 000a 0C48     	 ldr r0,.L47+8
+ 814 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 815              	.LVL56:
+ 228:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Write Trust Anchor used by the Trust M to verify the update");
+ 816              	 .loc 1 228 0
+ 817 0010 291C     	 mov r1,r5
+ 818 0012 221C     	 mov r2,r4
+ 819 0014 0A48     	 ldr r0,.L47+12
+ 820 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 821              	.LVL57:
+ 229:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Start Protected update with prepared manifest and fragments");
+ 822              	 .loc 1 229 0
+ 823 001a 291C     	 mov r1,r5
+ 824 001c 221C     	 mov r2,r4
+ 825 001e 0948     	 ldr r0,.L47+16
+ 826 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 827              	.LVL58:
+ 230:../optiga_shell.c **** 	example_optiga_util_protected_update();
+ 828              	 .loc 1 230 0
+ 829 0024 291C     	 mov r1,r5
+ 830 0026 0848     	 ldr r0,.L47+20
+ 831 0028 221C     	 mov r2,r4
+ 832 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 833              	.LVL59:
+ 232:../optiga_shell.c **** static void optiga_shell_crypt_hash()
+ 834              	 .loc 1 232 0
+ 835              	 
+ 231:../optiga_shell.c **** }
+ 836              	 .loc 1 231 0
+ 837 002e FFF7FEFF 	 bl example_optiga_util_protected_update
+ 838              	.LVL60:
+ 232:../optiga_shell.c **** static void optiga_shell_crypt_hash()
+ 839              	 .loc 1 232 0
+ 840 0032 38BD     	 pop {r3,r4,r5,pc}
+ 841              	.L48:
+ 842              	 .align 2
+ 843              	.L47:
+ 844 0034 36000000 	 .word .LC3
+ 845 0038 49000000 	 .word .LC5
+ 846 003c 18080000 	 .word .LC106
+ 847 0040 3A080000 	 .word .LC110
+ 848 0044 9E080000 	 .word .LC112
+ 849 0048 E2080000 	 .word .LC114
+ 850              	 .cfi_endproc
+ 851              	.LFE284:
+ 853              	 .section .text.optiga_shell_util_update_count,"ax",%progbits
+ 854              	 .align 1
+ 855              	 .code 16
+ 856              	 .thumb_func
+ 858              	optiga_shell_util_update_count:
+ 859              	.LFB283:
+ 219:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Update Counter Example");
+ 860              	 .loc 1 219 0
+ 861              	 .cfi_startproc
+ 862 0000 38B5     	 push {r3,r4,r5,lr}
+ 863              	.LCFI15:
+ 864              	 .cfi_def_cfa_offset 16
+ 865              	 .cfi_offset 3,-16
+ 866              	 .cfi_offset 4,-12
+ 867              	 .cfi_offset 5,-8
+ 868              	 .cfi_offset 14,-4
+ 220:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write Initial Counter Value");
+ 869              	 .loc 1 220 0
+ 870 0002 0A4D     	 ldr r5,.L50
+ 871 0004 0A4C     	 ldr r4,.L50+4
+ 872 0006 291C     	 mov r1,r5
+ 873 0008 221C     	 mov r2,r4
+ 874 000a 0A48     	 ldr r0,.L50+8
+ 875 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 876              	.LVL61:
+ 221:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Increase Counter Object");
+ 877              	 .loc 1 221 0
+ 878 0010 291C     	 mov r1,r5
+ 879 0012 221C     	 mov r2,r4
+ 880 0014 0848     	 ldr r0,.L50+12
+ 881 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 882              	.LVL62:
+ 222:../optiga_shell.c **** 	example_optiga_util_update_count();
+ 883              	 .loc 1 222 0
+ 884 001a 291C     	 mov r1,r5
+ 885 001c 0748     	 ldr r0,.L50+16
+ 886 001e 221C     	 mov r2,r4
+ 887 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 888              	.LVL63:
+ 224:../optiga_shell.c **** static void optiga_shell_util_protected_update()
+ 889              	 .loc 1 224 0
+ 890              	 
+ 223:../optiga_shell.c **** }
+ 891              	 .loc 1 223 0
+ 892 0024 FFF7FEFF 	 bl example_optiga_util_update_count
+ 893              	.LVL64:
+ 224:../optiga_shell.c **** static void optiga_shell_util_protected_update()
+ 894              	 .loc 1 224 0
+ 895 0028 38BD     	 pop {r3,r4,r5,pc}
+ 896              	.L51:
+ 897 002a C046     	 .align 2
+ 898              	.L50:
+ 899 002c 36000000 	 .word .LC3
+ 900 0030 49000000 	 .word .LC5
+ 901 0034 26090000 	 .word .LC116
+ 902 0038 46090000 	 .word .LC120
+ 903 003c 6A090000 	 .word .LC122
+ 904              	 .cfi_endproc
+ 905              	.LFE283:
+ 907              	 .section .text.optiga_shell_util_hibernate_restore,"ax",%progbits
+ 908              	 .align 1
+ 909              	 .code 16
+ 910              	 .thumb_func
+ 912              	optiga_shell_util_hibernate_restore:
+ 913              	.LFB282:
+ 203:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Hibernate and Restore Example");
+ 914              	 .loc 1 203 0
+ 915              	 .cfi_startproc
+ 916 0000 38B5     	 push {r3,r4,r5,lr}
+ 917              	.LCFI16:
+ 918              	 .cfi_def_cfa_offset 16
+ 919              	 .cfi_offset 3,-16
+ 920              	 .cfi_offset 4,-12
+ 921              	 .cfi_offset 5,-8
+ 922              	 .cfi_offset 14,-4
+ 204:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Open Application on the security chip");
+ 923              	 .loc 1 204 0
+ 924 0002 204D     	 ldr r5,.L53
+ 925 0004 204C     	 ldr r4,.L53+4
+ 926 0006 291C     	 mov r1,r5
+ 927 0008 221C     	 mov r2,r4
+ 928 000a 2048     	 ldr r0,.L53+8
+ 929 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 930              	.LVL65:
+ 205:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Pair the host and the security chip");
+ 931              	 .loc 1 205 0
+ 932 0010 291C     	 mov r1,r5
+ 933 0012 221C     	 mov r2,r4
+ 934 0014 1E48     	 ldr r0,.L53+12
+ 935 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 936              	.LVL66:
+ 206:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Select Protected I2C Connection");
+ 937              	 .loc 1 206 0
+ 938 001a 291C     	 mov r1,r5
+ 939 001c 221C     	 mov r2,r4
+ 940 001e 1D48     	 ldr r0,.L53+16
+ 941 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 942              	.LVL67:
+ 207:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Generate ECC NIST P-256 Key pair and store it in Session Data Ob
+ 943              	 .loc 1 207 0
+ 944 0024 291C     	 mov r1,r5
+ 945 0026 221C     	 mov r2,r4
+ 946 0028 1B48     	 ldr r0,.L53+20
+ 947 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 948              	.LVL68:
+ 208:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("5 Step: Check Security Event Counter and wait till it reaches 0");
+ 949              	 .loc 1 208 0
+ 950 002e 291C     	 mov r1,r5
+ 951 0030 221C     	 mov r2,r4
+ 952 0032 1A48     	 ldr r0,.L53+24
+ 953 0034 FFF7FEFF 	 bl optiga_lib_print_message
+ 954              	.LVL69:
+ 209:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("6 Step: Perform Close application with Hibernate parameter set to True")
+ 955              	 .loc 1 209 0
+ 956 0038 291C     	 mov r1,r5
+ 957 003a 221C     	 mov r2,r4
+ 958 003c 1848     	 ldr r0,.L53+28
+ 959 003e FFF7FEFF 	 bl optiga_lib_print_message
+ 960              	.LVL70:
+ 210:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("7 Step: Open Application on the security chip");
+ 961              	 .loc 1 210 0
+ 962 0042 291C     	 mov r1,r5
+ 963 0044 221C     	 mov r2,r4
+ 964 0046 1748     	 ldr r0,.L53+32
+ 965 0048 FFF7FEFF 	 bl optiga_lib_print_message
+ 966              	.LVL71:
+ 211:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("8 Step: Sign prepared data with private key stored in Session Data Objec
+ 967              	 .loc 1 211 0
+ 968 004c 291C     	 mov r1,r5
+ 969 004e 221C     	 mov r2,r4
+ 970 0050 1548     	 ldr r0,.L53+36
+ 971 0052 FFF7FEFF 	 bl optiga_lib_print_message
+ 972              	.LVL72:
+ 212:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("9 Step: Verify the signature with the public key generated previously");
+ 973              	 .loc 1 212 0
+ 974 0056 291C     	 mov r1,r5
+ 975 0058 221C     	 mov r2,r4
+ 976 005a 1448     	 ldr r0,.L53+40
+ 977 005c FFF7FEFF 	 bl optiga_lib_print_message
+ 978              	.LVL73:
+ 213:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("10 Step: Close Applicaiton on the chip");
+ 979              	 .loc 1 213 0
+ 980 0060 291C     	 mov r1,r5
+ 981 0062 221C     	 mov r2,r4
+ 982 0064 1248     	 ldr r0,.L53+44
+ 983 0066 FFF7FEFF 	 bl optiga_lib_print_message
+ 984              	.LVL74:
+ 214:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Important note: To continue with other examples you need to call the ini
+ 985              	 .loc 1 214 0
+ 986 006a 291C     	 mov r1,r5
+ 987 006c 221C     	 mov r2,r4
+ 988 006e 1148     	 ldr r0,.L53+48
+ 989 0070 FFF7FEFF 	 bl optiga_lib_print_message
+ 990              	.LVL75:
+ 215:../optiga_shell.c **** 	example_optiga_util_hibernate_restore();
+ 991              	 .loc 1 215 0
+ 992 0074 291C     	 mov r1,r5
+ 993 0076 1048     	 ldr r0,.L53+52
+ 994 0078 221C     	 mov r2,r4
+ 995 007a FFF7FEFF 	 bl optiga_lib_print_message
+ 996              	.LVL76:
+ 217:../optiga_shell.c **** static void optiga_shell_util_update_count()
+ 997              	 .loc 1 217 0
+ 998              	 
+ 216:../optiga_shell.c **** }
+ 999              	 .loc 1 216 0
+ 1000 007e FFF7FEFF 	 bl example_optiga_util_hibernate_restore
+ 1001              	.LVL77:
+ 217:../optiga_shell.c **** static void optiga_shell_util_update_count()
+ 1002              	 .loc 1 217 0
+ 1003 0082 38BD     	 pop {r3,r4,r5,pc}
+ 1004              	.L54:
+ 1005              	 .align 2
+ 1006              	.L53:
+ 1007 0084 36000000 	 .word .LC3
+ 1008 0088 49000000 	 .word .LC5
+ 1009 008c 8A090000 	 .word .LC124
+ 1010 0090 B1090000 	 .word .LC128
+ 1011 0094 DF090000 	 .word .LC130
+ 1012 0098 C6000000 	 .word .LC11
+ 1013 009c 0B0A0000 	 .word .LC133
+ 1014 00a0 6F0A0000 	 .word .LC135
+ 1015 00a4 AF0A0000 	 .word .LC137
+ 1016 00a8 F60A0000 	 .word .LC139
+ 1017 00ac 240B0000 	 .word .LC141
+ 1018 00b0 6E0B0000 	 .word .LC143
+ 1019 00b4 B40B0000 	 .word .LC145
+ 1020 00b8 DB0B0000 	 .word .LC147
+ 1021              	 .cfi_endproc
+ 1022              	.LFE282:
+ 1024              	 .section .text.optiga_shell_pair_host_optiga,"ax",%progbits
+ 1025              	 .align 1
+ 1026              	 .code 16
+ 1027              	 .thumb_func
+ 1029              	optiga_shell_pair_host_optiga:
+ 1030              	.LFB281:
+ 194:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Pairing of Host and Trust M Example");
+ 1031              	 .loc 1 194 0
+ 1032              	 .cfi_startproc
+ 1033 0000 38B5     	 push {r3,r4,r5,lr}
+ 1034              	.LCFI17:
+ 1035              	 .cfi_def_cfa_offset 16
+ 1036              	 .cfi_offset 3,-16
+ 1037              	 .cfi_offset 4,-12
+ 1038              	 .cfi_offset 5,-8
+ 1039              	 .cfi_offset 14,-4
+ 195:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Read and Check existing Metadata for the Binding Secret");
+ 1040              	 .loc 1 195 0
+ 1041 0002 0F4D     	 ldr r5,.L56
+ 1042 0004 0F4C     	 ldr r4,.L56+4
+ 1043 0006 291C     	 mov r1,r5
+ 1044 0008 221C     	 mov r2,r4
+ 1045 000a 0F48     	 ldr r0,.L56+8
+ 1046 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 1047              	.LVL78:
+ 196:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Generate Random for the new Binding Secret");
+ 1048              	 .loc 1 196 0
+ 1049 0010 291C     	 mov r1,r5
+ 1050 0012 221C     	 mov r2,r4
+ 1051 0014 0D48     	 ldr r0,.L56+12
+ 1052 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 1053              	.LVL79:
+ 197:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("3 Step: Write new Binding Secret");
+ 1054              	 .loc 1 197 0
+ 1055 001a 291C     	 mov r1,r5
+ 1056 001c 221C     	 mov r2,r4
+ 1057 001e 0C48     	 ldr r0,.L56+16
+ 1058 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 1059              	.LVL80:
+ 198:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("4 Step: Store new Binding Secret on the Host");
+ 1060              	 .loc 1 198 0
+ 1061 0024 291C     	 mov r1,r5
+ 1062 0026 221C     	 mov r2,r4
+ 1063 0028 0A48     	 ldr r0,.L56+20
+ 1064 002a FFF7FEFF 	 bl optiga_lib_print_message
+ 1065              	.LVL81:
+ 199:../optiga_shell.c **** 	example_pair_host_and_optiga_using_pre_shared_secret();
+ 1066              	 .loc 1 199 0
+ 1067 002e 291C     	 mov r1,r5
+ 1068 0030 0948     	 ldr r0,.L56+24
+ 1069 0032 221C     	 mov r2,r4
+ 1070 0034 FFF7FEFF 	 bl optiga_lib_print_message
+ 1071              	.LVL82:
+ 201:../optiga_shell.c **** static void optiga_shell_util_hibernate_restore()
+ 1072              	 .loc 1 201 0
+ 1073              	 
+ 200:../optiga_shell.c **** }
+ 1074              	 .loc 1 200 0
+ 1075 0038 FFF7FEFF 	 bl example_pair_host_and_optiga_using_pre_shared_secret
+ 1076              	.LVL83:
+ 201:../optiga_shell.c **** static void optiga_shell_util_hibernate_restore()
+ 1077              	 .loc 1 201 0
+ 1078 003c 38BD     	 pop {r3,r4,r5,pc}
+ 1079              	.L57:
+ 1080 003e C046     	 .align 2
+ 1081              	.L56:
+ 1082 0040 36000000 	 .word .LC3
+ 1083 0044 49000000 	 .word .LC5
+ 1084 0048 3A0C0000 	 .word .LC149
+ 1085 004c 670C0000 	 .word .LC153
+ 1086 0050 A70C0000 	 .word .LC155
+ 1087 0054 DA0C0000 	 .word .LC157
+ 1088 0058 FB0C0000 	 .word .LC159
+ 1089              	 .cfi_endproc
+ 1090              	.LFE281:
+ 1092              	 .section .text.optiga_shell_util_write_data,"ax",%progbits
+ 1093              	 .align 1
+ 1094              	 .code 16
+ 1095              	 .thumb_func
+ 1097              	optiga_shell_util_write_data:
+ 1098              	.LFB280:
+ 187:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Write Data/Metadata Example");
+ 1099              	 .loc 1 187 0
+ 1100              	 .cfi_startproc
+ 1101 0000 38B5     	 push {r3,r4,r5,lr}
+ 1102              	.LCFI18:
+ 1103              	 .cfi_def_cfa_offset 16
+ 1104              	 .cfi_offset 3,-16
+ 1105              	 .cfi_offset 4,-12
+ 1106              	 .cfi_offset 5,-8
+ 1107              	 .cfi_offset 14,-4
+ 188:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Write Sample Certificate in Trust Anchor Data Object (640 bytes)
+ 1108              	 .loc 1 188 0
+ 1109 0002 0A4D     	 ldr r5,.L59
+ 1110 0004 0A4C     	 ldr r4,.L59+4
+ 1111 0006 291C     	 mov r1,r5
+ 1112 0008 221C     	 mov r2,r4
+ 1113 000a 0A48     	 ldr r0,.L59+8
+ 1114 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 1115              	.LVL84:
+ 189:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Write new Metadata");
+ 1116              	 .loc 1 189 0
+ 1117 0010 291C     	 mov r1,r5
+ 1118 0012 221C     	 mov r2,r4
+ 1119 0014 0848     	 ldr r0,.L59+12
+ 1120 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 1121              	.LVL85:
+ 190:../optiga_shell.c **** 	example_optiga_util_write_data();
+ 1122              	 .loc 1 190 0
+ 1123 001a 291C     	 mov r1,r5
+ 1124 001c 0748     	 ldr r0,.L59+16
+ 1125 001e 221C     	 mov r2,r4
+ 1126 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 1127              	.LVL86:
+ 192:../optiga_shell.c **** static void optiga_shell_pair_host_optiga()
+ 1128              	 .loc 1 192 0
+ 1129              	 
+ 191:../optiga_shell.c **** }
+ 1130              	 .loc 1 191 0
+ 1131 0024 FFF7FEFF 	 bl example_optiga_util_write_data
+ 1132              	.LVL87:
+ 192:../optiga_shell.c **** static void optiga_shell_pair_host_optiga()
+ 1133              	 .loc 1 192 0
+ 1134 0028 38BD     	 pop {r3,r4,r5,pc}
+ 1135              	.L60:
+ 1136 002a C046     	 .align 2
+ 1137              	.L59:
+ 1138 002c 36000000 	 .word .LC3
+ 1139 0030 49000000 	 .word .LC5
+ 1140 0034 280D0000 	 .word .LC161
+ 1141 0038 4D0D0000 	 .word .LC165
+ 1142 003c 960D0000 	 .word .LC167
+ 1143              	 .cfi_endproc
+ 1144              	.LFE280:
+ 1146              	 .section .text.optiga_shell_util_read_data,"ax",%progbits
+ 1147              	 .align 1
+ 1148              	 .code 16
+ 1149              	 .thumb_func
+ 1151              	optiga_shell_util_read_data:
+ 1152              	.LFB279:
+ 180:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("Starting Read Data/Metadata Example");
+ 1153              	 .loc 1 180 0
+ 1154              	 .cfi_startproc
+ 1155 0000 38B5     	 push {r3,r4,r5,lr}
+ 1156              	.LCFI19:
+ 1157              	 .cfi_def_cfa_offset 16
+ 1158              	 .cfi_offset 3,-16
+ 1159              	 .cfi_offset 4,-12
+ 1160              	 .cfi_offset 5,-8
+ 1161              	 .cfi_offset 14,-4
+ 181:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("1 Step: Read Certificate (~500 bytes)");
+ 1162              	 .loc 1 181 0
+ 1163 0002 0A4D     	 ldr r5,.L62
+ 1164 0004 0A4C     	 ldr r4,.L62+4
+ 1165 0006 291C     	 mov r1,r5
+ 1166 0008 221C     	 mov r2,r4
+ 1167 000a 0A48     	 ldr r0,.L62+8
+ 1168 000c FFF7FEFF 	 bl optiga_lib_print_message
+ 1169              	.LVL88:
+ 182:../optiga_shell.c **** 	OPTIGA_SHELL_LOG_MESSAGE("2 Step: Read Certificate Metadata");
+ 1170              	 .loc 1 182 0
+ 1171 0010 291C     	 mov r1,r5
+ 1172 0012 221C     	 mov r2,r4
+ 1173 0014 0848     	 ldr r0,.L62+12
+ 1174 0016 FFF7FEFF 	 bl optiga_lib_print_message
+ 1175              	.LVL89:
+ 183:../optiga_shell.c **** 	example_optiga_util_read_data();
+ 1176              	 .loc 1 183 0
+ 1177 001a 291C     	 mov r1,r5
+ 1178 001c 0748     	 ldr r0,.L62+16
+ 1179 001e 221C     	 mov r2,r4
+ 1180 0020 FFF7FEFF 	 bl optiga_lib_print_message
+ 1181              	.LVL90:
+ 185:../optiga_shell.c **** static void optiga_shell_util_write_data()
+ 1182              	 .loc 1 185 0
+ 1183              	 
+ 184:../optiga_shell.c **** }
+ 1184              	 .loc 1 184 0
+ 1185 0024 FFF7FEFF 	 bl example_optiga_util_read_data
+ 1186              	.LVL91:
+ 185:../optiga_shell.c **** static void optiga_shell_util_write_data()
+ 1187              	 .loc 1 185 0
+ 1188 0028 38BD     	 pop {r3,r4,r5,pc}
+ 1189              	.L63:
+ 1190 002a C046     	 .align 2
+ 1191              	.L62:
+ 1192 002c 36000000 	 .word .LC3
+ 1193 0030 49000000 	 .word .LC5
+ 1194 0034 B10D0000 	 .word .LC169
+ 1195 0038 D50D0000 	 .word .LC173
+ 1196 003c FB0D0000 	 .word .LC175
+ 1197              	 .cfi_endproc
+ 1198              	.LFE279:
+ 1200              	 .section .text.optiga_shell_init,"ax",%progbits
+ 1201              	 .align 1
+ 1202              	 .code 16
+ 1203              	 .thumb_func
+ 1205              	optiga_shell_init:
+ 1206              	.LFB277:
+  86:../optiga_shell.c **** 	optiga_lib_status_t return_status;
+ 1207              	 .loc 1 86 0
+ 1208              	 .cfi_startproc
+ 1209              	.LVL92:
+ 1210 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 1211              	.LCFI20:
+ 1212              	 .cfi_def_cfa_offset 20
+ 1213              	 .cfi_offset 4,-20
+ 1214              	 .cfi_offset 5,-16
+ 1215              	 .cfi_offset 6,-12
+ 1216              	 .cfi_offset 7,-8
+ 1217              	 .cfi_offset 14,-4
+  89:../optiga_shell.c **** 
+ 1218              	 .loc 1 89 0
+ 1219 0002 0F27     	 mov r7,#15
+  86:../optiga_shell.c **** 	optiga_lib_status_t return_status;
+ 1220              	 .loc 1 86 0
+ 1221 0004 87B0     	 sub sp,sp,#28
+ 1222              	.LCFI21:
+ 1223              	 .cfi_def_cfa_offset 48
+  89:../optiga_shell.c **** 
+ 1224              	 .loc 1 89 0
+ 1225 0006 02AB     	 add r3,sp,#8
+  94:../optiga_shell.c **** 
+ 1226              	 .loc 1 94 0
+ 1227 0008 0020     	 mov r0,#0
+  89:../optiga_shell.c **** 
+ 1228              	 .loc 1 89 0
+ 1229 000a FF18     	 add r7,r7,r3
+ 1230 000c 0F23     	 mov r3,#15
+  94:../optiga_shell.c **** 
+ 1231              	 .loc 1 94 0
+ 1232 000e 2649     	 ldr r1,.L74
+ 1233 0010 021C     	 mov r2,r0
+  89:../optiga_shell.c **** 
+ 1234              	 .loc 1 89 0
+ 1235 0012 3B70     	 strb r3,[r7]
+  94:../optiga_shell.c **** 
+ 1236              	 .loc 1 94 0
+ 1237 0014 FFF7FEFF 	 bl optiga_util_create
+ 1238              	.LVL93:
+ 1239 0018 244C     	 ldr r4,.L74+4
+  96:../optiga_shell.c **** 		/**
+ 1240              	 .loc 1 96 0
+ 1241 001a 2549     	 ldr r1,.L74+8
+  94:../optiga_shell.c **** 
+ 1242              	 .loc 1 94 0
+ 1243 001c 2060     	 str r0,[r4]
+  96:../optiga_shell.c **** 		/**
+ 1244              	 .loc 1 96 0
+ 1245 001e 254A     	 ldr r2,.L74+12
+ 1246 0020 2548     	 ldr r0,.L74+16
+ 1247 0022 FFF7FEFF 	 bl optiga_lib_print_message
+ 1248              	.LVL94:
+ 101:../optiga_shell.c **** 		return_status = optiga_util_open_application(me_util, 0);
+ 1249              	 .loc 1 101 0
+ 1250 0026 0123     	 mov r3,#1
+ 1251 0028 244E     	 ldr r6,.L74+20
+ 102:../optiga_shell.c **** 
+ 1252              	 .loc 1 102 0
+ 1253 002a 2068     	 ldr r0,[r4]
+ 1254 002c 0021     	 mov r1,#0
+ 101:../optiga_shell.c **** 		return_status = optiga_util_open_application(me_util, 0);
+ 1255              	 .loc 1 101 0
+ 1256 002e 3380     	 strh r3,[r6]
+ 102:../optiga_shell.c **** 
+ 1257              	 .loc 1 102 0
+ 1258 0030 FFF7FEFF 	 bl optiga_util_open_application
+ 1259              	.LVL95:
+ 1260 0034 0394     	 str r4,[sp,#12]
+ 104:../optiga_shell.c **** 		{
+ 1261              	 .loc 1 104 0
+ 1262 0036 0028     	 cmp r0,#0
+ 1263 0038 33D1     	 bne .L64
+ 1264              	.L65:
+ 108:../optiga_shell.c **** 		{
+ 1265              	 .loc 1 108 0 discriminator 1
+ 1266 003a 3388     	 ldrh r3,[r6]
+ 1267 003c 012B     	 cmp r3,#1
+ 1268 003e FCD0     	 beq .L65
+ 112:../optiga_shell.c **** 		{
+ 1269              	 .loc 1 112 0
+ 1270 0040 3388     	 ldrh r3,[r6]
+ 1271 0042 9BB2     	 uxth r3,r3
+ 1272 0044 0293     	 str r3,[sp,#8]
+ 1273 0046 002B     	 cmp r3,#0
+ 1274 0048 2BD1     	 bne .L64
+ 118:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE("Begin pairing of host and OPTIGA...");
+ 1275              	 .loc 1 118 0
+ 1276 004a 1D4D     	 ldr r5,.L74+24
+ 1277 004c 1D4C     	 ldr r4,.L74+28
+ 1278 004e 1E48     	 ldr r0,.L74+32
+ 1279              	.LVL96:
+ 1280 0050 291C     	 mov r1,r5
+ 1281 0052 221C     	 mov r2,r4
+ 1282 0054 FFF7FEFF 	 bl optiga_lib_print_message
+ 1283              	.LVL97:
+ 119:../optiga_shell.c **** 		// Usercase: Generate the pre-shared secret on host and write it to OPTIGA
+ 1284              	 .loc 1 119 0
+ 1285 0058 1C48     	 ldr r0,.L74+36
+ 1286 005a 291C     	 mov r1,r5
+ 1287 005c 221C     	 mov r2,r4
+ 1288 005e FFF7FEFF 	 bl optiga_lib_print_message
+ 1289              	.LVL98:
+ 121:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE("Pairing of host and OPTIGA completed...");
+ 1290              	 .loc 1 121 0
+ 1291 0062 FFF7FEFF 	 bl example_pair_host_and_optiga_using_pre_shared_secret
+ 1292              	.LVL99:
+ 122:../optiga_shell.c **** 		// Usercase: Generate the pre-shared secret on host and write it to OPTIGA
+ 1293              	 .loc 1 122 0
+ 1294 0066 1A48     	 ldr r0,.L74+40
+ 1295 0068 291C     	 mov r1,r5
+ 1296 006a 221C     	 mov r2,r4
+ 1297 006c FFF7FEFF 	 bl optiga_lib_print_message
+ 1298              	.LVL100:
+ 124:../optiga_shell.c ****                                                optiga_oid,
+ 1299              	 .loc 1 124 0
+ 1300 0070 0123     	 mov r3,#1
+ 1301 0072 0193     	 str r3,[sp,#4]
+ 1302 0074 039B     	 ldr r3,[sp,#12]
+ 1303 0076 0097     	 str r7,[sp]
+ 1304 0078 1868     	 ldr r0,[r3]
+ 1305 007a 1649     	 ldr r1,.L74+44
+ 1306 007c 4022     	 mov r2,#64
+ 1307 007e 029B     	 ldr r3,[sp,#8]
+ 1308 0080 FFF7FEFF 	 bl optiga_util_write_data
+ 1309              	.LVL101:
+ 131:../optiga_shell.c ****         {
+ 1310              	 .loc 1 131 0
+ 1311 0084 0028     	 cmp r0,#0
+ 1312 0086 0CD1     	 bne .L64
+ 1313              	.L68:
+ 136:../optiga_shell.c ****         {
+ 1314              	 .loc 1 136 0 discriminator 1
+ 1315 0088 3388     	 ldrh r3,[r6]
+ 1316 008a 012B     	 cmp r3,#1
+ 1317 008c FCD0     	 beq .L68
+ 141:../optiga_shell.c ****         OPTIGA_SHELL_LOG_MESSAGE("Starting OPTIGA example demonstration..\n");
+ 1318              	 .loc 1 141 0
+ 1319 008e 1248     	 ldr r0,.L74+48
+ 1320              	.LVL102:
+ 1321 0090 291C     	 mov r1,r5
+ 1322 0092 221C     	 mov r2,r4
+ 1323 0094 FFF7FEFF 	 bl optiga_lib_print_message
+ 1324              	.LVL103:
+ 142:../optiga_shell.c **** 	}while(FALSE);
+ 1325              	 .loc 1 142 0
+ 1326 0098 1048     	 ldr r0,.L74+52
+ 1327 009a 291C     	 mov r1,r5
+ 1328 009c 221C     	 mov r2,r4
+ 1329 009e FFF7FEFF 	 bl optiga_lib_print_message
+ 1330              	.LVL104:
+ 1331              	.L64:
+ 144:../optiga_shell.c **** 
+ 1332              	 .loc 1 144 0
+ 1333 00a2 07B0     	 add sp,sp,#28
+ 1334              	 
+ 1335 00a4 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 1336              	.L75:
+ 1337 00a6 C046     	 .align 2
+ 1338              	.L74:
+ 1339 00a8 00000000 	 .word optiga_util_callback
+ 1340 00ac 00000000 	 .word .LANCHOR1
+ 1341 00b0 4F0E0000 	 .word .LC181
+ 1342 00b4 640E0000 	 .word .LC183
+ 1343 00b8 1D0E0000 	 .word .LC179
+ 1344 00bc 00000000 	 .word .LANCHOR0
+ 1345 00c0 36000000 	 .word .LC3
+ 1346 00c4 49000000 	 .word .LC5
+ 1347 00c8 690E0000 	 .word .LC186
+ 1348 00cc 8C0E0000 	 .word .LC190
+ 1349 00d0 B00E0000 	 .word .LC192
+ 1350 00d4 C4E00000 	 .word 57540
+ 1351 00d8 D80E0000 	 .word .LC194
+ 1352 00dc 010F0000 	 .word .LC196
+ 1353              	 .cfi_endproc
+ 1354              	.LFE277:
+ 1356              	 .section .text.optiga_shell_selftest,"ax",%progbits
+ 1357              	 .align 1
+ 1358              	 .code 16
+ 1359              	 .thumb_func
+ 1361              	optiga_shell_selftest:
+ 1362              	.LFB299:
+ 330:../optiga_shell.c **** 
+ 331:../optiga_shell.c **** #define PRINT_PERFORMANCE_RESULTS(TESTCASE) \
+ 332:../optiga_shell.c **** 		timestamp = pal_os_timer_get_time_in_milliseconds(); \
+ 333:../optiga_shell.c **** 		TESTCASE(); \
+ 334:../optiga_shell.c **** 		sprintf(buffer_string, "Example takes %d msec", (int) pal_os_timer_get_time_in_milliseconds() - t
+ 335:../optiga_shell.c **** 		OPTIGA_SHELL_LOG_MESSAGE(buffer_string); \
+ 336:../optiga_shell.c **** 		optiga_lib_print_string_with_newline(""); \
+ 337:../optiga_shell.c **** 		pal_os_timer_delay_in_milliseconds(2000);
+ 338:../optiga_shell.c **** 
+ 339:../optiga_shell.c **** static void optiga_shell_selftest()
+ 340:../optiga_shell.c **** {
+ 1363              	 .loc 1 340 0
+ 1364              	 .cfi_startproc
+ 1365 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 1366              	.LCFI22:
+ 1367              	 .cfi_def_cfa_offset 20
+ 1368              	 .cfi_offset 4,-20
+ 1369              	 .cfi_offset 5,-16
+ 1370              	 .cfi_offset 6,-12
+ 1371              	 .cfi_offset 7,-8
+ 1372              	 .cfi_offset 14,-4
+ 1373 0002 89B0     	 sub sp,sp,#36
+ 1374              	.LCFI23:
+ 1375              	 .cfi_def_cfa_offset 56
+ 341:../optiga_shell.c **** 	char buffer_string[30];
+ 342:../optiga_shell.c **** 	int timestamp = pal_os_timer_get_time_in_milliseconds();
+ 1376              	 .loc 1 342 0
+ 1377 0004 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1378              	.LVL105:
+ 343:../optiga_shell.c **** 
+ 344:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_init);
+ 1379              	 .loc 1 344 0
+ 1380 0008 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1381              	.LVL106:
+ 1382 000c 041C     	 mov r4,r0
+ 1383              	.LVL107:
+ 1384 000e FFF7FEFF 	 bl optiga_shell_init
+ 1385              	.LVL108:
+ 1386 0012 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1387              	.LVL109:
+ 1388 0016 EF4E     	 ldr r6,.L77
+ 1389 0018 021B     	 sub r2,r0,r4
+ 1390 001a 311C     	 mov r1,r6
+ 1391 001c 6846     	 mov r0,sp
+ 1392 001e FFF7FEFF 	 bl sprintf
+ 1393              	.LVL110:
+ 1394 0022 ED4D     	 ldr r5,.L77+4
+ 1395 0024 ED4C     	 ldr r4,.L77+8
+ 1396              	.LVL111:
+ 1397 0026 291C     	 mov r1,r5
+ 1398 0028 221C     	 mov r2,r4
+ 1399 002a 6846     	 mov r0,sp
+ 1400 002c FFF7FEFF 	 bl optiga_lib_print_message
+ 1401              	.LVL112:
+ 1402 0030 EB48     	 ldr r0,.L77+12
+ 1403 0032 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1404              	.LVL113:
+ 1405 0036 FA20     	 mov r0,#250
+ 1406 0038 C000     	 lsl r0,r0,#3
+ 1407 003a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1408              	.LVL114:
+ 345:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_util_read_data);
+ 1409              	 .loc 1 345 0
+ 1410 003e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1411              	.LVL115:
+ 1412 0042 071C     	 mov r7,r0
+ 1413              	.LVL116:
+ 1414 0044 FFF7FEFF 	 bl optiga_shell_util_read_data
+ 1415              	.LVL117:
+ 1416 0048 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1417              	.LVL118:
+ 1418 004c 311C     	 mov r1,r6
+ 1419 004e C21B     	 sub r2,r0,r7
+ 1420 0050 6846     	 mov r0,sp
+ 1421 0052 FFF7FEFF 	 bl sprintf
+ 1422              	.LVL119:
+ 1423 0056 291C     	 mov r1,r5
+ 1424 0058 221C     	 mov r2,r4
+ 1425 005a 6846     	 mov r0,sp
+ 1426 005c FFF7FEFF 	 bl optiga_lib_print_message
+ 1427              	.LVL120:
+ 1428 0060 DF48     	 ldr r0,.L77+12
+ 1429 0062 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1430              	.LVL121:
+ 1431 0066 FA20     	 mov r0,#250
+ 1432 0068 C000     	 lsl r0,r0,#3
+ 1433 006a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1434              	.LVL122:
+ 346:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_util_write_data);
+ 1435              	 .loc 1 346 0
+ 1436 006e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1437              	.LVL123:
+ 1438 0072 071C     	 mov r7,r0
+ 1439              	.LVL124:
+ 1440 0074 FFF7FEFF 	 bl optiga_shell_util_write_data
+ 1441              	.LVL125:
+ 1442 0078 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1443              	.LVL126:
+ 1444 007c 311C     	 mov r1,r6
+ 1445 007e C21B     	 sub r2,r0,r7
+ 1446 0080 6846     	 mov r0,sp
+ 1447 0082 FFF7FEFF 	 bl sprintf
+ 1448              	.LVL127:
+ 1449 0086 291C     	 mov r1,r5
+ 1450 0088 221C     	 mov r2,r4
+ 1451 008a 6846     	 mov r0,sp
+ 1452 008c FFF7FEFF 	 bl optiga_lib_print_message
+ 1453              	.LVL128:
+ 1454 0090 D348     	 ldr r0,.L77+12
+ 1455 0092 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1456              	.LVL129:
+ 1457 0096 FA20     	 mov r0,#250
+ 1458 0098 C000     	 lsl r0,r0,#3
+ 1459 009a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1460              	.LVL130:
+ 347:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_pair_host_optiga);
+ 1461              	 .loc 1 347 0
+ 1462 009e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1463              	.LVL131:
+ 1464 00a2 071C     	 mov r7,r0
+ 1465              	.LVL132:
+ 1466 00a4 FFF7FEFF 	 bl optiga_shell_pair_host_optiga
+ 1467              	.LVL133:
+ 1468 00a8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1469              	.LVL134:
+ 1470 00ac 311C     	 mov r1,r6
+ 1471 00ae C21B     	 sub r2,r0,r7
+ 1472 00b0 6846     	 mov r0,sp
+ 1473 00b2 FFF7FEFF 	 bl sprintf
+ 1474              	.LVL135:
+ 1475 00b6 291C     	 mov r1,r5
+ 1476 00b8 221C     	 mov r2,r4
+ 1477 00ba 6846     	 mov r0,sp
+ 1478 00bc FFF7FEFF 	 bl optiga_lib_print_message
+ 1479              	.LVL136:
+ 1480 00c0 C748     	 ldr r0,.L77+12
+ 1481 00c2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1482              	.LVL137:
+ 1483 00c6 FA20     	 mov r0,#250
+ 1484 00c8 C000     	 lsl r0,r0,#3
+ 1485 00ca FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1486              	.LVL138:
+ 348:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_util_update_count);
+ 1487              	 .loc 1 348 0
+ 1488 00ce FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1489              	.LVL139:
+ 1490 00d2 071C     	 mov r7,r0
+ 1491              	.LVL140:
+ 1492 00d4 FFF7FEFF 	 bl optiga_shell_util_update_count
+ 1493              	.LVL141:
+ 1494 00d8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1495              	.LVL142:
+ 1496 00dc 311C     	 mov r1,r6
+ 1497 00de C21B     	 sub r2,r0,r7
+ 1498 00e0 6846     	 mov r0,sp
+ 1499 00e2 FFF7FEFF 	 bl sprintf
+ 1500              	.LVL143:
+ 1501 00e6 291C     	 mov r1,r5
+ 1502 00e8 221C     	 mov r2,r4
+ 1503 00ea 6846     	 mov r0,sp
+ 1504 00ec FFF7FEFF 	 bl optiga_lib_print_message
+ 1505              	.LVL144:
+ 1506 00f0 BB48     	 ldr r0,.L77+12
+ 1507 00f2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1508              	.LVL145:
+ 1509 00f6 FA20     	 mov r0,#250
+ 1510 00f8 C000     	 lsl r0,r0,#3
+ 1511 00fa FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1512              	.LVL146:
+ 349:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_util_protected_update);
+ 1513              	 .loc 1 349 0
+ 1514 00fe FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1515              	.LVL147:
+ 1516 0102 071C     	 mov r7,r0
+ 1517              	.LVL148:
+ 1518 0104 FFF7FEFF 	 bl optiga_shell_util_protected_update
+ 1519              	.LVL149:
+ 1520 0108 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1521              	.LVL150:
+ 1522 010c 311C     	 mov r1,r6
+ 1523 010e C21B     	 sub r2,r0,r7
+ 1524 0110 6846     	 mov r0,sp
+ 1525 0112 FFF7FEFF 	 bl sprintf
+ 1526              	.LVL151:
+ 1527 0116 291C     	 mov r1,r5
+ 1528 0118 221C     	 mov r2,r4
+ 1529 011a 6846     	 mov r0,sp
+ 1530 011c FFF7FEFF 	 bl optiga_lib_print_message
+ 1531              	.LVL152:
+ 1532 0120 AF48     	 ldr r0,.L77+12
+ 1533 0122 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1534              	.LVL153:
+ 1535 0126 FA20     	 mov r0,#250
+ 1536 0128 C000     	 lsl r0,r0,#3
+ 1537 012a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1538              	.LVL154:
+ 350:../optiga_shell.c **** 
+ 351:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_hash);
+ 1539              	 .loc 1 351 0
+ 1540 012e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1541              	.LVL155:
+ 1542 0132 071C     	 mov r7,r0
+ 1543              	.LVL156:
+ 1544 0134 FFF7FEFF 	 bl optiga_shell_crypt_hash
+ 1545              	.LVL157:
+ 1546 0138 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1547              	.LVL158:
+ 1548 013c 311C     	 mov r1,r6
+ 1549 013e C21B     	 sub r2,r0,r7
+ 1550 0140 6846     	 mov r0,sp
+ 1551 0142 FFF7FEFF 	 bl sprintf
+ 1552              	.LVL159:
+ 1553 0146 291C     	 mov r1,r5
+ 1554 0148 221C     	 mov r2,r4
+ 1555 014a 6846     	 mov r0,sp
+ 1556 014c FFF7FEFF 	 bl optiga_lib_print_message
+ 1557              	.LVL160:
+ 1558 0150 A348     	 ldr r0,.L77+12
+ 1559 0152 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1560              	.LVL161:
+ 1561 0156 FA20     	 mov r0,#250
+ 1562 0158 C000     	 lsl r0,r0,#3
+ 1563 015a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1564              	.LVL162:
+ 352:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_tls_prf_sha256);
+ 1565              	 .loc 1 352 0
+ 1566 015e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1567              	.LVL163:
+ 1568 0162 071C     	 mov r7,r0
+ 1569              	.LVL164:
+ 1570 0164 FFF7FEFF 	 bl optiga_shell_crypt_tls_prf_sha256
+ 1571              	.LVL165:
+ 1572 0168 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1573              	.LVL166:
+ 1574 016c 311C     	 mov r1,r6
+ 1575 016e C21B     	 sub r2,r0,r7
+ 1576 0170 6846     	 mov r0,sp
+ 1577 0172 FFF7FEFF 	 bl sprintf
+ 1578              	.LVL167:
+ 1579 0176 291C     	 mov r1,r5
+ 1580 0178 221C     	 mov r2,r4
+ 1581 017a 6846     	 mov r0,sp
+ 1582 017c FFF7FEFF 	 bl optiga_lib_print_message
+ 1583              	.LVL168:
+ 1584 0180 9748     	 ldr r0,.L77+12
+ 1585 0182 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1586              	.LVL169:
+ 1587 0186 FA20     	 mov r0,#250
+ 1588 0188 C000     	 lsl r0,r0,#3
+ 1589 018a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1590              	.LVL170:
+ 353:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_random);
+ 1591              	 .loc 1 353 0
+ 1592 018e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1593              	.LVL171:
+ 1594 0192 071C     	 mov r7,r0
+ 1595              	.LVL172:
+ 1596 0194 FFF7FEFF 	 bl optiga_shell_crypt_random
+ 1597              	.LVL173:
+ 1598 0198 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1599              	.LVL174:
+ 1600 019c 311C     	 mov r1,r6
+ 1601 019e C21B     	 sub r2,r0,r7
+ 1602 01a0 6846     	 mov r0,sp
+ 1603 01a2 FFF7FEFF 	 bl sprintf
+ 1604              	.LVL175:
+ 1605 01a6 291C     	 mov r1,r5
+ 1606 01a8 221C     	 mov r2,r4
+ 1607 01aa 6846     	 mov r0,sp
+ 1608 01ac FFF7FEFF 	 bl optiga_lib_print_message
+ 1609              	.LVL176:
+ 1610 01b0 8B48     	 ldr r0,.L77+12
+ 1611 01b2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1612              	.LVL177:
+ 1613 01b6 FA20     	 mov r0,#250
+ 1614 01b8 C000     	 lsl r0,r0,#3
+ 1615 01ba FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1616              	.LVL178:
+ 354:../optiga_shell.c **** 
+ 355:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_ecc_generate_keypair);
+ 1617              	 .loc 1 355 0
+ 1618 01be FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1619              	.LVL179:
+ 1620 01c2 071C     	 mov r7,r0
+ 1621              	.LVL180:
+ 1622 01c4 FFF7FEFF 	 bl optiga_shell_crypt_ecc_generate_keypair
+ 1623              	.LVL181:
+ 1624 01c8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1625              	.LVL182:
+ 1626 01cc 311C     	 mov r1,r6
+ 1627 01ce C21B     	 sub r2,r0,r7
+ 1628 01d0 6846     	 mov r0,sp
+ 1629 01d2 FFF7FEFF 	 bl sprintf
+ 1630              	.LVL183:
+ 1631 01d6 291C     	 mov r1,r5
+ 1632 01d8 221C     	 mov r2,r4
+ 1633 01da 6846     	 mov r0,sp
+ 1634 01dc FFF7FEFF 	 bl optiga_lib_print_message
+ 1635              	.LVL184:
+ 1636 01e0 7F48     	 ldr r0,.L77+12
+ 1637 01e2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1638              	.LVL185:
+ 1639 01e6 FA20     	 mov r0,#250
+ 1640 01e8 C000     	 lsl r0,r0,#3
+ 1641 01ea FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1642              	.LVL186:
+ 356:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_ecdsa_sign);
+ 1643              	 .loc 1 356 0
+ 1644 01ee FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1645              	.LVL187:
+ 1646 01f2 071C     	 mov r7,r0
+ 1647              	.LVL188:
+ 1648 01f4 FFF7FEFF 	 bl optiga_shell_crypt_ecdsa_sign
+ 1649              	.LVL189:
+ 1650 01f8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1651              	.LVL190:
+ 1652 01fc 311C     	 mov r1,r6
+ 1653 01fe C21B     	 sub r2,r0,r7
+ 1654 0200 6846     	 mov r0,sp
+ 1655 0202 FFF7FEFF 	 bl sprintf
+ 1656              	.LVL191:
+ 1657 0206 291C     	 mov r1,r5
+ 1658 0208 221C     	 mov r2,r4
+ 1659 020a 6846     	 mov r0,sp
+ 1660 020c FFF7FEFF 	 bl optiga_lib_print_message
+ 1661              	.LVL192:
+ 1662 0210 7348     	 ldr r0,.L77+12
+ 1663 0212 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1664              	.LVL193:
+ 1665 0216 FA20     	 mov r0,#250
+ 1666 0218 C000     	 lsl r0,r0,#3
+ 1667 021a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1668              	.LVL194:
+ 357:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_ecdsa_verify);
+ 1669              	 .loc 1 357 0
+ 1670 021e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1671              	.LVL195:
+ 1672 0222 071C     	 mov r7,r0
+ 1673              	.LVL196:
+ 1674 0224 FFF7FEFF 	 bl optiga_shell_crypt_ecdsa_verify
+ 1675              	.LVL197:
+ 1676 0228 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1677              	.LVL198:
+ 1678 022c 311C     	 mov r1,r6
+ 1679 022e C21B     	 sub r2,r0,r7
+ 1680 0230 6846     	 mov r0,sp
+ 1681 0232 FFF7FEFF 	 bl sprintf
+ 1682              	.LVL199:
+ 1683 0236 291C     	 mov r1,r5
+ 1684 0238 221C     	 mov r2,r4
+ 1685 023a 6846     	 mov r0,sp
+ 1686 023c FFF7FEFF 	 bl optiga_lib_print_message
+ 1687              	.LVL200:
+ 1688 0240 6748     	 ldr r0,.L77+12
+ 1689 0242 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1690              	.LVL201:
+ 1691 0246 FA20     	 mov r0,#250
+ 1692 0248 C000     	 lsl r0,r0,#3
+ 1693 024a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1694              	.LVL202:
+ 358:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_ecdh);
+ 1695              	 .loc 1 358 0
+ 1696 024e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1697              	.LVL203:
+ 1698 0252 071C     	 mov r7,r0
+ 1699              	.LVL204:
+ 1700 0254 FFF7FEFF 	 bl optiga_shell_crypt_ecdh
+ 1701              	.LVL205:
+ 1702 0258 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1703              	.LVL206:
+ 1704 025c 311C     	 mov r1,r6
+ 1705 025e C21B     	 sub r2,r0,r7
+ 1706 0260 6846     	 mov r0,sp
+ 1707 0262 FFF7FEFF 	 bl sprintf
+ 1708              	.LVL207:
+ 1709 0266 291C     	 mov r1,r5
+ 1710 0268 221C     	 mov r2,r4
+ 1711 026a 6846     	 mov r0,sp
+ 1712 026c FFF7FEFF 	 bl optiga_lib_print_message
+ 1713              	.LVL208:
+ 1714 0270 5B48     	 ldr r0,.L77+12
+ 1715 0272 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1716              	.LVL209:
+ 1717 0276 FA20     	 mov r0,#250
+ 1718 0278 C000     	 lsl r0,r0,#3
+ 1719 027a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1720              	.LVL210:
+ 359:../optiga_shell.c **** 
+ 360:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_generate_keypair);
+ 1721              	 .loc 1 360 0
+ 1722 027e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1723              	.LVL211:
+ 1724 0282 071C     	 mov r7,r0
+ 1725              	.LVL212:
+ 1726 0284 FFF7FEFF 	 bl optiga_shell_crypt_generate_keypair
+ 1727              	.LVL213:
+ 1728 0288 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1729              	.LVL214:
+ 1730 028c 311C     	 mov r1,r6
+ 1731 028e C21B     	 sub r2,r0,r7
+ 1732 0290 6846     	 mov r0,sp
+ 1733 0292 FFF7FEFF 	 bl sprintf
+ 1734              	.LVL215:
+ 1735 0296 291C     	 mov r1,r5
+ 1736 0298 221C     	 mov r2,r4
+ 1737 029a 6846     	 mov r0,sp
+ 1738 029c FFF7FEFF 	 bl optiga_lib_print_message
+ 1739              	.LVL216:
+ 1740 02a0 4F48     	 ldr r0,.L77+12
+ 1741 02a2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1742              	.LVL217:
+ 1743 02a6 FA20     	 mov r0,#250
+ 1744 02a8 C000     	 lsl r0,r0,#3
+ 1745 02aa FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1746              	.LVL218:
+ 361:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_sign);
+ 1747              	 .loc 1 361 0
+ 1748 02ae FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1749              	.LVL219:
+ 1750 02b2 071C     	 mov r7,r0
+ 1751              	.LVL220:
+ 1752 02b4 FFF7FEFF 	 bl optiga_shell_crypt_rsa_sign
+ 1753              	.LVL221:
+ 1754 02b8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1755              	.LVL222:
+ 1756 02bc 311C     	 mov r1,r6
+ 1757 02be C21B     	 sub r2,r0,r7
+ 1758 02c0 6846     	 mov r0,sp
+ 1759 02c2 FFF7FEFF 	 bl sprintf
+ 1760              	.LVL223:
+ 1761 02c6 291C     	 mov r1,r5
+ 1762 02c8 221C     	 mov r2,r4
+ 1763 02ca 6846     	 mov r0,sp
+ 1764 02cc FFF7FEFF 	 bl optiga_lib_print_message
+ 1765              	.LVL224:
+ 1766 02d0 4348     	 ldr r0,.L77+12
+ 1767 02d2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1768              	.LVL225:
+ 1769 02d6 FA20     	 mov r0,#250
+ 1770 02d8 C000     	 lsl r0,r0,#3
+ 1771 02da FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1772              	.LVL226:
+ 362:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_verify);
+ 1773              	 .loc 1 362 0
+ 1774 02de FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1775              	.LVL227:
+ 1776 02e2 071C     	 mov r7,r0
+ 1777              	.LVL228:
+ 1778 02e4 FFF7FEFF 	 bl optiga_shell_crypt_rsa_verify
+ 1779              	.LVL229:
+ 1780 02e8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1781              	.LVL230:
+ 1782 02ec 311C     	 mov r1,r6
+ 1783 02ee C21B     	 sub r2,r0,r7
+ 1784 02f0 6846     	 mov r0,sp
+ 1785 02f2 FFF7FEFF 	 bl sprintf
+ 1786              	.LVL231:
+ 1787 02f6 291C     	 mov r1,r5
+ 1788 02f8 221C     	 mov r2,r4
+ 1789 02fa 6846     	 mov r0,sp
+ 1790 02fc FFF7FEFF 	 bl optiga_lib_print_message
+ 1791              	.LVL232:
+ 1792 0300 3748     	 ldr r0,.L77+12
+ 1793 0302 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1794              	.LVL233:
+ 1795 0306 FA20     	 mov r0,#250
+ 1796 0308 C000     	 lsl r0,r0,#3
+ 1797 030a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1798              	.LVL234:
+ 363:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_encrypt_message);
+ 1799              	 .loc 1 363 0
+ 1800 030e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1801              	.LVL235:
+ 1802 0312 071C     	 mov r7,r0
+ 1803              	.LVL236:
+ 1804 0314 FFF7FEFF 	 bl optiga_shell_crypt_rsa_encrypt_message
+ 1805              	.LVL237:
+ 1806 0318 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1807              	.LVL238:
+ 1808 031c 311C     	 mov r1,r6
+ 1809 031e C21B     	 sub r2,r0,r7
+ 1810 0320 6846     	 mov r0,sp
+ 1811 0322 FFF7FEFF 	 bl sprintf
+ 1812              	.LVL239:
+ 1813 0326 291C     	 mov r1,r5
+ 1814 0328 221C     	 mov r2,r4
+ 1815 032a 6846     	 mov r0,sp
+ 1816 032c FFF7FEFF 	 bl optiga_lib_print_message
+ 1817              	.LVL240:
+ 1818 0330 2B48     	 ldr r0,.L77+12
+ 1819 0332 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1820              	.LVL241:
+ 1821 0336 FA20     	 mov r0,#250
+ 1822 0338 C000     	 lsl r0,r0,#3
+ 1823 033a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1824              	.LVL242:
+ 364:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_encrypt_session);
+ 1825              	 .loc 1 364 0
+ 1826 033e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1827              	.LVL243:
+ 1828 0342 071C     	 mov r7,r0
+ 1829              	.LVL244:
+ 1830 0344 FFF7FEFF 	 bl optiga_shell_crypt_rsa_encrypt_session
+ 1831              	.LVL245:
+ 1832 0348 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1833              	.LVL246:
+ 1834 034c 311C     	 mov r1,r6
+ 1835 034e C21B     	 sub r2,r0,r7
+ 1836 0350 6846     	 mov r0,sp
+ 1837 0352 FFF7FEFF 	 bl sprintf
+ 1838              	.LVL247:
+ 1839 0356 291C     	 mov r1,r5
+ 1840 0358 221C     	 mov r2,r4
+ 1841 035a 6846     	 mov r0,sp
+ 1842 035c FFF7FEFF 	 bl optiga_lib_print_message
+ 1843              	.LVL248:
+ 1844 0360 1F48     	 ldr r0,.L77+12
+ 1845 0362 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1846              	.LVL249:
+ 1847 0366 FA20     	 mov r0,#250
+ 1848 0368 C000     	 lsl r0,r0,#3
+ 1849 036a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1850              	.LVL250:
+ 365:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_decrypt_and_store);
+ 1851              	 .loc 1 365 0
+ 1852 036e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1853              	.LVL251:
+ 1854 0372 071C     	 mov r7,r0
+ 1855              	.LVL252:
+ 1856 0374 FFF7FEFF 	 bl optiga_shell_crypt_rsa_decrypt_and_store
+ 1857              	.LVL253:
+ 1858 0378 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1859              	.LVL254:
+ 1860 037c 311C     	 mov r1,r6
+ 1861 037e C21B     	 sub r2,r0,r7
+ 1862 0380 6846     	 mov r0,sp
+ 1863 0382 FFF7FEFF 	 bl sprintf
+ 1864              	.LVL255:
+ 1865 0386 291C     	 mov r1,r5
+ 1866 0388 221C     	 mov r2,r4
+ 1867 038a 6846     	 mov r0,sp
+ 1868 038c FFF7FEFF 	 bl optiga_lib_print_message
+ 1869              	.LVL256:
+ 1870 0390 1348     	 ldr r0,.L77+12
+ 1871 0392 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1872              	.LVL257:
+ 1873 0396 FA20     	 mov r0,#250
+ 1874 0398 C000     	 lsl r0,r0,#3
+ 1875 039a FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1876              	.LVL258:
+ 366:../optiga_shell.c **** 	PRINT_PERFORMANCE_RESULTS(optiga_shell_crypt_rsa_decrypt_and_export);
+ 1877              	 .loc 1 366 0
+ 1878 039e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1879              	.LVL259:
+ 1880 03a2 071C     	 mov r7,r0
+ 1881              	.LVL260:
+ 1882 03a4 FFF7FEFF 	 bl optiga_shell_crypt_rsa_decrypt_and_export
+ 1883              	.LVL261:
+ 1884 03a8 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1885              	.LVL262:
+ 1886 03ac 311C     	 mov r1,r6
+ 1887 03ae C21B     	 sub r2,r0,r7
+ 1888 03b0 6846     	 mov r0,sp
+ 1889 03b2 FFF7FEFF 	 bl sprintf
+ 1890              	.LVL263:
+ 1891 03b6 291C     	 mov r1,r5
+ 1892 03b8 221C     	 mov r2,r4
+ 1893 03ba 6846     	 mov r0,sp
+ 1894 03bc FFF7FEFF 	 bl optiga_lib_print_message
+ 1895              	.LVL264:
+ 1896 03c0 0748     	 ldr r0,.L77+12
+ 1897 03c2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1898              	.LVL265:
+ 1899 03c6 FA20     	 mov r0,#250
+ 1900 03c8 C000     	 lsl r0,r0,#3
+ 1901 03ca FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 1902              	.LVL266:
+ 367:../optiga_shell.c **** }
+ 1903              	 .loc 1 367 0
+ 1904 03ce 09B0     	 add sp,sp,#36
+ 1905              	 
+ 1906              	.LVL267:
+ 1907 03d0 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 1908              	.L78:
+ 1909 03d2 C046     	 .align 2
+ 1910              	.L77:
+ 1911 03d4 2A0F0000 	 .word .LC198
+ 1912 03d8 36000000 	 .word .LC3
+ 1913 03dc 49000000 	 .word .LC5
+ 1914 03e0 400F0000 	 .word .LC202
+ 1915              	 .cfi_endproc
+ 1916              	.LFE299:
+ 1918              	 .section .text.optiga_shell_show_usage,"ax",%progbits
+ 1919              	 .align 1
+ 1920              	 .code 16
+ 1921              	 .thumb_func
+ 1923              	optiga_shell_show_usage:
+ 1924              	.LFB300:
+ 368:../optiga_shell.c **** 
+ 369:../optiga_shell.c **** 
+ 370:../optiga_shell.c **** static void optiga_shell_show_usage();
+ 371:../optiga_shell.c **** 
+ 372:../optiga_shell.c **** 
+ 373:../optiga_shell.c **** optiga_example_cmd_t optiga_cmds [] =
+ 374:../optiga_shell.c **** {
+ 375:../optiga_shell.c **** 		{"",                                        "help",			optiga_shell_show_usage},
+ 376:../optiga_shell.c **** 		{"    initialize optiga         : ","1",	optiga_shell_init},
+ 377:../optiga_shell.c **** 		{"    de-initialize optiga      : ","2",	optiga_shell_deinit},
+ 378:../optiga_shell.c **** 		{"    run all tests at once     : ","3",	optiga_shell_selftest},
+ 379:../optiga_shell.c **** 		{"    read data                 : ","4",	optiga_shell_util_read_data},
+ 380:../optiga_shell.c **** 		{"    write data                : ","5",	optiga_shell_util_write_data},
+ 381:../optiga_shell.c **** 		{"    binding host with optiga  : ","6",	optiga_shell_pair_host_optiga},
+ 382:../optiga_shell.c **** 		{"    hibernate and restore     : ","7",	optiga_shell_util_hibernate_restore},
+ 383:../optiga_shell.c **** 		{"    update counter            : ","8",	optiga_shell_util_update_count},
+ 384:../optiga_shell.c **** 		{"    protected update          : ","9",	optiga_shell_util_protected_update},
+ 385:../optiga_shell.c **** 
+ 386:../optiga_shell.c **** 		{"    hashing of data           : ","10",	optiga_shell_crypt_hash},
+ 387:../optiga_shell.c **** 		{"    tls pfr sha256            : ","11",	optiga_shell_crypt_tls_prf_sha256},
+ 388:../optiga_shell.c **** 		{"    random number generation  : ","12",	optiga_shell_crypt_random},
+ 389:../optiga_shell.c **** 
+ 390:../optiga_shell.c **** 		{"    ecc key pair generation   : ","13",	optiga_shell_crypt_ecc_generate_keypair},
+ 391:../optiga_shell.c **** 		{"    ecdsa sign                : ","14",	optiga_shell_crypt_ecdsa_sign},
+ 392:../optiga_shell.c **** 		{"    ecdsa verify sign         : ","15",	optiga_shell_crypt_ecdsa_verify},
+ 393:../optiga_shell.c **** 		{"    ecc diffie hellman        : ","16",	optiga_shell_crypt_ecdh},
+ 394:../optiga_shell.c **** 
+ 395:../optiga_shell.c **** 		{"    rsa key pair generation   : ","17",	optiga_shell_crypt_generate_keypair},
+ 396:../optiga_shell.c **** 		{"    rsa sign                  : ","18",	optiga_shell_crypt_rsa_sign},
+ 397:../optiga_shell.c **** 		{"    rsa verify sign           : ","19",	optiga_shell_crypt_rsa_verify},
+ 398:../optiga_shell.c **** 		{"    rsa encrypt message       : ","20",	optiga_shell_crypt_rsa_encrypt_message},
+ 399:../optiga_shell.c **** 		{"    rsa encrypt session       : ","21",	optiga_shell_crypt_rsa_encrypt_session},
+ 400:../optiga_shell.c **** 		{"    rsa decrypt and store     : ","22",	optiga_shell_crypt_rsa_decrypt_and_store},
+ 401:../optiga_shell.c **** 		{"    rsa decrypt and export    : ","23",	optiga_shell_crypt_rsa_decrypt_and_export},
+ 402:../optiga_shell.c **** };
+ 403:../optiga_shell.c **** 
+ 404:../optiga_shell.c **** #define OPTIGA_SIZE_OF_CMDS			(sizeof(optiga_cmds)/sizeof(optiga_example_cmd_t))
+ 405:../optiga_shell.c **** 
+ 406:../optiga_shell.c **** static void optiga_shell_show_usage()
+ 407:../optiga_shell.c **** {
+ 1925              	 .loc 1 407 0
+ 1926              	 .cfi_startproc
+ 1927              	.LVL268:
+ 1928 0000 38B5     	 push {r3,r4,r5,lr}
+ 1929              	.LCFI24:
+ 1930              	 .cfi_def_cfa_offset 16
+ 1931              	 .cfi_offset 3,-16
+ 1932              	 .cfi_offset 4,-12
+ 1933              	 .cfi_offset 5,-8
+ 1934              	 .cfi_offset 14,-4
+ 408:../optiga_shell.c **** 	uint8_t number_of_cmds = OPTIGA_SIZE_OF_CMDS;
+ 409:../optiga_shell.c **** 	uint8_t index = 0;
+ 410:../optiga_shell.c **** 	optiga_example_cmd_t * current_cmd;
+ 411:../optiga_shell.c **** 	optiga_lib_print_string_with_newline("");
+ 1935              	 .loc 1 411 0
+ 1936 0002 0E48     	 ldr r0,.L85
+ 1937 0004 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1938              	.LVL269:
+ 412:../optiga_shell.c **** 	optiga_lib_print_string_with_newline("    usage                : optiga -<cmd>");
+ 1939              	 .loc 1 412 0
+ 1940 0008 0D48     	 ldr r0,.L85+4
+ 1941 000a FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1942              	.LVL270:
+ 1943 000e 0D4B     	 ldr r3,.L85+8
+ 1944 0010 1C1D     	 add r4,r3,#4
+ 1945 0012 2533     	 add r3,r3,#37
+ 1946 0014 FF33     	 add r3,r3,#255
+ 1947 0016 1D1C     	 mov r5,r3
+ 1948              	.LVL271:
+ 1949              	.L81:
+ 413:../optiga_shell.c **** 	for(index = 0; index < number_of_cmds; index++)
+ 414:../optiga_shell.c **** 	{
+ 415:../optiga_shell.c **** 		current_cmd = &optiga_cmds[index];
+ 416:../optiga_shell.c **** 		if(0 != strcmp("help",current_cmd->cmd_options))
+ 1950              	 .loc 1 416 0
+ 1951 0018 0B48     	 ldr r0,.L85+12
+ 1952 001a 2168     	 ldr r1,[r4]
+ 1953 001c FFF7FEFF 	 bl strcmp
+ 1954              	.LVL272:
+ 1955 0020 0028     	 cmp r0,#0
+ 1956 0022 06D0     	 beq .L80
+ 1957 0024 231F     	 sub r3,r4,#4
+ 417:../optiga_shell.c **** 		{
+ 418:../optiga_shell.c **** 			optiga_lib_print_string(current_cmd->cmd_description);
+ 1958              	 .loc 1 418 0
+ 1959 0026 1868     	 ldr r0,[r3]
+ 1960 0028 FFF7FEFF 	 bl optiga_lib_print_string
+ 1961              	.LVL273:
+ 419:../optiga_shell.c **** 			optiga_lib_print_string_with_newline(current_cmd->cmd_options);
+ 1962              	 .loc 1 419 0
+ 1963 002c 2068     	 ldr r0,[r4]
+ 1964 002e FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 1965              	.LVL274:
+ 1966              	.L80:
+ 1967 0032 0C34     	 add r4,r4,#12
+ 413:../optiga_shell.c **** 	for(index = 0; index < number_of_cmds; index++)
+ 1968              	 .loc 1 413 0 discriminator 2
+ 1969 0034 AC42     	 cmp r4,r5
+ 1970 0036 EFD1     	 bne .L81
+ 420:../optiga_shell.c **** 		}
+ 421:../optiga_shell.c **** 	}
+ 422:../optiga_shell.c **** }
+ 1971              	 .loc 1 422 0
+ 1972              	 
+ 1973 0038 38BD     	 pop {r3,r4,r5,pc}
+ 1974              	.L86:
+ 1975 003a C046     	 .align 2
+ 1976              	.L85:
+ 1977 003c 400F0000 	 .word .LC202
+ 1978 0040 410F0000 	 .word .LC207
+ 1979 0044 00000000 	 .word .LANCHOR2
+ 1980 0048 6A0F0000 	 .word .LC210
+ 1981              	 .cfi_endproc
+ 1982              	.LFE300:
+ 1984              	 .section .text.optiga_shell_deinit,"ax",%progbits
+ 1985              	 .align 1
+ 1986              	 .code 16
+ 1987              	 .thumb_func
+ 1989              	optiga_shell_deinit:
+ 1990              	.LFB278:
+ 147:../optiga_shell.c **** 	optiga_lib_status_t return_status;
+ 1991              	 .loc 1 147 0
+ 1992              	 .cfi_startproc
+ 1993 0000 38B5     	 push {r3,r4,r5,lr}
+ 1994              	.LCFI25:
+ 1995              	 .cfi_def_cfa_offset 16
+ 1996              	 .cfi_offset 3,-16
+ 1997              	 .cfi_offset 4,-12
+ 1998              	 .cfi_offset 5,-8
+ 1999              	 .cfi_offset 14,-4
+ 155:../optiga_shell.c **** 		return_status = optiga_util_close_application(me_util, 0);
+ 2000              	 .loc 1 155 0
+ 2001 0002 0123     	 mov r3,#1
+ 156:../optiga_shell.c **** 
+ 2002              	 .loc 1 156 0
+ 2003 0004 094D     	 ldr r5,.L91
+ 155:../optiga_shell.c **** 		return_status = optiga_util_close_application(me_util, 0);
+ 2004              	 .loc 1 155 0
+ 2005 0006 0A4C     	 ldr r4,.L91+4
+ 156:../optiga_shell.c **** 
+ 2006              	 .loc 1 156 0
+ 2007 0008 2868     	 ldr r0,[r5]
+ 2008 000a 0021     	 mov r1,#0
+ 155:../optiga_shell.c **** 		return_status = optiga_util_close_application(me_util, 0);
+ 2009              	 .loc 1 155 0
+ 2010 000c 2380     	 strh r3,[r4]
+ 156:../optiga_shell.c **** 
+ 2011              	 .loc 1 156 0
+ 2012 000e FFF7FEFF 	 bl optiga_util_close_application
+ 2013              	.LVL275:
+ 158:../optiga_shell.c **** 		{
+ 2014              	 .loc 1 158 0
+ 2015 0012 0028     	 cmp r0,#0
+ 2016 0014 08D1     	 bne .L87
+ 2017              	.L89:
+ 163:../optiga_shell.c **** 		{
+ 2018              	 .loc 1 163 0 discriminator 1
+ 2019 0016 2388     	 ldrh r3,[r4]
+ 2020 0018 012B     	 cmp r3,#1
+ 2021 001a FCD0     	 beq .L89
+ 168:../optiga_shell.c **** 		{
+ 2022              	 .loc 1 168 0
+ 2023 001c 2388     	 ldrh r3,[r4]
+ 2024 001e 002B     	 cmp r3,#0
+ 2025 0020 02D1     	 bne .L87
+ 2026              	.LBB4:
+ 2027              	.LBB5:
+ 175:../optiga_shell.c **** 	}while(FALSE);
+ 2028              	 .loc 1 175 0
+ 2029 0022 2868     	 ldr r0,[r5]
+ 2030              	.LVL276:
+ 2031 0024 FFF7FEFF 	 bl optiga_util_destroy
+ 2032              	.LVL277:
+ 2033              	.L87:
+ 2034              	.LBE5:
+ 2035              	.LBE4:
+ 177:../optiga_shell.c **** 
+ 2036              	 .loc 1 177 0
+ 2037              	 
+ 2038 0028 38BD     	 pop {r3,r4,r5,pc}
+ 2039              	.L92:
+ 2040 002a C046     	 .align 2
+ 2041              	.L91:
+ 2042 002c 00000000 	 .word .LANCHOR1
+ 2043 0030 00000000 	 .word .LANCHOR0
+ 2044              	 .cfi_endproc
+ 2045              	.LFE278:
+ 2047              	 .section .text.optiga_shell_begin,"ax",%progbits
+ 2048              	 .align 1
+ 2049              	 .global optiga_shell_begin
+ 2050              	 .code 16
+ 2051              	 .thumb_func
+ 2053              	optiga_shell_begin:
+ 2054              	.LFB304:
+ 423:../optiga_shell.c **** 
+ 424:../optiga_shell.c **** static void optiga_shell_trim_cmd(char_t * user_cmd)
+ 425:../optiga_shell.c **** {
+ 426:../optiga_shell.c **** 	char_t* i = user_cmd;
+ 427:../optiga_shell.c **** 	char_t* j = user_cmd;
+ 428:../optiga_shell.c **** 	while(*j != 0)
+ 429:../optiga_shell.c **** 	{
+ 430:../optiga_shell.c **** 		*i = *j++;
+ 431:../optiga_shell.c **** 		if(*i != ' ')
+ 432:../optiga_shell.c **** 			i++;
+ 433:../optiga_shell.c **** 	}
+ 434:../optiga_shell.c **** 	*i = 0;
+ 435:../optiga_shell.c **** 	if(strlen(user_cmd)>strlen(OPTIGA_SHELL))
+ 436:../optiga_shell.c **** 	{
+ 437:../optiga_shell.c **** 		strcpy(user_cmd,user_cmd+strlen(OPTIGA_SHELL)-1);
+ 438:../optiga_shell.c **** 	}
+ 439:../optiga_shell.c **** }
+ 440:../optiga_shell.c **** 
+ 441:../optiga_shell.c **** #include <stdio.h>
+ 442:../optiga_shell.c **** static void optiga_shell_execute_example(char_t * user_cmd)
+ 443:../optiga_shell.c **** {
+ 444:../optiga_shell.c **** 	uint8_t number_of_cmds = OPTIGA_SIZE_OF_CMDS;
+ 445:../optiga_shell.c **** 	uint8_t index = 0,cmd_found = 0;
+ 446:../optiga_shell.c **** 	optiga_example_cmd_t * current_cmd;
+ 447:../optiga_shell.c **** 
+ 448:../optiga_shell.c **** 	optiga_shell_trim_cmd(user_cmd);
+ 449:../optiga_shell.c **** 
+ 450:../optiga_shell.c **** 	for(index = 0; index < number_of_cmds; index++)
+ 451:../optiga_shell.c **** 	{
+ 452:../optiga_shell.c **** 		current_cmd = &optiga_cmds[index];
+ 453:../optiga_shell.c **** 		if((0 == strcmp(user_cmd,current_cmd->cmd_options)))
+ 454:../optiga_shell.c **** 		{
+ 455:../optiga_shell.c **** 			if(NULL != current_cmd->cmd_handler)
+ 456:../optiga_shell.c **** 			{
+ 457:../optiga_shell.c **** 				int timestamp = pal_os_timer_get_time_in_milliseconds();
+ 458:../optiga_shell.c **** 				current_cmd->cmd_handler();
+ 459:../optiga_shell.c **** 				char buffer_string[30];
+ 460:../optiga_shell.c **** 				sprintf(buffer_string, "Example takes %d msec", (int) pal_os_timer_get_time_in_milliseconds() -
+ 461:../optiga_shell.c **** 				OPTIGA_EXAMPLE_LOG_MESSAGE(buffer_string);
+ 462:../optiga_shell.c **** 				optiga_lib_print_string_with_newline("");
+ 463:../optiga_shell.c **** 				cmd_found = 1;
+ 464:../optiga_shell.c **** 				break;
+ 465:../optiga_shell.c **** 			}
+ 466:../optiga_shell.c **** 			else
+ 467:../optiga_shell.c **** 			{
+ 468:../optiga_shell.c **** 				optiga_lib_print_string_with_newline("No example exists for this request");
+ 469:../optiga_shell.c **** 				break;
+ 470:../optiga_shell.c **** 			}
+ 471:../optiga_shell.c **** 		}
+ 472:../optiga_shell.c **** 	}
+ 473:../optiga_shell.c **** 	if(!cmd_found)
+ 474:../optiga_shell.c **** 	{
+ 475:../optiga_shell.c **** 		optiga_shell_show_usage();
+ 476:../optiga_shell.c **** 	}
+ 477:../optiga_shell.c **** 
+ 478:../optiga_shell.c **** }
+ 479:../optiga_shell.c **** 
+ 480:../optiga_shell.c **** static void optiga_shell_show_prompt()
+ 481:../optiga_shell.c **** {
+ 482:../optiga_shell.c **** 	optiga_lib_print_string("$");
+ 483:../optiga_shell.c **** }
+ 484:../optiga_shell.c **** 
+ 485:../optiga_shell.c **** void optiga_shell_begin(void)
+ 486:../optiga_shell.c **** {
+ 2055              	 .loc 1 486 0
+ 2056              	 .cfi_startproc
+ 2057 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 2058              	.LCFI26:
+ 2059              	 .cfi_def_cfa_offset 20
+ 2060              	 .cfi_offset 4,-20
+ 2061              	 .cfi_offset 5,-16
+ 2062              	 .cfi_offset 6,-12
+ 2063              	 .cfi_offset 7,-8
+ 2064              	 .cfi_offset 14,-4
+ 487:../optiga_shell.c **** 	uint8_t ch = 0;
+ 2065              	 .loc 1 487 0
+ 2066 0002 0025     	 mov r5,#0
+ 486:../optiga_shell.c **** 	uint8_t ch = 0;
+ 2067              	 .loc 1 486 0
+ 2068 0004 99B0     	 sub sp,sp,#100
+ 2069              	.LCFI27:
+ 2070              	 .cfi_def_cfa_offset 120
+ 2071              	.LBB17:
+ 2072              	.LBB18:
+ 482:../optiga_shell.c **** }
+ 2073              	 .loc 1 482 0
+ 2074 0006 384C     	 ldr r4,.L114
+ 2075              	.LBE18:
+ 2076              	.LBE17:
+ 2077              	 .loc 1 487 0
+ 2078 0008 02AB     	 add r3,sp,#8
+ 2079 000a DE1C     	 add r6,r3,#3
+ 2080              	.LBB21:
+ 2081              	.LBB19:
+ 482:../optiga_shell.c **** }
+ 2082              	 .loc 1 482 0
+ 2083 000c 201C     	 mov r0,r4
+ 2084              	.LBE19:
+ 2085              	.LBE21:
+ 2086              	 .loc 1 487 0
+ 2087 000e 3570     	 strb r5,[r6]
+ 2088              	.LVL278:
+ 2089              	.LBB22:
+ 2090              	.LBB20:
+ 482:../optiga_shell.c **** }
+ 2091              	 .loc 1 482 0
+ 2092 0010 FFF7FEFF 	 bl optiga_lib_print_string
+ 2093              	.LVL279:
+ 2094              	.LBE20:
+ 2095              	.LBE22:
+ 488:../optiga_shell.c **** 	char_t user_cmd[50];
+ 489:../optiga_shell.c **** 	uint8_t index = 0;
+ 490:../optiga_shell.c **** 
+ 491:../optiga_shell.c **** 	optiga_shell_show_prompt();
+ 492:../optiga_shell.c **** 	optiga_shell_show_usage();
+ 2096              	 .loc 1 492 0
+ 2097 0014 FFF7FEFF 	 bl optiga_shell_show_usage
+ 2098              	.LVL280:
+ 2099              	.LBB23:
+ 2100              	.LBB24:
+ 482:../optiga_shell.c **** }
+ 2101              	 .loc 1 482 0
+ 2102 0018 201C     	 mov r0,r4
+ 2103 001a FFF7FEFF 	 bl optiga_lib_print_string
+ 2104              	.LVL281:
+ 2105 001e 0094     	 str r4,[sp]
+ 2106              	.LVL282:
+ 2107              	.L95:
+ 2108              	.LBE24:
+ 2109              	.LBE23:
+ 493:../optiga_shell.c **** 	optiga_shell_show_prompt();
+ 494:../optiga_shell.c **** 
+ 495:../optiga_shell.c **** 	while(TRUE)
+ 496:../optiga_shell.c **** 	{
+ 497:../optiga_shell.c **** 		if (0 == pal_logger_read(&cunit_console,&ch,1))
+ 2110              	 .loc 1 497 0
+ 2111 0020 324F     	 ldr r7,.L114+4
+ 2112 0022 311C     	 mov r1,r6
+ 2113 0024 381C     	 mov r0,r7
+ 2114 0026 0122     	 mov r2,#1
+ 2115 0028 FFF7FEFF 	 bl pal_logger_read
+ 2116              	.LVL283:
+ 2117 002c 0028     	 cmp r0,#0
+ 2118 002e F7D1     	 bne .L95
+ 498:../optiga_shell.c **** 		{
+ 499:../optiga_shell.c **** 
+ 500:../optiga_shell.c **** 			if(ch == 0x0d || ch == 0x0a)
+ 2119              	 .loc 1 500 0
+ 2120 0030 3378     	 ldrb r3,[r6]
+ 2121 0032 0BAC     	 add r4,sp,#44
+ 2122 0034 0D2B     	 cmp r3,#13
+ 2123 0036 01D0     	 beq .L96
+ 2124              	 .loc 1 500 0 is_stmt 0 discriminator 1
+ 2125 0038 0A2B     	 cmp r3,#10
+ 2126 003a 4BD1     	 bne .L97
+ 2127              	.L96:
+ 2128              	.LVL284:
+ 501:../optiga_shell.c **** 			{
+ 502:../optiga_shell.c **** 				user_cmd[index++] = 0;
+ 2129              	 .loc 1 502 0 is_stmt 1
+ 2130 003c 0027     	 mov r7,#0
+ 2131 003e 6755     	 strb r7,[r4,r5]
+ 2132              	.LVL285:
+ 503:../optiga_shell.c **** 				index = 0;
+ 504:../optiga_shell.c **** 				optiga_lib_print_string_with_newline("");
+ 2133              	 .loc 1 504 0
+ 2134 0040 2B4D     	 ldr r5,.L114+8
+ 2135 0042 281C     	 mov r0,r5
+ 2136 0044 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 2137              	.LVL286:
+ 2138              	.LBB25:
+ 2139              	.LBB26:
+ 2140              	.LBB27:
+ 2141              	.LBB28:
+ 426:../optiga_shell.c **** 	char_t* j = user_cmd;
+ 2142              	 .loc 1 426 0
+ 2143 0048 221C     	 mov r2,r4
+ 2144 004a 0195     	 str r5,[sp,#4]
+ 2145              	.L98:
+ 2146              	.LVL287:
+ 428:../optiga_shell.c **** 	{
+ 2147              	 .loc 1 428 0
+ 2148 004c E35D     	 ldrb r3,[r4,r7]
+ 430:../optiga_shell.c **** 		if(*i != ' ')
+ 2149              	 .loc 1 430 0
+ 2150 004e 1370     	 strb r3,[r2]
+ 428:../optiga_shell.c **** 	{
+ 2151              	 .loc 1 428 0
+ 2152 0050 002B     	 cmp r3,#0
+ 2153 0052 05D0     	 beq .L113
+ 2154              	.LVL288:
+ 432:../optiga_shell.c **** 	}
+ 2155              	 .loc 1 432 0
+ 2156 0054 203B     	 sub r3,r3,#32
+ 2157 0056 591E     	 sub r1,r3,#1
+ 2158 0058 8B41     	 sbc r3,r3,r1
+ 2159 005a 0137     	 add r7,r7,#1
+ 2160              	.LVL289:
+ 2161 005c D218     	 add r2,r2,r3
+ 2162              	.LVL290:
+ 2163 005e F5E7     	 b .L98
+ 2164              	.LVL291:
+ 2165              	.L113:
+ 435:../optiga_shell.c **** 	{
+ 2166              	 .loc 1 435 0
+ 2167 0060 201C     	 mov r0,r4
+ 2168 0062 FFF7FEFF 	 bl strlen
+ 2169              	.LVL292:
+ 2170 0066 0928     	 cmp r0,#9
+ 2171 0068 03D9     	 bls .L101
+ 437:../optiga_shell.c **** 	}
+ 2172              	 .loc 1 437 0
+ 2173 006a 201C     	 mov r0,r4
+ 2174 006c 0DA9     	 add r1,sp,#52
+ 2175 006e FFF7FEFF 	 bl strcpy
+ 2176              	.LVL293:
+ 2177              	.L101:
+ 426:../optiga_shell.c **** 	char_t* j = user_cmd;
+ 2178              	 .loc 1 426 0
+ 2179 0072 0027     	 mov r7,#0
+ 2180              	.LVL294:
+ 2181              	.L106:
+ 2182 0074 0C25     	 mov r5,#12
+ 2183 0076 7D43     	 mul r5,r7
+ 2184 0078 1E4B     	 ldr r3,.L114+12
+ 2185              	.LBE28:
+ 2186              	.LBE27:
+ 453:../optiga_shell.c **** 		{
+ 2187              	 .loc 1 453 0
+ 2188 007a 201C     	 mov r0,r4
+ 2189 007c 5D19     	 add r5,r3,r5
+ 2190 007e 6968     	 ldr r1,[r5,#4]
+ 2191 0080 FFF7FEFF 	 bl strcmp
+ 2192              	.LVL295:
+ 2193 0084 0028     	 cmp r0,#0
+ 2194 0086 1BD1     	 bne .L102
+ 455:../optiga_shell.c **** 			{
+ 2195              	 .loc 1 455 0
+ 2196 0088 AB68     	 ldr r3,[r5,#8]
+ 2197 008a 002B     	 cmp r3,#0
+ 2198 008c 14D0     	 beq .L103
+ 2199              	.LBB29:
+ 457:../optiga_shell.c **** 				current_cmd->cmd_handler();
+ 2200              	 .loc 1 457 0
+ 2201 008e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 2202              	.LVL296:
+ 458:../optiga_shell.c **** 				char buffer_string[30];
+ 2203              	 .loc 1 458 0
+ 2204 0092 AB68     	 ldr r3,[r5,#8]
+ 457:../optiga_shell.c **** 				current_cmd->cmd_handler();
+ 2205              	 .loc 1 457 0
+ 2206 0094 041C     	 mov r4,r0
+ 2207              	.LVL297:
+ 458:../optiga_shell.c **** 				char buffer_string[30];
+ 2208              	 .loc 1 458 0
+ 2209 0096 9847     	 blx r3
+ 2210              	.LVL298:
+ 460:../optiga_shell.c **** 				OPTIGA_EXAMPLE_LOG_MESSAGE(buffer_string);
+ 2211              	 .loc 1 460 0
+ 2212 0098 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 2213              	.LVL299:
+ 2214 009c 1649     	 ldr r1,.L114+16
+ 2215 009e 021B     	 sub r2,r0,r4
+ 2216 00a0 03A8     	 add r0,sp,#12
+ 2217 00a2 FFF7FEFF 	 bl sprintf
+ 2218              	.LVL300:
+ 461:../optiga_shell.c **** 				optiga_lib_print_string_with_newline("");
+ 2219              	 .loc 1 461 0
+ 2220 00a6 03A8     	 add r0,sp,#12
+ 2221 00a8 1449     	 ldr r1,.L114+20
+ 2222 00aa 154A     	 ldr r2,.L114+24
+ 2223 00ac FFF7FEFF 	 bl optiga_lib_print_message
+ 2224              	.LVL301:
+ 462:../optiga_shell.c **** 				cmd_found = 1;
+ 2225              	 .loc 1 462 0
+ 2226 00b0 0198     	 ldr r0,[sp,#4]
+ 2227 00b2 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 2228              	.LVL302:
+ 2229 00b6 08E0     	 b .L104
+ 2230              	.LVL303:
+ 2231              	.L103:
+ 2232              	.LBE29:
+ 468:../optiga_shell.c **** 				break;
+ 2233              	 .loc 1 468 0
+ 2234 00b8 1248     	 ldr r0,.L114+28
+ 2235 00ba FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 2236              	.LVL304:
+ 2237 00be 02E0     	 b .L105
+ 2238              	.L102:
+ 2239              	.LVL305:
+ 2240 00c0 0137     	 add r7,r7,#1
+ 2241              	.LVL306:
+ 450:../optiga_shell.c **** 	{
+ 2242              	 .loc 1 450 0
+ 2243 00c2 182F     	 cmp r7,#24
+ 2244 00c4 D6D1     	 bne .L106
+ 2245              	.LVL307:
+ 2246              	.L105:
+ 475:../optiga_shell.c **** 	}
+ 2247              	 .loc 1 475 0
+ 2248 00c6 FFF7FEFF 	 bl optiga_shell_show_usage
+ 2249              	.LVL308:
+ 2250              	.L104:
+ 2251              	.LBE26:
+ 2252              	.LBE25:
+ 2253              	.LBB30:
+ 2254              	.LBB31:
+ 482:../optiga_shell.c **** }
+ 2255              	 .loc 1 482 0
+ 2256 00ca 0098     	 ldr r0,[sp]
+ 2257 00cc FFF7FEFF 	 bl optiga_lib_print_string
+ 2258              	.LVL309:
+ 2259              	.LBE31:
+ 2260              	.LBE30:
+ 503:../optiga_shell.c **** 				optiga_lib_print_string_with_newline("");
+ 2261              	 .loc 1 503 0
+ 2262 00d0 0025     	 mov r5,#0
+ 2263 00d2 A5E7     	 b .L95
+ 2264              	.LVL310:
+ 2265              	.L97:
+ 505:../optiga_shell.c **** 				//start cmd parsing
+ 506:../optiga_shell.c **** 				optiga_shell_execute_example((char_t * )&user_cmd);
+ 507:../optiga_shell.c **** 				optiga_shell_show_prompt();
+ 508:../optiga_shell.c **** 			}
+ 509:../optiga_shell.c **** 			else
+ 510:../optiga_shell.c **** 			{
+ 511:../optiga_shell.c **** 				//keep adding
+ 512:../optiga_shell.c **** 				pal_logger_write(&cunit_console, &ch, 1);
+ 2266              	 .loc 1 512 0
+ 2267 00d4 0122     	 mov r2,#1
+ 2268 00d6 381C     	 mov r0,r7
+ 2269 00d8 311C     	 mov r1,r6
+ 2270 00da FFF7FEFF 	 bl pal_logger_write
+ 2271              	.LVL311:
+ 513:../optiga_shell.c **** 				user_cmd[index++] = ch;
+ 2272              	 .loc 1 513 0
+ 2273 00de 3278     	 ldrb r2,[r6]
+ 2274 00e0 6B1C     	 add r3,r5,#1
+ 2275              	.LVL312:
+ 2276 00e2 6255     	 strb r2,[r4,r5]
+ 2277 00e4 DDB2     	 uxtb r5,r3
+ 2278 00e6 9BE7     	 b .L95
+ 2279              	.L115:
+ 2280              	 .align 2
+ 2281              	.L114:
+ 2282 00e8 6F0F0000 	 .word .LC217
+ 2283 00ec 00000000 	 .word cunit_console
+ 2284 00f0 400F0000 	 .word .LC202
+ 2285 00f4 00000000 	 .word .LANCHOR2
+ 2286 00f8 2A0F0000 	 .word .LC198
+ 2287 00fc 4F0E0000 	 .word .LC181
+ 2288 0100 640E0000 	 .word .LC183
+ 2289 0104 710F0000 	 .word .LC225
+ 2290              	 .cfi_endproc
+ 2291              	.LFE304:
+ 2293              	 .section .text.optiga_shell_wait_for_user,"ax",%progbits
+ 2294              	 .align 1
+ 2295              	 .global optiga_shell_wait_for_user
+ 2296              	 .code 16
+ 2297              	 .thumb_func
+ 2299              	optiga_shell_wait_for_user:
+ 2300              	.LFB305:
+ 514:../optiga_shell.c **** 			}
+ 515:../optiga_shell.c **** 		}
+ 516:../optiga_shell.c **** 	}
+ 517:../optiga_shell.c **** }
+ 518:../optiga_shell.c **** 
+ 519:../optiga_shell.c **** void optiga_shell_wait_for_user(void)
+ 520:../optiga_shell.c **** {
+ 2301              	 .loc 1 520 0
+ 2302              	 .cfi_startproc
+ 2303 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 2304              	.LCFI28:
+ 2305              	 .cfi_def_cfa_offset 24
+ 2306              	 .cfi_offset 0,-24
+ 2307              	 .cfi_offset 1,-20
+ 2308              	 .cfi_offset 2,-16
+ 2309              	 .cfi_offset 4,-12
+ 2310              	 .cfi_offset 5,-8
+ 2311              	 .cfi_offset 14,-4
+ 521:../optiga_shell.c **** 	uint8_t ch = 0;
+ 2312              	 .loc 1 521 0
+ 2313 0002 6B46     	 mov r3,sp
+ 2314 0004 DD1D     	 add r5,r3,#7
+ 2315 0006 0023     	 mov r3,#0
+ 522:../optiga_shell.c **** 
+ 523:../optiga_shell.c **** 	optiga_lib_print_string_with_newline("Press any key to start optiga mini shell");
+ 2316              	 .loc 1 523 0
+ 2317 0008 0A4C     	 ldr r4,.L119
+ 521:../optiga_shell.c **** 	uint8_t ch = 0;
+ 2318              	 .loc 1 521 0
+ 2319 000a 2B70     	 strb r3,[r5]
+ 2320              	 .loc 1 523 0
+ 2321 000c 201C     	 mov r0,r4
+ 2322 000e FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 2323              	.LVL313:
+ 2324              	.L118:
+ 524:../optiga_shell.c **** 	while(1U)
+ 525:../optiga_shell.c **** 	{
+ 526:../optiga_shell.c **** 		pal_logger_read(&cunit_console,&ch,1);
+ 2325              	 .loc 1 526 0
+ 2326 0012 0948     	 ldr r0,.L119+4
+ 2327 0014 291C     	 mov r1,r5
+ 2328 0016 0122     	 mov r2,#1
+ 2329 0018 FFF7FEFF 	 bl pal_logger_read
+ 2330              	.LVL314:
+ 527:../optiga_shell.c **** 		if (ch != 0)
+ 2331              	 .loc 1 527 0
+ 2332 001c 2B78     	 ldrb r3,[r5]
+ 2333 001e 002B     	 cmp r3,#0
+ 2334 0020 07D1     	 bne .L116
+ 528:../optiga_shell.c **** 		{
+ 529:../optiga_shell.c **** 			break;
+ 530:../optiga_shell.c **** 		}
+ 531:../optiga_shell.c **** 		else
+ 532:../optiga_shell.c **** 		{
+ 533:../optiga_shell.c **** 			optiga_lib_print_string_with_newline("Press any key to start optiga mini shell");
+ 2335              	 .loc 1 533 0
+ 2336 0022 201C     	 mov r0,r4
+ 2337 0024 FFF7FEFF 	 bl optiga_lib_print_string_with_newline
+ 2338              	.LVL315:
+ 534:../optiga_shell.c **** 			pal_os_timer_delay_in_milliseconds(2000);
+ 2339              	 .loc 1 534 0
+ 2340 0028 FA20     	 mov r0,#250
+ 2341 002a C000     	 lsl r0,r0,#3
+ 2342 002c FFF7FEFF 	 bl pal_os_timer_delay_in_milliseconds
+ 2343              	.LVL316:
+ 535:../optiga_shell.c **** 		}
+ 536:../optiga_shell.c **** 	}
+ 2344              	 .loc 1 536 0
+ 2345 0030 EFE7     	 b .L118
+ 2346              	.L116:
+ 537:../optiga_shell.c **** }
+ 2347              	 .loc 1 537 0
+ 2348              	 
+ 2349 0032 37BD     	 pop {r0,r1,r2,r4,r5,pc}
+ 2350              	.L120:
+ 2351              	 .align 2
+ 2352              	.L119:
+ 2353 0034 940F0000 	 .word .LC227
+ 2354 0038 00000000 	 .word cunit_console
+ 2355              	 .cfi_endproc
+ 2356              	.LFE305:
+ 2358              	 .global optiga_cmds
+ 2359              	 .global me_util
+ 2360              	 .section .data.optiga_cmds,"aw",%progbits
+ 2361              	 .align 2
+ 2362              	 .set .LANCHOR2,.+0
+ 2365              	optiga_cmds:
+ 2366 0000 400F0000 	 .word .LC202
+ 2367 0004 6A0F0000 	 .word .LC210
+ 2368 0008 00000000 	 .word optiga_shell_show_usage
+ 2369 000c BD0F0000 	 .word .LC230
+ 2370 0010 DE0F0000 	 .word .LC231
+ 2371 0014 00000000 	 .word optiga_shell_init
+ 2372 0018 E00F0000 	 .word .LC232
+ 2373 001c 01100000 	 .word .LC233
+ 2374 0020 00000000 	 .word optiga_shell_deinit
+ 2375 0024 03100000 	 .word .LC234
+ 2376 0028 24100000 	 .word .LC235
+ 2377 002c 00000000 	 .word optiga_shell_selftest
+ 2378 0030 26100000 	 .word .LC236
+ 2379 0034 47100000 	 .word .LC237
+ 2380 0038 00000000 	 .word optiga_shell_util_read_data
+ 2381 003c 49100000 	 .word .LC238
+ 2382 0040 6A100000 	 .word .LC239
+ 2383 0044 00000000 	 .word optiga_shell_util_write_data
+ 2384 0048 6C100000 	 .word .LC240
+ 2385 004c 8D100000 	 .word .LC241
+ 2386 0050 00000000 	 .word optiga_shell_pair_host_optiga
+ 2387 0054 8F100000 	 .word .LC242
+ 2388 0058 B0100000 	 .word .LC243
+ 2389 005c 00000000 	 .word optiga_shell_util_hibernate_restore
+ 2390 0060 B2100000 	 .word .LC244
+ 2391 0064 D3100000 	 .word .LC245
+ 2392 0068 00000000 	 .word optiga_shell_util_update_count
+ 2393 006c D5100000 	 .word .LC246
+ 2394 0070 F6100000 	 .word .LC247
+ 2395 0074 00000000 	 .word optiga_shell_util_protected_update
+ 2396 0078 F8100000 	 .word .LC248
+ 2397 007c 19110000 	 .word .LC249
+ 2398 0080 00000000 	 .word optiga_shell_crypt_hash
+ 2399 0084 1C110000 	 .word .LC250
+ 2400 0088 3D110000 	 .word .LC251
+ 2401 008c 00000000 	 .word optiga_shell_crypt_tls_prf_sha256
+ 2402 0090 40110000 	 .word .LC252
+ 2403 0094 61110000 	 .word .LC253
+ 2404 0098 00000000 	 .word optiga_shell_crypt_random
+ 2405 009c 64110000 	 .word .LC254
+ 2406 00a0 85110000 	 .word .LC255
+ 2407 00a4 00000000 	 .word optiga_shell_crypt_ecc_generate_keypair
+ 2408 00a8 88110000 	 .word .LC256
+ 2409 00ac A9110000 	 .word .LC257
+ 2410 00b0 00000000 	 .word optiga_shell_crypt_ecdsa_sign
+ 2411 00b4 AC110000 	 .word .LC258
+ 2412 00b8 CD110000 	 .word .LC259
+ 2413 00bc 00000000 	 .word optiga_shell_crypt_ecdsa_verify
+ 2414 00c0 D0110000 	 .word .LC260
+ 2415 00c4 F1110000 	 .word .LC261
+ 2416 00c8 00000000 	 .word optiga_shell_crypt_ecdh
+ 2417 00cc F4110000 	 .word .LC262
+ 2418 00d0 15120000 	 .word .LC263
+ 2419 00d4 00000000 	 .word optiga_shell_crypt_generate_keypair
+ 2420 00d8 18120000 	 .word .LC264
+ 2421 00dc 39120000 	 .word .LC265
+ 2422 00e0 00000000 	 .word optiga_shell_crypt_rsa_sign
+ 2423 00e4 3C120000 	 .word .LC266
+ 2424 00e8 5D120000 	 .word .LC267
+ 2425 00ec 00000000 	 .word optiga_shell_crypt_rsa_verify
+ 2426 00f0 60120000 	 .word .LC268
+ 2427 00f4 81120000 	 .word .LC269
+ 2428 00f8 00000000 	 .word optiga_shell_crypt_rsa_encrypt_message
+ 2429 00fc 84120000 	 .word .LC270
+ 2430 0100 A5120000 	 .word .LC271
+ 2431 0104 00000000 	 .word optiga_shell_crypt_rsa_encrypt_session
+ 2432 0108 A8120000 	 .word .LC272
+ 2433 010c C9120000 	 .word .LC273
+ 2434 0110 00000000 	 .word optiga_shell_crypt_rsa_decrypt_and_store
+ 2435 0114 CC120000 	 .word .LC274
+ 2436 0118 ED120000 	 .word .LC275
+ 2437 011c 00000000 	 .word optiga_shell_crypt_rsa_decrypt_and_export
+ 2438              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 2439              	.LC1:
+ 2440 0000 53746172 	 .ascii "Starting Decrypt and Export Data with RSA Key Examp"
+ 2440      74696E67 
+ 2440      20446563 
+ 2440      72797074 
+ 2440      20616E64 
+ 2441 0033 6C6500   	 .ascii "le\000"
+ 2442              	.LC3:
+ 2443 0036 5B6F7074 	 .ascii "[optiga shell]  : \000"
+ 2443      69676120 
+ 2443      7368656C 
+ 2443      6C5D2020 
+ 2443      3A2000
+ 2444              	.LC5:
+ 2445 0049 1B5B3932 	 .ascii "\033[92m\000"
+ 2445      6D00
+ 2446              	.LC7:
+ 2447 004f 31205374 	 .ascii "1 Step: Generate RSA 1024 Key Pair and export the p"
+ 2447      65703A20 
+ 2447      47656E65 
+ 2447      72617465 
+ 2447      20525341 
+ 2448 0082 75626C69 	 .ascii "ublic key\000"
+ 2448      63206B65 
+ 2448      7900
+ 2449              	.LC9:
+ 2450 008c 32205374 	 .ascii "2 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 "
+ 2450      65703A20 
+ 2450      456E6372 
+ 2450      79707420 
+ 2450      61206D65 
+ 2451 00bf 53636865 	 .ascii "Scheme\000"
+ 2451      6D6500
+ 2452              	.LC11:
+ 2453 00c6 33205374 	 .ascii "3 Step: Select Protected I2C Connection\000"
+ 2453      65703A20 
+ 2453      53656C65 
+ 2453      63742050 
+ 2453      726F7465 
+ 2454              	.LC13:
+ 2455 00ee 34205374 	 .ascii "4 Step: Decrypt the message with RSAES PKCS#1 Ver1."
+ 2455      65703A20 
+ 2455      44656372 
+ 2455      79707420 
+ 2455      74686520 
+ 2456 0121 35205363 	 .ascii "5 Scheme and export it\000"
+ 2456      68656D65 
+ 2456      20616E64 
+ 2456      20657870 
+ 2456      6F727420 
+ 2457              	.LC15:
+ 2458 0138 53746172 	 .ascii "Starting Decrypt and Store Data on the chip with RS"
+ 2458      74696E67 
+ 2458      20446563 
+ 2458      72797074 
+ 2458      20616E64 
+ 2459 016b 41204B65 	 .ascii "A Key Example\000"
+ 2459      79204578 
+ 2459      616D706C 
+ 2459      6500
+ 2460              	.LC20:
+ 2461 0179 32205374 	 .ascii "2 Step: Generate 70 bytes RSA Pre master secret whi"
+ 2461      65703A20 
+ 2461      47656E65 
+ 2461      72617465 
+ 2461      20373020 
+ 2462 01ac 63682069 	 .ascii "ch is stored in acquired session OID\000"
+ 2462      73207374 
+ 2462      6F726564 
+ 2462      20696E20 
+ 2462      61637175 
+ 2463              	.LC23:
+ 2464 01d1 34205374 	 .ascii "4 Step: Encrypt Session Data with RSA Public Key\000"
+ 2464      65703A20 
+ 2464      456E6372 
+ 2464      79707420 
+ 2464      53657373 
+ 2465              	.LC25:
+ 2466 0202 35205374 	 .ascii "5 Step: Decrypt the message with RSAES PKCS#1 Ver1."
+ 2466      65703A20 
+ 2466      44656372 
+ 2466      79707420 
+ 2466      74686520 
+ 2467 0235 35205363 	 .ascii "5 Scheme and store it on chip\000"
+ 2467      68656D65 
+ 2467      20616E64 
+ 2467      2073746F 
+ 2467      72652069 
+ 2468              	.LC27:
+ 2469 0253 53746172 	 .ascii "Starting Encrypt Data in Session Object on chip wit"
+ 2469      74696E67 
+ 2469      20456E63 
+ 2469      72797074 
+ 2469      20446174 
+ 2470 0286 68205253 	 .ascii "h RSA Key Example\000"
+ 2470      41204B65 
+ 2470      79204578 
+ 2470      616D706C 
+ 2470      6500
+ 2471              	.LC31:
+ 2472 0298 31205374 	 .ascii "1 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 "
+ 2472      65703A20 
+ 2472      456E6372 
+ 2472      79707420 
+ 2472      61206D65 
+ 2473 02cb 53636865 	 .ascii "Scheme stored on chip in Session Object\000"
+ 2473      6D652073 
+ 2473      746F7265 
+ 2473      64206F6E 
+ 2473      20636869 
+ 2474              	.LC33:
+ 2475 02f3 53746172 	 .ascii "Starting Encrypt Data with RSA Key Example\000"
+ 2475      74696E67 
+ 2475      20456E63 
+ 2475      72797074 
+ 2475      20446174 
+ 2476              	.LC37:
+ 2477 031e 31205374 	 .ascii "1 Step: Encrypt a message with RSAES PKCS#1 Ver1.5 "
+ 2477      65703A20 
+ 2477      456E6372 
+ 2477      79707420 
+ 2477      61206D65 
+ 2478 0351 53636865 	 .ascii "Scheme\000"
+ 2478      6D6500
+ 2479              	.LC39:
+ 2480 0358 53746172 	 .ascii "Starting signing example for PKCS#1 Ver1.5 SHA256 S"
+ 2480      74696E67 
+ 2480      20736967 
+ 2480      6E696E67 
+ 2480      20657861 
+ 2481 038b 69676E61 	 .ascii "ignature scheme (RSA)\000"
+ 2481      74757265 
+ 2481      20736368 
+ 2481      656D6520 
+ 2481      28525341 
+ 2482              	.LC43:
+ 2483 03a1 31205374 	 .ascii "1 Step: Verify prepared signature, with prepared pu"
+ 2483      65703A20 
+ 2483      56657269 
+ 2483      66792070 
+ 2483      72657061 
+ 2484 03d4 626C6963 	 .ascii "blic key and digest\000"
+ 2484      206B6579 
+ 2484      20616E64 
+ 2484      20646967 
+ 2484      65737400 
+ 2485              	.LC48:
+ 2486 03e8 31205374 	 .ascii "1 Step: Sign prepared Data and export the signature"
+ 2486      65703A20 
+ 2486      5369676E 
+ 2486      20707265 
+ 2486      70617265 
+ 2487 041b 00       	 .ascii "\000"
+ 2488              	.LC50:
+ 2489 041c 53746172 	 .ascii "Starting generate RSA Key Example\000"
+ 2489      74696E67 
+ 2489      2067656E 
+ 2489      65726174 
+ 2489      65205253 
+ 2490              	.LC55:
+ 2491 043e 53746172 	 .ascii "Starting Elliptic-curve Diffie\342\200\223Hellman ("
+ 2491      74696E67 
+ 2491      20456C6C 
+ 2491      69707469 
+ 2491      632D6375 
+ 2492 0468 45434448 	 .ascii "ECDH) Key Agreement Protocol Example\000"
+ 2492      29204B65 
+ 2492      79204167 
+ 2492      7265656D 
+ 2492      656E7420 
+ 2493              	.LC59:
+ 2494 048d 31205374 	 .ascii "1 Step: Select Protected I2C Connection\000"
+ 2494      65703A20 
+ 2494      53656C65 
+ 2494      63742050 
+ 2494      726F7465 
+ 2495              	.LC61:
+ 2496 04b5 32205374 	 .ascii "2 Step: Generate new ECC NIST P-256 Key Pair\000"
+ 2496      65703A20 
+ 2496      47656E65 
+ 2496      72617465 
+ 2496      206E6577 
+ 2497              	.LC64:
+ 2498 04e2 34205374 	 .ascii "4 Step: Generate Shared Secret and export it\000"
+ 2498      65703A20 
+ 2498      47656E65 
+ 2498      72617465 
+ 2498      20536861 
+ 2499              	.LC66:
+ 2500 050f 53746172 	 .ascii "Starting verification example for Elliptic-curve Di"
+ 2500      74696E67 
+ 2500      20766572 
+ 2500      69666963 
+ 2500      6174696F 
+ 2501 0542 67697461 	 .ascii "gital Signature Algorithm (ECDSA)\000"
+ 2501      6C205369 
+ 2501      676E6174 
+ 2501      75726520 
+ 2501      416C676F 
+ 2502              	.LC71:
+ 2503 0564 53746172 	 .ascii "Starting signing example for Elliptic-curve Digital"
+ 2503      74696E67 
+ 2503      20736967 
+ 2503      6E696E67 
+ 2503      20657861 
+ 2504 0597 20536967 	 .ascii " Signature Algorithm (ECDSA)\000"
+ 2504      6E617475 
+ 2504      72652041 
+ 2504      6C676F72 
+ 2504      6974686D 
+ 2505              	.LC76:
+ 2506 05b4 53746172 	 .ascii "Starting generate ECC Key Example\000"
+ 2506      74696E67 
+ 2506      2067656E 
+ 2506      65726174 
+ 2506      65204543 
+ 2507              	.LC80:
+ 2508 05d6 31205374 	 .ascii "1 Step: Generate ECC NIST P-256 Key Pair and export"
+ 2508      65703A20 
+ 2508      47656E65 
+ 2508      72617465 
+ 2508      20454343 
+ 2509 0609 20746865 	 .ascii " the public key\000"
+ 2509      20707562 
+ 2509      6C696320 
+ 2509      6B657900 
+ 2510              	.LC82:
+ 2511 0619 53746172 	 .ascii "Starting Generate Random Example\000"
+ 2511      74696E67 
+ 2511      2047656E 
+ 2511      65726174 
+ 2511      65205261 
+ 2512              	.LC86:
+ 2513 063a 31205374 	 .ascii "1 Step: Generate 32 bytes random\000"
+ 2513      65703A20 
+ 2513      47656E65 
+ 2513      72617465 
+ 2513      20333220 
+ 2514              	.LC88:
+ 2515 065b 53746172 	 .ascii "Starting TLS PRF SHA256 (Key Deriviation) Example\000"
+ 2515      74696E67 
+ 2515      20544C53 
+ 2515      20505246 
+ 2515      20534841 
+ 2516              	.LC92:
+ 2517 068d 31205374 	 .ascii "1 Step: Write prepared Shared Secret into an Arbitr"
+ 2517      65703A20 
+ 2517      57726974 
+ 2517      65207072 
+ 2517      65706172 
+ 2518 06c0 61727920 	 .ascii "ary Data Object\000"
+ 2518      44617461 
+ 2518      204F626A 
+ 2518      65637400 
+ 2519              	.LC94:
+ 2520 06d0 32205374 	 .ascii "2 Step: Update Metadata of the Object to use the Ar"
+ 2520      65703A20 
+ 2520      55706461 
+ 2520      7465204D 
+ 2520      65746164 
+ 2521 0703 62697472 	 .ascii "bitrary Data Object only via Shielded I2C Connectio"
+ 2521      61727920 
+ 2521      44617461 
+ 2521      204F626A 
+ 2521      65637420 
+ 2522 0736 6E00     	 .ascii "n\000"
+ 2523              	.LC96:
+ 2524 0738 33205374 	 .ascii "3 Step: Generate Shared Secret using the Shared Sec"
+ 2524      65703A20 
+ 2524      47656E65 
+ 2524      72617465 
+ 2524      20536861 
+ 2525 076b 72657420 	 .ascii "ret from the Arbitrary Data Object\000"
+ 2525      66726F6D 
+ 2525      20746865 
+ 2525      20417262 
+ 2525      69747261 
+ 2526              	.LC98:
+ 2527 078e 34205374 	 .ascii "4 Step: Restore Metadata of the Arbitrary Data Obje"
+ 2527      65703A20 
+ 2527      52657374 
+ 2527      6F726520 
+ 2527      4D657461 
+ 2528 07c1 637400   	 .ascii "ct\000"
+ 2529              	.LC100:
+ 2530 07c4 53746172 	 .ascii "Starting Hash Example\000"
+ 2530      74696E67 
+ 2530      20486173 
+ 2530      68204578 
+ 2530      616D706C 
+ 2531              	.LC104:
+ 2532 07da 31205374 	 .ascii "1 Step: Hash given data with Start, Update and Fina"
+ 2532      65703A20 
+ 2532      48617368 
+ 2532      20676976 
+ 2532      656E2064 
+ 2533 080d 6C697A65 	 .ascii "lize calls\000"
+ 2533      2063616C 
+ 2533      6C7300
+ 2534              	.LC106:
+ 2535 0818 53746172 	 .ascii "Starting Protected Update Example\000"
+ 2535      74696E67 
+ 2535      2050726F 
+ 2535      74656374 
+ 2535      65642055 
+ 2536              	.LC110:
+ 2537 083a 31205374 	 .ascii "1 Step: Update Metadata for the Object to be update"
+ 2537      65703A20 
+ 2537      55706461 
+ 2537      7465204D 
+ 2537      65746164 
+ 2538 086d 6420616E 	 .ascii "d and the Trust Anchor used to verify the update\000"
+ 2538      64207468 
+ 2538      65205472 
+ 2538      75737420 
+ 2538      416E6368 
+ 2539              	.LC112:
+ 2540 089e 32205374 	 .ascii "2 Step: Write Trust Anchor used by the Trust M to v"
+ 2540      65703A20 
+ 2540      57726974 
+ 2540      65205472 
+ 2540      75737420 
+ 2541 08d1 65726966 	 .ascii "erify the update\000"
+ 2541      79207468 
+ 2541      65207570 
+ 2541      64617465 
+ 2541      00
+ 2542              	.LC114:
+ 2543 08e2 33205374 	 .ascii "3 Step: Start Protected update with prepared manife"
+ 2543      65703A20 
+ 2543      53746172 
+ 2543      74205072 
+ 2543      6F746563 
+ 2544 0915 73742061 	 .ascii "st and fragments\000"
+ 2544      6E642066 
+ 2544      7261676D 
+ 2544      656E7473 
+ 2544      00
+ 2545              	.LC116:
+ 2546 0926 53746172 	 .ascii "Starting Update Counter Example\000"
+ 2546      74696E67 
+ 2546      20557064 
+ 2546      61746520 
+ 2546      436F756E 
+ 2547              	.LC120:
+ 2548 0946 31205374 	 .ascii "1 Step: Write Initial Counter Value\000"
+ 2548      65703A20 
+ 2548      57726974 
+ 2548      6520496E 
+ 2548      69746961 
+ 2549              	.LC122:
+ 2550 096a 32205374 	 .ascii "2 Step: Increase Counter Object\000"
+ 2550      65703A20 
+ 2550      496E6372 
+ 2550      65617365 
+ 2550      20436F75 
+ 2551              	.LC124:
+ 2552 098a 53746172 	 .ascii "Starting Hibernate and Restore Example\000"
+ 2552      74696E67 
+ 2552      20486962 
+ 2552      65726E61 
+ 2552      74652061 
+ 2553              	.LC128:
+ 2554 09b1 31205374 	 .ascii "1 Step: Open Application on the security chip\000"
+ 2554      65703A20 
+ 2554      4F70656E 
+ 2554      20417070 
+ 2554      6C696361 
+ 2555              	.LC130:
+ 2556 09df 32205374 	 .ascii "2 Step: Pair the host and the security chip\000"
+ 2556      65703A20 
+ 2556      50616972 
+ 2556      20746865 
+ 2556      20686F73 
+ 2557              	.LC133:
+ 2558 0a0b 34205374 	 .ascii "4 Step: Generate ECC NIST P-256 Key pair and store "
+ 2558      65703A20 
+ 2558      47656E65 
+ 2558      72617465 
+ 2558      20454343 
+ 2559 0a3e 69742069 	 .ascii "it in Session Data Object, export the public key\000"
+ 2559      6E205365 
+ 2559      7373696F 
+ 2559      6E204461 
+ 2559      7461204F 
+ 2560              	.LC135:
+ 2561 0a6f 35205374 	 .ascii "5 Step: Check Security Event Counter and wait till "
+ 2561      65703A20 
+ 2561      43686563 
+ 2561      6B205365 
+ 2561      63757269 
+ 2562 0aa2 69742072 	 .ascii "it reaches 0\000"
+ 2562      65616368 
+ 2562      65732030 
+ 2562      00
+ 2563              	.LC137:
+ 2564 0aaf 36205374 	 .ascii "6 Step: Perform Close application with Hibernate pa"
+ 2564      65703A20 
+ 2564      50657266 
+ 2564      6F726D20 
+ 2564      436C6F73 
+ 2565 0ae2 72616D65 	 .ascii "rameter set to True\000"
+ 2565      74657220 
+ 2565      73657420 
+ 2565      746F2054 
+ 2565      72756500 
+ 2566              	.LC139:
+ 2567 0af6 37205374 	 .ascii "7 Step: Open Application on the security chip\000"
+ 2567      65703A20 
+ 2567      4F70656E 
+ 2567      20417070 
+ 2567      6C696361 
+ 2568              	.LC141:
+ 2569 0b24 38205374 	 .ascii "8 Step: Sign prepared data with private key stored "
+ 2569      65703A20 
+ 2569      5369676E 
+ 2569      20707265 
+ 2569      70617265 
+ 2570 0b57 696E2053 	 .ascii "in Session Data Object\000"
+ 2570      65737369 
+ 2570      6F6E2044 
+ 2570      61746120 
+ 2570      4F626A65 
+ 2571              	.LC143:
+ 2572 0b6e 39205374 	 .ascii "9 Step: Verify the signature with the public key ge"
+ 2572      65703A20 
+ 2572      56657269 
+ 2572      66792074 
+ 2572      68652073 
+ 2573 0ba1 6E657261 	 .ascii "nerated previously\000"
+ 2573      74656420 
+ 2573      70726576 
+ 2573      696F7573 
+ 2573      6C7900
+ 2574              	.LC145:
+ 2575 0bb4 31302053 	 .ascii "10 Step: Close Applicaiton on the chip\000"
+ 2575      7465703A 
+ 2575      20436C6F 
+ 2575      73652041 
+ 2575      70706C69 
+ 2576              	.LC147:
+ 2577 0bdb 496D706F 	 .ascii "Important note: To continue with other examples you"
+ 2577      7274616E 
+ 2577      74206E6F 
+ 2577      74653A20 
+ 2577      546F2063 
+ 2578 0c0e 206E6565 	 .ascii " need to call the init parameter once again\000"
+ 2578      6420746F 
+ 2578      2063616C 
+ 2578      6C207468 
+ 2578      6520696E 
+ 2579              	.LC149:
+ 2580 0c3a 53746172 	 .ascii "Starting Pairing of Host and Trust M Example\000"
+ 2580      74696E67 
+ 2580      20506169 
+ 2580      72696E67 
+ 2580      206F6620 
+ 2581              	.LC153:
+ 2582 0c67 31205374 	 .ascii "1 Step: Read and Check existing Metadata for the Bi"
+ 2582      65703A20 
+ 2582      52656164 
+ 2582      20616E64 
+ 2582      20436865 
+ 2583 0c9a 6E64696E 	 .ascii "nding Secret\000"
+ 2583      67205365 
+ 2583      63726574 
+ 2583      00
+ 2584              	.LC155:
+ 2585 0ca7 32205374 	 .ascii "2 Step: Generate Random for the new Binding Secret\000"
+ 2585      65703A20 
+ 2585      47656E65 
+ 2585      72617465 
+ 2585      2052616E 
+ 2586              	.LC157:
+ 2587 0cda 33205374 	 .ascii "3 Step: Write new Binding Secret\000"
+ 2587      65703A20 
+ 2587      57726974 
+ 2587      65206E65 
+ 2587      77204269 
+ 2588              	.LC159:
+ 2589 0cfb 34205374 	 .ascii "4 Step: Store new Binding Secret on the Host\000"
+ 2589      65703A20 
+ 2589      53746F72 
+ 2589      65206E65 
+ 2589      77204269 
+ 2590              	.LC161:
+ 2591 0d28 53746172 	 .ascii "Starting Write Data/Metadata Example\000"
+ 2591      74696E67 
+ 2591      20577269 
+ 2591      74652044 
+ 2591      6174612F 
+ 2592              	.LC165:
+ 2593 0d4d 31205374 	 .ascii "1 Step: Write Sample Certificate in Trust Anchor Da"
+ 2593      65703A20 
+ 2593      57726974 
+ 2593      65205361 
+ 2593      6D706C65 
+ 2594 0d80 7461204F 	 .ascii "ta Object (640 bytes)\000"
+ 2594      626A6563 
+ 2594      74202836 
+ 2594      34302062 
+ 2594      79746573 
+ 2595              	.LC167:
+ 2596 0d96 32205374 	 .ascii "2 Step: Write new Metadata\000"
+ 2596      65703A20 
+ 2596      57726974 
+ 2596      65206E65 
+ 2596      77204D65 
+ 2597              	.LC169:
+ 2598 0db1 53746172 	 .ascii "Starting Read Data/Metadata Example\000"
+ 2598      74696E67 
+ 2598      20526561 
+ 2598      64204461 
+ 2598      74612F4D 
+ 2599              	.LC173:
+ 2600 0dd5 31205374 	 .ascii "1 Step: Read Certificate (~500 bytes)\000"
+ 2600      65703A20 
+ 2600      52656164 
+ 2600      20436572 
+ 2600      74696669 
+ 2601              	.LC175:
+ 2602 0dfb 32205374 	 .ascii "2 Step: Read Certificate Metadata\000"
+ 2602      65703A20 
+ 2602      52656164 
+ 2602      20436572 
+ 2602      74696669 
+ 2603              	.LC179:
+ 2604 0e1d 496E6974 	 .ascii "Initializing OPTIGA for example demonstration...\012"
+ 2604      69616C69 
+ 2604      7A696E67 
+ 2604      204F5054 
+ 2604      49474120 
+ 2605 0e4e 00       	 .ascii "\000"
+ 2606              	.LC181:
+ 2607 0e4f 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 2607      69676120 
+ 2607      6578616D 
+ 2607      706C655D 
+ 2607      20203A20 
+ 2608              	.LC183:
+ 2609 0e64 1B5B306D 	 .ascii "\033[0m\000"
+ 2609      00
+ 2610              	.LC186:
+ 2611 0e69 496E6974 	 .ascii "Initializing OPTIGA completed...\012\012\000"
+ 2611      69616C69 
+ 2611      7A696E67 
+ 2611      204F5054 
+ 2611      49474120 
+ 2612              	.LC190:
+ 2613 0e8c 42656769 	 .ascii "Begin pairing of host and OPTIGA...\000"
+ 2613      6E207061 
+ 2613      6972696E 
+ 2613      67206F66 
+ 2613      20686F73 
+ 2614              	.LC192:
+ 2615 0eb0 50616972 	 .ascii "Pairing of host and OPTIGA completed...\000"
+ 2615      696E6720 
+ 2615      6F662068 
+ 2615      6F737420 
+ 2615      616E6420 
+ 2616              	.LC194:
+ 2617 0ed8 53657474 	 .ascii "Setting current limitation to minimum...\000"
+ 2617      696E6720 
+ 2617      63757272 
+ 2617      656E7420 
+ 2617      6C696D69 
+ 2618              	.LC196:
+ 2619 0f01 53746172 	 .ascii "Starting OPTIGA example demonstration..\012\000"
+ 2619      74696E67 
+ 2619      204F5054 
+ 2619      49474120 
+ 2619      6578616D 
+ 2620              	.LC198:
+ 2621 0f2a 4578616D 	 .ascii "Example takes %d msec\000"
+ 2621      706C6520 
+ 2621      74616B65 
+ 2621      73202564 
+ 2621      206D7365 
+ 2622              	.LC202:
+ 2623 0f40 00       	 .ascii "\000"
+ 2624              	.LC207:
+ 2625 0f41 20202020 	 .ascii "    usage                : optiga -<cmd>\000"
+ 2625      75736167 
+ 2625      65202020 
+ 2625      20202020 
+ 2625      20202020 
+ 2626              	.LC210:
+ 2627 0f6a 68656C70 	 .ascii "help\000"
+ 2627      00
+ 2628              	.LC217:
+ 2629 0f6f 2400     	 .ascii "$\000"
+ 2630              	.LC225:
+ 2631 0f71 4E6F2065 	 .ascii "No example exists for this request\000"
+ 2631      78616D70 
+ 2631      6C652065 
+ 2631      78697374 
+ 2631      7320666F 
+ 2632              	.LC227:
+ 2633 0f94 50726573 	 .ascii "Press any key to start optiga mini shell\000"
+ 2633      7320616E 
+ 2633      79206B65 
+ 2633      7920746F 
+ 2633      20737461 
+ 2634              	.LC230:
+ 2635 0fbd 20202020 	 .ascii "    initialize optiga         : \000"
+ 2635      696E6974 
+ 2635      69616C69 
+ 2635      7A65206F 
+ 2635      70746967 
+ 2636              	.LC231:
+ 2637 0fde 3100     	 .ascii "1\000"
+ 2638              	.LC232:
+ 2639 0fe0 20202020 	 .ascii "    de-initialize optiga      : \000"
+ 2639      64652D69 
+ 2639      6E697469 
+ 2639      616C697A 
+ 2639      65206F70 
+ 2640              	.LC233:
+ 2641 1001 3200     	 .ascii "2\000"
+ 2642              	.LC234:
+ 2643 1003 20202020 	 .ascii "    run all tests at once     : \000"
+ 2643      72756E20 
+ 2643      616C6C20 
+ 2643      74657374 
+ 2643      73206174 
+ 2644              	.LC235:
+ 2645 1024 3300     	 .ascii "3\000"
+ 2646              	.LC236:
+ 2647 1026 20202020 	 .ascii "    read data                 : \000"
+ 2647      72656164 
+ 2647      20646174 
+ 2647      61202020 
+ 2647      20202020 
+ 2648              	.LC237:
+ 2649 1047 3400     	 .ascii "4\000"
+ 2650              	.LC238:
+ 2651 1049 20202020 	 .ascii "    write data                : \000"
+ 2651      77726974 
+ 2651      65206461 
+ 2651      74612020 
+ 2651      20202020 
+ 2652              	.LC239:
+ 2653 106a 3500     	 .ascii "5\000"
+ 2654              	.LC240:
+ 2655 106c 20202020 	 .ascii "    binding host with optiga  : \000"
+ 2655      62696E64 
+ 2655      696E6720 
+ 2655      686F7374 
+ 2655      20776974 
+ 2656              	.LC241:
+ 2657 108d 3600     	 .ascii "6\000"
+ 2658              	.LC242:
+ 2659 108f 20202020 	 .ascii "    hibernate and restore     : \000"
+ 2659      68696265 
+ 2659      726E6174 
+ 2659      6520616E 
+ 2659      64207265 
+ 2660              	.LC243:
+ 2661 10b0 3700     	 .ascii "7\000"
+ 2662              	.LC244:
+ 2663 10b2 20202020 	 .ascii "    update counter            : \000"
+ 2663      75706461 
+ 2663      74652063 
+ 2663      6F756E74 
+ 2663      65722020 
+ 2664              	.LC245:
+ 2665 10d3 3800     	 .ascii "8\000"
+ 2666              	.LC246:
+ 2667 10d5 20202020 	 .ascii "    protected update          : \000"
+ 2667      70726F74 
+ 2667      65637465 
+ 2667      64207570 
+ 2667      64617465 
+ 2668              	.LC247:
+ 2669 10f6 3900     	 .ascii "9\000"
+ 2670              	.LC248:
+ 2671 10f8 20202020 	 .ascii "    hashing of data           : \000"
+ 2671      68617368 
+ 2671      696E6720 
+ 2671      6F662064 
+ 2671      61746120 
+ 2672              	.LC249:
+ 2673 1119 313000   	 .ascii "10\000"
+ 2674              	.LC250:
+ 2675 111c 20202020 	 .ascii "    tls pfr sha256            : \000"
+ 2675      746C7320 
+ 2675      70667220 
+ 2675      73686132 
+ 2675      35362020 
+ 2676              	.LC251:
+ 2677 113d 313100   	 .ascii "11\000"
+ 2678              	.LC252:
+ 2679 1140 20202020 	 .ascii "    random number generation  : \000"
+ 2679      72616E64 
+ 2679      6F6D206E 
+ 2679      756D6265 
+ 2679      72206765 
+ 2680              	.LC253:
+ 2681 1161 313200   	 .ascii "12\000"
+ 2682              	.LC254:
+ 2683 1164 20202020 	 .ascii "    ecc key pair generation   : \000"
+ 2683      65636320 
+ 2683      6B657920 
+ 2683      70616972 
+ 2683      2067656E 
+ 2684              	.LC255:
+ 2685 1185 313300   	 .ascii "13\000"
+ 2686              	.LC256:
+ 2687 1188 20202020 	 .ascii "    ecdsa sign                : \000"
+ 2687      65636473 
+ 2687      61207369 
+ 2687      676E2020 
+ 2687      20202020 
+ 2688              	.LC257:
+ 2689 11a9 313400   	 .ascii "14\000"
+ 2690              	.LC258:
+ 2691 11ac 20202020 	 .ascii "    ecdsa verify sign         : \000"
+ 2691      65636473 
+ 2691      61207665 
+ 2691      72696679 
+ 2691      20736967 
+ 2692              	.LC259:
+ 2693 11cd 313500   	 .ascii "15\000"
+ 2694              	.LC260:
+ 2695 11d0 20202020 	 .ascii "    ecc diffie hellman        : \000"
+ 2695      65636320 
+ 2695      64696666 
+ 2695      69652068 
+ 2695      656C6C6D 
+ 2696              	.LC261:
+ 2697 11f1 313600   	 .ascii "16\000"
+ 2698              	.LC262:
+ 2699 11f4 20202020 	 .ascii "    rsa key pair generation   : \000"
+ 2699      72736120 
+ 2699      6B657920 
+ 2699      70616972 
+ 2699      2067656E 
+ 2700              	.LC263:
+ 2701 1215 313700   	 .ascii "17\000"
+ 2702              	.LC264:
+ 2703 1218 20202020 	 .ascii "    rsa sign                  : \000"
+ 2703      72736120 
+ 2703      7369676E 
+ 2703      20202020 
+ 2703      20202020 
+ 2704              	.LC265:
+ 2705 1239 313800   	 .ascii "18\000"
+ 2706              	.LC266:
+ 2707 123c 20202020 	 .ascii "    rsa verify sign           : \000"
+ 2707      72736120 
+ 2707      76657269 
+ 2707      66792073 
+ 2707      69676E20 
+ 2708              	.LC267:
+ 2709 125d 313900   	 .ascii "19\000"
+ 2710              	.LC268:
+ 2711 1260 20202020 	 .ascii "    rsa encrypt message       : \000"
+ 2711      72736120 
+ 2711      656E6372 
+ 2711      79707420 
+ 2711      6D657373 
+ 2712              	.LC269:
+ 2713 1281 323000   	 .ascii "20\000"
+ 2714              	.LC270:
+ 2715 1284 20202020 	 .ascii "    rsa encrypt session       : \000"
+ 2715      72736120 
+ 2715      656E6372 
+ 2715      79707420 
+ 2715      73657373 
+ 2716              	.LC271:
+ 2717 12a5 323100   	 .ascii "21\000"
+ 2718              	.LC272:
+ 2719 12a8 20202020 	 .ascii "    rsa decrypt and store     : \000"
+ 2719      72736120 
+ 2719      64656372 
+ 2719      79707420 
+ 2719      616E6420 
+ 2720              	.LC273:
+ 2721 12c9 323200   	 .ascii "22\000"
+ 2722              	.LC274:
+ 2723 12cc 20202020 	 .ascii "    rsa decrypt and export    : \000"
+ 2723      72736120 
+ 2723      64656372 
+ 2723      79707420 
+ 2723      616E6420 
+ 2724              	.LC275:
+ 2725 12ed 323300   	 .ascii "23\000"
+ 2726              	 .section .bss.me_util,"aw",%nobits
+ 2727              	 .align 2
+ 2728              	 .set .LANCHOR1,.+0
+ 2731              	me_util:
+ 2732 0000 00000000 	 .space 4
+ 2733              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 2734              	 .align 1
+ 2735              	 .set .LANCHOR0,.+0
+ 2738              	optiga_lib_status:
+ 2739 0000 0000     	 .space 2
+ 2740              	 .text
+ 2741              	.Letext0:
+ 2742              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 2743              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 2744              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 2745              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_usic.h"
+ 2746              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 2747              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 2748              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 2749              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_util.h"
+ 2750              	 .file 10 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal.h"
+ 2751              	 .file 11 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_logger.h"
+ 2752              	 .file 12 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 2753              	 .file 13 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+ 2754              	 .file 14 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdio.h"
+ 2755              	 .file 15 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+ 2756              	 .file 16 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_os_timer.h"
+ 2757              	 .file 17 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\string.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 optiga_shell.c
+    {standard input}:18     .text.optiga_util_callback:00000000 $t
+    {standard input}:22     .text.optiga_util_callback:00000000 optiga_util_callback
+    {standard input}:39     .text.optiga_util_callback:00000008 $d
+    {standard input}:44     .text.optiga_shell_crypt_rsa_decrypt_and_export:00000000 $t
+    {standard input}:48     .text.optiga_shell_crypt_rsa_decrypt_and_export:00000000 optiga_shell_crypt_rsa_decrypt_and_export
+    {standard input}:101    .text.optiga_shell_crypt_rsa_decrypt_and_export:00000040 $d
+    {standard input}:112    .text.optiga_shell_crypt_rsa_decrypt_and_store:00000000 $t
+    {standard input}:116    .text.optiga_shell_crypt_rsa_decrypt_and_store:00000000 optiga_shell_crypt_rsa_decrypt_and_store
+    {standard input}:175    .text.optiga_shell_crypt_rsa_decrypt_and_store:00000048 $d
+    {standard input}:187    .text.optiga_shell_crypt_rsa_encrypt_session:00000000 $t
+    {standard input}:191    .text.optiga_shell_crypt_rsa_encrypt_session:00000000 optiga_shell_crypt_rsa_encrypt_session
+    {standard input}:226    .text.optiga_shell_crypt_rsa_encrypt_session:00000020 $d
+    {standard input}:234    .text.optiga_shell_crypt_rsa_encrypt_message:00000000 $t
+    {standard input}:238    .text.optiga_shell_crypt_rsa_encrypt_message:00000000 optiga_shell_crypt_rsa_encrypt_message
+    {standard input}:273    .text.optiga_shell_crypt_rsa_encrypt_message:00000020 $d
+    {standard input}:281    .text.optiga_shell_crypt_rsa_verify:00000000 $t
+    {standard input}:285    .text.optiga_shell_crypt_rsa_verify:00000000 optiga_shell_crypt_rsa_verify
+    {standard input}:320    .text.optiga_shell_crypt_rsa_verify:00000020 $d
+    {standard input}:328    .text.optiga_shell_crypt_rsa_sign:00000000 $t
+    {standard input}:332    .text.optiga_shell_crypt_rsa_sign:00000000 optiga_shell_crypt_rsa_sign
+    {standard input}:367    .text.optiga_shell_crypt_rsa_sign:00000020 $d
+    {standard input}:375    .text.optiga_shell_crypt_generate_keypair:00000000 $t
+    {standard input}:379    .text.optiga_shell_crypt_generate_keypair:00000000 optiga_shell_crypt_generate_keypair
+    {standard input}:414    .text.optiga_shell_crypt_generate_keypair:00000020 $d
+    {standard input}:422    .text.optiga_shell_crypt_ecdh:00000000 $t
+    {standard input}:426    .text.optiga_shell_crypt_ecdh:00000000 optiga_shell_crypt_ecdh
+    {standard input}:479    .text.optiga_shell_crypt_ecdh:00000040 $d
+    {standard input}:490    .text.optiga_shell_crypt_ecdsa_verify:00000000 $t
+    {standard input}:494    .text.optiga_shell_crypt_ecdsa_verify:00000000 optiga_shell_crypt_ecdsa_verify
+    {standard input}:529    .text.optiga_shell_crypt_ecdsa_verify:00000020 $d
+    {standard input}:537    .text.optiga_shell_crypt_ecdsa_sign:00000000 $t
+    {standard input}:541    .text.optiga_shell_crypt_ecdsa_sign:00000000 optiga_shell_crypt_ecdsa_sign
+    {standard input}:576    .text.optiga_shell_crypt_ecdsa_sign:00000020 $d
+    {standard input}:584    .text.optiga_shell_crypt_ecc_generate_keypair:00000000 $t
+    {standard input}:588    .text.optiga_shell_crypt_ecc_generate_keypair:00000000 optiga_shell_crypt_ecc_generate_keypair
+    {standard input}:623    .text.optiga_shell_crypt_ecc_generate_keypair:00000020 $d
+    {standard input}:631    .text.optiga_shell_crypt_random:00000000 $t
+    {standard input}:635    .text.optiga_shell_crypt_random:00000000 optiga_shell_crypt_random
+    {standard input}:670    .text.optiga_shell_crypt_random:00000020 $d
+    {standard input}:678    .text.optiga_shell_crypt_tls_prf_sha256:00000000 $t
+    {standard input}:682    .text.optiga_shell_crypt_tls_prf_sha256:00000000 optiga_shell_crypt_tls_prf_sha256
+    {standard input}:735    .text.optiga_shell_crypt_tls_prf_sha256:00000040 $d
+    {standard input}:746    .text.optiga_shell_crypt_hash:00000000 $t
+    {standard input}:750    .text.optiga_shell_crypt_hash:00000000 optiga_shell_crypt_hash
+    {standard input}:785    .text.optiga_shell_crypt_hash:00000020 $d
+    {standard input}:793    .text.optiga_shell_util_protected_update:00000000 $t
+    {standard input}:797    .text.optiga_shell_util_protected_update:00000000 optiga_shell_util_protected_update
+    {standard input}:844    .text.optiga_shell_util_protected_update:00000034 $d
+    {standard input}:854    .text.optiga_shell_util_update_count:00000000 $t
+    {standard input}:858    .text.optiga_shell_util_update_count:00000000 optiga_shell_util_update_count
+    {standard input}:899    .text.optiga_shell_util_update_count:0000002c $d
+    {standard input}:908    .text.optiga_shell_util_hibernate_restore:00000000 $t
+    {standard input}:912    .text.optiga_shell_util_hibernate_restore:00000000 optiga_shell_util_hibernate_restore
+    {standard input}:1007   .text.optiga_shell_util_hibernate_restore:00000084 $d
+    {standard input}:1025   .text.optiga_shell_pair_host_optiga:00000000 $t
+    {standard input}:1029   .text.optiga_shell_pair_host_optiga:00000000 optiga_shell_pair_host_optiga
+    {standard input}:1082   .text.optiga_shell_pair_host_optiga:00000040 $d
+    {standard input}:1093   .text.optiga_shell_util_write_data:00000000 $t
+    {standard input}:1097   .text.optiga_shell_util_write_data:00000000 optiga_shell_util_write_data
+    {standard input}:1138   .text.optiga_shell_util_write_data:0000002c $d
+    {standard input}:1147   .text.optiga_shell_util_read_data:00000000 $t
+    {standard input}:1151   .text.optiga_shell_util_read_data:00000000 optiga_shell_util_read_data
+    {standard input}:1192   .text.optiga_shell_util_read_data:0000002c $d
+    {standard input}:1201   .text.optiga_shell_init:00000000 $t
+    {standard input}:1205   .text.optiga_shell_init:00000000 optiga_shell_init
+    {standard input}:1339   .text.optiga_shell_init:000000a8 $d
+    {standard input}:1357   .text.optiga_shell_selftest:00000000 $t
+    {standard input}:1361   .text.optiga_shell_selftest:00000000 optiga_shell_selftest
+    {standard input}:1911   .text.optiga_shell_selftest:000003d4 $d
+    {standard input}:1919   .text.optiga_shell_show_usage:00000000 $t
+    {standard input}:1923   .text.optiga_shell_show_usage:00000000 optiga_shell_show_usage
+    {standard input}:1977   .text.optiga_shell_show_usage:0000003c $d
+    {standard input}:1985   .text.optiga_shell_deinit:00000000 $t
+    {standard input}:1989   .text.optiga_shell_deinit:00000000 optiga_shell_deinit
+    {standard input}:2042   .text.optiga_shell_deinit:0000002c $d
+    {standard input}:2048   .text.optiga_shell_begin:00000000 $t
+    {standard input}:2053   .text.optiga_shell_begin:00000000 optiga_shell_begin
+    {standard input}:2282   .text.optiga_shell_begin:000000e8 $d
+    {standard input}:2294   .text.optiga_shell_wait_for_user:00000000 $t
+    {standard input}:2299   .text.optiga_shell_wait_for_user:00000000 optiga_shell_wait_for_user
+    {standard input}:2353   .text.optiga_shell_wait_for_user:00000034 $d
+    {standard input}:2365   .data.optiga_cmds:00000000 optiga_cmds
+    {standard input}:2731   .bss.me_util:00000000 me_util
+    {standard input}:2361   .data.optiga_cmds:00000000 $d
+    {standard input}:2727   .bss.me_util:00000000 $d
+    {standard input}:2734   .bss.optiga_lib_status:00000000 $d
+    {standard input}:2738   .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+optiga_lib_print_message
+example_optiga_crypt_rsa_decrypt_and_export
+example_optiga_crypt_rsa_decrypt_and_store
+example_optiga_crypt_rsa_encrypt_session
+example_optiga_crypt_rsa_encrypt_message
+example_optiga_crypt_rsa_verify
+example_optiga_crypt_rsa_sign
+example_optiga_crypt_rsa_generate_keypair
+example_optiga_crypt_ecdh
+example_optiga_crypt_ecdsa_verify
+example_optiga_crypt_ecdsa_sign
+example_optiga_crypt_ecc_generate_keypair
+example_optiga_crypt_random
+example_optiga_crypt_tls_prf_sha256
+example_optiga_crypt_hash
+example_optiga_util_protected_update
+example_optiga_util_update_count
+example_optiga_util_hibernate_restore
+example_pair_host_and_optiga_using_pre_shared_secret
+example_optiga_util_write_data
+example_optiga_util_read_data
+optiga_util_create
+optiga_util_open_application
+optiga_util_write_data
+pal_os_timer_get_time_in_milliseconds
+sprintf
+optiga_lib_print_string_with_newline
+pal_os_timer_delay_in_milliseconds
+strcmp
+optiga_lib_print_string
+optiga_util_close_application
+optiga_util_destroy
+pal_logger_read
+strlen
+strcpy
+pal_logger_write
+cunit_console

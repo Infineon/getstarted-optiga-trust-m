@@ -1,0 +1,2285 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "optiga_util.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_util_generic_event_handler,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_util_generic_event_handler:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util/optiga_util.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \file optiga_util.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \brief   This file implements the OPTIGA utility module functionalities
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * \ingroup  grOptigaUtil
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** *
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** * @{
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** */
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #include "optiga/optiga_util.h"
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #include "optiga/common/optiga_lib_logger.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #include "optiga/common/optiga_lib_common_internal.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #include "optiga/pal/pal_os_memory.h"
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** extern void optiga_cmd_set_shielded_connection_option(optiga_cmd_t * me, uint8_t value,
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                       uint8_t shielded_connection_option);
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** _STATIC_H void optiga_util_generic_event_handler(void * me,
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                  optiga_lib_status_t event)
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+  25              	 .loc 1 50 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  28 0000 10B5     	 push {r4,lr}
+  29              	.LCFI0:
+  30              	 .cfi_def_cfa_offset 8
+  31              	 .cfi_offset 4,-8
+  32              	 .cfi_offset 14,-4
+  33              	 .loc 1 50 0
+  34 0002 041C     	 mov r4,r0
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_t * p_optiga_util = (optiga_util_t *)me;
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     p_optiga_util->handler(p_optiga_util->caller_context, event);
+  35              	 .loc 1 53 0
+  36 0004 8069     	 ldr r0,[r0,#24]
+  37              	.LVL1:
+  38 0006 E369     	 ldr r3,[r4,#28]
+  39 0008 9847     	 blx r3
+  40              	.LVL2:
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     p_optiga_util->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+  41              	 .loc 1 54 0
+  42 000a 0023     	 mov r3,#0
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+  43              	 .loc 1 55 0
+  44              	 
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     p_optiga_util->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+  45              	 .loc 1 54 0
+  46 000c 2384     	 strh r3,[r4,#32]
+  47              	.LVL3:
+  48              	 .loc 1 55 0
+  49 000e 10BD     	 pop {r4,pc}
+  50              	 .cfi_endproc
+  51              	.LFE0:
+  53              	 .section .text.optiga_util_reset_protection_level,"ax",%progbits
+  54              	 .align 1
+  55              	 .code 16
+  56              	 .thumb_func
+  58              	optiga_util_reset_protection_level:
+  59              	.LFB1:
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** _STATIC_H void optiga_util_reset_protection_level(optiga_util_t * me)
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+  60              	 .loc 1 58 0
+  61              	 .cfi_startproc
+  62              	.LVL4:
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     if (NULL != me)
+  63              	 .loc 1 60 0
+  64 0000 0028     	 cmp r0,#0
+  65 0002 02D0     	 beq .L2
+  66              	.LVL5:
+  67              	.LBB4:
+  68              	.LBB5:
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_UTIL_SET_COMMS_PROTECTION_LEVEL(me, OPTIGA_COMMS_DEFAULT_PROTECTION_LEVEL);
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     }
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** _STATIC_H optiga_lib_status_t optiga_util_write_data_wrapper(optiga_util_t * me,
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                              uint16_t optiga_oid,
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                              uint8_t write_type,
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                              uint16_t offset,
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                              const uint8_t * p_buffer,
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                              uint16_t length)
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_set_data_object_params_t * p_params;
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) || (NULL == p_buffer))
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_data_object_params_t *)&(me->params.optiga_set_data_object_params);
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         pal_os_memset(&me->params,0x00,sizeof(optiga_util_params_t));
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_UTIL_COUNT_DATA_OBJECT == write_type)
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->count = p_buffer[0];
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->buffer = NULL;
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         else
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->count = 0;
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->buffer = p_buffer;
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->oid = optiga_oid;
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = offset;
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 0;//for Data
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->size = length;
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->written_size = 0;
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->write_type = write_type;
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_set_data_object(me->my_cmd, write_type, (optiga_set_data_object_p
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_COMMS_SHIELDED_CONNECTION
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** void optiga_util_set_comms_params(optiga_util_t * me,
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                   uint8_t parameter_type,
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                   uint8_t value)
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     switch (parameter_type)
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         case OPTIGA_COMMS_PROTECTION_LEVEL:
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->protection_level = value;
+  69              	 .loc 1 137 0
+  70 0004 0023     	 mov r3,#0
+  71 0006 0330     	 add r0,r0,#3
+  72              	.LVL6:
+  73 0008 C377     	 strb r3,[r0,#31]
+  74              	.LVL7:
+  75              	.L2:
+  76              	.LBE5:
+  77              	.LBE4:
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+  78              	 .loc 1 65 0
+  79              	 
+  80 000a 7047     	 bx lr
+  81              	 .cfi_endproc
+  82              	.LFE1:
+  84              	 .section .text.optiga_util_write_data_wrapper,"ax",%progbits
+  85              	 .align 1
+  86              	 .code 16
+  87              	 .thumb_func
+  89              	optiga_util_write_data_wrapper:
+  90              	.LFB2:
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+  91              	 .loc 1 73 0
+  92              	 .cfi_startproc
+  93              	.LVL8:
+  94 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  95              	.LCFI1:
+  96              	 .cfi_def_cfa_offset 20
+  97              	 .cfi_offset 4,-20
+  98              	 .cfi_offset 5,-16
+  99              	 .cfi_offset 6,-12
+ 100              	 .cfi_offset 7,-8
+ 101              	 .cfi_offset 14,-4
+ 102 0002 85B0     	 sub sp,sp,#20
+ 103              	.LCFI2:
+ 104              	 .cfi_def_cfa_offset 40
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 105              	 .loc 1 73 0
+ 106 0004 0293     	 str r3,[sp,#8]
+ 107 0006 0AAB     	 add r3,sp,#40
+ 108              	.LVL9:
+ 109 0008 40CB     	 ldmia r3!,{r6}
+ 110              	.LVL10:
+ 111 000a 041C     	 mov r4,r0
+ 112 000c 1B88     	 ldrh r3,[r3]
+ 113              	.LVL11:
+ 114 000e 0191     	 str r1,[sp,#4]
+ 115 0010 151C     	 mov r5,r2
+ 116 0012 0393     	 str r3,[sp,#12]
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 117              	 .loc 1 80 0
+ 118 0014 0028     	 cmp r0,#0
+ 119 0016 39D0     	 beq .L14
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 120              	 .loc 1 80 0 is_stmt 0 discriminator 1
+ 121 0018 4769     	 ldr r7,[r0,#20]
+ 122 001a 002F     	 cmp r7,#0
+ 123 001c 36D0     	 beq .L14
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 124              	 .loc 1 80 0 discriminator 2
+ 125 001e 002E     	 cmp r6,#0
+ 126 0020 34D0     	 beq .L14
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 127              	 .loc 1 87 0 is_stmt 1
+ 128 0022 038C     	 ldrh r3,[r0,#32]
+ 129 0024 012B     	 cmp r3,#1
+ 130 0026 33D0     	 beq .L15
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_data_object_params_t *)&(me->params.optiga_set_data_object_params);
+ 131              	 .loc 1 93 0
+ 132 0028 0123     	 mov r3,#1
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 133              	 .loc 1 95 0
+ 134 002a 0021     	 mov r1,#0
+ 135              	.LVL12:
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_data_object_params_t *)&(me->params.optiga_set_data_object_params);
+ 136              	 .loc 1 93 0
+ 137 002c 0384     	 strh r3,[r0,#32]
+ 138              	.LVL13:
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 139              	 .loc 1 95 0
+ 140 002e 1422     	 mov r2,#20
+ 141              	.LVL14:
+ 142 0030 FFF7FEFF 	 bl memset
+ 143              	.LVL15:
+ 144 0034 0023     	 mov r3,#0
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 145              	 .loc 1 97 0
+ 146 0036 022D     	 cmp r5,#2
+ 147 0038 03D1     	 bne .L10
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->buffer = NULL;
+ 148              	 .loc 1 99 0
+ 149 003a 3278     	 ldrb r2,[r6]
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 150              	 .loc 1 100 0
+ 151 003c A360     	 str r3,[r4,#8]
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->buffer = NULL;
+ 152              	 .loc 1 99 0
+ 153 003e A273     	 strb r2,[r4,#14]
+ 154 0040 01E0     	 b .L11
+ 155              	.L10:
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->buffer = p_buffer;
+ 156              	 .loc 1 104 0
+ 157 0042 A373     	 strb r3,[r4,#14]
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 158              	 .loc 1 105 0
+ 159 0044 A660     	 str r6,[r4,#8]
+ 160              	.L11:
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = offset;
+ 161              	 .loc 1 107 0
+ 162 0046 6B46     	 mov r3,sp
+ 163 0048 9B88     	 ldrh r3,[r3,#4]
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->size = length;
+ 164              	 .loc 1 109 0
+ 165 004a 0026     	 mov r6,#0
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = offset;
+ 166              	 .loc 1 107 0
+ 167 004c 2380     	 strh r3,[r4]
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 0;//for Data
+ 168              	 .loc 1 108 0
+ 169 004e 6B46     	 mov r3,sp
+ 170 0050 1B89     	 ldrh r3,[r3,#8]
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 171              	 .loc 1 112 0
+ 172 0052 6573     	 strb r5,[r4,#13]
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 0;//for Data
+ 173              	 .loc 1 108 0
+ 174 0054 6380     	 strh r3,[r4,#2]
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->written_size = 0;
+ 175              	 .loc 1 110 0
+ 176 0056 6B46     	 mov r3,sp
+ 177 0058 9B89     	 ldrh r3,[r3,#12]
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->size = length;
+ 178              	 .loc 1 109 0
+ 179 005a 2673     	 strb r6,[r4,#12]
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->written_size = 0;
+ 180              	 .loc 1 110 0
+ 181 005c A380     	 strh r3,[r4,#4]
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->write_type = write_type;
+ 182              	 .loc 1 111 0
+ 183 005e E680     	 strh r6,[r4,#6]
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 184              	 .loc 1 114 0
+ 185 0060 E31C     	 add r3,r4,#3
+ 186 0062 D97F     	 ldrb r1,[r3,#31]
+ 187 0064 381C     	 mov r0,r7
+ 188 0066 321C     	 mov r2,r6
+ 189 0068 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 190              	.LVL16:
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 191              	 .loc 1 115 0
+ 192 006c 231D     	 add r3,r4,#4
+ 193 006e D97F     	 ldrb r1,[r3,#31]
+ 194 0070 6069     	 ldr r0,[r4,#20]
+ 195 0072 0122     	 mov r2,#1
+ 196 0074 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 197              	.LVL17:
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 198              	 .loc 1 117 0
+ 199 0078 291C     	 mov r1,r5
+ 200 007a 6069     	 ldr r0,[r4,#20]
+ 201 007c 221C     	 mov r2,r4
+ 202 007e FFF7FEFF 	 bl optiga_cmd_set_data_object
+ 203              	.LVL18:
+ 204 0082 051E     	 sub r5,r0,#0
+ 205              	.LVL19:
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 206              	 .loc 1 118 0
+ 207 0084 B542     	 cmp r5,r6
+ 208 0086 04D0     	 beq .L9
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 209              	 .loc 1 120 0
+ 210 0088 2684     	 strh r6,[r4,#32]
+ 211 008a 02E0     	 b .L9
+ 212              	.LVL20:
+ 213              	.L14:
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 214              	 .loc 1 82 0
+ 215 008c 044D     	 ldr r5,.L19
+ 216 008e 00E0     	 b .L9
+ 217              	.L15:
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 218              	 .loc 1 89 0
+ 219 0090 044D     	 ldr r5,.L19+4
+ 220              	.LVL21:
+ 221              	.L9:
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 222              	 .loc 1 123 0
+ 223 0092 201C     	 mov r0,r4
+ 224 0094 FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 225              	.LVL22:
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 226              	 .loc 1 126 0
+ 227 0098 281C     	 mov r0,r5
+ 228 009a 05B0     	 add sp,sp,#20
+ 229              	 
+ 230              	.LVL23:
+ 231              	.LVL24:
+ 232 009c F0BD     	 pop {r4,r5,r6,r7,pc}
+ 233              	.L20:
+ 234 009e C046     	 .align 2
+ 235              	.L19:
+ 236 00a0 03030000 	 .word 771
+ 237 00a4 05030000 	 .word 773
+ 238              	 .cfi_endproc
+ 239              	.LFE2:
+ 241              	 .section .text.optiga_util_set_comms_params,"ax",%progbits
+ 242              	 .align 1
+ 243              	 .global optiga_util_set_comms_params
+ 244              	 .code 16
+ 245              	 .thumb_func
+ 247              	optiga_util_set_comms_params:
+ 248              	.LFB3:
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     switch (parameter_type)
+ 249              	 .loc 1 132 0
+ 250              	 .cfi_startproc
+ 251              	.LVL25:
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 252              	 .loc 1 133 0
+ 253 0000 0129     	 cmp r1,#1
+ 254 0002 03D0     	 beq .L23
+ 255 0004 0229     	 cmp r1,#2
+ 256 0006 03D1     	 bne .L21
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         case OPTIGA_COMMS_PROTOCOL_VERSION:
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->protocol_version = value;
+ 257              	 .loc 1 142 0
+ 258 0008 0430     	 add r0,r0,#4
+ 259              	.LVL26:
+ 260 000a 00E0     	 b .L25
+ 261              	.LVL27:
+ 262              	.L23:
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 263              	 .loc 1 137 0
+ 264 000c 0330     	 add r0,r0,#3
+ 265              	.LVL28:
+ 266              	.L25:
+ 267              	 .loc 1 142 0
+ 268 000e C277     	 strb r2,[r0,#31]
+ 269              	.L21:
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         default:
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     }
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 270              	 .loc 1 150 0
+ 271              	 
+ 272 0010 7047     	 bx lr
+ 273              	 .cfi_endproc
+ 274              	.LFE3:
+ 276              	 .section .text.optiga_util_create,"ax",%progbits
+ 277              	 .align 1
+ 278              	 .global optiga_util_create
+ 279              	 .code 16
+ 280              	 .thumb_func
+ 282              	optiga_util_create:
+ 283              	.LFB4:
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_util_t * optiga_util_create(uint8_t optiga_instance_id,
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                    callback_handler_t handler,
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                    void * caller_context)
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 284              	 .loc 1 156 0
+ 285              	 .cfi_startproc
+ 286              	.LVL29:
+ 287 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 288              	.LCFI3:
+ 289              	 .cfi_def_cfa_offset 24
+ 290              	 .cfi_offset 3,-24
+ 291              	 .cfi_offset 4,-20
+ 292              	 .cfi_offset 5,-16
+ 293              	 .cfi_offset 6,-12
+ 294              	 .cfi_offset 7,-8
+ 295              	 .cfi_offset 14,-4
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_t * me = NULL;
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (NULL == handler)
+ 296              	 .loc 1 162 0
+ 297 0002 0029     	 cmp r1,#0
+ 298 0004 01D1     	 bne .L27
+ 299              	.LVL30:
+ 300              	.L29:
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_t * me = NULL;
+ 301              	 .loc 1 157 0
+ 302 0006 0024     	 mov r4,#0
+ 303 0008 1DE0     	 b .L28
+ 304              	.LVL31:
+ 305              	.L27:
+ 306 000a 0F1C     	 mov r7,r1
+ 307 000c 051C     	 mov r5,r0
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me = (optiga_util_t *)pal_os_calloc(1, sizeof(optiga_util_t));
+ 308              	 .loc 1 167 0
+ 309 000e 2421     	 mov r1,#36
+ 310              	.LVL32:
+ 311 0010 0120     	 mov r0,#1
+ 312              	.LVL33:
+ 313 0012 161C     	 mov r6,r2
+ 314 0014 FFF7FEFF 	 bl calloc
+ 315              	.LVL34:
+ 316 0018 041E     	 sub r4,r0,#0
+ 317              	.LVL35:
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (NULL == me)
+ 318              	 .loc 1 168 0
+ 319 001a F4D0     	 beq .L29
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->handler = handler;
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->caller_context = caller_context;
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_SUCCESS;
+ 320              	 .loc 1 175 0
+ 321 001c 0022     	 mov r2,#0
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_COMMS_SHIELDED_CONNECTION
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->protocol_version = OPTIGA_COMMS_PROTOCOL_VERSION_PRE_SHARED_SECRET;
+ 322              	 .loc 1 177 0
+ 323 001e 0121     	 mov r1,#1
+ 324 0020 031D     	 add r3,r0,#4
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_COMMS_SHIELDED_CONNECTION
+ 325              	 .loc 1 175 0
+ 326 0022 0284     	 strh r2,[r0,#32]
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->caller_context = caller_context;
+ 327              	 .loc 1 173 0
+ 328 0024 C761     	 str r7,[r0,#28]
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_SUCCESS;
+ 329              	 .loc 1 174 0
+ 330 0026 8661     	 str r6,[r0,#24]
+ 331              	 .loc 1 177 0
+ 332 0028 D977     	 strb r1,[r3,#31]
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->protection_level = OPTIGA_COMMS_DEFAULT_PROTECTION_LEVEL;
+ 333              	 .loc 1 178 0
+ 334 002a C31C     	 add r3,r0,#3
+ 335 002c DA77     	 strb r2,[r3,#31]
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->my_cmd = optiga_cmd_create(optiga_instance_id, optiga_util_generic_event_handler, me);
+ 336              	 .loc 1 180 0
+ 337 002e 281C     	 mov r0,r5
+ 338              	.LVL36:
+ 339 0030 0649     	 ldr r1,.L33
+ 340 0032 221C     	 mov r2,r4
+ 341 0034 FFF7FEFF 	 bl optiga_cmd_create
+ 342              	.LVL37:
+ 343 0038 051E     	 sub r5,r0,#0
+ 344 003a 6061     	 str r0,[r4,#20]
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (NULL == me->my_cmd)
+ 345              	 .loc 1 181 0
+ 346 003c 03D1     	 bne .L28
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             pal_os_free(me);
+ 347              	 .loc 1 183 0
+ 348 003e 201C     	 mov r0,r4
+ 349 0040 FFF7FEFF 	 bl free
+ 350              	.LVL38:
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me = NULL;
+ 351              	 .loc 1 184 0
+ 352 0044 2C1C     	 mov r4,r5
+ 353              	.LVL39:
+ 354              	.L28:
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (me);
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 355              	 .loc 1 189 0
+ 356 0046 201C     	 mov r0,r4
+ 357              	 
+ 358              	.LVL40:
+ 359 0048 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 360              	.L34:
+ 361 004a C046     	 .align 2
+ 362              	.L33:
+ 363 004c 00000000 	 .word optiga_util_generic_event_handler
+ 364              	 .cfi_endproc
+ 365              	.LFE4:
+ 367              	 .section .text.optiga_util_destroy,"ax",%progbits
+ 368              	 .align 1
+ 369              	 .global optiga_util_destroy
+ 370              	 .code 16
+ 371              	 .thumb_func
+ 373              	optiga_util_destroy:
+ 374              	.LFB5:
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_destroy(optiga_util_t * me)
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 375              	 .loc 1 192 0
+ 376              	 .cfi_startproc
+ 377              	.LVL41:
+ 378 0000 38B5     	 push {r3,r4,r5,lr}
+ 379              	.LCFI4:
+ 380              	 .cfi_def_cfa_offset 16
+ 381              	 .cfi_offset 3,-16
+ 382              	 .cfi_offset 4,-12
+ 383              	 .cfi_offset 5,-8
+ 384              	 .cfi_offset 14,-4
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value;
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (NULL == me)
+ 385              	 .loc 1 198 0
+ 386 0002 0028     	 cmp r0,#0
+ 387 0004 0BD0     	 beq .L37
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 388              	 .loc 1 204 0
+ 389 0006 038C     	 ldrh r3,[r0,#32]
+ 390 0008 012B     	 cmp r3,#1
+ 391 000a 0AD0     	 beq .L38
+ 392 000c 041C     	 mov r4,r0
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_destroy(me->my_cmd);
+ 393              	 .loc 1 209 0
+ 394 000e 4069     	 ldr r0,[r0,#20]
+ 395              	.LVL42:
+ 396 0010 FFF7FEFF 	 bl optiga_cmd_destroy
+ 397              	.LVL43:
+ 398 0014 051C     	 mov r5,r0
+ 399              	.LVL44:
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         pal_os_free(me);
+ 400              	 .loc 1 210 0
+ 401 0016 201C     	 mov r0,r4
+ 402              	.LVL45:
+ 403 0018 FFF7FEFF 	 bl free
+ 404              	.LVL46:
+ 405 001c 02E0     	 b .L36
+ 406              	.LVL47:
+ 407              	.L37:
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 408              	 .loc 1 200 0
+ 409 001e 024D     	 ldr r5,.L39
+ 410 0020 00E0     	 b .L36
+ 411              	.L38:
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 412              	 .loc 1 206 0
+ 413 0022 024D     	 ldr r5,.L39+4
+ 414              	.LVL48:
+ 415              	.L36:
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 416              	 .loc 1 213 0
+ 417 0024 281C     	 mov r0,r5
+ 418              	 
+ 419              	.LVL49:
+ 420 0026 38BD     	 pop {r3,r4,r5,pc}
+ 421              	.L40:
+ 422              	 .align 2
+ 423              	.L39:
+ 424 0028 03030000 	 .word 771
+ 425 002c 05030000 	 .word 773
+ 426              	 .cfi_endproc
+ 427              	.LFE5:
+ 429              	 .section .text.optiga_util_open_application,"ax",%progbits
+ 430              	 .align 1
+ 431              	 .global optiga_util_open_application
+ 432              	 .code 16
+ 433              	 .thumb_func
+ 435              	optiga_util_open_application:
+ 436              	.LFB6:
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_open_application(optiga_util_t * me,
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                  bool_t perform_restore)
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 437              	 .loc 1 217 0
+ 438              	 .cfi_startproc
+ 439              	.LVL50:
+ 440 0000 70B5     	 push {r4,r5,r6,lr}
+ 441              	.LCFI5:
+ 442              	 .cfi_def_cfa_offset 16
+ 443              	 .cfi_offset 4,-16
+ 444              	 .cfi_offset 5,-12
+ 445              	 .cfi_offset 6,-8
+ 446              	 .cfi_offset 14,-4
+ 447              	 .loc 1 217 0
+ 448 0002 041C     	 mov r4,r0
+ 449 0004 0D1C     	 mov r5,r1
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd))
+ 450              	 .loc 1 224 0
+ 451 0006 0028     	 cmp r0,#0
+ 452 0008 24D0     	 beq .L46
+ 453              	 .loc 1 224 0 is_stmt 0 discriminator 1
+ 454 000a 4069     	 ldr r0,[r0,#20]
+ 455              	.LVL51:
+ 456 000c 0028     	 cmp r0,#0
+ 457 000e 21D0     	 beq .L46
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 458              	 .loc 1 231 0 is_stmt 1
+ 459 0010 238C     	 ldrh r3,[r4,#32]
+ 460 0012 012B     	 cmp r3,#1
+ 461 0014 20D0     	 beq .L47
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 462              	 .loc 1 237 0
+ 463 0016 0126     	 mov r6,#1
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 464              	 .loc 1 238 0
+ 465 0018 E31C     	 add r3,r4,#3
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 466              	 .loc 1 237 0
+ 467 001a 2684     	 strh r6,[r4,#32]
+ 468              	 .loc 1 238 0
+ 469 001c D97F     	 ldrb r1,[r3,#31]
+ 470              	.LVL52:
+ 471 001e 0022     	 mov r2,#0
+ 472 0020 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 473              	.LVL53:
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 474              	 .loc 1 239 0
+ 475 0024 231D     	 add r3,r4,#4
+ 476 0026 D97F     	 ldrb r1,[r3,#31]
+ 477 0028 6069     	 ldr r0,[r4,#20]
+ 478 002a 321C     	 mov r2,r6
+ 479 002c FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 480              	.LVL54:
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_COMMS_SHIELDED_CONNECTION
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (FALSE == perform_restore)
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_MANAGE_CONTEXT(me->my_cmd, OPTIGA_COMMS_SESSION_CONTEXT_NONE);
+ 481              	 .loc 1 243 0
+ 482 0030 6069     	 ldr r0,[r4,#20]
+ 483 0032 3321     	 mov r1,#51
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 484              	 .loc 1 241 0
+ 485 0034 002D     	 cmp r5,#0
+ 486 0036 00D0     	 beq .L51
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         else
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****              OPTIGA_PROTECTION_MANAGE_CONTEXT(me->my_cmd, OPTIGA_COMMS_SESSION_CONTEXT_RESTORE);
+ 487              	 .loc 1 247 0
+ 488 0038 1121     	 mov r1,#17
+ 489              	.L51:
+ 490 003a 0222     	 mov r2,#2
+ 491 003c FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 492              	.LVL55:
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif //OPTIGA_COMMS_SHIELDED_CONNECTION
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_open_application(me->my_cmd, perform_restore, NULL);
+ 493              	 .loc 1 251 0
+ 494 0040 291C     	 mov r1,r5
+ 495 0042 6069     	 ldr r0,[r4,#20]
+ 496 0044 0022     	 mov r2,#0
+ 497 0046 FFF7FEFF 	 bl optiga_cmd_open_application
+ 498              	.LVL56:
+ 499 004a 051E     	 sub r5,r0,#0
+ 500              	.LVL57:
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 501              	 .loc 1 252 0
+ 502 004c 05D0     	 beq .L42
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 503              	 .loc 1 254 0
+ 504 004e 0023     	 mov r3,#0
+ 505 0050 2384     	 strh r3,[r4,#32]
+ 506 0052 02E0     	 b .L42
+ 507              	.LVL58:
+ 508              	.L46:
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 509              	 .loc 1 226 0
+ 510 0054 034D     	 ldr r5,.L52
+ 511 0056 00E0     	 b .L42
+ 512              	.L47:
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 513              	 .loc 1 233 0
+ 514 0058 034D     	 ldr r5,.L52+4
+ 515              	.LVL59:
+ 516              	.L42:
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 517              	 .loc 1 258 0
+ 518 005a 201C     	 mov r0,r4
+ 519 005c FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 520              	.LVL60:
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 521              	 .loc 1 261 0
+ 522              	 
+ 523 0060 281C     	 mov r0,r5
+ 524              	.LVL61:
+ 525              	.LVL62:
+ 526 0062 70BD     	 pop {r4,r5,r6,pc}
+ 527              	.L53:
+ 528              	 .align 2
+ 529              	.L52:
+ 530 0064 03030000 	 .word 771
+ 531 0068 05030000 	 .word 773
+ 532              	 .cfi_endproc
+ 533              	.LFE6:
+ 535              	 .section .text.optiga_util_close_application,"ax",%progbits
+ 536              	 .align 1
+ 537              	 .global optiga_util_close_application
+ 538              	 .code 16
+ 539              	 .thumb_func
+ 541              	optiga_util_close_application:
+ 542              	.LFB7:
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_close_application(optiga_util_t * me,
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                   bool_t perform_hibernate)
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 543              	 .loc 1 265 0
+ 544              	 .cfi_startproc
+ 545              	.LVL63:
+ 546 0000 70B5     	 push {r4,r5,r6,lr}
+ 547              	.LCFI6:
+ 548              	 .cfi_def_cfa_offset 16
+ 549              	 .cfi_offset 4,-16
+ 550              	 .cfi_offset 5,-12
+ 551              	 .cfi_offset 6,-8
+ 552              	 .cfi_offset 14,-4
+ 553              	 .loc 1 265 0
+ 554 0002 041C     	 mov r4,r0
+ 555 0004 0D1C     	 mov r5,r1
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd))
+ 556              	 .loc 1 272 0
+ 557 0006 0028     	 cmp r0,#0
+ 558 0008 24D0     	 beq .L59
+ 559              	 .loc 1 272 0 is_stmt 0 discriminator 1
+ 560 000a 4069     	 ldr r0,[r0,#20]
+ 561              	.LVL64:
+ 562 000c 0028     	 cmp r0,#0
+ 563 000e 21D0     	 beq .L59
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 564              	 .loc 1 279 0 is_stmt 1
+ 565 0010 238C     	 ldrh r3,[r4,#32]
+ 566 0012 012B     	 cmp r3,#1
+ 567 0014 20D0     	 beq .L60
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 568              	 .loc 1 285 0
+ 569 0016 0126     	 mov r6,#1
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 570              	 .loc 1 286 0
+ 571 0018 E31C     	 add r3,r4,#3
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 572              	 .loc 1 285 0
+ 573 001a 2684     	 strh r6,[r4,#32]
+ 574              	 .loc 1 286 0
+ 575 001c D97F     	 ldrb r1,[r3,#31]
+ 576              	.LVL65:
+ 577 001e 0022     	 mov r2,#0
+ 578 0020 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 579              	.LVL66:
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 580              	 .loc 1 287 0
+ 581 0024 231D     	 add r3,r4,#4
+ 582 0026 D97F     	 ldrb r1,[r3,#31]
+ 583 0028 6069     	 ldr r0,[r4,#20]
+ 584 002a 321C     	 mov r2,r6
+ 585 002c FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 586              	.LVL67:
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_COMMS_SHIELDED_CONNECTION
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (FALSE == perform_hibernate)
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_MANAGE_CONTEXT(me->my_cmd, OPTIGA_COMMS_SESSION_CONTEXT_NONE);
+ 587              	 .loc 1 292 0
+ 588 0030 6069     	 ldr r0,[r4,#20]
+ 589 0032 3321     	 mov r1,#51
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 590              	 .loc 1 290 0
+ 591 0034 002D     	 cmp r5,#0
+ 592 0036 00D0     	 beq .L64
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         else
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_MANAGE_CONTEXT(me->my_cmd, OPTIGA_COMMS_SESSION_CONTEXT_SAVE);
+ 593              	 .loc 1 296 0
+ 594 0038 2221     	 mov r1,#34
+ 595              	.L64:
+ 596 003a 0222     	 mov r2,#2
+ 597 003c FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 598              	.LVL68:
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif //OPTIGA_COMMS_SHIELDED_CONNECTION
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_close_application(me->my_cmd, perform_hibernate, NULL);
+ 599              	 .loc 1 300 0
+ 600 0040 291C     	 mov r1,r5
+ 601 0042 6069     	 ldr r0,[r4,#20]
+ 602 0044 0022     	 mov r2,#0
+ 603 0046 FFF7FEFF 	 bl optiga_cmd_close_application
+ 604              	.LVL69:
+ 605 004a 051E     	 sub r5,r0,#0
+ 606              	.LVL70:
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 607              	 .loc 1 301 0
+ 608 004c 05D0     	 beq .L55
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 609              	 .loc 1 303 0
+ 610 004e 0023     	 mov r3,#0
+ 611 0050 2384     	 strh r3,[r4,#32]
+ 612 0052 02E0     	 b .L55
+ 613              	.LVL71:
+ 614              	.L59:
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 615              	 .loc 1 274 0
+ 616 0054 034D     	 ldr r5,.L65
+ 617 0056 00E0     	 b .L55
+ 618              	.L60:
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 619              	 .loc 1 281 0
+ 620 0058 034D     	 ldr r5,.L65+4
+ 621              	.LVL72:
+ 622              	.L55:
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 623              	 .loc 1 307 0
+ 624 005a 201C     	 mov r0,r4
+ 625 005c FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 626              	.LVL73:
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 627              	 .loc 1 310 0
+ 628              	 
+ 629 0060 281C     	 mov r0,r5
+ 630              	.LVL74:
+ 631              	.LVL75:
+ 632 0062 70BD     	 pop {r4,r5,r6,pc}
+ 633              	.L66:
+ 634              	 .align 2
+ 635              	.L65:
+ 636 0064 03030000 	 .word 771
+ 637 0068 05030000 	 .word 773
+ 638              	 .cfi_endproc
+ 639              	.LFE7:
+ 641              	 .section .text.optiga_util_read_data,"ax",%progbits
+ 642              	 .align 1
+ 643              	 .global optiga_util_read_data
+ 644              	 .code 16
+ 645              	 .thumb_func
+ 647              	optiga_util_read_data:
+ 648              	.LFB8:
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_read_data(optiga_util_t * me,
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           uint16_t optiga_oid,
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           uint16_t offset,
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           uint8_t * buffer,
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           uint16_t * length)
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 649              	 .loc 1 317 0
+ 650              	 .cfi_startproc
+ 651              	.LVL76:
+ 652 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 653              	.LCFI7:
+ 654              	 .cfi_def_cfa_offset 32
+ 655              	 .cfi_offset 0,-32
+ 656              	 .cfi_offset 1,-28
+ 657              	 .cfi_offset 2,-24
+ 658              	 .cfi_offset 4,-20
+ 659              	 .cfi_offset 5,-16
+ 660              	 .cfi_offset 6,-12
+ 661              	 .cfi_offset 7,-8
+ 662              	 .cfi_offset 14,-4
+ 663              	 .loc 1 317 0
+ 664 0002 041C     	 mov r4,r0
+ 665 0004 0D1C     	 mov r5,r1
+ 666 0006 0192     	 str r2,[sp,#4]
+ 667 0008 0093     	 str r3,[sp]
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_get_data_object_params_t * p_params;
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) ||
+ 668              	 .loc 1 324 0
+ 669 000a 0028     	 cmp r0,#0
+ 670 000c 35D0     	 beq .L72
+ 671              	 .loc 1 324 0 is_stmt 0 discriminator 1
+ 672 000e 4769     	 ldr r7,[r0,#20]
+ 673 0010 002F     	 cmp r7,#0
+ 674 0012 32D0     	 beq .L72
+ 675              	 .loc 1 324 0 discriminator 2
+ 676 0014 002B     	 cmp r3,#0
+ 677 0016 30D0     	 beq .L72
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             (NULL == buffer) || (NULL == length))
+ 678              	 .loc 1 325 0 is_stmt 1
+ 679 0018 089B     	 ldr r3,[sp,#32]
+ 680              	.LVL77:
+ 681 001a 002B     	 cmp r3,#0
+ 682 001c 2DD0     	 beq .L72
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 683              	 .loc 1 332 0
+ 684 001e 038C     	 ldrh r3,[r0,#32]
+ 685 0020 012B     	 cmp r3,#1
+ 686 0022 2CD0     	 beq .L73
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 687              	 .loc 1 338 0
+ 688 0024 0126     	 mov r6,#1
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_get_data_object_params_t *)&(me->params.optiga_get_data_object_params);
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         pal_os_memset(&me->params,0x00,sizeof(optiga_util_params_t));
+ 689              	 .loc 1 340 0
+ 690 0026 0021     	 mov r1,#0
+ 691              	.LVL78:
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_get_data_object_params_t *)&(me->params.optiga_get_data_object_params);
+ 692              	 .loc 1 338 0
+ 693 0028 0684     	 strh r6,[r0,#32]
+ 694              	.LVL79:
+ 695              	 .loc 1 340 0
+ 696 002a 1422     	 mov r2,#20
+ 697              	.LVL80:
+ 698 002c FFF7FEFF 	 bl memset
+ 699              	.LVL81:
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->oid = optiga_oid;
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = offset;
+ 700              	 .loc 1 343 0
+ 701 0030 6B46     	 mov r3,sp
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = offset;
+ 702              	 .loc 1 342 0
+ 703 0032 2580     	 strh r5,[r4]
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         // set option to read data
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 0;
+ 704              	 .loc 1 345 0
+ 705 0034 0025     	 mov r5,#0
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         // set option to read data
+ 706              	 .loc 1 343 0
+ 707 0036 9B88     	 ldrh r3,[r3,#4]
+ 708              	 .loc 1 345 0
+ 709 0038 A572     	 strb r5,[r4,#10]
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         // set option to read data
+ 710              	 .loc 1 343 0
+ 711 003a 6380     	 strh r3,[r4,#2]
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 712              	 .loc 1 346 0
+ 713 003c 009B     	 ldr r3,[sp]
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->ref_bytes_to_read = length;
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->accumulated_size = 0;
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->last_read_size = 0;
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 714              	 .loc 1 352 0
+ 715 003e 381C     	 mov r0,r7
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 716              	 .loc 1 346 0
+ 717 0040 2361     	 str r3,[r4,#16]
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 718              	 .loc 1 347 0
+ 719 0042 089B     	 ldr r3,[sp,#32]
+ 720              	 .loc 1 352 0
+ 721 0044 2A1C     	 mov r2,r5
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 722              	 .loc 1 347 0
+ 723 0046 1B88     	 ldrh r3,[r3]
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->last_read_size = 0;
+ 724              	 .loc 1 349 0
+ 725 0048 E580     	 strh r5,[r4,#6]
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 726              	 .loc 1 347 0
+ 727 004a A380     	 strh r3,[r4,#4]
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->accumulated_size = 0;
+ 728              	 .loc 1 348 0
+ 729 004c 089B     	 ldr r3,[sp,#32]
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 730              	 .loc 1 350 0
+ 731 004e 2581     	 strh r5,[r4,#8]
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->accumulated_size = 0;
+ 732              	 .loc 1 348 0
+ 733 0050 E360     	 str r3,[r4,#12]
+ 734              	 .loc 1 352 0
+ 735 0052 E31C     	 add r3,r4,#3
+ 736 0054 D97F     	 ldrb r1,[r3,#31]
+ 737 0056 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 738              	.LVL82:
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 739              	 .loc 1 353 0
+ 740 005a 231D     	 add r3,r4,#4
+ 741 005c D97F     	 ldrb r1,[r3,#31]
+ 742 005e 321C     	 mov r2,r6
+ 743 0060 6069     	 ldr r0,[r4,#20]
+ 744 0062 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 745              	.LVL83:
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_get_data_object(me->my_cmd, p_params->data_or_metadata, p_params)
+ 746              	 .loc 1 355 0
+ 747 0066 A17A     	 ldrb r1,[r4,#10]
+ 748 0068 6069     	 ldr r0,[r4,#20]
+ 749 006a 221C     	 mov r2,r4
+ 750 006c FFF7FEFF 	 bl optiga_cmd_get_data_object
+ 751              	.LVL84:
+ 752 0070 061E     	 sub r6,r0,#0
+ 753              	.LVL85:
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 754              	 .loc 1 356 0
+ 755 0072 AE42     	 cmp r6,r5
+ 756 0074 04D0     	 beq .L68
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 757              	 .loc 1 358 0
+ 758 0076 2584     	 strh r5,[r4,#32]
+ 759 0078 02E0     	 b .L68
+ 760              	.LVL86:
+ 761              	.L72:
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 762              	 .loc 1 327 0
+ 763 007a 044E     	 ldr r6,.L77
+ 764 007c 00E0     	 b .L68
+ 765              	.L73:
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 766              	 .loc 1 334 0
+ 767 007e 044E     	 ldr r6,.L77+4
+ 768              	.LVL87:
+ 769              	.L68:
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 770              	 .loc 1 362 0
+ 771 0080 201C     	 mov r0,r4
+ 772 0082 FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 773              	.LVL88:
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 774              	 .loc 1 365 0
+ 775              	 
+ 776 0086 301C     	 mov r0,r6
+ 777              	.LVL89:
+ 778              	.LVL90:
+ 779 0088 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 780              	.L78:
+ 781 008a C046     	 .align 2
+ 782              	.L77:
+ 783 008c 03030000 	 .word 771
+ 784 0090 05030000 	 .word 773
+ 785              	 .cfi_endproc
+ 786              	.LFE8:
+ 788              	 .section .text.optiga_util_read_metadata,"ax",%progbits
+ 789              	 .align 1
+ 790              	 .global optiga_util_read_metadata
+ 791              	 .code 16
+ 792              	 .thumb_func
+ 794              	optiga_util_read_metadata:
+ 795              	.LFB9:
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_read_metadata(optiga_util_t * me,
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                               uint16_t optiga_oid,
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                               uint8_t * buffer,
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                               uint16_t * length)
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 796              	 .loc 1 371 0
+ 797              	 .cfi_startproc
+ 798              	.LVL91:
+ 799 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 800              	.LCFI8:
+ 801              	 .cfi_def_cfa_offset 32
+ 802              	 .cfi_offset 0,-32
+ 803              	 .cfi_offset 1,-28
+ 804              	 .cfi_offset 2,-24
+ 805              	 .cfi_offset 4,-20
+ 806              	 .cfi_offset 5,-16
+ 807              	 .cfi_offset 6,-12
+ 808              	 .cfi_offset 7,-8
+ 809              	 .cfi_offset 14,-4
+ 810              	 .loc 1 371 0
+ 811 0002 041C     	 mov r4,r0
+ 812 0004 0D1C     	 mov r5,r1
+ 813 0006 0192     	 str r2,[sp,#4]
+ 814 0008 1F1C     	 mov r7,r3
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_get_data_object_params_t * p_params;
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) ||
+ 815              	 .loc 1 378 0
+ 816 000a 0028     	 cmp r0,#0
+ 817 000c 31D0     	 beq .L84
+ 818              	 .loc 1 378 0 is_stmt 0 discriminator 1
+ 819 000e 4369     	 ldr r3,[r0,#20]
+ 820              	.LVL92:
+ 821 0010 0093     	 str r3,[sp]
+ 822 0012 002B     	 cmp r3,#0
+ 823 0014 2DD0     	 beq .L84
+ 824              	 .loc 1 378 0 discriminator 2
+ 825 0016 002A     	 cmp r2,#0
+ 826 0018 2BD0     	 beq .L84
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             (NULL == buffer) || (NULL == length))
+ 827              	 .loc 1 379 0 is_stmt 1
+ 828 001a 002F     	 cmp r7,#0
+ 829 001c 29D0     	 beq .L84
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 830              	 .loc 1 386 0
+ 831 001e 038C     	 ldrh r3,[r0,#32]
+ 832 0020 012B     	 cmp r3,#1
+ 833 0022 28D0     	 beq .L85
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 834              	 .loc 1 392 0
+ 835 0024 0126     	 mov r6,#1
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_get_data_object_params_t *)&(me->params.optiga_get_data_object_params);
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         pal_os_memset(&me->params,0x00,sizeof(optiga_util_params_t));
+ 836              	 .loc 1 394 0
+ 837 0026 0021     	 mov r1,#0
+ 838              	.LVL93:
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_get_data_object_params_t *)&(me->params.optiga_get_data_object_params);
+ 839              	 .loc 1 392 0
+ 840 0028 0684     	 strh r6,[r0,#32]
+ 841              	.LVL94:
+ 842              	 .loc 1 394 0
+ 843 002a 1422     	 mov r2,#20
+ 844              	.LVL95:
+ 845 002c FFF7FEFF 	 bl memset
+ 846              	.LVL96:
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->oid = optiga_oid;
+ 847              	 .loc 1 396 0
+ 848 0030 2580     	 strh r5,[r4]
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = 0;
+ 849              	 .loc 1 397 0
+ 850 0032 0025     	 mov r5,#0
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         // set option to read metadata
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 1;//for metadata
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 851              	 .loc 1 400 0
+ 852 0034 019B     	 ldr r3,[sp,#4]
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 853              	 .loc 1 399 0
+ 854 0036 A672     	 strb r6,[r4,#10]
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = 0;
+ 855              	 .loc 1 397 0
+ 856 0038 6580     	 strh r5,[r4,#2]
+ 857              	 .loc 1 400 0
+ 858 003a 2361     	 str r3,[r4,#16]
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 859              	 .loc 1 401 0
+ 860 003c 3B88     	 ldrh r3,[r7]
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->ref_bytes_to_read = length;
+ 861              	 .loc 1 402 0
+ 862 003e E760     	 str r7,[r4,#12]
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->bytes_to_read = *length;
+ 863              	 .loc 1 401 0
+ 864 0040 A380     	 strh r3,[r4,#4]
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->accumulated_size = 0;
+ 865              	 .loc 1 403 0
+ 866 0042 E580     	 strh r5,[r4,#6]
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->last_read_size = 0;
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 867              	 .loc 1 405 0
+ 868 0044 E31C     	 add r3,r4,#3
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->last_read_size = 0;
+ 869              	 .loc 1 404 0
+ 870 0046 2581     	 strh r5,[r4,#8]
+ 871              	 .loc 1 405 0
+ 872 0048 D97F     	 ldrb r1,[r3,#31]
+ 873 004a 0098     	 ldr r0,[sp]
+ 874 004c 2A1C     	 mov r2,r5
+ 875 004e FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 876              	.LVL97:
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 877              	 .loc 1 406 0
+ 878 0052 231D     	 add r3,r4,#4
+ 879 0054 D97F     	 ldrb r1,[r3,#31]
+ 880 0056 321C     	 mov r2,r6
+ 881 0058 6069     	 ldr r0,[r4,#20]
+ 882 005a FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 883              	.LVL98:
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_get_data_object(me->my_cmd, p_params->data_or_metadata,
+ 884              	 .loc 1 408 0
+ 885 005e A17A     	 ldrb r1,[r4,#10]
+ 886 0060 6069     	 ldr r0,[r4,#20]
+ 887 0062 221C     	 mov r2,r4
+ 888 0064 FFF7FEFF 	 bl optiga_cmd_get_data_object
+ 889              	.LVL99:
+ 890 0068 061E     	 sub r6,r0,#0
+ 891              	.LVL100:
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                   (optiga_get_data_object_params_t *)p_params);
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 892              	 .loc 1 410 0
+ 893 006a AE42     	 cmp r6,r5
+ 894 006c 04D0     	 beq .L80
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 895              	 .loc 1 412 0
+ 896 006e 2584     	 strh r5,[r4,#32]
+ 897 0070 02E0     	 b .L80
+ 898              	.LVL101:
+ 899              	.L84:
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 900              	 .loc 1 381 0
+ 901 0072 044E     	 ldr r6,.L89
+ 902 0074 00E0     	 b .L80
+ 903              	.L85:
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 904              	 .loc 1 388 0
+ 905 0076 044E     	 ldr r6,.L89+4
+ 906              	.LVL102:
+ 907              	.L80:
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 908              	 .loc 1 415 0
+ 909 0078 201C     	 mov r0,r4
+ 910 007a FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 911              	.LVL103:
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 912              	 .loc 1 418 0
+ 913              	 
+ 914 007e 301C     	 mov r0,r6
+ 915              	.LVL104:
+ 916              	.LVL105:
+ 917              	.LVL106:
+ 918 0080 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 919              	.L90:
+ 920 0082 C046     	 .align 2
+ 921              	.L89:
+ 922 0084 03030000 	 .word 771
+ 923 0088 05030000 	 .word 773
+ 924              	 .cfi_endproc
+ 925              	.LFE9:
+ 927              	 .section .text.optiga_util_write_data,"ax",%progbits
+ 928              	 .align 1
+ 929              	 .global optiga_util_write_data
+ 930              	 .code 16
+ 931              	 .thumb_func
+ 933              	optiga_util_write_data:
+ 934              	.LFB10:
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_write_data(optiga_util_t * me,
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                            uint16_t optiga_oid,
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                            uint8_t write_type,
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                            uint16_t offset,
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                            const uint8_t * buffer,
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                            uint16_t length)
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 935              	 .loc 1 426 0
+ 936              	 .cfi_startproc
+ 937              	.LVL107:
+ 938 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 939              	.LCFI9:
+ 940              	 .cfi_def_cfa_offset 32
+ 941              	 .cfi_offset 0,-32
+ 942              	 .cfi_offset 1,-28
+ 943              	 .cfi_offset 2,-24
+ 944              	 .cfi_offset 4,-20
+ 945              	 .cfi_offset 5,-16
+ 946              	 .cfi_offset 6,-12
+ 947              	 .cfi_offset 7,-8
+ 948              	 .cfi_offset 14,-4
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((OPTIGA_UTIL_WRITE_ONLY != write_type) && (OPTIGA_UTIL_ERASE_AND_WRITE != write_type))
+ 949              	 .loc 1 431 0
+ 950 0002 4026     	 mov r6,#64
+ 951 0004 171C     	 mov r7,r2
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 952              	 .loc 1 426 0
+ 953 0006 08AC     	 add r4,sp,#32
+ 954              	.LVL108:
+ 955 0008 20CC     	 ldmia r4!,{r5}
+ 956              	.LVL109:
+ 957              	 .loc 1 431 0
+ 958 000a B743     	 bic r7,r6
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 959              	 .loc 1 426 0
+ 960 000c 2488     	 ldrh r4,[r4]
+ 961              	.LVL110:
+ 962              	 .loc 1 431 0
+ 963 000e 002F     	 cmp r7,#0
+ 964 0010 04D1     	 bne .L93
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value =  optiga_util_write_data_wrapper(me,
+ 965              	 .loc 1 435 0
+ 966 0012 0095     	 str r5,[sp]
+ 967 0014 0194     	 str r4,[sp,#4]
+ 968 0016 FFF7FEFF 	 bl optiga_util_write_data_wrapper
+ 969              	.LVL111:
+ 970 001a 00E0     	 b .L92
+ 971              	.LVL112:
+ 972              	.L93:
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 973              	 .loc 1 427 0
+ 974 001c 0048     	 ldr r0,.L94
+ 975              	.LVL113:
+ 976              	.L92:
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        optiga_oid,
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        write_type,
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        offset,
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        buffer,
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        length);
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 977              	 .loc 1 443 0
+ 978              	 
+ 979 001e FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 980              	.L95:
+ 981              	 .align 2
+ 982              	.L94:
+ 983 0020 03030000 	 .word 771
+ 984              	 .cfi_endproc
+ 985              	.LFE10:
+ 987              	 .section .text.optiga_util_write_metadata,"ax",%progbits
+ 988              	 .align 1
+ 989              	 .global optiga_util_write_metadata
+ 990              	 .code 16
+ 991              	 .thumb_func
+ 993              	optiga_util_write_metadata:
+ 994              	.LFB11:
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_write_metadata(optiga_util_t * me,
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                uint16_t optiga_oid,
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                const uint8_t * buffer,
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                uint8_t length)
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 995              	 .loc 1 449 0
+ 996              	 .cfi_startproc
+ 997              	.LVL114:
+ 998 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 999              	.LCFI10:
+ 1000              	 .cfi_def_cfa_offset 32
+ 1001              	 .cfi_offset 0,-32
+ 1002              	 .cfi_offset 1,-28
+ 1003              	 .cfi_offset 2,-24
+ 1004              	 .cfi_offset 4,-20
+ 1005              	 .cfi_offset 5,-16
+ 1006              	 .cfi_offset 6,-12
+ 1007              	 .cfi_offset 7,-8
+ 1008              	 .cfi_offset 14,-4
+ 1009              	 .loc 1 449 0
+ 1010 0002 041C     	 mov r4,r0
+ 1011 0004 0D1C     	 mov r5,r1
+ 1012 0006 171C     	 mov r7,r2
+ 1013 0008 0193     	 str r3,[sp,#4]
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_set_data_object_params_t * p_params;
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) || (NULL == buffer))
+ 1014              	 .loc 1 456 0
+ 1015 000a 0028     	 cmp r0,#0
+ 1016 000c 2ED0     	 beq .L100
+ 1017              	 .loc 1 456 0 is_stmt 0 discriminator 1
+ 1018 000e 4369     	 ldr r3,[r0,#20]
+ 1019              	.LVL115:
+ 1020 0010 0093     	 str r3,[sp]
+ 1021 0012 002B     	 cmp r3,#0
+ 1022 0014 2AD0     	 beq .L100
+ 1023              	 .loc 1 456 0 discriminator 2
+ 1024 0016 002A     	 cmp r2,#0
+ 1025 0018 28D0     	 beq .L100
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 1026              	 .loc 1 463 0 is_stmt 1
+ 1027 001a 038C     	 ldrh r3,[r0,#32]
+ 1028 001c 012B     	 cmp r3,#1
+ 1029 001e 27D0     	 beq .L101
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 1030              	 .loc 1 469 0
+ 1031 0020 0126     	 mov r6,#1
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_data_object_params_t *)&(me->params.optiga_set_data_object_params);
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         pal_os_memset(&me->params,0x00,sizeof(optiga_util_params_t));
+ 1032              	 .loc 1 471 0
+ 1033 0022 0021     	 mov r1,#0
+ 1034              	.LVL116:
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_data_object_params_t *)&(me->params.optiga_set_data_object_params);
+ 1035              	 .loc 1 469 0
+ 1036 0024 0684     	 strh r6,[r0,#32]
+ 1037              	.LVL117:
+ 1038              	 .loc 1 471 0
+ 1039 0026 1422     	 mov r2,#20
+ 1040              	.LVL118:
+ 1041 0028 FFF7FEFF 	 bl memset
+ 1042              	.LVL119:
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->oid = optiga_oid;
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = 0;
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         //for Metadata
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->data_or_metadata = 1;
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->size = length;
+ 1043              	 .loc 1 478 0
+ 1044 002c 6B46     	 mov r3,sp
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->offset = 0;
+ 1045              	 .loc 1 473 0
+ 1046 002e 2580     	 strh r5,[r4]
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         //for Metadata
+ 1047              	 .loc 1 474 0
+ 1048 0030 0025     	 mov r5,#0
+ 1049              	 .loc 1 478 0
+ 1050 0032 9B88     	 ldrh r3,[r3,#4]
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->buffer = buffer;
+ 1051              	 .loc 1 476 0
+ 1052 0034 2673     	 strb r6,[r4,#12]
+ 1053              	 .loc 1 478 0
+ 1054 0036 A380     	 strh r3,[r4,#4]
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->write_type = 1;
+ 1055              	 .loc 1 479 0
+ 1056 0038 6673     	 strb r6,[r4,#13]
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->written_size = 0;
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 1057              	 .loc 1 481 0
+ 1058 003a E31C     	 add r3,r4,#3
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         //for Metadata
+ 1059              	 .loc 1 474 0
+ 1060 003c 6580     	 strh r5,[r4,#2]
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->size = length;
+ 1061              	 .loc 1 477 0
+ 1062 003e A760     	 str r7,[r4,#8]
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->written_size = 0;
+ 1063              	 .loc 1 480 0
+ 1064 0040 E580     	 strh r5,[r4,#6]
+ 1065              	 .loc 1 481 0
+ 1066 0042 D97F     	 ldrb r1,[r3,#31]
+ 1067 0044 0098     	 ldr r0,[sp]
+ 1068 0046 2A1C     	 mov r2,r5
+ 1069 0048 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 1070              	.LVL120:
+ 482:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 1071              	 .loc 1 482 0
+ 1072 004c 231D     	 add r3,r4,#4
+ 1073 004e D97F     	 ldrb r1,[r3,#31]
+ 1074 0050 321C     	 mov r2,r6
+ 1075 0052 6069     	 ldr r0,[r4,#20]
+ 1076 0054 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 1077              	.LVL121:
+ 483:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_set_data_object(me->my_cmd, p_params->write_type,
+ 1078              	 .loc 1 484 0
+ 1079 0058 617B     	 ldrb r1,[r4,#13]
+ 1080 005a 6069     	 ldr r0,[r4,#20]
+ 1081 005c 221C     	 mov r2,r4
+ 1082 005e FFF7FEFF 	 bl optiga_cmd_set_data_object
+ 1083              	.LVL122:
+ 1084 0062 061E     	 sub r6,r0,#0
+ 1085              	.LVL123:
+ 485:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                   (optiga_set_data_object_params_t *)p_params);
+ 486:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 1086              	 .loc 1 486 0
+ 1087 0064 AE42     	 cmp r6,r5
+ 1088 0066 04D0     	 beq .L97
+ 487:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 488:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 1089              	 .loc 1 488 0
+ 1090 0068 2584     	 strh r5,[r4,#32]
+ 1091 006a 02E0     	 b .L97
+ 1092              	.LVL124:
+ 1093              	.L100:
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 1094              	 .loc 1 458 0
+ 1095 006c 034E     	 ldr r6,.L105
+ 1096 006e 00E0     	 b .L97
+ 1097              	.L101:
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 1098              	 .loc 1 465 0
+ 1099 0070 034E     	 ldr r6,.L105+4
+ 1100              	.LVL125:
+ 1101              	.L97:
+ 489:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 490:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 1102              	 .loc 1 491 0
+ 1103 0072 201C     	 mov r0,r4
+ 1104 0074 FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 1105              	.LVL126:
+ 492:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 493:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 494:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 1106              	 .loc 1 494 0
+ 1107              	 
+ 1108 0078 301C     	 mov r0,r6
+ 1109              	.LVL127:
+ 1110              	.LVL128:
+ 1111              	.LVL129:
+ 1112 007a FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 1113              	.L106:
+ 1114              	 .align 2
+ 1115              	.L105:
+ 1116 007c 03030000 	 .word 771
+ 1117 0080 05030000 	 .word 773
+ 1118              	 .cfi_endproc
+ 1119              	.LFE11:
+ 1121              	 .section .text.optiga_util_protected_update_start,"ax",%progbits
+ 1122              	 .align 1
+ 1123              	 .global optiga_util_protected_update_start
+ 1124              	 .code 16
+ 1125              	 .thumb_func
+ 1127              	optiga_util_protected_update_start:
+ 1128              	.LFB13:
+ 495:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** _STATIC_H optiga_lib_status_t optiga_util_protected_update(optiga_util_t * me,
+ 497:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                            uint8_t manifest_version,
+ 498:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                            const uint8_t * p_buffer,
+ 499:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                            uint16_t buffer_length,
+ 500:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                            optiga_set_obj_protected_tag_t set_obj_t
+ 501:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 503:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_set_object_protected_params_t * p_params;
+ 504:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 505:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 506:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_INSTANCE_BUSY == me->instance_state)
+ 508:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INSTANCE_IN_USE;
+ 510:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 511:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 512:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         me->instance_state = OPTIGA_LIB_INSTANCE_BUSY;
+ 514:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 516:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if(OPTIGA_SET_PROTECTED_UPDATE_START == set_obj_tag)
+ 517:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             pal_os_memset(&me->params,0x00,sizeof(optiga_util_params_t));
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->manifest_version = manifest_version;
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 522:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 523:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->p_protected_update_buffer = p_buffer;
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->p_protected_update_buffer_length = buffer_length;
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 527:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_cmd_set_object_protected(me->my_cmd, p_params->manifest_version,p_par
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 530:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             me->instance_state = OPTIGA_LIB_INSTANCE_FREE;
+ 532:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 533:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 535:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 536:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 537:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 538:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_protected_update_start(optiga_util_t * me,
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        uint8_t manifest_version,
+ 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        const uint8_t * manifest,
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        uint16_t manifest_length)
+ 542:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 1129              	 .loc 1 542 0
+ 1130              	 .cfi_startproc
+ 1131              	.LVL130:
+ 1132 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 1133              	.LCFI11:
+ 1134              	 .cfi_def_cfa_offset 32
+ 1135              	 .cfi_offset 0,-32
+ 1136              	 .cfi_offset 1,-28
+ 1137              	 .cfi_offset 2,-24
+ 1138              	 .cfi_offset 4,-20
+ 1139              	 .cfi_offset 5,-16
+ 1140              	 .cfi_offset 6,-12
+ 1141              	 .cfi_offset 7,-8
+ 1142              	 .cfi_offset 14,-4
+ 1143              	 .loc 1 542 0
+ 1144 0002 041C     	 mov r4,r0
+ 1145 0004 0091     	 str r1,[sp]
+ 1146 0006 151C     	 mov r5,r2
+ 1147 0008 0193     	 str r3,[sp,#4]
+ 543:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 544:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 547:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 548:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 549:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) || (NULL == manifest))
+ 1148              	 .loc 1 549 0
+ 1149 000a 0028     	 cmp r0,#0
+ 1150 000c 2CD0     	 beq .L111
+ 1151              	 .loc 1 549 0 is_stmt 0 discriminator 1
+ 1152 000e 4769     	 ldr r7,[r0,#20]
+ 1153 0010 002F     	 cmp r7,#0
+ 1154 0012 29D0     	 beq .L111
+ 1155              	 .loc 1 549 0 discriminator 2
+ 1156 0014 002A     	 cmp r2,#0
+ 1157 0016 27D0     	 beq .L111
+ 1158              	.LVL131:
+ 1159              	.LBB10:
+ 1160              	.LBB11:
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1161              	 .loc 1 507 0 is_stmt 1
+ 1162 0018 038C     	 ldrh r3,[r0,#32]
+ 1163              	.LVL132:
+ 1164 001a 012B     	 cmp r3,#1
+ 1165 001c 26D0     	 beq .L112
+ 1166              	.LVL133:
+ 1167              	.LBB12:
+ 1168              	.LBB13:
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 1169              	 .loc 1 513 0
+ 1170 001e 0126     	 mov r6,#1
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->manifest_version = manifest_version;
+ 1171              	 .loc 1 518 0
+ 1172 0020 0021     	 mov r1,#0
+ 1173              	.LVL134:
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 1174              	 .loc 1 513 0
+ 1175 0022 0684     	 strh r6,[r0,#32]
+ 1176              	.LVL135:
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             p_params->manifest_version = manifest_version;
+ 1177              	 .loc 1 518 0
+ 1178 0024 1422     	 mov r2,#20
+ 1179              	.LVL136:
+ 1180 0026 FFF7FEFF 	 bl memset
+ 1181              	.LVL137:
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 1182              	 .loc 1 519 0
+ 1183 002a 6B46     	 mov r3,sp
+ 1184 002c 1B78     	 ldrb r3,[r3]
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 1185              	 .loc 1 520 0
+ 1186 002e 381C     	 mov r0,r7
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_ENABLE(me->my_cmd, me);
+ 1187              	 .loc 1 519 0
+ 1188 0030 E371     	 strb r3,[r4,#7]
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             OPTIGA_PROTECTION_SET_VERSION(me->my_cmd, me);
+ 1189              	 .loc 1 520 0
+ 1190 0032 E31C     	 add r3,r4,#3
+ 1191 0034 D97F     	 ldrb r1,[r3,#31]
+ 1192 0036 0022     	 mov r2,#0
+ 1193 0038 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 1194              	.LVL138:
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 1195              	 .loc 1 521 0
+ 1196 003c 231D     	 add r3,r4,#4
+ 1197 003e D97F     	 ldrb r1,[r3,#31]
+ 1198 0040 321C     	 mov r2,r6
+ 1199 0042 6069     	 ldr r0,[r4,#20]
+ 1200 0044 FFF7FEFF 	 bl optiga_cmd_set_shielded_connection_option
+ 1201              	.LVL139:
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 1202              	 .loc 1 525 0
+ 1203 0048 6B46     	 mov r3,sp
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 1204              	 .loc 1 526 0
+ 1205 004a 0026     	 mov r6,#0
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 1206              	 .loc 1 525 0
+ 1207 004c 9B88     	 ldrh r3,[r3,#4]
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->p_protected_update_buffer_length = buffer_length;
+ 1208              	 .loc 1 524 0
+ 1209 004e 2560     	 str r5,[r4]
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 1210              	 .loc 1 525 0
+ 1211 0050 A380     	 strh r3,[r4,#4]
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 1212              	 .loc 1 526 0
+ 1213 0052 A671     	 strb r6,[r4,#6]
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 1214              	 .loc 1 528 0
+ 1215 0054 E179     	 ldrb r1,[r4,#7]
+ 1216 0056 6069     	 ldr r0,[r4,#20]
+ 1217 0058 221C     	 mov r2,r4
+ 1218 005a FFF7FEFF 	 bl optiga_cmd_set_object_protected
+ 1219              	.LVL140:
+ 1220 005e 051E     	 sub r5,r0,#0
+ 1221              	.LVL141:
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1222              	 .loc 1 529 0
+ 1223 0060 B542     	 cmp r5,r6
+ 1224 0062 04D0     	 beq .L108
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 1225              	 .loc 1 531 0
+ 1226 0064 2684     	 strh r6,[r4,#32]
+ 1227 0066 02E0     	 b .L108
+ 1228              	.LVL142:
+ 1229              	.L111:
+ 1230              	.LBE13:
+ 1231              	.LBE12:
+ 1232              	.LBE11:
+ 1233              	.LBE10:
+ 550:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 551:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 1234              	 .loc 1 551 0
+ 1235 0068 034D     	 ldr r5,.L116
+ 1236 006a 00E0     	 b .L108
+ 1237              	.LVL143:
+ 1238              	.L112:
+ 1239              	.LBB15:
+ 1240              	.LBB14:
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 1241              	 .loc 1 509 0
+ 1242 006c 034D     	 ldr r5,.L116+4
+ 1243              	.LVL144:
+ 1244              	.L108:
+ 1245              	.LBE14:
+ 1246              	.LBE15:
+ 552:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 553:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 555:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 556:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_util_protected_update(me,
+ 557:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     manifest_version,
+ 558:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     manifest,
+ 559:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     manifest_length,
+ 560:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     OPTIGA_SET_PROTECTED_UPDATE_START
+ 561:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     );
+ 562:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 563:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_util_reset_protection_level(me);
+ 1247              	 .loc 1 563 0
+ 1248 006e 201C     	 mov r0,r4
+ 1249 0070 FFF7FEFF 	 bl optiga_util_reset_protection_level
+ 1250              	.LVL145:
+ 564:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 565:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 1251              	 .loc 1 565 0
+ 1252              	 
+ 1253 0074 281C     	 mov r0,r5
+ 1254              	.LVL146:
+ 1255              	.LVL147:
+ 1256 0076 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 1257              	.L117:
+ 1258              	 .align 2
+ 1259              	.L116:
+ 1260 0078 03030000 	 .word 771
+ 1261 007c 05030000 	 .word 773
+ 1262              	 .cfi_endproc
+ 1263              	.LFE13:
+ 1265              	 .section .text.optiga_util_protected_update_continue,"ax",%progbits
+ 1266              	 .align 1
+ 1267              	 .global optiga_util_protected_update_continue
+ 1268              	 .code 16
+ 1269              	 .thumb_func
+ 1271              	optiga_util_protected_update_continue:
+ 1272              	.LFB14:
+ 566:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 567:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_protected_update_continue(optiga_util_t * me,
+ 568:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                           const uint8_t * fragment,
+ 569:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                           uint16_t fragment_length)
+ 570:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 1273              	 .loc 1 570 0
+ 1274              	 .cfi_startproc
+ 1275              	.LVL148:
+ 1276 0000 10B5     	 push {r4,lr}
+ 1277              	.LCFI12:
+ 1278              	 .cfi_def_cfa_offset 8
+ 1279              	 .cfi_offset 4,-8
+ 1280              	 .cfi_offset 14,-4
+ 1281              	 .loc 1 570 0
+ 1282 0002 041E     	 sub r4,r0,#0
+ 571:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 572:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 573:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 574:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 575:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 576:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 577:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd) || (NULL == fragment))
+ 1283              	 .loc 1 577 0
+ 1284 0004 16D0     	 beq .L122
+ 1285              	 .loc 1 577 0 is_stmt 0 discriminator 1
+ 1286 0006 4069     	 ldr r0,[r0,#20]
+ 1287              	.LVL149:
+ 1288 0008 0028     	 cmp r0,#0
+ 1289 000a 13D0     	 beq .L122
+ 1290              	 .loc 1 577 0 discriminator 2
+ 1291 000c 0029     	 cmp r1,#0
+ 1292 000e 11D0     	 beq .L122
+ 1293              	.LVL150:
+ 1294              	.LBB20:
+ 1295              	.LBB21:
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1296              	 .loc 1 507 0 is_stmt 1
+ 1297 0010 238C     	 ldrh r3,[r4,#32]
+ 1298 0012 012B     	 cmp r3,#1
+ 1299 0014 10D0     	 beq .L123
+ 1300              	.LVL151:
+ 1301              	.LBB22:
+ 1302              	.LBB23:
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 1303              	 .loc 1 513 0
+ 1304 0016 0123     	 mov r3,#1
+ 1305 0018 2384     	 strh r3,[r4,#32]
+ 1306              	.LVL152:
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 1307              	 .loc 1 526 0
+ 1308 001a DB18     	 add r3,r3,r3
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->p_protected_update_buffer_length = buffer_length;
+ 1309              	 .loc 1 524 0
+ 1310 001c 2160     	 str r1,[r4]
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 1311              	 .loc 1 525 0
+ 1312 001e A280     	 strh r2,[r4,#4]
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 1313              	 .loc 1 526 0
+ 1314 0020 A371     	 strb r3,[r4,#6]
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 1315              	 .loc 1 528 0
+ 1316 0022 E179     	 ldrb r1,[r4,#7]
+ 1317              	.LVL153:
+ 1318 0024 221C     	 mov r2,r4
+ 1319              	.LVL154:
+ 1320 0026 FFF7FEFF 	 bl optiga_cmd_set_object_protected
+ 1321              	.LVL155:
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1322              	 .loc 1 529 0
+ 1323 002a 0028     	 cmp r0,#0
+ 1324 002c 05D0     	 beq .L119
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 1325              	 .loc 1 531 0
+ 1326 002e 0023     	 mov r3,#0
+ 1327 0030 2384     	 strh r3,[r4,#32]
+ 1328 0032 02E0     	 b .L119
+ 1329              	.LVL156:
+ 1330              	.L122:
+ 1331              	.LBE23:
+ 1332              	.LBE22:
+ 1333              	.LBE21:
+ 1334              	.LBE20:
+ 578:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 579:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 1335              	 .loc 1 579 0
+ 1336 0034 0148     	 ldr r0,.L127
+ 1337 0036 00E0     	 b .L119
+ 1338              	.LVL157:
+ 1339              	.L123:
+ 1340              	.LBB25:
+ 1341              	.LBB24:
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 1342              	 .loc 1 509 0
+ 1343 0038 0148     	 ldr r0,.L127+4
+ 1344              	.LVL158:
+ 1345              	.L119:
+ 1346              	.LBE24:
+ 1347              	.LBE25:
+ 580:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 581:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 582:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 583:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 584:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_util_protected_update(me,
+ 585:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     0x00,
+ 586:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     fragment,
+ 587:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     fragment_length,
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     OPTIGA_SET_PROTECTED_UPDATE_CONTINUE);
+ 589:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 590:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 591:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 1348              	 .loc 1 591 0
+ 1349              	 
+ 1350              	.LVL159:
+ 1351 003a 10BD     	 pop {r4,pc}
+ 1352              	.L128:
+ 1353              	 .align 2
+ 1354              	.L127:
+ 1355 003c 03030000 	 .word 771
+ 1356 0040 05030000 	 .word 773
+ 1357              	 .cfi_endproc
+ 1358              	.LFE14:
+ 1360              	 .section .text.optiga_util_protected_update_final,"ax",%progbits
+ 1361              	 .align 1
+ 1362              	 .global optiga_util_protected_update_final
+ 1363              	 .code 16
+ 1364              	 .thumb_func
+ 1366              	optiga_util_protected_update_final:
+ 1367              	.LFB15:
+ 592:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 593:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_protected_update_final(optiga_util_t * me,
+ 594:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        const uint8_t * fragment,
+ 595:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                        uint16_t fragment_length)
+ 596:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 1368              	 .loc 1 596 0
+ 1369              	 .cfi_startproc
+ 1370              	.LVL160:
+ 1371 0000 10B5     	 push {r4,lr}
+ 1372              	.LCFI13:
+ 1373              	 .cfi_def_cfa_offset 8
+ 1374              	 .cfi_offset 4,-8
+ 1375              	 .cfi_offset 14,-4
+ 1376              	 .loc 1 596 0
+ 1377 0002 041E     	 sub r4,r0,#0
+ 597:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     optiga_lib_status_t return_value = OPTIGA_UTIL_ERROR;
+ 598:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 599:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 600:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     do
+ 601:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     {
+ 602:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #ifdef OPTIGA_LIB_DEBUG_NULL_CHECK
+ 603:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if ((NULL == me) || (NULL == me->my_cmd))
+ 1378              	 .loc 1 603 0
+ 1379 0004 13D0     	 beq .L132
+ 1380              	 .loc 1 603 0 is_stmt 0 discriminator 1
+ 1381 0006 4069     	 ldr r0,[r0,#20]
+ 1382              	.LVL161:
+ 1383 0008 0028     	 cmp r0,#0
+ 1384 000a 10D0     	 beq .L132
+ 1385              	.LVL162:
+ 1386              	.LBB30:
+ 1387              	.LBB31:
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1388              	 .loc 1 507 0 is_stmt 1
+ 1389 000c 238C     	 ldrh r3,[r4,#32]
+ 1390 000e 012B     	 cmp r3,#1
+ 1391 0010 0FD0     	 beq .L133
+ 1392              	.LVL163:
+ 1393              	.LBB32:
+ 1394              	.LBB33:
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 1395              	 .loc 1 513 0
+ 1396 0012 0123     	 mov r3,#1
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->p_protected_update_buffer_length = buffer_length;
+ 1397              	 .loc 1 524 0
+ 1398 0014 2160     	 str r1,[r4]
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params->set_obj_protected_tag = set_obj_tag;
+ 1399              	 .loc 1 525 0
+ 1400 0016 A280     	 strh r2,[r4,#4]
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         p_params = (optiga_set_object_protected_params_t *)&(me->params.optiga_set_object_protected
+ 1401              	 .loc 1 513 0
+ 1402 0018 2384     	 strh r3,[r4,#32]
+ 1403              	.LVL164:
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 1404              	 .loc 1 526 0
+ 1405 001a A371     	 strb r3,[r4,#6]
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         if (OPTIGA_LIB_SUCCESS != return_value)
+ 1406              	 .loc 1 528 0
+ 1407 001c E179     	 ldrb r1,[r4,#7]
+ 1408              	.LVL165:
+ 1409 001e 221C     	 mov r2,r4
+ 1410              	.LVL166:
+ 1411 0020 FFF7FEFF 	 bl optiga_cmd_set_object_protected
+ 1412              	.LVL167:
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 1413              	 .loc 1 529 0
+ 1414 0024 0028     	 cmp r0,#0
+ 1415 0026 05D0     	 beq .L130
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 1416              	 .loc 1 531 0
+ 1417 0028 0023     	 mov r3,#0
+ 1418 002a 2384     	 strh r3,[r4,#32]
+ 1419 002c 02E0     	 b .L130
+ 1420              	.LVL168:
+ 1421              	.L132:
+ 1422              	.LBE33:
+ 1423              	.LBE32:
+ 1424              	.LBE31:
+ 1425              	.LBE30:
+ 604:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         {
+ 605:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             return_value = OPTIGA_UTIL_ERROR_INVALID_INPUT;
+ 1426              	 .loc 1 605 0
+ 1427 002e 0248     	 ldr r0,.L137
+ 1428 0030 00E0     	 b .L130
+ 1429              	.LVL169:
+ 1430              	.L133:
+ 1431              	.LBB35:
+ 1432              	.LBB34:
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 1433              	 .loc 1 509 0
+ 1434 0032 0248     	 ldr r0,.L137+4
+ 1435              	.LVL170:
+ 1436              	.L130:
+ 1437              	.LBE34:
+ 1438              	.LBE35:
+ 606:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****             break;
+ 607:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         }
+ 608:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** #endif
+ 609:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 610:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****         return_value = optiga_util_protected_update(me,
+ 611:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     0x00,
+ 612:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     fragment,
+ 613:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     fragment_length,
+ 614:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                                     OPTIGA_SET_PROTECTED_UPDATE_FINAL);
+ 615:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     } while (FALSE);
+ 616:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (return_value);
+ 617:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 1439              	 .loc 1 617 0
+ 1440              	 
+ 1441              	.LVL171:
+ 1442 0034 10BD     	 pop {r4,pc}
+ 1443              	.L138:
+ 1444 0036 C046     	 .align 2
+ 1445              	.L137:
+ 1446 0038 03030000 	 .word 771
+ 1447 003c 05030000 	 .word 773
+ 1448              	 .cfi_endproc
+ 1449              	.LFE15:
+ 1451              	 .section .text.optiga_util_update_count,"ax",%progbits
+ 1452              	 .align 1
+ 1453              	 .global optiga_util_update_count
+ 1454              	 .code 16
+ 1455              	 .thumb_func
+ 1457              	optiga_util_update_count:
+ 1458              	.LFB16:
+ 618:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** 
+ 619:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** optiga_lib_status_t optiga_util_update_count(optiga_util_t * me,
+ 620:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                              uint16_t optiga_counter_oid,
+ 621:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                              uint8_t count)
+ 622:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** {
+ 1459              	 .loc 1 622 0
+ 1460              	 .cfi_startproc
+ 1461              	.LVL172:
+ 1462 0000 1FB5     	 push {r0,r1,r2,r3,r4,lr}
+ 1463              	.LCFI14:
+ 1464              	 .cfi_def_cfa_offset 24
+ 1465              	 .cfi_offset 0,-24
+ 1466              	 .cfi_offset 1,-20
+ 1467              	 .cfi_offset 2,-16
+ 1468              	 .cfi_offset 3,-12
+ 1469              	 .cfi_offset 4,-8
+ 1470              	 .cfi_offset 14,-4
+ 623:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     const uint8_t count_value[] = {count};
+ 1471              	 .loc 1 623 0
+ 1472 0002 03AB     	 add r3,sp,#12
+ 1473 0004 1A70     	 strb r2,[r3]
+ 624:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     OPTIGA_UTIL_LOG_MESSAGE(__FUNCTION__);
+ 625:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****     return (optiga_util_write_data_wrapper(me,
+ 1474              	 .loc 1 625 0
+ 1475 0006 0093     	 str r3,[sp]
+ 1476 0008 0123     	 mov r3,#1
+ 1477 000a 0222     	 mov r2,#2
+ 1478              	.LVL173:
+ 1479 000c 0193     	 str r3,[sp,#4]
+ 1480 000e 0023     	 mov r3,#0
+ 1481 0010 FFF7FEFF 	 bl optiga_util_write_data_wrapper
+ 1482              	.LVL174:
+ 626:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           optiga_counter_oid,
+ 627:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           OPTIGA_UTIL_COUNT_DATA_OBJECT,
+ 628:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           0x0000,
+ 629:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           count_value,
+ 630:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c ****                                           sizeof(count_value)));
+ 631:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/util\optiga_util.c **** }
+ 1483              	 .loc 1 631 0
+ 1484 0014 05B0     	 add sp,sp,#20
+ 1485              	 
+ 1486 0016 00BD     	 pop {pc}
+ 1487              	 .cfi_endproc
+ 1488              	.LFE16:
+ 1490              	 .text
+ 1491              	.Letext0:
+ 1492              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1493              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 1494              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 1495              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 1496              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 1497              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 1498              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_util.h"
+ 1499              	 .file 9 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdlib.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 optiga_util.c
+    {standard input}:18     .text.optiga_util_generic_event_handler:00000000 $t
+    {standard input}:22     .text.optiga_util_generic_event_handler:00000000 optiga_util_generic_event_handler
+    {standard input}:54     .text.optiga_util_reset_protection_level:00000000 $t
+    {standard input}:58     .text.optiga_util_reset_protection_level:00000000 optiga_util_reset_protection_level
+    {standard input}:85     .text.optiga_util_write_data_wrapper:00000000 $t
+    {standard input}:89     .text.optiga_util_write_data_wrapper:00000000 optiga_util_write_data_wrapper
+    {standard input}:236    .text.optiga_util_write_data_wrapper:000000a0 $d
+    {standard input}:242    .text.optiga_util_set_comms_params:00000000 $t
+    {standard input}:247    .text.optiga_util_set_comms_params:00000000 optiga_util_set_comms_params
+    {standard input}:277    .text.optiga_util_create:00000000 $t
+    {standard input}:282    .text.optiga_util_create:00000000 optiga_util_create
+    {standard input}:363    .text.optiga_util_create:0000004c $d
+    {standard input}:368    .text.optiga_util_destroy:00000000 $t
+    {standard input}:373    .text.optiga_util_destroy:00000000 optiga_util_destroy
+    {standard input}:424    .text.optiga_util_destroy:00000028 $d
+    {standard input}:430    .text.optiga_util_open_application:00000000 $t
+    {standard input}:435    .text.optiga_util_open_application:00000000 optiga_util_open_application
+    {standard input}:530    .text.optiga_util_open_application:00000064 $d
+    {standard input}:536    .text.optiga_util_close_application:00000000 $t
+    {standard input}:541    .text.optiga_util_close_application:00000000 optiga_util_close_application
+    {standard input}:636    .text.optiga_util_close_application:00000064 $d
+    {standard input}:642    .text.optiga_util_read_data:00000000 $t
+    {standard input}:647    .text.optiga_util_read_data:00000000 optiga_util_read_data
+    {standard input}:783    .text.optiga_util_read_data:0000008c $d
+    {standard input}:789    .text.optiga_util_read_metadata:00000000 $t
+    {standard input}:794    .text.optiga_util_read_metadata:00000000 optiga_util_read_metadata
+    {standard input}:922    .text.optiga_util_read_metadata:00000084 $d
+    {standard input}:928    .text.optiga_util_write_data:00000000 $t
+    {standard input}:933    .text.optiga_util_write_data:00000000 optiga_util_write_data
+    {standard input}:983    .text.optiga_util_write_data:00000020 $d
+    {standard input}:988    .text.optiga_util_write_metadata:00000000 $t
+    {standard input}:993    .text.optiga_util_write_metadata:00000000 optiga_util_write_metadata
+    {standard input}:1116   .text.optiga_util_write_metadata:0000007c $d
+    {standard input}:1122   .text.optiga_util_protected_update_start:00000000 $t
+    {standard input}:1127   .text.optiga_util_protected_update_start:00000000 optiga_util_protected_update_start
+    {standard input}:1260   .text.optiga_util_protected_update_start:00000078 $d
+    {standard input}:1266   .text.optiga_util_protected_update_continue:00000000 $t
+    {standard input}:1271   .text.optiga_util_protected_update_continue:00000000 optiga_util_protected_update_continue
+    {standard input}:1355   .text.optiga_util_protected_update_continue:0000003c $d
+    {standard input}:1361   .text.optiga_util_protected_update_final:00000000 $t
+    {standard input}:1366   .text.optiga_util_protected_update_final:00000000 optiga_util_protected_update_final
+    {standard input}:1446   .text.optiga_util_protected_update_final:00000038 $d
+    {standard input}:1452   .text.optiga_util_update_count:00000000 $t
+    {standard input}:1457   .text.optiga_util_update_count:00000000 optiga_util_update_count
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memset
+optiga_cmd_set_shielded_connection_option
+optiga_cmd_set_data_object
+calloc
+optiga_cmd_create
+free
+optiga_cmd_destroy
+optiga_cmd_open_application
+optiga_cmd_close_application
+optiga_cmd_get_data_object
+optiga_cmd_set_object_protected

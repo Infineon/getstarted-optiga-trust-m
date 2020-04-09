@@ -1,0 +1,2629 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "sha256.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.mbedtls_sha256_init,"ax",%progbits
+  18              	 .align 1
+  19              	 .global mbedtls_sha256_init
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	mbedtls_sha256_init:
+  24              	.LFB0:
+  25              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/sha256.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  FIPS-180-2 compliant SHA-256 implementation
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  SPDX-License-Identifier: Apache-2.0
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  not use this file except in compliance with the License.
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  You may obtain a copy of the License at
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  Unless required by applicable law or agreed to in writing, software
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  See the License for the specific language governing permissions and
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  limitations under the License.
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  The SHA-256 Secure Hash Standard was published by NIST in 2002.
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  *  http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include "mbedtls/config.h"
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #else
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include MBEDTLS_CONFIG_FILE
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if defined(MBEDTLS_SHA256_C)
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include "mbedtls/sha256.h"
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include "mbedtls/platform_util.h"
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include <string.h>
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if defined(MBEDTLS_SELF_TEST)
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if defined(MBEDTLS_PLATFORM_C)
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include "mbedtls/platform.h"
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #else
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include <stdio.h>
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #include <stdlib.h>
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define mbedtls_printf printf
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define mbedtls_calloc    calloc
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define mbedtls_free       free
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif /* MBEDTLS_PLATFORM_C */
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif /* MBEDTLS_SELF_TEST */
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define SHA256_VALIDATE_RET(cond)                           \
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     MBEDTLS_INTERNAL_VALIDATE_RET( cond, MBEDTLS_ERR_SHA256_BAD_INPUT_DATA )
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define SHA256_VALIDATE(cond)  MBEDTLS_INTERNAL_VALIDATE( cond )
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_SHA256_ALT)
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  * 32-bit integer manipulation macros (big endian)
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #ifndef GET_UINT32_BE
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define GET_UINT32_BE(n,b,i)                            \
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** do {                                                    \
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     (n) = ( (uint32_t) (b)[(i)    ] << 24 )             \
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         | ( (uint32_t) (b)[(i) + 1] << 16 )             \
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         | ( (uint32_t) (b)[(i) + 2] <<  8 )             \
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         | ( (uint32_t) (b)[(i) + 3]       );            \
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** } while( 0 )
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #ifndef PUT_UINT32_BE
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define PUT_UINT32_BE(n,b,i)                            \
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** do {                                                    \
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     (b)[(i)    ] = (unsigned char) ( (n) >> 24 );       \
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     (b)[(i) + 1] = (unsigned char) ( (n) >> 16 );       \
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     (b)[(i) + 2] = (unsigned char) ( (n) >>  8 );       \
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     (b)[(i) + 3] = (unsigned char) ( (n)       );       \
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** } while( 0 )
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_init( mbedtls_sha256_context *ctx )
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+  26              	 .loc 1 82 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 08B5     	 push {r3,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 8
+  32              	 .cfi_offset 3,-8
+  33              	 .cfi_offset 14,-4
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE( ctx != NULL );
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     memset( ctx, 0, sizeof( mbedtls_sha256_context ) );
+  34              	 .loc 1 85 0
+  35 0002 0021     	 mov r1,#0
+  36 0004 6C22     	 mov r2,#108
+  37 0006 FFF7FEFF 	 bl memset
+  38              	.LVL1:
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+  39              	 .loc 1 86 0
+  40              	 
+  41 000a 08BD     	 pop {r3,pc}
+  42              	 .cfi_endproc
+  43              	.LFE0:
+  45              	 .section .text.mbedtls_sha256_free,"ax",%progbits
+  46              	 .align 1
+  47              	 .global mbedtls_sha256_free
+  48              	 .code 16
+  49              	 .thumb_func
+  51              	mbedtls_sha256_free:
+  52              	.LFB1:
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_free( mbedtls_sha256_context *ctx )
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+  53              	 .loc 1 89 0
+  54              	 .cfi_startproc
+  55              	.LVL2:
+  56 0000 08B5     	 push {r3,lr}
+  57              	.LCFI1:
+  58              	 .cfi_def_cfa_offset 8
+  59              	 .cfi_offset 3,-8
+  60              	 .cfi_offset 14,-4
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ctx == NULL )
+  61              	 .loc 1 90 0
+  62 0002 0028     	 cmp r0,#0
+  63 0004 02D0     	 beq .L2
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         return;
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_platform_zeroize( ctx, sizeof( mbedtls_sha256_context ) );
+  64              	 .loc 1 93 0
+  65 0006 6C21     	 mov r1,#108
+  66 0008 FFF7FEFF 	 bl mbedtls_platform_zeroize
+  67              	.LVL3:
+  68              	.L2:
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+  69              	 .loc 1 94 0
+  70              	 
+  71 000c 08BD     	 pop {r3,pc}
+  72              	 .cfi_endproc
+  73              	.LFE1:
+  75              	 .section .text.mbedtls_sha256_clone,"ax",%progbits
+  76              	 .align 1
+  77              	 .global mbedtls_sha256_clone
+  78              	 .code 16
+  79              	 .thumb_func
+  81              	mbedtls_sha256_clone:
+  82              	.LFB2:
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_clone( mbedtls_sha256_context *dst,
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                            const mbedtls_sha256_context *src )
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+  83              	 .loc 1 98 0
+  84              	 .cfi_startproc
+  85              	.LVL4:
+  86 0000 08B5     	 push {r3,lr}
+  87              	.LCFI2:
+  88              	 .cfi_def_cfa_offset 8
+  89              	 .cfi_offset 3,-8
+  90              	 .cfi_offset 14,-4
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE( dst != NULL );
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE( src != NULL );
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     *dst = *src;
+  91              	 .loc 1 102 0
+  92 0002 6C22     	 mov r2,#108
+  93 0004 FFF7FEFF 	 bl memcpy
+  94              	.LVL5:
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+  95              	 .loc 1 103 0
+  96              	 
+  97 0008 08BD     	 pop {r3,pc}
+  98              	 .cfi_endproc
+  99              	.LFE2:
+ 101              	 .section .text.mbedtls_sha256_starts_ret,"ax",%progbits
+ 102              	 .align 1
+ 103              	 .global mbedtls_sha256_starts_ret
+ 104              	 .code 16
+ 105              	 .thumb_func
+ 107              	mbedtls_sha256_starts_ret:
+ 108              	.LFB3:
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  * SHA-256 context setup
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** int mbedtls_sha256_starts_ret( mbedtls_sha256_context *ctx, int is224 )
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 109              	 .loc 1 109 0
+ 110              	 .cfi_startproc
+ 111              	.LVL6:
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ctx != NULL );
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( is224 == 0 || is224 == 1 );
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->total[0] = 0;
+ 112              	 .loc 1 113 0
+ 113 0000 0023     	 mov r3,#0
+ 114 0002 0360     	 str r3,[r0]
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->total[1] = 0;
+ 115              	 .loc 1 114 0
+ 116 0004 4360     	 str r3,[r0,#4]
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( is224 == 0 )
+ 117              	 .loc 1 116 0
+ 118 0006 9942     	 cmp r1,r3
+ 119 0008 0FD1     	 bne .L10
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         /* SHA-256 */
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[0] = 0x6A09E667;
+ 120              	 .loc 1 119 0
+ 121 000a 114B     	 ldr r3,.L13
+ 122 000c 8360     	 str r3,[r0,#8]
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[1] = 0xBB67AE85;
+ 123              	 .loc 1 120 0
+ 124 000e 114B     	 ldr r3,.L13+4
+ 125 0010 C360     	 str r3,[r0,#12]
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[2] = 0x3C6EF372;
+ 126              	 .loc 1 121 0
+ 127 0012 114B     	 ldr r3,.L13+8
+ 128 0014 0361     	 str r3,[r0,#16]
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[3] = 0xA54FF53A;
+ 129              	 .loc 1 122 0
+ 130 0016 114B     	 ldr r3,.L13+12
+ 131 0018 4361     	 str r3,[r0,#20]
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[4] = 0x510E527F;
+ 132              	 .loc 1 123 0
+ 133 001a 114B     	 ldr r3,.L13+16
+ 134 001c 8361     	 str r3,[r0,#24]
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[5] = 0x9B05688C;
+ 135              	 .loc 1 124 0
+ 136 001e 114B     	 ldr r3,.L13+20
+ 137 0020 C361     	 str r3,[r0,#28]
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[6] = 0x1F83D9AB;
+ 138              	 .loc 1 125 0
+ 139 0022 114B     	 ldr r3,.L13+24
+ 140 0024 0362     	 str r3,[r0,#32]
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[7] = 0x5BE0CD19;
+ 141              	 .loc 1 126 0
+ 142 0026 114B     	 ldr r3,.L13+28
+ 143 0028 0EE0     	 b .L12
+ 144              	.L10:
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     else
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         /* SHA-224 */
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[0] = 0xC1059ED8;
+ 145              	 .loc 1 131 0
+ 146 002a 114B     	 ldr r3,.L13+32
+ 147 002c 8360     	 str r3,[r0,#8]
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[1] = 0x367CD507;
+ 148              	 .loc 1 132 0
+ 149 002e 114B     	 ldr r3,.L13+36
+ 150 0030 C360     	 str r3,[r0,#12]
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[2] = 0x3070DD17;
+ 151              	 .loc 1 133 0
+ 152 0032 114B     	 ldr r3,.L13+40
+ 153 0034 0361     	 str r3,[r0,#16]
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[3] = 0xF70E5939;
+ 154              	 .loc 1 134 0
+ 155 0036 114B     	 ldr r3,.L13+44
+ 156 0038 4361     	 str r3,[r0,#20]
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[4] = 0xFFC00B31;
+ 157              	 .loc 1 135 0
+ 158 003a 114B     	 ldr r3,.L13+48
+ 159 003c 8361     	 str r3,[r0,#24]
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[5] = 0x68581511;
+ 160              	 .loc 1 136 0
+ 161 003e 114B     	 ldr r3,.L13+52
+ 162 0040 C361     	 str r3,[r0,#28]
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[6] = 0x64F98FA7;
+ 163              	 .loc 1 137 0
+ 164 0042 114B     	 ldr r3,.L13+56
+ 165 0044 0362     	 str r3,[r0,#32]
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[7] = 0xBEFA4FA4;
+ 166              	 .loc 1 138 0
+ 167 0046 114B     	 ldr r3,.L13+60
+ 168              	.L12:
+ 169 0048 4362     	 str r3,[r0,#36]
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->is224 = is224;
+ 170              	 .loc 1 141 0
+ 171 004a 8166     	 str r1,[r0,#104]
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     return( 0 );
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 172              	 .loc 1 144 0
+ 173              	 
+ 174 004c 0020     	 mov r0,#0
+ 175              	.LVL7:
+ 176 004e 7047     	 bx lr
+ 177              	.L14:
+ 178              	 .align 2
+ 179              	.L13:
+ 180 0050 67E6096A 	 .word 1779033703
+ 181 0054 85AE67BB 	 .word -1150833019
+ 182 0058 72F36E3C 	 .word 1013904242
+ 183 005c 3AF54FA5 	 .word -1521486534
+ 184 0060 7F520E51 	 .word 1359893119
+ 185 0064 8C68059B 	 .word -1694144372
+ 186 0068 ABD9831F 	 .word 528734635
+ 187 006c 19CDE05B 	 .word 1541459225
+ 188 0070 D89E05C1 	 .word -1056596264
+ 189 0074 07D57C36 	 .word 914150663
+ 190 0078 17DD7030 	 .word 812702999
+ 191 007c 39590EF7 	 .word -150054599
+ 192 0080 310BC0FF 	 .word -4191439
+ 193 0084 11155868 	 .word 1750603025
+ 194 0088 A78FF964 	 .word 1694076839
+ 195 008c A44FFABE 	 .word -1090891868
+ 196              	 .cfi_endproc
+ 197              	.LFE3:
+ 199              	 .section .text.mbedtls_sha256_starts,"ax",%progbits
+ 200              	 .align 1
+ 201              	 .global mbedtls_sha256_starts
+ 202              	 .code 16
+ 203              	 .thumb_func
+ 205              	mbedtls_sha256_starts:
+ 206              	.LFB4:
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_DEPRECATED_REMOVED)
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_starts( mbedtls_sha256_context *ctx,
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                             int is224 )
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 207              	 .loc 1 149 0
+ 208              	 .cfi_startproc
+ 209              	.LVL8:
+ 210 0000 08B5     	 push {r3,lr}
+ 211              	.LCFI3:
+ 212              	 .cfi_def_cfa_offset 8
+ 213              	 .cfi_offset 3,-8
+ 214              	 .cfi_offset 14,-4
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_starts_ret( ctx, is224 );
+ 215              	 .loc 1 150 0
+ 216 0002 FFF7FEFF 	 bl mbedtls_sha256_starts_ret
+ 217              	.LVL9:
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 218              	 .loc 1 151 0
+ 219              	 
+ 220 0006 08BD     	 pop {r3,pc}
+ 221              	 .cfi_endproc
+ 222              	.LFE4:
+ 224              	 .section .text.mbedtls_internal_sha256_process,"ax",%progbits
+ 225              	 .align 1
+ 226              	 .global mbedtls_internal_sha256_process
+ 227              	 .code 16
+ 228              	 .thumb_func
+ 230              	mbedtls_internal_sha256_process:
+ 231              	.LFB5:
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_SHA256_PROCESS_ALT)
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** static const uint32_t K[] =
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5,
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5,
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3,
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174,
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0xE49B69C1, 0xEFBE4786, 0x0FC19DC6, 0x240CA1CC,
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA,
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7,
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0xC6E00BF3, 0xD5A79147, 0x06CA6351, 0x14292967,
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13,
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85,
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3,
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070,
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5,
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208,
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2,
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** };
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define  SHR(x,n) ((x & 0xFFFFFFFF) >> n)
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define S0(x) (ROTR(x, 7) ^ ROTR(x,18) ^  SHR(x, 3))
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define S1(x) (ROTR(x,17) ^ ROTR(x,19) ^  SHR(x,10))
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define S2(x) (ROTR(x, 2) ^ ROTR(x,13) ^ ROTR(x,22))
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define S3(x) (ROTR(x, 6) ^ ROTR(x,11) ^ ROTR(x,25))
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define F0(x,y,z) ((x & y) | (z & (x | y)))
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define F1(x,y,z) (z ^ (x & (y ^ z)))
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define R(t)                                    \
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** (                                               \
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     W[t] = S1(W[t -  2]) + W[t -  7] +          \
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****            S0(W[t - 15]) + W[t - 16]            \
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** )
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #define P(a,b,c,d,e,f,g,h,x,K)                  \
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {                                               \
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     temp1 = h + S3(e) + F1(e,f,g) + K + x;      \
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     temp2 = S2(a) + F0(a,b,c);                  \
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     d += temp1; h = temp1 + temp2;              \
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** int mbedtls_internal_sha256_process( mbedtls_sha256_context *ctx,
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                                 const unsigned char data[64] )
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 232              	 .loc 1 202 0
+ 233              	 .cfi_startproc
+ 234              	.LVL10:
+ 235 0000 0023     	 mov r3,#0
+ 236 0002 F0B5     	 push {r4,r5,r6,r7,lr}
+ 237              	.LCFI4:
+ 238              	 .cfi_def_cfa_offset 20
+ 239              	 .cfi_offset 4,-20
+ 240              	 .cfi_offset 5,-16
+ 241              	 .cfi_offset 6,-12
+ 242              	 .cfi_offset 7,-8
+ 243              	 .cfi_offset 14,-4
+ 244 0004 D5B0     	 sub sp,sp,#340
+ 245              	.LCFI5:
+ 246              	 .cfi_def_cfa_offset 360
+ 247              	 .loc 1 202 0
+ 248 0006 0B90     	 str r0,[sp,#44]
+ 249              	.LVL11:
+ 250              	.L17:
+ 251 0008 0B9A     	 ldr r2,[sp,#44]
+ 252 000a D218     	 add r2,r2,r3
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     uint32_t temp1, temp2, W[64];
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     uint32_t A[8];
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     unsigned int i;
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ctx != NULL );
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( (const unsigned char *)data != NULL );
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 0; i < 8; i++ )
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         A[i] = ctx->state[i];
+ 253              	 .loc 1 211 0 discriminator 3
+ 254 000c 9268     	 ldr r2,[r2,#8]
+ 255 000e 0092     	 str r2,[sp]
+ 256 0010 0098     	 ldr r0,[sp]
+ 257 0012 0CAA     	 add r2,sp,#48
+ 258 0014 9850     	 str r0,[r3,r2]
+ 259 0016 0433     	 add r3,r3,#4
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         A[i] = ctx->state[i];
+ 260              	 .loc 1 210 0 discriminator 3
+ 261 0018 202B     	 cmp r3,#32
+ 262 001a F5D1     	 bne .L17
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         A[i] = ctx->state[i];
+ 263              	 .loc 1 210 0 is_stmt 0
+ 264 001c 0020     	 mov r0,#0
+ 265              	.LVL12:
+ 266              	.L18:
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if defined(MBEDTLS_SHA256_SMALLER)
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 0; i < 64; i++ )
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         if( i < 16 )
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****             GET_UINT32_BE( W[i], data, 4 * i );
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         else
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****             R( i );
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], W[i], K[i] );
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         temp1 = A[7]; A[7] = A[6]; A[6] = A[5]; A[5] = A[4]; A[4] = A[3];
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         A[3] = A[2]; A[2] = A[1]; A[1] = A[0]; A[0] = temp1;
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #else /* MBEDTLS_SHA256_SMALLER */
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 0; i < 16; i++ )
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         GET_UINT32_BE( W[i], data, 4 * i );
+ 267              	 .loc 1 228 0 is_stmt 1 discriminator 3
+ 268 001e 0B78     	 ldrb r3,[r1]
+ 269 0020 1A06     	 lsl r2,r3,#24
+ 270 0022 4B78     	 ldrb r3,[r1,#1]
+ 271 0024 1B04     	 lsl r3,r3,#16
+ 272 0026 1343     	 orr r3,r2
+ 273 0028 CA78     	 ldrb r2,[r1,#3]
+ 274 002a 1343     	 orr r3,r2
+ 275 002c 8A78     	 ldrb r2,[r1,#2]
+ 276 002e 0431     	 add r1,r1,#4
+ 277 0030 1202     	 lsl r2,r2,#8
+ 278 0032 1343     	 orr r3,r2
+ 279 0034 14AA     	 add r2,sp,#80
+ 280 0036 8350     	 str r3,[r0,r2]
+ 281 0038 0430     	 add r0,r0,#4
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         GET_UINT32_BE( W[i], data, 4 * i );
+ 282              	 .loc 1 227 0 discriminator 3
+ 283 003a 4028     	 cmp r0,#64
+ 284 003c EFD1     	 bne .L18
+ 285 003e EF4C     	 ldr r4,.L22
+ 286 0040 139B     	 ldr r3,[sp,#76]
+ 287 0042 201D     	 add r0,r4,#4
+ 288 0044 0590     	 str r0,[sp,#20]
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         GET_UINT32_BE( W[i], data, 4 * i );
+ 289              	 .loc 1 227 0 is_stmt 0
+ 290 0046 0020     	 mov r0,#0
+ 291 0048 0493     	 str r3,[sp,#16]
+ 292 004a 0F9B     	 ldr r3,[sp,#60]
+ 293 004c 109A     	 ldr r2,[sp,#64]
+ 294 004e 0093     	 str r3,[sp]
+ 295 0050 129B     	 ldr r3,[sp,#72]
+ 296 0052 0392     	 str r2,[sp,#12]
+ 297 0054 0193     	 str r3,[sp,#4]
+ 298 0056 119B     	 ldr r3,[sp,#68]
+ 299 0058 0E99     	 ldr r1,[sp,#56]
+ 300 005a 0293     	 str r3,[sp,#8]
+ 301 005c 0C9A     	 ldr r2,[sp,#48]
+ 302 005e 0D9B     	 ldr r3,[sp,#52]
+ 303 0060 15AE     	 add r6,sp,#84
+ 304 0062 0690     	 str r0,[sp,#24]
+ 305              	.L19:
+ 306 0064 2025     	 mov r5,#32
+ 307 0066 069C     	 ldr r4,[sp,#24]
+ 308 0068 0CA8     	 add r0,sp,#48
+ 309 006a 4019     	 add r0,r0,r5
+ 310 006c 0059     	 ldr r0,[r0,r4]
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 0; i < 16; i += 8 )
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], W[i+0], K[i+0] );
+ 311              	 .loc 1 232 0 is_stmt 1 discriminator 3
+ 312 006e 039D     	 ldr r5,[sp,#12]
+ 313 0070 0790     	 str r0,[sp,#28]
+ 314 0072 E248     	 ldr r0,.L22
+ 315 0074 2058     	 ldr r0,[r4,r0]
+ 316 0076 0890     	 str r0,[sp,#32]
+ 317 0078 089C     	 ldr r4,[sp,#32]
+ 318 007a 0798     	 ldr r0,[sp,#28]
+ 319 007c A446     	 mov ip,r4
+ 320 007e 6044     	 add r0,r0,ip
+ 321 0080 071C     	 mov r7,r0
+ 322 0082 0B20     	 mov r0,#11
+ 323 0084 0624     	 mov r4,#6
+ 324 0086 C541     	 ror r5,r5,r0
+ 325 0088 0398     	 ldr r0,[sp,#12]
+ 326 008a E041     	 ror r0,r0,r4
+ 327 008c 4540     	 eor r5,r0
+ 328 008e 0398     	 ldr r0,[sp,#12]
+ 329 0090 1334     	 add r4,r4,#19
+ 330 0092 E041     	 ror r0,r0,r4
+ 331 0094 6840     	 eor r0,r5
+ 332 0096 3F18     	 add r7,r7,r0
+ 333 0098 019D     	 ldr r5,[sp,#4]
+ 334 009a 0298     	 ldr r0,[sp,#8]
+ 335 009c 0C3C     	 sub r4,r4,#12
+ 336 009e 4540     	 eor r5,r0
+ 337 00a0 0398     	 ldr r0,[sp,#12]
+ 338 00a2 0540     	 and r5,r0
+ 339 00a4 0198     	 ldr r0,[sp,#4]
+ 340 00a6 4540     	 eor r5,r0
+ 341 00a8 0498     	 ldr r0,[sp,#16]
+ 342 00aa 7D19     	 add r5,r7,r5
+ 343 00ac 2D18     	 add r5,r5,r0
+ 344              	.LVL13:
+ 345 00ae 0098     	 ldr r0,[sp]
+ 346 00b0 1F1C     	 mov r7,r3
+ 347 00b2 8446     	 mov ip,r0
+ 348 00b4 AC44     	 add ip,ip,r5
+ 349 00b6 6046     	 mov r0,ip
+ 350 00b8 0090     	 str r0,[sp]
+ 351 00ba 101C     	 mov r0,r2
+ 352 00bc 1743     	 orr r7,r2
+ 353 00be 1840     	 and r0,r3
+ 354 00c0 0F40     	 and r7,r1
+ 355 00c2 0743     	 orr r7,r0
+ 356 00c4 101C     	 mov r0,r2
+ 357 00c6 E041     	 ror r0,r0,r4
+ 358 00c8 8446     	 mov ip,r0
+ 359 00ca 101C     	 mov r0,r2
+ 360 00cc 0B3C     	 sub r4,r4,#11
+ 361 00ce E041     	 ror r0,r0,r4
+ 362 00d0 6446     	 mov r4,ip
+ 363 00d2 4440     	 eor r4,r0
+ 364 00d4 A446     	 mov ip,r4
+ 365 00d6 101C     	 mov r0,r2
+ 366 00d8 1624     	 mov r4,#22
+ 367 00da E041     	 ror r0,r0,r4
+ 368 00dc 6446     	 mov r4,ip
+ 369 00de 6040     	 eor r0,r4
+ 370 00e0 3818     	 add r0,r7,r0
+ 371 00e2 4519     	 add r5,r0,r5
+ 372              	.LVL14:
+ 373 00e4 0598     	 ldr r0,[sp,#20]
+ 374 00e6 3468     	 ldr r4,[r6]
+ 375 00e8 0068     	 ldr r0,[r0]
+ 376 00ea 0019     	 add r0,r0,r4
+ 377 00ec 019C     	 ldr r4,[sp,#4]
+ 378 00ee 0719     	 add r7,r0,r4
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[7], A[0], A[1], A[2], A[3], A[4], A[5], A[6], W[i+1], K[i+1] );
+ 379              	 .loc 1 233 0 discriminator 3
+ 380 00f0 039C     	 ldr r4,[sp,#12]
+ 381 00f2 0298     	 ldr r0,[sp,#8]
+ 382 00f4 6040     	 eor r0,r4
+ 383 00f6 009C     	 ldr r4,[sp]
+ 384 00f8 2040     	 and r0,r4
+ 385 00fa 029C     	 ldr r4,[sp,#8]
+ 386 00fc 6040     	 eor r0,r4
+ 387 00fe 3818     	 add r0,r7,r0
+ 388 0100 0B27     	 mov r7,#11
+ 389              	.LVL15:
+ 390 0102 009C     	 ldr r4,[sp]
+ 391 0104 FC41     	 ror r4,r4,r7
+ 392 0106 A446     	 mov ip,r4
+ 393 0108 0624     	 mov r4,#6
+ 394              	.LVL16:
+ 395 010a 009F     	 ldr r7,[sp]
+ 396              	.LVL17:
+ 397 010c E741     	 ror r7,r7,r4
+ 398 010e 6446     	 mov r4,ip
+ 399              	.LVL18:
+ 400 0110 7C40     	 eor r4,r7
+ 401 0112 A446     	 mov ip,r4
+ 402 0114 1924     	 mov r4,#25
+ 403 0116 009F     	 ldr r7,[sp]
+ 404 0118 E741     	 ror r7,r7,r4
+ 405 011a 6446     	 mov r4,ip
+ 406 011c 6740     	 eor r7,r4
+ 407 011e C019     	 add r0,r0,r7
+ 408              	.LVL19:
+ 409 0120 4118     	 add r1,r0,r1
+ 410 0122 2F1C     	 mov r7,r5
+ 411 0124 0191     	 str r1,[sp,#4]
+ 412 0126 111C     	 mov r1,r2
+ 413 0128 1743     	 orr r7,r2
+ 414 012a 2940     	 and r1,r5
+ 415 012c 1F40     	 and r7,r3
+ 416 012e 0F43     	 orr r7,r1
+ 417 0130 0D24     	 mov r4,#13
+ 418 0132 291C     	 mov r1,r5
+ 419 0134 E141     	 ror r1,r1,r4
+ 420 0136 8C46     	 mov ip,r1
+ 421 0138 291C     	 mov r1,r5
+ 422 013a 0B3C     	 sub r4,r4,#11
+ 423 013c E141     	 ror r1,r1,r4
+ 424 013e 6446     	 mov r4,ip
+ 425 0140 4C40     	 eor r4,r1
+ 426 0142 A446     	 mov ip,r4
+ 427 0144 291C     	 mov r1,r5
+ 428 0146 1624     	 mov r4,#22
+ 429 0148 E141     	 ror r1,r1,r4
+ 430 014a 6446     	 mov r4,ip
+ 431 014c 6140     	 eor r1,r4
+ 432 014e 7918     	 add r1,r7,r1
+ 433 0150 0918     	 add r1,r1,r0
+ 434 0152 0598     	 ldr r0,[sp,#20]
+ 435              	.LVL20:
+ 436 0154 7468     	 ldr r4,[r6,#4]
+ 437 0156 4068     	 ldr r0,[r0,#4]
+ 438 0158 0019     	 add r0,r0,r4
+ 439 015a 029C     	 ldr r4,[sp,#8]
+ 440 015c 0719     	 add r7,r0,r4
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[6], A[7], A[0], A[1], A[2], A[3], A[4], A[5], W[i+2], K[i+2] );
+ 441              	 .loc 1 234 0 discriminator 3
+ 442 015e 0398     	 ldr r0,[sp,#12]
+ 443 0160 009C     	 ldr r4,[sp]
+ 444 0162 6040     	 eor r0,r4
+ 445 0164 019C     	 ldr r4,[sp,#4]
+ 446 0166 2040     	 and r0,r4
+ 447 0168 039C     	 ldr r4,[sp,#12]
+ 448 016a 6040     	 eor r0,r4
+ 449 016c 3818     	 add r0,r7,r0
+ 450 016e 0B27     	 mov r7,#11
+ 451 0170 019C     	 ldr r4,[sp,#4]
+ 452 0172 FC41     	 ror r4,r4,r7
+ 453 0174 A446     	 mov ip,r4
+ 454 0176 0624     	 mov r4,#6
+ 455 0178 019F     	 ldr r7,[sp,#4]
+ 456 017a E741     	 ror r7,r7,r4
+ 457 017c 6446     	 mov r4,ip
+ 458 017e 7C40     	 eor r4,r7
+ 459 0180 A446     	 mov ip,r4
+ 460 0182 1924     	 mov r4,#25
+ 461 0184 019F     	 ldr r7,[sp,#4]
+ 462 0186 E741     	 ror r7,r7,r4
+ 463 0188 6446     	 mov r4,ip
+ 464 018a 6740     	 eor r7,r4
+ 465 018c C019     	 add r0,r0,r7
+ 466              	.LVL21:
+ 467 018e C318     	 add r3,r0,r3
+ 468 0190 0F1C     	 mov r7,r1
+ 469 0192 0293     	 str r3,[sp,#8]
+ 470 0194 2B1C     	 mov r3,r5
+ 471 0196 2F43     	 orr r7,r5
+ 472 0198 0B40     	 and r3,r1
+ 473 019a 1740     	 and r7,r2
+ 474 019c 1F43     	 orr r7,r3
+ 475 019e 0D24     	 mov r4,#13
+ 476 01a0 0B1C     	 mov r3,r1
+ 477 01a2 E341     	 ror r3,r3,r4
+ 478 01a4 9C46     	 mov ip,r3
+ 479 01a6 0B1C     	 mov r3,r1
+ 480 01a8 0B3C     	 sub r4,r4,#11
+ 481 01aa E341     	 ror r3,r3,r4
+ 482 01ac 6446     	 mov r4,ip
+ 483 01ae 5C40     	 eor r4,r3
+ 484 01b0 A446     	 mov ip,r4
+ 485 01b2 0B1C     	 mov r3,r1
+ 486 01b4 1624     	 mov r4,#22
+ 487 01b6 E341     	 ror r3,r3,r4
+ 488 01b8 6446     	 mov r4,ip
+ 489 01ba 6340     	 eor r3,r4
+ 490 01bc FF18     	 add r7,r7,r3
+ 491 01be 059B     	 ldr r3,[sp,#20]
+ 492 01c0 3F18     	 add r7,r7,r0
+ 493 01c2 9B68     	 ldr r3,[r3,#8]
+ 494 01c4 B068     	 ldr r0,[r6,#8]
+ 495              	.LVL22:
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[5], A[6], A[7], A[0], A[1], A[2], A[3], A[4], W[i+3], K[i+3] );
+ 496              	 .loc 1 235 0 discriminator 3
+ 497 01c6 019C     	 ldr r4,[sp,#4]
+ 498 01c8 1818     	 add r0,r3,r0
+ 499 01ca 039B     	 ldr r3,[sp,#12]
+ 500 01cc C018     	 add r0,r0,r3
+ 501 01ce 009B     	 ldr r3,[sp]
+ 502 01d0 6340     	 eor r3,r4
+ 503 01d2 029C     	 ldr r4,[sp,#8]
+ 504 01d4 2340     	 and r3,r4
+ 505 01d6 009C     	 ldr r4,[sp]
+ 506 01d8 6340     	 eor r3,r4
+ 507 01da 0B24     	 mov r4,#11
+ 508 01dc C318     	 add r3,r0,r3
+ 509 01de 0298     	 ldr r0,[sp,#8]
+ 510 01e0 E041     	 ror r0,r0,r4
+ 511 01e2 8446     	 mov ip,r0
+ 512 01e4 0298     	 ldr r0,[sp,#8]
+ 513 01e6 053C     	 sub r4,r4,#5
+ 514 01e8 E041     	 ror r0,r0,r4
+ 515 01ea 6446     	 mov r4,ip
+ 516 01ec 4440     	 eor r4,r0
+ 517 01ee A446     	 mov ip,r4
+ 518 01f0 1924     	 mov r4,#25
+ 519 01f2 0298     	 ldr r0,[sp,#8]
+ 520 01f4 E041     	 ror r0,r0,r4
+ 521 01f6 6446     	 mov r4,ip
+ 522 01f8 6040     	 eor r0,r4
+ 523 01fa 1B18     	 add r3,r3,r0
+ 524              	.LVL23:
+ 525 01fc 9A18     	 add r2,r3,r2
+ 526 01fe 381C     	 mov r0,r7
+ 527 0200 0392     	 str r2,[sp,#12]
+ 528 0202 0A1C     	 mov r2,r1
+ 529 0204 0843     	 orr r0,r1
+ 530 0206 3A40     	 and r2,r7
+ 531 0208 2840     	 and r0,r5
+ 532 020a 1043     	 orr r0,r2
+ 533 020c 0D24     	 mov r4,#13
+ 534 020e 3A1C     	 mov r2,r7
+ 535 0210 E241     	 ror r2,r2,r4
+ 536 0212 9446     	 mov ip,r2
+ 537 0214 3A1C     	 mov r2,r7
+ 538 0216 0B3C     	 sub r4,r4,#11
+ 539 0218 E241     	 ror r2,r2,r4
+ 540 021a 6446     	 mov r4,ip
+ 541 021c 5440     	 eor r4,r2
+ 542 021e A446     	 mov ip,r4
+ 543 0220 3A1C     	 mov r2,r7
+ 544 0222 1624     	 mov r4,#22
+ 545 0224 E241     	 ror r2,r2,r4
+ 546 0226 6446     	 mov r4,ip
+ 547 0228 6240     	 eor r2,r4
+ 548 022a 8018     	 add r0,r0,r2
+ 549 022c 059A     	 ldr r2,[sp,#20]
+ 550 022e C018     	 add r0,r0,r3
+ 551 0230 D268     	 ldr r2,[r2,#12]
+ 552 0232 F368     	 ldr r3,[r6,#12]
+ 553              	.LVL24:
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[4], A[5], A[6], A[7], A[0], A[1], A[2], A[3], W[i+4], K[i+4] );
+ 554              	 .loc 1 236 0 discriminator 3
+ 555 0234 029C     	 ldr r4,[sp,#8]
+ 556 0236 9B18     	 add r3,r3,r2
+ 557 0238 009A     	 ldr r2,[sp]
+ 558 023a 9A18     	 add r2,r3,r2
+ 559 023c 019B     	 ldr r3,[sp,#4]
+ 560 023e 6340     	 eor r3,r4
+ 561 0240 039C     	 ldr r4,[sp,#12]
+ 562 0242 2340     	 and r3,r4
+ 563 0244 019C     	 ldr r4,[sp,#4]
+ 564 0246 6340     	 eor r3,r4
+ 565 0248 0B24     	 mov r4,#11
+ 566 024a D318     	 add r3,r2,r3
+ 567 024c 039A     	 ldr r2,[sp,#12]
+ 568 024e E241     	 ror r2,r2,r4
+ 569 0250 9446     	 mov ip,r2
+ 570 0252 039A     	 ldr r2,[sp,#12]
+ 571 0254 053C     	 sub r4,r4,#5
+ 572 0256 E241     	 ror r2,r2,r4
+ 573 0258 6446     	 mov r4,ip
+ 574 025a 5440     	 eor r4,r2
+ 575 025c A446     	 mov ip,r4
+ 576 025e 1924     	 mov r4,#25
+ 577 0260 039A     	 ldr r2,[sp,#12]
+ 578 0262 E241     	 ror r2,r2,r4
+ 579 0264 6446     	 mov r4,ip
+ 580 0266 6240     	 eor r2,r4
+ 581 0268 9B18     	 add r3,r3,r2
+ 582              	.LVL25:
+ 583 026a 5A19     	 add r2,r3,r5
+ 584 026c 051C     	 mov r5,r0
+ 585 026e 0492     	 str r2,[sp,#16]
+ 586 0270 3A1C     	 mov r2,r7
+ 587 0272 3D43     	 orr r5,r7
+ 588 0274 0240     	 and r2,r0
+ 589 0276 0D40     	 and r5,r1
+ 590 0278 1543     	 orr r5,r2
+ 591 027a 0D24     	 mov r4,#13
+ 592 027c 021C     	 mov r2,r0
+ 593 027e E241     	 ror r2,r2,r4
+ 594 0280 9446     	 mov ip,r2
+ 595 0282 021C     	 mov r2,r0
+ 596 0284 0B3C     	 sub r4,r4,#11
+ 597 0286 E241     	 ror r2,r2,r4
+ 598 0288 6446     	 mov r4,ip
+ 599 028a 5440     	 eor r4,r2
+ 600 028c A446     	 mov ip,r4
+ 601 028e 021C     	 mov r2,r0
+ 602 0290 1624     	 mov r4,#22
+ 603 0292 E241     	 ror r2,r2,r4
+ 604 0294 6446     	 mov r4,ip
+ 605 0296 6240     	 eor r2,r4
+ 606 0298 AA18     	 add r2,r5,r2
+ 607 029a D318     	 add r3,r2,r3
+ 608              	.LVL26:
+ 609 029c 0093     	 str r3,[sp]
+ 610              	.LVL27:
+ 611 029e 059A     	 ldr r2,[sp,#20]
+ 612 02a0 3369     	 ldr r3,[r6,#16]
+ 613 02a2 1269     	 ldr r2,[r2,#16]
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[3], A[4], A[5], A[6], A[7], A[0], A[1], A[2], W[i+5], K[i+5] );
+ 614              	 .loc 1 237 0 discriminator 3
+ 615 02a4 0624     	 mov r4,#6
+ 616 02a6 9A18     	 add r2,r3,r2
+ 617 02a8 019B     	 ldr r3,[sp,#4]
+ 618 02aa D518     	 add r5,r2,r3
+ 619 02ac 029B     	 ldr r3,[sp,#8]
+ 620 02ae 039A     	 ldr r2,[sp,#12]
+ 621 02b0 5340     	 eor r3,r2
+ 622 02b2 049A     	 ldr r2,[sp,#16]
+ 623 02b4 1340     	 and r3,r2
+ 624 02b6 029A     	 ldr r2,[sp,#8]
+ 625 02b8 5340     	 eor r3,r2
+ 626 02ba EA18     	 add r2,r5,r3
+ 627 02bc 0B23     	 mov r3,#11
+ 628 02be 049D     	 ldr r5,[sp,#16]
+ 629 02c0 DD41     	 ror r5,r5,r3
+ 630 02c2 049B     	 ldr r3,[sp,#16]
+ 631 02c4 E341     	 ror r3,r3,r4
+ 632 02c6 6B40     	 eor r3,r5
+ 633 02c8 049D     	 ldr r5,[sp,#16]
+ 634 02ca 1334     	 add r4,r4,#19
+ 635 02cc E541     	 ror r5,r5,r4
+ 636 02ce 6B40     	 eor r3,r5
+ 637 02d0 D318     	 add r3,r2,r3
+ 638              	.LVL28:
+ 639 02d2 5A18     	 add r2,r3,r1
+ 640 02d4 0192     	 str r2,[sp,#4]
+ 641 02d6 0D22     	 mov r2,#13
+ 642 02d8 009D     	 ldr r5,[sp]
+ 643 02da 0099     	 ldr r1,[sp]
+ 644 02dc 0543     	 orr r5,r0
+ 645 02de 0140     	 and r1,r0
+ 646 02e0 3D40     	 and r5,r7
+ 647 02e2 0D43     	 orr r5,r1
+ 648 02e4 0099     	 ldr r1,[sp]
+ 649 02e6 173C     	 sub r4,r4,#23
+ 650 02e8 D141     	 ror r1,r1,r2
+ 651 02ea 009A     	 ldr r2,[sp]
+ 652 02ec E241     	 ror r2,r2,r4
+ 653 02ee 5140     	 eor r1,r2
+ 654 02f0 009A     	 ldr r2,[sp]
+ 655 02f2 1434     	 add r4,r4,#20
+ 656 02f4 E241     	 ror r2,r2,r4
+ 657 02f6 4A40     	 eor r2,r1
+ 658 02f8 A918     	 add r1,r5,r2
+ 659 02fa 059A     	 ldr r2,[sp,#20]
+ 660 02fc C918     	 add r1,r1,r3
+ 661 02fe 5269     	 ldr r2,[r2,#20]
+ 662 0300 7369     	 ldr r3,[r6,#20]
+ 663              	.LVL29:
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[2], A[3], A[4], A[5], A[6], A[7], A[0], A[1], W[i+6], K[i+6] );
+ 664              	 .loc 1 238 0 discriminator 3
+ 665 0302 049C     	 ldr r4,[sp,#16]
+ 666 0304 9B18     	 add r3,r3,r2
+ 667 0306 029A     	 ldr r2,[sp,#8]
+ 668 0308 9B18     	 add r3,r3,r2
+ 669 030a 039A     	 ldr r2,[sp,#12]
+ 670 030c 6240     	 eor r2,r4
+ 671 030e 019C     	 ldr r4,[sp,#4]
+ 672 0310 2240     	 and r2,r4
+ 673 0312 039C     	 ldr r4,[sp,#12]
+ 674 0314 6240     	 eor r2,r4
+ 675 0316 9D18     	 add r5,r3,r2
+ 676 0318 0B23     	 mov r3,#11
+ 677 031a 0624     	 mov r4,#6
+ 678 031c 019A     	 ldr r2,[sp,#4]
+ 679 031e DA41     	 ror r2,r2,r3
+ 680 0320 019B     	 ldr r3,[sp,#4]
+ 681 0322 E341     	 ror r3,r3,r4
+ 682 0324 5340     	 eor r3,r2
+ 683 0326 019A     	 ldr r2,[sp,#4]
+ 684 0328 1334     	 add r4,r4,#19
+ 685 032a E241     	 ror r2,r2,r4
+ 686 032c 5A40     	 eor r2,r3
+ 687 032e AA18     	 add r2,r5,r2
+ 688              	.LVL30:
+ 689 0330 D319     	 add r3,r2,r7
+ 690 0332 009F     	 ldr r7,[sp]
+ 691 0334 0293     	 str r3,[sp,#8]
+ 692 0336 009B     	 ldr r3,[sp]
+ 693 0338 0F43     	 orr r7,r1
+ 694 033a 0740     	 and r7,r0
+ 695 033c 0B40     	 and r3,r1
+ 696 033e 1F43     	 orr r7,r3
+ 697 0340 0D1C     	 mov r5,r1
+ 698 0342 0D23     	 mov r3,#13
+ 699 0344 DD41     	 ror r5,r5,r3
+ 700 0346 0B1C     	 mov r3,r1
+ 701 0348 173C     	 sub r4,r4,#23
+ 702 034a E341     	 ror r3,r3,r4
+ 703 034c 6B40     	 eor r3,r5
+ 704 034e 0D1C     	 mov r5,r1
+ 705 0350 1434     	 add r4,r4,#20
+ 706 0352 E541     	 ror r5,r5,r4
+ 707 0354 059C     	 ldr r4,[sp,#20]
+ 708 0356 5D40     	 eor r5,r3
+ 709 0358 7B19     	 add r3,r7,r5
+ 710 035a 9B18     	 add r3,r3,r2
+ 711 035c B269     	 ldr r2,[r6,#24]
+ 712              	.LVL31:
+ 713 035e A469     	 ldr r4,[r4,#24]
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[0], W[i+7], K[i+7] );
+ 714              	 .loc 1 239 0 discriminator 3
+ 715 0360 049D     	 ldr r5,[sp,#16]
+ 716 0362 1219     	 add r2,r2,r4
+ 717 0364 039C     	 ldr r4,[sp,#12]
+ 718 0366 029F     	 ldr r7,[sp,#8]
+ 719 0368 1219     	 add r2,r2,r4
+ 720 036a 019C     	 ldr r4,[sp,#4]
+ 721 036c 2036     	 add r6,r6,#32
+ 722 036e 6540     	 eor r5,r4
+ 723 0370 029C     	 ldr r4,[sp,#8]
+ 724 0372 2540     	 and r5,r4
+ 725 0374 049C     	 ldr r4,[sp,#16]
+ 726 0376 6540     	 eor r5,r4
+ 727 0378 5519     	 add r5,r2,r5
+ 728 037a 0B22     	 mov r2,#11
+ 729 037c 0624     	 mov r4,#6
+ 730 037e D741     	 ror r7,r7,r2
+ 731 0380 029A     	 ldr r2,[sp,#8]
+ 732 0382 E241     	 ror r2,r2,r4
+ 733 0384 7A40     	 eor r2,r7
+ 734 0386 029F     	 ldr r7,[sp,#8]
+ 735 0388 1334     	 add r4,r4,#19
+ 736 038a E741     	 ror r7,r7,r4
+ 737 038c 7A40     	 eor r2,r7
+ 738 038e 1F1C     	 mov r7,r3
+ 739 0390 AD18     	 add r5,r5,r2
+ 740              	.LVL32:
+ 741 0392 2A18     	 add r2,r5,r0
+ 742 0394 0392     	 str r2,[sp,#12]
+ 743 0396 009A     	 ldr r2,[sp]
+ 744 0398 0F43     	 orr r7,r1
+ 745 039a 1740     	 and r7,r2
+ 746 039c 0A1C     	 mov r2,r1
+ 747 039e 1A40     	 and r2,r3
+ 748 03a0 1743     	 orr r7,r2
+ 749 03a2 181C     	 mov r0,r3
+ 750 03a4 0D22     	 mov r2,#13
+ 751 03a6 D041     	 ror r0,r0,r2
+ 752 03a8 1A1C     	 mov r2,r3
+ 753 03aa 173C     	 sub r4,r4,#23
+ 754 03ac E241     	 ror r2,r2,r4
+ 755 03ae 4240     	 eor r2,r0
+ 756 03b0 181C     	 mov r0,r3
+ 757 03b2 1434     	 add r4,r4,#20
+ 758 03b4 E041     	 ror r0,r0,r4
+ 759 03b6 5040     	 eor r0,r2
+ 760 03b8 3A18     	 add r2,r7,r0
+ 761 03ba 0698     	 ldr r0,[sp,#24]
+ 762 03bc 5219     	 add r2,r2,r5
+ 763 03be 2030     	 add r0,r0,#32
+ 764 03c0 0690     	 str r0,[sp,#24]
+ 765 03c2 0598     	 ldr r0,[sp,#20]
+ 766 03c4 2030     	 add r0,r0,#32
+ 767 03c6 0590     	 str r0,[sp,#20]
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 768              	 .loc 1 230 0 discriminator 3
+ 769 03c8 0698     	 ldr r0,[sp,#24]
+ 770 03ca 4028     	 cmp r0,#64
+ 771 03cc 00D0     	 beq .LCB733
+ 772 03ce 49E6     	 b .L19
+ 773              	.LCB733:
+ 774 03d0 0498     	 ldr r0,[sp,#16]
+ 775 03d2 0E91     	 str r1,[sp,#56]
+ 776 03d4 1390     	 str r0,[sp,#76]
+ 777 03d6 0398     	 ldr r0,[sp,#12]
+ 778 03d8 0C92     	 str r2,[sp,#48]
+ 779 03da 1090     	 str r0,[sp,#64]
+ 780 03dc 0298     	 ldr r0,[sp,#8]
+ 781 03de 0D93     	 str r3,[sp,#52]
+ 782 03e0 1190     	 str r0,[sp,#68]
+ 783 03e2 0198     	 ldr r0,[sp,#4]
+ 784 03e4 14AC     	 add r4,sp,#80
+ 785 03e6 1290     	 str r0,[sp,#72]
+ 786 03e8 0198     	 ldr r0,[sp,#4]
+ 787 03ea 0191     	 str r1,[sp,#4]
+ 788 03ec 0299     	 ldr r1,[sp,#8]
+ 789              	.LVL33:
+ 790 03ee 0690     	 str r0,[sp,#24]
+ 791 03f0 0591     	 str r1,[sp,#20]
+ 792 03f2 0249     	 ldr r1,.L22
+ 793 03f4 0291     	 str r1,[sp,#8]
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 794              	 .loc 1 230 0 is_stmt 0
+ 795 03f6 1021     	 mov r1,#16
+ 796 03f8 0A91     	 str r1,[sp,#40]
+ 797 03fa 01E0     	 b .L23
+ 798              	.L24:
+ 799              	 .align 2
+ 800              	.L22:
+ 801 03fc 00000000 	 .word .LANCHOR0
+ 802              	.L23:
+ 803              	.LVL34:
+ 804              	.L20:
+ 805 0400 2168     	 ldr r1,[r4]
+ 806 0402 606A     	 ldr r0,[r4,#36]
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 16; i < 64; i += 8 )
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], R(i+0), K[i+0] );
+ 807              	 .loc 1 244 0 is_stmt 1 discriminator 3
+ 808 0404 A56B     	 ldr r5,[r4,#56]
+ 809 0406 0F18     	 add r7,r1,r0
+ 810 0408 1321     	 mov r1,#19
+ 811 040a 1120     	 mov r0,#17
+ 812 040c CD41     	 ror r5,r5,r1
+ 813 040e A16B     	 ldr r1,[r4,#56]
+ 814 0410 0726     	 mov r6,#7
+ 815 0412 C141     	 ror r1,r1,r0
+ 816 0414 A06B     	 ldr r0,[r4,#56]
+ 817 0416 6940     	 eor r1,r5
+ 818 0418 850A     	 lsr r5,r0,#10
+ 819 041a 1220     	 mov r0,#18
+ 820 041c 6940     	 eor r1,r5
+ 821 041e 6568     	 ldr r5,[r4,#4]
+ 822 0420 7918     	 add r1,r7,r1
+ 823 0422 C541     	 ror r5,r5,r0
+ 824 0424 6068     	 ldr r0,[r4,#4]
+ 825 0426 171C     	 mov r7,r2
+ 826 0428 F041     	 ror r0,r0,r6
+ 827 042a 6840     	 eor r0,r5
+ 828 042c 6568     	 ldr r5,[r4,#4]
+ 829 042e 053E     	 sub r6,r6,#5
+ 830 0430 ED08     	 lsr r5,r5,#3
+ 831 0432 4540     	 eor r5,r0
+ 832 0434 4919     	 add r1,r1,r5
+ 833 0436 0991     	 str r1,[sp,#36]
+ 834 0438 0B21     	 mov r1,#11
+ 835 043a 0625     	 mov r5,#6
+ 836 043c 0398     	 ldr r0,[sp,#12]
+ 837 043e C841     	 ror r0,r0,r1
+ 838 0440 0399     	 ldr r1,[sp,#12]
+ 839 0442 E941     	 ror r1,r1,r5
+ 840 0444 4840     	 eor r0,r1
+ 841 0446 0399     	 ldr r1,[sp,#12]
+ 842 0448 1335     	 add r5,r5,#19
+ 843 044a E941     	 ror r1,r1,r5
+ 844 044c 059D     	 ldr r5,[sp,#20]
+ 845 044e 4840     	 eor r0,r1
+ 846 0450 0699     	 ldr r1,[sp,#24]
+ 847 0452 6940     	 eor r1,r5
+ 848 0454 039D     	 ldr r5,[sp,#12]
+ 849 0456 2940     	 and r1,r5
+ 850 0458 069D     	 ldr r5,[sp,#24]
+ 851 045a 6940     	 eor r1,r5
+ 852 045c 4518     	 add r5,r0,r1
+ 853 045e 0299     	 ldr r1,[sp,#8]
+ 854 0460 181C     	 mov r0,r3
+ 855 0462 096C     	 ldr r1,[r1,#64]
+ 856 0464 1043     	 orr r0,r2
+ 857 0466 6D18     	 add r5,r5,r1
+ 858 0468 0999     	 ldr r1,[sp,#36]
+ 859 046a 2164     	 str r1,[r4,#64]
+ 860 046c 6D18     	 add r5,r5,r1
+ 861 046e 0499     	 ldr r1,[sp,#16]
+ 862 0470 6D18     	 add r5,r5,r1
+ 863              	.LVL35:
+ 864 0472 0099     	 ldr r1,[sp]
+ 865 0474 8C46     	 mov ip,r1
+ 866 0476 AC44     	 add ip,ip,r5
+ 867 0478 6146     	 mov r1,ip
+ 868 047a 0491     	 str r1,[sp,#16]
+ 869 047c 0199     	 ldr r1,[sp,#4]
+ 870 047e 0840     	 and r0,r1
+ 871 0480 111C     	 mov r1,r2
+ 872 0482 1940     	 and r1,r3
+ 873 0484 0843     	 orr r0,r1
+ 874 0486 0D21     	 mov r1,#13
+ 875 0488 CF41     	 ror r7,r7,r1
+ 876 048a 111C     	 mov r1,r2
+ 877 048c F141     	 ror r1,r1,r6
+ 878 048e 4F40     	 eor r7,r1
+ 879 0490 111C     	 mov r1,r2
+ 880 0492 1436     	 add r6,r6,#20
+ 881 0494 F141     	 ror r1,r1,r6
+ 882 0496 7940     	 eor r1,r7
+ 883 0498 4118     	 add r1,r0,r1
+ 884 049a 4919     	 add r1,r1,r5
+ 885 049c A06A     	 ldr r0,[r4,#40]
+ 886 049e 0091     	 str r1,[sp]
+ 887 04a0 6168     	 ldr r1,[r4,#4]
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[7], A[0], A[1], A[2], A[3], A[4], A[5], A[6], R(i+1), K[i+1] );
+ 888              	 .loc 1 245 0 discriminator 3
+ 889 04a2 E56B     	 ldr r5,[r4,#60]
+ 890              	.LVL36:
+ 891 04a4 0918     	 add r1,r1,r0
+ 892 04a6 1320     	 mov r0,#19
+ 893 04a8 C541     	 ror r5,r5,r0
+ 894 04aa E06B     	 ldr r0,[r4,#60]
+ 895 04ac 053E     	 sub r6,r6,#5
+ 896 04ae F041     	 ror r0,r0,r6
+ 897 04b0 6840     	 eor r0,r5
+ 898 04b2 E56B     	 ldr r5,[r4,#60]
+ 899 04b4 A768     	 ldr r7,[r4,#8]
+ 900 04b6 AD0A     	 lsr r5,r5,#10
+ 901 04b8 6840     	 eor r0,r5
+ 902 04ba 0818     	 add r0,r1,r0
+ 903 04bc 1221     	 mov r1,#18
+ 904 04be 0725     	 mov r5,#7
+ 905 04c0 CF41     	 ror r7,r7,r1
+ 906 04c2 A168     	 ldr r1,[r4,#8]
+ 907 04c4 0B3E     	 sub r6,r6,#11
+ 908 04c6 E941     	 ror r1,r1,r5
+ 909 04c8 4F40     	 eor r7,r1
+ 910 04ca A168     	 ldr r1,[r4,#8]
+ 911 04cc C908     	 lsr r1,r1,#3
+ 912 04ce 4F40     	 eor r7,r1
+ 913 04d0 C719     	 add r7,r0,r7
+ 914 04d2 0699     	 ldr r1,[sp,#24]
+ 915 04d4 0298     	 ldr r0,[sp,#8]
+ 916 04d6 039D     	 ldr r5,[sp,#12]
+ 917 04d8 406C     	 ldr r0,[r0,#68]
+ 918 04da 6764     	 str r7,[r4,#68]
+ 919 04dc 8446     	 mov ip,r0
+ 920 04de 6144     	 add r1,r1,ip
+ 921 04e0 C819     	 add r0,r1,r7
+ 922 04e2 0599     	 ldr r1,[sp,#20]
+ 923 04e4 6940     	 eor r1,r5
+ 924 04e6 049D     	 ldr r5,[sp,#16]
+ 925 04e8 2940     	 and r1,r5
+ 926 04ea 059D     	 ldr r5,[sp,#20]
+ 927 04ec 6940     	 eor r1,r5
+ 928 04ee 4118     	 add r1,r0,r1
+ 929 04f0 0B20     	 mov r0,#11
+ 930 04f2 049D     	 ldr r5,[sp,#16]
+ 931 04f4 C541     	 ror r5,r5,r0
+ 932 04f6 0498     	 ldr r0,[sp,#16]
+ 933 04f8 F041     	 ror r0,r0,r6
+ 934 04fa 4540     	 eor r5,r0
+ 935 04fc 0498     	 ldr r0,[sp,#16]
+ 936 04fe 1336     	 add r6,r6,#19
+ 937 0500 F041     	 ror r0,r0,r6
+ 938 0502 6840     	 eor r0,r5
+ 939 0504 0918     	 add r1,r1,r0
+ 940              	.LVL37:
+ 941 0506 0198     	 ldr r0,[sp,#4]
+ 942 0508 009D     	 ldr r5,[sp]
+ 943 050a 0818     	 add r0,r1,r0
+ 944 050c 0690     	 str r0,[sp,#24]
+ 945 050e 0098     	 ldr r0,[sp]
+ 946 0510 1543     	 orr r5,r2
+ 947 0512 1040     	 and r0,r2
+ 948 0514 1D40     	 and r5,r3
+ 949 0516 0543     	 orr r5,r0
+ 950 0518 0098     	 ldr r0,[sp]
+ 951 051a 0C3E     	 sub r6,r6,#12
+ 952 051c F041     	 ror r0,r0,r6
+ 953 051e 8446     	 mov ip,r0
+ 954 0520 0098     	 ldr r0,[sp]
+ 955 0522 0B3E     	 sub r6,r6,#11
+ 956 0524 F041     	 ror r0,r0,r6
+ 957 0526 6646     	 mov r6,ip
+ 958 0528 4640     	 eor r6,r0
+ 959 052a B446     	 mov ip,r6
+ 960 052c 1626     	 mov r6,#22
+ 961 052e 0098     	 ldr r0,[sp]
+ 962 0530 F041     	 ror r0,r0,r6
+ 963 0532 6646     	 mov r6,ip
+ 964 0534 7040     	 eor r0,r6
+ 965 0536 2818     	 add r0,r5,r0
+ 966 0538 4118     	 add r1,r0,r1
+ 967              	.LVL38:
+ 968 053a 0191     	 str r1,[sp,#4]
+ 969 053c E06A     	 ldr r0,[r4,#44]
+ 970 053e A168     	 ldr r1,[r4,#8]
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[6], A[7], A[0], A[1], A[2], A[3], A[4], A[5], R(i+2), K[i+2] );
+ 971              	 .loc 1 246 0 discriminator 3
+ 972 0540 1126     	 mov r6,#17
+ 973 0542 0D18     	 add r5,r1,r0
+ 974 0544 1321     	 mov r1,#19
+ 975 0546 0998     	 ldr r0,[sp,#36]
+ 976 0548 C841     	 ror r0,r0,r1
+ 977 054a 0999     	 ldr r1,[sp,#36]
+ 978 054c F141     	 ror r1,r1,r6
+ 979 054e 4140     	 eor r1,r0
+ 980 0550 0998     	 ldr r0,[sp,#36]
+ 981 0552 0A3E     	 sub r6,r6,#10
+ 982 0554 800A     	 lsr r0,r0,#10
+ 983 0556 4140     	 eor r1,r0
+ 984 0558 1220     	 mov r0,#18
+ 985 055a 6918     	 add r1,r5,r1
+ 986 055c E568     	 ldr r5,[r4,#12]
+ 987 055e C541     	 ror r5,r5,r0
+ 988 0560 E068     	 ldr r0,[r4,#12]
+ 989 0562 F041     	 ror r0,r0,r6
+ 990 0564 4540     	 eor r5,r0
+ 991 0566 E068     	 ldr r0,[r4,#12]
+ 992 0568 049E     	 ldr r6,[sp,#16]
+ 993 056a C008     	 lsr r0,r0,#3
+ 994 056c 4540     	 eor r5,r0
+ 995 056e 0298     	 ldr r0,[sp,#8]
+ 996 0570 4D19     	 add r5,r1,r5
+ 997 0572 806C     	 ldr r0,[r0,#72]
+ 998 0574 0599     	 ldr r1,[sp,#20]
+ 999 0576 8446     	 mov ip,r0
+ 1000 0578 6144     	 add r1,r1,ip
+ 1001 057a 4819     	 add r0,r1,r5
+ 1002 057c 0399     	 ldr r1,[sp,#12]
+ 1003 057e 7140     	 eor r1,r6
+ 1004 0580 069E     	 ldr r6,[sp,#24]
+ 1005 0582 3140     	 and r1,r6
+ 1006 0584 039E     	 ldr r6,[sp,#12]
+ 1007 0586 A564     	 str r5,[r4,#72]
+ 1008 0588 7140     	 eor r1,r6
+ 1009 058a 0B26     	 mov r6,#11
+ 1010 058c 4118     	 add r1,r0,r1
+ 1011 058e 0698     	 ldr r0,[sp,#24]
+ 1012 0590 F041     	 ror r0,r0,r6
+ 1013 0592 8446     	 mov ip,r0
+ 1014 0594 0698     	 ldr r0,[sp,#24]
+ 1015 0596 053E     	 sub r6,r6,#5
+ 1016 0598 F041     	 ror r0,r0,r6
+ 1017 059a 6646     	 mov r6,ip
+ 1018 059c 4640     	 eor r6,r0
+ 1019 059e B446     	 mov ip,r6
+ 1020 05a0 1926     	 mov r6,#25
+ 1021 05a2 0698     	 ldr r0,[sp,#24]
+ 1022 05a4 F041     	 ror r0,r0,r6
+ 1023 05a6 6646     	 mov r6,ip
+ 1024 05a8 7040     	 eor r0,r6
+ 1025 05aa 0918     	 add r1,r1,r0
+ 1026              	.LVL39:
+ 1027 05ac CB18     	 add r3,r1,r3
+ 1028 05ae 0793     	 str r3,[sp,#28]
+ 1029 05b0 0098     	 ldr r0,[sp]
+ 1030 05b2 019B     	 ldr r3,[sp,#4]
+ 1031 05b4 019E     	 ldr r6,[sp,#4]
+ 1032 05b6 1843     	 orr r0,r3
+ 1033 05b8 009B     	 ldr r3,[sp]
+ 1034 05ba 1040     	 and r0,r2
+ 1035 05bc 3340     	 and r3,r6
+ 1036 05be 1843     	 orr r0,r3
+ 1037 05c0 331C     	 mov r3,r6
+ 1038 05c2 0D26     	 mov r6,#13
+ 1039 05c4 F341     	 ror r3,r3,r6
+ 1040 05c6 9C46     	 mov ip,r3
+ 1041 05c8 019B     	 ldr r3,[sp,#4]
+ 1042 05ca 0B3E     	 sub r6,r6,#11
+ 1043 05cc F341     	 ror r3,r3,r6
+ 1044 05ce 6646     	 mov r6,ip
+ 1045 05d0 5E40     	 eor r6,r3
+ 1046 05d2 B446     	 mov ip,r6
+ 1047 05d4 1626     	 mov r6,#22
+ 1048 05d6 019B     	 ldr r3,[sp,#4]
+ 1049 05d8 F341     	 ror r3,r3,r6
+ 1050 05da 6646     	 mov r6,ip
+ 1051 05dc 7340     	 eor r3,r6
+ 1052 05de C318     	 add r3,r0,r3
+ 1053 05e0 5B18     	 add r3,r3,r1
+ 1054 05e2 0593     	 str r3,[sp,#20]
+ 1055 05e4 216B     	 ldr r1,[r4,#48]
+ 1056              	.LVL40:
+ 1057 05e6 E368     	 ldr r3,[r4,#12]
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[5], A[6], A[7], A[0], A[1], A[2], A[3], A[4], R(i+3), K[i+3] );
+ 1058              	 .loc 1 247 0 discriminator 3
+ 1059 05e8 381C     	 mov r0,r7
+ 1060 05ea 5B18     	 add r3,r3,r1
+ 1061 05ec 1321     	 mov r1,#19
+ 1062 05ee 1126     	 mov r6,#17
+ 1063 05f0 C841     	 ror r0,r0,r1
+ 1064 05f2 391C     	 mov r1,r7
+ 1065 05f4 F141     	 ror r1,r1,r6
+ 1066 05f6 BF0A     	 lsr r7,r7,#10
+ 1067 05f8 4140     	 eor r1,r0
+ 1068 05fa 7940     	 eor r1,r7
+ 1069 05fc 5B18     	 add r3,r3,r1
+ 1070 05fe 1221     	 mov r1,#18
+ 1071 0600 2069     	 ldr r0,[r4,#16]
+ 1072 0602 0A3E     	 sub r6,r6,#10
+ 1073 0604 C841     	 ror r0,r0,r1
+ 1074 0606 2169     	 ldr r1,[r4,#16]
+ 1075 0608 079F     	 ldr r7,[sp,#28]
+ 1076 060a F141     	 ror r1,r1,r6
+ 1077 060c 4140     	 eor r1,r0
+ 1078 060e 2069     	 ldr r0,[r4,#16]
+ 1079 0610 C008     	 lsr r0,r0,#3
+ 1080 0612 4140     	 eor r1,r0
+ 1081 0614 0298     	 ldr r0,[sp,#8]
+ 1082 0616 5918     	 add r1,r3,r1
+ 1083 0618 C66C     	 ldr r6,[r0,#76]
+ 1084 061a 039B     	 ldr r3,[sp,#12]
+ 1085 061c B446     	 mov ip,r6
+ 1086 061e 6344     	 add r3,r3,ip
+ 1087 0620 5818     	 add r0,r3,r1
+ 1088 0622 069E     	 ldr r6,[sp,#24]
+ 1089 0624 049B     	 ldr r3,[sp,#16]
+ 1090 0626 E164     	 str r1,[r4,#76]
+ 1091 0628 7340     	 eor r3,r6
+ 1092 062a 079E     	 ldr r6,[sp,#28]
+ 1093 062c 3340     	 and r3,r6
+ 1094 062e 049E     	 ldr r6,[sp,#16]
+ 1095 0630 7340     	 eor r3,r6
+ 1096 0632 C318     	 add r3,r0,r3
+ 1097 0634 0B20     	 mov r0,#11
+ 1098 0636 0626     	 mov r6,#6
+ 1099 0638 C741     	 ror r7,r7,r0
+ 1100 063a 0798     	 ldr r0,[sp,#28]
+ 1101 063c F041     	 ror r0,r0,r6
+ 1102 063e 4740     	 eor r7,r0
+ 1103 0640 0798     	 ldr r0,[sp,#28]
+ 1104 0642 1336     	 add r6,r6,#19
+ 1105 0644 F041     	 ror r0,r0,r6
+ 1106 0646 7840     	 eor r0,r7
+ 1107 0648 1B18     	 add r3,r3,r0
+ 1108              	.LVL41:
+ 1109 064a 9A18     	 add r2,r3,r2
+ 1110 064c 0892     	 str r2,[sp,#32]
+ 1111 064e 019F     	 ldr r7,[sp,#4]
+ 1112 0650 059A     	 ldr r2,[sp,#20]
+ 1113 0652 173E     	 sub r6,r6,#23
+ 1114 0654 1743     	 orr r7,r2
+ 1115 0656 009A     	 ldr r2,[sp]
+ 1116 0658 1740     	 and r7,r2
+ 1117 065a 019A     	 ldr r2,[sp,#4]
+ 1118 065c 0598     	 ldr r0,[sp,#20]
+ 1119 065e 0240     	 and r2,r0
+ 1120 0660 1743     	 orr r7,r2
+ 1121 0662 0D22     	 mov r2,#13
+ 1122 0664 D041     	 ror r0,r0,r2
+ 1123 0666 059A     	 ldr r2,[sp,#20]
+ 1124 0668 F241     	 ror r2,r2,r6
+ 1125 066a 5040     	 eor r0,r2
+ 1126 066c 059A     	 ldr r2,[sp,#20]
+ 1127 066e 1436     	 add r6,r6,#20
+ 1128 0670 F241     	 ror r2,r2,r6
+ 1129 0672 4240     	 eor r2,r0
+ 1130 0674 BA18     	 add r2,r7,r2
+ 1131 0676 D318     	 add r3,r2,r3
+ 1132              	.LVL42:
+ 1133 0678 0393     	 str r3,[sp,#12]
+ 1134              	.LVL43:
+ 1135 067a 626B     	 ldr r2,[r4,#52]
+ 1136 067c 2369     	 ldr r3,[r4,#16]
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[4], A[5], A[6], A[7], A[0], A[1], A[2], A[3], R(i+4), K[i+4] );
+ 1137              	 .loc 1 248 0 discriminator 3
+ 1138 067e 281C     	 mov r0,r5
+ 1139 0680 9B18     	 add r3,r3,r2
+ 1140 0682 1322     	 mov r2,#19
+ 1141 0684 D041     	 ror r0,r0,r2
+ 1142 0686 2A1C     	 mov r2,r5
+ 1143 0688 053E     	 sub r6,r6,#5
+ 1144 068a F241     	 ror r2,r2,r6
+ 1145 068c AD0A     	 lsr r5,r5,#10
+ 1146 068e 4240     	 eor r2,r0
+ 1147 0690 6A40     	 eor r2,r5
+ 1148 0692 9B18     	 add r3,r3,r2
+ 1149 0694 1222     	 mov r2,#18
+ 1150 0696 0725     	 mov r5,#7
+ 1151 0698 6069     	 ldr r0,[r4,#20]
+ 1152 069a 069F     	 ldr r7,[sp,#24]
+ 1153 069c D041     	 ror r0,r0,r2
+ 1154 069e 6269     	 ldr r2,[r4,#20]
+ 1155 06a0 0F3E     	 sub r6,r6,#15
+ 1156 06a2 EA41     	 ror r2,r2,r5
+ 1157 06a4 5040     	 eor r0,r2
+ 1158 06a6 6269     	 ldr r2,[r4,#20]
+ 1159 06a8 D208     	 lsr r2,r2,#3
+ 1160 06aa 5040     	 eor r0,r2
+ 1161 06ac 1818     	 add r0,r3,r0
+ 1162 06ae 029B     	 ldr r3,[sp,#8]
+ 1163 06b0 2065     	 str r0,[r4,#80]
+ 1164 06b2 1B6D     	 ldr r3,[r3,#80]
+ 1165 06b4 C518     	 add r5,r0,r3
+ 1166 06b6 049B     	 ldr r3,[sp,#16]
+ 1167 06b8 EA18     	 add r2,r5,r3
+ 1168 06ba 079B     	 ldr r3,[sp,#28]
+ 1169 06bc 5F40     	 eor r7,r3
+ 1170 06be 089B     	 ldr r3,[sp,#32]
+ 1171 06c0 1F40     	 and r7,r3
+ 1172 06c2 069B     	 ldr r3,[sp,#24]
+ 1173 06c4 5F40     	 eor r7,r3
+ 1174 06c6 0B23     	 mov r3,#11
+ 1175 06c8 D519     	 add r5,r2,r7
+ 1176 06ca 0622     	 mov r2,#6
+ 1177 06cc 089F     	 ldr r7,[sp,#32]
+ 1178 06ce DF41     	 ror r7,r7,r3
+ 1179 06d0 089B     	 ldr r3,[sp,#32]
+ 1180 06d2 D341     	 ror r3,r3,r2
+ 1181 06d4 5F40     	 eor r7,r3
+ 1182 06d6 089B     	 ldr r3,[sp,#32]
+ 1183 06d8 1332     	 add r2,r2,#19
+ 1184 06da D341     	 ror r3,r3,r2
+ 1185 06dc 5F40     	 eor r7,r3
+ 1186 06de 009B     	 ldr r3,[sp]
+ 1187 06e0 EF19     	 add r7,r5,r7
+ 1188              	.LVL44:
+ 1189 06e2 FB18     	 add r3,r7,r3
+ 1190 06e4 039A     	 ldr r2,[sp,#12]
+ 1191 06e6 0493     	 str r3,[sp,#16]
+ 1192 06e8 059B     	 ldr r3,[sp,#20]
+ 1193 06ea 039D     	 ldr r5,[sp,#12]
+ 1194 06ec 1343     	 orr r3,r2
+ 1195 06ee 019A     	 ldr r2,[sp,#4]
+ 1196 06f0 1340     	 and r3,r2
+ 1197 06f2 059A     	 ldr r2,[sp,#20]
+ 1198 06f4 2A40     	 and r2,r5
+ 1199 06f6 1343     	 orr r3,r2
+ 1200 06f8 0D22     	 mov r2,#13
+ 1201 06fa D541     	 ror r5,r5,r2
+ 1202 06fc 039A     	 ldr r2,[sp,#12]
+ 1203 06fe F241     	 ror r2,r2,r6
+ 1204 0700 6A40     	 eor r2,r5
+ 1205 0702 039D     	 ldr r5,[sp,#12]
+ 1206 0704 1436     	 add r6,r6,#20
+ 1207 0706 F541     	 ror r5,r5,r6
+ 1208 0708 5540     	 eor r5,r2
+ 1209 070a 5A19     	 add r2,r3,r5
+ 1210 070c D319     	 add r3,r2,r7
+ 1211 070e 0093     	 str r3,[sp]
+ 1212 0710 A26B     	 ldr r2,[r4,#56]
+ 1213 0712 6369     	 ldr r3,[r4,#20]
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[3], A[4], A[5], A[6], A[7], A[0], A[1], A[2], R(i+5), K[i+5] );
+ 1214              	 .loc 1 249 0 discriminator 3
+ 1215 0714 0D1C     	 mov r5,r1
+ 1216 0716 9B18     	 add r3,r3,r2
+ 1217 0718 1322     	 mov r2,#19
+ 1218 071a D541     	 ror r5,r5,r2
+ 1219 071c 0A1C     	 mov r2,r1
+ 1220 071e 053E     	 sub r6,r6,#5
+ 1221 0720 F241     	 ror r2,r2,r6
+ 1222 0722 890A     	 lsr r1,r1,#10
+ 1223 0724 6A40     	 eor r2,r5
+ 1224 0726 4A40     	 eor r2,r1
+ 1225 0728 9B18     	 add r3,r3,r2
+ 1226 072a 1222     	 mov r2,#18
+ 1227 072c 0725     	 mov r5,#7
+ 1228 072e A169     	 ldr r1,[r4,#24]
+ 1229 0730 049F     	 ldr r7,[sp,#16]
+ 1230              	.LVL45:
+ 1231 0732 D141     	 ror r1,r1,r2
+ 1232 0734 A269     	 ldr r2,[r4,#24]
+ 1233 0736 0F3E     	 sub r6,r6,#15
+ 1234 0738 EA41     	 ror r2,r2,r5
+ 1235 073a 4A40     	 eor r2,r1
+ 1236 073c A169     	 ldr r1,[r4,#24]
+ 1237 073e C908     	 lsr r1,r1,#3
+ 1238 0740 4A40     	 eor r2,r1
+ 1239 0742 9A18     	 add r2,r3,r2
+ 1240 0744 029B     	 ldr r3,[sp,#8]
+ 1241 0746 6265     	 str r2,[r4,#84]
+ 1242 0748 5B6D     	 ldr r3,[r3,#84]
+ 1243 074a D518     	 add r5,r2,r3
+ 1244 074c 069B     	 ldr r3,[sp,#24]
+ 1245 074e E918     	 add r1,r5,r3
+ 1246 0750 089D     	 ldr r5,[sp,#32]
+ 1247 0752 079B     	 ldr r3,[sp,#28]
+ 1248 0754 6B40     	 eor r3,r5
+ 1249 0756 049D     	 ldr r5,[sp,#16]
+ 1250 0758 2B40     	 and r3,r5
+ 1251 075a 079D     	 ldr r5,[sp,#28]
+ 1252 075c 6B40     	 eor r3,r5
+ 1253 075e CD18     	 add r5,r1,r3
+ 1254 0760 0B23     	 mov r3,#11
+ 1255 0762 0621     	 mov r1,#6
+ 1256 0764 DF41     	 ror r7,r7,r3
+ 1257 0766 049B     	 ldr r3,[sp,#16]
+ 1258 0768 CB41     	 ror r3,r3,r1
+ 1259 076a 7B40     	 eor r3,r7
+ 1260 076c 049F     	 ldr r7,[sp,#16]
+ 1261 076e 1331     	 add r1,r1,#19
+ 1262 0770 CF41     	 ror r7,r7,r1
+ 1263 0772 0199     	 ldr r1,[sp,#4]
+ 1264 0774 7B40     	 eor r3,r7
+ 1265 0776 EB18     	 add r3,r5,r3
+ 1266              	.LVL46:
+ 1267 0778 5918     	 add r1,r3,r1
+ 1268 077a 0691     	 str r1,[sp,#24]
+ 1269 077c 039F     	 ldr r7,[sp,#12]
+ 1270 077e 0099     	 ldr r1,[sp]
+ 1271 0780 009D     	 ldr r5,[sp]
+ 1272 0782 0F43     	 orr r7,r1
+ 1273 0784 0599     	 ldr r1,[sp,#20]
+ 1274 0786 0F40     	 and r7,r1
+ 1275 0788 0399     	 ldr r1,[sp,#12]
+ 1276 078a 2940     	 and r1,r5
+ 1277 078c 0F43     	 orr r7,r1
+ 1278 078e 0D21     	 mov r1,#13
+ 1279 0790 CD41     	 ror r5,r5,r1
+ 1280 0792 0099     	 ldr r1,[sp]
+ 1281 0794 F141     	 ror r1,r1,r6
+ 1282 0796 6940     	 eor r1,r5
+ 1283 0798 009D     	 ldr r5,[sp]
+ 1284 079a 1436     	 add r6,r6,#20
+ 1285 079c F541     	 ror r5,r5,r6
+ 1286 079e 4D40     	 eor r5,r1
+ 1287 07a0 7919     	 add r1,r7,r5
+ 1288 07a2 CB18     	 add r3,r1,r3
+ 1289              	.LVL47:
+ 1290 07a4 0193     	 str r3,[sp,#4]
+ 1291 07a6 E16B     	 ldr r1,[r4,#60]
+ 1292 07a8 A369     	 ldr r3,[r4,#24]
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[2], A[3], A[4], A[5], A[6], A[7], A[0], A[1], R(i+6), K[i+6] );
+ 1293              	 .loc 1 250 0 discriminator 3
+ 1294 07aa 051C     	 mov r5,r0
+ 1295 07ac 5B18     	 add r3,r3,r1
+ 1296 07ae 1321     	 mov r1,#19
+ 1297 07b0 CD41     	 ror r5,r5,r1
+ 1298 07b2 011C     	 mov r1,r0
+ 1299 07b4 053E     	 sub r6,r6,#5
+ 1300 07b6 F141     	 ror r1,r1,r6
+ 1301 07b8 800A     	 lsr r0,r0,#10
+ 1302 07ba 6940     	 eor r1,r5
+ 1303 07bc 4140     	 eor r1,r0
+ 1304 07be 5B18     	 add r3,r3,r1
+ 1305 07c0 1221     	 mov r1,#18
+ 1306 07c2 0725     	 mov r5,#7
+ 1307 07c4 E069     	 ldr r0,[r4,#28]
+ 1308 07c6 0F3E     	 sub r6,r6,#15
+ 1309 07c8 C841     	 ror r0,r0,r1
+ 1310 07ca E169     	 ldr r1,[r4,#28]
+ 1311 07cc E941     	 ror r1,r1,r5
+ 1312 07ce 4840     	 eor r0,r1
+ 1313 07d0 E169     	 ldr r1,[r4,#28]
+ 1314 07d2 C908     	 lsr r1,r1,#3
+ 1315 07d4 4840     	 eor r0,r1
+ 1316 07d6 1818     	 add r0,r3,r0
+ 1317 07d8 029B     	 ldr r3,[sp,#8]
+ 1318 07da 9B6D     	 ldr r3,[r3,#88]
+ 1319 07dc C718     	 add r7,r0,r3
+ 1320 07de 079B     	 ldr r3,[sp,#28]
+ 1321 07e0 FD18     	 add r5,r7,r3
+ 1322 07e2 089F     	 ldr r7,[sp,#32]
+ 1323 07e4 049B     	 ldr r3,[sp,#16]
+ 1324 07e6 A065     	 str r0,[r4,#88]
+ 1325 07e8 5F40     	 eor r7,r3
+ 1326 07ea 069B     	 ldr r3,[sp,#24]
+ 1327 07ec 0620     	 mov r0,#6
+ 1328 07ee 1F40     	 and r7,r3
+ 1329 07f0 089B     	 ldr r3,[sp,#32]
+ 1330 07f2 0699     	 ldr r1,[sp,#24]
+ 1331 07f4 5F40     	 eor r7,r3
+ 1332 07f6 0B23     	 mov r3,#11
+ 1333 07f8 D941     	 ror r1,r1,r3
+ 1334 07fa 069B     	 ldr r3,[sp,#24]
+ 1335 07fc EF19     	 add r7,r5,r7
+ 1336 07fe C341     	 ror r3,r3,r0
+ 1337 0800 4B40     	 eor r3,r1
+ 1338 0802 1921     	 mov r1,#25
+ 1339 0804 0698     	 ldr r0,[sp,#24]
+ 1340 0806 009D     	 ldr r5,[sp]
+ 1341 0808 C841     	 ror r0,r0,r1
+ 1342 080a 4340     	 eor r3,r0
+ 1343 080c F918     	 add r1,r7,r3
+ 1344              	.LVL48:
+ 1345 080e 059B     	 ldr r3,[sp,#20]
+ 1346 0810 0198     	 ldr r0,[sp,#4]
+ 1347 0812 CB18     	 add r3,r1,r3
+ 1348 0814 0593     	 str r3,[sp,#20]
+ 1349 0816 019B     	 ldr r3,[sp,#4]
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[0], R(i+7), K[i+7] );
+ 1350              	 .loc 1 251 0 discriminator 3
+ 1351 0818 171C     	 mov r7,r2
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[2], A[3], A[4], A[5], A[6], A[7], A[0], A[1], R(i+6), K[i+6] );
+ 1352              	 .loc 1 250 0 discriminator 3
+ 1353 081a 1D43     	 orr r5,r3
+ 1354 081c 039B     	 ldr r3,[sp,#12]
+ 1355 081e 1D40     	 and r5,r3
+ 1356 0820 009B     	 ldr r3,[sp]
+ 1357 0822 0340     	 and r3,r0
+ 1358 0824 1D43     	 orr r5,r3
+ 1359 0826 0D23     	 mov r3,#13
+ 1360 0828 D841     	 ror r0,r0,r3
+ 1361 082a 019B     	 ldr r3,[sp,#4]
+ 1362 082c F341     	 ror r3,r3,r6
+ 1363 082e 4340     	 eor r3,r0
+ 1364 0830 0198     	 ldr r0,[sp,#4]
+ 1365 0832 1436     	 add r6,r6,#20
+ 1366 0834 F041     	 ror r0,r0,r6
+ 1367 0836 5840     	 eor r0,r3
+ 1368 0838 2B18     	 add r3,r5,r0
+ 1369 083a E569     	 ldr r5,[r4,#28]
+ 1370              	 .loc 1 251 0 discriminator 3
+ 1371 083c 053E     	 sub r6,r6,#5
+ 1372 083e AC46     	 mov ip,r5
+ 1373 0840 1325     	 mov r5,#19
+ 1374 0842 EF41     	 ror r7,r7,r5
+ 1375 0844 151C     	 mov r5,r2
+ 1376 0846 F541     	 ror r5,r5,r6
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         P( A[2], A[3], A[4], A[5], A[6], A[7], A[0], A[1], R(i+6), K[i+6] );
+ 1377              	 .loc 1 250 0 discriminator 3
+ 1378 0848 5B18     	 add r3,r3,r1
+ 1379              	 .loc 1 251 0 discriminator 3
+ 1380 084a 216A     	 ldr r1,[r4,#32]
+ 1381              	.LVL49:
+ 1382 084c 7D40     	 eor r5,r7
+ 1383 084e 920A     	 lsr r2,r2,#10
+ 1384 0850 5540     	 eor r5,r2
+ 1385 0852 0F1C     	 mov r7,r1
+ 1386 0854 1222     	 mov r2,#18
+ 1387 0856 0998     	 ldr r0,[sp,#36]
+ 1388 0858 D741     	 ror r7,r7,r2
+ 1389 085a 6044     	 add r0,r0,ip
+ 1390 085c 4019     	 add r0,r0,r5
+ 1391 085e 0A1C     	 mov r2,r1
+ 1392 0860 0725     	 mov r5,#7
+ 1393 0862 EA41     	 ror r2,r2,r5
+ 1394 0864 C908     	 lsr r1,r1,#3
+ 1395 0866 7A40     	 eor r2,r7
+ 1396 0868 4A40     	 eor r2,r1
+ 1397 086a 8018     	 add r0,r0,r2
+ 1398 086c 029A     	 ldr r2,[sp,#8]
+ 1399 086e 0499     	 ldr r1,[sp,#16]
+ 1400 0870 D26D     	 ldr r2,[r2,#92]
+ 1401 0872 E065     	 str r0,[r4,#92]
+ 1402 0874 8518     	 add r5,r0,r2
+ 1403 0876 089A     	 ldr r2,[sp,#32]
+ 1404 0878 0620     	 mov r0,#6
+ 1405              	.LVL50:
+ 1406 087a AF18     	 add r7,r5,r2
+ 1407 087c 069A     	 ldr r2,[sp,#24]
+ 1408 087e 0F3E     	 sub r6,r6,#15
+ 1409 0880 5140     	 eor r1,r2
+ 1410 0882 059A     	 ldr r2,[sp,#20]
+ 1411 0884 2034     	 add r4,r4,#32
+ 1412              	.LVL51:
+ 1413 0886 1140     	 and r1,r2
+ 1414 0888 049A     	 ldr r2,[sp,#16]
+ 1415 088a 5140     	 eor r1,r2
+ 1416 088c 0B22     	 mov r2,#11
+ 1417              	.LVL52:
+ 1418 088e 7D18     	 add r5,r7,r1
+ 1419 0890 0599     	 ldr r1,[sp,#20]
+ 1420 0892 D141     	 ror r1,r1,r2
+ 1421 0894 059A     	 ldr r2,[sp,#20]
+ 1422              	.LVL53:
+ 1423 0896 C241     	 ror r2,r2,r0
+ 1424 0898 4A40     	 eor r2,r1
+ 1425 089a 1921     	 mov r1,#25
+ 1426              	.LVL54:
+ 1427 089c 0598     	 ldr r0,[sp,#20]
+ 1428              	.LVL55:
+ 1429 089e C841     	 ror r0,r0,r1
+ 1430 08a0 4240     	 eor r2,r0
+ 1431 08a2 A918     	 add r1,r5,r2
+ 1432              	.LVL56:
+ 1433 08a4 039A     	 ldr r2,[sp,#12]
+ 1434 08a6 019D     	 ldr r5,[sp,#4]
+ 1435 08a8 8A18     	 add r2,r1,r2
+ 1436 08aa 0392     	 str r2,[sp,#12]
+ 1437 08ac 009A     	 ldr r2,[sp]
+ 1438 08ae 1D43     	 orr r5,r3
+ 1439 08b0 1540     	 and r5,r2
+ 1440 08b2 019A     	 ldr r2,[sp,#4]
+ 1441 08b4 181C     	 mov r0,r3
+ 1442 08b6 1A40     	 and r2,r3
+ 1443 08b8 1543     	 orr r5,r2
+ 1444 08ba 0D22     	 mov r2,#13
+ 1445 08bc D041     	 ror r0,r0,r2
+ 1446 08be 1A1C     	 mov r2,r3
+ 1447 08c0 F241     	 ror r2,r2,r6
+ 1448 08c2 4240     	 eor r2,r0
+ 1449 08c4 181C     	 mov r0,r3
+ 1450 08c6 1436     	 add r6,r6,#20
+ 1451 08c8 F041     	 ror r0,r0,r6
+ 1452 08ca 5040     	 eor r0,r2
+ 1453 08cc 2A18     	 add r2,r5,r0
+ 1454 08ce 5218     	 add r2,r2,r1
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 1455              	 .loc 1 242 0 discriminator 3
+ 1456 08d0 0A99     	 ldr r1,[sp,#40]
+ 1457              	.LVL57:
+ 1458 08d2 0831     	 add r1,r1,#8
+ 1459 08d4 0A91     	 str r1,[sp,#40]
+ 1460              	.LVL58:
+ 1461 08d6 0299     	 ldr r1,[sp,#8]
+ 1462              	.LVL59:
+ 1463 08d8 2031     	 add r1,r1,#32
+ 1464 08da 0291     	 str r1,[sp,#8]
+ 1465 08dc 0A99     	 ldr r1,[sp,#40]
+ 1466 08de 4029     	 cmp r1,#64
+ 1467 08e0 00D0     	 beq .LCB1466
+ 1468 08e2 8DE5     	 b .L20
+ 1469              	.LCB1466:
+ 1470 08e4 0D93     	 str r3,[sp,#52]
+ 1471 08e6 019B     	 ldr r3,[sp,#4]
+ 1472              	.LVL60:
+ 1473 08e8 0499     	 ldr r1,[sp,#16]
+ 1474 08ea 0E93     	 str r3,[sp,#56]
+ 1475 08ec 009B     	 ldr r3,[sp]
+ 1476 08ee 1391     	 str r1,[sp,#76]
+ 1477 08f0 0F93     	 str r3,[sp,#60]
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 1478              	 .loc 1 242 0 is_stmt 0
+ 1479 08f2 0023     	 mov r3,#0
+ 1480 08f4 0399     	 ldr r1,[sp,#12]
+ 1481 08f6 0C92     	 str r2,[sp,#48]
+ 1482 08f8 1091     	 str r1,[sp,#64]
+ 1483 08fa 0599     	 ldr r1,[sp,#20]
+ 1484 08fc 1191     	 str r1,[sp,#68]
+ 1485 08fe 0699     	 ldr r1,[sp,#24]
+ 1486 0900 1291     	 str r1,[sp,#72]
+ 1487              	.LVL61:
+ 1488              	.L21:
+ 1489 0902 0B9A     	 ldr r2,[sp,#44]
+ 1490 0904 D118     	 add r1,r2,r3
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif /* MBEDTLS_SHA256_SMALLER */
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     for( i = 0; i < 8; i++ )
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[i] += A[i];
+ 1491              	 .loc 1 256 0 is_stmt 1 discriminator 3
+ 1492 0906 8868     	 ldr r0,[r1,#8]
+ 1493 0908 0CAA     	 add r2,sp,#48
+ 1494 090a 8446     	 mov ip,r0
+ 1495 090c D258     	 ldr r2,[r2,r3]
+ 1496 090e 0433     	 add r3,r3,#4
+ 1497 0910 0092     	 str r2,[sp]
+ 1498 0912 6244     	 add r2,r2,ip
+ 1499 0914 8A60     	 str r2,[r1,#8]
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->state[i] += A[i];
+ 1500              	 .loc 1 255 0 discriminator 3
+ 1501 0916 202B     	 cmp r3,#32
+ 1502 0918 F3D1     	 bne .L21
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     return( 0 );
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1503              	 .loc 1 259 0
+ 1504 091a 0020     	 mov r0,#0
+ 1505 091c 55B0     	 add sp,sp,#340
+ 1506              	 
+ 1507              	.LVL62:
+ 1508 091e F0BD     	 pop {r4,r5,r6,r7,pc}
+ 1509              	 .cfi_endproc
+ 1510              	.LFE5:
+ 1512              	 .section .text.mbedtls_sha256_process,"ax",%progbits
+ 1513              	 .align 1
+ 1514              	 .global mbedtls_sha256_process
+ 1515              	 .code 16
+ 1516              	 .thumb_func
+ 1518              	mbedtls_sha256_process:
+ 1519              	.LFB6:
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_DEPRECATED_REMOVED)
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_process( mbedtls_sha256_context *ctx,
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                              const unsigned char data[64] )
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1520              	 .loc 1 264 0
+ 1521              	 .cfi_startproc
+ 1522              	.LVL63:
+ 1523 0000 08B5     	 push {r3,lr}
+ 1524              	.LCFI6:
+ 1525              	 .cfi_def_cfa_offset 8
+ 1526              	 .cfi_offset 3,-8
+ 1527              	 .cfi_offset 14,-4
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_internal_sha256_process( ctx, data );
+ 1528              	 .loc 1 265 0
+ 1529 0002 FFF7FEFF 	 bl mbedtls_internal_sha256_process
+ 1530              	.LVL64:
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1531              	 .loc 1 266 0
+ 1532              	 
+ 1533 0006 08BD     	 pop {r3,pc}
+ 1534              	 .cfi_endproc
+ 1535              	.LFE6:
+ 1537              	 .section .text.mbedtls_sha256_update_ret,"ax",%progbits
+ 1538              	 .align 1
+ 1539              	 .global mbedtls_sha256_update_ret
+ 1540              	 .code 16
+ 1541              	 .thumb_func
+ 1543              	mbedtls_sha256_update_ret:
+ 1544              	.LFB7:
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif /* !MBEDTLS_SHA256_PROCESS_ALT */
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  * SHA-256 process buffer
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** int mbedtls_sha256_update_ret( mbedtls_sha256_context *ctx,
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                                const unsigned char *input,
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                                size_t ilen )
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1545              	 .loc 1 276 0
+ 1546              	 .cfi_startproc
+ 1547              	.LVL65:
+ 1548 0000 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 1549              	.LCFI7:
+ 1550              	 .cfi_def_cfa_offset 32
+ 1551              	 .cfi_offset 0,-32
+ 1552              	 .cfi_offset 1,-28
+ 1553              	 .cfi_offset 2,-24
+ 1554              	 .cfi_offset 4,-20
+ 1555              	 .cfi_offset 5,-16
+ 1556              	 .cfi_offset 6,-12
+ 1557              	 .cfi_offset 7,-8
+ 1558              	 .cfi_offset 14,-4
+ 1559              	 .loc 1 276 0
+ 1560 0002 041C     	 mov r4,r0
+ 1561 0004 0191     	 str r1,[sp,#4]
+ 1562 0006 151E     	 sub r5,r2,#0
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     size_t fill;
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     uint32_t left;
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ctx != NULL );
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ilen == 0 || input != NULL );
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ilen == 0 )
+ 1563              	 .loc 1 284 0
+ 1564 0008 38D0     	 beq .L42
+ 1565              	.LVL66:
+ 1566              	.LBB4:
+ 1567              	.LBB5:
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         return( 0 );
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     left = ctx->total[0] & 0x3F;
+ 1568              	 .loc 1 287 0
+ 1569 000a 0368     	 ldr r3,[r0]
+ 1570 000c 3F20     	 mov r0,#63
+ 1571              	.LVL67:
+ 1572 000e 1840     	 and r0,r3
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     fill = 64 - left;
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->total[0] += (uint32_t) ilen;
+ 1573              	 .loc 1 290 0
+ 1574 0010 D318     	 add r3,r2,r3
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     fill = 64 - left;
+ 1575              	 .loc 1 287 0
+ 1576 0012 071C     	 mov r7,r0
+ 1577              	.LVL68:
+ 1578              	 .loc 1 290 0
+ 1579 0014 2360     	 str r3,[r4]
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->total[0] &= 0xFFFFFFFF;
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ctx->total[0] < (uint32_t) ilen )
+ 1580              	 .loc 1 293 0
+ 1581 0016 9342     	 cmp r3,r2
+ 1582 0018 02D2     	 bcs .L29
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ctx->total[1]++;
+ 1583              	 .loc 1 294 0
+ 1584 001a 6368     	 ldr r3,[r4,#4]
+ 1585 001c 0133     	 add r3,r3,#1
+ 1586 001e 6360     	 str r3,[r4,#4]
+ 1587              	.L29:
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( left && ilen >= fill )
+ 1588              	 .loc 1 296 0
+ 1589 0020 002F     	 cmp r7,#0
+ 1590 0022 16D0     	 beq .L30
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 1591              	 .loc 1 288 0
+ 1592 0024 4026     	 mov r6,#64
+ 1593 0026 F61B     	 sub r6,r6,r7
+ 1594              	 .loc 1 296 0
+ 1595 0028 B542     	 cmp r5,r6
+ 1596 002a 12D3     	 bcc .L30
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         memcpy( (void *) (ctx->buffer + left), input, fill );
+ 1597              	 .loc 1 298 0
+ 1598 002c 381C     	 mov r0,r7
+ 1599              	.LVL69:
+ 1600 002e 2830     	 add r0,r0,#40
+ 1601 0030 0199     	 ldr r1,[sp,#4]
+ 1602              	.LVL70:
+ 1603 0032 321C     	 mov r2,r6
+ 1604              	.LVL71:
+ 1605 0034 2018     	 add r0,r4,r0
+ 1606 0036 FFF7FEFF 	 bl memcpy
+ 1607              	.LVL72:
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         if( ( ret = mbedtls_internal_sha256_process( ctx, ctx->buffer ) ) != 0 )
+ 1608              	 .loc 1 300 0
+ 1609 003a 211C     	 mov r1,r4
+ 1610 003c 201C     	 mov r0,r4
+ 1611 003e 2831     	 add r1,r1,#40
+ 1612 0040 FFF7FEFF 	 bl mbedtls_internal_sha256_process
+ 1613              	.LVL73:
+ 1614 0044 031E     	 sub r3,r0,#0
+ 1615              	.LVL74:
+ 1616 0046 1AD1     	 bne .L28
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****             return( ret );
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         input += fill;
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ilen  -= fill;
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         left = 0;
+ 1617              	 .loc 1 305 0
+ 1618 0048 1F1C     	 mov r7,r3
+ 1619              	.LVL75:
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ilen  -= fill;
+ 1620              	 .loc 1 303 0
+ 1621 004a 019A     	 ldr r2,[sp,#4]
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         left = 0;
+ 1622              	 .loc 1 304 0
+ 1623 004c AD1B     	 sub r5,r5,r6
+ 1624              	.LVL76:
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ilen  -= fill;
+ 1625              	 .loc 1 303 0
+ 1626 004e 9219     	 add r2,r2,r6
+ 1627 0050 0192     	 str r2,[sp,#4]
+ 1628              	.LVL77:
+ 1629              	.L30:
+ 1630              	 .loc 1 305 0
+ 1631 0052 2E1C     	 mov r6,r5
+ 1632              	.LVL78:
+ 1633              	.L31:
+ 1634 0054 019B     	 ldr r3,[sp,#4]
+ 1635 0056 A91B     	 sub r1,r5,r6
+ 1636 0058 5918     	 add r1,r3,r1
+ 1637              	.LVL79:
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     while( ilen >= 64 )
+ 1638              	 .loc 1 308 0
+ 1639 005a 3F2E     	 cmp r6,#63
+ 1640 005c 06D9     	 bls .L43
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         if( ( ret = mbedtls_internal_sha256_process( ctx, input ) ) != 0 )
+ 1641              	 .loc 1 310 0
+ 1642 005e 201C     	 mov r0,r4
+ 1643 0060 FFF7FEFF 	 bl mbedtls_internal_sha256_process
+ 1644              	.LVL80:
+ 1645 0064 0028     	 cmp r0,#0
+ 1646 0066 0AD1     	 bne .L28
+ 1647              	.LVL81:
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****             return( ret );
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         input += 64;
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         ilen  -= 64;
+ 1648              	 .loc 1 314 0
+ 1649 0068 403E     	 sub r6,r6,#64
+ 1650              	.LVL82:
+ 1651 006a F3E7     	 b .L31
+ 1652              	.LVL83:
+ 1653              	.L43:
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ilen > 0 )
+ 1654              	 .loc 1 317 0
+ 1655 006c 002E     	 cmp r6,#0
+ 1656 006e 05D0     	 beq .L42
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         memcpy( (void *) (ctx->buffer + left), input, ilen );
+ 1657              	 .loc 1 318 0
+ 1658 0070 381C     	 mov r0,r7
+ 1659 0072 2830     	 add r0,r0,#40
+ 1660 0074 2018     	 add r0,r4,r0
+ 1661 0076 321C     	 mov r2,r6
+ 1662 0078 FFF7FEFF 	 bl memcpy
+ 1663              	.LVL84:
+ 1664              	.L42:
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     return( 0 );
+ 1665              	 .loc 1 320 0
+ 1666 007c 0020     	 mov r0,#0
+ 1667              	.L28:
+ 1668              	.LBE5:
+ 1669              	.LBE4:
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1670              	 .loc 1 321 0
+ 1671              	 
+ 1672              	.LVL85:
+ 1673 007e FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 1674              	 .cfi_endproc
+ 1675              	.LFE7:
+ 1677              	 .section .text.mbedtls_sha256_update,"ax",%progbits
+ 1678              	 .align 1
+ 1679              	 .global mbedtls_sha256_update
+ 1680              	 .code 16
+ 1681              	 .thumb_func
+ 1683              	mbedtls_sha256_update:
+ 1684              	.LFB8:
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_DEPRECATED_REMOVED)
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_update( mbedtls_sha256_context *ctx,
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                             const unsigned char *input,
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                             size_t ilen )
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1685              	 .loc 1 327 0
+ 1686              	 .cfi_startproc
+ 1687              	.LVL86:
+ 1688 0000 08B5     	 push {r3,lr}
+ 1689              	.LCFI8:
+ 1690              	 .cfi_def_cfa_offset 8
+ 1691              	 .cfi_offset 3,-8
+ 1692              	 .cfi_offset 14,-4
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_update_ret( ctx, input, ilen );
+ 1693              	 .loc 1 328 0
+ 1694 0002 FFF7FEFF 	 bl mbedtls_sha256_update_ret
+ 1695              	.LVL87:
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1696              	 .loc 1 329 0
+ 1697              	 
+ 1698 0006 08BD     	 pop {r3,pc}
+ 1699              	 .cfi_endproc
+ 1700              	.LFE8:
+ 1702              	 .section .text.mbedtls_sha256_finish_ret,"ax",%progbits
+ 1703              	 .align 1
+ 1704              	 .global mbedtls_sha256_finish_ret
+ 1705              	 .code 16
+ 1706              	 .thumb_func
+ 1708              	mbedtls_sha256_finish_ret:
+ 1709              	.LFB9:
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  * SHA-256 final digest
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** int mbedtls_sha256_finish_ret( mbedtls_sha256_context *ctx,
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                                unsigned char output[32] )
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1710              	 .loc 1 337 0
+ 1711              	 .cfi_startproc
+ 1712              	.LVL88:
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     uint32_t used;
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     uint32_t high, low;
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ctx != NULL );
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( (unsigned char *)output != NULL );
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     /*
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      * Add padding: 0x80 then 0x00 until 8 bytes remain for the length
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      */
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     used = ctx->total[0] & 0x3F;
+ 1713              	 .loc 1 348 0
+ 1714 0000 3F22     	 mov r2,#63
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 1715              	 .loc 1 337 0
+ 1716 0002 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 1717              	.LCFI9:
+ 1718              	 .cfi_def_cfa_offset 24
+ 1719              	 .cfi_offset 3,-24
+ 1720              	 .cfi_offset 4,-20
+ 1721              	 .cfi_offset 5,-16
+ 1722              	 .cfi_offset 6,-12
+ 1723              	 .cfi_offset 7,-8
+ 1724              	 .cfi_offset 14,-4
+ 1725              	 .loc 1 348 0
+ 1726 0004 0368     	 ldr r3,[r0]
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 1727              	 .loc 1 337 0
+ 1728 0006 041C     	 mov r4,r0
+ 1729              	 .loc 1 348 0
+ 1730 0008 1340     	 and r3,r2
+ 1731              	.LVL89:
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 1732              	 .loc 1 337 0
+ 1733 000a 0D1C     	 mov r5,r1
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     ctx->buffer[used++] = 0x80;
+ 1734              	 .loc 1 350 0
+ 1735 000c C118     	 add r1,r0,r3
+ 1736              	.LVL90:
+ 1737 000e 8020     	 mov r0,#128
+ 1738              	.LVL91:
+ 1739 0010 2831     	 add r1,r1,#40
+ 1740 0012 0870     	 strb r0,[r1]
+ 1741 0014 261C     	 mov r6,r4
+ 1742 0016 181C     	 mov r0,r3
+ 1743 0018 5F1C     	 add r7,r3,#1
+ 1744              	.LVL92:
+ 1745 001a 2930     	 add r0,r0,#41
+ 1746 001c 2836     	 add r6,r6,#40
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( used <= 56 )
+ 1747              	 .loc 1 352 0
+ 1748 001e 382F     	 cmp r7,#56
+ 1749 0020 04D8     	 bhi .L46
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         /* Enough room for padding + length in current block */
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         memset( ctx->buffer + used, 0, 56 - used );
+ 1750              	 .loc 1 355 0
+ 1751 0022 083A     	 sub r2,r2,#8
+ 1752 0024 D21A     	 sub r2,r2,r3
+ 1753 0026 2018     	 add r0,r4,r0
+ 1754 0028 0021     	 mov r1,#0
+ 1755 002a 0CE0     	 b .L52
+ 1756              	.L46:
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     else
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     {
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         /* We'll need an extra block */
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         memset( ctx->buffer + used, 0, 64 - used );
+ 1757              	 .loc 1 360 0
+ 1758 002c D21A     	 sub r2,r2,r3
+ 1759 002e 0021     	 mov r1,#0
+ 1760 0030 2018     	 add r0,r4,r0
+ 1761 0032 FFF7FEFF 	 bl memset
+ 1762              	.LVL93:
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         if( ( ret = mbedtls_internal_sha256_process( ctx, ctx->buffer ) ) != 0 )
+ 1763              	 .loc 1 362 0
+ 1764 0036 311C     	 mov r1,r6
+ 1765 0038 201C     	 mov r0,r4
+ 1766 003a FFF7FEFF 	 bl mbedtls_internal_sha256_process
+ 1767              	.LVL94:
+ 1768 003e 011E     	 sub r1,r0,#0
+ 1769              	.LVL95:
+ 1770 0040 7ED1     	 bne .L48
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****             return( ret );
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         memset( ctx->buffer, 0, 56 );
+ 1771              	 .loc 1 365 0
+ 1772 0042 301C     	 mov r0,r6
+ 1773              	.LVL96:
+ 1774 0044 3822     	 mov r2,#56
+ 1775              	.LVL97:
+ 1776              	.L52:
+ 1777 0046 FFF7FEFF 	 bl memset
+ 1778              	.LVL98:
+ 1779              	.LBB8:
+ 1780              	.LBB9:
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     }
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     /*
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      * Add message length
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      */
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     high = ( ctx->total[0] >> 29 )
+ 1781              	 .loc 1 371 0
+ 1782 004a 2368     	 ldr r3,[r4]
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****          | ( ctx->total[1] <<  3 );
+ 1783              	 .loc 1 372 0
+ 1784 004c 6268     	 ldr r2,[r4,#4]
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****          | ( ctx->total[1] <<  3 );
+ 1785              	 .loc 1 371 0
+ 1786 004e 590F     	 lsr r1,r3,#29
+ 1787              	 .loc 1 372 0
+ 1788 0050 D200     	 lsl r2,r2,#3
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****          | ( ctx->total[1] <<  3 );
+ 1789              	 .loc 1 371 0
+ 1790 0052 0A43     	 orr r2,r1
+ 1791              	.LVL99:
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     low  = ( ctx->total[0] <<  3 );
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( high, ctx->buffer, 56 );
+ 1792              	 .loc 1 375 0
+ 1793 0054 211C     	 mov r1,r4
+ 1794 0056 100E     	 lsr r0,r2,#24
+ 1795 0058 6031     	 add r1,r1,#96
+ 1796 005a 0870     	 strb r0,[r1]
+ 1797 005c 100C     	 lsr r0,r2,#16
+ 1798 005e 4870     	 strb r0,[r1,#1]
+ 1799 0060 CA70     	 strb r2,[r1,#3]
+ 1800 0062 100A     	 lsr r0,r2,#8
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( low,  ctx->buffer, 60 );
+ 1801              	 .loc 1 376 0
+ 1802 0064 221C     	 mov r2,r4
+ 1803              	.LVL100:
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     low  = ( ctx->total[0] <<  3 );
+ 1804              	 .loc 1 373 0
+ 1805 0066 DB00     	 lsl r3,r3,#3
+ 1806              	.LVL101:
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( low,  ctx->buffer, 60 );
+ 1807              	 .loc 1 375 0
+ 1808 0068 8870     	 strb r0,[r1,#2]
+ 1809              	 .loc 1 376 0
+ 1810 006a 6432     	 add r2,r2,#100
+ 1811 006c 190E     	 lsr r1,r3,#24
+ 1812 006e 1170     	 strb r1,[r2]
+ 1813 0070 190C     	 lsr r1,r3,#16
+ 1814 0072 5170     	 strb r1,[r2,#1]
+ 1815 0074 190A     	 lsr r1,r3,#8
+ 1816 0076 9170     	 strb r1,[r2,#2]
+ 1817 0078 D370     	 strb r3,[r2,#3]
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ( ret = mbedtls_internal_sha256_process( ctx, ctx->buffer ) ) != 0 )
+ 1818              	 .loc 1 378 0
+ 1819 007a 201C     	 mov r0,r4
+ 1820 007c 311C     	 mov r1,r6
+ 1821 007e FFF7FEFF 	 bl mbedtls_internal_sha256_process
+ 1822              	.LVL102:
+ 1823 0082 021E     	 sub r2,r0,#0
+ 1824 0084 5CD1     	 bne .L48
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         return( ret );
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     /*
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      * Output final state
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****      */
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[0], output,  0 );
+ 1825              	 .loc 1 384 0
+ 1826 0086 A368     	 ldr r3,[r4,#8]
+ 1827 0088 1B0E     	 lsr r3,r3,#24
+ 1828 008a 2B70     	 strb r3,[r5]
+ 1829 008c A368     	 ldr r3,[r4,#8]
+ 1830 008e 1B0C     	 lsr r3,r3,#16
+ 1831 0090 6B70     	 strb r3,[r5,#1]
+ 1832 0092 A368     	 ldr r3,[r4,#8]
+ 1833 0094 1B0A     	 lsr r3,r3,#8
+ 1834 0096 AB70     	 strb r3,[r5,#2]
+ 1835 0098 237A     	 ldrb r3,[r4,#8]
+ 1836 009a EB70     	 strb r3,[r5,#3]
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[1], output,  4 );
+ 1837              	 .loc 1 385 0
+ 1838 009c E368     	 ldr r3,[r4,#12]
+ 1839 009e 1B0E     	 lsr r3,r3,#24
+ 1840 00a0 2B71     	 strb r3,[r5,#4]
+ 1841 00a2 E368     	 ldr r3,[r4,#12]
+ 1842 00a4 1B0C     	 lsr r3,r3,#16
+ 1843 00a6 6B71     	 strb r3,[r5,#5]
+ 1844 00a8 E368     	 ldr r3,[r4,#12]
+ 1845 00aa 1B0A     	 lsr r3,r3,#8
+ 1846 00ac AB71     	 strb r3,[r5,#6]
+ 1847 00ae 237B     	 ldrb r3,[r4,#12]
+ 1848 00b0 EB71     	 strb r3,[r5,#7]
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[2], output,  8 );
+ 1849              	 .loc 1 386 0
+ 1850 00b2 2369     	 ldr r3,[r4,#16]
+ 1851 00b4 1B0E     	 lsr r3,r3,#24
+ 1852 00b6 2B72     	 strb r3,[r5,#8]
+ 1853 00b8 2369     	 ldr r3,[r4,#16]
+ 1854 00ba 1B0C     	 lsr r3,r3,#16
+ 1855 00bc 6B72     	 strb r3,[r5,#9]
+ 1856 00be 2369     	 ldr r3,[r4,#16]
+ 1857 00c0 1B0A     	 lsr r3,r3,#8
+ 1858 00c2 AB72     	 strb r3,[r5,#10]
+ 1859 00c4 237C     	 ldrb r3,[r4,#16]
+ 1860 00c6 EB72     	 strb r3,[r5,#11]
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[3], output, 12 );
+ 1861              	 .loc 1 387 0
+ 1862 00c8 6369     	 ldr r3,[r4,#20]
+ 1863 00ca 1B0E     	 lsr r3,r3,#24
+ 1864 00cc 2B73     	 strb r3,[r5,#12]
+ 1865 00ce 6369     	 ldr r3,[r4,#20]
+ 1866 00d0 1B0C     	 lsr r3,r3,#16
+ 1867 00d2 6B73     	 strb r3,[r5,#13]
+ 1868 00d4 6369     	 ldr r3,[r4,#20]
+ 1869 00d6 1B0A     	 lsr r3,r3,#8
+ 1870 00d8 AB73     	 strb r3,[r5,#14]
+ 1871 00da 237D     	 ldrb r3,[r4,#20]
+ 1872 00dc EB73     	 strb r3,[r5,#15]
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[4], output, 16 );
+ 1873              	 .loc 1 388 0
+ 1874 00de A369     	 ldr r3,[r4,#24]
+ 1875 00e0 1B0E     	 lsr r3,r3,#24
+ 1876 00e2 2B74     	 strb r3,[r5,#16]
+ 1877 00e4 A369     	 ldr r3,[r4,#24]
+ 1878 00e6 1B0C     	 lsr r3,r3,#16
+ 1879 00e8 6B74     	 strb r3,[r5,#17]
+ 1880 00ea A369     	 ldr r3,[r4,#24]
+ 1881 00ec 1B0A     	 lsr r3,r3,#8
+ 1882 00ee AB74     	 strb r3,[r5,#18]
+ 1883 00f0 237E     	 ldrb r3,[r4,#24]
+ 1884 00f2 EB74     	 strb r3,[r5,#19]
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[5], output, 20 );
+ 1885              	 .loc 1 389 0
+ 1886 00f4 E369     	 ldr r3,[r4,#28]
+ 1887 00f6 1B0E     	 lsr r3,r3,#24
+ 1888 00f8 2B75     	 strb r3,[r5,#20]
+ 1889 00fa E369     	 ldr r3,[r4,#28]
+ 1890 00fc 1B0C     	 lsr r3,r3,#16
+ 1891 00fe 6B75     	 strb r3,[r5,#21]
+ 1892 0100 E369     	 ldr r3,[r4,#28]
+ 1893 0102 1B0A     	 lsr r3,r3,#8
+ 1894 0104 AB75     	 strb r3,[r5,#22]
+ 1895 0106 237F     	 ldrb r3,[r4,#28]
+ 1896 0108 EB75     	 strb r3,[r5,#23]
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     PUT_UINT32_BE( ctx->state[6], output, 24 );
+ 1897              	 .loc 1 390 0
+ 1898 010a 236A     	 ldr r3,[r4,#32]
+ 1899 010c 1B0E     	 lsr r3,r3,#24
+ 1900 010e 2B76     	 strb r3,[r5,#24]
+ 1901 0110 236A     	 ldr r3,[r4,#32]
+ 1902 0112 1B0C     	 lsr r3,r3,#16
+ 1903 0114 6B76     	 strb r3,[r5,#25]
+ 1904 0116 236A     	 ldr r3,[r4,#32]
+ 1905 0118 1B0A     	 lsr r3,r3,#8
+ 1906 011a AB76     	 strb r3,[r5,#26]
+ 1907 011c 236A     	 ldr r3,[r4,#32]
+ 1908 011e EB76     	 strb r3,[r5,#27]
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ctx->is224 == 0 )
+ 1909              	 .loc 1 392 0
+ 1910 0120 A06E     	 ldr r0,[r4,#104]
+ 1911 0122 0028     	 cmp r0,#0
+ 1912 0124 0BD1     	 bne .L51
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         PUT_UINT32_BE( ctx->state[7], output, 28 );
+ 1913              	 .loc 1 393 0
+ 1914 0126 636A     	 ldr r3,[r4,#36]
+ 1915 0128 1B0E     	 lsr r3,r3,#24
+ 1916 012a 2B77     	 strb r3,[r5,#28]
+ 1917 012c 636A     	 ldr r3,[r4,#36]
+ 1918 012e 1B0C     	 lsr r3,r3,#16
+ 1919 0130 6B77     	 strb r3,[r5,#29]
+ 1920 0132 636A     	 ldr r3,[r4,#36]
+ 1921 0134 1B0A     	 lsr r3,r3,#8
+ 1922 0136 AB77     	 strb r3,[r5,#30]
+ 1923 0138 636A     	 ldr r3,[r4,#36]
+ 1924 013a EB77     	 strb r3,[r5,#31]
+ 1925 013c 00E0     	 b .L48
+ 1926              	.L51:
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     return( 0 );
+ 1927              	 .loc 1 395 0
+ 1928 013e 101C     	 mov r0,r2
+ 1929              	.LVL103:
+ 1930              	.L48:
+ 1931              	.LBE9:
+ 1932              	.LBE8:
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1933              	 .loc 1 396 0
+ 1934              	 
+ 1935              	.LVL104:
+ 1936              	.LVL105:
+ 1937              	.LVL106:
+ 1938              	.LVL107:
+ 1939 0140 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 1940              	 .cfi_endproc
+ 1941              	.LFE9:
+ 1943              	 .section .text.mbedtls_sha256_finish,"ax",%progbits
+ 1944              	 .align 1
+ 1945              	 .global mbedtls_sha256_finish
+ 1946              	 .code 16
+ 1947              	 .thumb_func
+ 1949              	mbedtls_sha256_finish:
+ 1950              	.LFB10:
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_DEPRECATED_REMOVED)
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256_finish( mbedtls_sha256_context *ctx,
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                             unsigned char output[32] )
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1951              	 .loc 1 401 0
+ 1952              	 .cfi_startproc
+ 1953              	.LVL108:
+ 1954 0000 08B5     	 push {r3,lr}
+ 1955              	.LCFI10:
+ 1956              	 .cfi_def_cfa_offset 8
+ 1957              	 .cfi_offset 3,-8
+ 1958              	 .cfi_offset 14,-4
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_finish_ret( ctx, output );
+ 1959              	 .loc 1 402 0
+ 1960 0002 FFF7FEFF 	 bl mbedtls_sha256_finish_ret
+ 1961              	.LVL109:
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 1962              	 .loc 1 403 0
+ 1963              	 
+ 1964 0006 08BD     	 pop {r3,pc}
+ 1965              	 .cfi_endproc
+ 1966              	.LFE10:
+ 1968              	 .section .text.mbedtls_sha256_ret,"ax",%progbits
+ 1969              	 .align 1
+ 1970              	 .global mbedtls_sha256_ret
+ 1971              	 .code 16
+ 1972              	 .thumb_func
+ 1974              	mbedtls_sha256_ret:
+ 1975              	.LFB11:
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #endif /* !MBEDTLS_SHA256_ALT */
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** /*
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  * output = SHA-256( input buffer )
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****  */
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** int mbedtls_sha256_ret( const unsigned char *input,
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                         size_t ilen,
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                         unsigned char output[32],
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                         int is224 )
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 1976              	 .loc 1 415 0
+ 1977              	 .cfi_startproc
+ 1978              	.LVL110:
+ 1979 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 1980              	.LCFI11:
+ 1981              	 .cfi_def_cfa_offset 20
+ 1982              	 .cfi_offset 4,-20
+ 1983              	 .cfi_offset 5,-16
+ 1984              	 .cfi_offset 6,-12
+ 1985              	 .cfi_offset 7,-8
+ 1986              	 .cfi_offset 14,-4
+ 1987 0002 1C1C     	 mov r4,r3
+ 1988 0004 9DB0     	 sub sp,sp,#116
+ 1989              	.LCFI12:
+ 1990              	 .cfi_def_cfa_offset 136
+ 1991              	 .loc 1 415 0
+ 1992 0006 071C     	 mov r7,r0
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_context ctx;
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( is224 == 0 || is224 == 1 );
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( ilen == 0 || input != NULL );
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     SHA256_VALIDATE_RET( (unsigned char *)output != NULL );
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_init( &ctx );
+ 1993              	 .loc 1 423 0
+ 1994 0008 01A8     	 add r0,sp,#4
+ 1995              	.LVL111:
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     int ret;
+ 1996              	 .loc 1 415 0
+ 1997 000a 0E1C     	 mov r6,r1
+ 1998 000c 151C     	 mov r5,r2
+ 1999              	 .loc 1 423 0
+ 2000 000e FFF7FEFF 	 bl mbedtls_sha256_init
+ 2001              	.LVL112:
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ( ret = mbedtls_sha256_starts_ret( &ctx, is224 ) ) != 0 )
+ 2002              	 .loc 1 425 0
+ 2003 0012 211C     	 mov r1,r4
+ 2004 0014 01A8     	 add r0,sp,#4
+ 2005 0016 FFF7FEFF 	 bl mbedtls_sha256_starts_ret
+ 2006              	.LVL113:
+ 2007 001a 041E     	 sub r4,r0,#0
+ 2008              	.LVL114:
+ 2009 001c 0BD1     	 bne .L55
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         goto exit;
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ( ret = mbedtls_sha256_update_ret( &ctx, input, ilen ) ) != 0 )
+ 2010              	 .loc 1 428 0
+ 2011 001e 01A8     	 add r0,sp,#4
+ 2012              	.LVL115:
+ 2013 0020 391C     	 mov r1,r7
+ 2014 0022 321C     	 mov r2,r6
+ 2015 0024 FFF7FEFF 	 bl mbedtls_sha256_update_ret
+ 2016              	.LVL116:
+ 2017 0028 041E     	 sub r4,r0,#0
+ 2018              	.LVL117:
+ 2019 002a 04D1     	 bne .L55
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         goto exit;
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     if( ( ret = mbedtls_sha256_finish_ret( &ctx, output ) ) != 0 )
+ 2020              	 .loc 1 431 0
+ 2021 002c 01A8     	 add r0,sp,#4
+ 2022              	.LVL118:
+ 2023 002e 291C     	 mov r1,r5
+ 2024 0030 FFF7FEFF 	 bl mbedtls_sha256_finish_ret
+ 2025              	.LVL119:
+ 2026 0034 041C     	 mov r4,r0
+ 2027              	.LVL120:
+ 2028              	.L55:
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****         goto exit;
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** exit:
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_free( &ctx );
+ 2029              	 .loc 1 435 0
+ 2030 0036 01A8     	 add r0,sp,#4
+ 2031              	.LVL121:
+ 2032 0038 FFF7FEFF 	 bl mbedtls_sha256_free
+ 2033              	.LVL122:
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     return( ret );
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 2034              	 .loc 1 438 0
+ 2035 003c 201C     	 mov r0,r4
+ 2036 003e 1DB0     	 add sp,sp,#116
+ 2037              	 
+ 2038              	.LVL123:
+ 2039              	.LVL124:
+ 2040              	.LVL125:
+ 2041              	.LVL126:
+ 2042 0040 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 2043              	 .cfi_endproc
+ 2044              	.LFE11:
+ 2046              	 .section .text.mbedtls_sha256,"ax",%progbits
+ 2047              	 .align 1
+ 2048              	 .global mbedtls_sha256
+ 2049              	 .code 16
+ 2050              	 .thumb_func
+ 2052              	mbedtls_sha256:
+ 2053              	.LFB12:
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** 
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** #if !defined(MBEDTLS_DEPRECATED_REMOVED)
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** void mbedtls_sha256( const unsigned char *input,
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                      size_t ilen,
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                      unsigned char output[32],
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****                      int is224 )
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** {
+ 2054              	 .loc 1 445 0
+ 2055              	 .cfi_startproc
+ 2056              	.LVL127:
+ 2057 0000 08B5     	 push {r3,lr}
+ 2058              	.LCFI13:
+ 2059              	 .cfi_def_cfa_offset 8
+ 2060              	 .cfi_offset 3,-8
+ 2061              	 .cfi_offset 14,-4
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c ****     mbedtls_sha256_ret( input, ilen, output, is224 );
+ 2062              	 .loc 1 446 0
+ 2063 0002 FFF7FEFF 	 bl mbedtls_sha256_ret
+ 2064              	.LVL128:
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\sha256.c **** }
+ 2065              	 .loc 1 447 0
+ 2066              	 
+ 2067 0006 08BD     	 pop {r3,pc}
+ 2068              	 .cfi_endproc
+ 2069              	.LFE12:
+ 2071              	 .section .rodata.K,"a",%progbits
+ 2072              	 .align 2
+ 2073              	 .set .LANCHOR0,.+0
+ 2076              	K:
+ 2077 0000 982F8A42 	 .word 1116352408
+ 2078 0004 91443771 	 .word 1899447441
+ 2079 0008 CFFBC0B5 	 .word -1245643825
+ 2080 000c A5DBB5E9 	 .word -373957723
+ 2081 0010 5BC25639 	 .word 961987163
+ 2082 0014 F111F159 	 .word 1508970993
+ 2083 0018 A4823F92 	 .word -1841331548
+ 2084 001c D55E1CAB 	 .word -1424204075
+ 2085 0020 98AA07D8 	 .word -670586216
+ 2086 0024 015B8312 	 .word 310598401
+ 2087 0028 BE853124 	 .word 607225278
+ 2088 002c C37D0C55 	 .word 1426881987
+ 2089 0030 745DBE72 	 .word 1925078388
+ 2090 0034 FEB1DE80 	 .word -2132889090
+ 2091 0038 A706DC9B 	 .word -1680079193
+ 2092 003c 74F19BC1 	 .word -1046744716
+ 2093 0040 C1699BE4 	 .word -459576895
+ 2094 0044 8647BEEF 	 .word -272742522
+ 2095 0048 C69DC10F 	 .word 264347078
+ 2096 004c CCA10C24 	 .word 604807628
+ 2097 0050 6F2CE92D 	 .word 770255983
+ 2098 0054 AA84744A 	 .word 1249150122
+ 2099 0058 DCA9B05C 	 .word 1555081692
+ 2100 005c DA88F976 	 .word 1996064986
+ 2101 0060 52513E98 	 .word -1740746414
+ 2102 0064 6DC631A8 	 .word -1473132947
+ 2103 0068 C82703B0 	 .word -1341970488
+ 2104 006c C77F59BF 	 .word -1084653625
+ 2105 0070 F30BE0C6 	 .word -958395405
+ 2106 0074 4791A7D5 	 .word -710438585
+ 2107 0078 5163CA06 	 .word 113926993
+ 2108 007c 67292914 	 .word 338241895
+ 2109 0080 850AB727 	 .word 666307205
+ 2110 0084 38211B2E 	 .word 773529912
+ 2111 0088 FC6D2C4D 	 .word 1294757372
+ 2112 008c 130D3853 	 .word 1396182291
+ 2113 0090 54730A65 	 .word 1695183700
+ 2114 0094 BB0A6A76 	 .word 1986661051
+ 2115 0098 2EC9C281 	 .word -2117940946
+ 2116 009c 852C7292 	 .word -1838011259
+ 2117 00a0 A1E8BFA2 	 .word -1564481375
+ 2118 00a4 4B661AA8 	 .word -1474664885
+ 2119 00a8 708B4BC2 	 .word -1035236496
+ 2120 00ac A3516CC7 	 .word -949202525
+ 2121 00b0 19E892D1 	 .word -778901479
+ 2122 00b4 240699D6 	 .word -694614492
+ 2123 00b8 85350EF4 	 .word -200395387
+ 2124 00bc 70A06A10 	 .word 275423344
+ 2125 00c0 16C1A419 	 .word 430227734
+ 2126 00c4 086C371E 	 .word 506948616
+ 2127 00c8 4C774827 	 .word 659060556
+ 2128 00cc B5BCB034 	 .word 883997877
+ 2129 00d0 B30C1C39 	 .word 958139571
+ 2130 00d4 4AAAD84E 	 .word 1322822218
+ 2131 00d8 4FCA9C5B 	 .word 1537002063
+ 2132 00dc F36F2E68 	 .word 1747873779
+ 2133 00e0 EE828F74 	 .word 1955562222
+ 2134 00e4 6F63A578 	 .word 2024104815
+ 2135 00e8 1478C884 	 .word -2067236844
+ 2136 00ec 0802C78C 	 .word -1933114872
+ 2137 00f0 FAFFBE90 	 .word -1866530822
+ 2138 00f4 EB6C50A4 	 .word -1538233109
+ 2139 00f8 F7A3F9BE 	 .word -1090935817
+ 2140 00fc F27871C6 	 .word -965641998
+ 2141              	 .text
+ 2142              	.Letext0:
+ 2143              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 2144              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 2145              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 2146              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/sha256.h"
+ 2147              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/platform_util.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 sha256.c
+    {standard input}:18     .text.mbedtls_sha256_init:00000000 $t
+    {standard input}:23     .text.mbedtls_sha256_init:00000000 mbedtls_sha256_init
+    {standard input}:46     .text.mbedtls_sha256_free:00000000 $t
+    {standard input}:51     .text.mbedtls_sha256_free:00000000 mbedtls_sha256_free
+    {standard input}:76     .text.mbedtls_sha256_clone:00000000 $t
+    {standard input}:81     .text.mbedtls_sha256_clone:00000000 mbedtls_sha256_clone
+    {standard input}:102    .text.mbedtls_sha256_starts_ret:00000000 $t
+    {standard input}:107    .text.mbedtls_sha256_starts_ret:00000000 mbedtls_sha256_starts_ret
+    {standard input}:180    .text.mbedtls_sha256_starts_ret:00000050 $d
+    {standard input}:200    .text.mbedtls_sha256_starts:00000000 $t
+    {standard input}:205    .text.mbedtls_sha256_starts:00000000 mbedtls_sha256_starts
+    {standard input}:225    .text.mbedtls_internal_sha256_process:00000000 $t
+    {standard input}:230    .text.mbedtls_internal_sha256_process:00000000 mbedtls_internal_sha256_process
+    {standard input}:801    .text.mbedtls_internal_sha256_process:000003fc $d
+    {standard input}:805    .text.mbedtls_internal_sha256_process:00000400 $t
+    {standard input}:1513   .text.mbedtls_sha256_process:00000000 $t
+    {standard input}:1518   .text.mbedtls_sha256_process:00000000 mbedtls_sha256_process
+    {standard input}:1538   .text.mbedtls_sha256_update_ret:00000000 $t
+    {standard input}:1543   .text.mbedtls_sha256_update_ret:00000000 mbedtls_sha256_update_ret
+    {standard input}:1678   .text.mbedtls_sha256_update:00000000 $t
+    {standard input}:1683   .text.mbedtls_sha256_update:00000000 mbedtls_sha256_update
+    {standard input}:1703   .text.mbedtls_sha256_finish_ret:00000000 $t
+    {standard input}:1708   .text.mbedtls_sha256_finish_ret:00000000 mbedtls_sha256_finish_ret
+    {standard input}:1944   .text.mbedtls_sha256_finish:00000000 $t
+    {standard input}:1949   .text.mbedtls_sha256_finish:00000000 mbedtls_sha256_finish
+    {standard input}:1969   .text.mbedtls_sha256_ret:00000000 $t
+    {standard input}:1974   .text.mbedtls_sha256_ret:00000000 mbedtls_sha256_ret
+    {standard input}:2047   .text.mbedtls_sha256:00000000 $t
+    {standard input}:2052   .text.mbedtls_sha256:00000000 mbedtls_sha256
+    {standard input}:2072   .rodata.K:00000000 $d
+    {standard input}:2076   .rodata.K:00000000 K
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memset
+mbedtls_platform_zeroize
+memcpy

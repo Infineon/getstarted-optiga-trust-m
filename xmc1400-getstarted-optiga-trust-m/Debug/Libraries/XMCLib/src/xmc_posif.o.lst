@@ -1,0 +1,1286 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_posif.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_POSIF_Enable,"ax",%progbits
+  18              	 .align 1
+  19              	 .global XMC_POSIF_Enable
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	XMC_POSIF_Enable:
+  24              	.LFB92:
+  25              	 .file 1 "../Libraries/XMCLib/src/xmc_posif.c"
+   1:../Libraries/XMCLib/src/xmc_posif.c **** /**
+   2:../Libraries/XMCLib/src/xmc_posif.c ****  * @file xmc_posif.c
+   3:../Libraries/XMCLib/src/xmc_posif.c ****  * @date 2017-02-25
+   4:../Libraries/XMCLib/src/xmc_posif.c ****  *
+   5:../Libraries/XMCLib/src/xmc_posif.c ****  * @cond
+   6:../Libraries/XMCLib/src/xmc_posif.c ****  **********************************************************************************
+   7:../Libraries/XMCLib/src/xmc_posif.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:../Libraries/XMCLib/src/xmc_posif.c ****  *
+   9:../Libraries/XMCLib/src/xmc_posif.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:../Libraries/XMCLib/src/xmc_posif.c ****  * All rights reserved.                        
+  11:../Libraries/XMCLib/src/xmc_posif.c ****  *                                             
+  12:../Libraries/XMCLib/src/xmc_posif.c ****  * Redistribution and use in source and binary forms, with or without           
+  13:../Libraries/XMCLib/src/xmc_posif.c ****  * modification,are permitted provided that the following conditions are met:   
+  14:../Libraries/XMCLib/src/xmc_posif.c ****  *                                                                              
+  15:../Libraries/XMCLib/src/xmc_posif.c ****  *   Redistributions of source code must retain the above copyright notice,      
+  16:../Libraries/XMCLib/src/xmc_posif.c ****  *   this list of conditions and the following disclaimer.                        
+  17:../Libraries/XMCLib/src/xmc_posif.c ****  * 
+  18:../Libraries/XMCLib/src/xmc_posif.c ****  *   Redistributions in binary form must reproduce the above copyright notice,   
+  19:../Libraries/XMCLib/src/xmc_posif.c ****  *   this list of conditions and the following disclaimer in the documentation    
+  20:../Libraries/XMCLib/src/xmc_posif.c ****  *   and/or other materials provided with the distribution.                       
+  21:../Libraries/XMCLib/src/xmc_posif.c ****  * 
+  22:../Libraries/XMCLib/src/xmc_posif.c ****  *   Neither the name of the copyright holders nor the names of its contributors 
+  23:../Libraries/XMCLib/src/xmc_posif.c ****  *   may be used to endorse or promote products derived from this software without
+  24:../Libraries/XMCLib/src/xmc_posif.c ****  *   specific prior written permission.                                           
+  25:../Libraries/XMCLib/src/xmc_posif.c ****  *                                                                              
+  26:../Libraries/XMCLib/src/xmc_posif.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  
+  27:../Libraries/XMCLib/src/xmc_posif.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    
+  28:../Libraries/XMCLib/src/xmc_posif.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   
+  29:../Libraries/XMCLib/src/xmc_posif.c ****  * ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   
+  30:../Libraries/XMCLib/src/xmc_posif.c ****  * LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         
+  31:../Libraries/XMCLib/src/xmc_posif.c ****  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         
+  32:../Libraries/XMCLib/src/xmc_posif.c ****  * SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    
+  33:../Libraries/XMCLib/src/xmc_posif.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      
+  34:../Libraries/XMCLib/src/xmc_posif.c ****  * CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       
+  35:../Libraries/XMCLib/src/xmc_posif.c ****  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   
+  36:../Libraries/XMCLib/src/xmc_posif.c ****  * POSSIBILITY OF SUCH DAMAGE.                                                  
+  37:../Libraries/XMCLib/src/xmc_posif.c ****  *                                                                              
+  38:../Libraries/XMCLib/src/xmc_posif.c ****  * To improve the quality of the software, users are encouraged to share        
+  39:../Libraries/XMCLib/src/xmc_posif.c ****  * modifications, enhancements or bug fixes with Infineon Technologies AG       
+  40:../Libraries/XMCLib/src/xmc_posif.c ****  * dave@infineon.com).                                                          
+  41:../Libraries/XMCLib/src/xmc_posif.c ****  **********************************************************************************
+  42:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  43:../Libraries/XMCLib/src/xmc_posif.c ****  * Change History
+  44:../Libraries/XMCLib/src/xmc_posif.c ****  * --------------
+  45:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  46:../Libraries/XMCLib/src/xmc_posif.c ****  * 2015-02-18:
+  47:../Libraries/XMCLib/src/xmc_posif.c ****  *     - Initial version
+  48:../Libraries/XMCLib/src/xmc_posif.c ****  *      
+  49:../Libraries/XMCLib/src/xmc_posif.c ****  * 2015-02-20:
+  50:../Libraries/XMCLib/src/xmc_posif.c ****  *     - Driver description added <BR>
+  51:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  52:../Libraries/XMCLib/src/xmc_posif.c ****  * 2015-04-30:
+  53:../Libraries/XMCLib/src/xmc_posif.c ****  *     - XMC_POSIF_Enable and XMC_POSIF_Disable APIs updated for POSIF1 peripheral check <BR>
+  54:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  55:../Libraries/XMCLib/src/xmc_posif.c ****  * 2015-06-19:
+  56:../Libraries/XMCLib/src/xmc_posif.c ****  *     - Removed GetDriverVersion API <BR> 
+  57:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  58:../Libraries/XMCLib/src/xmc_posif.c ****  * 2017-02-25:
+  59:../Libraries/XMCLib/src/xmc_posif.c ****  *     - XMC_POSIF_Enable() and XMC_POSIF_Disable() fixed compilation warnings
+  60:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  61:../Libraries/XMCLib/src/xmc_posif.c ****  * @endcond 
+  62:../Libraries/XMCLib/src/xmc_posif.c ****  *
+  63:../Libraries/XMCLib/src/xmc_posif.c ****  */
+  64:../Libraries/XMCLib/src/xmc_posif.c **** 
+  65:../Libraries/XMCLib/src/xmc_posif.c **** /**************************************************************************************************
+  66:../Libraries/XMCLib/src/xmc_posif.c ****  * HEADER FILES
+  67:../Libraries/XMCLib/src/xmc_posif.c ****  **************************************************************************************************
+  68:../Libraries/XMCLib/src/xmc_posif.c **** #include <xmc_posif.h>
+  69:../Libraries/XMCLib/src/xmc_posif.c **** 
+  70:../Libraries/XMCLib/src/xmc_posif.c **** /* POSIF is not available on XMC1100 and XMC1200 */
+  71:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(POSIF0)
+  72:../Libraries/XMCLib/src/xmc_posif.c **** #include <xmc_scu.h>
+  73:../Libraries/XMCLib/src/xmc_posif.c **** 
+  74:../Libraries/XMCLib/src/xmc_posif.c **** /**************************************************************************************************
+  75:../Libraries/XMCLib/src/xmc_posif.c ****  * MACROS
+  76:../Libraries/XMCLib/src/xmc_posif.c ****  **************************************************************************************************
+  77:../Libraries/XMCLib/src/xmc_posif.c **** #define XMC_POSIF_PCONF_INSEL_Msk        (0x3fUL << POSIF_PCONF_INSEL0_Pos) /*< Mask for input pins
+  78:../Libraries/XMCLib/src/xmc_posif.c **** #define XMC_POSIF_INSEL_MAX              (4U) /*< Maximum possible input selector */
+  79:../Libraries/XMCLib/src/xmc_posif.c **** 
+  80:../Libraries/XMCLib/src/xmc_posif.c **** /**************************************************************************************************
+  81:../Libraries/XMCLib/src/xmc_posif.c ****  * LOCAL ROUTINES
+  82:../Libraries/XMCLib/src/xmc_posif.c ****  **************************************************************************************************
+  83:../Libraries/XMCLib/src/xmc_posif.c **** #ifdef XMC_ASSERT_ENABLE
+  84:../Libraries/XMCLib/src/xmc_posif.c **** __STATIC_INLINE bool XMC_POSIF_IsPeripheralValid(const XMC_POSIF_t *const peripheral)
+  85:../Libraries/XMCLib/src/xmc_posif.c **** {
+  86:../Libraries/XMCLib/src/xmc_posif.c ****   bool tmp;
+  87:../Libraries/XMCLib/src/xmc_posif.c **** 
+  88:../Libraries/XMCLib/src/xmc_posif.c ****   tmp = (peripheral == POSIF0);
+  89:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(POSIF1)  
+  90:../Libraries/XMCLib/src/xmc_posif.c ****   tmp |= (peripheral == POSIF1);
+  91:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+  92:../Libraries/XMCLib/src/xmc_posif.c **** 
+  93:../Libraries/XMCLib/src/xmc_posif.c ****   return tmp;  
+  94:../Libraries/XMCLib/src/xmc_posif.c **** }
+  95:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+  96:../Libraries/XMCLib/src/xmc_posif.c **** /**************************************************************************************************
+  97:../Libraries/XMCLib/src/xmc_posif.c ****  * API IMPLEMENTATION
+  98:../Libraries/XMCLib/src/xmc_posif.c ****  **************************************************************************************************
+  99:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 100:../Libraries/XMCLib/src/xmc_posif.c **** /* API to enable the POSIF module */
+ 101:../Libraries/XMCLib/src/xmc_posif.c **** void XMC_POSIF_Enable(XMC_POSIF_t *const peripheral)
+ 102:../Libraries/XMCLib/src/xmc_posif.c **** {
+  26              	 .loc 1 102 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 08B5     	 push {r3,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 8
+  32              	 .cfi_offset 3,-8
+  33              	 .cfi_offset 14,-4
+ 103:../Libraries/XMCLib/src/xmc_posif.c **** #if UC_FAMILY == XMC4
+ 104:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_SCU_CLOCK_EnableClock(XMC_SCU_CLOCK_CCU);
+ 105:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 106:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 107:../Libraries/XMCLib/src/xmc_posif.c ****   if (peripheral == POSIF0)
+  34              	 .loc 1 107 0
+  35 0002 064B     	 ldr r3,.L6
+  36 0004 9842     	 cmp r0,r3
+  37 0006 01D1     	 bne .L2
+ 108:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 109:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(CLOCK_GATING_SUPPORTED)
+ 110:../Libraries/XMCLib/src/xmc_posif.c ****     XMC_SCU_CLOCK_UngatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_POSIF0);
+  38              	 .loc 1 110 0
+  39 0008 8020     	 mov r0,#128
+  40              	.LVL1:
+  41 000a 04E0     	 b .L4
+  42              	.LVL2:
+  43              	.L2:
+ 111:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 112:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(PERIPHERAL_RESET_SUPPORTED)
+ 113:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_RESET_DeassertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_POSIF0);
+ 114:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 115:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 116:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(POSIF1)
+ 117:../Libraries/XMCLib/src/xmc_posif.c ****   else if (peripheral == POSIF1)
+  44              	 .loc 1 117 0
+  45 000c 044B     	 ldr r3,.L6+4
+  46 000e 9842     	 cmp r0,r3
+  47 0010 03D1     	 bne .L1
+ 118:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 119:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(CLOCK_GATING_SUPPORTED)
+ 120:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_CLOCK_UngatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_POSIF1);
+  48              	 .loc 1 120 0
+  49 0012 8020     	 mov r0,#128
+  50              	.LVL3:
+  51 0014 4003     	 lsl r0,r0,#13
+  52              	.L4:
+  53 0016 FFF7FEFF 	 bl XMC_SCU_CLOCK_UngatePeripheralClock
+  54              	.LVL4:
+  55              	.L1:
+ 121:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 122:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(PERIPHERAL_RESET_SUPPORTED)
+ 123:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_RESET_DeassertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_POSIF1);
+ 124:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 125:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 126:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 127:../Libraries/XMCLib/src/xmc_posif.c ****   else
+ 128:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 129:../Libraries/XMCLib/src/xmc_posif.c ****     XMC_ASSERT("XMC_POSIF_Disable:Invalid module pointer", 0);
+ 130:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 131:../Libraries/XMCLib/src/xmc_posif.c **** }
+  56              	 .loc 1 131 0
+  57              	 
+  58 001a 08BD     	 pop {r3,pc}
+  59              	.L7:
+  60              	 .align 2
+  61              	.L6:
+  62 001c 00000150 	 .word 1342242816
+  63 0020 00400150 	 .word 1342259200
+  64              	 .cfi_endproc
+  65              	.LFE92:
+  67              	 .section .text.XMC_POSIF_Disable,"ax",%progbits
+  68              	 .align 1
+  69              	 .global XMC_POSIF_Disable
+  70              	 .code 16
+  71              	 .thumb_func
+  73              	XMC_POSIF_Disable:
+  74              	.LFB93:
+ 132:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 133:../Libraries/XMCLib/src/xmc_posif.c **** /* API to disable the POSIF module */
+ 134:../Libraries/XMCLib/src/xmc_posif.c **** void XMC_POSIF_Disable(XMC_POSIF_t *const peripheral)
+ 135:../Libraries/XMCLib/src/xmc_posif.c **** {
+  75              	 .loc 1 135 0
+  76              	 .cfi_startproc
+  77              	.LVL5:
+  78 0000 08B5     	 push {r3,lr}
+  79              	.LCFI1:
+  80              	 .cfi_def_cfa_offset 8
+  81              	 .cfi_offset 3,-8
+  82              	 .cfi_offset 14,-4
+ 136:../Libraries/XMCLib/src/xmc_posif.c ****   if (peripheral == POSIF0)
+  83              	 .loc 1 136 0
+  84 0002 064B     	 ldr r3,.L12
+  85 0004 9842     	 cmp r0,r3
+  86 0006 01D1     	 bne .L9
+ 137:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 138:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(PERIPHERAL_RESET_SUPPORTED)
+ 139:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_RESET_AssertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_POSIF0);
+ 140:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 141:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(CLOCK_GATING_SUPPORTED)
+ 142:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_CLOCK_GatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_POSIF0);
+  87              	 .loc 1 142 0
+  88 0008 8020     	 mov r0,#128
+  89              	.LVL6:
+  90 000a 04E0     	 b .L11
+  91              	.LVL7:
+  92              	.L9:
+ 143:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 144:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 145:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(POSIF1)
+ 146:../Libraries/XMCLib/src/xmc_posif.c ****   else if (peripheral == POSIF1)
+  93              	 .loc 1 146 0
+  94 000c 044B     	 ldr r3,.L12+4
+  95 000e 9842     	 cmp r0,r3
+  96 0010 03D1     	 bne .L8
+ 147:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 148:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(PERIPHERAL_RESET_SUPPORTED)
+ 149:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_RESET_AssertPeripheralReset(XMC_SCU_PERIPHERAL_RESET_POSIF1);
+ 150:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 151:../Libraries/XMCLib/src/xmc_posif.c **** #if defined(CLOCK_GATING_SUPPORTED)
+ 152:../Libraries/XMCLib/src/xmc_posif.c ****       XMC_SCU_CLOCK_GatePeripheralClock(XMC_SCU_PERIPHERAL_CLOCK_POSIF1);
+  97              	 .loc 1 152 0
+  98 0012 8020     	 mov r0,#128
+  99              	.LVL8:
+ 100 0014 4003     	 lsl r0,r0,#13
+ 101              	.L11:
+ 102 0016 FFF7FEFF 	 bl XMC_SCU_CLOCK_GatePeripheralClock
+ 103              	.LVL9:
+ 104              	.L8:
+ 153:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 154:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 155:../Libraries/XMCLib/src/xmc_posif.c **** #endif
+ 156:../Libraries/XMCLib/src/xmc_posif.c ****   else
+ 157:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 158:../Libraries/XMCLib/src/xmc_posif.c ****     XMC_ASSERT("XMC_POSIF_Disable:Invalid module pointer", 0);
+ 159:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 160:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 105              	 .loc 1 160 0
+ 106              	 
+ 107 001a 08BD     	 pop {r3,pc}
+ 108              	.L13:
+ 109              	 .align 2
+ 110              	.L12:
+ 111 001c 00000150 	 .word 1342242816
+ 112 0020 00400150 	 .word 1342259200
+ 113              	 .cfi_endproc
+ 114              	.LFE93:
+ 116              	 .section .text.XMC_POSIF_Init,"ax",%progbits
+ 117              	 .align 1
+ 118              	 .global XMC_POSIF_Init
+ 119              	 .code 16
+ 120              	 .thumb_func
+ 122              	XMC_POSIF_Init:
+ 123              	.LFB94:
+ 161:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 162:../Libraries/XMCLib/src/xmc_posif.c **** /* API to initialize POSIF global resources */
+ 163:../Libraries/XMCLib/src/xmc_posif.c **** void XMC_POSIF_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_CONFIG_t *const config)
+ 164:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 124              	 .loc 1 164 0
+ 125              	 .cfi_startproc
+ 126              	.LVL10:
+ 127 0000 38B5     	 push {r3,r4,r5,lr}
+ 128              	.LCFI2:
+ 129              	 .cfi_def_cfa_offset 16
+ 130              	 .cfi_offset 3,-16
+ 131              	 .cfi_offset 4,-12
+ 132              	 .cfi_offset 5,-8
+ 133              	 .cfi_offset 14,-4
+ 134              	 .loc 1 164 0
+ 135 0002 041C     	 mov r4,r0
+ 136 0004 0D1C     	 mov r5,r1
+ 165:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_Init:Invalid module pointer", XMC_POSIF_IsPeripheralValid(peripheral));
+ 166:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_Init:NULL Pointer", (config != (XMC_POSIF_CONFIG_t *)NULL) );
+ 167:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 168:../Libraries/XMCLib/src/xmc_posif.c ****   /* Enable the POSIF module */
+ 169:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_Enable(peripheral);
+ 137              	 .loc 1 169 0
+ 138 0006 FFF7FEFF 	 bl XMC_POSIF_Enable
+ 139              	.LVL11:
+ 140              	.LBB4:
+ 141              	.LBB5:
+ 142              	 .file 2 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_posif.h"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @file xmc_posif.h
+   3:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @date 2017-06-24
+   4:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @cond
+   6:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+   7:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+   9:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * All rights reserved.                        
+  11:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *                                             
+  12:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * following conditions are met:   
+  14:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *                                                                              
+  15:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * disclaimer.                        
+  17:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 
+  18:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 
+  21:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * products derived from this software without specific prior written permission.                  
+  23:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *                                                                              
+  24:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *                                                                              
+  32:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+  35:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  36:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Change History
+  37:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * --------------
+  38:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  39:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2015-02-18:
+  40:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Initial version
+  41:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *      
+  42:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2015-02-20:
+  43:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Driver description added <BR>
+  44:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  45:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2015-06-19:
+  46:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Removed version macros and declaration of GetDriverVersion API <BR> 
+  47:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  48:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2015-07-02:
+  49:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Updated XMC_POSIF_QD_GetDirection API
+  50:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  51:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2016-03-09:
+  52:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Optimization of write only registers
+  53:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  54:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 2017-06-24
+  55:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *     - Added posif map connectivity file<br>
+  56:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  57:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @endcond 
+  58:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  59:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+  60:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  61:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  62:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #ifndef XMC_POSIF_H
+  63:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #define XMC_POSIF_H
+  64:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  65:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**************************************************************************************************
+  66:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * HEADER FILES
+  67:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+  68:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #include <xmc_common.h>
+  69:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  70:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #if defined(POSIF0)
+  71:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #include <xmc_scu.h>
+  72:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #include "xmc_posif_map.h"
+  73:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  74:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+  75:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @addtogroup XMClib XMC Peripheral Library
+  76:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @{
+  77:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+  78:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+  79:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+  80:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @addtogroup POSIF
+  81:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @brief Position Interface Unit (POSIF) driver for the XMC microcontroller family <br>
+  82:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  83:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The POSIF unit is a flexible and powerful component for motor control systems that use
+  84:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * rotary encoders or hall sensors as feedback loop. It provides interface for motor position and v
+  85:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * POSIF unit works with CCU4 and CCU8 to enable position and velocity measurement and to control P
+  86:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  87:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Driver is divided in three POSIF functional blocks - Hall Sensor Control (POSIF_HSC), Quadrature
+  88:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * MultiChannel Mode (POSIF_MCM). <br>
+  89:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+  90:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * POSIF driver features:
+  91:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -#  Configuration structure XMC_POSIF_CONFIG_t and initialization function XMC_POSIF_Init() to c
+  92:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -# Allows to change the operating mode using XMC_POSIF_SetMode()
+  93:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -# Allows the selection of one of the four inputs (A, B, C or D) using XMC_POSIF_SelectInputSour
+  94:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * hall0, hall1 and hall2 signals. For quadrature decoder mode, inputs are phase A, phase B and ind
+  95:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -#  Hall Sensor Control (APIs prefixed with XMC_POSIF_HSC_) <br>
+  96:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 	-  Configuration structure XMC_POSIF_HSC_CONFIG_t and initialization function XMC_POSIF_HSC_Ini
+  97:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 	-  Update current and expected hall pattern in shadow register using XMC_POSIF_HSC_SetHallPatte
+  98:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 	- Allows immediate shadow transfer using XMC_POSIF_HSC_UpdateHallPattern()
+  99:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -#  Quadrature Decoder (APIs prefixed with XMC_POSIF_QD_) <br>
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 	-  Configuration structure XMC_POSIF_QD_CONFIG_t and initialization function XMC_POSIF_QD_Init(
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 	-  Get direction of rotation using XMC_POSIF_QD_GetDirection()
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -#  MultiChannel Mode (APIs prefixed with XMC_POSIF_MCM_) <br>
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *	-  Configuration structure XMC_POSIF_MCM_CONFIG_t and initialization function XMC_POSIF_MCM_Init
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *	-  Update multichannel pattern in shadow register using XMC_POSIF_MCM_SetMultiChannelPattern()
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *	-  Allows immediate shadow transfer using XMC_POSIF_MCM_UpdateMultiChannelPattern()
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -# User need to call respective init functions to configure POSIF operating mode. e.g to configu
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * call both XMC_POSIF_HSC_Init() and XMC_POSIF_MCM_Init().
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * -# Allows to enable and disable interrupt sources and assign to service request node using XMC_P
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * 
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @note POSIF is not available on XMC11 and XMC12 devices
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @{
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**************************************************************************************************
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * MACROS
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #if ((UC_SERIES == XMC45) || (UC_SERIES == XMC44) || (UC_SERIES == XMC47) || (UC_SERIES == XMC48) |
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #define XMC_POSIF_CHECK_MODULE_PTR(PTR)  ( ((PTR)== POSIF0) || ((PTR)== POSIF1) ) /*< Check for val
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #else
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #define XMC_POSIF_CHECK_MODULE_PTR(PTR)  ( ((PTR)== POSIF0))  /*< Check for valid module pointer */
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #endif
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**************************************************************************************************
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * ENUMS
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Defines the return status, to verify the POSIF related API calls. Use type @ref XMC_POSIF_STATU
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_STATUS
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_STATUS_OK = 0U,     /**< API fulfills request */
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_STATUS_ERROR        /**< API cannot fulfill request */
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_STATUS_t;
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF configurable modes.Use type @ref XMC_POSIF_MODE_t for this enum.
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The members defines the function selector(FSEL) bitfields of \a PCONF register.
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_MODE
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_MODE_HALL_SENSOR = 0U, /**< Hall sensor mode */
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_MODE_QD              , /**< Quadrature Decoder mode */
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_MODE_MCM             , /**< Standalone Multichannel mode */
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_MODE_MCM_QD           /**< Quadrature Decoder + Standalone Multichannel mode */
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_MODE_t;
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF configurable input ports.Use type @ref XMC_POSIF_INPUT_PORT_t for this enum.
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The member defines the respective input selector(INSELX) bitfields of \a PCONF register.
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It selects, which input is used for the phase or Hall input function (depending on the module is
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Quadrature Decoder or Hall Sensor Mode). Same enum can be used to configure pattern update signa
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \a PCONF register's \a MSETS bit field.
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_INPUT_PORT
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_A = 0U, /**< INPUT-A */
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_B     , /**< INPUT-B */
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_C     , /**< INPUT-C */
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_D     , /**< INPUT-D */
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_E     , /**< INPUT-E */
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_F     , /**< INPUT-F */
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_G     , /**< INPUT-G */
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_PORT_H       /**< INPUT-H */
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_INPUT_PORT_t;
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Defines active level of an input signal.Use type @ref XMC_POSIF_INPUT_ACTIVE_LEVEL_t for this e
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_INPUT_ACTIVE_LEVEL
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_ACTIVE_LEVEL_HIGH  = 0U, /**< Input - Active High */
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_INPUT_ACTIVE_LEVEL_LOW         /**< Input - Active Low */
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_INPUT_ACTIVE_LEVEL_t;
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF input debounce filter configuration.POSIF inputs are connected to low pass filter 
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * this enum is used to configure low pass filters cut off frequency.
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Use type @ref XMC_POSIF_FILTER_t for this enum.
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The member defines the low pass filter configuration(LPC) bitfield of \a PCONF register.
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_FILTER
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_DISABLED     = 0U, /**< No filtering */
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_1_CLOCK_CYCLE    , /**< Filter of 1 Clock Cycle */
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_2_CLOCK_CYCLE    , /**< Filter of 2 Clock Cycles */
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_4_CLOCK_CYCLE    , /**< Filter of 4 Clock Cycles */
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_8_CLOCK_CYCLE    , /**< Filter of 8 Clock Cycles */
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_16_CLOCK_CYCLE   , /**< Filter of 16 Clock Cycles */
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_32_CLOCK_CYCLE   , /**< Filter of 32 Clock Cycles */
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_FILTER_64_CLOCK_CYCLE     /**< Filter of 64 Clock Cycles */
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_FILTER_t;
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF events.Use type @ref XMC_POSIF_IRQ_EVENT_t for this enum.
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The member defines available event sources.It is used to configure which event to be used for
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * interrupt generation using \a PFLGE register. [ PFLG,SPFLG,RPFLG]
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_IRQ_EVENT
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_CHE                  = 0U, /**< Hall Mode : Correct Hall Event */
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_WHE                  = 1U, /**< Hall Mode : Wrong Hall Event */
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_HALL_INPUT           = 2U, /**< Hall Mode : Hall Input update */
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_MCP_SHADOW_TRANSFER  = 4U, /**< Hall Mode + MCM Mode : MC Pattern shadow tran
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_INDX                 = 8U, /**< Quadrature Mode : Index event detection */
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_ERR                  = 9U, /**< Quadrature Mode : Quadrature Phase Error */
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_CNT                  = 10U, /**< Quadrature Mode : Quadrature Clock event */
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_DIR                  = 11U, /**< Quadrature Mode : Quadrature Direction chang
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_IRQ_EVENT_PCLK                 = 12U  /**< Quadrature Mode : Quadrature period clock ge
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_IRQ_EVENT_t;
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF service request lines.Use type @ref XMC_POSIF_SR_ID_t for this enum.
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It used to connect POSIF event to required service request line.
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * in \a PFLGE register for interrupt generation.
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_SR_ID
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_SR_ID_0 = 0U, /**< SR-0 */
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_SR_ID_1      /**< SR-1 */
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_SR_ID_t;
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines position decoder mode selection.Use type @ref XMC_POSIF_QD_MODE_t for this enum.
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The member defines configuration for the operation of the quadrature decoder mode.
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It used to configure \a QDC register.
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_QD_MODE
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_MODE_QUADRATURE       = 0U, /**< Standard Quadrature Mode */
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_MODE_DIRECTION_COUNT       /**< Direction Count Mode */
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_QD_MODE_t;
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines motor rotation direction.Use type @ref XMC_POSIF_QD_DIR_t for this enum.
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * The member defines the direction in quadrature mode.
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_QD_DIR
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_DIR_COUNTERCLOCKWISE  = 0U, /**< Counter Clockwise */
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_DIR_CLOCKWISE              /**< Clockwise */
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_QD_DIR_t;
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines frequency of index signal generation.Use type @ref XMC_POSIF_QD_INDEX_GENERATION_t for t
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Member represents available configuration for index marker generation using \a ICM  bit field in
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_QD_INDEX_GENERATION
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_INDEX_GENERATION_NEVER  = 0U, /**< Never generate the index marker signal */
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_INDEX_GENERATION_ONCE      , /**< Generate only once after the first revolution */
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_INDEX_GENERATION_ALWAYS      /**< Index marker generated upon every revolution */
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_QD_INDEX_GENERATION_t;
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Defines trigger edge in hall sensor mode.Use type @ref XMC_POSIF_HSC_TRIGGER_EDGE_t for this en
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  It can be used to configure \a PCONF register's \a SPES and \a MSES bit fields.
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef enum XMC_POSIF_HSC_TRIGGER_EDGE
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_HSC_TRIGGER_EDGE_RISING  = 0U, /**< Rising edge */
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_HSC_TRIGGER_EDGE_FALLING      /**< Falling edge */
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_HSC_TRIGGER_EDGE_t;
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**************************************************************************************************
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * DATA STRUCTURES
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /*Anonymous structure/union guard start*/
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #if defined(__CC_ARM)
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   #pragma push
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   #pragma anon_unions
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #elif defined(__TASKING__)
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   #pragma warning 586
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #endif
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF peripheral register structure.Use type @ref XMC_POSIF_t for this data structure.
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef POSIF_GLOBAL_TypeDef XMC_POSIF_t;
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Defines POSIF quadrature decoder initialization data structure.
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Use type @ref XMC_POSIF_QD_CONFIG_t for this data structure.
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  It used to configure Quadrature mode using \a QDC register.
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef struct XMC_POSIF_QD_CONFIG
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   XMC_POSIF_QD_MODE_t mode;      /**< Operational Mode of the quadrature encoder and decoder */
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   union
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   {
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     struct
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     {
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t phase_a: 1;       /**< Phase-A active level configuration */
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t phase_b: 1;       /**< Phase-B active level configuration */
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t phase_leader: 1;  /**< Which of the two phase signals[Phase A or Phase B] leads the 
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 1;
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t index: 2;        /**< Index signal generation control. Use @ref XMC_POSIF_QD_INDEX_G
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 26;
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     };
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     uint32_t qdc;
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   };
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_QD_CONFIG_t;
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF hall sensor control initialization data structure.
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Use type @ref XMC_POSIF_HSC_CONFIG_t for this data structure.
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It used to initialize hall sensor mode configuration using \a PCONF register.
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef struct XMC_POSIF_HSC_CONFIG
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   union
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   {
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     struct
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     {
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 4;
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t disable_idle_signal: 1;   /**< Should idle signal be disabled upon wrong hall event?
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 11;
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t sampling_trigger: 1;      /**< Of HSDA and HSDB, which one is to be used to trigger 
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t sampling_trigger_edge: 1; /**< Which edge of the sampling trigger signal is to be co
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 	  uint32_t : 6;
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t external_error_port: 2;    /**< Of the 4 external error ports, which one is to be co
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t external_error_enable: 1;  /**< Should external errors lead to Wrong Hall event? */
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t external_error_level: 1;   /**< What should be the active level of external error si
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t: 4;
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     };
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     uint32_t hall_config;
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   };
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_HSC_CONFIG_t;
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Defines POSIF multi-channel mode initialization data structure.
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Use type @ref XMC_POSIF_MCM_CONFIG_t for this data structure.
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It used to initialize multi channel mode configuration using \a PCONF register.
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef struct XMC_POSIF_MCM_CONFIG
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   union
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   {
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     struct
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     {
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 5;
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t pattern_sw_update: 1; /**< should multi channel pattern updated by SW ? */
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 12;
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 	  uint32_t pattern_update_trigger: 3; /**< Of the 8 update triggers, which one is to be considered
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t pattern_trigger_edge: 1;  /**< Which edge of the pattern update trigger is to be con
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t pwm_sync: 2;         /**< Of the 4 pwm sync inputs, which one is to be considered? *
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t : 8;
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     };
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     uint32_t mcm_config;
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   };
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** }XMC_POSIF_MCM_CONFIG_t;
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Defines POSIF module initialization data structure.
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  Use type @ref XMC_POSIF_CONFIG_t for this data structure.
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *  It is used to initialize POSIF module using \a PCONF register.
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** typedef struct XMC_POSIF_CONFIG
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   union
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   {
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     struct
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     {
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t mode: 2;    /**< POSIF Operational mode. Use @ref XMC_POSIF_MODE_t to configure */
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t :6;
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t input0: 2; /**< Choice of input for Input-1 */
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t input1: 2; /**< Choice of input for Input-2 */
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t input2: 2; /**< Choice of input for Input-3 */
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t :14;
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t filter: 3; /**< Input filter configuration */
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****       uint32_t: 1;
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     };
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     uint32_t pconf;
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   };
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** } XMC_POSIF_CONFIG_t;
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /*Anonymous structure/union guard end*/
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #if defined(__CC_ARM)
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   #pragma pop
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #elif defined(__TASKING__)
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   #pragma warning restore
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #endif
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**************************************************************************************************
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * API Prototypes
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  **************************************************************************************************
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #ifdef __cplusplus
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** extern "C" {
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** #endif
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module of type @ref XMC_POSIF_t
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * De-asserts the POSIF module from reset and enables the clock.\n
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PRCLR0 register's \a POSIF0RS or \a POSIF1RS bit field depends upon \a peripheral.
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * If running on other than XMC45 device then it will ungate the peripheral clock.
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * This is the first API which application must invoke to configure POSIF.
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It is internally called by XMC_POSIF_Init().
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Disable(),XMC_POSIF_Init() \n\n\n
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** void XMC_POSIF_Enable(XMC_POSIF_t *const peripheral);
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module of type @ref XMC_POSIF_t
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Asserts the POSIF module into reset and disables the clock.\n
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * If running on other than XMC45 device then in addition it will gate the peripheral clock.
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PRCLR0 register's \a POSIF0RS or \a POSIF1RS bitfield depends upon \a peripheral.
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Enable()\n\n\n
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** void XMC_POSIF_Disable(XMC_POSIF_t *const peripheral);
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module of type @ref XMC_POSIF_t
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param config Pointer to POSIF configuration data(operation mode,input selection and filter conf
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Initialize POSIF module with \a config.\n
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures POSIF global registers.This is the first API which application must invoke to configu
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It sets up parameters common to all the POSIF modes - hall sensor,quadrature decoder and multi-c
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register with mode of operation,input selection and filter configuration.
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_HSC_Init(),XMC_POSIF_QD_Init(),XMC_POSIF_MCM_Init() \n\n\n
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** */
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** void XMC_POSIF_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_CONFIG_t * const config);
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param config Pointer to hall sensor control initialization data of type @ref XMC_POSIF_HSC_CONF
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval XMC_POSIF_STATUS_t  Returns @ref XMC_POSIF_STATUS_OK if configured in Hall Sensor Mode
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *                             else return @ref XMC_POSIF_STATUS_ERROR.
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Initializes hall sensor control mode.\n
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register with which POSIF input trigger to be used for
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * sampling hall pattern.Configures \a PCONF register for idle signal generation for wrong hall eve
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It is necessary to have called XMC_POSIF_Init first with Hall sensor mode before invocation of t
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Init() \n\n\n
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** XMC_POSIF_STATUS_t XMC_POSIF_HSC_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_HSC_CONFIG_t *
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param config Pointer to quadrature decoder initialization data
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval XMC_POSIF_STATUS_t Returns quadrature mode initialization status of type @ref XMC_POSIF_
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Initializes quadrature decoder control mode.\n
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register with quadrature mode using @ref XMC_POSIF_QD_MODE_t data structure.
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Initializes \a QDC register with quadrature mode configuration using @ref XMC_POSIF_QD_CONFIG_t 
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It is necessary to have called XMC_POSIF_Init first with Quadrature decoder mode before invocati
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Init() \n\n\n
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** XMC_POSIF_STATUS_t XMC_POSIF_QD_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_QD_CONFIG_t * c
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param config Pointer to quadrature decoder initialization data
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval XMC_POSIF_STATUS_t Returns multi channel pattern initialization status of type @ref XMC_
+ 482:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 483:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 484:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Initializes multi channel mode in Hall mode, standalone multi-channel mode and quadrature with m
+ 485:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register with multi channel mode using @ref XMC_POSIF_MCM_CONFIG_t data stru
+ 486:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 487:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 488:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * It is necessary to call XMC_POSIF_Init first before invocation of this API.
+ 489:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * For XMC_POSIF_MODE_HALL_SENSOR, it is necessary to have called XMC_POSIF_HSC_Init before invocat
+ 490:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * For XMC_POSIF_MODE_MCM_QD, it is necessary to have called XMC_POSIF_QD_Init before invocation of
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 492:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 493:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Init(),XMC_POSIF_HSC_Init(),XMC_POSIF_QD_Init() \n\n\n
+ 494:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 495:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** XMC_POSIF_STATUS_t XMC_POSIF_MCM_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_MCM_CONFIG_t *
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 497:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 498:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 499:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param mode POSIF operating mode of type @ref XMC_POSIF_MODE_t
+ 500:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 501:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 502:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 503:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures POSIF module for \a mode.\n
+ 504:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register's a\ FSEL bitfield with \a mode.
+ 505:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Refer @ref XMC_POSIF_MODE_t for available options.
+ 506:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 508:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * POSIF module should be in stopped state while changing the operating mode.
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 510:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 511:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Stop() \n\n\n
+ 512:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** __STATIC_INLINE void XMC_POSIF_SetMode(XMC_POSIF_t *const peripheral, const XMC_POSIF_MODE_t mode)
+ 514:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 515:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   peripheral->PCONF = ((peripheral->PCONF & ~(uint32_t)(POSIF_PCONF_FSEL_Msk)) |
+ 516:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****                      (((uint32_t)mode << POSIF_PCONF_FSEL_Pos) & (uint32_t)POSIF_PCONF_FSEL_Msk));
+ 517:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** }
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param input0 Choice of input for input 0 [0-3]
+ 522:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param input1 Choice of input for input 1 [0-3]
+ 523:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param input2 Choice of input for input 2 [0-3]
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 527:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures which input to be connected to POSIF module. \n
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PCONF register's INSEL0,INSEL1,INSEL2 bit fields with source for the input connect
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \a input1, \a input2 respectively.
+ 530:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 532:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures which input is used for the Phase X or Hall input X function depending upon the modul
+ 533:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * set for Quadrature Decoder or Hall Sensor Mode.
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 535:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 536:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Init() \n\n\n
+ 537:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 538:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** void XMC_POSIF_SelectInputSource(XMC_POSIF_t *const peripheral, const XMC_POSIF_INPUT_PORT_t input0
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****     const XMC_POSIF_INPUT_PORT_t input1, const XMC_POSIF_INPUT_PORT_t input2);
+ 540:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 542:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 543:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 544:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 547:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Starts POSIF \a peripheral functional state machine.\n
+ 548:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Starts POSIF state machine for \a peripheral.Configures \a PRUNS register's \a SRB bit field wit
+ 549:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 550:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Note</b><br>
+ 551:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Global properties of POSIF along with mode specific properties should have been initialized befo
+ 552:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * FSM.
+ 553:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 555:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Stop(),XMC_POSIF_IsRunning() \n\n\n
+ 556:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 557:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** __STATIC_INLINE void XMC_POSIF_Start(XMC_POSIF_t *const peripheral)
+ 558:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 559:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   peripheral->PRUNS = (uint32_t)POSIF_PRUNS_SRB_Msk;
+ 560:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** }
+ 561:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** 
+ 562:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** /**
+ 563:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @param peripheral Pointer to an instance of POSIF module
+ 564:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * @retval None
+ 565:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 566:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Description</b><br>
+ 567:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Stops POSIF \a peripheral functional state machine.\n
+ 568:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Stop POSIF functional state machine and clears current internal status of the \a peripheral.
+ 569:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * Configures \a PRUNC register's \a CRB bit field with 1.
+ 570:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  *
+ 571:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * \par<b>Related APIs:</b><BR>
+ 572:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  * XMC_POSIF_Start(),XMC_POSIF_IsRunning() \n\n\n
+ 573:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****  */
+ 574:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** __STATIC_INLINE void XMC_POSIF_Stop(XMC_POSIF_t *const peripheral)
+ 575:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h **** {
+ 576:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_posif.h ****   peripheral->PRUNC = (uint32_t)(POSIF_PRUNC_CRB_Msk | POSIF_PRUNC_CSM_Msk);
+ 143              	 .loc 2 576 0
+ 144 000a 0323     	 mov r3,#3
+ 145 000c E360     	 str r3,[r4,#12]
+ 146              	.LBE5:
+ 147              	.LBE4:
+ 170:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 171:../Libraries/XMCLib/src/xmc_posif.c ****   /* Stop POSIF */
+ 172:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_Stop(peripheral);
+ 173:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 174:../Libraries/XMCLib/src/xmc_posif.c ****   /* Program the operational mode, input selectors and debounce filter */
+ 175:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PCONF = config->pconf;
+ 148              	 .loc 1 175 0
+ 149 000e 2B68     	 ldr r3,[r5]
+ 176:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 150              	 .loc 1 176 0
+ 151              	 
+ 175:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 152              	 .loc 1 175 0
+ 153 0010 2360     	 str r3,[r4]
+ 154              	.LVL12:
+ 155              	.LVL13:
+ 156              	 .loc 1 176 0
+ 157 0012 38BD     	 pop {r3,r4,r5,pc}
+ 158              	 .cfi_endproc
+ 159              	.LFE94:
+ 161              	 .section .text.XMC_POSIF_HSC_Init,"ax",%progbits
+ 162              	 .align 1
+ 163              	 .global XMC_POSIF_HSC_Init
+ 164              	 .code 16
+ 165              	 .thumb_func
+ 167              	XMC_POSIF_HSC_Init:
+ 168              	.LFB95:
+ 177:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 178:../Libraries/XMCLib/src/xmc_posif.c **** /* API to initialize hall sensor interface */
+ 179:../Libraries/XMCLib/src/xmc_posif.c **** XMC_POSIF_STATUS_t XMC_POSIF_HSC_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_HSC_CONFIG_t *
+ 180:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 169              	 .loc 1 180 0
+ 170              	 .cfi_startproc
+ 171              	.LVL14:
+ 181:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_STATUS_t retval;
+ 182:../Libraries/XMCLib/src/xmc_posif.c ****   
+ 183:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_HSC_Init:Invalid module pointer\n", XMC_POSIF_IsPeripheralValid(peripheral)
+ 184:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_HSC_Init:NULL Pointer\n", (config != (XMC_POSIF_HSC_CONFIG_t *)NULL) );
+ 185:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 186:../Libraries/XMCLib/src/xmc_posif.c ****   if (XMC_POSIF_MODE_HALL_SENSOR == (XMC_POSIF_MODE_t)((peripheral->PCONF) & (uint32_t)POSIF_PCONF_
+ 172              	 .loc 1 186 0
+ 173 0000 0323     	 mov r3,#3
+ 180:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_STATUS_t retval;
+ 174              	 .loc 1 180 0
+ 175 0002 021C     	 mov r2,r0
+ 176              	 .loc 1 186 0
+ 177 0004 0068     	 ldr r0,[r0]
+ 178              	.LVL15:
+ 179 0006 0340     	 and r3,r0
+ 187:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 188:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->PCONF |= config->hall_config;
+ 189:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 190:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 191:../Libraries/XMCLib/src/xmc_posif.c ****   else
+ 192:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 193:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_ERROR;
+ 180              	 .loc 1 193 0
+ 181 0008 0120     	 mov r0,#1
+ 186:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 182              	 .loc 1 186 0
+ 183 000a 002B     	 cmp r3,#0
+ 184 000c 04D1     	 bne .L16
+ 188:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 185              	 .loc 1 188 0
+ 186 000e 1068     	 ldr r0,[r2]
+ 187 0010 0968     	 ldr r1,[r1]
+ 188              	.LVL16:
+ 189 0012 0143     	 orr r1,r0
+ 189:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 190              	 .loc 1 189 0
+ 191 0014 181C     	 mov r0,r3
+ 188:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 192              	 .loc 1 188 0
+ 193 0016 1160     	 str r1,[r2]
+ 194              	.LVL17:
+ 195              	.L16:
+ 194:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 195:../Libraries/XMCLib/src/xmc_posif.c ****   return retval;
+ 196:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 196              	 .loc 1 196 0
+ 197              	 
+ 198 0018 7047     	 bx lr
+ 199              	 .cfi_endproc
+ 200              	.LFE95:
+ 202              	 .section .text.XMC_POSIF_QD_Init,"ax",%progbits
+ 203              	 .align 1
+ 204              	 .global XMC_POSIF_QD_Init
+ 205              	 .code 16
+ 206              	 .thumb_func
+ 208              	XMC_POSIF_QD_Init:
+ 209              	.LFB96:
+ 197:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 198:../Libraries/XMCLib/src/xmc_posif.c **** /* API to initialize quadrature decoder interface */
+ 199:../Libraries/XMCLib/src/xmc_posif.c **** XMC_POSIF_STATUS_t XMC_POSIF_QD_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_QD_CONFIG_t * c
+ 200:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 210              	 .loc 1 200 0
+ 211              	 .cfi_startproc
+ 212              	.LVL18:
+ 213              	 .loc 1 200 0
+ 214 0000 031C     	 mov r3,r0
+ 201:../Libraries/XMCLib/src/xmc_posif.c ****   uint8_t reg;
+ 202:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_STATUS_t retval;
+ 203:../Libraries/XMCLib/src/xmc_posif.c ****   
+ 204:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_QD_Init:Invalid module pointer", XMC_POSIF_IsPeripheralValid(peripheral));
+ 205:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_QD_Init:NULL Pointer", (config != (XMC_POSIF_QD_CONFIG_t *)NULL) );
+ 206:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 207:../Libraries/XMCLib/src/xmc_posif.c ****   reg = (uint8_t)((peripheral->PCONF) & (uint32_t)POSIF_PCONF_FSEL_Msk);
+ 215              	 .loc 1 207 0
+ 216 0002 0268     	 ldr r2,[r0]
+ 217              	.LVL19:
+ 208:../Libraries/XMCLib/src/xmc_posif.c ****   if (((uint32_t)XMC_POSIF_MODE_QD == reg) || ((uint32_t)XMC_POSIF_MODE_MCM_QD == reg))
+ 209:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 210:../Libraries/XMCLib/src/xmc_posif.c ****     /* Program the quadrature mode */
+ 211:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->PCONF |= (uint32_t)(config->mode) << POSIF_PCONF_QDCM_Pos;
+ 212:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->QDC = config->qdc;
+ 213:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 214:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 215:../Libraries/XMCLib/src/xmc_posif.c ****   else
+ 216:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 217:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_ERROR;
+ 218              	 .loc 1 217 0
+ 219 0004 0120     	 mov r0,#1
+ 220              	.LVL20:
+ 208:../Libraries/XMCLib/src/xmc_posif.c ****   if (((uint32_t)XMC_POSIF_MODE_QD == reg) || ((uint32_t)XMC_POSIF_MODE_MCM_QD == reg))
+ 221              	 .loc 1 208 0
+ 222 0006 0242     	 tst r2,r0
+ 223 0008 07D0     	 beq .L19
+ 211:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->QDC = config->qdc;
+ 224              	 .loc 1 211 0
+ 225 000a 0A78     	 ldrb r2,[r1]
+ 226              	.LVL21:
+ 227 000c 1868     	 ldr r0,[r3]
+ 228 000e 9200     	 lsl r2,r2,#2
+ 229 0010 0243     	 orr r2,r0
+ 213:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 230              	 .loc 1 213 0
+ 231 0012 0020     	 mov r0,#0
+ 211:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->QDC = config->qdc;
+ 232              	 .loc 1 211 0
+ 233 0014 1A60     	 str r2,[r3]
+ 212:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 234              	 .loc 1 212 0
+ 235 0016 4A68     	 ldr r2,[r1,#4]
+ 236 0018 1A66     	 str r2,[r3,#96]
+ 237              	.LVL22:
+ 238              	.L19:
+ 218:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 219:../Libraries/XMCLib/src/xmc_posif.c ****   
+ 220:../Libraries/XMCLib/src/xmc_posif.c ****   return retval;
+ 221:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 239              	 .loc 1 221 0
+ 240              	 
+ 241 001a 7047     	 bx lr
+ 242              	 .cfi_endproc
+ 243              	.LFE96:
+ 245              	 .section .text.XMC_POSIF_MCM_Init,"ax",%progbits
+ 246              	 .align 1
+ 247              	 .global XMC_POSIF_MCM_Init
+ 248              	 .code 16
+ 249              	 .thumb_func
+ 251              	XMC_POSIF_MCM_Init:
+ 252              	.LFB97:
+ 222:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 223:../Libraries/XMCLib/src/xmc_posif.c **** /* API to initialize multi-channel mode.
+ 224:../Libraries/XMCLib/src/xmc_posif.c ****  * This is used in Hall mode, standalone multi-channel mode and quadrature with multi-channel mode
+ 225:../Libraries/XMCLib/src/xmc_posif.c ****  */
+ 226:../Libraries/XMCLib/src/xmc_posif.c **** XMC_POSIF_STATUS_t XMC_POSIF_MCM_Init(XMC_POSIF_t *const peripheral, const XMC_POSIF_MCM_CONFIG_t *
+ 227:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 253              	 .loc 1 227 0
+ 254              	 .cfi_startproc
+ 255              	.LVL23:
+ 228:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_STATUS_t retval;
+ 229:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 230:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_MCM_Init:Invalid module pointer", XMC_POSIF_IsPeripheralValid(peripheral));
+ 231:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_MCM_Init:NULL Pointer", (config != (XMC_POSIF_MCM_CONFIG_t *)NULL) );
+ 232:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 233:../Libraries/XMCLib/src/xmc_posif.c ****   if ((XMC_POSIF_MODE_t)((peripheral->PCONF) & (uint32_t)POSIF_PCONF_FSEL_Msk) != XMC_POSIF_MODE_QD
+ 256              	 .loc 1 233 0
+ 257 0000 0323     	 mov r3,#3
+ 227:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_POSIF_STATUS_t retval;
+ 258              	 .loc 1 227 0
+ 259 0002 021C     	 mov r2,r0
+ 260              	 .loc 1 233 0
+ 261 0004 0068     	 ldr r0,[r0]
+ 262              	.LVL24:
+ 263 0006 0340     	 and r3,r0
+ 234:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 235:../Libraries/XMCLib/src/xmc_posif.c ****     peripheral->PCONF |= config->mcm_config;
+ 236:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 237:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 238:../Libraries/XMCLib/src/xmc_posif.c ****   else
+ 239:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 240:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_ERROR;
+ 264              	 .loc 1 240 0
+ 265 0008 181E     	 sub r0,r3,#0
+ 233:../Libraries/XMCLib/src/xmc_posif.c ****   {
+ 266              	 .loc 1 233 0
+ 267 000a 0128     	 cmp r0,#1
+ 268 000c 04D0     	 beq .L22
+ 235:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 269              	 .loc 1 235 0
+ 270 000e 1068     	 ldr r0,[r2]
+ 271 0010 0B68     	 ldr r3,[r1]
+ 272 0012 0343     	 orr r3,r0
+ 236:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 273              	 .loc 1 236 0
+ 274 0014 0020     	 mov r0,#0
+ 235:../Libraries/XMCLib/src/xmc_posif.c ****     retval = XMC_POSIF_STATUS_OK;
+ 275              	 .loc 1 235 0
+ 276 0016 1360     	 str r3,[r2]
+ 277              	.LVL25:
+ 278              	.L22:
+ 241:../Libraries/XMCLib/src/xmc_posif.c ****   }
+ 242:../Libraries/XMCLib/src/xmc_posif.c ****   return retval;
+ 243:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 279              	 .loc 1 243 0
+ 280              	 
+ 281 0018 7047     	 bx lr
+ 282              	 .cfi_endproc
+ 283              	.LFE97:
+ 285              	 .section .text.XMC_POSIF_SelectInputSource,"ax",%progbits
+ 286              	 .align 1
+ 287              	 .global XMC_POSIF_SelectInputSource
+ 288              	 .code 16
+ 289              	 .thumb_func
+ 291              	XMC_POSIF_SelectInputSource:
+ 292              	.LFB98:
+ 244:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 245:../Libraries/XMCLib/src/xmc_posif.c **** /* API to configure input source */
+ 246:../Libraries/XMCLib/src/xmc_posif.c **** void XMC_POSIF_SelectInputSource (XMC_POSIF_t *const peripheral, const XMC_POSIF_INPUT_PORT_t input
+ 247:../Libraries/XMCLib/src/xmc_posif.c ****     const XMC_POSIF_INPUT_PORT_t input1, const XMC_POSIF_INPUT_PORT_t input2)
+ 248:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 293              	 .loc 1 248 0
+ 294              	 .cfi_startproc
+ 295              	.LVL26:
+ 296 0000 70B5     	 push {r4,r5,r6,lr}
+ 297              	.LCFI3:
+ 298              	 .cfi_def_cfa_offset 16
+ 299              	 .cfi_offset 4,-16
+ 300              	 .cfi_offset 5,-12
+ 301              	 .cfi_offset 6,-8
+ 302              	 .cfi_offset 14,-4
+ 303              	 .loc 1 248 0
+ 304 0002 151C     	 mov r5,r2
+ 249:../Libraries/XMCLib/src/xmc_posif.c ****   uint32_t reg;
+ 250:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SelectInputSource:Invalid module pointer", XMC_POSIF_IsPeripheralValid(peri
+ 251:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SelectInputSource:Wrong input port input0", (input0 < XMC_POSIF_INSEL_MAX))
+ 252:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SelectInputSource:Wrong input port input1", (input1 < XMC_POSIF_INSEL_MAX))
+ 253:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SelectInputSource:Wrong input port input2", (input2 < XMC_POSIF_INSEL_MAX))
+ 254:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 255:../Libraries/XMCLib/src/xmc_posif.c ****   reg = (uint32_t)((((uint32_t)input0 << POSIF_PCONF_INSEL0_Pos) & (uint32_t)POSIF_PCONF_INSEL0_Msk
+ 256:../Libraries/XMCLib/src/xmc_posif.c ****         (((uint32_t)input1 << POSIF_PCONF_INSEL1_Pos) & (uint32_t)POSIF_PCONF_INSEL1_Msk) |
+ 257:../Libraries/XMCLib/src/xmc_posif.c ****         (((uint32_t)input2 << POSIF_PCONF_INSEL2_Pos) & (uint32_t)POSIF_PCONF_INSEL2_Msk));
+ 305              	 .loc 1 257 0
+ 306 0004 C026     	 mov r6,#192
+ 248:../Libraries/XMCLib/src/xmc_posif.c ****   uint32_t reg;
+ 307              	 .loc 1 248 0
+ 308 0006 1A1C     	 mov r2,r3
+ 309              	.LVL27:
+ 310              	 .loc 1 257 0
+ 311 0008 B601     	 lsl r6,r6,#6
+ 258:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PCONF = ((peripheral->PCONF & ~(uint32_t)XMC_POSIF_PCONF_INSEL_Msk) | reg);
+ 312              	 .loc 1 258 0
+ 313 000a 0368     	 ldr r3,[r0]
+ 314              	.LVL28:
+ 257:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PCONF = ((peripheral->PCONF & ~(uint32_t)XMC_POSIF_PCONF_INSEL_Msk) | reg);
+ 315              	 .loc 1 257 0
+ 316 000c 1203     	 lsl r2,r2,#12
+ 317              	.LVL29:
+ 318              	 .loc 1 258 0
+ 319 000e 084C     	 ldr r4,.L25
+ 257:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PCONF = ((peripheral->PCONF & ~(uint32_t)XMC_POSIF_PCONF_INSEL_Msk) | reg);
+ 320              	 .loc 1 257 0
+ 321 0010 3240     	 and r2,r6
+ 322              	 .loc 1 258 0
+ 323 0012 1C40     	 and r4,r3
+ 324 0014 131C     	 mov r3,r2
+ 325 0016 2343     	 orr r3,r4
+ 256:../Libraries/XMCLib/src/xmc_posif.c ****         (((uint32_t)input2 << POSIF_PCONF_INSEL2_Pos) & (uint32_t)POSIF_PCONF_INSEL2_Msk));
+ 326              	 .loc 1 256 0
+ 327 0018 C024     	 mov r4,#192
+ 328 001a AA02     	 lsl r2,r5,#10
+ 329 001c 2401     	 lsl r4,r4,#4
+ 330 001e 2240     	 and r2,r4
+ 255:../Libraries/XMCLib/src/xmc_posif.c ****         (((uint32_t)input1 << POSIF_PCONF_INSEL1_Pos) & (uint32_t)POSIF_PCONF_INSEL1_Msk) |
+ 331              	 .loc 1 255 0
+ 332 0020 C024     	 mov r4,#192
+ 333 0022 0902     	 lsl r1,r1,#8
+ 334              	.LVL30:
+ 335 0024 A400     	 lsl r4,r4,#2
+ 336 0026 1A43     	 orr r2,r3
+ 337 0028 2140     	 and r1,r4
+ 338              	 .loc 1 258 0
+ 339 002a 1143     	 orr r1,r2
+ 340 002c 0160     	 str r1,[r0]
+ 259:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 341              	 .loc 1 259 0
+ 342              	 
+ 343 002e 70BD     	 pop {r4,r5,r6,pc}
+ 344              	.L26:
+ 345              	 .align 2
+ 346              	.L25:
+ 347 0030 FFC0FFFF 	 .word -16129
+ 348              	 .cfi_endproc
+ 349              	.LFE98:
+ 351              	 .section .text.XMC_POSIF_SetInterruptNode,"ax",%progbits
+ 352              	 .align 1
+ 353              	 .global XMC_POSIF_SetInterruptNode
+ 354              	 .code 16
+ 355              	 .thumb_func
+ 357              	XMC_POSIF_SetInterruptNode:
+ 358              	.LFB99:
+ 260:../Libraries/XMCLib/src/xmc_posif.c **** 
+ 261:../Libraries/XMCLib/src/xmc_posif.c **** /* API to select an interrupt node */
+ 262:../Libraries/XMCLib/src/xmc_posif.c **** void XMC_POSIF_SetInterruptNode(XMC_POSIF_t *const peripheral, const XMC_POSIF_IRQ_EVENT_t event, c
+ 263:../Libraries/XMCLib/src/xmc_posif.c **** {
+ 359              	 .loc 1 263 0
+ 360              	 .cfi_startproc
+ 361              	.LVL31:
+ 362 0000 10B5     	 push {r4,lr}
+ 363              	.LCFI4:
+ 364              	 .cfi_def_cfa_offset 8
+ 365              	 .cfi_offset 4,-8
+ 366              	 .cfi_offset 14,-4
+ 264:../Libraries/XMCLib/src/xmc_posif.c ****   uint32_t reg;
+ 265:../Libraries/XMCLib/src/xmc_posif.c ****   
+ 266:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SetInterruptNode:Invalid module pointer", XMC_POSIF_IsPeripheralValid(perip
+ 267:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SetInterruptNode:Wrong IRQ event", (event <= XMC_POSIF_IRQ_EVENT_PCLK) );
+ 268:../Libraries/XMCLib/src/xmc_posif.c ****   XMC_ASSERT("XMC_POSIF_SetInterruptNode:Wrong SR ID", (sr <= XMC_POSIF_SR_ID_1) );
+ 269:../Libraries/XMCLib/src/xmc_posif.c ****   
+ 270:../Libraries/XMCLib/src/xmc_posif.c ****   reg = peripheral->PFLGE;
+ 271:../Libraries/XMCLib/src/xmc_posif.c ****   reg &= ~((uint32_t)1 << ((uint32_t)event + (uint32_t)POSIF_PFLGE_CHESEL_Pos));
+ 367              	 .loc 1 271 0
+ 368 0002 0124     	 mov r4,#1
+ 369 0004 1031     	 add r1,r1,#16
+ 370              	.LVL32:
+ 371 0006 8C40     	 lsl r4,r4,r1
+ 272:../Libraries/XMCLib/src/xmc_posif.c ****   reg |= (uint32_t)sr << ((uint32_t)event + (uint32_t)POSIF_PFLGE_CHESEL_Pos);
+ 372              	 .loc 1 272 0
+ 373 0008 8A40     	 lsl r2,r2,r1
+ 374              	.LVL33:
+ 270:../Libraries/XMCLib/src/xmc_posif.c ****   reg &= ~((uint32_t)1 << ((uint32_t)event + (uint32_t)POSIF_PFLGE_CHESEL_Pos));
+ 375              	 .loc 1 270 0
+ 376 000a 436F     	 ldr r3,[r0,#116]
+ 377              	.LVL34:
+ 273:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PFLGE = reg;
+ 274:../Libraries/XMCLib/src/xmc_posif.c **** }
+ 378              	 .loc 1 274 0
+ 379              	 
+ 271:../Libraries/XMCLib/src/xmc_posif.c ****   reg |= (uint32_t)sr << ((uint32_t)event + (uint32_t)POSIF_PFLGE_CHESEL_Pos);
+ 380              	 .loc 1 271 0
+ 381 000c A343     	 bic r3,r4
+ 382              	.LVL35:
+ 272:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PFLGE = reg;
+ 383              	 .loc 1 272 0
+ 384 000e 1343     	 orr r3,r2
+ 385              	.LVL36:
+ 273:../Libraries/XMCLib/src/xmc_posif.c ****   peripheral->PFLGE = reg;
+ 386              	 .loc 1 273 0
+ 387 0010 4367     	 str r3,[r0,#116]
+ 388              	 .loc 1 274 0
+ 389 0012 10BD     	 pop {r4,pc}
+ 390              	 .cfi_endproc
+ 391              	.LFE99:
+ 393              	 .text
+ 394              	.Letext0:
+ 395              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 396              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 397              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
+ 398              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_scu.h"
+ 399              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 400              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+ 401              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_scu.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_posif.c
+    {standard input}:18     .text.XMC_POSIF_Enable:00000000 $t
+    {standard input}:23     .text.XMC_POSIF_Enable:00000000 XMC_POSIF_Enable
+    {standard input}:62     .text.XMC_POSIF_Enable:0000001c $d
+    {standard input}:68     .text.XMC_POSIF_Disable:00000000 $t
+    {standard input}:73     .text.XMC_POSIF_Disable:00000000 XMC_POSIF_Disable
+    {standard input}:111    .text.XMC_POSIF_Disable:0000001c $d
+    {standard input}:117    .text.XMC_POSIF_Init:00000000 $t
+    {standard input}:122    .text.XMC_POSIF_Init:00000000 XMC_POSIF_Init
+    {standard input}:162    .text.XMC_POSIF_HSC_Init:00000000 $t
+    {standard input}:167    .text.XMC_POSIF_HSC_Init:00000000 XMC_POSIF_HSC_Init
+    {standard input}:203    .text.XMC_POSIF_QD_Init:00000000 $t
+    {standard input}:208    .text.XMC_POSIF_QD_Init:00000000 XMC_POSIF_QD_Init
+    {standard input}:246    .text.XMC_POSIF_MCM_Init:00000000 $t
+    {standard input}:251    .text.XMC_POSIF_MCM_Init:00000000 XMC_POSIF_MCM_Init
+    {standard input}:286    .text.XMC_POSIF_SelectInputSource:00000000 $t
+    {standard input}:291    .text.XMC_POSIF_SelectInputSource:00000000 XMC_POSIF_SelectInputSource
+    {standard input}:347    .text.XMC_POSIF_SelectInputSource:00000030 $d
+    {standard input}:352    .text.XMC_POSIF_SetInterruptNode:00000000 $t
+    {standard input}:357    .text.XMC_POSIF_SetInterruptNode:00000000 XMC_POSIF_SetInterruptNode
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_CLOCK_UngatePeripheralClock
+XMC_SCU_CLOCK_GatePeripheralClock

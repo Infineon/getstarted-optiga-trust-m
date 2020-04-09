@@ -1,0 +1,374 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "example_optiga_crypt_ecc_generate_keypair.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_crypt_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_crypt_callback:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga/example_optiga_crypt_ecc_generate_keypair.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \file example_optiga_crypt_ecc_generate_keypair.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \brief   This file provides the example for generation of ecc keypair using
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *          optiga_crypt_ecc_generate_keypair.
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * \ingroup grOptigaExamples
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** *
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** * @{
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** */
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** #include "optiga/optiga_crypt.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** #include "optiga_example.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** #ifdef OPTIGA_CRYPT_ECC_GENERATE_KEYPAIR_ENABLED
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** /**
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  * Callback when optiga_crypt_xxxx operation is completed asynchronously
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  */
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** static volatile optiga_lib_status_t optiga_lib_status;
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** //lint --e{818} suppress "argument "context" is not used in the sample provided"
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** static void optiga_crypt_callback(void * context, optiga_lib_status_t return_status)
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** {
+  25              	 .loc 1 50 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_lib_status = return_status;
+  28              	 .loc 1 51 0
+  29 0000 014B     	 ldr r3,.L2
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     if (NULL != context)
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     {
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         // callback to upper layer here
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     }
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** }
+  30              	 .loc 1 56 0
+  31              	 
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_lib_status = return_status;
+  32              	 .loc 1 51 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 56 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE0:
+  43              	 .section .text.example_optiga_crypt_ecc_generate_keypair,"ax",%progbits
+  44              	 .align 1
+  45              	 .global example_optiga_crypt_ecc_generate_keypair
+  46              	 .code 16
+  47              	 .thumb_func
+  49              	example_optiga_crypt_ecc_generate_keypair:
+  50              	.LFB1:
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** /**
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  * The below example demonstrates the generation of
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  * ECC Key pair using #optiga_crypt_ecc_generate_keypair.
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  *
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****  */
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** void example_optiga_crypt_ecc_generate_keypair(void)
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** {
+  51              	 .loc 1 64 0
+  52              	 .cfi_startproc
+  53              	.LVL1:
+  54 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  55              	.LCFI0:
+  56              	 .cfi_def_cfa_offset 20
+  57              	 .cfi_offset 4,-20
+  58              	 .cfi_offset 5,-16
+  59              	 .cfi_offset 6,-12
+  60              	 .cfi_offset 7,-8
+  61              	 .cfi_offset 14,-4
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_lib_status_t return_status = 0;
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_key_id_t optiga_key_id;
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     //To store the generated public key as part of Generate key pair
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     uint8_t public_key [100];
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     uint16_t public_key_length = sizeof(public_key);
+  62              	 .loc 1 70 0
+  63 0002 1227     	 mov r7,#18
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_lib_status_t return_status = 0;
+  64              	 .loc 1 64 0
+  65 0004 A1B0     	 sub sp,sp,#132
+  66              	.LCFI1:
+  67              	 .cfi_def_cfa_offset 152
+  68              	 .loc 1 70 0
+  69 0006 02AB     	 add r3,sp,#8
+  70 0008 FF18     	 add r7,r7,r3
+  71 000a 6423     	 mov r3,#100
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     optiga_crypt_t * me = NULL;
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     OPTIGA_EXAMPLE_LOG_MESSAGE(__FUNCTION__);
+  72              	 .loc 1 73 0
+  73 000c 204D     	 ldr r5,.L26
+  74 000e 214C     	 ldr r4,.L26+4
+  75 0010 2148     	 ldr r0,.L26+8
+  76 0012 211C     	 mov r1,r4
+  77 0014 2A1C     	 mov r2,r5
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  78              	 .loc 1 70 0
+  79 0016 3B80     	 strh r3,[r7]
+  80              	.LVL2:
+  81              	 .loc 1 73 0
+  82 0018 FFF7FEFF 	 bl optiga_lib_print_message
+  83              	.LVL3:
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     do
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     {
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         /**
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          * 1. Create OPTIGA Crypt Instance
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          */
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         me = optiga_crypt_create(0, optiga_crypt_callback, NULL);
+  84              	 .loc 1 80 0
+  85 001c 0020     	 mov r0,#0
+  86 001e 1F49     	 ldr r1,.L26+12
+  87 0020 021C     	 mov r2,r0
+  88 0022 FFF7FEFF 	 bl optiga_crypt_create
+  89              	.LVL4:
+  90 0026 0595     	 str r5,[sp,#20]
+  91 0028 061E     	 sub r6,r0,#0
+  92              	.LVL5:
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         if (NULL == me)
+  93              	 .loc 1 81 0
+  94 002a 1FD0     	 beq .L8
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         {
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             break;
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         }
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         /**
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          * 2. Generate ECC Key pair
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          *       - Use ECC NIST P 256 Curve
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          *       - Specify the Key Usage (Key Agreement or Sign based on requirement)
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          *       - Store the Private key in OPTIGA Key store
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          *       - Export Public Key
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****          */
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+  95              	 .loc 1 93 0
+  96 002c 0123     	 mov r3,#1
+  97 002e 1C4D     	 ldr r5,.L26+16
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         optiga_key_id = OPTIGA_KEY_ID_E0F1;
+  98              	 .loc 1 94 0
+  99 0030 1C4A     	 ldr r2,.L26+20
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         optiga_key_id = OPTIGA_KEY_ID_E0F1;
+ 100              	 .loc 1 93 0
+ 101 0032 2B80     	 strh r3,[r5]
+ 102              	 .loc 1 94 0
+ 103 0034 06AB     	 add r3,sp,#24
+ 104 0036 1A80     	 strh r2,[r3]
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         //for Session based, use OPTIGA_KEY_ID_SESSION_BASED as key id as shown below.
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         //optiga_key_id = OPTIGA_KEY_ID_SESSION_BASED;
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         return_status = optiga_crypt_ecc_generate_keypair(me,
+ 105              	 .loc 1 97 0
+ 106 0038 0093     	 str r3,[sp]
+ 107 003a 07AB     	 add r3,sp,#28
+ 108 003c 0193     	 str r3,[sp,#4]
+ 109 003e 1022     	 mov r2,#16
+ 110 0040 0297     	 str r7,[sp,#8]
+ 111 0042 0321     	 mov r1,#3
+ 112 0044 0023     	 mov r3,#0
+ 113 0046 FFF7FEFF 	 bl optiga_crypt_ecc_generate_keypair
+ 114              	.LVL6:
+ 115 004a 021E     	 sub r2,r0,#0
+ 116              	.LVL7:
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           OPTIGA_ECC_CURVE_NIST_P_256,
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           (uint8_t)OPTIGA_KEY_USAGE_SIGN,
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           FALSE,
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           &optiga_key_id,
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           public_key,
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****                                                           &public_key_length);
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 117              	 .loc 1 104 0
+ 118 004c 09D1     	 bne .L6
+ 119              	.L7:
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         {
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             break;
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         }
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 120              	 .loc 1 109 0 discriminator 1
+ 121 004e 2B88     	 ldrh r3,[r5]
+ 122 0050 012B     	 cmp r3,#1
+ 123 0052 FCD0     	 beq .L7
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         {
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             //Wait until the optiga_crypt_ecc_generate_keypair operation is completed
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         }
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 124              	 .loc 1 114 0
+ 125 0054 2B88     	 ldrh r3,[r5]
+ 126 0056 002B     	 cmp r3,#0
+ 127 0058 08D0     	 beq .L8
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         {
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             //Key pair generation failed
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             return_status = optiga_lib_status;
+ 128              	 .loc 1 117 0
+ 129 005a 2A88     	 ldrh r2,[r5]
+ 130 005c 92B2     	 uxth r2,r2
+ 131              	.LVL8:
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             break;
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         }
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         return_status = OPTIGA_LIB_SUCCESS;
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     } while (FALSE);
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 132              	 .loc 1 122 0
+ 133 005e 002A     	 cmp r2,#0
+ 134 0060 04D0     	 beq .L8
+ 135              	.LVL9:
+ 136              	.L6:
+ 137              	 .loc 1 122 0 is_stmt 0 discriminator 1
+ 138 0062 201C     	 mov r0,r4
+ 139 0064 1049     	 ldr r1,.L26+24
+ 140 0066 FFF7FEFF 	 bl optiga_lib_print_status
+ 141              	.LVL10:
+ 142 006a 06E0     	 b .L9
+ 143              	.L8:
+ 144              	 .loc 1 122 0 discriminator 2
+ 145 006c 201C     	 mov r0,r4
+ 146 006e 0599     	 ldr r1,[sp,#20]
+ 147 0070 0022     	 mov r2,#0
+ 148 0072 FFF7FEFF 	 bl optiga_lib_print_status
+ 149              	.LVL11:
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** 
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     if (me)
+ 150              	 .loc 1 124 0 is_stmt 1 discriminator 2
+ 151 0076 002E     	 cmp r6,#0
+ 152 0078 08D0     	 beq .L4
+ 153              	.L9:
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     {
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         //Destroy the instance after the completion of usecase if not required.
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         return_status = optiga_crypt_destroy(me);
+ 154              	 .loc 1 127 0
+ 155 007a 301C     	 mov r0,r6
+ 156 007c FFF7FEFF 	 bl optiga_crypt_destroy
+ 157              	.LVL12:
+ 158 0080 021E     	 sub r2,r0,#0
+ 159              	.LVL13:
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 160              	 .loc 1 128 0
+ 161 0082 03D0     	 beq .L4
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         {
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             //lint --e{774} suppress This is a generic macro
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 162              	 .loc 1 131 0 discriminator 1
+ 163 0084 201C     	 mov r0,r4
+ 164              	.LVL14:
+ 165 0086 0849     	 ldr r1,.L26+24
+ 166 0088 FFF7FEFF 	 bl optiga_lib_print_status
+ 167              	.LVL15:
+ 168              	.L4:
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****         }
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c ****     }
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_ecc_generate_keypair.c **** }
+ 169              	 .loc 1 134 0
+ 170 008c 21B0     	 add sp,sp,#132
+ 171              	 
+ 172              	.LVL16:
+ 173 008e F0BD     	 pop {r4,r5,r6,r7,pc}
+ 174              	.L27:
+ 175              	 .align 2
+ 176              	.L26:
+ 177 0090 15000000 	 .word .LC4
+ 178 0094 00000000 	 .word .LC2
+ 179 0098 00000000 	 .word .LANCHOR1
+ 180 009c 00000000 	 .word optiga_crypt_callback
+ 181 00a0 00000000 	 .word .LANCHOR0
+ 182 00a4 F1E0FFFF 	 .word -7951
+ 183 00a8 1A000000 	 .word .LC8
+ 184              	 .cfi_endproc
+ 185              	.LFE1:
+ 187              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 188              	.LC2:
+ 189 0000 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 189      69676120 
+ 189      6578616D 
+ 189      706C655D 
+ 189      20203A20 
+ 190              	.LC4:
+ 191 0015 1B5B306D 	 .ascii "\033[0m\000"
+ 191      00
+ 192              	.LC8:
+ 193 001a 1B5B3331 	 .ascii "\033[31m\000"
+ 193      6D00
+ 194              	 .section .rodata.__FUNCTION__.6003,"a",%progbits
+ 195              	 .set .LANCHOR1,.+0
+ 198              	__FUNCTION__.6003:
+ 199 0000 6578616D 	 .ascii "example_optiga_crypt_ecc_generate_keypair\000"
+ 199      706C655F 
+ 199      6F707469 
+ 199      67615F63 
+ 199      72797074 
+ 200              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 201              	 .align 1
+ 202              	 .set .LANCHOR0,.+0
+ 205              	optiga_lib_status:
+ 206 0000 0000     	 .space 2
+ 207              	 .text
+ 208              	.Letext0:
+ 209              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 210              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 211              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 212              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 213              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 214              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_crypt.h"
+ 215              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 example_optiga_crypt_ecc_generate_keypair.c
+    {standard input}:18     .text.optiga_crypt_callback:00000000 $t
+    {standard input}:22     .text.optiga_crypt_callback:00000000 optiga_crypt_callback
+    {standard input}:39     .text.optiga_crypt_callback:00000008 $d
+    {standard input}:44     .text.example_optiga_crypt_ecc_generate_keypair:00000000 $t
+    {standard input}:49     .text.example_optiga_crypt_ecc_generate_keypair:00000000 example_optiga_crypt_ecc_generate_keypair
+    {standard input}:177    .text.example_optiga_crypt_ecc_generate_keypair:00000090 $d
+    {standard input}:198    .rodata.__FUNCTION__.6003:00000000 __FUNCTION__.6003
+    {standard input}:201    .bss.optiga_lib_status:00000000 $d
+    {standard input}:205    .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+optiga_lib_print_message
+optiga_crypt_create
+optiga_crypt_ecc_generate_keypair
+optiga_lib_print_status
+optiga_crypt_destroy

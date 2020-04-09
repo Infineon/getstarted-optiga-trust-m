@@ -1,0 +1,104 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "timer_conf.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .global tick_timer
+  18              	 .global tick_timer_config
+  19              	 .global scheduler_timer
+  20              	 .global scheduler_timer_config
+  21              	 .section .data.tick_timer,"aw",%progbits
+  22              	 .align 2
+  25              	tick_timer:
+  26 0000 A0860100 	 .word 100000
+  27 0004 00D05485 	 .word -2058039296
+  28 0008 0A000000 	 .word 10
+  29 000c 50000000 	 .word 80
+  30 0010 00000000 	 .word GLOBAL_CCU4_0
+  31 0014 00020448 	 .word 1208222208
+  32 0018 01       	 .byte 1
+  33 0019 000000   	 .space 3
+  34 001c 00000000 	 .word tick_timer_config
+  35 0020 00       	 .byte 0
+  36 0021 00       	 .byte 0
+  37 0022 7FBB     	 .short -17537
+  38 0024 01       	 .byte 1
+  39 0025 01       	 .byte 1
+  40 0026 00       	 .byte 0
+  41 0027 00       	 .space 1
+  42              	 .section .data.scheduler_timer,"aw",%progbits
+  43              	 .align 2
+  46              	scheduler_timer:
+  47 0000 A0860100 	 .word 100000
+  48 0004 00D05485 	 .word -2058039296
+  49 0008 0A000000 	 .word 10
+  50 000c 05000000 	 .word 5
+  51 0010 00000000 	 .word GLOBAL_CCU4_0
+  52 0014 00010448 	 .word 1208221952
+  53 0018 00       	 .byte 0
+  54 0019 000000   	 .space 3
+  55 001c 00000000 	 .word scheduler_timer_config
+  56 0020 01       	 .byte 1
+  57 0021 00       	 .byte 0
+  58 0022 7FBB     	 .short -17537
+  59 0024 01       	 .byte 1
+  60 0025 01       	 .byte 1
+  61 0026 00       	 .byte 0
+  62 0027 00       	 .space 1
+  63              	 .section .data.scheduler_timer_config,"aw",%progbits
+  64              	 .align 2
+  67              	scheduler_timer_config:
+  68 0000 00       	 .byte 0
+  69 0001 00       	 .byte 0
+  70 0002 00       	 .byte 0
+  71 0003 00       	 .byte 0
+  72 0004 01       	 .byte 1
+  73 0005 00       	 .byte 0
+  74 0006 0000     	 .space 2
+  75              	 .section .data.tick_timer_config,"aw",%progbits
+  76              	 .align 2
+  79              	tick_timer_config:
+  80 0000 00       	 .byte 0
+  81 0001 00       	 .byte 0
+  82 0002 00       	 .byte 0
+  83 0003 00       	 .byte 0
+  84 0004 01       	 .byte 1
+  85 0005 00       	 .byte 0
+  86 0006 0000     	 .space 2
+  87              	 .text
+  88              	.Letext0:
+  89              	 .file 1 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+  90              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+  91              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
+  92              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_ccu4.h"
+  93              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_scu.h"
+  94              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/GLOBAL_CCU4/global_ccu4.h"
+  95              	 .file 7 "../Dave/Generated/TIMER/timer.h"
+  96              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+  97              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+  98              	 .file 10 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/GLOBAL_CCU4/global_ccu4_extern.h"
+  99              	 .file 11 "../Dave/Generated/TIMER/timer_conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer_conf.c
+    {standard input}:25     .data.tick_timer:00000000 tick_timer
+    {standard input}:79     .data.tick_timer_config:00000000 tick_timer_config
+    {standard input}:46     .data.scheduler_timer:00000000 scheduler_timer
+    {standard input}:67     .data.scheduler_timer_config:00000000 scheduler_timer_config
+    {standard input}:22     .data.tick_timer:00000000 $d
+    {standard input}:43     .data.scheduler_timer:00000000 $d
+    {standard input}:64     .data.scheduler_timer_config:00000000 $d
+    {standard input}:76     .data.tick_timer_config:00000000 $d
+
+UNDEFINED SYMBOLS
+GLOBAL_CCU4_0

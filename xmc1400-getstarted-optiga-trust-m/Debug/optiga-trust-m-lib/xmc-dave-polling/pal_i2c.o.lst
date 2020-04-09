@@ -1,0 +1,766 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "pal_i2c.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.pal_i2c_acquire.isra.0,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	pal_i2c_acquire.isra.0:
+  23              	.LFB284:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling/pal_i2c.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \file pal_i2c.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \brief   This file implements the platform abstraction layer(pal) APIs for I2C.
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * \ingroup  grPAL
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** *
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** * @{
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** */
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** #include <DAVE.h>
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** #include "optiga/pal/pal_i2c.h"
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** #define PAL_I2C_MASTER_MAX_BITRATE  (400U)
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** /// @cond hidden
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** _STATIC_H volatile uint32_t g_entry_count = 0;
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** _STATIC_H pal_i2c_t * gp_pal_i2c_current_ctx;
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** //lint --e{715} suppress "This is implemented for overall completion of API"
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** _STATIC_H pal_status_t pal_i2c_acquire(const void * p_i2c_context)
+  25              	 .loc 1 50 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (0 == g_entry_count)
+  28              	 .loc 1 52 0
+  29 0000 064B     	 ldr r3,.L5
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         g_entry_count++;
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (1 == g_entry_count)
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             return PAL_STATUS_SUCCESS;
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     return PAL_STATUS_FAILURE;
+  30              	 .loc 1 60 0
+  31 0002 0120     	 mov r0,#1
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+  32              	 .loc 1 52 0
+  33 0004 1A68     	 ldr r2,[r3]
+  34 0006 002A     	 cmp r2,#0
+  35 0008 07D1     	 bne .L2
+  36              	.LBB14:
+  37              	.LBB15:
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (1 == g_entry_count)
+  38              	 .loc 1 54 0
+  39 000a 1A68     	 ldr r2,[r3]
+  40 000c 1218     	 add r2,r2,r0
+  41 000e 1A60     	 str r2,[r3]
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+  42              	 .loc 1 55 0
+  43 0010 1868     	 ldr r0,[r3]
+  44 0012 0138     	 sub r0,r0,#1
+  45 0014 431E     	 sub r3,r0,#1
+  46 0016 9841     	 sbc r0,r0,r3
+  47              	.LBE15:
+  48              	.LBE14:
+  49              	 .loc 1 60 0
+  50 0018 80B2     	 uxth r0,r0
+  51              	.L2:
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+  52              	 .loc 1 61 0
+  53              	 
+  54 001a 7047     	 bx lr
+  55              	.L6:
+  56              	 .align 2
+  57              	.L5:
+  58 001c 00000000 	 .word .LANCHOR0
+  59              	 .cfi_endproc
+  60              	.LFE284:
+  62              	 .section .text.invoke_upper_layer_callback,"ax",%progbits
+  63              	 .align 1
+  64              	 .global invoke_upper_layer_callback
+  65              	 .code 16
+  66              	 .thumb_func
+  68              	invoke_upper_layer_callback:
+  69              	.LFB278:
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** //lint --e{715} suppress "The unused p_i2c_context variable is kept for future enhancements"
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** _STATIC_H void pal_i2c_release(const void * p_i2c_context)
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     g_entry_count = 0;
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** /// @endcond
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** void invoke_upper_layer_callback (const pal_i2c_t * p_pal_i2c_ctx, optiga_lib_status_t event)
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+  70              	 .loc 1 71 0
+  71              	 .cfi_startproc
+  72              	.LVL1:
+  73 0000 08B5     	 push {r3,lr}
+  74              	.LCFI0:
+  75              	 .cfi_def_cfa_offset 8
+  76              	 .cfi_offset 3,-8
+  77              	 .cfi_offset 14,-4
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     upper_layer_callback_t upper_layer_handler;
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t type"
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     upper_layer_handler = (upper_layer_callback_t)p_pal_i2c_ctx->upper_layer_event_handler;
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     upper_layer_handler(p_pal_i2c_ctx->p_upper_layer_ctx, event);
+  78              	 .loc 1 76 0
+  79 0002 C368     	 ldr r3,[r0,#12]
+  80 0004 8068     	 ldr r0,[r0,#8]
+  81              	.LVL2:
+  82 0006 9847     	 blx r3
+  83              	.LVL3:
+  84              	.LBB16:
+  85              	.LBB17:
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+  86              	 .loc 1 66 0
+  87 0008 0022     	 mov r2,#0
+  88 000a 014B     	 ldr r3,.L8
+  89              	.LBE17:
+  90              	.LBE16:
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //Release I2C Bus
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     pal_i2c_release(p_pal_i2c_ctx->p_upper_layer_ctx);
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+  91              	 .loc 1 80 0
+  92              	 
+  93              	.LBB19:
+  94              	.LBB18:
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+  95              	 .loc 1 66 0
+  96 000c 1A60     	 str r2,[r3]
+  97              	.LBE18:
+  98              	.LBE19:
+  99              	 .loc 1 80 0
+ 100 000e 08BD     	 pop {r3,pc}
+ 101              	.L9:
+ 102              	 .align 2
+ 103              	.L8:
+ 104 0010 00000000 	 .word .LANCHOR0
+ 105              	 .cfi_endproc
+ 106              	.LFE278:
+ 108              	 .section .text.pal_i2c_init,"ax",%progbits
+ 109              	 .align 1
+ 110              	 .global pal_i2c_init
+ 111              	 .code 16
+ 112              	 .thumb_func
+ 114              	pal_i2c_init:
+ 115              	.LFB279:
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** /// @endcond
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** pal_status_t pal_i2c_init(const pal_i2c_t * p_i2c_context)
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+ 116              	 .loc 1 85 0
+ 117              	 .cfi_startproc
+ 118              	.LVL4:
+ 119 0000 08B5     	 push {r3,lr}
+ 120              	.LCFI1:
+ 121              	 .cfi_def_cfa_offset 8
+ 122              	 .cfi_offset 3,-8
+ 123              	 .cfi_offset 14,-4
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 	DAVE_STATUS_t status;
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 	status = (DAVE_STATUS_t)I2C_MASTER_Init(&i2c_master_0);
+ 124              	 .loc 1 88 0
+ 125 0002 0248     	 ldr r0,.L11
+ 126              	.LVL5:
+ 127 0004 FFF7FEFF 	 bl I2C_MASTER_Init
+ 128              	.LVL6:
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 	return PAL_STATUS_SUCCESS;
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 129              	 .loc 1 91 0
+ 130              	 
+ 131 0008 0020     	 mov r0,#0
+ 132 000a 08BD     	 pop {r3,pc}
+ 133              	.L12:
+ 134              	 .align 2
+ 135              	.L11:
+ 136 000c 00000000 	 .word i2c_master_0
+ 137              	 .cfi_endproc
+ 138              	.LFE279:
+ 140              	 .section .text.pal_i2c_deinit,"ax",%progbits
+ 141              	 .align 1
+ 142              	 .global pal_i2c_deinit
+ 143              	 .code 16
+ 144              	 .thumb_func
+ 146              	pal_i2c_deinit:
+ 147              	.LFB280:
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** pal_status_t pal_i2c_deinit(const pal_i2c_t * p_i2c_context)
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+ 148              	 .loc 1 94 0
+ 149              	 .cfi_startproc
+ 150              	.LVL7:
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     return PAL_STATUS_SUCCESS;
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 151              	 .loc 1 96 0
+ 152 0000 0020     	 mov r0,#0
+ 153              	.LVL8:
+ 154              	 
+ 155 0002 7047     	 bx lr
+ 156              	 .cfi_endproc
+ 157              	.LFE280:
+ 159              	 .section .text.pal_i2c_write,"ax",%progbits
+ 160              	 .align 1
+ 161              	 .global pal_i2c_write
+ 162              	 .code 16
+ 163              	 .thumb_func
+ 165              	pal_i2c_write:
+ 166              	.LFB281:
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** pal_status_t pal_i2c_write(pal_i2c_t * p_i2c_context, uint8_t * p_data, uint16_t length)
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+ 167              	 .loc 1 99 0
+ 168              	 .cfi_startproc
+ 169              	.LVL9:
+ 170 0000 73B5     	 push {r0,r1,r4,r5,r6,lr}
+ 171              	.LCFI2:
+ 172              	 .cfi_def_cfa_offset 24
+ 173              	 .cfi_offset 0,-24
+ 174              	 .cfi_offset 1,-20
+ 175              	 .cfi_offset 4,-16
+ 176              	 .cfi_offset 5,-12
+ 177              	 .cfi_offset 6,-8
+ 178              	 .cfi_offset 14,-4
+ 179              	 .loc 1 99 0
+ 180 0002 041C     	 mov r4,r0
+ 181 0004 0D1C     	 mov r5,r1
+ 182 0006 161C     	 mov r6,r2
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     pal_status_t status = PAL_STATUS_FAILURE;
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //Acquire the I2C bus before read/write
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (PAL_STATUS_SUCCESS == pal_i2c_acquire(p_i2c_context))
+ 183              	 .loc 1 103 0
+ 184 0008 FFF7FEFF 	 bl pal_i2c_acquire.isra.0
+ 185              	.LVL10:
+ 186 000c 0028     	 cmp r0,#0
+ 187 000e 1AD1     	 bne .L15
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         gp_pal_i2c_current_ctx = p_i2c_context;
+ 188              	 .loc 1 105 0
+ 189 0010 104B     	 ldr r3,.L19
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //Invoke the low level i2c master driver API to write to the bus
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (I2C_MASTER_STATUS_SUCCESS != I2C_MASTER_Transmit(p_i2c_context->p_i2c_hw_config,
+ 190              	 .loc 1 108 0
+ 191 0012 2068     	 ldr r0,[r4]
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 192              	 .loc 1 105 0
+ 193 0014 1C60     	 str r4,[r3]
+ 194              	 .loc 1 108 0
+ 195 0016 0096     	 str r6,[sp]
+ 196 0018 0126     	 mov r6,#1
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (bool)TRUE,
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (p_i2c_context->slave_address << 1),
+ 197              	 .loc 1 110 0
+ 198 001a 2279     	 ldrb r2,[r4,#4]
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (bool)TRUE,
+ 199              	 .loc 1 108 0
+ 200 001c 2B1C     	 mov r3,r5
+ 201              	 .loc 1 110 0
+ 202 001e 5200     	 lsl r2,r2,#1
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (bool)TRUE,
+ 203              	 .loc 1 108 0
+ 204 0020 0196     	 str r6,[sp,#4]
+ 205 0022 311C     	 mov r1,r6
+ 206 0024 FFF7FEFF 	 bl I2C_MASTER_Transmit
+ 207              	.LVL11:
+ 208 0028 E368     	 ldr r3,[r4,#12]
+ 209 002a 051E     	 sub r5,r0,#0
+ 210              	.LVL12:
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              p_data,
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              length,
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (bool)TRUE))
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             //If I2C Master fails to invoke the write operation, invoke upper layer event handler w
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             ((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 211              	 .loc 1 118 0
+ 212 002c A068     	 ldr r0,[r4,#8]
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                              (bool)TRUE,
+ 213              	 .loc 1 108 0
+ 214 002e 03D0     	 beq .L16
+ 215              	 .loc 1 118 0
+ 216 0030 311C     	 mov r1,r6
+ 217 0032 9847     	 blx r3
+ 218              	.LVL13:
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 219              	 .loc 1 100 0
+ 220 0034 301C     	 mov r0,r6
+ 221 0036 02E0     	 b .L17
+ 222              	.L16:
+ 223              	.LVL14:
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                        (p_i2c_context->p_upper_layer_ctx , PAL_I2C_
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         else
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         	status = PAL_STATUS_SUCCESS;
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         	//lint --e{611} suppress "void* function pointer is type casted to app_event_handler_t typ
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             ((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 224              	 .loc 1 125 0
+ 225 0038 291C     	 mov r1,r5
+ 226 003a 9847     	 blx r3
+ 227              	.LVL15:
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         	//lint --e{611} suppress "void* function pointer is type casted to app_event_handler_t typ
+ 228              	 .loc 1 123 0
+ 229 003c 281C     	 mov r0,r5
+ 230              	.LVL16:
+ 231              	.L17:
+ 232              	.LBB20:
+ 233              	.LBB21:
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 234              	 .loc 1 66 0
+ 235 003e 0022     	 mov r2,#0
+ 236 0040 054B     	 ldr r3,.L19+4
+ 237 0042 1A60     	 str r2,[r3]
+ 238 0044 04E0     	 b .L18
+ 239              	.LVL17:
+ 240              	.L15:
+ 241              	.LBE21:
+ 242              	.LBE20:
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                        (p_i2c_context->p_upper_layer_ctx , PAL_I2C_
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         pal_i2c_release(p_i2c_context);
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     else
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         status = PAL_STATUS_I2C_BUSY;
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t t
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         ((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 243              	 .loc 1 134 0
+ 244 0046 A068     	 ldr r0,[r4,#8]
+ 245 0048 E368     	 ldr r3,[r4,#12]
+ 246 004a 0221     	 mov r1,#2
+ 247 004c 9847     	 blx r3
+ 248              	.LVL18:
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t t
+ 249              	 .loc 1 132 0
+ 250 004e 0220     	 mov r0,#2
+ 251              	.LVL19:
+ 252              	.L18:
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                         (p_i2c_context->p_upper_layer_ctx , PAL_I2C
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     return status;
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 253              	 .loc 1 138 0
+ 254              	 
+ 255              	.LVL20:
+ 256 0050 76BD     	 pop {r1,r2,r4,r5,r6,pc}
+ 257              	.L20:
+ 258 0052 C046     	 .align 2
+ 259              	.L19:
+ 260 0054 00000000 	 .word .LANCHOR1
+ 261 0058 00000000 	 .word .LANCHOR0
+ 262              	 .cfi_endproc
+ 263              	.LFE281:
+ 265              	 .section .text.pal_i2c_read,"ax",%progbits
+ 266              	 .align 1
+ 267              	 .global pal_i2c_read
+ 268              	 .code 16
+ 269              	 .thumb_func
+ 271              	pal_i2c_read:
+ 272              	.LFB282:
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** pal_status_t pal_i2c_read(pal_i2c_t * p_i2c_context, uint8_t * p_data, uint16_t length)
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+ 273              	 .loc 1 141 0
+ 274              	 .cfi_startproc
+ 275              	.LVL21:
+ 276 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 277              	.LCFI3:
+ 278              	 .cfi_def_cfa_offset 20
+ 279              	 .cfi_offset 4,-20
+ 280              	 .cfi_offset 5,-16
+ 281              	 .cfi_offset 6,-12
+ 282              	 .cfi_offset 7,-8
+ 283              	 .cfi_offset 14,-4
+ 284 0002 85B0     	 sub sp,sp,#20
+ 285              	.LCFI4:
+ 286              	 .cfi_def_cfa_offset 40
+ 287              	 .loc 1 141 0
+ 288 0004 051C     	 mov r5,r0
+ 289 0006 0C1C     	 mov r4,r1
+ 290 0008 161C     	 mov r6,r2
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     pal_status_t status = PAL_STATUS_FAILURE;
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //Acquire the I2C bus before read/write
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (PAL_STATUS_SUCCESS == pal_i2c_acquire(p_i2c_context))
+ 291              	 .loc 1 145 0
+ 292 000a FFF7FEFF 	 bl pal_i2c_acquire.isra.0
+ 293              	.LVL22:
+ 294 000e 0028     	 cmp r0,#0
+ 295 0010 1CD1     	 bne .L22
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         gp_pal_i2c_current_ctx = p_i2c_context;
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //Invoke the low level i2c master driver API to read from the bus
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (I2C_MASTER_STATUS_SUCCESS != I2C_MASTER_Receive(p_i2c_context->p_i2c_hw_config,
+ 296              	 .loc 1 150 0
+ 297 0012 0127     	 mov r7,#1
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 298              	 .loc 1 147 0
+ 299 0014 114B     	 ldr r3,.L26
+ 300              	 .loc 1 150 0
+ 301 0016 2868     	 ldr r0,[r5]
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 302              	 .loc 1 147 0
+ 303 0018 1D60     	 str r5,[r3]
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE,
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (p_i2c_context->slave_address << 1),
+ 304              	 .loc 1 152 0
+ 305 001a 2A79     	 ldrb r2,[r5,#4]
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE,
+ 306              	 .loc 1 150 0
+ 307 001c 231C     	 mov r3,r4
+ 308 001e 0096     	 str r6,[sp]
+ 309              	 .loc 1 152 0
+ 310 0020 5200     	 lsl r2,r2,#1
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE,
+ 311              	 .loc 1 150 0
+ 312 0022 0197     	 str r7,[sp,#4]
+ 313 0024 0297     	 str r7,[sp,#8]
+ 314 0026 391C     	 mov r1,r7
+ 315 0028 FFF7FEFF 	 bl I2C_MASTER_Receive
+ 316              	.LVL23:
+ 317 002c EB68     	 ldr r3,[r5,#12]
+ 318 002e 041E     	 sub r4,r0,#0
+ 319              	.LVL24:
+ 320 0030 0B4E     	 ldr r6,.L26+4
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             p_data,
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             length,
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE,
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE))
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             //If I2C Master fails to invoke the read operation, invoke upper layer event handler wi
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             ((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 321              	 .loc 1 161 0
+ 322 0032 A868     	 ldr r0,[r5,#8]
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             (bool)TRUE,
+ 323              	 .loc 1 150 0
+ 324 0034 03D0     	 beq .L23
+ 325              	 .loc 1 161 0
+ 326 0036 391C     	 mov r1,r7
+ 327 0038 9847     	 blx r3
+ 328              	.LVL25:
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 329              	 .loc 1 142 0
+ 330 003a 381C     	 mov r0,r7
+ 331 003c 03E0     	 b .L24
+ 332              	.L23:
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                        (p_i2c_context->p_upper_layer_ctx , PAL_I2C_
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         else
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         	//lint --e{611} suppress "void* function pointer is type casted to app_event_handler_t typ
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 			((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 333              	 .loc 1 167 0
+ 334 003e 211C     	 mov r1,r4
+ 335 0040 9847     	 blx r3
+ 336              	.LVL26:
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 													   (p_i2c_context->p_upper_layer_ctx , PAL_I2C_EVENT_SUCCESS);
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 			pal_i2c_release(p_i2c_context);
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             status = PAL_STATUS_SUCCESS;
+ 337              	 .loc 1 170 0
+ 338 0042 201C     	 mov r0,r4
+ 339              	.LBB22:
+ 340              	.LBB23:
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 341              	 .loc 1 66 0
+ 342 0044 3460     	 str r4,[r6]
+ 343              	.LVL27:
+ 344              	.L24:
+ 345              	.LBE23:
+ 346              	.LBE22:
+ 347              	.LBB24:
+ 348              	.LBB25:
+ 349 0046 0023     	 mov r3,#0
+ 350 0048 3360     	 str r3,[r6]
+ 351 004a 04E0     	 b .L25
+ 352              	.LVL28:
+ 353              	.L22:
+ 354              	.LBE25:
+ 355              	.LBE24:
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         pal_i2c_release(p_i2c_context);
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     else
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         status = PAL_STATUS_I2C_BUSY;
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t t
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         ((upper_layer_callback_t)(p_i2c_context->upper_layer_event_handler))
+ 356              	 .loc 1 178 0
+ 357 004c A868     	 ldr r0,[r5,#8]
+ 358 004e EB68     	 ldr r3,[r5,#12]
+ 359 0050 0221     	 mov r1,#2
+ 360 0052 9847     	 blx r3
+ 361              	.LVL29:
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t t
+ 362              	 .loc 1 176 0
+ 363 0054 0220     	 mov r0,#2
+ 364              	.LVL30:
+ 365              	.L25:
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                         (p_i2c_context->p_upper_layer_ctx , PAL_I2C
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     return status;
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 366              	 .loc 1 182 0
+ 367 0056 05B0     	 add sp,sp,#20
+ 368              	 
+ 369              	.LVL31:
+ 370 0058 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 371              	.L27:
+ 372 005a C046     	 .align 2
+ 373              	.L26:
+ 374 005c 00000000 	 .word .LANCHOR1
+ 375 0060 00000000 	 .word .LANCHOR0
+ 376              	 .cfi_endproc
+ 377              	.LFE282:
+ 379              	 .section .text.pal_i2c_set_bitrate,"ax",%progbits
+ 380              	 .align 1
+ 381              	 .global pal_i2c_set_bitrate
+ 382              	 .code 16
+ 383              	 .thumb_func
+ 385              	pal_i2c_set_bitrate:
+ 386              	.LFB283:
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** pal_status_t pal_i2c_set_bitrate(const pal_i2c_t * p_i2c_context, uint16_t bitrate)
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** {
+ 387              	 .loc 1 185 0
+ 388              	 .cfi_startproc
+ 389              	.LVL32:
+ 390 0000 70B5     	 push {r4,r5,r6,lr}
+ 391              	.LCFI5:
+ 392              	 .cfi_def_cfa_offset 16
+ 393              	 .cfi_offset 4,-16
+ 394              	 .cfi_offset 5,-12
+ 395              	 .cfi_offset 6,-8
+ 396              	 .cfi_offset 14,-4
+ 397              	 .loc 1 185 0
+ 398 0002 051C     	 mov r5,r0
+ 399 0004 0E1C     	 mov r6,r1
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     optiga_lib_status_t event = PAL_I2C_EVENT_ERROR;
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** 
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //Acquire the I2C bus before setting the bitrate
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (PAL_STATUS_SUCCESS == pal_i2c_acquire(p_i2c_context))
+ 400              	 .loc 1 190 0
+ 401 0006 FFF7FEFF 	 bl pal_i2c_acquire.isra.0
+ 402              	.LVL33:
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         // If the user provided bitrate is greater than the I2C master hardware maximum supported v
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         // set the I2C master to its maximum supported value.
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (bitrate > PAL_I2C_MASTER_MAX_BITRATE)
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             bitrate = PAL_I2C_MASTER_MAX_BITRATE;
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         if (XMC_I2C_CH_STATUS_OK != XMC_I2C_CH_SetBaudrate(((I2C_MASTER_t * )p_i2c_context->p_i2c_h
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             bitrate * 1000))
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             return_status = PAL_STATUS_FAILURE;
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         else
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             return_status = PAL_STATUS_SUCCESS;
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             event = PAL_I2C_EVENT_SUCCESS;
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         }
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     else
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         return_status = PAL_STATUS_I2C_BUSY;
+ 403              	 .loc 1 211 0
+ 404 000a 0224     	 mov r4,#2
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 405              	 .loc 1 190 0
+ 406 000c 0028     	 cmp r0,#0
+ 407 000e 10D1     	 bne .L29
+ 408              	.LVL34:
+ 409 0010 C823     	 mov r3,#200
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             bitrate * 1000))
+ 410              	 .loc 1 198 0
+ 411 0012 2A68     	 ldr r2,[r5]
+ 412 0014 311C     	 add r1,r6,#0
+ 413 0016 5B00     	 lsl r3,r3,#1
+ 414 0018 9E42     	 cmp r6,r3
+ 415 001a 00D9     	 bls .L30
+ 416 001c 191C     	 add r1,r3,#0
+ 417              	.L30:
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         {
+ 418              	 .loc 1 199 0
+ 419 001e FA23     	 mov r3,#250
+ 420 0020 89B2     	 uxth r1,r1
+ 421 0022 9B00     	 lsl r3,r3,#2
+ 422 0024 5943     	 mul r1,r3
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****                                                             bitrate * 1000))
+ 423              	 .loc 1 198 0
+ 424 0026 1068     	 ldr r0,[r2]
+ 425 0028 FFF7FEFF 	 bl XMC_I2C_CH_SetBaudrate
+ 426              	.LVL35:
+ 427 002c 441E     	 sub r4,r0,#1
+ 428 002e A041     	 sbc r0,r0,r4
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****             event = PAL_I2C_EVENT_SUCCESS;
+ 429              	 .loc 1 205 0
+ 430 0030 84B2     	 uxth r4,r0
+ 431              	.LVL36:
+ 432              	.L29:
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         event = PAL_I2C_EVENT_BUSY;
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (0 != p_i2c_context->upper_layer_event_handler)
+ 433              	 .loc 1 214 0
+ 434 0032 EB68     	 ldr r3,[r5,#12]
+ 435 0034 002B     	 cmp r3,#0
+ 436 0036 02D0     	 beq .L31
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         //lint --e{611} suppress "void* function pointer is type casted to upper_layer_callback_t t
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         ((callback_handler_t)(p_i2c_context->upper_layer_event_handler))(p_i2c_context->p_upper_lay
+ 437              	 .loc 1 217 0
+ 438 0038 A868     	 ldr r0,[r5,#8]
+ 439 003a 211C     	 mov r1,r4
+ 440 003c 9847     	 blx r3
+ 441              	.LVL37:
+ 442              	.L31:
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     //Release I2C Bus if its acquired 
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     if (PAL_STATUS_I2C_BUSY != return_status)
+ 443              	 .loc 1 220 0
+ 444 003e 022C     	 cmp r4,#2
+ 445 0040 02D0     	 beq .L32
+ 446              	.LVL38:
+ 447              	.LBB26:
+ 448              	.LBB27:
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 449              	 .loc 1 66 0
+ 450 0042 0022     	 mov r2,#0
+ 451 0044 014B     	 ldr r3,.L40
+ 452 0046 1A60     	 str r2,[r3]
+ 453              	.LVL39:
+ 454              	.L32:
+ 455              	.LBE27:
+ 456              	.LBE26:
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     {
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****         pal_i2c_release((void * )p_i2c_context);
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     }
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c ****     return return_status;
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/pal/xmc-dave-polling\pal_i2c.c **** }
+ 457              	 .loc 1 225 0
+ 458 0048 201C     	 mov r0,r4
+ 459              	 
+ 460              	.LVL40:
+ 461              	.LVL41:
+ 462 004a 70BD     	 pop {r4,r5,r6,pc}
+ 463              	.L41:
+ 464              	 .align 2
+ 465              	.L40:
+ 466 004c 00000000 	 .word .LANCHOR0
+ 467              	 .cfi_endproc
+ 468              	.LFE283:
+ 470              	 .section .bss.gp_pal_i2c_current_ctx,"aw",%nobits
+ 471              	 .align 2
+ 472              	 .set .LANCHOR1,.+0
+ 475              	gp_pal_i2c_current_ctx:
+ 476 0000 00000000 	 .space 4
+ 477              	 .section .bss.g_entry_count,"aw",%nobits
+ 478              	 .align 2
+ 479              	 .set .LANCHOR0,.+0
+ 482              	g_entry_count:
+ 483 0000 00000000 	 .space 4
+ 484              	 .text
+ 485              	.Letext0:
+ 486              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 487              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 488              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
+ 489              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_usic.h"
+ 490              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_i2c.h"
+ 491              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/I2C_MASTER/i2c_master.h"
+ 492              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/DAVE.h"
+ 493              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 494              	 .file 10 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal.h"
+ 495              	 .file 11 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_i2c.h"
+ 496              	 .file 12 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 497              	 .file 13 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+ 498              	 .file 14 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Dave/Generated/I2C_MASTER/i2c_master_extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 pal_i2c.c
+    {standard input}:18     .text.pal_i2c_acquire.isra.0:00000000 $t
+    {standard input}:22     .text.pal_i2c_acquire.isra.0:00000000 pal_i2c_acquire.isra.0
+    {standard input}:58     .text.pal_i2c_acquire.isra.0:0000001c $d
+    {standard input}:63     .text.invoke_upper_layer_callback:00000000 $t
+    {standard input}:68     .text.invoke_upper_layer_callback:00000000 invoke_upper_layer_callback
+    {standard input}:104    .text.invoke_upper_layer_callback:00000010 $d
+    {standard input}:109    .text.pal_i2c_init:00000000 $t
+    {standard input}:114    .text.pal_i2c_init:00000000 pal_i2c_init
+    {standard input}:136    .text.pal_i2c_init:0000000c $d
+    {standard input}:141    .text.pal_i2c_deinit:00000000 $t
+    {standard input}:146    .text.pal_i2c_deinit:00000000 pal_i2c_deinit
+    {standard input}:160    .text.pal_i2c_write:00000000 $t
+    {standard input}:165    .text.pal_i2c_write:00000000 pal_i2c_write
+    {standard input}:260    .text.pal_i2c_write:00000054 $d
+    {standard input}:266    .text.pal_i2c_read:00000000 $t
+    {standard input}:271    .text.pal_i2c_read:00000000 pal_i2c_read
+    {standard input}:374    .text.pal_i2c_read:0000005c $d
+    {standard input}:380    .text.pal_i2c_set_bitrate:00000000 $t
+    {standard input}:385    .text.pal_i2c_set_bitrate:00000000 pal_i2c_set_bitrate
+    {standard input}:466    .text.pal_i2c_set_bitrate:0000004c $d
+    {standard input}:471    .bss.gp_pal_i2c_current_ctx:00000000 $d
+    {standard input}:475    .bss.gp_pal_i2c_current_ctx:00000000 gp_pal_i2c_current_ctx
+    {standard input}:478    .bss.g_entry_count:00000000 $d
+    {standard input}:482    .bss.g_entry_count:00000000 g_entry_count
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+I2C_MASTER_Init
+i2c_master_0
+I2C_MASTER_Transmit
+I2C_MASTER_Receive
+XMC_I2C_CH_SetBaudrate

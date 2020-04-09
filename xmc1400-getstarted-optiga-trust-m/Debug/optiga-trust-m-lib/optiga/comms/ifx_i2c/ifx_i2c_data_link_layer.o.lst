@@ -1,0 +1,1926 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "ifx_i2c_data_link_layer.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.ifx_i2c_dl_calc_crc,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	ifx_i2c_dl_calc_crc:
+  23              	.LFB4:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c/ifx_i2c_data_link_layer.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \file ifx_i2c_data_link_layer.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \brief   This file implements the APIs for data link layer of the Infineon I2C Protocol Stack lib
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * \ingroup  grIFXI2C
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** *
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** * @{
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** */
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #include "optiga/ifx_i2c/ifx_i2c_data_link_layer.h"
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #include "optiga/ifx_i2c/ifx_i2c_physical_layer.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// @cond hidden
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Data Link layer internal states
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_UNINIT                 (0x00)
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_IDLE                   (0x01)
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_TX                     (0x02)
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_RX                     (0x03)
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_ACK                    (0x04)
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_RESEND                 (0x05)
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_NACK                   (0x06)
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_ERROR                  (0x08)
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_DISCARD                (0x09)
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_RX_DF                  (0x0A)
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_STATE_RX_CF                  (0x0B)
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Data Link Layer Frame Control Constants
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_FTYPE_MASK              (0x80)
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_FTYPE_OFFSET            (7U)
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_VALUE_CONTROL_FRAME     (0x01)
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_MASK             (0x60)
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_OFFSET           (5U)
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_VALUE_ACK        (0x00)
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_VALUE_NACK       (0x01)
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_VALUE_RESYNC     (0x02)
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_SEQCTR_VALUE_RFU        (0x03)
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_FRNR_MASK               (0x0C)
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_FRNR_OFFSET             (2U)
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_ACKNR_MASK              (0x03)
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_FCTR_ACKNR_OFFSET            (0U)
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Data Link Layer frame counter max value
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_MAX_FRAME_NUM                (0x03)
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Data link layer length
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_CONTROL_FRAME_LENGTH         (5U)
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Seconds to milliseconds
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define DL_SEC_TO_MSECS                 (1000U)
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** // Setup debug log statements
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #if IFX_I2C_LOG_DL == 1
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define LOG_DL IFX_I2C_LOG
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #else
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #define LOG_DL(...) //printf(__VA_ARGS__)
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** #endif
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Helper function to calculate CRC of a byte
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_calc_crc_byte(uint16_t seed,
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                        uint8_t byte);
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Helper function to calculate CRC of a frame
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_calc_crc(const uint8_t * p_data,
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                   uint16_t data_len);
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Internal function to send frame
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_send_frame_internal(ifx_i2c_context_t * p_ctx,
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint16_t frame_len,
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint8_t seqctr_value,
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint8_t resend);
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Helper function to send resync
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_resync(ifx_i2c_context_t * p_ctx);
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Helper function to resend frame
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H void ifx_i2c_dl_resend_frame(ifx_i2c_context_t * p_ctx,
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                        uint8_t seqctr_value);
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// Data Link Layer state machine
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H void ifx_i2c_pl_event_handler(ifx_i2c_context_t * p_ctx,
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         optiga_lib_status_t event,
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         const uint8_t * p_data,
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         uint16_t data_len);
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** /// @endcond
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** optiga_lib_status_t ifx_i2c_dl_init(ifx_i2c_context_t * p_ctx, ifx_i2c_event_handler_t handler)
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Init\n");
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_UNINIT;
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Initialize Physical Layer (and register event handler)
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (IFX_I2C_STACK_SUCCESS != ifx_i2c_pl_init(p_ctx, ifx_i2c_pl_event_handler))
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         return (IFX_I2C_STACK_ERROR);
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Initialize internal variables
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.upper_layer_event_handler = handler;
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_IDLE;
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_seq_nr = DL_MAX_FRAME_NUM;
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.resynced = 0;
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.error = 0;
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.p_tx_frame_buffer = p_ctx->tx_frame_buffer;
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.p_rx_frame_buffer = p_ctx->rx_frame_buffer;
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return IFX_I2C_STACK_SUCCESS;
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** optiga_lib_status_t ifx_i2c_dl_send_frame(ifx_i2c_context_t * p_ctx, uint16_t frame_len)
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start TX Frame\n");
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // State must be idle and payload available
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (p_ctx->dl.state != DL_STATE_IDLE || (0 == frame_len))
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         return (IFX_I2C_STACK_ERROR);
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_TX;
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.retransmit_counter = 0;
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.action_rx_only = 0;
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_buffer_size = frame_len;
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.data_poll_timeout = PL_TRANS_TIMEOUT_MS;
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (ifx_i2c_dl_send_frame_internal(p_ctx, frame_len, DL_FCTR_SEQCTR_VALUE_ACK, 0));
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** optiga_lib_status_t ifx_i2c_dl_receive_frame(ifx_i2c_context_t * p_ctx)
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start RX Frame\n");
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (DL_STATE_IDLE != p_ctx->dl.state)
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         return (IFX_I2C_STACK_ERROR);
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Set internal state
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_RX;
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.retransmit_counter = 0;
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.action_rx_only = 1;
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.frame_start_time = pal_os_timer_get_time_in_milliseconds();
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.data_poll_timeout = TL_MAX_EXIT_TIMEOUT * DL_SEC_TO_MSECS;
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (ifx_i2c_pl_receive_frame(p_ctx));
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_calc_crc_byte(uint16_t seed, uint8_t byte)
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t h1;
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t h2;
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t h3;
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t h4;
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h1 = (seed ^ byte) & 0xFF;
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h2 = h1 & 0x0F;
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h3 = ((uint16_t)(h2 << 4)) ^ h1;
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h4 = h3 >> 4;
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return ((uint16_t)((((uint16_t)((((uint16_t)(h3 << 1)) ^ h4) << 4)) ^ h2) << 3)) ^ h4 ^ (seed >
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_calc_crc(const uint8_t * p_data, uint16_t data_len)
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+  25              	 .loc 1 192 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  28 0000 70B5     	 push {r4,r5,r6,lr}
+  29              	.LCFI0:
+  30              	 .cfi_def_cfa_offset 16
+  31              	 .cfi_offset 4,-16
+  32              	 .cfi_offset 5,-12
+  33              	 .cfi_offset 6,-8
+  34              	 .cfi_offset 14,-4
+  35              	 .loc 1 192 0
+  36 0002 051C     	 mov r5,r0
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t i;
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc = 0;
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     for (i = 0; i < data_len; i++)
+  37              	 .loc 1 196 0
+  38 0004 041C     	 mov r4,r0
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  39              	 .loc 1 194 0
+  40 0006 0020     	 mov r0,#0
+  41              	.LVL1:
+  42              	.L2:
+  43 0008 631B     	 sub r3,r4,r5
+  44              	 .loc 1 196 0 discriminator 1
+  45 000a 9BB2     	 uxth r3,r3
+  46 000c 8B42     	 cmp r3,r1
+  47 000e 13D2     	 bcs .L5
+  48              	.LVL2:
+  49              	.LBB4:
+  50              	.LBB5:
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h3 = ((uint16_t)(h2 << 4)) ^ h1;
+  51              	 .loc 1 184 0 discriminator 3
+  52 0010 0F23     	 mov r3,#15
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h2 = h1 & 0x0F;
+  53              	 .loc 1 183 0 discriminator 3
+  54 0012 2278     	 ldrb r2,[r4]
+  55 0014 0134     	 add r4,r4,#1
+  56              	.LVL3:
+  57 0016 4240     	 eor r2,r0
+  58              	.LVL4:
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h3 = ((uint16_t)(h2 << 4)) ^ h1;
+  59              	 .loc 1 184 0 discriminator 3
+  60 0018 1340     	 and r3,r2
+  61 001a 1E1C     	 mov r6,r3
+  62              	.LVL5:
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h2 = h1 & 0x0F;
+  63              	 .loc 1 183 0 discriminator 3
+  64 001c D2B2     	 uxtb r2,r2
+  65              	.LVL6:
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     h4 = h3 >> 4;
+  66              	 .loc 1 185 0 discriminator 3
+  67 001e 1B01     	 lsl r3,r3,#4
+  68              	.LVL7:
+  69 0020 5340     	 eor r3,r2
+  70              	.LVL8:
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+  71              	 .loc 1 186 0 discriminator 3
+  72 0022 1A09     	 lsr r2,r3,#4
+  73              	.LVL9:
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+  74              	 .loc 1 188 0 discriminator 3
+  75 0024 000A     	 lsr r0,r0,#8
+  76              	.LVL10:
+  77 0026 5B00     	 lsl r3,r3,#1
+  78              	.LVL11:
+  79 0028 5040     	 eor r0,r2
+  80 002a 5A40     	 eor r2,r3
+  81              	.LVL12:
+  82 002c 331C     	 mov r3,r6
+  83 002e 1201     	 lsl r2,r2,#4
+  84 0030 5340     	 eor r3,r2
+  85 0032 DB00     	 lsl r3,r3,#3
+  86 0034 5840     	 eor r0,r3
+  87 0036 E7E7     	 b .L2
+  88              	.LVL13:
+  89              	.L5:
+  90              	.LBE5:
+  91              	.LBE4:
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         crc = ifx_i2c_dl_calc_crc_byte(crc, p_data[i]);
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (crc);
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+  92              	 .loc 1 202 0
+  93              	 
+  94              	.LVL14:
+  95              	.LVL15:
+  96 0038 70BD     	 pop {r4,r5,r6,pc}
+  97              	 .cfi_endproc
+  98              	.LFE4:
+ 100              	 .section .text.ifx_i2c_dl_send_frame_internal,"ax",%progbits
+ 101              	 .align 1
+ 102              	 .code 16
+ 103              	 .thumb_func
+ 105              	ifx_i2c_dl_send_frame_internal:
+ 106              	.LFB5:
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_send_frame_internal(ifx_i2c_context_t * p_ctx,
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint16_t frame_len,
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint8_t seqctr_value,
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                              uint8_t resend)
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 107              	 .loc 1 208 0
+ 108              	 .cfi_startproc
+ 109              	.LVL16:
+ 110 0000 70B5     	 push {r4,r5,r6,lr}
+ 111              	.LCFI1:
+ 112              	 .cfi_def_cfa_offset 16
+ 113              	 .cfi_offset 4,-16
+ 114              	 .cfi_offset 5,-12
+ 115              	 .cfi_offset 6,-8
+ 116              	 .cfi_offset 14,-4
+ 117              	 .loc 1 208 0
+ 118 0002 0D1C     	 mov r5,r1
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc;
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t ack_nr = p_ctx->dl.rx_seq_nr;
+ 119              	 .loc 1 210 0
+ 120 0004 011C     	 mov r1,r0
+ 121              	.LVL17:
+ 122 0006 6231     	 add r1,r1,#98
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc;
+ 123              	 .loc 1 208 0
+ 124 0008 061C     	 mov r6,r0
+ 125              	 .loc 1 210 0
+ 126 000a 0978     	 ldrb r1,[r1]
+ 127              	.LVL18:
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t * p_buffer;
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: TX Frame len %d\n", frame_len);
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // In case of sending a NACK the next frame is referenced
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (DL_FCTR_SEQCTR_VALUE_NACK == seqctr_value)
+ 128              	 .loc 1 215 0
+ 129 000c 012A     	 cmp r2,#1
+ 130 000e 02D1     	 bne .L7
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         ack_nr = (p_ctx->dl.rx_seq_nr + 1) & DL_MAX_FRAME_NUM;
+ 131              	 .loc 1 217 0
+ 132 0010 0320     	 mov r0,#3
+ 133              	.LVL19:
+ 134 0012 0131     	 add r1,r1,#1
+ 135              	.LVL20:
+ 136 0014 0140     	 and r1,r0
+ 137              	.LVL21:
+ 138              	.L7:
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer = p_ctx->dl.p_tx_frame_buffer;
+ 139              	 .loc 1 219 0
+ 140 0016 346F     	 ldr r4,[r6,#112]
+ 141              	.LVL22:
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (DL_FCTR_SEQCTR_VALUE_RESYNC == seqctr_value)
+ 142              	 .loc 1 220 0
+ 143 0018 022A     	 cmp r2,#2
+ 144 001a 02D1     	 bne .L8
+ 145              	.LVL23:
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         ack_nr = 0;
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         // Use rx buffer to send resync
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_buffer = p_ctx->dl.p_rx_frame_buffer;
+ 146              	 .loc 1 224 0
+ 147 001c 746F     	 ldr r4,[r6,#116]
+ 148              	.LVL24:
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         // Use rx buffer to send resync
+ 149              	 .loc 1 222 0
+ 150 001e 0021     	 mov r1,#0
+ 151 0020 07E0     	 b .L9
+ 152              	.LVL25:
+ 153              	.L8:
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Use tx buffer when discarding a frame and send nakc for later received frame
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if ((DL_FCTR_SEQCTR_VALUE_ACK == seqctr_value) && (DL_STATE_DISCARD == p_ctx->dl.state))
+ 154              	 .loc 1 227 0
+ 155 0022 002A     	 cmp r2,#0
+ 156 0024 05D1     	 bne .L9
+ 157              	 .loc 1 227 0 is_stmt 0 discriminator 1
+ 158 0026 301C     	 mov r0,r6
+ 159 0028 6030     	 add r0,r0,#96
+ 160 002a 0078     	 ldrb r0,[r0]
+ 161 002c 0928     	 cmp r0,#9
+ 162 002e 00D1     	 bne .L9
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_buffer = p_ctx->dl.p_rx_frame_buffer;
+ 163              	 .loc 1 229 0 is_stmt 1
+ 164 0030 746F     	 ldr r4,[r6,#116]
+ 165              	.LVL26:
+ 166              	.L9:
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Set sequence control value (ACK or NACK) and referenced frame number
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[0] = (uint8_t)(ack_nr << DL_FCTR_ACKNR_OFFSET);
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[0] |= (uint8_t)(seqctr_value << DL_FCTR_SEQCTR_OFFSET);
+ 167              	 .loc 1 234 0
+ 168 0032 5201     	 lsl r2,r2,#5
+ 169              	.LVL27:
+ 170 0034 0A43     	 orr r2,r1
+ 171 0036 D2B2     	 uxtb r2,r2
+ 172 0038 2270     	 strb r2,[r4]
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (0 != frame_len) // Data frame
+ 173              	 .loc 1 236 0
+ 174 003a 002D     	 cmp r5,#0
+ 175 003c 15D0     	 beq .L10
+ 176 003e 311C     	 mov r1,r6
+ 177 0040 321C     	 mov r2,r6
+ 178 0042 6631     	 add r1,r1,#102
+ 179 0044 6132     	 add r2,r2,#97
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         // Increment and set frame transmit sequence number
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         if ((0 == resend) || (0 != p_ctx->dl.resynced))
+ 180              	 .loc 1 239 0
+ 181 0046 002B     	 cmp r3,#0
+ 182 0048 02D0     	 beq .L11
+ 183              	 .loc 1 239 0 is_stmt 0 discriminator 1
+ 184 004a 0B78     	 ldrb r3,[r1]
+ 185              	.LVL28:
+ 186 004c 002B     	 cmp r3,#0
+ 187 004e 04D0     	 beq .L12
+ 188              	.L11:
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.tx_seq_nr = (p_ctx->dl.tx_seq_nr + 1) & DL_MAX_FRAME_NUM;
+ 189              	 .loc 1 241 0 is_stmt 1
+ 190 0050 0320     	 mov r0,#3
+ 191 0052 1378     	 ldrb r3,[r2]
+ 192 0054 0133     	 add r3,r3,#1
+ 193 0056 0340     	 and r3,r0
+ 194 0058 1370     	 strb r3,[r2]
+ 195              	.L12:
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_buffer[0] |= (uint8_t)(p_ctx->dl.tx_seq_nr << DL_FCTR_FRNR_OFFSET);
+ 196              	 .loc 1 243 0
+ 197 005a 1378     	 ldrb r3,[r2]
+ 198 005c 2278     	 ldrb r2,[r4]
+ 199 005e 9B00     	 lsl r3,r3,#2
+ 200 0060 1343     	 orr r3,r2
+ 201 0062 2370     	 strb r3,[r4]
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         // Reset resync received
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_ctx->dl.resynced = 0;
+ 202              	 .loc 1 245 0
+ 203 0064 0023     	 mov r3,#0
+ 204 0066 0B70     	 strb r3,[r1]
+ 205 0068 03E0     	 b .L13
+ 206              	.LVL29:
+ 207              	.L10:
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         OPTIGA_COMMS_LOG_MESSAGE(">>>>");
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     else // Control frame
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_buffer[0] |= DL_FCTR_FTYPE_MASK;
+ 208              	 .loc 1 250 0
+ 209 006a 8023     	 mov r3,#128
+ 210              	.LVL30:
+ 211 006c 5B42     	 neg r3,r3
+ 212 006e 1A43     	 orr r2,r3
+ 213 0070 2270     	 strb r2,[r4]
+ 214              	.L13:
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Set frame length
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[1] = (uint8_t)(frame_len >> 8);
+ 215              	 .loc 1 254 0
+ 216 0072 2B0A     	 lsr r3,r5,#8
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[2] = (uint8_t)frame_len;
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Calculate frame CRC
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     crc = ifx_i2c_dl_calc_crc(p_buffer, 3 + frame_len);
+ 217              	 .loc 1 258 0
+ 218 0074 E91C     	 add r1,r5,#3
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[2] = (uint8_t)frame_len;
+ 219              	 .loc 1 254 0
+ 220 0076 6370     	 strb r3,[r4,#1]
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[2] = (uint8_t)frame_len;
+ 221              	 .loc 1 255 0
+ 222 0078 A570     	 strb r5,[r4,#2]
+ 223              	 .loc 1 258 0
+ 224 007a 89B2     	 uxth r1,r1
+ 225 007c 201C     	 mov r0,r4
+ 226 007e FFF7FEFF 	 bl ifx_i2c_dl_calc_crc
+ 227              	.LVL31:
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[3 + frame_len] = (uint8_t) (crc >> 8);
+ 228              	 .loc 1 259 0
+ 229 0082 6319     	 add r3,r4,r5
+ 230 0084 020A     	 lsr r2,r0,#8
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[4 + frame_len] = (uint8_t)crc;
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Transmit frame
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     OPTIGA_IFXI2C_LOG_TRANSMIT_HEX_DATA(p_buffer,DL_HEADER_SIZE + frame_len,p_ctx)
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (ifx_i2c_pl_send_frame(p_ctx, p_buffer, DL_HEADER_SIZE + frame_len));
+ 231              	 .loc 1 264 0
+ 232 0086 0535     	 add r5,r5,#5
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[3 + frame_len] = (uint8_t) (crc >> 8);
+ 233              	 .loc 1 259 0
+ 234 0088 DA70     	 strb r2,[r3,#3]
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_buffer[4 + frame_len] = (uint8_t)crc;
+ 235              	 .loc 1 260 0
+ 236 008a 1871     	 strb r0,[r3,#4]
+ 237              	 .loc 1 264 0
+ 238 008c AAB2     	 uxth r2,r5
+ 239 008e 301C     	 mov r0,r6
+ 240              	.LVL32:
+ 241 0090 211C     	 mov r1,r4
+ 242 0092 FFF7FEFF 	 bl ifx_i2c_pl_send_frame
+ 243              	.LVL33:
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 244              	 .loc 1 265 0
+ 245              	 
+ 246              	.LVL34:
+ 247              	.LVL35:
+ 248 0096 70BD     	 pop {r4,r5,r6,pc}
+ 249              	 .cfi_endproc
+ 250              	.LFE5:
+ 252              	 .section .text.ifx_i2c_pl_event_handler,"ax",%progbits
+ 253              	 .align 1
+ 254              	 .code 16
+ 255              	 .thumb_func
+ 257              	ifx_i2c_pl_event_handler:
+ 258              	.LFB8:
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H optiga_lib_status_t ifx_i2c_dl_resync(ifx_i2c_context_t * p_ctx)
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     optiga_lib_status_t api_status = IFX_I2C_STACK_SUCCESS;
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Reset tx and rx counters
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_seq_nr = DL_MAX_FRAME_NUM;
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.resynced = 1;
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Send Re-Sync Frame\n");
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_RESEND;
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     api_status = ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_RESYNC, 0);
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (api_status);
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H void ifx_i2c_dl_resend_frame(ifx_i2c_context_t * p_ctx, uint8_t seqctr_value)
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     optiga_lib_status_t status;
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // If exit timeout not violated
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint32_t current_time_stamp = pal_os_timer_get_time_in_milliseconds();
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint32_t time_stamp_diff = current_time_stamp - p_ctx->tl.api_start_time;
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (p_ctx->tl.api_start_time > current_time_stamp)
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         time_stamp_diff = (0xFFFFFFFF + (current_time_stamp - p_ctx->tl.api_start_time)) + 0x01;
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     if (time_stamp_diff < (TL_MAX_EXIT_TIMEOUT * DL_SEC_TO_MSECS))
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         if (DL_TRANS_REPEAT == p_ctx->dl.retransmit_counter)
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             LOG_DL("[IFX-DL]: Re-Sync counters\n");
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.retransmit_counter = 0;
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_resync(p_ctx);
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         else
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             LOG_DL("[IFX-DL]: Re-TX Frame\n");
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.retransmit_counter++;
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.state = DL_STATE_TX;
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_send_frame_internal(p_ctx, p_ctx->dl.tx_buffer_size, seqctr_value, 
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         // Handle error in above case by sending NACK
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         if (IFX_I2C_STACK_SUCCESS != status)
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.state  = DL_STATE_NACK;
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     else
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         p_ctx->dl.state = DL_STATE_ERROR;
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** _STATIC_H void ifx_i2c_pl_event_handler(ifx_i2c_context_t * p_ctx,
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         optiga_lib_status_t event,
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         const uint8_t * p_data,
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                         uint16_t data_len)
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** {
+ 259              	 .loc 1 322 0
+ 260              	 .cfi_startproc
+ 261              	.LVL36:
+ 262 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 263              	.LCFI2:
+ 264              	 .cfi_def_cfa_offset 20
+ 265              	 .cfi_offset 4,-20
+ 266              	 .cfi_offset 5,-16
+ 267              	 .cfi_offset 6,-12
+ 268              	 .cfi_offset 7,-8
+ 269              	 .cfi_offset 14,-4
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t fctr = 0;
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t fr_nr = 0;
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t ack_nr = 0;
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t seqctr = 0;
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t current_event;
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t ftype;
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t continue_state_machine = TRUE;
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t packet_len = 0;
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc_received = 0;
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc_calculated = 0;
+ 270              	 .loc 1 332 0
+ 271 0002 0025     	 mov r5,#0
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t fctr = 0;
+ 272              	 .loc 1 322 0
+ 273 0004 041C     	 mov r4,r0
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc_calculated = 0;
+ 274              	 .loc 1 331 0
+ 275 0006 2F1C     	 mov r7,r5
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t fctr = 0;
+ 276              	 .loc 1 322 0
+ 277 0008 89B0     	 sub sp,sp,#36
+ 278              	.LCFI3:
+ 279              	 .cfi_def_cfa_offset 56
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t fctr = 0;
+ 280              	 .loc 1 322 0
+ 281 000a 0491     	 str r1,[sp,#16]
+ 282 000c 0392     	 str r2,[sp,#12]
+ 283 000e 0193     	 str r3,[sp,#4]
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint16_t crc_received = 0;
+ 284              	 .loc 1 330 0
+ 285 0010 0595     	 str r5,[sp,#20]
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t current_event;
+ 286              	 .loc 1 326 0
+ 287 0012 0095     	 str r5,[sp]
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t seqctr = 0;
+ 288              	 .loc 1 325 0
+ 289 0014 0695     	 str r5,[sp,#24]
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint8_t ack_nr = 0;
+ 290              	 .loc 1 324 0
+ 291 0016 0295     	 str r5,[sp,#8]
+ 292              	.LVL37:
+ 293              	.L64:
+ 294 0018 261C     	 mov r6,r4
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: #Enter DL Handler\n");
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     do
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         if ((IFX_I2C_FATAL_ERROR == event) && (DL_STATE_IDLE != p_ctx->dl.state))
+ 295              	 .loc 1 336 0
+ 296 001a 8323     	 mov r3,#131
+ 297 001c 049A     	 ldr r2,[sp,#16]
+ 298 001e 6036     	 add r6,r6,#96
+ 299 0020 5B00     	 lsl r3,r3,#1
+ 300 0022 9A42     	 cmp r2,r3
+ 301 0024 04D1     	 bne .L21
+ 302              	 .loc 1 336 0 is_stmt 0 discriminator 1
+ 303 0026 3378     	 ldrb r3,[r6]
+ 304 0028 012B     	 cmp r3,#1
+ 305 002a 01D0     	 beq .L21
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {    // Exit in case of fatal error
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             LOG_DL("[IFX-DL]: Fatal error received\n");
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.state = DL_STATE_ERROR;
+ 306              	 .loc 1 339 0 is_stmt 1
+ 307 002c 0823     	 mov r3,#8
+ 308 002e 3370     	 strb r3,[r6]
+ 309              	.L21:
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         switch (p_ctx->dl.state)
+ 310              	 .loc 1 341 0
+ 311 0030 3078     	 ldrb r0,[r6]
+ 312 0032 0138     	 sub r0,r0,#1
+ 313 0034 0A28     	 cmp r0,#10
+ 314 0036 00D9     	 bls .LCB326
+ 315 0038 75E1     	 b .L22
+ 316              	.LCB326:
+ 317 003a FFF7FEFF 	 bl __gnu_thumb1_case_uhi
+ 318              	.L24:
+ 319 003e 0B00     	 .2byte (.L23-.L24)/2
+ 320 0040 1200     	 .2byte (.L25-.L24)/2
+ 321 0042 2900     	 .2byte (.L26-.L24)/2
+ 322 0044 F200     	 .2byte (.L27-.L24)/2
+ 323 0046 1801     	 .2byte (.L28-.L24)/2
+ 324 0048 0F01     	 .2byte (.L29-.L24)/2
+ 325 004a 7401     	 .2byte (.L22-.L24)/2
+ 326 004c 4E01     	 .2byte (.L30-.L24)/2
+ 327 004e EA00     	 .2byte (.L31-.L24)/2
+ 328 0050 6200     	 .2byte (.L32-.L24)/2
+ 329 0052 AA00     	 .2byte (.L33-.L24)/2
+ 330              	 .p2align 1
+ 331              	.L23:
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_IDLE:
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 current_event = (event != IFX_I2C_STACK_SUCCESS) ? IFX_I2C_DL_EVENT_ERROR : IFX_I2C
+ 332              	 .loc 1 345 0
+ 333 0054 0499     	 ldr r1,[sp,#16]
+ 334 0056 4B1E     	 sub r3,r1,#1
+ 335 0058 9941     	 sbc r1,r1,r3
+ 336 005a 0223     	 mov r3,#2
+ 337 005c 591A     	 sub r1,r3,r1
+ 338              	.LVL38:
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.upper_layer_event_handler(p_ctx,current_event, 0, 0);
+ 339              	 .loc 1 347 0
+ 340 005e 89B2     	 uxth r1,r1
+ 341              	.LVL39:
+ 342 0060 63E1     	 b .L88
+ 343              	.LVL40:
+ 344              	.L25:
+ 345 0062 261C     	 mov r6,r4
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_TX:
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // If writing a frame failed retry sending
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (IFX_I2C_STACK_ERROR == event)
+ 346              	 .loc 1 353 0
+ 347 0064 8123     	 mov r3,#129
+ 348 0066 049A     	 ldr r2,[sp,#16]
+ 349 0068 6036     	 add r6,r6,#96
+ 350 006a 5B00     	 lsl r3,r3,#1
+ 351 006c 9A42     	 cmp r2,r3
+ 352 006e 01D1     	 bne .L36
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 353              	 .loc 1 355 0
+ 354 0070 FD3B     	 sub r3,r3,#253
+ 355 0072 0BE0     	 b .L79
+ 356              	.L36:
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Frame Sent\n");
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Transmission successful, start receiving frame
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.frame_start_time = pal_os_timer_get_time_in_milliseconds();
+ 357              	 .loc 1 360 0
+ 358 0074 FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 359              	.LVL41:
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_RX;
+ 360              	 .loc 1 361 0
+ 361 0078 0323     	 mov r3,#3
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_RX;
+ 362              	 .loc 1 360 0
+ 363 007a A067     	 str r0,[r4,#120]
+ 364              	 .loc 1 361 0
+ 365 007c 3370     	 strb r3,[r6]
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (0 != ifx_i2c_pl_receive_frame(p_ctx))
+ 366              	 .loc 1 362 0
+ 367 007e 201C     	 mov r0,r4
+ 368 0080 FFF7FEFF 	 bl ifx_i2c_pl_receive_frame
+ 369              	.LVL42:
+ 370 0084 0028     	 cmp r0,#0
+ 371 0086 00D1     	 bne .LCB368
+ 372 0088 54E1     	 b .L20
+ 373              	.LCB368:
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state  = DL_STATE_NACK;
+ 374              	 .loc 1 364 0
+ 375 008a 0623     	 mov r3,#6
+ 376              	.L79:
+ 377 008c 3370     	 strb r3,[r6]
+ 378 008e C3E7     	 b .L64
+ 379              	.L26:
+ 380 0090 231C     	 mov r3,r4
+ 381 0092 6033     	 add r3,r3,#96
+ 382 0094 0793     	 str r3,[sp,#28]
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 else
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     continue_state_machine = FALSE;
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_RX:
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (IFX_I2C_STACK_ERROR == event)
+ 383              	 .loc 1 374 0
+ 384 0096 8123     	 mov r3,#129
+ 385 0098 049A     	 ldr r2,[sp,#16]
+ 386 009a 5B00     	 lsl r3,r3,#1
+ 387 009c 9A42     	 cmp r2,r3
+ 388 009e 01D1     	 bne .L39
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {    // If no frame was received retry sending
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 389              	 .loc 1 376 0
+ 390 00a0 FD3B     	 sub r3,r3,#253
+ 391 00a2 03E0     	 b .L80
+ 392              	.L39:
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Received frame from device, start analyzing
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Received Frame of length %d\n",data_len);
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (data_len < DL_HEADER_SIZE)
+ 393              	 .loc 1 382 0
+ 394 00a4 019B     	 ldr r3,[sp,#4]
+ 395 00a6 042B     	 cmp r3,#4
+ 396 00a8 03D8     	 bhi .L40
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {    // Received length is less than minimum size
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: received data_len < DL_HEADER_SIZE\n");
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state  = DL_STATE_NACK;
+ 397              	 .loc 1 385 0
+ 398 00aa 0623     	 mov r3,#6
+ 399              	.L80:
+ 400 00ac 079A     	 ldr r2,[sp,#28]
+ 401 00ae 1370     	 strb r3,[r2]
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 402              	 .loc 1 386 0
+ 403 00b0 B2E7     	 b .L64
+ 404              	.L40:
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Check transmit frame sequence number
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 fctr = p_data[0];
+ 405              	 .loc 1 389 0
+ 406 00b2 039B     	 ldr r3,[sp,#12]
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ftype = (fctr & DL_FCTR_FTYPE_MASK) >> DL_FCTR_FTYPE_OFFSET;
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 seqctr = (fctr & DL_FCTR_SEQCTR_MASK) >> DL_FCTR_SEQCTR_OFFSET;
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ack_nr = (fctr & DL_FCTR_ACKNR_MASK) >> DL_FCTR_ACKNR_OFFSET;
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 fr_nr = (fctr & DL_FCTR_FRNR_MASK) >> DL_FCTR_FRNR_OFFSET;
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 packet_len = (p_data[1] << 8) | p_data[2];
+ 407              	 .loc 1 394 0
+ 408 00b4 039A     	 ldr r2,[sp,#12]
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ftype = (fctr & DL_FCTR_FTYPE_MASK) >> DL_FCTR_FTYPE_OFFSET;
+ 409              	 .loc 1 389 0
+ 410 00b6 1E78     	 ldrb r6,[r3]
+ 411              	.LVL43:
+ 412              	 .loc 1 394 0
+ 413 00b8 9278     	 ldrb r2,[r2,#2]
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ack_nr = (fctr & DL_FCTR_ACKNR_MASK) >> DL_FCTR_ACKNR_OFFSET;
+ 414              	 .loc 1 391 0
+ 415 00ba 7306     	 lsl r3,r6,#25
+ 416              	.LVL44:
+ 417 00bc 9B0F     	 lsr r3,r3,#30
+ 418              	.LVL45:
+ 419 00be 0093     	 str r3,[sp]
+ 420              	.LVL46:
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 fr_nr = (fctr & DL_FCTR_FRNR_MASK) >> DL_FCTR_FRNR_OFFSET;
+ 421              	 .loc 1 392 0
+ 422 00c0 0323     	 mov r3,#3
+ 423              	.LVL47:
+ 424 00c2 3340     	 and r3,r6
+ 425              	.LVL48:
+ 426 00c4 0693     	 str r3,[sp,#24]
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 packet_len = (p_data[1] << 8) | p_data[2];
+ 427              	 .loc 1 393 0
+ 428 00c6 3307     	 lsl r3,r6,#28
+ 429              	.LVL49:
+ 430 00c8 9B0F     	 lsr r3,r3,#30
+ 431 00ca 0293     	 str r3,[sp,#8]
+ 432              	.LVL50:
+ 433              	 .loc 1 394 0
+ 434 00cc 039B     	 ldr r3,[sp,#12]
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Check frame CRC value
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 crc_received = (p_data[data_len - 2] << 8) | p_data[data_len - 1];
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 crc_calculated = ifx_i2c_dl_calc_crc(p_data, data_len - 2);
+ 435              	 .loc 1 398 0
+ 436 00ce 0398     	 ldr r0,[sp,#12]
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 437              	 .loc 1 394 0
+ 438 00d0 5B78     	 ldrb r3,[r3,#1]
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = (ftype == DL_FCTR_VALUE_CONTROL_FRAME) ? DL_STATE_RX_CF : DL_STAT
+ 439              	 .loc 1 399 0
+ 440 00d2 F609     	 lsr r6,r6,#7
+ 441              	.LVL51:
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 442              	 .loc 1 394 0
+ 443 00d4 1B02     	 lsl r3,r3,#8
+ 444 00d6 1A43     	 orr r2,r3
+ 445 00d8 0592     	 str r2,[sp,#20]
+ 446              	.LVL52:
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 crc_calculated = ifx_i2c_dl_calc_crc(p_data, data_len - 2);
+ 447              	 .loc 1 397 0
+ 448 00da 039B     	 ldr r3,[sp,#12]
+ 449 00dc 019A     	 ldr r2,[sp,#4]
+ 450              	 .loc 1 399 0
+ 451 00de 0A36     	 add r6,r6,#10
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 crc_calculated = ifx_i2c_dl_calc_crc(p_data, data_len - 2);
+ 452              	 .loc 1 397 0
+ 453 00e0 9B18     	 add r3,r3,r2
+ 454 00e2 9A1E     	 sub r2,r3,#2
+ 455 00e4 1278     	 ldrb r2,[r2]
+ 456 00e6 013B     	 sub r3,r3,#1
+ 457 00e8 1B78     	 ldrb r3,[r3]
+ 458 00ea 1202     	 lsl r2,r2,#8
+ 459              	.LVL53:
+ 460 00ec 1343     	 orr r3,r2
+ 461              	.LVL54:
+ 462 00ee 1F1C     	 mov r7,r3
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = (ftype == DL_FCTR_VALUE_CONTROL_FRAME) ? DL_STATE_RX_CF : DL_STAT
+ 463              	 .loc 1 398 0
+ 464 00f0 019B     	 ldr r3,[sp,#4]
+ 465              	.LVL55:
+ 466 00f2 991E     	 sub r1,r3,#2
+ 467 00f4 89B2     	 uxth r1,r1
+ 468 00f6 FFF7FEFF 	 bl ifx_i2c_dl_calc_crc
+ 469              	.LVL56:
+ 470              	 .loc 1 399 0
+ 471 00fa 079B     	 ldr r3,[sp,#28]
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = (ftype == DL_FCTR_VALUE_CONTROL_FRAME) ? DL_STATE_RX_CF : DL_STAT
+ 472              	 .loc 1 398 0
+ 473 00fc 051C     	 mov r5,r0
+ 474              	.LVL57:
+ 475              	 .loc 1 399 0
+ 476 00fe 1E70     	 strb r6,[r3]
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 477              	 .loc 1 401 0
+ 478 0100 8AE7     	 b .L64
+ 479              	.LVL58:
+ 480              	.L32:
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_RX_DF:
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Data Frame Received\n");
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if ((crc_received != crc_calculated) || (0 == packet_len) ||
+ 481              	 .loc 1 405 0
+ 482 0102 AF42     	 cmp r7,r5
+ 483 0104 0AD1     	 bne .L42
+ 484              	 .loc 1 405 0 is_stmt 0 discriminator 1
+ 485 0106 059B     	 ldr r3,[sp,#20]
+ 486 0108 002B     	 cmp r3,#0
+ 487 010a 07D0     	 beq .L42
+ 488              	 .loc 1 405 0 discriminator 2
+ 489 010c 019A     	 ldr r2,[sp,#4]
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     (data_len != (DL_HEADER_SIZE + packet_len)) || (DL_FCTR_SEQCTR_VALUE_RFU == seq
+ 490              	 .loc 1 406 0 is_stmt 1 discriminator 2
+ 491 010e 0533     	 add r3,r3,#5
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     (data_len != (DL_HEADER_SIZE + packet_len)) || (DL_FCTR_SEQCTR_VALUE_RFU == seq
+ 492              	 .loc 1 405 0 discriminator 2
+ 493 0110 9A42     	 cmp r2,r3
+ 494 0112 03D1     	 bne .L42
+ 495              	 .loc 1 406 0 discriminator 1
+ 496 0114 009B     	 ldr r3,[sp]
+ 497 0116 023B     	 sub r3,r3,#2
+ 498 0118 012B     	 cmp r3,#1
+ 499 011a 03D8     	 bhi .L43
+ 500              	.L42:
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     (DL_FCTR_SEQCTR_VALUE_RESYNC == seqctr))
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // CRC,Length of data frame is 0/ SEQCTR has RFU/Re-sync in Data frame
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: NACK for CRC error,Data frame length is not correct,RFU in SE
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state  = DL_STATE_NACK;
+ 501              	 .loc 1 411 0
+ 502 011c 231C     	 mov r3,r4
+ 503 011e 0622     	 mov r2,#6
+ 504 0120 6033     	 add r3,r3,#96
+ 505 0122 86E0     	 b .L82
+ 506              	.L43:
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (fr_nr != ((p_ctx->dl.rx_seq_nr + 1) & DL_MAX_FRAME_NUM))
+ 507              	 .loc 1 414 0
+ 508 0124 211C     	 mov r1,r4
+ 509 0126 0322     	 mov r2,#3
+ 510 0128 251C     	 mov r5,r4
+ 511 012a 6231     	 add r1,r1,#98
+ 512 012c 0B78     	 ldrb r3,[r1]
+ 513 012e 6035     	 add r5,r5,#96
+ 514 0130 0133     	 add r3,r3,#1
+ 515 0132 1340     	 and r3,r2
+ 516 0134 029A     	 ldr r2,[sp,#8]
+ 517 0136 9A42     	 cmp r2,r3
+ 518 0138 06D0     	 beq .L44
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Data frame number not expected\n");
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state  = DL_STATE_DISCARD;
+ 519              	 .loc 1 417 0
+ 520 013a 0923     	 mov r3,#9
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     continue_state_machine = FALSE;
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     //lint --e{534} suppress "Error handling is not required so return value is not
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_ACK, 0);
+ 521              	 .loc 1 420 0
+ 522 013c 0021     	 mov r1,#0
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     continue_state_machine = FALSE;
+ 523              	 .loc 1 417 0
+ 524 013e 2B70     	 strb r3,[r5]
+ 525              	.LVL59:
+ 526              	 .loc 1 420 0
+ 527 0140 201C     	 mov r0,r4
+ 528 0142 0A1C     	 mov r2,r1
+ 529 0144 0B1C     	 mov r3,r1
+ 530 0146 8FE0     	 b .L89
+ 531              	.LVL60:
+ 532              	.L44:
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (ack_nr != p_ctx->dl.tx_seq_nr)
+ 533              	 .loc 1 423 0
+ 534 0148 231C     	 mov r3,r4
+ 535 014a 6133     	 add r3,r3,#97
+ 536 014c 1B78     	 ldrb r3,[r3]
+ 537 014e 069A     	 ldr r2,[sp,#24]
+ 538 0150 9342     	 cmp r3,r2
+ 539 0152 01D0     	 beq .L45
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // ack number error
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Error in ack number\n");
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     //lint --e{534} suppress "Error handling is not required so return value is not
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_DISCARD;
+ 540              	 .loc 1 428 0
+ 541 0154 0923     	 mov r3,#9
+ 542 0156 03E0     	 b .L84
+ 543              	.L45:
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (DL_FCTR_SEQCTR_VALUE_NACK == seqctr)
+ 544              	 .loc 1 431 0
+ 545 0158 009B     	 ldr r3,[sp]
+ 546 015a 012B     	 cmp r3,#1
+ 547 015c 02D1     	 bne .L46
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // NACK for transmitted frame
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: NACK received in data frame\n");
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 548              	 .loc 1 435 0
+ 549 015e 0433     	 add r3,r3,#4
+ 550              	.L84:
+ 551 0160 2B70     	 strb r3,[r5]
+ 552 0162 4DE0     	 b .L83
+ 553              	.L46:
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.rx_seq_nr = (p_ctx->dl.rx_seq_nr + 1) & DL_MAX_FRAME_NUM;
+ 554              	 .loc 1 438 0
+ 555 0164 6B46     	 mov r3,sp
+ 556 0166 1B7A     	 ldrb r3,[r3,#8]
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 memcpy(p_ctx->dl.p_rx_frame_buffer, p_data, data_len);
+ 557              	 .loc 1 439 0
+ 558 0168 019A     	 ldr r2,[sp,#4]
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 memcpy(p_ctx->dl.p_rx_frame_buffer, p_data, data_len);
+ 559              	 .loc 1 438 0
+ 560 016a 0B70     	 strb r3,[r1]
+ 561              	 .loc 1 439 0
+ 562 016c 606F     	 ldr r0,[r4,#116]
+ 563 016e 0399     	 ldr r1,[sp,#12]
+ 564 0170 FFF7FEFF 	 bl memcpy
+ 565              	.LVL61:
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.rx_buffer_size = data_len;
+ 566              	 .loc 1 440 0
+ 567 0174 6A46     	 mov r2,sp
+ 568 0176 231C     	 mov r3,r4
+ 569 0178 9288     	 ldrh r2,[r2,#4]
+ 570 017a 6E33     	 add r3,r3,#110
+ 571 017c 1A80     	 strh r2,[r3]
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Send control frame to acknowledge reception of this data frame
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Read Data Frame -> Send ACK\n");
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.retransmit_counter = 0;
+ 572              	 .loc 1 444 0
+ 573 017e 221C     	 mov r2,r4
+ 574 0180 0023     	 mov r3,#0
+ 575 0182 6432     	 add r2,r2,#100
+ 576 0184 1370     	 strb r3,[r2]
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_ACK;
+ 577              	 .loc 1 445 0
+ 578 0186 0422     	 mov r2,#4
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 OPTIGA_COMMS_LOG_MESSAGE("<<<<");\
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 OPTIGA_IFXI2C_LOG_RECEIVE_HEX_DATA(p_data,data_len,p_ctx);
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 //lint --e{534} suppress "Error handling is not required so return value is not che
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_ACK, 0);
+ 579              	 .loc 1 451 0
+ 580 0188 201C     	 mov r0,r4
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_ACK;
+ 581              	 .loc 1 445 0
+ 582 018a 2A70     	 strb r2,[r5]
+ 583              	.LVL62:
+ 584              	 .loc 1 451 0
+ 585 018c 191C     	 mov r1,r3
+ 586 018e 1A1C     	 mov r2,r3
+ 587 0190 6AE0     	 b .L89
+ 588              	.LVL63:
+ 589              	.L33:
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_RX_CF:
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Control Frame Received\n");
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Except Re-Sync, Discard Control frame when in receiver mode
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Discard Re-Sync in transmission mode
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 //lint --e{514} suppress "Refer the above comment for the explaination of this chec
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if ((p_ctx->dl.action_rx_only) ^ (DL_FCTR_SEQCTR_VALUE_RESYNC == seqctr))
+ 590              	 .loc 1 460 0
+ 591 0192 009B     	 ldr r3,[sp]
+ 592 0194 9A1E     	 sub r2,r3,#2
+ 593 0196 5042     	 neg r0,r2
+ 594 0198 5041     	 adc r0,r0,r2
+ 595 019a 231C     	 mov r3,r4
+ 596 019c 6333     	 add r3,r3,#99
+ 597 019e 1978     	 ldrb r1,[r3]
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     //If control frame already received for data frame, ignore any received control
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: CF in receiver mode,Discard\n");
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_DISCARD;
+ 598              	 .loc 1 464 0
+ 599 01a0 0922     	 mov r2,#9
+ 600 01a2 033B     	 sub r3,r3,#3
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 601              	 .loc 1 460 0
+ 602 01a4 8142     	 cmp r1,r0
+ 603 01a6 44D1     	 bne .L82
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (crc_received != crc_calculated)
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // Re-Transmit frame in case of CF CRC error
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Retransmit frame for CF CRC error\n");
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 604              	 .loc 1 471 0
+ 605 01a8 0522     	 mov r2,#5
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 606              	 .loc 1 467 0
+ 607 01aa AF42     	 cmp r7,r5
+ 608 01ac 41D1     	 bne .L82
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if ((data_len > DL_CONTROL_FRAME_LENGTH) || (0 != packet_len))
+ 609              	 .loc 1 474 0
+ 610 01ae 019A     	 ldr r2,[sp,#4]
+ 611 01b0 052A     	 cmp r2,#5
+ 612 01b2 1ED8     	 bhi .L52
+ 613              	 .loc 1 474 0 is_stmt 0 discriminator 1
+ 614 01b4 059A     	 ldr r2,[sp,#20]
+ 615 01b6 002A     	 cmp r2,#0
+ 616 01b8 1BD1     	 bne .L52
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // Control frame is more than 5/Control frame with non-zero FRNR/packet len is 
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Errors in control frame\n");
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_DISCARD;
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (DL_FCTR_SEQCTR_VALUE_RESYNC == seqctr)
+ 617              	 .loc 1 481 0 is_stmt 1
+ 618 01ba 0029     	 cmp r1,#0
+ 619 01bc 0DD0     	 beq .L51
+ 482:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {    // Re-sync received
+ 483:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Re-Sync received\n");
+ 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_DISCARD;
+ 620              	 .loc 1 484 0
+ 621 01be 0922     	 mov r2,#9
+ 622 01c0 1A70     	 strb r2,[r3]
+ 485:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.resynced = 1;
+ 623              	 .loc 1 485 0
+ 624 01c2 231C     	 mov r3,r4
+ 625 01c4 083A     	 sub r2,r2,#8
+ 626 01c6 6633     	 add r3,r3,#102
+ 627 01c8 1A70     	 strb r2,[r3]
+ 486:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.tx_seq_nr = DL_MAX_FRAME_NUM;
+ 628              	 .loc 1 486 0
+ 629 01ca 053B     	 sub r3,r3,#5
+ 630 01cc 0232     	 add r2,r2,#2
+ 631 01ce 1A70     	 strb r2,[r3]
+ 487:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 632              	 .loc 1 487 0
+ 633 01d0 5A70     	 strb r2,[r3,#1]
+ 488:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 634              	 .loc 1 488 0
+ 635 01d2 0223     	 mov r3,#2
+ 636 01d4 3D1C     	 mov r5,r7
+ 637              	.LVL64:
+ 638 01d6 0093     	 str r3,[sp]
+ 639 01d8 1EE7     	 b .L64
+ 640              	.LVL65:
+ 641              	.L51:
+ 489:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 490:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if ((0 != fr_nr) || (DL_FCTR_SEQCTR_VALUE_RFU == seqctr) || (ack_nr != p_ctx->dl.tx
+ 642              	 .loc 1 490 0
+ 643 01da 029A     	 ldr r2,[sp,#8]
+ 644 01dc 002A     	 cmp r2,#0
+ 645 01de 08D1     	 bne .L52
+ 646              	 .loc 1 490 0 is_stmt 0 discriminator 1
+ 647 01e0 009A     	 ldr r2,[sp]
+ 648 01e2 032A     	 cmp r2,#3
+ 649 01e4 05D0     	 beq .L52
+ 650              	 .loc 1 490 0 discriminator 2
+ 651 01e6 221C     	 mov r2,r4
+ 652 01e8 6132     	 add r2,r2,#97
+ 653 01ea 1278     	 ldrb r2,[r2]
+ 654 01ec 0699     	 ldr r1,[sp,#24]
+ 655 01ee 8A42     	 cmp r2,r1
+ 656 01f0 01D0     	 beq .L53
+ 657              	.L52:
+ 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 492:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // Control frame with non-zero FRNR/ ACK not received/ ack number != tx number
+ 493:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Errors in control frame\n");
+ 494:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_DISCARD;
+ 658              	 .loc 1 494 0 is_stmt 1
+ 659 01f2 0922     	 mov r2,#9
+ 660 01f4 03E0     	 b .L81
+ 661              	.L53:
+ 495:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 497:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (DL_FCTR_SEQCTR_VALUE_NACK == seqctr)
+ 662              	 .loc 1 497 0
+ 663 01f6 009A     	 ldr r2,[sp]
+ 664 01f8 012A     	 cmp r2,#1
+ 665 01fa 03D1     	 bne .L54
+ 498:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 499:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // NACK for transmitted frame
+ 500:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: NACK received\n");
+ 501:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 666              	 .loc 1 501 0
+ 667 01fc 0432     	 add r2,r2,#4
+ 668              	.L81:
+ 669 01fe 1A70     	 strb r2,[r3]
+ 670              	.L83:
+ 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 671              	 .loc 1 502 0
+ 672 0200 3D1C     	 mov r5,r7
+ 673 0202 09E7     	 b .L64
+ 674              	.L54:
+ 503:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 504:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 505:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: ACK received\n");
+ 506:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Report frame reception to upper layer and go in idle state
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_IDLE;
+ 675              	 .loc 1 507 0
+ 676 0204 0122     	 mov r2,#1
+ 508:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.upper_layer_event_handler(p_ctx, IFX_I2C_DL_EVENT_TX_SUCCESS, 0, 0);
+ 677              	 .loc 1 509 0
+ 678 0206 E56F     	 ldr r5,[r4,#124]
+ 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 679              	 .loc 1 507 0
+ 680 0208 1A70     	 strb r2,[r3]
+ 681              	.LVL66:
+ 682              	 .loc 1 509 0
+ 683 020a 201C     	 mov r0,r4
+ 684 020c 0221     	 mov r1,#2
+ 685 020e 029A     	 ldr r2,[sp,#8]
+ 686 0210 8EE0     	 b .L90
+ 687              	.LVL67:
+ 688              	.L31:
+ 510:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 511:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 512:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_DISCARD:
+ 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 514:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Discard frame\n");
+ 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_RX;
+ 689              	 .loc 1 515 0
+ 690 0212 231C     	 mov r3,r4
+ 691 0214 0322     	 mov r2,#3
+ 692 0216 6033     	 add r3,r3,#96
+ 693 0218 1A70     	 strb r2,[r3]
+ 694              	.LVL68:
+ 516:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 517:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 //lint --e{534} suppress "Error handling is not required so return value is not che
+ 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ifx_i2c_pl_receive_frame(p_ctx);
+ 695              	 .loc 1 518 0
+ 696 021a 201C     	 mov r0,r4
+ 697 021c FFF7FEFF 	 bl ifx_i2c_pl_receive_frame
+ 698              	.LVL69:
+ 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 699              	 .loc 1 520 0
+ 700 0220 88E0     	 b .L20
+ 701              	.LVL70:
+ 702              	.L27:
+ 703 0222 231C     	 mov r3,r4
+ 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_ACK:
+ 522:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 523:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: ACK sent\n");
+ 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (IFX_I2C_STACK_ERROR == event)
+ 704              	 .loc 1 524 0
+ 705 0224 8122     	 mov r2,#129
+ 706 0226 0499     	 ldr r1,[sp,#16]
+ 707 0228 6033     	 add r3,r3,#96
+ 708 022a 5200     	 lsl r2,r2,#1
+ 709 022c 9142     	 cmp r1,r2
+ 710 022e 02D1     	 bne .L55
+ 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // If writing the ACK frame failed, Re-Send
+ 527:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Physical Layer error -> Resend ACK\n");
+ 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_RESEND;
+ 711              	 .loc 1 528 0
+ 712 0230 FD3A     	 sub r2,r2,#253
+ 713              	.L82:
+ 714 0232 1A70     	 strb r2,[r3]
+ 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     break;
+ 715              	 .loc 1 529 0
+ 716 0234 F0E6     	 b .L64
+ 717              	.L55:
+ 530:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Control frame successful transmitted
+ 532:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_IDLE;
+ 718              	 .loc 1 532 0
+ 719 0236 0122     	 mov r2,#1
+ 720 0238 1A70     	 strb r2,[r3]
+ 721              	.LVL71:
+ 533:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (0 != p_ctx->dl.action_rx_only)
+ 722              	 .loc 1 534 0
+ 723 023a 231C     	 mov r3,r4
+ 724 023c 6333     	 add r3,r3,#99
+ 725 023e 1978     	 ldrb r1,[r3]
+ 726 0240 0B33     	 add r3,r3,#11
+ 535:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 536:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.upper_layer_event_handler(p_ctx,
+ 727              	 .loc 1 536 0
+ 728 0242 1B88     	 ldrh r3,[r3]
+ 729 0244 626F     	 ldr r2,[r4,#116]
+ 730 0246 053B     	 sub r3,r3,#5
+ 731 0248 E56F     	 ldr r5,[r4,#124]
+ 732 024a 0332     	 add r2,r2,#3
+ 733 024c 9BB2     	 uxth r3,r3
+ 734 024e 201C     	 mov r0,r4
+ 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 735              	 .loc 1 534 0
+ 736 0250 0029     	 cmp r1,#0
+ 737 0252 01D0     	 beq .L56
+ 738              	.LVL72:
+ 739              	 .loc 1 536 0
+ 740 0254 0421     	 mov r1,#4
+ 741 0256 6CE0     	 b .L87
+ 742              	.L56:
+ 537:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         IFX_I2C_DL_EVENT_RX_SUCCESS,
+ 538:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         p_ctx->dl.p_rx_frame_buffer + 3,
+ 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         p_ctx->dl.rx_buffer_size - DL_HEADER_SIZE);
+ 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 else
+ 542:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 543:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.upper_layer_event_handler(p_ctx,
+ 743              	 .loc 1 543 0
+ 744 0258 0621     	 mov r1,#6
+ 745 025a 6AE0     	 b .L87
+ 746              	.LVL73:
+ 747              	.L29:
+ 544:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         IFX_I2C_DL_EVENT_TX_SUCCESS | IFX_I2C_DL_EV
+ 545:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         p_ctx->dl.p_rx_frame_buffer + 3,
+ 546:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                                                         p_ctx->dl.rx_buffer_size - DL_HEADER_SIZE);
+ 547:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 548:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 549:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 550:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_NACK:
+ 551:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 552:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 // Sending NACK
+ 553:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Sending NACK\n");
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_TX;
+ 748              	 .loc 1 554 0
+ 749 025c 0223     	 mov r3,#2
+ 555:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 556:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 //lint --e{534} suppress "Error handling is not required so return value is not che
+ 557:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_NACK, 0);
+ 750              	 .loc 1 557 0
+ 751 025e 0021     	 mov r1,#0
+ 554:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 752              	 .loc 1 554 0
+ 753 0260 3370     	 strb r3,[r6]
+ 754              	.LVL74:
+ 755              	 .loc 1 557 0
+ 756 0262 201C     	 mov r0,r4
+ 757 0264 0122     	 mov r2,#1
+ 758 0266 0B1C     	 mov r3,r1
+ 759              	.LVL75:
+ 760              	.L89:
+ 761 0268 FFF7FEFF 	 bl ifx_i2c_dl_send_frame_internal
+ 762              	.LVL76:
+ 558:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 559:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 763              	 .loc 1 559 0
+ 764 026c 62E0     	 b .L20
+ 765              	.LVL77:
+ 766              	.L28:
+ 767              	.LBB12:
+ 768              	.LBB13:
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     uint32_t time_stamp_diff = current_time_stamp - p_ctx->tl.api_start_time;
+ 769              	 .loc 1 284 0
+ 770 026e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 771              	.LVL78:
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 772              	 .loc 1 285 0
+ 773 0272 E36C     	 ldr r3,[r4,#76]
+ 774 0274 C01A     	 sub r0,r0,r3
+ 775              	.LVL79:
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 776              	 .loc 1 291 0
+ 777 0276 304B     	 ldr r3,.L91
+ 778 0278 9842     	 cmp r0,r3
+ 779 027a 24D8     	 bhi .L57
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 780              	 .loc 1 293 0
+ 781 027c 211C     	 mov r1,r4
+ 782 027e 6431     	 add r1,r1,#100
+ 783 0280 0A78     	 ldrb r2,[r1]
+ 784 0282 032A     	 cmp r2,#3
+ 785 0284 0FD1     	 bne .L58
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_resync(p_ctx);
+ 786              	 .loc 1 296 0
+ 787 0286 0023     	 mov r3,#0
+ 788              	.LBB14:
+ 789              	.LBB15:
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 790              	 .loc 1 271 0
+ 791 0288 0339     	 sub r1,r1,#3
+ 792              	.LBE15:
+ 793              	.LBE14:
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_resync(p_ctx);
+ 794              	 .loc 1 296 0
+ 795 028a CB70     	 strb r3,[r1,#3]
+ 796              	.LVL80:
+ 797              	.LBB17:
+ 798              	.LBB16:
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 799              	 .loc 1 271 0
+ 800 028c 0A70     	 strb r2,[r1]
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.resynced = 1;
+ 801              	 .loc 1 272 0
+ 802 028e 4A70     	 strb r2,[r1,#1]
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Send Re-Sync Frame\n");
+ 803              	 .loc 1 273 0
+ 804 0290 221C     	 mov r2,r4
+ 805 0292 0121     	 mov r1,#1
+ 806 0294 6632     	 add r2,r2,#102
+ 807 0296 1170     	 strb r1,[r2]
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     api_status = ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_RESYNC, 0);
+ 808              	 .loc 1 275 0
+ 809 0298 0431     	 add r1,r1,#4
+ 810 029a 063A     	 sub r2,r2,#6
+ 811 029c 1170     	 strb r1,[r2]
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (api_status);
+ 812              	 .loc 1 276 0
+ 813 029e 201C     	 mov r0,r4
+ 814              	.LVL81:
+ 815 02a0 191C     	 mov r1,r3
+ 816 02a2 0222     	 mov r2,#2
+ 817 02a4 09E0     	 b .L85
+ 818              	.LVL82:
+ 819              	.L58:
+ 820              	.LBE16:
+ 821              	.LBE17:
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.state = DL_STATE_TX;
+ 822              	 .loc 1 302 0
+ 823 02a6 0132     	 add r2,r2,#1
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_send_frame_internal(p_ctx, p_ctx->dl.tx_buffer_size, seqctr_value, 
+ 824              	 .loc 1 303 0
+ 825 02a8 231C     	 mov r3,r4
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             p_ctx->dl.state = DL_STATE_TX;
+ 826              	 .loc 1 302 0
+ 827 02aa 0A70     	 strb r2,[r1]
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             status = ifx_i2c_dl_send_frame_internal(p_ctx, p_ctx->dl.tx_buffer_size, seqctr_value, 
+ 828              	 .loc 1 303 0
+ 829 02ac 0222     	 mov r2,#2
+ 830 02ae 6033     	 add r3,r3,#96
+ 831 02b0 1A70     	 strb r2,[r3]
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 832              	 .loc 1 304 0
+ 833 02b2 9989     	 ldrh r1,[r3,#12]
+ 834 02b4 201C     	 mov r0,r4
+ 835              	.LVL83:
+ 836 02b6 0022     	 mov r2,#0
+ 837 02b8 0123     	 mov r3,#1
+ 838              	.LVL84:
+ 839              	.L85:
+ 840 02ba FFF7FEFF 	 bl ifx_i2c_dl_send_frame_internal
+ 841              	.LVL85:
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 842              	 .loc 1 309 0
+ 843 02be 0622     	 mov r2,#6
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         {
+ 844              	 .loc 1 307 0
+ 845 02c0 0028     	 cmp r0,#0
+ 846 02c2 01D1     	 bne .L86
+ 847 02c4 03E0     	 b .L60
+ 848              	.LVL86:
+ 849              	.L57:
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 850              	 .loc 1 314 0
+ 851 02c6 0822     	 mov r2,#8
+ 852              	.LVL87:
+ 853              	.L86:
+ 854 02c8 231C     	 mov r3,r4
+ 855 02ca 6033     	 add r3,r3,#96
+ 856 02cc 1A70     	 strb r2,[r3]
+ 857              	.L60:
+ 858              	.LBE13:
+ 859              	.LBE12:
+ 560:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_RESEND:
+ 561:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 562:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 //Resend frame
+ 563:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 ifx_i2c_dl_resend_frame(p_ctx, DL_FCTR_SEQCTR_VALUE_ACK);
+ 564:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (DL_STATE_ERROR != p_ctx->dl.state)
+ 860              	 .loc 1 564 0
+ 861 02ce 231C     	 mov r3,r4
+ 862 02d0 6033     	 add r3,r3,#96
+ 863 02d2 1B78     	 ldrb r3,[r3]
+ 864 02d4 082B     	 cmp r3,#8
+ 865 02d6 2DD1     	 bne .L20
+ 866 02d8 9EE6     	 b .L64
+ 867              	.LVL88:
+ 868              	.L30:
+ 565:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 566:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     continue_state_machine = FALSE;
+ 567:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 568:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 569:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 570:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             case DL_STATE_ERROR:
+ 571:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             {
+ 572:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (0 == p_ctx->dl.resynced)
+ 869              	 .loc 1 572 0
+ 870 02da 221C     	 mov r2,r4
+ 871 02dc 251C     	 mov r5,r4
+ 872 02de 6632     	 add r2,r2,#102
+ 873 02e0 1378     	 ldrb r3,[r2]
+ 874 02e2 6535     	 add r5,r5,#101
+ 875 02e4 002B     	 cmp r3,#0
+ 876 02e6 01D1     	 bne .L62
+ 573:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 574:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.error = 1;
+ 877              	 .loc 1 574 0
+ 878 02e8 0133     	 add r3,r3,#1
+ 879 02ea 2B70     	 strb r3,[r5]
+ 880              	.L62:
+ 575:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 576:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 if (0 == p_ctx->dl.error)
+ 881              	 .loc 1 576 0
+ 882 02ec 2B78     	 ldrb r3,[r5]
+ 883 02ee 002B     	 cmp r3,#0
+ 884 02f0 05D1     	 bne .L63
+ 577:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 578:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Exit error after fatal error\n");
+ 579:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     //After sending resync, inform upper layer
+ 580:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_IDLE;
+ 885              	 .loc 1 580 0
+ 886 02f2 0121     	 mov r1,#1
+ 581:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.upper_layer_event_handler(p_ctx, IFX_I2C_DL_EVENT_ERROR, 0, 0);
+ 887              	 .loc 1 581 0
+ 888 02f4 E56F     	 ldr r5,[r4,#124]
+ 580:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.upper_layer_event_handler(p_ctx, IFX_I2C_DL_EVENT_ERROR, 0, 0);
+ 889              	 .loc 1 580 0
+ 890 02f6 3170     	 strb r1,[r6]
+ 891              	 .loc 1 581 0
+ 892 02f8 201C     	 mov r0,r4
+ 893 02fa 1A1C     	 mov r2,r3
+ 894 02fc 19E0     	 b .L87
+ 895              	.L63:
+ 896              	.LVL89:
+ 897              	.LBB18:
+ 898              	.LBB19:
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 899              	 .loc 1 271 0
+ 900 02fe 211C     	 mov r1,r4
+ 901 0300 0323     	 mov r3,#3
+ 902 0302 6131     	 add r1,r1,#97
+ 903 0304 0B70     	 strb r3,[r1]
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.resynced = 1;
+ 904              	 .loc 1 272 0
+ 905 0306 4B70     	 strb r3,[r1,#1]
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (api_status);
+ 906              	 .loc 1 276 0
+ 907 0308 0021     	 mov r1,#0
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Send Re-Sync Frame\n");
+ 908              	 .loc 1 273 0
+ 909 030a 023B     	 sub r3,r3,#2
+ 910 030c 1370     	 strb r3,[r2]
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     api_status = ifx_i2c_dl_send_frame_internal(p_ctx, 0, DL_FCTR_SEQCTR_VALUE_RESYNC, 0);
+ 911              	 .loc 1 275 0
+ 912 030e 0433     	 add r3,r3,#4
+ 913 0310 3370     	 strb r3,[r6]
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     return (api_status);
+ 914              	 .loc 1 276 0
+ 915 0312 201C     	 mov r0,r4
+ 916 0314 0B1C     	 mov r3,r1
+ 917 0316 0222     	 mov r2,#2
+ 918 0318 FFF7FEFF 	 bl ifx_i2c_dl_send_frame_internal
+ 919              	.LVL90:
+ 920              	.LBE19:
+ 921              	.LBE18:
+ 582:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 583:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 else
+ 584:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 {
+ 585:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     LOG_DL("[IFX-DL]: Sending re-sync after fatal error\n");
+ 586:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     // Send re-sync to slave on error
+ 587:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     //lint --e{534} suppress "As this is last step, no effect of checking return co
+ 588:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     ifx_i2c_dl_resync(p_ctx);
+ 589:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.state = DL_STATE_ERROR;
+ 922              	 .loc 1 589 0
+ 923 031c 0823     	 mov r3,#8
+ 924 031e 3370     	 strb r3,[r6]
+ 590:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                     p_ctx->dl.error = 0;
+ 925              	 .loc 1 590 0
+ 926 0320 0023     	 mov r3,#0
+ 927 0322 2B70     	 strb r3,[r5]
+ 928 0324 06E0     	 b .L20
+ 929              	.LVL91:
+ 930              	.L22:
+ 591:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 }
+ 592:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 593:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             }
+ 594:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             break;
+ 595:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****             default:
+ 596:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 LOG_DL("[IFX-DL]: Default condition occurred. Exiting with error\n");
+ 597:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.state = DL_STATE_IDLE;
+ 931              	 .loc 1 597 0
+ 932 0326 0121     	 mov r1,#1
+ 933 0328 3170     	 strb r1,[r6]
+ 934              	.LVL92:
+ 935              	.L88:
+ 598:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 p_ctx->dl.upper_layer_event_handler(p_ctx, IFX_I2C_DL_EVENT_ERROR, 0, 0);
+ 936              	 .loc 1 598 0
+ 937 032a 201C     	 mov r0,r4
+ 938 032c 0022     	 mov r2,#0
+ 939 032e E56F     	 ldr r5,[r4,#124]
+ 940              	.LVL93:
+ 941              	.L90:
+ 942 0330 131C     	 mov r3,r2
+ 943              	.L87:
+ 944 0332 A847     	 blx r5
+ 945              	.LVL94:
+ 946              	.L20:
+ 599:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 continue_state_machine = FALSE;
+ 600:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****                 break;
+ 601:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****         }
+ 602:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     } while (TRUE == continue_state_machine);
+ 603:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: #Exiting DL Handler\n");
+ 604:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 947              	 .loc 1 604 0
+ 948 0334 09B0     	 add sp,sp,#36
+ 949              	 
+ 950              	.LVL95:
+ 951 0336 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 952              	.L92:
+ 953              	 .align 2
+ 954              	.L91:
+ 955 0338 1FBF0200 	 .word 179999
+ 956              	 .cfi_endproc
+ 957              	.LFE8:
+ 959              	 .section .text.ifx_i2c_dl_init,"ax",%progbits
+ 960              	 .align 1
+ 961              	 .global ifx_i2c_dl_init
+ 962              	 .code 16
+ 963              	 .thumb_func
+ 965              	ifx_i2c_dl_init:
+ 966              	.LFB0:
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Init\n");
+ 967              	 .loc 1 116 0
+ 968              	 .cfi_startproc
+ 969              	.LVL96:
+ 970 0000 70B5     	 push {r4,r5,r6,lr}
+ 971              	.LCFI4:
+ 972              	 .cfi_def_cfa_offset 16
+ 973              	 .cfi_offset 4,-16
+ 974              	 .cfi_offset 5,-12
+ 975              	 .cfi_offset 6,-8
+ 976              	 .cfi_offset 14,-4
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Initialize Physical Layer (and register event handler)
+ 977              	 .loc 1 119 0
+ 978 0002 051C     	 mov r5,r0
+ 979 0004 0023     	 mov r3,#0
+ 980 0006 6035     	 add r5,r5,#96
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Init\n");
+ 981              	 .loc 1 116 0
+ 982 0008 0E1C     	 mov r6,r1
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     // Initialize Physical Layer (and register event handler)
+ 983              	 .loc 1 119 0
+ 984 000a 2B70     	 strb r3,[r5]
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 985              	 .loc 1 121 0
+ 986 000c 0E49     	 ldr r1,.L96
+ 987              	.LVL97:
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Init\n");
+ 988              	 .loc 1 116 0
+ 989 000e 041C     	 mov r4,r0
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 990              	 .loc 1 121 0
+ 991 0010 FFF7FEFF 	 bl ifx_i2c_pl_init
+ 992              	.LVL98:
+ 993 0014 0028     	 cmp r0,#0
+ 994 0016 14D1     	 bne .L95
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_seq_nr = DL_MAX_FRAME_NUM;
+ 995              	 .loc 1 128 0
+ 996 0018 0123     	 mov r3,#1
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 997              	 .loc 1 129 0
+ 998 001a 221C     	 mov r2,r4
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.state = DL_STATE_IDLE;
+ 999              	 .loc 1 127 0
+ 1000 001c E667     	 str r6,[r4,#124]
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 1001              	 .loc 1 129 0
+ 1002 001e 6132     	 add r2,r2,#97
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_seq_nr = DL_MAX_FRAME_NUM;
+ 1003              	 .loc 1 128 0
+ 1004 0020 2B70     	 strb r3,[r5]
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.rx_seq_nr = DL_MAX_FRAME_NUM;
+ 1005              	 .loc 1 129 0
+ 1006 0022 0233     	 add r3,r3,#2
+ 1007 0024 1370     	 strb r3,[r2]
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.resynced = 0;
+ 1008              	 .loc 1 130 0
+ 1009 0026 5370     	 strb r3,[r2,#1]
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.error = 0;
+ 1010              	 .loc 1 131 0
+ 1011 0028 231C     	 mov r3,r4
+ 1012 002a 6633     	 add r3,r3,#102
+ 1013 002c 1870     	 strb r0,[r3]
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.p_tx_frame_buffer = p_ctx->tx_frame_buffer;
+ 1014              	 .loc 1 132 0
+ 1015 002e 013B     	 sub r3,r3,#1
+ 1016 0030 1870     	 strb r0,[r3]
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.p_rx_frame_buffer = p_ctx->rx_frame_buffer;
+ 1017              	 .loc 1 133 0
+ 1018 0032 A923     	 mov r3,#169
+ 1019 0034 9B00     	 lsl r3,r3,#2
+ 1020 0036 E318     	 add r3,r4,r3
+ 1021 0038 2367     	 str r3,[r4,#112]
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1022              	 .loc 1 134 0
+ 1023 003a 044B     	 ldr r3,.L96+4
+ 1024 003c E318     	 add r3,r4,r3
+ 1025 003e 6367     	 str r3,[r4,#116]
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 1026              	 .loc 1 136 0
+ 1027 0040 01E0     	 b .L94
+ 1028              	.L95:
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 1029              	 .loc 1 123 0
+ 1030 0042 8120     	 mov r0,#129
+ 1031 0044 4000     	 lsl r0,r0,#1
+ 1032              	.L94:
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1033              	 .loc 1 137 0
+ 1034              	 
+ 1035              	.LVL99:
+ 1036              	.LVL100:
+ 1037              	.LVL101:
+ 1038 0046 70BD     	 pop {r4,r5,r6,pc}
+ 1039              	.L97:
+ 1040              	 .align 2
+ 1041              	.L96:
+ 1042 0048 00000000 	 .word ifx_i2c_pl_event_handler
+ 1043 004c BA030000 	 .word 954
+ 1044              	 .cfi_endproc
+ 1045              	.LFE0:
+ 1047              	 .section .text.ifx_i2c_dl_send_frame,"ax",%progbits
+ 1048              	 .align 1
+ 1049              	 .global ifx_i2c_dl_send_frame
+ 1050              	 .code 16
+ 1051              	 .thumb_func
+ 1053              	ifx_i2c_dl_send_frame:
+ 1054              	.LFB1:
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start TX Frame\n");
+ 1055              	 .loc 1 140 0
+ 1056              	 .cfi_startproc
+ 1057              	.LVL102:
+ 1058 0000 08B5     	 push {r3,lr}
+ 1059              	.LCFI5:
+ 1060              	 .cfi_def_cfa_offset 8
+ 1061              	 .cfi_offset 3,-8
+ 1062              	 .cfi_offset 14,-4
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 1063              	 .loc 1 143 0
+ 1064 0002 031C     	 mov r3,r0
+ 1065 0004 6033     	 add r3,r3,#96
+ 1066 0006 1A78     	 ldrb r2,[r3]
+ 1067 0008 012A     	 cmp r2,#1
+ 1068 000a 11D1     	 bne .L101
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 1069              	 .loc 1 143 0 is_stmt 0 discriminator 1
+ 1070 000c 0029     	 cmp r1,#0
+ 1071 000e 0FD0     	 beq .L101
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.retransmit_counter = 0;
+ 1072              	 .loc 1 148 0 is_stmt 1
+ 1073 0010 0132     	 add r2,r2,#1
+ 1074 0012 1A70     	 strb r2,[r3]
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.action_rx_only = 0;
+ 1075              	 .loc 1 149 0
+ 1076 0014 021C     	 mov r2,r0
+ 1077 0016 0023     	 mov r3,#0
+ 1078 0018 6432     	 add r2,r2,#100
+ 1079 001a 1370     	 strb r3,[r2]
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.tx_buffer_size = frame_len;
+ 1080              	 .loc 1 150 0
+ 1081 001c 013A     	 sub r2,r2,#1
+ 1082 001e 1370     	 strb r3,[r2]
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.data_poll_timeout = PL_TRANS_TIMEOUT_MS;
+ 1083              	 .loc 1 151 0
+ 1084 0020 0932     	 add r2,r2,#9
+ 1085 0022 1180     	 strh r1,[r2]
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1086              	 .loc 1 152 0
+ 1087 0024 0A22     	 mov r2,#10
+ 1088 0026 8266     	 str r2,[r0,#104]
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 1089              	 .loc 1 154 0
+ 1090 0028 1A1C     	 mov r2,r3
+ 1091 002a FFF7FEFF 	 bl ifx_i2c_dl_send_frame_internal
+ 1092              	.LVL103:
+ 1093 002e 01E0     	 b .L99
+ 1094              	.LVL104:
+ 1095              	.L101:
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 1096              	 .loc 1 145 0
+ 1097 0030 8120     	 mov r0,#129
+ 1098              	.LVL105:
+ 1099 0032 4000     	 lsl r0,r0,#1
+ 1100              	.LVL106:
+ 1101              	.L99:
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1102              	 .loc 1 155 0
+ 1103              	 
+ 1104 0034 08BD     	 pop {r3,pc}
+ 1105              	 .cfi_endproc
+ 1106              	.LFE1:
+ 1108              	 .section .text.ifx_i2c_dl_receive_frame,"ax",%progbits
+ 1109              	 .align 1
+ 1110              	 .global ifx_i2c_dl_receive_frame
+ 1111              	 .code 16
+ 1112              	 .thumb_func
+ 1114              	ifx_i2c_dl_receive_frame:
+ 1115              	.LFB2:
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start RX Frame\n");
+ 1116              	 .loc 1 158 0
+ 1117              	 .cfi_startproc
+ 1118              	.LVL107:
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 1119              	 .loc 1 161 0
+ 1120 0000 021C     	 mov r2,r0
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start RX Frame\n");
+ 1121              	 .loc 1 158 0
+ 1122 0002 10B5     	 push {r4,lr}
+ 1123              	.LCFI6:
+ 1124              	 .cfi_def_cfa_offset 8
+ 1125              	 .cfi_offset 4,-8
+ 1126              	 .cfi_offset 14,-4
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     LOG_DL("[IFX-DL]: Start RX Frame\n");
+ 1127              	 .loc 1 158 0
+ 1128 0004 041C     	 mov r4,r0
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 1129              	 .loc 1 163 0
+ 1130 0006 8120     	 mov r0,#129
+ 1131              	.LVL108:
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 1132              	 .loc 1 161 0
+ 1133 0008 6032     	 add r2,r2,#96
+ 1134              	.LVL109:
+ 1135 000a 1378     	 ldrb r3,[r2]
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     }
+ 1136              	 .loc 1 163 0
+ 1137 000c 4000     	 lsl r0,r0,#1
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     {
+ 1138              	 .loc 1 161 0
+ 1139 000e 012B     	 cmp r3,#1
+ 1140 0010 0DD1     	 bne .L103
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.retransmit_counter = 0;
+ 1141              	 .loc 1 167 0
+ 1142 0012 0321     	 mov r1,#3
+ 1143 0014 1170     	 strb r1,[r2]
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.action_rx_only = 1;
+ 1144              	 .loc 1 168 0
+ 1145 0016 0021     	 mov r1,#0
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.frame_start_time = pal_os_timer_get_time_in_milliseconds();
+ 1146              	 .loc 1 169 0
+ 1147 0018 0332     	 add r2,r2,#3
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.action_rx_only = 1;
+ 1148              	 .loc 1 168 0
+ 1149 001a 5170     	 strb r1,[r2,#1]
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.frame_start_time = pal_os_timer_get_time_in_milliseconds();
+ 1150              	 .loc 1 169 0
+ 1151 001c 1370     	 strb r3,[r2]
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.data_poll_timeout = TL_MAX_EXIT_TIMEOUT * DL_SEC_TO_MSECS;
+ 1152              	 .loc 1 170 0
+ 1153 001e FFF7FEFF 	 bl pal_os_timer_get_time_in_milliseconds
+ 1154              	.LVL110:
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1155              	 .loc 1 171 0
+ 1156 0022 034B     	 ldr r3,.L105
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c ****     p_ctx->dl.data_poll_timeout = TL_MAX_EXIT_TIMEOUT * DL_SEC_TO_MSECS;
+ 1157              	 .loc 1 170 0
+ 1158 0024 A067     	 str r0,[r4,#120]
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1159              	 .loc 1 171 0
+ 1160 0026 A366     	 str r3,[r4,#104]
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** }
+ 1161              	 .loc 1 173 0
+ 1162 0028 201C     	 mov r0,r4
+ 1163 002a FFF7FEFF 	 bl ifx_i2c_pl_receive_frame
+ 1164              	.LVL111:
+ 1165              	.L103:
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c\ifx_i2c_data_link_layer.c **** 
+ 1166              	 .loc 1 174 0
+ 1167              	 
+ 1168              	.LVL112:
+ 1169 002e 10BD     	 pop {r4,pc}
+ 1170              	.L106:
+ 1171              	 .align 2
+ 1172              	.L105:
+ 1173 0030 20BF0200 	 .word 180000
+ 1174              	 .cfi_endproc
+ 1175              	.LFE2:
+ 1177              	 .text
+ 1178              	.Letext0:
+ 1179              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1180              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 1181              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 1182              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_i2c.h"
+ 1183              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_gpio.h"
+ 1184              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h"
+ 1185              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/ifx_i2c/ifx_i2c_physical_layer.h"
+ 1186              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_os_timer.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ifx_i2c_data_link_layer.c
+    {standard input}:18     .text.ifx_i2c_dl_calc_crc:00000000 $t
+    {standard input}:22     .text.ifx_i2c_dl_calc_crc:00000000 ifx_i2c_dl_calc_crc
+    {standard input}:101    .text.ifx_i2c_dl_send_frame_internal:00000000 $t
+    {standard input}:105    .text.ifx_i2c_dl_send_frame_internal:00000000 ifx_i2c_dl_send_frame_internal
+    {standard input}:253    .text.ifx_i2c_pl_event_handler:00000000 $t
+    {standard input}:257    .text.ifx_i2c_pl_event_handler:00000000 ifx_i2c_pl_event_handler
+    {standard input}:319    .text.ifx_i2c_pl_event_handler:0000003e $d
+    {standard input}:330    .text.ifx_i2c_pl_event_handler:00000054 $t
+    {standard input}:955    .text.ifx_i2c_pl_event_handler:00000338 $d
+    {standard input}:960    .text.ifx_i2c_dl_init:00000000 $t
+    {standard input}:965    .text.ifx_i2c_dl_init:00000000 ifx_i2c_dl_init
+    {standard input}:1042   .text.ifx_i2c_dl_init:00000048 $d
+    {standard input}:1048   .text.ifx_i2c_dl_send_frame:00000000 $t
+    {standard input}:1053   .text.ifx_i2c_dl_send_frame:00000000 ifx_i2c_dl_send_frame
+    {standard input}:1109   .text.ifx_i2c_dl_receive_frame:00000000 $t
+    {standard input}:1114   .text.ifx_i2c_dl_receive_frame:00000000 ifx_i2c_dl_receive_frame
+    {standard input}:1173   .text.ifx_i2c_dl_receive_frame:00000030 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+ifx_i2c_pl_send_frame
+__gnu_thumb1_case_uhi
+pal_os_timer_get_time_in_milliseconds
+ifx_i2c_pl_receive_frame
+memcpy
+ifx_i2c_pl_init

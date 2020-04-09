@@ -1,0 +1,1519 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "asn1parse.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.mbedtls_asn1_get_len,"ax",%progbits
+  18              	 .align 1
+  19              	 .global mbedtls_asn1_get_len
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	mbedtls_asn1_get_len:
+  24              	.LFB0:
+  25              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/asn1parse.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** /*
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  Generic ASN.1 parsing
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  SPDX-License-Identifier: Apache-2.0
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  not use this file except in compliance with the License.
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  You may obtain a copy of the License at
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  Unless required by applicable law or agreed to in writing, software
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  See the License for the specific language governing permissions and
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  limitations under the License.
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  */
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include "mbedtls/config.h"
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #else
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include MBEDTLS_CONFIG_FILE
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #endif
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #if defined(MBEDTLS_ASN1_PARSE_C)
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include "mbedtls/asn1.h"
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include "mbedtls/platform_util.h"
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include <string.h>
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #if defined(MBEDTLS_BIGNUM_C)
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include "mbedtls/bignum.h"
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #endif
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #if defined(MBEDTLS_PLATFORM_C)
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include "mbedtls/platform.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #else
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #include <stdlib.h>
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #define mbedtls_calloc    calloc
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #define mbedtls_free       free
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #endif
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** /*
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  * ASN.1 DER decoding routines
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  */
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_len( unsigned char **p,
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   const unsigned char *end,
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   size_t *len )
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+  26              	 .loc 1 53 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( end - *p ) < 1 )
+  29              	 .loc 1 54 0
+  30 0000 0368     	 ldr r3,[r0]
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( end - *p ) < 1 )
+  31              	 .loc 1 53 0
+  32 0002 70B5     	 push {r4,r5,r6,lr}
+  33              	.LCFI0:
+  34              	 .cfi_def_cfa_offset 16
+  35              	 .cfi_offset 4,-16
+  36              	 .cfi_offset 5,-12
+  37              	 .cfi_offset 6,-8
+  38              	 .cfi_offset 14,-4
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( end - *p ) < 1 )
+  39              	 .loc 1 53 0
+  40 0004 041C     	 mov r4,r0
+  41              	 .loc 1 54 0
+  42 0006 CD1A     	 sub r5,r1,r3
+  43 0008 002D     	 cmp r5,#0
+  44 000a 01DC     	 bgt .L2
+  45              	.LVL1:
+  46              	.L11:
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+  47              	 .loc 1 55 0
+  48 000c 6020     	 mov r0,#96
+  49 000e 43E0     	 b .L17
+  50              	.LVL2:
+  51              	.L2:
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( **p & 0x80 ) == 0 )
+  52              	 .loc 1 57 0
+  53 0010 1E78     	 ldrb r6,[r3]
+  54 0012 70B2     	 sxtb r0,r6
+  55              	.LVL3:
+  56 0014 0028     	 cmp r0,#0
+  57 0016 04DB     	 blt .L4
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         *len = *(*p)++;
+  58              	 .loc 1 58 0
+  59 0018 581C     	 add r0,r3,#1
+  60 001a 2060     	 str r0,[r4]
+  61 001c 1B78     	 ldrb r3,[r3]
+  62 001e 1360     	 str r3,[r2]
+  63 0020 32E0     	 b .L5
+  64              	.L4:
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     else
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         switch( **p & 0x7F )
+  65              	 .loc 1 61 0
+  66 0022 7F20     	 mov r0,#127
+  67 0024 3040     	 and r0,r6
+  68 0026 0138     	 sub r0,r0,#1
+  69 0028 0328     	 cmp r0,#3
+  70 002a 34D8     	 bhi .L12
+  71 002c FFF7FEFF 	 bl __gnu_thumb1_case_uqi
+  72              	.L7:
+  73 0030 02       	 .byte (.L6-.L7)/2
+  74 0031 08       	 .byte (.L8-.L7)/2
+  75 0032 11       	 .byte (.L9-.L7)/2
+  76 0033 1D       	 .byte (.L10-.L7)/2
+  77              	 .p2align 1
+  78              	.L6:
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         {
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         case 1:
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             if( ( end - *p ) < 2 )
+  79              	 .loc 1 64 0
+  80 0034 012D     	 cmp r5,#1
+  81 0036 E9D0     	 beq .L11
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             *len = (*p)[1];
+  82              	 .loc 1 67 0
+  83 0038 5878     	 ldrb r0,[r3,#1]
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             (*p) += 2;
+  84              	 .loc 1 68 0
+  85 003a 0233     	 add r3,r3,#2
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             (*p) += 2;
+  86              	 .loc 1 67 0
+  87 003c 1060     	 str r0,[r2]
+  88 003e 22E0     	 b .L16
+  89              	.L8:
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             break;
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         case 2:
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             if( ( end - *p ) < 3 )
+  90              	 .loc 1 72 0
+  91 0040 022D     	 cmp r5,#2
+  92 0042 E3DD     	 ble .L11
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             *len = ( (size_t)(*p)[1] << 8 ) | (*p)[2];
+  93              	 .loc 1 75 0
+  94 0044 5878     	 ldrb r0,[r3,#1]
+  95 0046 9D78     	 ldrb r5,[r3,#2]
+  96 0048 0002     	 lsl r0,r0,#8
+  97 004a 2843     	 orr r0,r5
+  98 004c 1060     	 str r0,[r2]
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             (*p) += 3;
+  99              	 .loc 1 76 0
+ 100 004e 0333     	 add r3,r3,#3
+ 101 0050 19E0     	 b .L16
+ 102              	.L9:
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             break;
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         case 3:
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             if( ( end - *p ) < 4 )
+ 103              	 .loc 1 80 0
+ 104 0052 032D     	 cmp r5,#3
+ 105 0054 DADD     	 ble .L11
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             *len = ( (size_t)(*p)[1] << 16 ) |
+ 106              	 .loc 1 83 0
+ 107 0056 5878     	 ldrb r0,[r3,#1]
+ 108 0058 0504     	 lsl r5,r0,#16
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[2] << 8  ) | (*p)[3];
+ 109              	 .loc 1 84 0
+ 110 005a 9878     	 ldrb r0,[r3,#2]
+ 111 005c 0002     	 lsl r0,r0,#8
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[2] << 8  ) | (*p)[3];
+ 112              	 .loc 1 83 0
+ 113 005e 2843     	 orr r0,r5
+ 114              	 .loc 1 84 0
+ 115 0060 DD78     	 ldrb r5,[r3,#3]
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             (*p) += 4;
+ 116              	 .loc 1 85 0
+ 117 0062 0433     	 add r3,r3,#4
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[2] << 8  ) | (*p)[3];
+ 118              	 .loc 1 84 0
+ 119 0064 2843     	 orr r0,r5
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[2] << 8  ) | (*p)[3];
+ 120              	 .loc 1 83 0
+ 121 0066 1060     	 str r0,[r2]
+ 122 0068 0DE0     	 b .L16
+ 123              	.L10:
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             break;
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         case 4:
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             if( ( end - *p ) < 5 )
+ 124              	 .loc 1 89 0
+ 125 006a 042D     	 cmp r5,#4
+ 126 006c CEDD     	 ble .L11
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             *len = ( (size_t)(*p)[1] << 24 ) | ( (size_t)(*p)[2] << 16 ) |
+ 127              	 .loc 1 92 0
+ 128 006e 5878     	 ldrb r0,[r3,#1]
+ 129 0070 0506     	 lsl r5,r0,#24
+ 130 0072 9878     	 ldrb r0,[r3,#2]
+ 131 0074 0004     	 lsl r0,r0,#16
+ 132 0076 2843     	 orr r0,r5
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[3] << 8  ) |           (*p)[4];
+ 133              	 .loc 1 93 0
+ 134 0078 1D79     	 ldrb r5,[r3,#4]
+ 135 007a 2843     	 orr r0,r5
+ 136 007c DD78     	 ldrb r5,[r3,#3]
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             (*p) += 5;
+ 137              	 .loc 1 94 0
+ 138 007e 0533     	 add r3,r3,#5
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[3] << 8  ) |           (*p)[4];
+ 139              	 .loc 1 93 0
+ 140 0080 2D02     	 lsl r5,r5,#8
+ 141 0082 2843     	 orr r0,r5
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    ( (size_t)(*p)[3] << 8  ) |           (*p)[4];
+ 142              	 .loc 1 92 0
+ 143 0084 1060     	 str r0,[r2]
+ 144              	.L16:
+ 145              	 .loc 1 94 0
+ 146 0086 2360     	 str r3,[r4]
+ 147              	.L5:
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             break;
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         default:
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             return( MBEDTLS_ERR_ASN1_INVALID_LENGTH );
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         }
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *len > (size_t) ( end - *p ) )
+ 148              	 .loc 1 102 0
+ 149 0088 2368     	 ldr r3,[r4]
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 150              	 .loc 1 105 0
+ 151 008a 0020     	 mov r0,#0
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+ 152              	 .loc 1 102 0
+ 153 008c C91A     	 sub r1,r1,r3
+ 154              	.LVL4:
+ 155 008e 1368     	 ldr r3,[r2]
+ 156 0090 8B42     	 cmp r3,r1
+ 157 0092 02D9     	 bls .L3
+ 158 0094 BAE7     	 b .L11
+ 159              	.LVL5:
+ 160              	.L12:
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         }
+ 161              	 .loc 1 98 0
+ 162 0096 6420     	 mov r0,#100
+ 163              	.LVL6:
+ 164              	.L17:
+ 165 0098 4042     	 neg r0,r0
+ 166              	.L3:
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 167              	 .loc 1 106 0
+ 168              	 
+ 169              	.LVL7:
+ 170 009a 70BD     	 pop {r4,r5,r6,pc}
+ 171              	 .cfi_endproc
+ 172              	.LFE0:
+ 174              	 .section .text.mbedtls_asn1_get_tag,"ax",%progbits
+ 175              	 .align 1
+ 176              	 .global mbedtls_asn1_get_tag
+ 177              	 .code 16
+ 178              	 .thumb_func
+ 180              	mbedtls_asn1_get_tag:
+ 181              	.LFB1:
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_tag( unsigned char **p,
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   const unsigned char *end,
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   size_t *len, int tag )
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 182              	 .loc 1 111 0
+ 183              	 .cfi_startproc
+ 184              	.LVL8:
+ 185 0000 38B5     	 push {r3,r4,r5,lr}
+ 186              	.LCFI1:
+ 187              	 .cfi_def_cfa_offset 16
+ 188              	 .cfi_offset 3,-16
+ 189              	 .cfi_offset 4,-12
+ 190              	 .cfi_offset 5,-8
+ 191              	 .cfi_offset 14,-4
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( end - *p ) < 1 )
+ 192              	 .loc 1 112 0
+ 193 0002 0468     	 ldr r4,[r0]
+ 194 0004 0D1B     	 sub r5,r1,r4
+ 195 0006 002D     	 cmp r5,#0
+ 196 0008 07DD     	 ble .L21
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( **p != tag )
+ 197              	 .loc 1 115 0
+ 198 000a 2578     	 ldrb r5,[r4]
+ 199 000c 9D42     	 cmp r5,r3
+ 200 000e 06D1     	 bne .L22
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_UNEXPECTED_TAG );
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 201              	 .loc 1 118 0
+ 202 0010 0134     	 add r4,r4,#1
+ 203 0012 0460     	 str r4,[r0]
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( mbedtls_asn1_get_len( p, end, len ) );
+ 204              	 .loc 1 120 0
+ 205 0014 FFF7FEFF 	 bl mbedtls_asn1_get_len
+ 206              	.LVL9:
+ 207 0018 03E0     	 b .L20
+ 208              	.LVL10:
+ 209              	.L21:
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 210              	 .loc 1 113 0
+ 211 001a 6020     	 mov r0,#96
+ 212              	.LVL11:
+ 213 001c 00E0     	 b .L23
+ 214              	.LVL12:
+ 215              	.L22:
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_UNEXPECTED_TAG );
+ 216              	 .loc 1 116 0
+ 217 001e 6220     	 mov r0,#98
+ 218              	.LVL13:
+ 219              	.L23:
+ 220 0020 4042     	 neg r0,r0
+ 221              	.LVL14:
+ 222              	.L20:
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 223              	 .loc 1 121 0
+ 224              	 
+ 225 0022 38BD     	 pop {r3,r4,r5,pc}
+ 226              	 .cfi_endproc
+ 227              	.LFE1:
+ 229              	 .section .text.mbedtls_asn1_get_bool,"ax",%progbits
+ 230              	 .align 1
+ 231              	 .global mbedtls_asn1_get_bool
+ 232              	 .code 16
+ 233              	 .thumb_func
+ 235              	mbedtls_asn1_get_bool:
+ 236              	.LFB2:
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_bool( unsigned char **p,
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    const unsigned char *end,
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                    int *val )
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 237              	 .loc 1 126 0
+ 238              	 .cfi_startproc
+ 239              	.LVL15:
+ 240 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 241              	.LCFI2:
+ 242              	 .cfi_def_cfa_offset 24
+ 243              	 .cfi_offset 0,-24
+ 244              	 .cfi_offset 1,-20
+ 245              	 .cfi_offset 2,-16
+ 246              	 .cfi_offset 4,-12
+ 247              	 .cfi_offset 5,-8
+ 248              	 .cfi_offset 14,-4
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     size_t len;
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &len, MBEDTLS_ASN1_BOOLEAN ) ) != 0 )
+ 249              	 .loc 1 130 0
+ 250 0002 0123     	 mov r3,#1
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 251              	 .loc 1 126 0
+ 252 0004 151C     	 mov r5,r2
+ 253              	 .loc 1 130 0
+ 254 0006 01AA     	 add r2,sp,#4
+ 255              	.LVL16:
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 256              	 .loc 1 126 0
+ 257 0008 041C     	 mov r4,r0
+ 258              	 .loc 1 130 0
+ 259 000a FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 260              	.LVL17:
+ 261 000e 0028     	 cmp r0,#0
+ 262 0010 0CD1     	 bne .L25
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( len != 1 )
+ 263              	 .loc 1 133 0
+ 264 0012 019B     	 ldr r3,[sp,#4]
+ 265 0014 012B     	 cmp r3,#1
+ 266 0016 07D1     	 bne .L27
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_INVALID_LENGTH );
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *val = ( **p != 0 ) ? 1 : 0;
+ 267              	 .loc 1 136 0
+ 268 0018 2368     	 ldr r3,[r4]
+ 269 001a 1A78     	 ldrb r2,[r3]
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 270              	 .loc 1 137 0
+ 271 001c 0133     	 add r3,r3,#1
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 272              	 .loc 1 136 0
+ 273 001e 511E     	 sub r1,r2,#1
+ 274 0020 8A41     	 sbc r2,r2,r1
+ 275 0022 2A60     	 str r2,[r5]
+ 276              	 .loc 1 137 0
+ 277 0024 2360     	 str r3,[r4]
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 278              	 .loc 1 139 0
+ 279 0026 01E0     	 b .L25
+ 280              	.L27:
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 281              	 .loc 1 134 0
+ 282 0028 6420     	 mov r0,#100
+ 283              	.LVL18:
+ 284 002a 4042     	 neg r0,r0
+ 285              	.L25:
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 286              	 .loc 1 140 0
+ 287              	 
+ 288              	.LVL19:
+ 289              	.LVL20:
+ 290 002c 3EBD     	 pop {r1,r2,r3,r4,r5,pc}
+ 291              	 .cfi_endproc
+ 292              	.LFE2:
+ 294              	 .section .text.mbedtls_asn1_get_int,"ax",%progbits
+ 295              	 .align 1
+ 296              	 .global mbedtls_asn1_get_int
+ 297              	 .code 16
+ 298              	 .thumb_func
+ 300              	mbedtls_asn1_get_int:
+ 301              	.LFB3:
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_int( unsigned char **p,
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   const unsigned char *end,
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   int *val )
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 302              	 .loc 1 145 0
+ 303              	 .cfi_startproc
+ 304              	.LVL21:
+ 305 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 306              	.LCFI3:
+ 307              	 .cfi_def_cfa_offset 24
+ 308              	 .cfi_offset 0,-24
+ 309              	 .cfi_offset 1,-20
+ 310              	 .cfi_offset 2,-16
+ 311              	 .cfi_offset 4,-12
+ 312              	 .cfi_offset 5,-8
+ 313              	 .cfi_offset 14,-4
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     size_t len;
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &len, MBEDTLS_ASN1_INTEGER ) ) != 0 )
+ 314              	 .loc 1 149 0
+ 315 0002 0223     	 mov r3,#2
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 316              	 .loc 1 145 0
+ 317 0004 151C     	 mov r5,r2
+ 318              	 .loc 1 149 0
+ 319 0006 01AA     	 add r2,sp,#4
+ 320              	.LVL22:
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 321              	 .loc 1 145 0
+ 322 0008 041C     	 mov r4,r0
+ 323              	 .loc 1 149 0
+ 324 000a FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 325              	.LVL23:
+ 326 000e 0028     	 cmp r0,#0
+ 327 0010 18D1     	 bne .L29
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( len == 0 || len > sizeof( int ) || ( **p & 0x80 ) != 0 )
+ 328              	 .loc 1 152 0
+ 329 0012 019B     	 ldr r3,[sp,#4]
+ 330 0014 013B     	 sub r3,r3,#1
+ 331 0016 032B     	 cmp r3,#3
+ 332 0018 12D8     	 bhi .L34
+ 333              	 .loc 1 152 0 is_stmt 0 discriminator 1
+ 334 001a 2368     	 ldr r3,[r4]
+ 335 001c 1B78     	 ldrb r3,[r3]
+ 336 001e 7F2B     	 cmp r3,#127
+ 337 0020 0ED8     	 bhi .L34
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_INVALID_LENGTH );
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *val = 0;
+ 338              	 .loc 1 155 0 is_stmt 1
+ 339 0022 2860     	 str r0,[r5]
+ 340              	.LVL24:
+ 341              	.L30:
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     while( len-- > 0 )
+ 342              	 .loc 1 157 0
+ 343 0024 0198     	 ldr r0,[sp,#4]
+ 344 0026 431E     	 sub r3,r0,#1
+ 345 0028 0193     	 str r3,[sp,#4]
+ 346 002a 0028     	 cmp r0,#0
+ 347 002c 0AD0     	 beq .L29
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         *val = ( *val << 8 ) | **p;
+ 348              	 .loc 1 159 0
+ 349 002e 2268     	 ldr r2,[r4]
+ 350 0030 2B68     	 ldr r3,[r5]
+ 351 0032 1178     	 ldrb r1,[r2]
+ 352 0034 1B02     	 lsl r3,r3,#8
+ 353 0036 0B43     	 orr r3,r1
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         (*p)++;
+ 354              	 .loc 1 160 0
+ 355 0038 0132     	 add r2,r2,#1
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         (*p)++;
+ 356              	 .loc 1 159 0
+ 357 003a 2B60     	 str r3,[r5]
+ 358              	 .loc 1 160 0
+ 359 003c 2260     	 str r2,[r4]
+ 360 003e F1E7     	 b .L30
+ 361              	.LVL25:
+ 362              	.L34:
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 363              	 .loc 1 153 0
+ 364 0040 6420     	 mov r0,#100
+ 365              	.LVL26:
+ 366 0042 4042     	 neg r0,r0
+ 367              	.L29:
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 368              	 .loc 1 164 0
+ 369              	 
+ 370              	.LVL27:
+ 371              	.LVL28:
+ 372 0044 3EBD     	 pop {r1,r2,r3,r4,r5,pc}
+ 373              	 .cfi_endproc
+ 374              	.LFE3:
+ 376              	 .section .text.mbedtls_asn1_get_mpi,"ax",%progbits
+ 377              	 .align 1
+ 378              	 .global mbedtls_asn1_get_mpi
+ 379              	 .code 16
+ 380              	 .thumb_func
+ 382              	mbedtls_asn1_get_mpi:
+ 383              	.LFB4:
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #if defined(MBEDTLS_BIGNUM_C)
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_mpi( unsigned char **p,
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   const unsigned char *end,
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   mbedtls_mpi *X )
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 384              	 .loc 1 170 0
+ 385              	 .cfi_startproc
+ 386              	.LVL29:
+ 387 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 388              	.LCFI4:
+ 389              	 .cfi_def_cfa_offset 24
+ 390              	 .cfi_offset 0,-24
+ 391              	 .cfi_offset 1,-20
+ 392              	 .cfi_offset 2,-16
+ 393              	 .cfi_offset 4,-12
+ 394              	 .cfi_offset 5,-8
+ 395              	 .cfi_offset 14,-4
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     size_t len;
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &len, MBEDTLS_ASN1_INTEGER ) ) != 0 )
+ 396              	 .loc 1 174 0
+ 397 0002 0223     	 mov r3,#2
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 398              	 .loc 1 170 0
+ 399 0004 151C     	 mov r5,r2
+ 400              	 .loc 1 174 0
+ 401 0006 01AA     	 add r2,sp,#4
+ 402              	.LVL30:
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 403              	 .loc 1 170 0
+ 404 0008 041C     	 mov r4,r0
+ 405              	 .loc 1 174 0
+ 406 000a FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 407              	.LVL31:
+ 408 000e 0028     	 cmp r0,#0
+ 409 0010 08D1     	 bne .L36
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     ret = mbedtls_mpi_read_binary( X, *p, len );
+ 410              	 .loc 1 177 0
+ 411 0012 019A     	 ldr r2,[sp,#4]
+ 412 0014 281C     	 mov r0,r5
+ 413              	.LVL32:
+ 414 0016 2168     	 ldr r1,[r4]
+ 415 0018 FFF7FEFF 	 bl mbedtls_mpi_read_binary
+ 416              	.LVL33:
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += len;
+ 417              	 .loc 1 179 0
+ 418 001c 2368     	 ldr r3,[r4]
+ 419 001e 019A     	 ldr r2,[sp,#4]
+ 420 0020 9B18     	 add r3,r3,r2
+ 421 0022 2360     	 str r3,[r4]
+ 422              	.LVL34:
+ 423              	.L36:
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( ret );
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 424              	 .loc 1 182 0
+ 425              	 
+ 426              	.LVL35:
+ 427              	.LVL36:
+ 428 0024 3EBD     	 pop {r1,r2,r3,r4,r5,pc}
+ 429              	 .cfi_endproc
+ 430              	.LFE4:
+ 432              	 .section .text.mbedtls_asn1_get_bitstring,"ax",%progbits
+ 433              	 .align 1
+ 434              	 .global mbedtls_asn1_get_bitstring
+ 435              	 .code 16
+ 436              	 .thumb_func
+ 438              	mbedtls_asn1_get_bitstring:
+ 439              	.LFB5:
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** #endif /* MBEDTLS_BIGNUM_C */
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_bitstring( unsigned char **p, const unsigned char *end,
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                         mbedtls_asn1_bitstring *bs)
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 440              	 .loc 1 187 0
+ 441              	 .cfi_startproc
+ 442              	.LVL37:
+ 443 0000 70B5     	 push {r4,r5,r6,lr}
+ 444              	.LCFI5:
+ 445              	 .cfi_def_cfa_offset 16
+ 446              	 .cfi_offset 4,-16
+ 447              	 .cfi_offset 5,-12
+ 448              	 .cfi_offset 6,-8
+ 449              	 .cfi_offset 14,-4
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Certificate type is a single byte bitstring */
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &bs->len, MBEDTLS_ASN1_BIT_STRING ) ) != 0 )
+ 450              	 .loc 1 191 0
+ 451 0002 0323     	 mov r3,#3
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 452              	 .loc 1 187 0
+ 453 0004 041C     	 mov r4,r0
+ 454 0006 0D1C     	 mov r5,r1
+ 455 0008 161C     	 mov r6,r2
+ 456              	 .loc 1 191 0
+ 457 000a FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 458              	.LVL38:
+ 459 000e 0028     	 cmp r0,#0
+ 460 0010 18D1     	 bne .L39
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Check length, subtract one for actual bit string length */
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( bs->len < 1 )
+ 461              	 .loc 1 195 0
+ 462 0012 3368     	 ldr r3,[r6]
+ 463 0014 002B     	 cmp r3,#0
+ 464 0016 11D0     	 beq .L41
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     bs->len -= 1;
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Get number of unused bits, ensure unused bits <= 7 */
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     bs->unused_bits = **p;
+ 465              	 .loc 1 200 0
+ 466 0018 2268     	 ldr r2,[r4]
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 467              	 .loc 1 197 0
+ 468 001a 013B     	 sub r3,r3,#1
+ 469 001c 3360     	 str r3,[r6]
+ 470              	 .loc 1 200 0
+ 471 001e 1278     	 ldrb r2,[r2]
+ 472 0020 3271     	 strb r2,[r6,#4]
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( bs->unused_bits > 7 )
+ 473              	 .loc 1 201 0
+ 474 0022 072A     	 cmp r2,#7
+ 475 0024 0CD8     	 bhi .L42
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_INVALID_LENGTH );
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 476              	 .loc 1 203 0
+ 477 0026 2268     	 ldr r2,[r4]
+ 478 0028 0132     	 add r2,r2,#1
+ 479 002a 2260     	 str r2,[r4]
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Get actual bitstring */
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     bs->p = *p;
+ 480              	 .loc 1 206 0
+ 481 002c B260     	 str r2,[r6,#8]
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += bs->len;
+ 482              	 .loc 1 207 0
+ 483 002e 2268     	 ldr r2,[r4]
+ 484 0030 D318     	 add r3,r2,r3
+ 485 0032 2360     	 str r3,[r4]
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *p != end )
+ 486              	 .loc 1 209 0
+ 487 0034 AB42     	 cmp r3,r5
+ 488 0036 05D0     	 beq .L39
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_LENGTH_MISMATCH );
+ 489              	 .loc 1 210 0
+ 490 0038 6620     	 mov r0,#102
+ 491              	.LVL39:
+ 492 003a 02E0     	 b .L44
+ 493              	.LVL40:
+ 494              	.L41:
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     bs->len -= 1;
+ 495              	 .loc 1 196 0
+ 496 003c 6020     	 mov r0,#96
+ 497              	.LVL41:
+ 498 003e 00E0     	 b .L44
+ 499              	.LVL42:
+ 500              	.L42:
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 501              	 .loc 1 202 0
+ 502 0040 6420     	 mov r0,#100
+ 503              	.LVL43:
+ 504              	.L44:
+ 505              	 .loc 1 210 0
+ 506 0042 4042     	 neg r0,r0
+ 507              	.L39:
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 508              	 .loc 1 213 0
+ 509              	 
+ 510              	.LVL44:
+ 511              	.LVL45:
+ 512              	.LVL46:
+ 513 0044 70BD     	 pop {r4,r5,r6,pc}
+ 514              	 .cfi_endproc
+ 515              	.LFE5:
+ 517              	 .section .text.mbedtls_asn1_get_bitstring_null,"ax",%progbits
+ 518              	 .align 1
+ 519              	 .global mbedtls_asn1_get_bitstring_null
+ 520              	 .code 16
+ 521              	 .thumb_func
+ 523              	mbedtls_asn1_get_bitstring_null:
+ 524              	.LFB6:
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** /*
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  * Get a bit string without unused bits
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  */
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_bitstring_null( unsigned char **p, const unsigned char *end,
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                              size_t *len )
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 525              	 .loc 1 220 0
+ 526              	 .cfi_startproc
+ 527              	.LVL47:
+ 528 0000 38B5     	 push {r3,r4,r5,lr}
+ 529              	.LCFI6:
+ 530              	 .cfi_def_cfa_offset 16
+ 531              	 .cfi_offset 3,-16
+ 532              	 .cfi_offset 4,-12
+ 533              	 .cfi_offset 5,-8
+ 534              	 .cfi_offset 14,-4
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, len, MBEDTLS_ASN1_BIT_STRING ) ) != 0 )
+ 535              	 .loc 1 223 0
+ 536 0002 0323     	 mov r3,#3
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 537              	 .loc 1 220 0
+ 538 0004 041C     	 mov r4,r0
+ 539 0006 151C     	 mov r5,r2
+ 540              	 .loc 1 223 0
+ 541 0008 FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 542              	.LVL48:
+ 543 000c 0028     	 cmp r0,#0
+ 544 000e 0ED1     	 bne .L46
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( (*len)-- < 2 || *(*p)++ != 0 )
+ 545              	 .loc 1 226 0
+ 546 0010 2B68     	 ldr r3,[r5]
+ 547 0012 5A1E     	 sub r2,r3,#1
+ 548 0014 2A60     	 str r2,[r5]
+ 549 0016 012B     	 cmp r3,#1
+ 550 0018 07D9     	 bls .L48
+ 551              	 .loc 1 226 0 is_stmt 0 discriminator 1
+ 552 001a 2368     	 ldr r3,[r4]
+ 553 001c 5A1C     	 add r2,r3,#1
+ 554 001e 2260     	 str r2,[r4]
+ 555 0020 1B78     	 ldrb r3,[r3]
+ 556 0022 002B     	 cmp r3,#0
+ 557 0024 03D0     	 beq .L46
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_INVALID_DATA );
+ 558              	 .loc 1 227 0 is_stmt 1
+ 559 0026 6838     	 sub r0,r0,#104
+ 560              	.LVL49:
+ 561 0028 01E0     	 b .L46
+ 562              	.LVL50:
+ 563              	.L48:
+ 564 002a 6820     	 mov r0,#104
+ 565              	.LVL51:
+ 566 002c 4042     	 neg r0,r0
+ 567              	.L46:
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 568              	 .loc 1 230 0
+ 569              	 
+ 570              	.LVL52:
+ 571              	.LVL53:
+ 572 002e 38BD     	 pop {r3,r4,r5,pc}
+ 573              	 .cfi_endproc
+ 574              	.LFE6:
+ 576              	 .section .text.mbedtls_asn1_get_sequence_of,"ax",%progbits
+ 577              	 .align 1
+ 578              	 .global mbedtls_asn1_get_sequence_of
+ 579              	 .code 16
+ 580              	 .thumb_func
+ 582              	mbedtls_asn1_get_sequence_of:
+ 583              	.LFB7:
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** /*
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  *  Parses and splits an ASN.1 "SEQUENCE OF <tag>"
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****  */
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_sequence_of( unsigned char **p,
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                           const unsigned char *end,
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                           mbedtls_asn1_sequence *cur,
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                           int tag)
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 584              	 .loc 1 241 0
+ 585              	 .cfi_startproc
+ 586              	.LVL54:
+ 587 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 588              	.LCFI7:
+ 589              	 .cfi_def_cfa_offset 20
+ 590              	 .cfi_offset 4,-20
+ 591              	 .cfi_offset 5,-16
+ 592              	 .cfi_offset 6,-12
+ 593              	 .cfi_offset 7,-8
+ 594              	 .cfi_offset 14,-4
+ 595 0002 85B0     	 sub sp,sp,#20
+ 596              	.LCFI8:
+ 597              	 .cfi_def_cfa_offset 40
+ 598              	 .loc 1 241 0
+ 599 0004 161C     	 mov r6,r2
+ 600 0006 0193     	 str r3,[sp,#4]
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     size_t len;
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_asn1_buf *buf;
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Get main sequence tag */
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &len,
+ 601              	 .loc 1 247 0
+ 602 0008 03AA     	 add r2,sp,#12
+ 603              	.LVL55:
+ 604 000a 3023     	 mov r3,#48
+ 605              	.LVL56:
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 606              	 .loc 1 241 0
+ 607 000c 041C     	 mov r4,r0
+ 608 000e 0F1C     	 mov r7,r1
+ 609              	 .loc 1 247 0
+ 610 0010 FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 611              	.LVL57:
+ 612 0014 0028     	 cmp r0,#0
+ 613 0016 2DD1     	 bne .L52
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             MBEDTLS_ASN1_CONSTRUCTED | MBEDTLS_ASN1_SEQUENCE ) ) != 0 )
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *p + len != end )
+ 614              	 .loc 1 251 0
+ 615 0018 2368     	 ldr r3,[r4]
+ 616 001a 039A     	 ldr r2,[sp,#12]
+ 617 001c 9D18     	 add r5,r3,r2
+ 618 001e BD42     	 cmp r5,r7
+ 619 0020 13D0     	 beq .L54
+ 620              	.LVL58:
+ 621              	.L57:
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_LENGTH_MISMATCH );
+ 622              	 .loc 1 252 0
+ 623 0022 6620     	 mov r0,#102
+ 624 0024 25E0     	 b .L61
+ 625              	.L56:
+ 626              	.LVL59:
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     while( *p < end )
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         buf = &(cur->buf);
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         buf->tag = **p;
+ 627              	 .loc 1 257 0
+ 628 0026 321C     	 mov r2,r6
+ 629 0028 1B78     	 ldrb r3,[r3]
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         if( ( ret = mbedtls_asn1_get_tag( p, end, &buf->len, tag ) ) != 0 )
+ 630              	 .loc 1 259 0
+ 631 002a 201C     	 mov r0,r4
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 632              	 .loc 1 257 0
+ 633 002c 08C2     	 stmia r2!,{r3}
+ 634              	 .loc 1 259 0
+ 635 002e 291C     	 mov r1,r5
+ 636 0030 019B     	 ldr r3,[sp,#4]
+ 637 0032 FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 638              	.LVL60:
+ 639 0036 0028     	 cmp r0,#0
+ 640 0038 1CD1     	 bne .L52
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             return( ret );
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         buf->p = *p;
+ 641              	 .loc 1 262 0
+ 642 003a 2368     	 ldr r3,[r4]
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         *p += buf->len;
+ 643              	 .loc 1 263 0
+ 644 003c 7268     	 ldr r2,[r6,#4]
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         *p += buf->len;
+ 645              	 .loc 1 262 0
+ 646 003e B360     	 str r3,[r6,#8]
+ 647              	 .loc 1 263 0
+ 648 0040 2368     	 ldr r3,[r4]
+ 649 0042 9B18     	 add r3,r3,r2
+ 650 0044 2360     	 str r3,[r4]
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         /* Allocate and assign next pointer */
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         if( *p < end )
+ 651              	 .loc 1 266 0
+ 652 0046 AB42     	 cmp r3,r5
+ 653 0048 03D3     	 bcc .L62
+ 654              	.LVL61:
+ 655              	.L54:
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 656              	 .loc 1 254 0
+ 657 004a 2368     	 ldr r3,[r4]
+ 658 004c AB42     	 cmp r3,r5
+ 659 004e EAD3     	 bcc .L56
+ 660 0050 08E0     	 b .L63
+ 661              	.LVL62:
+ 662              	.L62:
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         {
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             cur->next = (mbedtls_asn1_sequence*)mbedtls_calloc( 1,
+ 663              	 .loc 1 268 0
+ 664 0052 0130     	 add r0,r0,#1
+ 665              	.LVL63:
+ 666 0054 1021     	 mov r1,#16
+ 667 0056 FFF7FEFF 	 bl calloc
+ 668              	.LVL64:
+ 669 005a F060     	 str r0,[r6,#12]
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                                             sizeof( mbedtls_asn1_sequence ) );
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             if( cur->next == NULL )
+ 670              	 .loc 1 271 0
+ 671 005c 0028     	 cmp r0,#0
+ 672 005e 07D0     	 beq .L60
+ 673 0060 061C     	 mov r6,r0
+ 674              	.LVL65:
+ 675 0062 F2E7     	 b .L54
+ 676              	.LVL66:
+ 677              	.L63:
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_ALLOC_FAILED );
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             cur = cur->next;
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         }
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     /* Set final sequence entry's next pointer to NULL */
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     cur->next = NULL;
+ 678              	 .loc 1 279 0
+ 679 0064 0020     	 mov r0,#0
+ 680 0066 F060     	 str r0,[r6,#12]
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *p != end )
+ 681              	 .loc 1 281 0
+ 682 0068 2368     	 ldr r3,[r4]
+ 683 006a AB42     	 cmp r3,r5
+ 684 006c 02D0     	 beq .L52
+ 685 006e D8E7     	 b .L57
+ 686              	.LVL67:
+ 687              	.L60:
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                 return( MBEDTLS_ERR_ASN1_ALLOC_FAILED );
+ 688              	 .loc 1 272 0
+ 689 0070 6A20     	 mov r0,#106
+ 690              	.LVL68:
+ 691              	.L61:
+ 692 0072 4042     	 neg r0,r0
+ 693              	.L52:
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_LENGTH_MISMATCH );
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 694              	 .loc 1 285 0
+ 695 0074 05B0     	 add sp,sp,#20
+ 696              	 
+ 697              	.LVL69:
+ 698              	.LVL70:
+ 699              	.LVL71:
+ 700 0076 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 701              	 .cfi_endproc
+ 702              	.LFE7:
+ 704              	 .section .text.mbedtls_asn1_get_alg,"ax",%progbits
+ 705              	 .align 1
+ 706              	 .global mbedtls_asn1_get_alg
+ 707              	 .code 16
+ 708              	 .thumb_func
+ 710              	mbedtls_asn1_get_alg:
+ 711              	.LFB8:
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_alg( unsigned char **p,
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   const unsigned char *end,
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                   mbedtls_asn1_buf *alg, mbedtls_asn1_buf *params )
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 712              	 .loc 1 290 0
+ 713              	 .cfi_startproc
+ 714              	.LVL72:
+ 715 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+ 716              	.LCFI9:
+ 717              	 .cfi_def_cfa_offset 20
+ 718              	 .cfi_offset 4,-20
+ 719              	 .cfi_offset 5,-16
+ 720              	 .cfi_offset 6,-12
+ 721              	 .cfi_offset 7,-8
+ 722              	 .cfi_offset 14,-4
+ 723 0002 85B0     	 sub sp,sp,#20
+ 724              	.LCFI10:
+ 725              	 .cfi_def_cfa_offset 40
+ 726              	 .loc 1 290 0
+ 727 0004 171C     	 mov r7,r2
+ 728 0006 1E1C     	 mov r6,r3
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     size_t len;
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &len,
+ 729              	 .loc 1 294 0
+ 730 0008 03AA     	 add r2,sp,#12
+ 731              	.LVL73:
+ 732 000a 3023     	 mov r3,#48
+ 733              	.LVL74:
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 734              	 .loc 1 290 0
+ 735 000c 041C     	 mov r4,r0
+ 736 000e 0191     	 str r1,[sp,#4]
+ 737              	 .loc 1 294 0
+ 738 0010 FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 739              	.LVL75:
+ 740 0014 051E     	 sub r5,r0,#0
+ 741              	.LVL76:
+ 742 0016 37D1     	 bne .L65
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             MBEDTLS_ASN1_CONSTRUCTED | MBEDTLS_ASN1_SEQUENCE ) ) != 0 )
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( end - *p ) < 1 )
+ 743              	 .loc 1 298 0
+ 744 0018 2168     	 ldr r1,[r4]
+ 745 001a 019B     	 ldr r3,[sp,#4]
+ 746 001c 5B1A     	 sub r3,r3,r1
+ 747 001e 002B     	 cmp r3,#0
+ 748 0020 30DD     	 ble .L68
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_OUT_OF_DATA );
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     alg->tag = **p;
+ 749              	 .loc 1 301 0
+ 750 0022 3A1C     	 mov r2,r7
+ 751 0024 0B78     	 ldrb r3,[r1]
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     end = *p + len;
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_tag( p, end, &alg->len, MBEDTLS_ASN1_OID ) ) != 0 )
+ 752              	 .loc 1 304 0
+ 753 0026 201C     	 mov r0,r4
+ 754              	.LVL77:
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     end = *p + len;
+ 755              	 .loc 1 301 0
+ 756 0028 08C2     	 stmia r2!,{r3}
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     end = *p + len;
+ 757              	 .loc 1 302 0
+ 758 002a 039B     	 ldr r3,[sp,#12]
+ 759 002c CB18     	 add r3,r1,r3
+ 760 002e 0193     	 str r3,[sp,#4]
+ 761              	.LVL78:
+ 762              	 .loc 1 304 0
+ 763 0030 191C     	 mov r1,r3
+ 764 0032 0623     	 mov r3,#6
+ 765              	.LVL79:
+ 766 0034 FFF7FEFF 	 bl mbedtls_asn1_get_tag
+ 767              	.LVL80:
+ 768 0038 051E     	 sub r5,r0,#0
+ 769              	.LVL81:
+ 770 003a 25D1     	 bne .L65
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     alg->p = *p;
+ 771              	 .loc 1 307 0
+ 772 003c 2368     	 ldr r3,[r4]
+ 773 003e BB60     	 str r3,[r7,#8]
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += alg->len;
+ 774              	 .loc 1 308 0
+ 775 0040 2268     	 ldr r2,[r4]
+ 776 0042 7B68     	 ldr r3,[r7,#4]
+ 777 0044 D318     	 add r3,r2,r3
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *p == end )
+ 778              	 .loc 1 310 0
+ 779 0046 019A     	 ldr r2,[sp,#4]
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += alg->len;
+ 780              	 .loc 1 308 0
+ 781 0048 2360     	 str r3,[r4]
+ 782              	 .loc 1 310 0
+ 783 004a 9342     	 cmp r3,r2
+ 784 004c 04D1     	 bne .L66
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         mbedtls_platform_zeroize( params, sizeof(mbedtls_asn1_buf) );
+ 785              	 .loc 1 312 0
+ 786 004e 301C     	 mov r0,r6
+ 787              	.LVL82:
+ 788 0050 0C21     	 mov r1,#12
+ 789 0052 FFF7FEFF 	 bl mbedtls_platform_zeroize
+ 790              	.LVL83:
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( 0 );
+ 791              	 .loc 1 313 0
+ 792 0056 17E0     	 b .L65
+ 793              	.LVL84:
+ 794              	.L66:
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     params->tag = **p;
+ 795              	 .loc 1 316 0
+ 796 0058 321C     	 mov r2,r6
+ 797 005a 1978     	 ldrb r1,[r3]
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 798              	 .loc 1 317 0
+ 799 005c 0133     	 add r3,r3,#1
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     (*p)++;
+ 800              	 .loc 1 316 0
+ 801 005e 02C2     	 stmia r2!,{r1}
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_len( p, end, &params->len ) ) != 0 )
+ 802              	 .loc 1 319 0
+ 803 0060 201C     	 mov r0,r4
+ 804              	.LVL85:
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 805              	 .loc 1 317 0
+ 806 0062 2360     	 str r3,[r4]
+ 807              	 .loc 1 319 0
+ 808 0064 0199     	 ldr r1,[sp,#4]
+ 809 0066 FFF7FEFF 	 bl mbedtls_asn1_get_len
+ 810              	.LVL86:
+ 811 006a 051E     	 sub r5,r0,#0
+ 812              	.LVL87:
+ 813 006c 0CD1     	 bne .L65
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     params->p = *p;
+ 814              	 .loc 1 322 0
+ 815 006e 2368     	 ldr r3,[r4]
+ 816 0070 B360     	 str r3,[r6,#8]
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += params->len;
+ 817              	 .loc 1 323 0
+ 818 0072 2268     	 ldr r2,[r4]
+ 819 0074 7368     	 ldr r3,[r6,#4]
+ 820 0076 D318     	 add r3,r2,r3
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( *p != end )
+ 821              	 .loc 1 325 0
+ 822 0078 019A     	 ldr r2,[sp,#4]
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     *p += params->len;
+ 823              	 .loc 1 323 0
+ 824 007a 2360     	 str r3,[r4]
+ 825              	 .loc 1 325 0
+ 826 007c 9342     	 cmp r3,r2
+ 827 007e 03D0     	 beq .L65
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_LENGTH_MISMATCH );
+ 828              	 .loc 1 326 0
+ 829 0080 6625     	 mov r5,#102
+ 830 0082 00E0     	 b .L72
+ 831              	.L68:
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 832              	 .loc 1 299 0
+ 833 0084 6025     	 mov r5,#96
+ 834              	.LVL88:
+ 835              	.L72:
+ 836              	 .loc 1 326 0
+ 837 0086 6D42     	 neg r5,r5
+ 838              	.L65:
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 839              	 .loc 1 329 0
+ 840 0088 281C     	 mov r0,r5
+ 841 008a 05B0     	 add sp,sp,#20
+ 842              	 
+ 843              	.LVL89:
+ 844              	.LVL90:
+ 845              	.LVL91:
+ 846 008c F0BD     	 pop {r4,r5,r6,r7,pc}
+ 847              	 .cfi_endproc
+ 848              	.LFE8:
+ 850              	 .section .text.mbedtls_asn1_get_alg_null,"ax",%progbits
+ 851              	 .align 1
+ 852              	 .global mbedtls_asn1_get_alg_null
+ 853              	 .code 16
+ 854              	 .thumb_func
+ 856              	mbedtls_asn1_get_alg_null:
+ 857              	.LFB9:
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** int mbedtls_asn1_get_alg_null( unsigned char **p,
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                        const unsigned char *end,
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                        mbedtls_asn1_buf *alg )
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 858              	 .loc 1 334 0
+ 859              	 .cfi_startproc
+ 860              	.LVL92:
+ 861 0000 7FB5     	 push {r0,r1,r2,r3,r4,r5,r6,lr}
+ 862              	.LCFI11:
+ 863              	 .cfi_def_cfa_offset 32
+ 864              	 .cfi_offset 0,-32
+ 865              	 .cfi_offset 1,-28
+ 866              	 .cfi_offset 2,-24
+ 867              	 .cfi_offset 3,-20
+ 868              	 .cfi_offset 4,-16
+ 869              	 .cfi_offset 5,-12
+ 870              	 .cfi_offset 6,-8
+ 871              	 .cfi_offset 14,-4
+ 872              	 .loc 1 334 0
+ 873 0002 061C     	 mov r6,r0
+ 874 0004 0D1C     	 mov r5,r1
+ 875 0006 141C     	 mov r4,r2
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     int ret;
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_asn1_buf params;
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     memset( &params, 0, sizeof(mbedtls_asn1_buf) );
+ 876              	 .loc 1 338 0
+ 877 0008 0021     	 mov r1,#0
+ 878              	.LVL93:
+ 879 000a 0C22     	 mov r2,#12
+ 880              	.LVL94:
+ 881 000c 01A8     	 add r0,sp,#4
+ 882              	.LVL95:
+ 883 000e FFF7FEFF 	 bl memset
+ 884              	.LVL96:
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( ret = mbedtls_asn1_get_alg( p, end, alg, &params ) ) != 0 )
+ 885              	 .loc 1 340 0
+ 886 0012 301C     	 mov r0,r6
+ 887 0014 291C     	 mov r1,r5
+ 888 0016 221C     	 mov r2,r4
+ 889 0018 01AB     	 add r3,sp,#4
+ 890 001a FFF7FEFF 	 bl mbedtls_asn1_get_alg
+ 891              	.LVL97:
+ 892 001e 0028     	 cmp r0,#0
+ 893 0020 09D1     	 bne .L74
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( ret );
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( ( params.tag != MBEDTLS_ASN1_NULL && params.tag != 0 ) || params.len != 0 )
+ 894              	 .loc 1 343 0
+ 895 0022 019B     	 ldr r3,[sp,#4]
+ 896 0024 052B     	 cmp r3,#5
+ 897 0026 01D0     	 beq .L75
+ 898              	 .loc 1 343 0 is_stmt 0 discriminator 1
+ 899 0028 002B     	 cmp r3,#0
+ 900 002a 02D1     	 bne .L78
+ 901              	.L75:
+ 902              	 .loc 1 343 0 discriminator 3
+ 903 002c 0298     	 ldr r0,[sp,#8]
+ 904              	.LVL98:
+ 905 002e 0028     	 cmp r0,#0
+ 906 0030 01D0     	 beq .L74
+ 907              	.L78:
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return( MBEDTLS_ERR_ASN1_INVALID_DATA );
+ 908              	 .loc 1 344 0 is_stmt 1
+ 909 0032 6820     	 mov r0,#104
+ 910 0034 4042     	 neg r0,r0
+ 911              	.L74:
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( 0 );
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 912              	 .loc 1 347 0
+ 913 0036 04B0     	 add sp,sp,#16
+ 914              	 
+ 915              	.LVL99:
+ 916              	.LVL100:
+ 917              	.LVL101:
+ 918 0038 70BD     	 pop {r4,r5,r6,pc}
+ 919              	 .cfi_endproc
+ 920              	.LFE9:
+ 922              	 .section .text.mbedtls_asn1_free_named_data,"ax",%progbits
+ 923              	 .align 1
+ 924              	 .global mbedtls_asn1_free_named_data
+ 925              	 .code 16
+ 926              	 .thumb_func
+ 928              	mbedtls_asn1_free_named_data:
+ 929              	.LFB10:
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** void mbedtls_asn1_free_named_data( mbedtls_asn1_named_data *cur )
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 930              	 .loc 1 350 0
+ 931              	 .cfi_startproc
+ 932              	.LVL102:
+ 933 0000 10B5     	 push {r4,lr}
+ 934              	.LCFI12:
+ 935              	 .cfi_def_cfa_offset 8
+ 936              	 .cfi_offset 4,-8
+ 937              	 .cfi_offset 14,-4
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     if( cur == NULL )
+ 938              	 .loc 1 351 0
+ 939 0002 0028     	 cmp r0,#0
+ 940 0004 0AD0     	 beq .L82
+ 941 0006 041C     	 mov r4,r0
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         return;
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_free( cur->oid.p );
+ 942              	 .loc 1 354 0
+ 943 0008 8068     	 ldr r0,[r0,#8]
+ 944              	.LVL103:
+ 945 000a FFF7FEFF 	 bl free
+ 946              	.LVL104:
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_free( cur->val.p );
+ 947              	 .loc 1 355 0
+ 948 000e 6069     	 ldr r0,[r4,#20]
+ 949 0010 FFF7FEFF 	 bl free
+ 950              	.LVL105:
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_platform_zeroize( cur, sizeof( mbedtls_asn1_named_data ) );
+ 951              	 .loc 1 357 0
+ 952 0014 201C     	 mov r0,r4
+ 953 0016 2021     	 mov r1,#32
+ 954 0018 FFF7FEFF 	 bl mbedtls_platform_zeroize
+ 955              	.LVL106:
+ 956              	.L82:
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 957              	 .loc 1 358 0
+ 958              	 
+ 959 001c 10BD     	 pop {r4,pc}
+ 960              	 .cfi_endproc
+ 961              	.LFE10:
+ 963              	 .section .text.mbedtls_asn1_free_named_data_list,"ax",%progbits
+ 964              	 .align 1
+ 965              	 .global mbedtls_asn1_free_named_data_list
+ 966              	 .code 16
+ 967              	 .thumb_func
+ 969              	mbedtls_asn1_free_named_data_list:
+ 970              	.LFB11:
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** void mbedtls_asn1_free_named_data_list( mbedtls_asn1_named_data **head )
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 971              	 .loc 1 361 0
+ 972              	 .cfi_startproc
+ 973              	.LVL107:
+ 974 0000 38B5     	 push {r3,r4,r5,lr}
+ 975              	.LCFI13:
+ 976              	 .cfi_def_cfa_offset 16
+ 977              	 .cfi_offset 3,-16
+ 978              	 .cfi_offset 4,-12
+ 979              	 .cfi_offset 5,-8
+ 980              	 .cfi_offset 14,-4
+ 981 0002 051C     	 mov r5,r0
+ 982              	.LVL108:
+ 983              	.L88:
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     mbedtls_asn1_named_data *cur;
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     while( ( cur = *head ) != NULL )
+ 984              	 .loc 1 364 0
+ 985 0004 2C68     	 ldr r4,[r5]
+ 986              	.LVL109:
+ 987 0006 002C     	 cmp r4,#0
+ 988 0008 08D0     	 beq .L90
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         *head = cur->next;
+ 989              	 .loc 1 366 0
+ 990 000a A369     	 ldr r3,[r4,#24]
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         mbedtls_asn1_free_named_data( cur );
+ 991              	 .loc 1 367 0
+ 992 000c 201C     	 mov r0,r4
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         mbedtls_asn1_free_named_data( cur );
+ 993              	 .loc 1 366 0
+ 994 000e 2B60     	 str r3,[r5]
+ 995              	 .loc 1 367 0
+ 996 0010 FFF7FEFF 	 bl mbedtls_asn1_free_named_data
+ 997              	.LVL110:
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         mbedtls_free( cur );
+ 998              	 .loc 1 368 0
+ 999 0014 201C     	 mov r0,r4
+ 1000 0016 FFF7FEFF 	 bl free
+ 1001              	.LVL111:
+ 1002 001a F3E7     	 b .L88
+ 1003              	.L90:
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 1004              	 .loc 1 370 0
+ 1005              	 
+ 1006              	.LVL112:
+ 1007              	.LVL113:
+ 1008 001c 38BD     	 pop {r3,r4,r5,pc}
+ 1009              	 .cfi_endproc
+ 1010              	.LFE11:
+ 1012              	 .section .text.mbedtls_asn1_find_named_data,"ax",%progbits
+ 1013              	 .align 1
+ 1014              	 .global mbedtls_asn1_find_named_data
+ 1015              	 .code 16
+ 1016              	 .thumb_func
+ 1018              	mbedtls_asn1_find_named_data:
+ 1019              	.LFB12:
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** mbedtls_asn1_named_data *mbedtls_asn1_find_named_data( mbedtls_asn1_named_data *list,
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****                                        const char *oid, size_t len )
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** {
+ 1020              	 .loc 1 374 0
+ 1021              	 .cfi_startproc
+ 1022              	.LVL114:
+ 1023 0000 70B5     	 push {r4,r5,r6,lr}
+ 1024              	.LCFI14:
+ 1025              	 .cfi_def_cfa_offset 16
+ 1026              	 .cfi_offset 4,-16
+ 1027              	 .cfi_offset 5,-12
+ 1028              	 .cfi_offset 6,-8
+ 1029              	 .cfi_offset 14,-4
+ 1030 0002 041C     	 mov r4,r0
+ 1031 0004 0E1C     	 mov r6,r1
+ 1032 0006 151C     	 mov r5,r2
+ 1033              	.LVL115:
+ 1034              	.L92:
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     while( list != NULL )
+ 1035              	 .loc 1 375 0
+ 1036 0008 002C     	 cmp r4,#0
+ 1037 000a 0BD0     	 beq .L94
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     {
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         if( list->oid.len == len &&
+ 1038              	 .loc 1 377 0
+ 1039 000c 6368     	 ldr r3,[r4,#4]
+ 1040 000e AB42     	 cmp r3,r5
+ 1041 0010 06D1     	 bne .L93
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             memcmp( list->oid.p, oid, len ) == 0 )
+ 1042              	 .loc 1 378 0 discriminator 1
+ 1043 0012 A068     	 ldr r0,[r4,#8]
+ 1044 0014 311C     	 mov r1,r6
+ 1045 0016 2A1C     	 mov r2,r5
+ 1046 0018 FFF7FEFF 	 bl memcmp
+ 1047              	.LVL116:
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             memcmp( list->oid.p, oid, len ) == 0 )
+ 1048              	 .loc 1 377 0 discriminator 1
+ 1049 001c 0028     	 cmp r0,#0
+ 1050 001e 01D0     	 beq .L94
+ 1051              	.L93:
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         {
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****             break;
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         }
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****         list = list->next;
+ 1052              	 .loc 1 383 0
+ 1053 0020 A469     	 ldr r4,[r4,#24]
+ 1054              	.LVL117:
+ 1055 0022 F1E7     	 b .L92
+ 1056              	.L94:
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     }
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** 
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c ****     return( list );
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\asn1parse.c **** }
+ 1057              	 .loc 1 387 0
+ 1058 0024 201C     	 mov r0,r4
+ 1059              	 
+ 1060              	.LVL118:
+ 1061              	.LVL119:
+ 1062              	.LVL120:
+ 1063 0026 70BD     	 pop {r4,r5,r6,pc}
+ 1064              	 .cfi_endproc
+ 1065              	.LFE12:
+ 1067              	 .text
+ 1068              	.Letext0:
+ 1069              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 1070              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1071              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 1072              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/bignum.h"
+ 1073              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/asn1.h"
+ 1074              	 .file 7 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdlib.h"
+ 1075              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/platform_util.h"
+ 1076              	 .file 9 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\string.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 asn1parse.c
+    {standard input}:18     .text.mbedtls_asn1_get_len:00000000 $t
+    {standard input}:23     .text.mbedtls_asn1_get_len:00000000 mbedtls_asn1_get_len
+    {standard input}:73     .text.mbedtls_asn1_get_len:00000030 $d
+    {standard input}:77     .text.mbedtls_asn1_get_len:00000034 $t
+    {standard input}:175    .text.mbedtls_asn1_get_tag:00000000 $t
+    {standard input}:180    .text.mbedtls_asn1_get_tag:00000000 mbedtls_asn1_get_tag
+    {standard input}:230    .text.mbedtls_asn1_get_bool:00000000 $t
+    {standard input}:235    .text.mbedtls_asn1_get_bool:00000000 mbedtls_asn1_get_bool
+    {standard input}:295    .text.mbedtls_asn1_get_int:00000000 $t
+    {standard input}:300    .text.mbedtls_asn1_get_int:00000000 mbedtls_asn1_get_int
+    {standard input}:377    .text.mbedtls_asn1_get_mpi:00000000 $t
+    {standard input}:382    .text.mbedtls_asn1_get_mpi:00000000 mbedtls_asn1_get_mpi
+    {standard input}:433    .text.mbedtls_asn1_get_bitstring:00000000 $t
+    {standard input}:438    .text.mbedtls_asn1_get_bitstring:00000000 mbedtls_asn1_get_bitstring
+    {standard input}:518    .text.mbedtls_asn1_get_bitstring_null:00000000 $t
+    {standard input}:523    .text.mbedtls_asn1_get_bitstring_null:00000000 mbedtls_asn1_get_bitstring_null
+    {standard input}:577    .text.mbedtls_asn1_get_sequence_of:00000000 $t
+    {standard input}:582    .text.mbedtls_asn1_get_sequence_of:00000000 mbedtls_asn1_get_sequence_of
+    {standard input}:705    .text.mbedtls_asn1_get_alg:00000000 $t
+    {standard input}:710    .text.mbedtls_asn1_get_alg:00000000 mbedtls_asn1_get_alg
+    {standard input}:851    .text.mbedtls_asn1_get_alg_null:00000000 $t
+    {standard input}:856    .text.mbedtls_asn1_get_alg_null:00000000 mbedtls_asn1_get_alg_null
+    {standard input}:923    .text.mbedtls_asn1_free_named_data:00000000 $t
+    {standard input}:928    .text.mbedtls_asn1_free_named_data:00000000 mbedtls_asn1_free_named_data
+    {standard input}:964    .text.mbedtls_asn1_free_named_data_list:00000000 $t
+    {standard input}:969    .text.mbedtls_asn1_free_named_data_list:00000000 mbedtls_asn1_free_named_data_list
+    {standard input}:1013   .text.mbedtls_asn1_find_named_data:00000000 $t
+    {standard input}:1018   .text.mbedtls_asn1_find_named_data:00000000 mbedtls_asn1_find_named_data
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__gnu_thumb1_case_uqi
+mbedtls_mpi_read_binary
+calloc
+mbedtls_platform_zeroize
+memset
+free
+memcmp

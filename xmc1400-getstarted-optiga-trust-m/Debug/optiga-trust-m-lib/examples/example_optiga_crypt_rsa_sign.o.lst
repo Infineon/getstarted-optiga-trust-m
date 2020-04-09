@@ -1,0 +1,415 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "example_optiga_crypt_rsa_sign.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.optiga_crypt_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .code 16
+  20              	 .thumb_func
+  22              	optiga_crypt_callback:
+  23              	.LFB0:
+  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_sign.c"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** /**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \copyright
+   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * MIT License
+   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * of this software and associated documentation files (the "Software"), to deal
+   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * in the Software without restriction, including without limitation the rights
+  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * copies of the Software, and to permit persons to whom the Software is
+  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * furnished to do so, subject to the following conditions:
+  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * The above copyright notice and this permission notice shall be included in all
+  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * copies or substantial portions of the Software.
+  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * SOFTWARE
+  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \endcopyright
+  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \author Infineon Technologies AG
+  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \file example_optiga_crypt_rsa_sign.c
+  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \brief   This file provides the example for RSA Sign operation using #optiga_crypt_rsa_sign.
+  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * \ingroup grOptigaExamples
+  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** *
+  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** * @{
+  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** */
+  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** #include "optiga/optiga_crypt.h"
+  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** #include "optiga_example.h"
+  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** #ifdef OPTIGA_CRYPT_RSA_SIGN_ENABLED
+  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** /**
+  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  * Callback when optiga_crypt_xxxx operation is completed asynchronously
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  */
+  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** static volatile optiga_lib_status_t optiga_lib_status;
+  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** //lint --e{818} suppress "argument "context" is not used in the sample provided"
+  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** static void optiga_crypt_callback(void * context, optiga_lib_status_t return_status)
+  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** {
+  25              	 .loc 1 50 0
+  26              	 .cfi_startproc
+  27              	.LVL0:
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     optiga_lib_status = return_status;
+  28              	 .loc 1 51 0
+  29 0000 014B     	 ldr r3,.L2
+  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     if (NULL != context)
+  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     {
+  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         // callback to upper layer here
+  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     }
+  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** }
+  30              	 .loc 1 56 0
+  31              	 
+  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     optiga_lib_status = return_status;
+  32              	 .loc 1 51 0
+  33 0002 1980     	 strh r1,[r3]
+  34              	 .loc 1 56 0
+  35 0004 7047     	 bx lr
+  36              	.L3:
+  37 0006 C046     	 .align 2
+  38              	.L2:
+  39 0008 00000000 	 .word .LANCHOR0
+  40              	 .cfi_endproc
+  41              	.LFE0:
+  43              	 .section .text.example_optiga_crypt_rsa_sign,"ax",%progbits
+  44              	 .align 1
+  45              	 .global example_optiga_crypt_rsa_sign
+  46              	 .code 16
+  47              	 .thumb_func
+  49              	example_optiga_crypt_rsa_sign:
+  50              	.LFB1:
+  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** // SHA-256 digest to be signed
+  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** static uint8_t digest [] =
+  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** {
+  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     0x61, 0xC7, 0xDE, 0xF9, 0x0F, 0xD5, 0xCD, 0x7A,0x8B, 0x7A, 0x36, 0x41, 0x04, 0xE0, 0x0D, 0x82,
+  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     0x38, 0x46, 0xBF, 0xB7, 0x70, 0xEE, 0xBF, 0x8F,0x40, 0x25, 0x2E, 0x0A, 0x21, 0x42, 0xAF, 0x9C,
+  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** };
+  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** /**
+  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  * The below example demonstrates the signing of digest using
+  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  * the Private key present in OPTIGA Key store.
+  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  *
+  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  * Example for #optiga_crypt_rsa_sign
+  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  *
+  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****  */
+  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** void example_optiga_crypt_rsa_sign(void)
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** {
+  51              	 .loc 1 73 0
+  52              	 .cfi_startproc
+  53 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  54              	.LCFI0:
+  55              	 .cfi_def_cfa_offset 20
+  56              	 .cfi_offset 4,-20
+  57              	 .cfi_offset 5,-16
+  58              	 .cfi_offset 6,-12
+  59              	 .cfi_offset 7,-8
+  60              	 .cfi_offset 14,-4
+  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     //To store the signture generated
+  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     uint8_t signature [200];
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     uint16_t signature_length = sizeof(signature);
+  61              	 .loc 1 76 0
+  62 0002 1627     	 mov r7,#22
+  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     //To store the signture generated
+  63              	 .loc 1 73 0
+  64 0004 BBB0     	 sub sp,sp,#236
+  65              	.LCFI1:
+  66              	 .cfi_def_cfa_offset 256
+  67              	 .loc 1 76 0
+  68 0006 02AB     	 add r3,sp,#8
+  69 0008 FF18     	 add r7,r7,r3
+  70 000a C823     	 mov r3,#200
+  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     //Crypt Instance
+  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     optiga_crypt_t * me = NULL;
+  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     optiga_lib_status_t return_status = 0;
+  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     OPTIGA_EXAMPLE_LOG_MESSAGE(__FUNCTION__);
+  71              	 .loc 1 81 0
+  72 000c 204D     	 ldr r5,.L26
+  73 000e 214C     	 ldr r4,.L26+4
+  74 0010 2148     	 ldr r0,.L26+8
+  75 0012 211C     	 mov r1,r4
+  76 0014 2A1C     	 mov r2,r5
+  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  77              	 .loc 1 76 0
+  78 0016 3B80     	 strh r3,[r7]
+  79              	.LVL1:
+  80              	 .loc 1 81 0
+  81 0018 FFF7FEFF 	 bl optiga_lib_print_message
+  82              	.LVL2:
+  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     do
+  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     {
+  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         /**
+  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          * 1. Create OPTIGA Crypt Instance
+  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          *
+  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          */
+  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         me = optiga_crypt_create(0, optiga_crypt_callback, NULL);
+  83              	 .loc 1 89 0
+  84 001c 0020     	 mov r0,#0
+  85 001e 1F49     	 ldr r1,.L26+12
+  86 0020 021C     	 mov r2,r0
+  87 0022 FFF7FEFF 	 bl optiga_crypt_create
+  88              	.LVL3:
+  89 0026 0595     	 str r5,[sp,#20]
+  90 0028 061E     	 sub r6,r0,#0
+  91              	.LVL4:
+  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         if (NULL == me)
+  92              	 .loc 1 90 0
+  93 002a 1ED0     	 beq .L8
+  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         {
+  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             break;
+  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         }
+  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         /**
+  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          * 2. Sign the digest -
+  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          *       - Use Private key from Key Store ID E0FC
+  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          *       - Signature scheme is SHA256,
+  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****          */
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         optiga_lib_status = OPTIGA_LIB_BUSY;
+  94              	 .loc 1 100 0
+  95 002c 0121     	 mov r1,#1
+  96 002e 1C4D     	 ldr r5,.L26+16
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         return_status = optiga_crypt_rsa_sign(me,
+  97              	 .loc 1 101 0
+  98 0030 1C4B     	 ldr r3,.L26+20
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         return_status = optiga_crypt_rsa_sign(me,
+  99              	 .loc 1 100 0
+ 100 0032 2980     	 strh r1,[r5]
+ 101              	 .loc 1 101 0
+ 102 0034 0093     	 str r3,[sp]
+ 103 0036 08AB     	 add r3,sp,#32
+ 104 0038 0193     	 str r3,[sp,#4]
+ 105 003a 0023     	 mov r3,#0
+ 106 003c 1A4A     	 ldr r2,.L26+24
+ 107 003e 0393     	 str r3,[sp,#12]
+ 108 0040 0297     	 str r7,[sp,#8]
+ 109 0042 2033     	 add r3,r3,#32
+ 110 0044 FFF7FEFF 	 bl optiga_crypt_rsa_sign
+ 111              	.LVL5:
+ 112 0048 021E     	 sub r2,r0,#0
+ 113              	.LVL6:
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               OPTIGA_RSASSA_PKCS1_V15_SHA256,
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               digest,
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               sizeof(digest),
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               OPTIGA_KEY_ID_E0FC,
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               signature,
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               &signature_length,
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****                                               0x0000);
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         if (OPTIGA_LIB_SUCCESS != return_status)
+ 114              	 .loc 1 110 0
+ 115 004a 09D1     	 bne .L6
+ 116              	.L7:
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         {
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             break;
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         }
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         while (OPTIGA_LIB_BUSY == optiga_lib_status)
+ 117              	 .loc 1 115 0 discriminator 1
+ 118 004c 2B88     	 ldrh r3,[r5]
+ 119 004e 012B     	 cmp r3,#1
+ 120 0050 FCD0     	 beq .L7
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         {
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             //Wait until the optiga_crypt_rsa_sign operation is completed
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         }
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         if (OPTIGA_LIB_SUCCESS != optiga_lib_status)
+ 121              	 .loc 1 120 0
+ 122 0052 2B88     	 ldrh r3,[r5]
+ 123 0054 002B     	 cmp r3,#0
+ 124 0056 08D0     	 beq .L8
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         {
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             //RSA Signature generation failed.
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             return_status = optiga_lib_status;
+ 125              	 .loc 1 123 0
+ 126 0058 2A88     	 ldrh r2,[r5]
+ 127 005a 92B2     	 uxth r2,r2
+ 128              	.LVL7:
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             break;
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         }
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         return_status = OPTIGA_LIB_SUCCESS;
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** 
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     } while (FALSE);
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 129              	 .loc 1 129 0
+ 130 005c 002A     	 cmp r2,#0
+ 131 005e 04D0     	 beq .L8
+ 132              	.LVL8:
+ 133              	.L6:
+ 134              	 .loc 1 129 0 is_stmt 0 discriminator 1
+ 135 0060 201C     	 mov r0,r4
+ 136 0062 1249     	 ldr r1,.L26+28
+ 137 0064 FFF7FEFF 	 bl optiga_lib_print_status
+ 138              	.LVL9:
+ 139 0068 06E0     	 b .L9
+ 140              	.L8:
+ 141              	 .loc 1 129 0 discriminator 2
+ 142 006a 201C     	 mov r0,r4
+ 143 006c 0599     	 ldr r1,[sp,#20]
+ 144 006e 0022     	 mov r2,#0
+ 145 0070 FFF7FEFF 	 bl optiga_lib_print_status
+ 146              	.LVL10:
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     if (me)
+ 147              	 .loc 1 131 0 is_stmt 1 discriminator 2
+ 148 0074 002E     	 cmp r6,#0
+ 149 0076 08D0     	 beq .L4
+ 150              	.L9:
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     {
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         //Destroy the instance after the completion of usecase if not required.
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         return_status = optiga_crypt_destroy(me);
+ 151              	 .loc 1 134 0
+ 152 0078 301C     	 mov r0,r6
+ 153 007a FFF7FEFF 	 bl optiga_crypt_destroy
+ 154              	.LVL11:
+ 155 007e 021E     	 sub r2,r0,#0
+ 156              	.LVL12:
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         if(OPTIGA_LIB_SUCCESS != return_status)
+ 157              	 .loc 1 135 0
+ 158 0080 03D0     	 beq .L4
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         {
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             //lint --e{774} suppress This is a generic macro
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****             OPTIGA_EXAMPLE_LOG_STATUS(return_status);
+ 159              	 .loc 1 138 0 discriminator 1
+ 160 0082 201C     	 mov r0,r4
+ 161              	.LVL13:
+ 162 0084 0949     	 ldr r1,.L26+28
+ 163 0086 FFF7FEFF 	 bl optiga_lib_print_status
+ 164              	.LVL14:
+ 165              	.L4:
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****         }
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c ****     }
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/examples/optiga\example_optiga_crypt_rsa_sign.c **** }
+ 166              	 .loc 1 141 0
+ 167 008a 3BB0     	 add sp,sp,#236
+ 168              	 
+ 169              	.LVL15:
+ 170 008c F0BD     	 pop {r4,r5,r6,r7,pc}
+ 171              	.L27:
+ 172 008e C046     	 .align 2
+ 173              	.L26:
+ 174 0090 15000000 	 .word .LC4
+ 175 0094 00000000 	 .word .LC2
+ 176 0098 00000000 	 .word .LANCHOR1
+ 177 009c 00000000 	 .word optiga_crypt_callback
+ 178 00a0 00000000 	 .word .LANCHOR0
+ 179 00a4 FCE00000 	 .word 57596
+ 180 00a8 00000000 	 .word .LANCHOR2
+ 181 00ac 1A000000 	 .word .LC9
+ 182              	 .cfi_endproc
+ 183              	.LFE1:
+ 185              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 186              	.LC2:
+ 187 0000 5B6F7074 	 .ascii "[optiga example]  : \000"
+ 187      69676120 
+ 187      6578616D 
+ 187      706C655D 
+ 187      20203A20 
+ 188              	.LC4:
+ 189 0015 1B5B306D 	 .ascii "\033[0m\000"
+ 189      00
+ 190              	.LC9:
+ 191 001a 1B5B3331 	 .ascii "\033[31m\000"
+ 191      6D00
+ 192              	 .section .data.digest,"aw",%progbits
+ 193              	 .set .LANCHOR2,.+0
+ 196              	digest:
+ 197 0000 61       	 .byte 97
+ 198 0001 C7       	 .byte -57
+ 199 0002 DE       	 .byte -34
+ 200 0003 F9       	 .byte -7
+ 201 0004 0F       	 .byte 15
+ 202 0005 D5       	 .byte -43
+ 203 0006 CD       	 .byte -51
+ 204 0007 7A       	 .byte 122
+ 205 0008 8B       	 .byte -117
+ 206 0009 7A       	 .byte 122
+ 207 000a 36       	 .byte 54
+ 208 000b 41       	 .byte 65
+ 209 000c 04       	 .byte 4
+ 210 000d E0       	 .byte -32
+ 211 000e 0D       	 .byte 13
+ 212 000f 82       	 .byte -126
+ 213 0010 38       	 .byte 56
+ 214 0011 46       	 .byte 70
+ 215 0012 BF       	 .byte -65
+ 216 0013 B7       	 .byte -73
+ 217 0014 70       	 .byte 112
+ 218 0015 EE       	 .byte -18
+ 219 0016 BF       	 .byte -65
+ 220 0017 8F       	 .byte -113
+ 221 0018 40       	 .byte 64
+ 222 0019 25       	 .byte 37
+ 223 001a 2E       	 .byte 46
+ 224 001b 0A       	 .byte 10
+ 225 001c 21       	 .byte 33
+ 226 001d 42       	 .byte 66
+ 227 001e AF       	 .byte -81
+ 228 001f 9C       	 .byte -100
+ 229              	 .section .rodata.__FUNCTION__.6003,"a",%progbits
+ 230              	 .set .LANCHOR1,.+0
+ 233              	__FUNCTION__.6003:
+ 234 0000 6578616D 	 .ascii "example_optiga_crypt_rsa_sign\000"
+ 234      706C655F 
+ 234      6F707469 
+ 234      67615F63 
+ 234      72797074 
+ 235              	 .section .bss.optiga_lib_status,"aw",%nobits
+ 236              	 .align 1
+ 237              	 .set .LANCHOR0,.+0
+ 240              	optiga_lib_status:
+ 241 0000 0000     	 .space 2
+ 242              	 .text
+ 243              	.Letext0:
+ 244              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 245              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 246              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
+ 247              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_common.h"
+ 248              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/cmd/optiga_cmd.h"
+ 249              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/optiga_crypt.h"
+ 250              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_logger.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 example_optiga_crypt_rsa_sign.c
+    {standard input}:18     .text.optiga_crypt_callback:00000000 $t
+    {standard input}:22     .text.optiga_crypt_callback:00000000 optiga_crypt_callback
+    {standard input}:39     .text.optiga_crypt_callback:00000008 $d
+    {standard input}:44     .text.example_optiga_crypt_rsa_sign:00000000 $t
+    {standard input}:49     .text.example_optiga_crypt_rsa_sign:00000000 example_optiga_crypt_rsa_sign
+    {standard input}:174    .text.example_optiga_crypt_rsa_sign:00000090 $d
+    {standard input}:196    .data.digest:00000000 digest
+    {standard input}:233    .rodata.__FUNCTION__.6003:00000000 __FUNCTION__.6003
+    {standard input}:236    .bss.optiga_lib_status:00000000 $d
+    {standard input}:240    .bss.optiga_lib_status:00000000 optiga_lib_status
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+optiga_lib_print_message
+optiga_crypt_create
+optiga_crypt_rsa_sign
+optiga_lib_print_status
+optiga_crypt_destroy

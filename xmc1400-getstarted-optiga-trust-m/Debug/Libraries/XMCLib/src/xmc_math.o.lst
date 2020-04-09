@@ -1,0 +1,2461 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_math.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_MATH_DIV_IsBusy,"ax",%progbits
+  18              	 .align 1
+  19              	 .global XMC_MATH_DIV_IsBusy
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	XMC_MATH_DIV_IsBusy:
+  24              	.LFB86:
+  25              	 .file 1 "../Libraries/XMCLib/src/xmc_math.c"
+   1:../Libraries/XMCLib/src/xmc_math.c **** 
+   2:../Libraries/XMCLib/src/xmc_math.c **** /**
+   3:../Libraries/XMCLib/src/xmc_math.c ****  * @file xmc_math.c
+   4:../Libraries/XMCLib/src/xmc_math.c ****  * @date 2018-08-08
+   5:../Libraries/XMCLib/src/xmc_math.c ****  *
+   6:../Libraries/XMCLib/src/xmc_math.c ****  * @cond
+   7:../Libraries/XMCLib/src/xmc_math.c ****  **********************************************************************************
+   8:../Libraries/XMCLib/src/xmc_math.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   9:../Libraries/XMCLib/src/xmc_math.c ****  *
+  10:../Libraries/XMCLib/src/xmc_math.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  11:../Libraries/XMCLib/src/xmc_math.c ****  * All rights reserved.                        
+  12:../Libraries/XMCLib/src/xmc_math.c ****  *                                             
+  13:../Libraries/XMCLib/src/xmc_math.c ****  * Redistribution and use in source and binary forms, with or without           
+  14:../Libraries/XMCLib/src/xmc_math.c ****  * modification,are permitted provided that the following conditions are met:   
+  15:../Libraries/XMCLib/src/xmc_math.c ****  *                                                                              
+  16:../Libraries/XMCLib/src/xmc_math.c ****  *   Redistributions of source code must retain the above copyright notice,      
+  17:../Libraries/XMCLib/src/xmc_math.c ****  *   this list of conditions and the following disclaimer.                        
+  18:../Libraries/XMCLib/src/xmc_math.c ****  * 
+  19:../Libraries/XMCLib/src/xmc_math.c ****  *   Redistributions in binary form must reproduce the above copyright notice,   
+  20:../Libraries/XMCLib/src/xmc_math.c ****  *   this list of conditions and the following disclaimer in the documentation    
+  21:../Libraries/XMCLib/src/xmc_math.c ****  *   and/or other materials provided with the distribution.                       
+  22:../Libraries/XMCLib/src/xmc_math.c ****  * 
+  23:../Libraries/XMCLib/src/xmc_math.c ****  *   Neither the name of the copyright holders nor the names of its contributors 
+  24:../Libraries/XMCLib/src/xmc_math.c ****  *   may be used to endorse or promote products derived from this software without
+  25:../Libraries/XMCLib/src/xmc_math.c ****  *   specific prior written permission.                                           
+  26:../Libraries/XMCLib/src/xmc_math.c ****  *                                                                              
+  27:../Libraries/XMCLib/src/xmc_math.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  
+  28:../Libraries/XMCLib/src/xmc_math.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    
+  29:../Libraries/XMCLib/src/xmc_math.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   
+  30:../Libraries/XMCLib/src/xmc_math.c ****  * ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   
+  31:../Libraries/XMCLib/src/xmc_math.c ****  * LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         
+  32:../Libraries/XMCLib/src/xmc_math.c ****  * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         
+  33:../Libraries/XMCLib/src/xmc_math.c ****  * SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    
+  34:../Libraries/XMCLib/src/xmc_math.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      
+  35:../Libraries/XMCLib/src/xmc_math.c ****  * CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       
+  36:../Libraries/XMCLib/src/xmc_math.c ****  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   
+  37:../Libraries/XMCLib/src/xmc_math.c ****  * POSSIBILITY OF SUCH DAMAGE.                                                  
+  38:../Libraries/XMCLib/src/xmc_math.c ****  *                                                                              
+  39:../Libraries/XMCLib/src/xmc_math.c ****  * To improve the quality of the software, users are encouraged to share        
+  40:../Libraries/XMCLib/src/xmc_math.c ****  * modifications, enhancements or bug fixes with Infineon Technologies AG       
+  41:../Libraries/XMCLib/src/xmc_math.c ****  * dave@infineon.com).                                                          
+  42:../Libraries/XMCLib/src/xmc_math.c ****  **********************************************************************************
+  43:../Libraries/XMCLib/src/xmc_math.c ****  *
+  44:../Libraries/XMCLib/src/xmc_math.c ****  * Change History
+  45:../Libraries/XMCLib/src/xmc_math.c ****  * --------------
+  46:../Libraries/XMCLib/src/xmc_math.c ****  *
+  47:../Libraries/XMCLib/src/xmc_math.c ****  * 2015-06-20: 
+  48:../Libraries/XMCLib/src/xmc_math.c ****  *     - Removed version macros and declaration of GetDriverVersion API <br>
+  49:../Libraries/XMCLib/src/xmc_math.c ****  *     - Updated copyright and change history section.
+  50:../Libraries/XMCLib/src/xmc_math.c ****  *
+  51:../Libraries/XMCLib/src/xmc_math.c ****  * 2015-09-23: 
+  52:../Libraries/XMCLib/src/xmc_math.c ****  *     - Added SQRT functions
+  53:../Libraries/XMCLib/src/xmc_math.c ****  *
+  54:../Libraries/XMCLib/src/xmc_math.c ****  * 2015-10-08:
+  55:../Libraries/XMCLib/src/xmc_math.c ****  *     - Return values for sin(), cos(), sinh(), cosh(), arctan() are corrected.
+  56:../Libraries/XMCLib/src/xmc_math.c ****  *
+  57:../Libraries/XMCLib/src/xmc_math.c ****  * 2017-04-20:
+  58:../Libraries/XMCLib/src/xmc_math.c ****  *     - Foward declaration of __aeabi_* to fix link time optimization (-flto) compilation errors
+  59:../Libraries/XMCLib/src/xmc_math.c ****  * 
+  60:../Libraries/XMCLib/src/xmc_math.c ****  * 2017-11-30:
+  61:../Libraries/XMCLib/src/xmc_math.c ****  *     - Fixed reentrancy problems when using __aeabi_* functions (division ‘/’ and modulo ‘%
+  62:../Libraries/XMCLib/src/xmc_math.c ****  *       as long as XMC_MATH_DISABLE_DIV_ABI is not defined
+  63:../Libraries/XMCLib/src/xmc_math.c ****  * 
+  64:../Libraries/XMCLib/src/xmc_math.c ****  * 2018-08-08:
+  65:../Libraries/XMCLib/src/xmc_math.c ****  *     - Fixed compiler warnings for compiler others than GCC
+  66:../Libraries/XMCLib/src/xmc_math.c ****  *
+  67:../Libraries/XMCLib/src/xmc_math.c ****  * @endcond
+  68:../Libraries/XMCLib/src/xmc_math.c ****  *
+  69:../Libraries/XMCLib/src/xmc_math.c ****  */
+  70:../Libraries/XMCLib/src/xmc_math.c **** 
+  71:../Libraries/XMCLib/src/xmc_math.c **** /**
+  72:../Libraries/XMCLib/src/xmc_math.c ****  *
+  73:../Libraries/XMCLib/src/xmc_math.c ****  * @brief MATH driver - API implementation for XMC13/14 family MATH libraries. <br>
+  74:../Libraries/XMCLib/src/xmc_math.c ****  * 
+  75:../Libraries/XMCLib/src/xmc_math.c ****  * <b>Detailed description of file</b> <br>
+  76:../Libraries/XMCLib/src/xmc_math.c ****  * APIs provided in this file cover the following functional blocks of MATH: <br>
+  77:../Libraries/XMCLib/src/xmc_math.c ****  *
+  78:../Libraries/XMCLib/src/xmc_math.c ****  */
+  79:../Libraries/XMCLib/src/xmc_math.c **** 
+  80:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+  81:../Libraries/XMCLib/src/xmc_math.c ****  * HEADER FILES
+  82:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+  83:../Libraries/XMCLib/src/xmc_math.c **** #include <xmc_math.h>
+  84:../Libraries/XMCLib/src/xmc_math.c **** 
+  85:../Libraries/XMCLib/src/xmc_math.c **** #if defined (MATH)
+  86:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+  87:../Libraries/XMCLib/src/xmc_math.c ****  * MACROS
+  88:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+  89:../Libraries/XMCLib/src/xmc_math.c **** /* Reciprocal of Circular gain in XMC_MATH_Q0_23_t format ((2^23)/1.646760258121) */
+  90:../Libraries/XMCLib/src/xmc_math.c **** #define XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023       (0x4DBA76U)
+  91:../Libraries/XMCLib/src/xmc_math.c **** /* Reciprocal of Hyperbolic gain in XMC_MATH_Q1_22_t format ((2^22)/0.828159360960) */
+  92:../Libraries/XMCLib/src/xmc_math.c **** #define XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22    (0x4D47A1U)
+  93:../Libraries/XMCLib/src/xmc_math.c **** /* Signed division is selected */
+  94:../Libraries/XMCLib/src/xmc_math.c **** #define XMC_MATH_SIGNED_DIVISION                      ((uint32_t) 0 << MATH_DIVCON_USIGN_Pos)
+  95:../Libraries/XMCLib/src/xmc_math.c **** /* Unsigned division is selected */
+  96:../Libraries/XMCLib/src/xmc_math.c **** #define XMC_MATH_UNSIGNED_DIVISION                    ((uint32_t) 1 << MATH_DIVCON_USIGN_Pos)
+  97:../Libraries/XMCLib/src/xmc_math.c **** 
+  98:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+  99:../Libraries/XMCLib/src/xmc_math.c ****  * ENUMS
+ 100:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 101:../Libraries/XMCLib/src/xmc_math.c **** 
+ 102:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 103:../Libraries/XMCLib/src/xmc_math.c ****  * GLOBAL DATA
+ 104:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 105:../Libraries/XMCLib/src/xmc_math.c **** 
+ 106:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 107:../Libraries/XMCLib/src/xmc_math.c ****  * DATA STRUCTURES
+ 108:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 109:../Libraries/XMCLib/src/xmc_math.c **** 
+ 110:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 111:../Libraries/XMCLib/src/xmc_math.c ****  * LOCAL ROUTINES
+ 112:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 113:../Libraries/XMCLib/src/xmc_math.c **** 
+ 114:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 115:../Libraries/XMCLib/src/xmc_math.c ****  * API IMPLEMENTATION - Utility functions
+ 116:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 117:../Libraries/XMCLib/src/xmc_math.c **** __attribute__((always_inline)) __STATIC_INLINE uint32_t critical_section_enter(void)
+ 118:../Libraries/XMCLib/src/xmc_math.c **** {
+ 119:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t status;
+ 120:../Libraries/XMCLib/src/xmc_math.c ****   status = __get_PRIMASK();
+ 121:../Libraries/XMCLib/src/xmc_math.c ****   __disable_irq ();
+ 122:../Libraries/XMCLib/src/xmc_math.c ****   return status;
+ 123:../Libraries/XMCLib/src/xmc_math.c **** }
+ 124:../Libraries/XMCLib/src/xmc_math.c **** 
+ 125:../Libraries/XMCLib/src/xmc_math.c **** __attribute__((always_inline)) __STATIC_INLINE void critical_section_exit(uint32_t status)
+ 126:../Libraries/XMCLib/src/xmc_math.c **** {
+ 127:../Libraries/XMCLib/src/xmc_math.c ****   __set_PRIMASK(status);
+ 128:../Libraries/XMCLib/src/xmc_math.c **** }
+ 129:../Libraries/XMCLib/src/xmc_math.c **** 
+ 130:../Libraries/XMCLib/src/xmc_math.c **** /* Utility function to check if the DIV unit is busy */
+ 131:../Libraries/XMCLib/src/xmc_math.c **** bool XMC_MATH_DIV_IsBusy(void)
+ 132:../Libraries/XMCLib/src/xmc_math.c **** {
+  26              	 .loc 1 132 0
+  27              	 .cfi_startproc
+ 133:../Libraries/XMCLib/src/xmc_math.c ****   bool status;
+ 134:../Libraries/XMCLib/src/xmc_math.c ****   if (MATH->DIVST & MATH_DIVST_BSY_Msk)
+  28              	 .loc 1 134 0
+  29 0000 024B     	 ldr r3,.L2
+ 135:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 136:../Libraries/XMCLib/src/xmc_math.c ****     status = true;  /* DIV unit is busy running a division operation */ 
+ 137:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 138:../Libraries/XMCLib/src/xmc_math.c ****   else
+ 139:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 140:../Libraries/XMCLib/src/xmc_math.c ****     status = false; /* DIV unit is idle */ 
+ 141:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 142:../Libraries/XMCLib/src/xmc_math.c **** 
+ 143:../Libraries/XMCLib/src/xmc_math.c ****   return (status);
+ 144:../Libraries/XMCLib/src/xmc_math.c **** }
+  30              	 .loc 1 144 0
+  31              	 
+ 134:../Libraries/XMCLib/src/xmc_math.c ****   {
+  32              	 .loc 1 134 0
+  33 0002 186B     	 ldr r0,[r3,#48]
+  34              	.LVL0:
+ 143:../Libraries/XMCLib/src/xmc_math.c **** }
+  35              	 .loc 1 143 0
+  36 0004 0123     	 mov r3,#1
+  37 0006 1840     	 and r0,r3
+  38              	.LVL1:
+  39              	 .loc 1 144 0
+  40 0008 7047     	 bx lr
+  41              	.L3:
+  42 000a C046     	 .align 2
+  43              	.L2:
+  44 000c 00000340 	 .word 1073938432
+  45              	 .cfi_endproc
+  46              	.LFE86:
+  48              	 .section .text.XMC_MATH_CORDIC_IsBusy,"ax",%progbits
+  49              	 .align 1
+  50              	 .global XMC_MATH_CORDIC_IsBusy
+  51              	 .code 16
+  52              	 .thumb_func
+  54              	XMC_MATH_CORDIC_IsBusy:
+  55              	.LFB87:
+ 145:../Libraries/XMCLib/src/xmc_math.c **** 
+ 146:../Libraries/XMCLib/src/xmc_math.c **** /* Utility function to check if the CORDIC unit is busy */
+ 147:../Libraries/XMCLib/src/xmc_math.c **** bool XMC_MATH_CORDIC_IsBusy(void)
+ 148:../Libraries/XMCLib/src/xmc_math.c **** {
+  56              	 .loc 1 148 0
+  57              	 .cfi_startproc
+ 149:../Libraries/XMCLib/src/xmc_math.c ****   bool status;
+ 150:../Libraries/XMCLib/src/xmc_math.c ****   if (MATH->STATC & MATH_STATC_BSY_Msk)
+  58              	 .loc 1 150 0
+  59 0000 024B     	 ldr r3,.L5
+ 151:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 152:../Libraries/XMCLib/src/xmc_math.c ****     status = true;  /* CORDIC unit is busy running an operation */  
+ 153:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 154:../Libraries/XMCLib/src/xmc_math.c ****   else
+ 155:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 156:../Libraries/XMCLib/src/xmc_math.c ****     status = false; /* CORDIC unit is idle */   
+ 157:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 158:../Libraries/XMCLib/src/xmc_math.c **** 
+ 159:../Libraries/XMCLib/src/xmc_math.c ****   return (status);
+ 160:../Libraries/XMCLib/src/xmc_math.c **** }
+  60              	 .loc 1 160 0
+  61              	 
+ 150:../Libraries/XMCLib/src/xmc_math.c ****   {
+  62              	 .loc 1 150 0
+  63 0002 186C     	 ldr r0,[r3,#64]
+  64              	.LVL2:
+ 159:../Libraries/XMCLib/src/xmc_math.c **** }
+  65              	 .loc 1 159 0
+  66 0004 0123     	 mov r3,#1
+  67 0006 1840     	 and r0,r3
+  68              	.LVL3:
+  69              	 .loc 1 160 0
+  70 0008 7047     	 bx lr
+  71              	.L6:
+  72 000a C046     	 .align 2
+  73              	.L5:
+  74 000c 00000340 	 .word 1073938432
+  75              	 .cfi_endproc
+  76              	.LFE87:
+  78              	 .section .text.XMC_MATH_GetEventStatus,"ax",%progbits
+  79              	 .align 1
+  80              	 .global XMC_MATH_GetEventStatus
+  81              	 .code 16
+  82              	 .thumb_func
+  84              	XMC_MATH_GetEventStatus:
+  85              	.LFB88:
+ 161:../Libraries/XMCLib/src/xmc_math.c **** 
+ 162:../Libraries/XMCLib/src/xmc_math.c **** /* This functions returns the status of a requested event */
+ 163:../Libraries/XMCLib/src/xmc_math.c **** bool XMC_MATH_GetEventStatus(const XMC_MATH_EVENT_t event)
+ 164:../Libraries/XMCLib/src/xmc_math.c **** {
+  86              	 .loc 1 164 0
+  87              	 .cfi_startproc
+  88              	.LVL4:
+ 165:../Libraries/XMCLib/src/xmc_math.c ****   bool status;
+ 166:../Libraries/XMCLib/src/xmc_math.c ****   if (MATH->EVFR & (uint32_t) event)
+  89              	 .loc 1 166 0
+  90 0000 034B     	 ldr r3,.L8
+ 167:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 168:../Libraries/XMCLib/src/xmc_math.c ****     status = true; /* Requested event has been detected */
+ 169:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 170:../Libraries/XMCLib/src/xmc_math.c ****   else
+ 171:../Libraries/XMCLib/src/xmc_math.c ****   {
+ 172:../Libraries/XMCLib/src/xmc_math.c ****     status = false; /* Requested event has not been detected */
+ 173:../Libraries/XMCLib/src/xmc_math.c ****   }
+ 174:../Libraries/XMCLib/src/xmc_math.c ****   return (status);
+ 175:../Libraries/XMCLib/src/xmc_math.c **** }
+  91              	 .loc 1 175 0
+  92              	 
+ 166:../Libraries/XMCLib/src/xmc_math.c ****   {
+  93              	 .loc 1 166 0
+  94 0002 1B69     	 ldr r3,[r3,#16]
+  95              	.LVL5:
+  96 0004 1840     	 and r0,r3
+  97              	.LVL6:
+  98 0006 431E     	 sub r3,r0,#1
+  99 0008 9841     	 sbc r0,r0,r3
+ 100              	.LVL7:
+ 174:../Libraries/XMCLib/src/xmc_math.c **** }
+ 101              	 .loc 1 174 0
+ 102 000a C0B2     	 uxtb r0,r0
+ 103              	 .loc 1 175 0
+ 104 000c 7047     	 bx lr
+ 105              	.L9:
+ 106 000e C046     	 .align 2
+ 107              	.L8:
+ 108 0010 00000340 	 .word 1073938432
+ 109              	 .cfi_endproc
+ 110              	.LFE88:
+ 112              	 .section .text.__aeabi_uidiv,"ax",%progbits
+ 113              	 .align 1
+ 114              	 .global __aeabi_uidiv
+ 115              	 .code 16
+ 116              	 .thumb_func
+ 118              	__aeabi_uidiv:
+ 119              	.LFB89:
+ 176:../Libraries/XMCLib/src/xmc_math.c **** 
+ 177:../Libraries/XMCLib/src/xmc_math.c **** #ifndef XMC_MATH_DISABLE_DIV_ABI
+ 178:../Libraries/XMCLib/src/xmc_math.c **** 
+ 179:../Libraries/XMCLib/src/xmc_math.c **** /* Forward prototypes.  */
+ 180:../Libraries/XMCLib/src/xmc_math.c **** #if defined ( __GNUC__ )
+ 181:../Libraries/XMCLib/src/xmc_math.c **** uint32_t __aeabi_uidiv(uint32_t dividend, uint32_t divisor) __attribute__((externally_visible));
+ 182:../Libraries/XMCLib/src/xmc_math.c **** int32_t __aeabi_idiv(int32_t dividend, int32_t divisor) __attribute__((externally_visible));
+ 183:../Libraries/XMCLib/src/xmc_math.c **** uint64_t __aeabi_uidivmod(uint32_t dividend, uint32_t divisor) __attribute__((externally_visible));
+ 184:../Libraries/XMCLib/src/xmc_math.c **** int64_t __aeabi_idivmod(int32_t dividend, int32_t divisor) __attribute__((externally_visible));
+ 185:../Libraries/XMCLib/src/xmc_math.c **** #else
+ 186:../Libraries/XMCLib/src/xmc_math.c **** uint32_t __aeabi_uidiv(uint32_t dividend, uint32_t divisor);
+ 187:../Libraries/XMCLib/src/xmc_math.c **** int32_t __aeabi_idiv(int32_t dividend, int32_t divisor);
+ 188:../Libraries/XMCLib/src/xmc_math.c **** uint64_t __aeabi_uidivmod(uint32_t dividend, uint32_t divisor);
+ 189:../Libraries/XMCLib/src/xmc_math.c **** int64_t __aeabi_idivmod(int32_t dividend, int32_t divisor);
+ 190:../Libraries/XMCLib/src/xmc_math.c **** #endif
+ 191:../Libraries/XMCLib/src/xmc_math.c **** 
+ 192:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 193:../Libraries/XMCLib/src/xmc_math.c ****  * API IMPLEMENTATION - aeabi routines
+ 194:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 195:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs unsigned integer division */
+ 196:../Libraries/XMCLib/src/xmc_math.c **** uint32_t __aeabi_uidiv(uint32_t dividend, uint32_t divisor)
+ 197:../Libraries/XMCLib/src/xmc_math.c **** {
+ 120              	 .loc 1 197 0
+ 121              	 .cfi_startproc
+ 122              	.LVL8:
+ 123 0000 10B5     	 push {r4,lr}
+ 124              	.LCFI0:
+ 125              	 .cfi_def_cfa_offset 8
+ 126              	 .cfi_offset 4,-8
+ 127              	 .cfi_offset 14,-4
+ 128              	.LBB48:
+ 129              	.LBB49:
+ 130              	.LBB50:
+ 131              	.LBB51:
+ 132              	 .file 2 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+   1:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**************************************************************************//**
+   2:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * @version  V5.2.0
+   5:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * @date     08. May 2019
+   6:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  ******************************************************************************/
+   7:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /*
+   8:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+   9:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  *
+  10:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  *
+  12:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  *
+  16:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  17:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  *
+  18:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  * limitations under the License.
+  23:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+  24:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+  25:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+  28:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+  34:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /* Fallback for __has_builtin */
+  35:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __has_builtin
+  36:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  38:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+  39:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __ASM
+  41:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  43:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __INLINE
+  44:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __INLINE                               inline
+  45:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  46:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  49:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  50:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif                                           
+  52:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  55:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __USED
+  56:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  58:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __WEAK
+  59:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  61:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __PACKED
+  62:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  64:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  66:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  67:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  70:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  74:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  78:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  86:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+  94:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 102:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 103:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 107:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 110:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 113:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 116:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef   __COMPILER_BARRIER
+ 117:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
+ 118:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 119:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 120:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ 121:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 122:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __PROGRAM_START
+ 123:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 124:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 125:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Initializes data and bss sections
+ 126:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****            in the used linker script.
+ 129:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   extern void _start(void) __NO_RETURN;
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   typedef struct {
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     uint32_t const* src;
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     uint32_t* dest;
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     uint32_t  wlen;
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   } __copy_table_t;
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   typedef struct {
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     uint32_t* dest;
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     uint32_t  wlen;
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   } __zero_table_t;
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     }
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   }
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     }
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   }
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   _start();
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __INITIAL_SP
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __STACK_LIMIT
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __STACK_LIMIT             __StackLimit
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __VECTOR_TABLE
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __VECTOR_TABLE            __Vectors
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #ifndef __VECTOR_TABLE_ATTRIBUTE
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   @{
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Control Register
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the content of the Control Register.
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               Control Register value
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_CONTROL(void)
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the content of the non-secure Control Register when in secure mode.
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               non-secure Control Register value
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_CONTROL_NS(void)
+ 234:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, control_ns" : "=r" (result) );
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Control Register
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Writes the given value to the Control Register.
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    control  Control Register value to set
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_CONTROL(uint32_t control)
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Control Register (non-secure)
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Writes the given value to the non-secure Control Register when in secure state.
+ 258:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    control  Control Register value to set
+ 259:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 260:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_CONTROL_NS(uint32_t control)
+ 261:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 262:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR control_ns, %0" : : "r" (control) : "memory");
+ 263:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 264:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 265:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 266:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 267:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 268:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get IPSR Register
+ 269:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the content of the IPSR Register.
+ 270:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               IPSR Register value
+ 271:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 272:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_IPSR(void)
+ 273:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 274:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 275:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 276:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
+ 277:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 278:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 279:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 280:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 281:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 282:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get APSR Register
+ 283:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the content of the APSR Register.
+ 284:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               APSR Register value
+ 285:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 286:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
+ 287:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 288:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 289:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 290:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
+ 291:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 292:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 293:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 294:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 295:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 296:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get xPSR Register
+ 297:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the content of the xPSR Register.
+ 298:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               xPSR Register value
+ 299:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 300:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_xPSR(void)
+ 301:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 302:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 303:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 304:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
+ 305:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 306:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 307:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 308:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 309:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 310:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Process Stack Pointer
+ 311:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer (PSP).
+ 312:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               PSP Register value
+ 313:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 314:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSP(void)
+ 315:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 316:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 317:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 318:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp"  : "=r" (result) );
+ 319:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 320:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 321:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 322:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 323:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 324:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 325:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Process Stack Pointer (non-secure)
+ 326:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer (PSP) when in secure s
+ 327:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               PSP Register value
+ 328:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 329:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSP_NS(void)
+ 330:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 331:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 332:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 333:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
+ 334:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 335:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 336:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 337:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 338:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 339:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 340:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Process Stack Pointer
+ 341:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
+ 342:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 343:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 344:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSP(uint32_t topOfProcStack)
+ 345:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 346:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR psp, %0" : : "r" (topOfProcStack) : );
+ 347:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 348:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 349:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 350:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 351:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 352:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Process Stack Pointer (non-secure)
+ 353:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the non-secure Process Stack Pointer (PSP) when in secure sta
+ 354:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 355:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 356:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSP_NS(uint32_t topOfProcStack)
+ 357:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 358:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR psp_ns, %0" : : "r" (topOfProcStack) : );
+ 359:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 360:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 361:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 362:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 363:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 364:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Main Stack Pointer
+ 365:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
+ 366:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               MSP Register value
+ 367:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 368:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSP(void)
+ 369:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 370:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 371:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 372:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp" : "=r" (result) );
+ 373:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 374:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 375:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 376:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 377:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 378:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 379:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Main Stack Pointer (non-secure)
+ 380:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer (MSP) when in secure stat
+ 381:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               MSP Register value
+ 382:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 383:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_MSP_NS(void)
+ 384:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 385:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 386:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 387:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp_ns" : "=r" (result) );
+ 388:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 389:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 390:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 391:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 392:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 393:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 394:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Main Stack Pointer
+ 395:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
+ 396:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 397:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 398:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
+ 399:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 400:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
+ 401:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 402:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 403:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 404:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 405:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 406:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Main Stack Pointer (non-secure)
+ 407:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer (MSP) when in secure state.
+ 408:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 409:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 410:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_MSP_NS(uint32_t topOfMainStack)
+ 411:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 412:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR msp_ns, %0" : : "r" (topOfMainStack) : );
+ 413:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 414:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 415:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 416:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 417:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 418:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 419:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Stack Pointer (non-secure)
+ 420:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current value of the non-secure Stack Pointer (SP) when in secure state.
+ 421:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               SP Register value
+ 422:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 423:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_SP_NS(void)
+ 424:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 425:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 426:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 427:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, sp_ns" : "=r" (result) );
+ 428:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 429:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 430:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 431:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 432:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 433:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Stack Pointer (non-secure)
+ 434:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the non-secure Stack Pointer (SP) when in secure state.
+ 435:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    topOfStack  Stack Pointer value to set
+ 436:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 437:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_SP_NS(uint32_t topOfStack)
+ 438:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 439:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR sp_ns, %0" : : "r" (topOfStack) : );
+ 440:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 441:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 442:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 443:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 444:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 445:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Priority Mask
+ 446:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
+ 447:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               Priority Mask value
+ 448:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 449:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PRIMASK(void)
+ 450:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 451:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 452:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
+ 133              	 .loc 2 453 0
+ 134              	
+ 135 0002 EFF31082 	 MRS r2,primask
+ 136              	
+ 137              	.LVL9:
+ 138              	 .code 16
+ 139              	.LBE51:
+ 140              	.LBE50:
+ 141              	.LBB52:
+ 142              	.LBB53:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 143              	 .loc 2 209 0
+ 144              	
+ 145 0006 72B6     	 cpsid i
+ 146              	
+ 147              	 .code 16
+ 148              	.LBE53:
+ 149              	.LBE52:
+ 150              	.LBE49:
+ 151              	.LBE48:
+ 198:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t result;
+ 199:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t ics;
+ 200:../Libraries/XMCLib/src/xmc_math.c ****   ics = critical_section_enter();
+ 201:../Libraries/XMCLib/src/xmc_math.c **** 
+ 202:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON  = XMC_MATH_UNSIGNED_DIVISION;
+ 152              	 .loc 1 202 0
+ 153 0008 0424     	 mov r4,#4
+ 154 000a 044B     	 ldr r3,.L11
+ 155 000c 5C63     	 str r4,[r3,#52]
+ 203:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD     = dividend;
+ 156              	 .loc 1 203 0
+ 157 000e 1862     	 str r0,[r3,#32]
+ 204:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS     = divisor;
+ 158              	 .loc 1 204 0
+ 159 0010 5962     	 str r1,[r3,#36]
+ 205:../Libraries/XMCLib/src/xmc_math.c **** 
+ 206:../Libraries/XMCLib/src/xmc_math.c ****   result = MATH->QUOT;
+ 160              	 .loc 1 206 0
+ 161 0012 986A     	 ldr r0,[r3,#40]
+ 162              	.LVL10:
+ 163              	.LBB54:
+ 164              	.LBB55:
+ 165              	.LBB56:
+ 454:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 455:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 456:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 457:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 458:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 459:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 460:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Get Priority Mask (non-secure)
+ 461:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Returns the current state of the non-secure priority mask bit from the Priority Mask Reg
+ 462:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \return               Priority Mask value
+ 463:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 464:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PRIMASK_NS(void)
+ 465:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 466:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   uint32_t result;
+ 467:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 468:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask_ns" : "=r" (result) :: "memory");
+ 469:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 470:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 471:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** #endif
+ 472:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 473:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** 
+ 474:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** /**
+ 475:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \brief   Set Priority Mask
+ 476:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \details Assigns the given value to the Priority Mask Register.
+ 477:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
+ 478:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****  */
+ 479:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PRIMASK(uint32_t priMask)
+ 480:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** {
+ 481:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
+ 166              	 .loc 2 481 0
+ 167              	
+ 168 0014 82F31088 	 MSR primask,r2
+ 169              	
+ 170              	 .code 16
+ 171              	.LBE56:
+ 172              	.LBE55:
+ 173              	.LBE54:
+ 207:../Libraries/XMCLib/src/xmc_math.c **** 
+ 208:../Libraries/XMCLib/src/xmc_math.c ****   critical_section_exit(ics);
+ 209:../Libraries/XMCLib/src/xmc_math.c **** 
+ 210:../Libraries/XMCLib/src/xmc_math.c ****   return result;
+ 211:../Libraries/XMCLib/src/xmc_math.c **** }
+ 174              	 .loc 1 211 0
+ 175              	 
+ 176 0018 10BD     	 pop {r4,pc}
+ 177              	.L12:
+ 178 001a C046     	 .align 2
+ 179              	.L11:
+ 180 001c 00000340 	 .word 1073938432
+ 181              	 .cfi_endproc
+ 182              	.LFE89:
+ 184              	 .section .text.__aeabi_idiv,"ax",%progbits
+ 185              	 .align 1
+ 186              	 .global __aeabi_idiv
+ 187              	 .code 16
+ 188              	 .thumb_func
+ 190              	__aeabi_idiv:
+ 191              	.LFB90:
+ 212:../Libraries/XMCLib/src/xmc_math.c **** 
+ 213:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs signed integer division */
+ 214:../Libraries/XMCLib/src/xmc_math.c **** int32_t __aeabi_idiv(int32_t dividend, int32_t divisor)
+ 215:../Libraries/XMCLib/src/xmc_math.c **** {
+ 192              	 .loc 1 215 0
+ 193              	 .cfi_startproc
+ 194              	.LVL11:
+ 195 0000 10B5     	 push {r4,lr}
+ 196              	.LCFI1:
+ 197              	 .cfi_def_cfa_offset 8
+ 198              	 .cfi_offset 4,-8
+ 199              	 .cfi_offset 14,-4
+ 200              	.LBB57:
+ 201              	.LBB58:
+ 202              	.LBB59:
+ 203              	.LBB60:
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 204              	 .loc 2 453 0
+ 205              	
+ 206 0002 EFF31082 	 MRS r2,primask
+ 207              	
+ 208              	.LVL12:
+ 209              	 .code 16
+ 210              	.LBE60:
+ 211              	.LBE59:
+ 212              	.LBB61:
+ 213              	.LBB62:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 214              	 .loc 2 209 0
+ 215              	
+ 216 0006 72B6     	 cpsid i
+ 217              	
+ 218              	 .code 16
+ 219              	.LBE62:
+ 220              	.LBE61:
+ 221              	.LBE58:
+ 222              	.LBE57:
+ 216:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t result;
+ 217:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t ics;
+ 218:../Libraries/XMCLib/src/xmc_math.c ****   ics = critical_section_enter();
+ 219:../Libraries/XMCLib/src/xmc_math.c **** 
+ 220:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON  = XMC_MATH_SIGNED_DIVISION;
+ 223              	 .loc 1 220 0
+ 224 0008 0024     	 mov r4,#0
+ 225 000a 044B     	 ldr r3,.L14
+ 226 000c 5C63     	 str r4,[r3,#52]
+ 221:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD     = dividend;
+ 227              	 .loc 1 221 0
+ 228 000e 1862     	 str r0,[r3,#32]
+ 222:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS     = divisor;
+ 229              	 .loc 1 222 0
+ 230 0010 5962     	 str r1,[r3,#36]
+ 223:../Libraries/XMCLib/src/xmc_math.c **** 
+ 224:../Libraries/XMCLib/src/xmc_math.c ****   result = MATH->QUOT;
+ 231              	 .loc 1 224 0
+ 232 0012 986A     	 ldr r0,[r3,#40]
+ 233              	.LVL13:
+ 234              	.LBB63:
+ 235              	.LBB64:
+ 236              	.LBB65:
+ 237              	 .loc 2 481 0
+ 238              	
+ 239 0014 82F31088 	 MSR primask,r2
+ 240              	
+ 241              	 .code 16
+ 242              	.LBE65:
+ 243              	.LBE64:
+ 244              	.LBE63:
+ 225:../Libraries/XMCLib/src/xmc_math.c **** 
+ 226:../Libraries/XMCLib/src/xmc_math.c ****   critical_section_exit(ics);
+ 227:../Libraries/XMCLib/src/xmc_math.c ****   
+ 228:../Libraries/XMCLib/src/xmc_math.c ****   return result;
+ 229:../Libraries/XMCLib/src/xmc_math.c **** }
+ 245              	 .loc 1 229 0
+ 246              	 
+ 247 0018 10BD     	 pop {r4,pc}
+ 248              	.L15:
+ 249 001a C046     	 .align 2
+ 250              	.L14:
+ 251 001c 00000340 	 .word 1073938432
+ 252              	 .cfi_endproc
+ 253              	.LFE90:
+ 255              	 .section .text.__aeabi_uidivmod,"ax",%progbits
+ 256              	 .align 1
+ 257              	 .global __aeabi_uidivmod
+ 258              	 .code 16
+ 259              	 .thumb_func
+ 261              	__aeabi_uidivmod:
+ 262              	.LFB91:
+ 230:../Libraries/XMCLib/src/xmc_math.c **** 
+ 231:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs unsigned integer division modulo */
+ 232:../Libraries/XMCLib/src/xmc_math.c **** uint64_t __aeabi_uidivmod(uint32_t dividend, uint32_t divisor)
+ 233:../Libraries/XMCLib/src/xmc_math.c **** {
+ 263              	 .loc 1 233 0
+ 264              	 .cfi_startproc
+ 265              	.LVL14:
+ 266 0000 10B5     	 push {r4,lr}
+ 267              	.LCFI2:
+ 268              	 .cfi_def_cfa_offset 8
+ 269              	 .cfi_offset 4,-8
+ 270              	 .cfi_offset 14,-4
+ 271              	.LBB66:
+ 272              	.LBB67:
+ 273              	.LBB68:
+ 274              	.LBB69:
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 275              	 .loc 2 453 0
+ 276              	
+ 277 0002 EFF31082 	 MRS r2,primask
+ 278              	
+ 279              	.LVL15:
+ 280              	 .code 16
+ 281              	.LBE69:
+ 282              	.LBE68:
+ 283              	.LBB70:
+ 284              	.LBB71:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 285              	 .loc 2 209 0
+ 286              	
+ 287 0006 72B6     	 cpsid i
+ 288              	
+ 289              	 .code 16
+ 290              	.LBE71:
+ 291              	.LBE70:
+ 292              	.LBE67:
+ 293              	.LBE66:
+ 234:../Libraries/XMCLib/src/xmc_math.c ****   uint64_t remainder;
+ 235:../Libraries/XMCLib/src/xmc_math.c ****   uint64_t quot;
+ 236:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t ics;
+ 237:../Libraries/XMCLib/src/xmc_math.c ****   ics = critical_section_enter();
+ 238:../Libraries/XMCLib/src/xmc_math.c ****   
+ 239:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON  = XMC_MATH_UNSIGNED_DIVISION;
+ 294              	 .loc 1 239 0
+ 295 0008 0424     	 mov r4,#4
+ 296 000a 044B     	 ldr r3,.L17
+ 297 000c 5C63     	 str r4,[r3,#52]
+ 240:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD     = dividend;
+ 298              	 .loc 1 240 0
+ 299 000e 1862     	 str r0,[r3,#32]
+ 241:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS     = divisor;
+ 300              	 .loc 1 241 0
+ 301 0010 5962     	 str r1,[r3,#36]
+ 242:../Libraries/XMCLib/src/xmc_math.c **** 
+ 243:../Libraries/XMCLib/src/xmc_math.c ****   remainder = (uint64_t)MATH->RMD;
+ 302              	 .loc 1 243 0
+ 303 0012 D96A     	 ldr r1,[r3,#44]
+ 304              	.LVL16:
+ 244:../Libraries/XMCLib/src/xmc_math.c ****   quot = (uint64_t)MATH->QUOT;
+ 305              	 .loc 1 244 0
+ 306 0014 986A     	 ldr r0,[r3,#40]
+ 307              	.LVL17:
+ 308              	.LBB72:
+ 309              	.LBB73:
+ 310              	.LBB74:
+ 311              	 .loc 2 481 0
+ 312              	
+ 313 0016 82F31088 	 MSR primask,r2
+ 314              	
+ 315              	 .code 16
+ 316              	.LBE74:
+ 317              	.LBE73:
+ 318              	.LBE72:
+ 245:../Libraries/XMCLib/src/xmc_math.c **** 
+ 246:../Libraries/XMCLib/src/xmc_math.c ****   critical_section_exit(ics);
+ 247:../Libraries/XMCLib/src/xmc_math.c **** 
+ 248:../Libraries/XMCLib/src/xmc_math.c ****   return ((remainder << 32) | quot);
+ 249:../Libraries/XMCLib/src/xmc_math.c **** }
+ 319              	 .loc 1 249 0
+ 320              	 
+ 321 001a 10BD     	 pop {r4,pc}
+ 322              	.L18:
+ 323              	 .align 2
+ 324              	.L17:
+ 325 001c 00000340 	 .word 1073938432
+ 326              	 .cfi_endproc
+ 327              	.LFE91:
+ 329              	 .section .text.__aeabi_idivmod,"ax",%progbits
+ 330              	 .align 1
+ 331              	 .global __aeabi_idivmod
+ 332              	 .code 16
+ 333              	 .thumb_func
+ 335              	__aeabi_idivmod:
+ 336              	.LFB92:
+ 250:../Libraries/XMCLib/src/xmc_math.c **** 
+ 251:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs signed integer division modulo */
+ 252:../Libraries/XMCLib/src/xmc_math.c **** int64_t __aeabi_idivmod(int32_t dividend, int32_t divisor)
+ 253:../Libraries/XMCLib/src/xmc_math.c **** {
+ 337              	 .loc 1 253 0
+ 338              	 .cfi_startproc
+ 339              	.LVL18:
+ 340 0000 10B5     	 push {r4,lr}
+ 341              	.LCFI3:
+ 342              	 .cfi_def_cfa_offset 8
+ 343              	 .cfi_offset 4,-8
+ 344              	 .cfi_offset 14,-4
+ 345              	.LBB75:
+ 346              	.LBB76:
+ 347              	.LBB77:
+ 348              	.LBB78:
+ 453:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h ****   return(result);
+ 349              	 .loc 2 453 0
+ 350              	
+ 351 0002 EFF31082 	 MRS r2,primask
+ 352              	
+ 353              	.LVL19:
+ 354              	 .code 16
+ 355              	.LBE78:
+ 356              	.LBE77:
+ 357              	.LBB79:
+ 358              	.LBB80:
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\cmsis_gcc.h **** }
+ 359              	 .loc 2 209 0
+ 360              	
+ 361 0006 72B6     	 cpsid i
+ 362              	
+ 363              	 .code 16
+ 364              	.LBE80:
+ 365              	.LBE79:
+ 366              	.LBE76:
+ 367              	.LBE75:
+ 254:../Libraries/XMCLib/src/xmc_math.c ****   uint64_t remainder;
+ 255:../Libraries/XMCLib/src/xmc_math.c ****   uint64_t quot;
+ 256:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t ics;
+ 257:../Libraries/XMCLib/src/xmc_math.c ****   ics = critical_section_enter();
+ 258:../Libraries/XMCLib/src/xmc_math.c ****   
+ 259:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON  = XMC_MATH_SIGNED_DIVISION;
+ 368              	 .loc 1 259 0
+ 369 0008 0024     	 mov r4,#0
+ 370 000a 044B     	 ldr r3,.L20
+ 371 000c 5C63     	 str r4,[r3,#52]
+ 260:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD     = dividend;
+ 372              	 .loc 1 260 0
+ 373 000e 1862     	 str r0,[r3,#32]
+ 261:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS     = divisor;
+ 374              	 .loc 1 261 0
+ 375 0010 5962     	 str r1,[r3,#36]
+ 262:../Libraries/XMCLib/src/xmc_math.c **** 
+ 263:../Libraries/XMCLib/src/xmc_math.c ****   remainder = (uint64_t)MATH->RMD;;
+ 376              	 .loc 1 263 0
+ 377 0012 D96A     	 ldr r1,[r3,#44]
+ 378              	.LVL20:
+ 264:../Libraries/XMCLib/src/xmc_math.c ****   quot    = (uint64_t)MATH->QUOT;
+ 379              	 .loc 1 264 0
+ 380 0014 986A     	 ldr r0,[r3,#40]
+ 381              	.LVL21:
+ 382              	.LBB81:
+ 383              	.LBB82:
+ 384              	.LBB83:
+ 385              	 .loc 2 481 0
+ 386              	
+ 387 0016 82F31088 	 MSR primask,r2
+ 388              	
+ 389              	 .code 16
+ 390              	.LBE83:
+ 391              	.LBE82:
+ 392              	.LBE81:
+ 265:../Libraries/XMCLib/src/xmc_math.c **** 
+ 266:../Libraries/XMCLib/src/xmc_math.c ****   critical_section_exit(ics);
+ 267:../Libraries/XMCLib/src/xmc_math.c **** 
+ 268:../Libraries/XMCLib/src/xmc_math.c ****   return ((int64_t)((remainder << 32) | quot));
+ 269:../Libraries/XMCLib/src/xmc_math.c **** }
+ 393              	 .loc 1 269 0
+ 394              	 
+ 395 001a 10BD     	 pop {r4,pc}
+ 396              	.L21:
+ 397              	 .align 2
+ 398              	.L20:
+ 399 001c 00000340 	 .word 1073938432
+ 400              	 .cfi_endproc
+ 401              	.LFE92:
+ 403              	 .section .text.XMC_MATH_CORDIC_Cos,"ax",%progbits
+ 404              	 .align 1
+ 405              	 .global XMC_MATH_CORDIC_Cos
+ 406              	 .code 16
+ 407              	 .thumb_func
+ 409              	XMC_MATH_CORDIC_Cos:
+ 410              	.LFB93:
+ 270:../Libraries/XMCLib/src/xmc_math.c **** #endif
+ 271:../Libraries/XMCLib/src/xmc_math.c **** 
+ 272:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 273:../Libraries/XMCLib/src/xmc_math.c ****  * API IMPLEMENTATION - Blocking functions
+ 274:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 275:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the cosine of a given angle in radians */
+ 276:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q0_23_t XMC_MATH_CORDIC_Cos(XMC_MATH_Q0_23_t angle_in_radians)
+ 277:../Libraries/XMCLib/src/xmc_math.c **** {
+ 411              	 .loc 1 277 0
+ 412              	 .cfi_startproc
+ 413              	.LVL22:
+ 278:../Libraries/XMCLib/src/xmc_math.c ****   int32_t result;
+ 279:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 414              	 .loc 1 279 0
+ 415 0000 0022     	 mov r2,#0
+ 280:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 416              	 .loc 1 280 0
+ 417 0002 0A21     	 mov r1,#10
+ 279:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 418              	 .loc 1 279 0
+ 419 0004 054B     	 ldr r3,.L23
+ 281:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 282:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t) angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 420              	 .loc 1 282 0
+ 421 0006 0002     	 lsl r0,r0,#8
+ 422              	.LVL23:
+ 279:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 423              	 .loc 1 279 0
+ 424 0008 1A64     	 str r2,[r3,#64]
+ 280:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 425              	 .loc 1 280 0
+ 426 000a 5964     	 str r1,[r3,#68]
+ 427              	 .loc 1 282 0
+ 428 000c 1865     	 str r0,[r3,#80]
+ 283:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U;  /* Clear register */
+ 429              	 .loc 1 283 0
+ 430 000e DA64     	 str r2,[r3,#76]
+ 284:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 431              	 .loc 1 284 0
+ 432 0010 034A     	 ldr r2,.L23+4
+ 285:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRX) >> MATH_CORRX_RESULT_Pos;
+ 286:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q0_23_t) result);
+ 287:../Libraries/XMCLib/src/xmc_math.c **** }
+ 433              	 .loc 1 287 0
+ 434              	 
+ 284:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 435              	 .loc 1 284 0
+ 436 0012 9A64     	 str r2,[r3,#72]
+ 285:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRX) >> MATH_CORRX_RESULT_Pos;
+ 437              	 .loc 1 285 0
+ 438 0014 586D     	 ldr r0,[r3,#84]
+ 439              	.LVL24:
+ 440 0016 0012     	 asr r0,r0,#8
+ 441              	.LVL25:
+ 442              	 .loc 1 287 0
+ 443 0018 7047     	 bx lr
+ 444              	.L24:
+ 445 001a C046     	 .align 2
+ 446              	.L23:
+ 447 001c 00000340 	 .word 1073938432
+ 448 0020 0076BA4D 	 .word 1304065536
+ 449              	 .cfi_endproc
+ 450              	.LFE93:
+ 452              	 .section .text.XMC_MATH_CORDIC_Sin,"ax",%progbits
+ 453              	 .align 1
+ 454              	 .global XMC_MATH_CORDIC_Sin
+ 455              	 .code 16
+ 456              	 .thumb_func
+ 458              	XMC_MATH_CORDIC_Sin:
+ 459              	.LFB94:
+ 288:../Libraries/XMCLib/src/xmc_math.c **** 
+ 289:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the sine of a given angle in radians */
+ 290:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q0_23_t XMC_MATH_CORDIC_Sin(XMC_MATH_Q0_23_t angle_in_radians)
+ 291:../Libraries/XMCLib/src/xmc_math.c **** {
+ 460              	 .loc 1 291 0
+ 461              	 .cfi_startproc
+ 462              	.LVL26:
+ 292:../Libraries/XMCLib/src/xmc_math.c ****   int32_t result;
+ 293:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 463              	 .loc 1 293 0
+ 464 0000 0022     	 mov r2,#0
+ 294:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 465              	 .loc 1 294 0
+ 466 0002 0A21     	 mov r1,#10
+ 293:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 467              	 .loc 1 293 0
+ 468 0004 054B     	 ldr r3,.L26
+ 295:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 296:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 469              	 .loc 1 296 0
+ 470 0006 0002     	 lsl r0,r0,#8
+ 471              	.LVL27:
+ 293:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 472              	 .loc 1 293 0
+ 473 0008 1A64     	 str r2,[r3,#64]
+ 294:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 474              	 .loc 1 294 0
+ 475 000a 5964     	 str r1,[r3,#68]
+ 476              	 .loc 1 296 0
+ 477 000c 1865     	 str r0,[r3,#80]
+ 297:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 478              	 .loc 1 297 0
+ 479 000e DA64     	 str r2,[r3,#76]
+ 298:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 480              	 .loc 1 298 0
+ 481 0010 034A     	 ldr r2,.L26+4
+ 299:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRY) >> MATH_CORRY_RESULT_Pos;
+ 300:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q0_23_t) result);
+ 301:../Libraries/XMCLib/src/xmc_math.c **** }
+ 482              	 .loc 1 301 0
+ 483              	 
+ 298:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 484              	 .loc 1 298 0
+ 485 0012 9A64     	 str r2,[r3,#72]
+ 299:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRY) >> MATH_CORRY_RESULT_Pos;
+ 486              	 .loc 1 299 0
+ 487 0014 986D     	 ldr r0,[r3,#88]
+ 488              	.LVL28:
+ 489 0016 0012     	 asr r0,r0,#8
+ 490              	.LVL29:
+ 491              	 .loc 1 301 0
+ 492 0018 7047     	 bx lr
+ 493              	.L27:
+ 494 001a C046     	 .align 2
+ 495              	.L26:
+ 496 001c 00000340 	 .word 1073938432
+ 497 0020 0076BA4D 	 .word 1304065536
+ 498              	 .cfi_endproc
+ 499              	.LFE94:
+ 501              	 .section .text.XMC_MATH_CORDIC_Tan,"ax",%progbits
+ 502              	 .align 1
+ 503              	 .global XMC_MATH_CORDIC_Tan
+ 504              	 .code 16
+ 505              	 .thumb_func
+ 507              	XMC_MATH_CORDIC_Tan:
+ 508              	.LFB95:
+ 302:../Libraries/XMCLib/src/xmc_math.c **** 
+ 303:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the tangent of a given angle in radians */
+ 304:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q0_11_t XMC_MATH_CORDIC_Tan(XMC_MATH_Q0_23_t angle_in_radians)
+ 305:../Libraries/XMCLib/src/xmc_math.c **** {
+ 509              	 .loc 1 305 0
+ 510              	 .cfi_startproc
+ 511              	.LVL30:
+ 306:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t result;
+ 307:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 512              	 .loc 1 307 0
+ 513 0000 1C22     	 mov r2,#28
+ 514 0002 084B     	 ldr r3,.L29
+ 308:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 309:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = (uint32_t) 11 << MATH_DIVCON_DVSSRC_Pos;            /* Right Shifts Divisor by 11 
+ 310:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 311:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 515              	 .loc 1 311 0
+ 516 0004 0A21     	 mov r1,#10
+ 307:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 517              	 .loc 1 307 0
+ 518 0006 5A60     	 str r2,[r3,#4]
+ 309:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 519              	 .loc 1 309 0
+ 520 0008 B022     	 mov r2,#176
+ 521 000a 1205     	 lsl r2,r2,#20
+ 522 000c 5A63     	 str r2,[r3,#52]
+ 310:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 523              	 .loc 1 310 0
+ 524 000e 0022     	 mov r2,#0
+ 312:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 313:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ  = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 525              	 .loc 1 313 0
+ 526 0010 0002     	 lsl r0,r0,#8
+ 527              	.LVL31:
+ 310:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 528              	 .loc 1 310 0
+ 529 0012 1A64     	 str r2,[r3,#64]
+ 311:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 530              	 .loc 1 311 0
+ 531 0014 5964     	 str r1,[r3,#68]
+ 532              	 .loc 1 313 0
+ 533 0016 1865     	 str r0,[r3,#80]
+ 314:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY  = 0U; /* Clear register */
+ 534              	 .loc 1 314 0
+ 535 0018 DA64     	 str r2,[r3,#76]
+ 315:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 536              	 .loc 1 315 0
+ 537 001a 034A     	 ldr r2,.L29+4
+ 316:../Libraries/XMCLib/src/xmc_math.c ****   result       = MATH->QUOT;
+ 317:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q0_11_t) result);
+ 318:../Libraries/XMCLib/src/xmc_math.c **** }
+ 538              	 .loc 1 318 0
+ 539              	 
+ 315:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 540              	 .loc 1 315 0
+ 541 001c 9A64     	 str r2,[r3,#72]
+ 316:../Libraries/XMCLib/src/xmc_math.c ****   result       = MATH->QUOT;
+ 542              	 .loc 1 316 0
+ 543 001e 986A     	 ldr r0,[r3,#40]
+ 544              	.LVL32:
+ 545              	 .loc 1 318 0
+ 546 0020 7047     	 bx lr
+ 547              	.L30:
+ 548 0022 C046     	 .align 2
+ 549              	.L29:
+ 550 0024 00000340 	 .word 1073938432
+ 551 0028 0076BA4D 	 .word 1304065536
+ 552              	 .cfi_endproc
+ 553              	.LFE95:
+ 555              	 .section .text.XMC_MATH_CORDIC_ArcTan,"ax",%progbits
+ 556              	 .align 1
+ 557              	 .global XMC_MATH_CORDIC_ArcTan
+ 558              	 .code 16
+ 559              	 .thumb_func
+ 561              	XMC_MATH_CORDIC_ArcTan:
+ 562              	.LFB96:
+ 319:../Libraries/XMCLib/src/xmc_math.c **** 
+ 320:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the arc tangent of a given angle in radians */
+ 321:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q0_23_t XMC_MATH_CORDIC_ArcTan(XMC_MATH_Q8_15_t x, XMC_MATH_Q8_15_t y)
+ 322:../Libraries/XMCLib/src/xmc_math.c **** {
+ 563              	 .loc 1 322 0
+ 564              	 .cfi_startproc
+ 565              	.LVL33:
+ 566 0000 10B5     	 push {r4,lr}
+ 567              	.LCFI4:
+ 568              	 .cfi_def_cfa_offset 8
+ 569              	 .cfi_offset 4,-8
+ 570              	 .cfi_offset 14,-4
+ 323:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t result;
+ 324:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 571              	 .loc 1 324 0
+ 572 0002 0022     	 mov r2,#0
+ 325:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR;
+ 573              	 .loc 1 325 0
+ 574 0004 0224     	 mov r4,#2
+ 324:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR;
+ 575              	 .loc 1 324 0
+ 576 0006 054B     	 ldr r3,.L32
+ 326:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = 0U; /* Clear register */
+ 327:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = ((uint32_t) y) << MATH_CORDY_DATA_Pos;
+ 577              	 .loc 1 327 0
+ 578 0008 0902     	 lsl r1,r1,#8
+ 579              	.LVL34:
+ 328:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = ((uint32_t) x) << MATH_CORDX_DATA_Pos;
+ 580              	 .loc 1 328 0
+ 581 000a 0002     	 lsl r0,r0,#8
+ 582              	.LVL35:
+ 324:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR;
+ 583              	 .loc 1 324 0
+ 584 000c 1A64     	 str r2,[r3,#64]
+ 325:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = 0U; /* Clear register */
+ 585              	 .loc 1 325 0
+ 586 000e 5C64     	 str r4,[r3,#68]
+ 326:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = 0U; /* Clear register */
+ 587              	 .loc 1 326 0
+ 588 0010 1A65     	 str r2,[r3,#80]
+ 327:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = ((uint32_t) x) << MATH_CORDX_DATA_Pos;
+ 589              	 .loc 1 327 0
+ 590 0012 D964     	 str r1,[r3,#76]
+ 591              	 .loc 1 328 0
+ 592 0014 9864     	 str r0,[r3,#72]
+ 329:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRZ) >> MATH_CORRZ_RESULT_Pos;
+ 593              	 .loc 1 329 0
+ 594 0016 D86D     	 ldr r0,[r3,#92]
+ 595              	.LVL36:
+ 330:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q0_23_t) result);
+ 331:../Libraries/XMCLib/src/xmc_math.c **** }
+ 596              	 .loc 1 331 0
+ 597              	 
+ 329:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRZ) >> MATH_CORRZ_RESULT_Pos;
+ 598              	 .loc 1 329 0
+ 599 0018 0012     	 asr r0,r0,#8
+ 600              	.LVL37:
+ 601              	 .loc 1 331 0
+ 602 001a 10BD     	 pop {r4,pc}
+ 603              	.L33:
+ 604              	 .align 2
+ 605              	.L32:
+ 606 001c 00000340 	 .word 1073938432
+ 607              	 .cfi_endproc
+ 608              	.LFE96:
+ 610              	 .section .text.XMC_MATH_CORDIC_Cosh,"ax",%progbits
+ 611              	 .align 1
+ 612              	 .global XMC_MATH_CORDIC_Cosh
+ 613              	 .code 16
+ 614              	 .thumb_func
+ 616              	XMC_MATH_CORDIC_Cosh:
+ 617              	.LFB97:
+ 332:../Libraries/XMCLib/src/xmc_math.c **** 
+ 333:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic cosine of a given angle in radians */
+ 334:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q1_22_t XMC_MATH_CORDIC_Cosh(XMC_MATH_Q0_23_t angle_in_radians)
+ 335:../Libraries/XMCLib/src/xmc_math.c **** {
+ 618              	 .loc 1 335 0
+ 619              	 .cfi_startproc
+ 620              	.LVL38:
+ 336:../Libraries/XMCLib/src/xmc_math.c ****   int32_t result;
+ 337:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 621              	 .loc 1 337 0
+ 622 0000 0022     	 mov r2,#0
+ 338:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 623              	 .loc 1 338 0
+ 624 0002 0E21     	 mov r1,#14
+ 337:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 625              	 .loc 1 337 0
+ 626 0004 054B     	 ldr r3,.L35
+ 339:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 340:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t) angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 627              	 .loc 1 340 0
+ 628 0006 0002     	 lsl r0,r0,#8
+ 629              	.LVL39:
+ 337:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 630              	 .loc 1 337 0
+ 631 0008 1A64     	 str r2,[r3,#64]
+ 338:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 632              	 .loc 1 338 0
+ 633 000a 5964     	 str r1,[r3,#68]
+ 634              	 .loc 1 340 0
+ 635 000c 1865     	 str r0,[r3,#80]
+ 341:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 636              	 .loc 1 341 0
+ 637 000e DA64     	 str r2,[r3,#76]
+ 342:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 638              	 .loc 1 342 0
+ 639 0010 034A     	 ldr r2,.L35+4
+ 343:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRX) >> MATH_CORRX_RESULT_Pos;
+ 344:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q1_22_t) result);
+ 345:../Libraries/XMCLib/src/xmc_math.c **** }
+ 640              	 .loc 1 345 0
+ 641              	 
+ 342:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 642              	 .loc 1 342 0
+ 643 0012 9A64     	 str r2,[r3,#72]
+ 343:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRX) >> MATH_CORRX_RESULT_Pos;
+ 644              	 .loc 1 343 0
+ 645 0014 586D     	 ldr r0,[r3,#84]
+ 646              	.LVL40:
+ 647 0016 0012     	 asr r0,r0,#8
+ 648              	.LVL41:
+ 649              	 .loc 1 345 0
+ 650 0018 7047     	 bx lr
+ 651              	.L36:
+ 652 001a C046     	 .align 2
+ 653              	.L35:
+ 654 001c 00000340 	 .word 1073938432
+ 655 0020 00A1474D 	 .word 1296539904
+ 656              	 .cfi_endproc
+ 657              	.LFE97:
+ 659              	 .section .text.XMC_MATH_CORDIC_Sinh,"ax",%progbits
+ 660              	 .align 1
+ 661              	 .global XMC_MATH_CORDIC_Sinh
+ 662              	 .code 16
+ 663              	 .thumb_func
+ 665              	XMC_MATH_CORDIC_Sinh:
+ 666              	.LFB98:
+ 346:../Libraries/XMCLib/src/xmc_math.c **** 
+ 347:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic sine of a given angle in radians */
+ 348:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q1_22_t XMC_MATH_CORDIC_Sinh(XMC_MATH_Q0_23_t angle_in_radians)
+ 349:../Libraries/XMCLib/src/xmc_math.c **** {
+ 667              	 .loc 1 349 0
+ 668              	 .cfi_startproc
+ 669              	.LVL42:
+ 350:../Libraries/XMCLib/src/xmc_math.c ****   int32_t result;
+ 351:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 670              	 .loc 1 351 0
+ 671 0000 0022     	 mov r2,#0
+ 352:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 672              	 .loc 1 352 0
+ 673 0002 0E21     	 mov r1,#14
+ 351:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 674              	 .loc 1 351 0
+ 675 0004 054B     	 ldr r3,.L38
+ 353:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 354:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 676              	 .loc 1 354 0
+ 677 0006 0002     	 lsl r0,r0,#8
+ 678              	.LVL43:
+ 351:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 679              	 .loc 1 351 0
+ 680 0008 1A64     	 str r2,[r3,#64]
+ 352:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 681              	 .loc 1 352 0
+ 682 000a 5964     	 str r1,[r3,#68]
+ 683              	 .loc 1 354 0
+ 684 000c 1865     	 str r0,[r3,#80]
+ 355:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 685              	 .loc 1 355 0
+ 686 000e DA64     	 str r2,[r3,#76]
+ 356:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 687              	 .loc 1 356 0
+ 688 0010 034A     	 ldr r2,.L38+4
+ 357:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRY) >> MATH_CORRY_RESULT_Pos;
+ 358:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q1_22_t) result);
+ 359:../Libraries/XMCLib/src/xmc_math.c **** }
+ 689              	 .loc 1 359 0
+ 690              	 
+ 356:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 691              	 .loc 1 356 0
+ 692 0012 9A64     	 str r2,[r3,#72]
+ 357:../Libraries/XMCLib/src/xmc_math.c ****   result      = ((int32_t)MATH->CORRY) >> MATH_CORRY_RESULT_Pos;
+ 693              	 .loc 1 357 0
+ 694 0014 986D     	 ldr r0,[r3,#88]
+ 695              	.LVL44:
+ 696 0016 0012     	 asr r0,r0,#8
+ 697              	.LVL45:
+ 698              	 .loc 1 359 0
+ 699 0018 7047     	 bx lr
+ 700              	.L39:
+ 701 001a C046     	 .align 2
+ 702              	.L38:
+ 703 001c 00000340 	 .word 1073938432
+ 704 0020 00A1474D 	 .word 1296539904
+ 705              	 .cfi_endproc
+ 706              	.LFE98:
+ 708              	 .section .text.XMC_MATH_CORDIC_Tanh,"ax",%progbits
+ 709              	 .align 1
+ 710              	 .global XMC_MATH_CORDIC_Tanh
+ 711              	 .code 16
+ 712              	 .thumb_func
+ 714              	XMC_MATH_CORDIC_Tanh:
+ 715              	.LFB99:
+ 360:../Libraries/XMCLib/src/xmc_math.c **** 
+ 361:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic tangent of a given angle in radians */
+ 362:../Libraries/XMCLib/src/xmc_math.c **** XMC_MATH_Q0_11_t XMC_MATH_CORDIC_Tanh(XMC_MATH_Q0_23_t angle_in_radians)
+ 363:../Libraries/XMCLib/src/xmc_math.c **** {
+ 716              	 .loc 1 363 0
+ 717              	 .cfi_startproc
+ 718              	.LVL46:
+ 364:../Libraries/XMCLib/src/xmc_math.c ****   uint32_t result;
+ 365:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 719              	 .loc 1 365 0
+ 720 0000 1C22     	 mov r2,#28
+ 721 0002 084B     	 ldr r3,.L41
+ 366:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 367:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = (uint32_t) 11 << MATH_DIVCON_DVSSRC_Pos;            /* Right Shifts Divisor by 11 
+ 368:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 369:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 722              	 .loc 1 369 0
+ 723 0004 0E21     	 mov r1,#14
+ 365:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 724              	 .loc 1 365 0
+ 725 0006 5A60     	 str r2,[r3,#4]
+ 367:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 726              	 .loc 1 367 0
+ 727 0008 B022     	 mov r2,#176
+ 728 000a 1205     	 lsl r2,r2,#20
+ 729 000c 5A63     	 str r2,[r3,#52]
+ 368:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 730              	 .loc 1 368 0
+ 731 000e 0022     	 mov r2,#0
+ 370:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 371:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ  = ((uint32_t) angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 732              	 .loc 1 371 0
+ 733 0010 0002     	 lsl r0,r0,#8
+ 734              	.LVL47:
+ 368:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 735              	 .loc 1 368 0
+ 736 0012 1A64     	 str r2,[r3,#64]
+ 369:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 737              	 .loc 1 369 0
+ 738 0014 5964     	 str r1,[r3,#68]
+ 739              	 .loc 1 371 0
+ 740 0016 1865     	 str r0,[r3,#80]
+ 372:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY  = 0U; /* Clear register */
+ 741              	 .loc 1 372 0
+ 742 0018 DA64     	 str r2,[r3,#76]
+ 373:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 743              	 .loc 1 373 0
+ 744 001a 034A     	 ldr r2,.L41+4
+ 374:../Libraries/XMCLib/src/xmc_math.c ****   result       = MATH->QUOT;
+ 375:../Libraries/XMCLib/src/xmc_math.c ****   return ((XMC_MATH_Q0_11_t) result);
+ 376:../Libraries/XMCLib/src/xmc_math.c **** }
+ 745              	 .loc 1 376 0
+ 746              	 
+ 373:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 747              	 .loc 1 373 0
+ 748 001c 9A64     	 str r2,[r3,#72]
+ 374:../Libraries/XMCLib/src/xmc_math.c ****   result       = MATH->QUOT;
+ 749              	 .loc 1 374 0
+ 750 001e 986A     	 ldr r0,[r3,#40]
+ 751              	.LVL48:
+ 752              	 .loc 1 376 0
+ 753 0020 7047     	 bx lr
+ 754              	.L42:
+ 755 0022 C046     	 .align 2
+ 756              	.L41:
+ 757 0024 00000340 	 .word 1073938432
+ 758 0028 00A1474D 	 .word 1296539904
+ 759              	 .cfi_endproc
+ 760              	.LFE99:
+ 762              	 .section .text.XMC_MATH_CORDIC_CosNB,"ax",%progbits
+ 763              	 .align 1
+ 764              	 .global XMC_MATH_CORDIC_CosNB
+ 765              	 .code 16
+ 766              	 .thumb_func
+ 768              	XMC_MATH_CORDIC_CosNB:
+ 769              	.LFB100:
+ 377:../Libraries/XMCLib/src/xmc_math.c **** 
+ 378:../Libraries/XMCLib/src/xmc_math.c **** /**************************************************************************************************
+ 379:../Libraries/XMCLib/src/xmc_math.c ****  * API IMPLEMENTATION - Non blocking functions
+ 380:../Libraries/XMCLib/src/xmc_math.c ****  **************************************************************************************************
+ 381:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the cosine of a given angle in radians */
+ 382:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_CosNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 383:../Libraries/XMCLib/src/xmc_math.c **** {
+ 770              	 .loc 1 383 0
+ 771              	 .cfi_startproc
+ 772              	.LVL49:
+ 384:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 773              	 .loc 1 384 0
+ 774 0000 0022     	 mov r2,#0
+ 385:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 775              	 .loc 1 385 0
+ 776 0002 0A21     	 mov r1,#10
+ 384:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 777              	 .loc 1 384 0
+ 778 0004 044B     	 ldr r3,.L44
+ 386:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 387:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t) angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 779              	 .loc 1 387 0
+ 780 0006 0002     	 lsl r0,r0,#8
+ 781              	.LVL50:
+ 384:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 782              	 .loc 1 384 0
+ 783 0008 1A64     	 str r2,[r3,#64]
+ 385:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 784              	 .loc 1 385 0
+ 785 000a 5964     	 str r1,[r3,#68]
+ 786              	 .loc 1 387 0
+ 787 000c 1865     	 str r0,[r3,#80]
+ 388:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U;  /* Clear register */
+ 788              	 .loc 1 388 0
+ 789 000e DA64     	 str r2,[r3,#76]
+ 389:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 790              	 .loc 1 389 0
+ 791 0010 024A     	 ldr r2,.L44+4
+ 390:../Libraries/XMCLib/src/xmc_math.c **** }
+ 792              	 .loc 1 390 0
+ 793              	 
+ 389:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 794              	 .loc 1 389 0
+ 795 0012 9A64     	 str r2,[r3,#72]
+ 796              	 .loc 1 390 0
+ 797 0014 7047     	 bx lr
+ 798              	.L45:
+ 799 0016 C046     	 .align 2
+ 800              	.L44:
+ 801 0018 00000340 	 .word 1073938432
+ 802 001c 0076BA4D 	 .word 1304065536
+ 803              	 .cfi_endproc
+ 804              	.LFE100:
+ 806              	 .section .text.XMC_MATH_CORDIC_SinNB,"ax",%progbits
+ 807              	 .align 1
+ 808              	 .global XMC_MATH_CORDIC_SinNB
+ 809              	 .code 16
+ 810              	 .thumb_func
+ 812              	XMC_MATH_CORDIC_SinNB:
+ 813              	.LFB101:
+ 391:../Libraries/XMCLib/src/xmc_math.c **** 
+ 392:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the sine of a given angle in radians */
+ 393:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_SinNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 394:../Libraries/XMCLib/src/xmc_math.c **** {
+ 814              	 .loc 1 394 0
+ 815              	 .cfi_startproc
+ 816              	.LVL51:
+ 395:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 817              	 .loc 1 395 0
+ 818 0000 0022     	 mov r2,#0
+ 396:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 819              	 .loc 1 396 0
+ 820 0002 0A21     	 mov r1,#10
+ 395:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 821              	 .loc 1 395 0
+ 822 0004 044B     	 ldr r3,.L47
+ 397:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 398:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 823              	 .loc 1 398 0
+ 824 0006 0002     	 lsl r0,r0,#8
+ 825              	.LVL52:
+ 395:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 826              	 .loc 1 395 0
+ 827 0008 1A64     	 str r2,[r3,#64]
+ 396:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 828              	 .loc 1 396 0
+ 829 000a 5964     	 str r1,[r3,#68]
+ 830              	 .loc 1 398 0
+ 831 000c 1865     	 str r0,[r3,#80]
+ 399:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 832              	 .loc 1 399 0
+ 833 000e DA64     	 str r2,[r3,#76]
+ 400:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 834              	 .loc 1 400 0
+ 835 0010 024A     	 ldr r2,.L47+4
+ 401:../Libraries/XMCLib/src/xmc_math.c **** }
+ 836              	 .loc 1 401 0
+ 837              	 
+ 400:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 838              	 .loc 1 400 0
+ 839 0012 9A64     	 str r2,[r3,#72]
+ 840              	 .loc 1 401 0
+ 841 0014 7047     	 bx lr
+ 842              	.L48:
+ 843 0016 C046     	 .align 2
+ 844              	.L47:
+ 845 0018 00000340 	 .word 1073938432
+ 846 001c 0076BA4D 	 .word 1304065536
+ 847              	 .cfi_endproc
+ 848              	.LFE101:
+ 850              	 .section .text.XMC_MATH_CORDIC_TanNB,"ax",%progbits
+ 851              	 .align 1
+ 852              	 .global XMC_MATH_CORDIC_TanNB
+ 853              	 .code 16
+ 854              	 .thumb_func
+ 856              	XMC_MATH_CORDIC_TanNB:
+ 857              	.LFB102:
+ 402:../Libraries/XMCLib/src/xmc_math.c **** 
+ 403:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the tangent of a given angle in radians */
+ 404:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_TanNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 405:../Libraries/XMCLib/src/xmc_math.c **** {
+ 858              	 .loc 1 405 0
+ 859              	 .cfi_startproc
+ 860              	.LVL53:
+ 406:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 861              	 .loc 1 406 0
+ 862 0000 1C22     	 mov r2,#28
+ 863 0002 074B     	 ldr r3,.L50
+ 407:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 408:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = (uint32_t) 11 << MATH_DIVCON_DVSSRC_Pos;            /* Right Shifts Divisor by 11 
+ 409:../Libraries/XMCLib/src/xmc_math.c **** 
+ 410:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 411:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 864              	 .loc 1 411 0
+ 865 0004 0A21     	 mov r1,#10
+ 406:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 866              	 .loc 1 406 0
+ 867 0006 5A60     	 str r2,[r3,#4]
+ 408:../Libraries/XMCLib/src/xmc_math.c **** 
+ 868              	 .loc 1 408 0
+ 869 0008 B022     	 mov r2,#176
+ 870 000a 1205     	 lsl r2,r2,#20
+ 871 000c 5A63     	 str r2,[r3,#52]
+ 410:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 872              	 .loc 1 410 0
+ 873 000e 0022     	 mov r2,#0
+ 412:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 413:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ  = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 874              	 .loc 1 413 0
+ 875 0010 0002     	 lsl r0,r0,#8
+ 876              	.LVL54:
+ 410:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR + \
+ 877              	 .loc 1 410 0
+ 878 0012 1A64     	 str r2,[r3,#64]
+ 411:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 879              	 .loc 1 411 0
+ 880 0014 5964     	 str r1,[r3,#68]
+ 881              	 .loc 1 413 0
+ 882 0016 1865     	 str r0,[r3,#80]
+ 414:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY  = 0U; /* Clear register */
+ 883              	 .loc 1 414 0
+ 884 0018 DA64     	 str r2,[r3,#76]
+ 415:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 885              	 .loc 1 415 0
+ 886 001a 024A     	 ldr r2,.L50+4
+ 416:../Libraries/XMCLib/src/xmc_math.c **** }
+ 887              	 .loc 1 416 0
+ 888              	 
+ 415:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_CIRCULAR_GAIN_IN_Q023 << MATH_CORDX_DATA_Pos;
+ 889              	 .loc 1 415 0
+ 890 001c 9A64     	 str r2,[r3,#72]
+ 891              	 .loc 1 416 0
+ 892 001e 7047     	 bx lr
+ 893              	.L51:
+ 894              	 .align 2
+ 895              	.L50:
+ 896 0020 00000340 	 .word 1073938432
+ 897 0024 0076BA4D 	 .word 1304065536
+ 898              	 .cfi_endproc
+ 899              	.LFE102:
+ 901              	 .section .text.XMC_MATH_CORDIC_ArcTanNB,"ax",%progbits
+ 902              	 .align 1
+ 903              	 .global XMC_MATH_CORDIC_ArcTanNB
+ 904              	 .code 16
+ 905              	 .thumb_func
+ 907              	XMC_MATH_CORDIC_ArcTanNB:
+ 908              	.LFB103:
+ 417:../Libraries/XMCLib/src/xmc_math.c **** 
+ 418:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the arc tangent of a given value */
+ 419:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_ArcTanNB(XMC_MATH_Q8_15_t x, XMC_MATH_Q8_15_t y)
+ 420:../Libraries/XMCLib/src/xmc_math.c **** {
+ 909              	 .loc 1 420 0
+ 910              	 .cfi_startproc
+ 911              	.LVL55:
+ 912 0000 10B5     	 push {r4,lr}
+ 913              	.LCFI5:
+ 914              	 .cfi_def_cfa_offset 8
+ 915              	 .cfi_offset 4,-8
+ 916              	 .cfi_offset 14,-4
+ 421:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 917              	 .loc 1 421 0
+ 918 0002 0022     	 mov r2,#0
+ 422:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR;
+ 919              	 .loc 1 422 0
+ 920 0004 0224     	 mov r4,#2
+ 421:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 921              	 .loc 1 421 0
+ 922 0006 044B     	 ldr r3,.L53
+ 423:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = 0U; /* Clear register */
+ 424:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = ((uint32_t) y) << MATH_CORDY_DATA_Pos;
+ 923              	 .loc 1 424 0
+ 924 0008 0902     	 lsl r1,r1,#8
+ 925              	.LVL56:
+ 425:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = ((uint32_t) x) << MATH_CORDX_DATA_Pos;
+ 926              	 .loc 1 425 0
+ 927 000a 0002     	 lsl r0,r0,#8
+ 928              	.LVL57:
+ 421:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_CIRCULAR;
+ 929              	 .loc 1 421 0
+ 930 000c 1A64     	 str r2,[r3,#64]
+ 426:../Libraries/XMCLib/src/xmc_math.c **** }
+ 931              	 .loc 1 426 0
+ 932              	 
+ 422:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = 0U; /* Clear register */
+ 933              	 .loc 1 422 0
+ 934 000e 5C64     	 str r4,[r3,#68]
+ 423:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = ((uint32_t) y) << MATH_CORDY_DATA_Pos;
+ 935              	 .loc 1 423 0
+ 936 0010 1A65     	 str r2,[r3,#80]
+ 424:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = ((uint32_t) x) << MATH_CORDX_DATA_Pos;
+ 937              	 .loc 1 424 0
+ 938 0012 D964     	 str r1,[r3,#76]
+ 425:../Libraries/XMCLib/src/xmc_math.c **** }
+ 939              	 .loc 1 425 0
+ 940 0014 9864     	 str r0,[r3,#72]
+ 941              	 .loc 1 426 0
+ 942 0016 10BD     	 pop {r4,pc}
+ 943              	.L54:
+ 944              	 .align 2
+ 945              	.L53:
+ 946 0018 00000340 	 .word 1073938432
+ 947              	 .cfi_endproc
+ 948              	.LFE103:
+ 950              	 .section .text.XMC_MATH_CORDIC_CoshNB,"ax",%progbits
+ 951              	 .align 1
+ 952              	 .global XMC_MATH_CORDIC_CoshNB
+ 953              	 .code 16
+ 954              	 .thumb_func
+ 956              	XMC_MATH_CORDIC_CoshNB:
+ 957              	.LFB104:
+ 427:../Libraries/XMCLib/src/xmc_math.c **** 
+ 428:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic cosine of a given angle in radians */
+ 429:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_CoshNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 430:../Libraries/XMCLib/src/xmc_math.c **** {
+ 958              	 .loc 1 430 0
+ 959              	 .cfi_startproc
+ 960              	.LVL58:
+ 431:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 961              	 .loc 1 431 0
+ 962 0000 0022     	 mov r2,#0
+ 432:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 963              	 .loc 1 432 0
+ 964 0002 0E21     	 mov r1,#14
+ 431:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 965              	 .loc 1 431 0
+ 966 0004 044B     	 ldr r3,.L56
+ 433:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 434:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 967              	 .loc 1 434 0
+ 968 0006 0002     	 lsl r0,r0,#8
+ 969              	.LVL59:
+ 431:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 970              	 .loc 1 431 0
+ 971 0008 1A64     	 str r2,[r3,#64]
+ 432:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 972              	 .loc 1 432 0
+ 973 000a 5964     	 str r1,[r3,#68]
+ 974              	 .loc 1 434 0
+ 975 000c 1865     	 str r0,[r3,#80]
+ 435:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 976              	 .loc 1 435 0
+ 977 000e DA64     	 str r2,[r3,#76]
+ 436:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 978              	 .loc 1 436 0
+ 979 0010 024A     	 ldr r2,.L56+4
+ 437:../Libraries/XMCLib/src/xmc_math.c **** }
+ 980              	 .loc 1 437 0
+ 981              	 
+ 436:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 982              	 .loc 1 436 0
+ 983 0012 9A64     	 str r2,[r3,#72]
+ 984              	 .loc 1 437 0
+ 985 0014 7047     	 bx lr
+ 986              	.L57:
+ 987 0016 C046     	 .align 2
+ 988              	.L56:
+ 989 0018 00000340 	 .word 1073938432
+ 990 001c 00A1474D 	 .word 1296539904
+ 991              	 .cfi_endproc
+ 992              	.LFE104:
+ 994              	 .section .text.XMC_MATH_CORDIC_SinhNB,"ax",%progbits
+ 995              	 .align 1
+ 996              	 .global XMC_MATH_CORDIC_SinhNB
+ 997              	 .code 16
+ 998              	 .thumb_func
+ 1000              	XMC_MATH_CORDIC_SinhNB:
+ 1001              	.LFB105:
+ 438:../Libraries/XMCLib/src/xmc_math.c **** 
+ 439:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic sine of a given angle in radians */
+ 440:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_SinhNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 441:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1002              	 .loc 1 441 0
+ 1003              	 .cfi_startproc
+ 1004              	.LVL60:
+ 442:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 1005              	 .loc 1 442 0
+ 1006 0000 0022     	 mov r2,#0
+ 443:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1007              	 .loc 1 443 0
+ 1008 0002 0E21     	 mov r1,#14
+ 442:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 1009              	 .loc 1 442 0
+ 1010 0004 044B     	 ldr r3,.L59
+ 444:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 445:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ = ((uint32_t)angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 1011              	 .loc 1 445 0
+ 1012 0006 0002     	 lsl r0,r0,#8
+ 1013              	.LVL61:
+ 442:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1014              	 .loc 1 442 0
+ 1015 0008 1A64     	 str r2,[r3,#64]
+ 443:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1016              	 .loc 1 443 0
+ 1017 000a 5964     	 str r1,[r3,#68]
+ 1018              	 .loc 1 445 0
+ 1019 000c 1865     	 str r0,[r3,#80]
+ 446:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = 0U; /* Clear register */
+ 1020              	 .loc 1 446 0
+ 1021 000e DA64     	 str r2,[r3,#76]
+ 447:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 1022              	 .loc 1 447 0
+ 1023 0010 024A     	 ldr r2,.L59+4
+ 448:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1024              	 .loc 1 448 0
+ 1025              	 
+ 447:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 1026              	 .loc 1 447 0
+ 1027 0012 9A64     	 str r2,[r3,#72]
+ 1028              	 .loc 1 448 0
+ 1029 0014 7047     	 bx lr
+ 1030              	.L60:
+ 1031 0016 C046     	 .align 2
+ 1032              	.L59:
+ 1033 0018 00000340 	 .word 1073938432
+ 1034 001c 00A1474D 	 .word 1296539904
+ 1035              	 .cfi_endproc
+ 1036              	.LFE105:
+ 1038              	 .section .text.XMC_MATH_CORDIC_TanhNB,"ax",%progbits
+ 1039              	 .align 1
+ 1040              	 .global XMC_MATH_CORDIC_TanhNB
+ 1041              	 .code 16
+ 1042              	 .thumb_func
+ 1044              	XMC_MATH_CORDIC_TanhNB:
+ 1045              	.LFB106:
+ 449:../Libraries/XMCLib/src/xmc_math.c **** 
+ 450:../Libraries/XMCLib/src/xmc_math.c **** /* This function computes the hyperbolic tangent of a given angle in radians */
+ 451:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_CORDIC_TanhNB(XMC_MATH_Q0_23_t angle_in_radians)
+ 452:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1046              	 .loc 1 452 0
+ 1047              	 .cfi_startproc
+ 1048              	.LVL62:
+ 453:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 1049              	 .loc 1 453 0
+ 1050 0000 1C22     	 mov r2,#28
+ 1051 0002 074B     	 ldr r3,.L62
+ 454:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_DIV_DVSRC_CORRX_IS_SOURCE;      /* Chain the results of CORDIC
+ 455:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = (uint32_t) 11 << MATH_DIVCON_DVSSRC_Pos;            /* Right Shifts Divisor by 11 
+ 456:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 457:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1052              	 .loc 1 457 0
+ 1053 0004 0E21     	 mov r1,#14
+ 453:../Libraries/XMCLib/src/xmc_math.c ****   MATH->GLBCON = (uint32_t) XMC_MATH_DIV_DVDRC_CORRY_IS_SOURCE + \
+ 1054              	 .loc 1 453 0
+ 1055 0006 5A60     	 str r2,[r3,#4]
+ 455:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC  = 0U; /* Clear register */
+ 1056              	 .loc 1 455 0
+ 1057 0008 B022     	 mov r2,#176
+ 1058 000a 1205     	 lsl r2,r2,#20
+ 1059 000c 5A63     	 str r2,[r3,#52]
+ 456:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1060              	 .loc 1 456 0
+ 1061 000e 0022     	 mov r2,#0
+ 458:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 459:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDZ  = ((uint32_t) angle_in_radians) << MATH_CORDZ_DATA_Pos;
+ 1062              	 .loc 1 459 0
+ 1063 0010 0002     	 lsl r0,r0,#8
+ 1064              	.LVL63:
+ 456:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON    = (uint32_t) XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC + \
+ 1065              	 .loc 1 456 0
+ 1066 0012 1A64     	 str r2,[r3,#64]
+ 457:../Libraries/XMCLib/src/xmc_math.c ****                  (uint32_t) XMC_MATH_CORDIC_ROTVEC_MODE_ROTATION;
+ 1067              	 .loc 1 457 0
+ 1068 0014 5964     	 str r1,[r3,#68]
+ 1069              	 .loc 1 459 0
+ 1070 0016 1865     	 str r0,[r3,#80]
+ 460:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY  = 0U; /* Clear register */
+ 1071              	 .loc 1 460 0
+ 1072 0018 DA64     	 str r2,[r3,#76]
+ 461:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 1073              	 .loc 1 461 0
+ 1074 001a 024A     	 ldr r2,.L62+4
+ 462:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1075              	 .loc 1 462 0
+ 1076              	 
+ 461:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX  = XMC_MATH_RECIPROC_HYPERBOLIC_GAIN_IN_Q1_22 << MATH_CORDX_DATA_Pos;
+ 1077              	 .loc 1 461 0
+ 1078 001c 9A64     	 str r2,[r3,#72]
+ 1079              	 .loc 1 462 0
+ 1080 001e 7047     	 bx lr
+ 1081              	.L63:
+ 1082              	 .align 2
+ 1083              	.L62:
+ 1084 0020 00000340 	 .word 1073938432
+ 1085 0024 00A1474D 	 .word 1296539904
+ 1086              	 .cfi_endproc
+ 1087              	.LFE106:
+ 1089              	 .section .text.XMC_MATH_DIV_UnsignedDivNB,"ax",%progbits
+ 1090              	 .align 1
+ 1091              	 .global XMC_MATH_DIV_UnsignedDivNB
+ 1092              	 .code 16
+ 1093              	 .thumb_func
+ 1095              	XMC_MATH_DIV_UnsignedDivNB:
+ 1096              	.LFB107:
+ 463:../Libraries/XMCLib/src/xmc_math.c **** 
+ 464:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs division for given two unsigned arguments */
+ 465:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_DIV_UnsignedDivNB(uint32_t dividend, uint32_t divisor)
+ 466:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1097              	 .loc 1 466 0
+ 1098              	 .cfi_startproc
+ 1099              	.LVL64:
+ 467:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_UNSIGNED_DIVISION;
+ 1100              	 .loc 1 467 0
+ 1101 0000 0422     	 mov r2,#4
+ 1102 0002 024B     	 ldr r3,.L65
+ 468:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 469:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS    = divisor;
+ 470:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1103              	 .loc 1 470 0
+ 1104              	 
+ 467:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_UNSIGNED_DIVISION;
+ 1105              	 .loc 1 467 0
+ 1106 0004 5A63     	 str r2,[r3,#52]
+ 468:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 1107              	 .loc 1 468 0
+ 1108 0006 1862     	 str r0,[r3,#32]
+ 469:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1109              	 .loc 1 469 0
+ 1110 0008 5962     	 str r1,[r3,#36]
+ 1111              	 .loc 1 470 0
+ 1112 000a 7047     	 bx lr
+ 1113              	.L66:
+ 1114              	 .align 2
+ 1115              	.L65:
+ 1116 000c 00000340 	 .word 1073938432
+ 1117              	 .cfi_endproc
+ 1118              	.LFE107:
+ 1120              	 .section .text.XMC_MATH_DIV_SignedDivNB,"ax",%progbits
+ 1121              	 .align 1
+ 1122              	 .global XMC_MATH_DIV_SignedDivNB
+ 1123              	 .code 16
+ 1124              	 .thumb_func
+ 1126              	XMC_MATH_DIV_SignedDivNB:
+ 1127              	.LFB108:
+ 471:../Libraries/XMCLib/src/xmc_math.c **** 
+ 472:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs division for given two signed arguments */
+ 473:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_DIV_SignedDivNB(int32_t dividend, int32_t divisor)
+ 474:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1128              	 .loc 1 474 0
+ 1129              	 .cfi_startproc
+ 1130              	.LVL65:
+ 475:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_SIGNED_DIVISION;
+ 1131              	 .loc 1 475 0
+ 1132 0000 0022     	 mov r2,#0
+ 1133 0002 024B     	 ldr r3,.L68
+ 476:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 477:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS    = divisor;
+ 478:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1134              	 .loc 1 478 0
+ 1135              	 
+ 475:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_SIGNED_DIVISION;
+ 1136              	 .loc 1 475 0
+ 1137 0004 5A63     	 str r2,[r3,#52]
+ 476:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 1138              	 .loc 1 476 0
+ 1139 0006 1862     	 str r0,[r3,#32]
+ 477:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1140              	 .loc 1 477 0
+ 1141 0008 5962     	 str r1,[r3,#36]
+ 1142              	 .loc 1 478 0
+ 1143 000a 7047     	 bx lr
+ 1144              	.L69:
+ 1145              	 .align 2
+ 1146              	.L68:
+ 1147 000c 00000340 	 .word 1073938432
+ 1148              	 .cfi_endproc
+ 1149              	.LFE108:
+ 1151              	 .section .text.XMC_MATH_DIV_UnsignedModNB,"ax",%progbits
+ 1152              	 .align 1
+ 1153              	 .global XMC_MATH_DIV_UnsignedModNB
+ 1154              	 .code 16
+ 1155              	 .thumb_func
+ 1157              	XMC_MATH_DIV_UnsignedModNB:
+ 1158              	.LFB109:
+ 479:../Libraries/XMCLib/src/xmc_math.c **** 
+ 480:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs modulo operation for given two unsigned arguments */
+ 481:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_DIV_UnsignedModNB(uint32_t dividend, uint32_t divisor)
+ 482:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1159              	 .loc 1 482 0
+ 1160              	 .cfi_startproc
+ 1161              	.LVL66:
+ 483:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_UNSIGNED_DIVISION;
+ 1162              	 .loc 1 483 0
+ 1163 0000 0422     	 mov r2,#4
+ 1164 0002 024B     	 ldr r3,.L71
+ 484:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 485:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS    = divisor;
+ 486:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1165              	 .loc 1 486 0
+ 1166              	 
+ 483:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_UNSIGNED_DIVISION;
+ 1167              	 .loc 1 483 0
+ 1168 0004 5A63     	 str r2,[r3,#52]
+ 484:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 1169              	 .loc 1 484 0
+ 1170 0006 1862     	 str r0,[r3,#32]
+ 485:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1171              	 .loc 1 485 0
+ 1172 0008 5962     	 str r1,[r3,#36]
+ 1173              	 .loc 1 486 0
+ 1174 000a 7047     	 bx lr
+ 1175              	.L72:
+ 1176              	 .align 2
+ 1177              	.L71:
+ 1178 000c 00000340 	 .word 1073938432
+ 1179              	 .cfi_endproc
+ 1180              	.LFE109:
+ 1182              	 .section .text.XMC_MATH_DIV_SignedModNB,"ax",%progbits
+ 1183              	 .align 1
+ 1184              	 .global XMC_MATH_DIV_SignedModNB
+ 1185              	 .code 16
+ 1186              	 .thumb_func
+ 1188              	XMC_MATH_DIV_SignedModNB:
+ 1189              	.LFB110:
+ 487:../Libraries/XMCLib/src/xmc_math.c **** 
+ 488:../Libraries/XMCLib/src/xmc_math.c **** /* This function performs modulo operation for given two signed arguments */
+ 489:../Libraries/XMCLib/src/xmc_math.c **** void XMC_MATH_DIV_SignedModNB(int32_t dividend, int32_t divisor)
+ 490:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1190              	 .loc 1 490 0
+ 1191              	 .cfi_startproc
+ 1192              	.LVL67:
+ 491:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_SIGNED_DIVISION;
+ 1193              	 .loc 1 491 0
+ 1194 0000 0022     	 mov r2,#0
+ 1195 0002 024B     	 ldr r3,.L74
+ 492:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 493:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVS    = divisor;
+ 494:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1196              	 .loc 1 494 0
+ 1197              	 
+ 491:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DIVCON = XMC_MATH_SIGNED_DIVISION;
+ 1198              	 .loc 1 491 0
+ 1199 0004 5A63     	 str r2,[r3,#52]
+ 492:../Libraries/XMCLib/src/xmc_math.c ****   MATH->DVD    = dividend;
+ 1200              	 .loc 1 492 0
+ 1201 0006 1862     	 str r0,[r3,#32]
+ 493:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1202              	 .loc 1 493 0
+ 1203 0008 5962     	 str r1,[r3,#36]
+ 1204              	 .loc 1 494 0
+ 1205 000a 7047     	 bx lr
+ 1206              	.L75:
+ 1207              	 .align 2
+ 1208              	.L74:
+ 1209 000c 00000340 	 .word 1073938432
+ 1210              	 .cfi_endproc
+ 1211              	.LFE110:
+ 1213              	 .section .text.XMC_MATH_CORDIC_Q15_Sqrt,"ax",%progbits
+ 1214              	 .align 1
+ 1215              	 .global XMC_MATH_CORDIC_Q15_Sqrt
+ 1216              	 .code 16
+ 1217              	 .thumb_func
+ 1219              	XMC_MATH_CORDIC_Q15_Sqrt:
+ 1220              	.LFB111:
+ 495:../Libraries/XMCLib/src/xmc_math.c **** 
+ 496:../Libraries/XMCLib/src/xmc_math.c **** int16_t XMC_MATH_CORDIC_Q15_Sqrt(int16_t x)
+ 497:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1221              	 .loc 1 497 0
+ 1222              	 .cfi_startproc
+ 1223              	.LVL68:
+ 498:../Libraries/XMCLib/src/xmc_math.c ****   int32_t temp;
+ 499:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 1224              	 .loc 1 499 0
+ 1225 0000 0022     	 mov r2,#0
+ 1226 0002 094B     	 ldr r3,.L77
+ 500:../Libraries/XMCLib/src/xmc_math.c **** 
+ 501:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t)XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC |
+ 502:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t)XMC_MATH_CORDIC_ROTVEC_MODE_VECTORING;
+ 503:../Libraries/XMCLib/src/xmc_math.c **** 
+ 504:../Libraries/XMCLib/src/xmc_math.c ****   temp = (int32_t)x << 15; /* Q30 to handle numbers > 1.0 */
+ 1227              	 .loc 1 504 0
+ 1228 0004 C003     	 lsl r0,r0,#15
+ 1229              	.LVL69:
+ 499:../Libraries/XMCLib/src/xmc_math.c **** 
+ 1230              	 .loc 1 499 0
+ 1231 0006 1A64     	 str r2,[r3,#64]
+ 501:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t)XMC_MATH_CORDIC_ROTVEC_MODE_VECTORING;
+ 1232              	 .loc 1 501 0
+ 1233 0008 0632     	 add r2,r2,#6
+ 1234 000a 5A64     	 str r2,[r3,#68]
+ 505:../Libraries/XMCLib/src/xmc_math.c **** 
+ 506:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = (temp - 0x10000000U); /* x - 0.25 */
+ 1235              	 .loc 1 506 0
+ 1236 000c F022     	 mov r2,#240
+ 1237 000e 1206     	 lsl r2,r2,#24
+ 1238 0010 8218     	 add r2,r0,r2
+ 1239 0012 DA64     	 str r2,[r3,#76]
+ 507:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = (temp + 0x10000000U); /* x + 0.25 */
+ 1240              	 .loc 1 507 0
+ 1241 0014 8022     	 mov r2,#128
+ 1242 0016 5205     	 lsl r2,r2,#21
+ 1243 0018 8018     	 add r0,r0,r2
+ 1244 001a 9864     	 str r0,[r3,#72]
+ 508:../Libraries/XMCLib/src/xmc_math.c **** 
+ 509:../Libraries/XMCLib/src/xmc_math.c ****   return (int16_t)(((MATH->CORRX >> 14) * 39568) >> 16); /* Q16 * Q15 */
+ 1245              	 .loc 1 509 0
+ 1246 001c 586D     	 ldr r0,[r3,#84]
+ 1247 001e 034B     	 ldr r3,.L77+4
+ 1248 0020 800B     	 lsr r0,r0,#14
+ 1249 0022 5843     	 mul r0,r3
+ 510:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1250              	 .loc 1 510 0
+ 1251              	 
+ 509:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1252              	 .loc 1 509 0
+ 1253 0024 0014     	 asr r0,r0,#16
+ 1254              	 .loc 1 510 0
+ 1255 0026 7047     	 bx lr
+ 1256              	.L78:
+ 1257              	 .align 2
+ 1258              	.L77:
+ 1259 0028 00000340 	 .word 1073938432
+ 1260 002c 909A0000 	 .word 39568
+ 1261              	 .cfi_endproc
+ 1262              	.LFE111:
+ 1264              	 .section .text.XMC_MATH_CORDIC_Q31_Sqrt,"ax",%progbits
+ 1265              	 .align 1
+ 1266              	 .global XMC_MATH_CORDIC_Q31_Sqrt
+ 1267              	 .code 16
+ 1268              	 .thumb_func
+ 1270              	XMC_MATH_CORDIC_Q31_Sqrt:
+ 1271              	.LFB112:
+ 511:../Libraries/XMCLib/src/xmc_math.c **** 
+ 512:../Libraries/XMCLib/src/xmc_math.c **** int32_t XMC_MATH_CORDIC_Q31_Sqrt(int32_t x)
+ 513:../Libraries/XMCLib/src/xmc_math.c **** {
+ 1272              	 .loc 1 513 0
+ 1273              	 .cfi_startproc
+ 1274              	.LVL70:
+ 514:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 1275              	 .loc 1 514 0
+ 1276 0000 0022     	 mov r2,#0
+ 1277 0002 094B     	 ldr r3,.L80
+ 515:../Libraries/XMCLib/src/xmc_math.c **** 
+ 516:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CON   = (uint32_t)XMC_MATH_CORDIC_OPERATING_MODE_HYPERBOLIC |
+ 517:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t)XMC_MATH_CORDIC_ROTVEC_MODE_VECTORING;
+ 518:../Libraries/XMCLib/src/xmc_math.c **** 
+ 519:../Libraries/XMCLib/src/xmc_math.c ****   x >>= 1;  /* Q30 to handle numbers > 1.0 */
+ 1278              	 .loc 1 519 0
+ 1279 0004 4010     	 asr r0,r0,#1
+ 1280              	.LVL71:
+ 514:../Libraries/XMCLib/src/xmc_math.c ****   MATH->STATC = 0U; /* Clear register */
+ 1281              	 .loc 1 514 0
+ 1282 0006 1A64     	 str r2,[r3,#64]
+ 516:../Libraries/XMCLib/src/xmc_math.c ****                 (uint32_t)XMC_MATH_CORDIC_ROTVEC_MODE_VECTORING;
+ 1283              	 .loc 1 516 0
+ 1284 0008 0632     	 add r2,r2,#6
+ 1285 000a 5A64     	 str r2,[r3,#68]
+ 1286              	.LVL72:
+ 520:../Libraries/XMCLib/src/xmc_math.c **** 
+ 521:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDY = (x - 0x10000000U); /* x - 0.25 */
+ 1287              	 .loc 1 521 0
+ 1288 000c F022     	 mov r2,#240
+ 1289 000e 1206     	 lsl r2,r2,#24
+ 1290 0010 8218     	 add r2,r0,r2
+ 1291 0012 DA64     	 str r2,[r3,#76]
+ 522:../Libraries/XMCLib/src/xmc_math.c ****   MATH->CORDX = (x + 0x10000000U); /* x + 0.25 */
+ 1292              	 .loc 1 522 0
+ 1293 0014 8022     	 mov r2,#128
+ 1294 0016 5205     	 lsl r2,r2,#21
+ 1295 0018 8018     	 add r0,r0,r2
+ 1296 001a 9864     	 str r0,[r3,#72]
+ 523:../Libraries/XMCLib/src/xmc_math.c **** 
+ 524:../Libraries/XMCLib/src/xmc_math.c ****   return ((MATH->CORRX >> 14) * 39568); /* Q16 * Q15 */
+ 1297              	 .loc 1 524 0
+ 1298 001c 586D     	 ldr r0,[r3,#84]
+ 1299 001e 034B     	 ldr r3,.L80+4
+ 1300 0020 800B     	 lsr r0,r0,#14
+ 1301 0022 5843     	 mul r0,r3
+ 525:../Libraries/XMCLib/src/xmc_math.c **** }
+ 1302              	 .loc 1 525 0
+ 1303              	 
+ 1304 0024 7047     	 bx lr
+ 1305              	.L81:
+ 1306 0026 C046     	 .align 2
+ 1307              	.L80:
+ 1308 0028 00000340 	 .word 1073938432
+ 1309 002c 909A0000 	 .word 39568
+ 1310              	 .cfi_endproc
+ 1311              	.LFE112:
+ 1313              	 .text
+ 1314              	.Letext0:
+ 1315              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1316              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 1317              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
+ 1318              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_math.h"
+ 1319              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_math.c
+    {standard input}:18     .text.XMC_MATH_DIV_IsBusy:00000000 $t
+    {standard input}:23     .text.XMC_MATH_DIV_IsBusy:00000000 XMC_MATH_DIV_IsBusy
+    {standard input}:44     .text.XMC_MATH_DIV_IsBusy:0000000c $d
+    {standard input}:49     .text.XMC_MATH_CORDIC_IsBusy:00000000 $t
+    {standard input}:54     .text.XMC_MATH_CORDIC_IsBusy:00000000 XMC_MATH_CORDIC_IsBusy
+    {standard input}:74     .text.XMC_MATH_CORDIC_IsBusy:0000000c $d
+    {standard input}:79     .text.XMC_MATH_GetEventStatus:00000000 $t
+    {standard input}:84     .text.XMC_MATH_GetEventStatus:00000000 XMC_MATH_GetEventStatus
+    {standard input}:108    .text.XMC_MATH_GetEventStatus:00000010 $d
+    {standard input}:113    .text.__aeabi_uidiv:00000000 $t
+    {standard input}:118    .text.__aeabi_uidiv:00000000 __aeabi_uidiv
+    {standard input}:180    .text.__aeabi_uidiv:0000001c $d
+    {standard input}:185    .text.__aeabi_idiv:00000000 $t
+    {standard input}:190    .text.__aeabi_idiv:00000000 __aeabi_idiv
+    {standard input}:251    .text.__aeabi_idiv:0000001c $d
+    {standard input}:256    .text.__aeabi_uidivmod:00000000 $t
+    {standard input}:261    .text.__aeabi_uidivmod:00000000 __aeabi_uidivmod
+    {standard input}:325    .text.__aeabi_uidivmod:0000001c $d
+    {standard input}:330    .text.__aeabi_idivmod:00000000 $t
+    {standard input}:335    .text.__aeabi_idivmod:00000000 __aeabi_idivmod
+    {standard input}:399    .text.__aeabi_idivmod:0000001c $d
+    {standard input}:404    .text.XMC_MATH_CORDIC_Cos:00000000 $t
+    {standard input}:409    .text.XMC_MATH_CORDIC_Cos:00000000 XMC_MATH_CORDIC_Cos
+    {standard input}:447    .text.XMC_MATH_CORDIC_Cos:0000001c $d
+    {standard input}:453    .text.XMC_MATH_CORDIC_Sin:00000000 $t
+    {standard input}:458    .text.XMC_MATH_CORDIC_Sin:00000000 XMC_MATH_CORDIC_Sin
+    {standard input}:496    .text.XMC_MATH_CORDIC_Sin:0000001c $d
+    {standard input}:502    .text.XMC_MATH_CORDIC_Tan:00000000 $t
+    {standard input}:507    .text.XMC_MATH_CORDIC_Tan:00000000 XMC_MATH_CORDIC_Tan
+    {standard input}:550    .text.XMC_MATH_CORDIC_Tan:00000024 $d
+    {standard input}:556    .text.XMC_MATH_CORDIC_ArcTan:00000000 $t
+    {standard input}:561    .text.XMC_MATH_CORDIC_ArcTan:00000000 XMC_MATH_CORDIC_ArcTan
+    {standard input}:606    .text.XMC_MATH_CORDIC_ArcTan:0000001c $d
+    {standard input}:611    .text.XMC_MATH_CORDIC_Cosh:00000000 $t
+    {standard input}:616    .text.XMC_MATH_CORDIC_Cosh:00000000 XMC_MATH_CORDIC_Cosh
+    {standard input}:654    .text.XMC_MATH_CORDIC_Cosh:0000001c $d
+    {standard input}:660    .text.XMC_MATH_CORDIC_Sinh:00000000 $t
+    {standard input}:665    .text.XMC_MATH_CORDIC_Sinh:00000000 XMC_MATH_CORDIC_Sinh
+    {standard input}:703    .text.XMC_MATH_CORDIC_Sinh:0000001c $d
+    {standard input}:709    .text.XMC_MATH_CORDIC_Tanh:00000000 $t
+    {standard input}:714    .text.XMC_MATH_CORDIC_Tanh:00000000 XMC_MATH_CORDIC_Tanh
+    {standard input}:757    .text.XMC_MATH_CORDIC_Tanh:00000024 $d
+    {standard input}:763    .text.XMC_MATH_CORDIC_CosNB:00000000 $t
+    {standard input}:768    .text.XMC_MATH_CORDIC_CosNB:00000000 XMC_MATH_CORDIC_CosNB
+    {standard input}:801    .text.XMC_MATH_CORDIC_CosNB:00000018 $d
+    {standard input}:807    .text.XMC_MATH_CORDIC_SinNB:00000000 $t
+    {standard input}:812    .text.XMC_MATH_CORDIC_SinNB:00000000 XMC_MATH_CORDIC_SinNB
+    {standard input}:845    .text.XMC_MATH_CORDIC_SinNB:00000018 $d
+    {standard input}:851    .text.XMC_MATH_CORDIC_TanNB:00000000 $t
+    {standard input}:856    .text.XMC_MATH_CORDIC_TanNB:00000000 XMC_MATH_CORDIC_TanNB
+    {standard input}:896    .text.XMC_MATH_CORDIC_TanNB:00000020 $d
+    {standard input}:902    .text.XMC_MATH_CORDIC_ArcTanNB:00000000 $t
+    {standard input}:907    .text.XMC_MATH_CORDIC_ArcTanNB:00000000 XMC_MATH_CORDIC_ArcTanNB
+    {standard input}:946    .text.XMC_MATH_CORDIC_ArcTanNB:00000018 $d
+    {standard input}:951    .text.XMC_MATH_CORDIC_CoshNB:00000000 $t
+    {standard input}:956    .text.XMC_MATH_CORDIC_CoshNB:00000000 XMC_MATH_CORDIC_CoshNB
+    {standard input}:989    .text.XMC_MATH_CORDIC_CoshNB:00000018 $d
+    {standard input}:995    .text.XMC_MATH_CORDIC_SinhNB:00000000 $t
+    {standard input}:1000   .text.XMC_MATH_CORDIC_SinhNB:00000000 XMC_MATH_CORDIC_SinhNB
+    {standard input}:1033   .text.XMC_MATH_CORDIC_SinhNB:00000018 $d
+    {standard input}:1039   .text.XMC_MATH_CORDIC_TanhNB:00000000 $t
+    {standard input}:1044   .text.XMC_MATH_CORDIC_TanhNB:00000000 XMC_MATH_CORDIC_TanhNB
+    {standard input}:1084   .text.XMC_MATH_CORDIC_TanhNB:00000020 $d
+    {standard input}:1090   .text.XMC_MATH_DIV_UnsignedDivNB:00000000 $t
+    {standard input}:1095   .text.XMC_MATH_DIV_UnsignedDivNB:00000000 XMC_MATH_DIV_UnsignedDivNB
+    {standard input}:1116   .text.XMC_MATH_DIV_UnsignedDivNB:0000000c $d
+    {standard input}:1121   .text.XMC_MATH_DIV_SignedDivNB:00000000 $t
+    {standard input}:1126   .text.XMC_MATH_DIV_SignedDivNB:00000000 XMC_MATH_DIV_SignedDivNB
+    {standard input}:1147   .text.XMC_MATH_DIV_SignedDivNB:0000000c $d
+    {standard input}:1152   .text.XMC_MATH_DIV_UnsignedModNB:00000000 $t
+    {standard input}:1157   .text.XMC_MATH_DIV_UnsignedModNB:00000000 XMC_MATH_DIV_UnsignedModNB
+    {standard input}:1178   .text.XMC_MATH_DIV_UnsignedModNB:0000000c $d
+    {standard input}:1183   .text.XMC_MATH_DIV_SignedModNB:00000000 $t
+    {standard input}:1188   .text.XMC_MATH_DIV_SignedModNB:00000000 XMC_MATH_DIV_SignedModNB
+    {standard input}:1209   .text.XMC_MATH_DIV_SignedModNB:0000000c $d
+    {standard input}:1214   .text.XMC_MATH_CORDIC_Q15_Sqrt:00000000 $t
+    {standard input}:1219   .text.XMC_MATH_CORDIC_Q15_Sqrt:00000000 XMC_MATH_CORDIC_Q15_Sqrt
+    {standard input}:1259   .text.XMC_MATH_CORDIC_Q15_Sqrt:00000028 $d
+    {standard input}:1265   .text.XMC_MATH_CORDIC_Q31_Sqrt:00000000 $t
+    {standard input}:1270   .text.XMC_MATH_CORDIC_Q31_Sqrt:00000000 XMC_MATH_CORDIC_Q31_Sqrt
+    {standard input}:1308   .text.XMC_MATH_CORDIC_Q31_Sqrt:00000028 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

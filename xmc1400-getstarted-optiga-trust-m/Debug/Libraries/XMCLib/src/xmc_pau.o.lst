@@ -1,0 +1,287 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_pau.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.XMC_PAU_EnablePeripheralAccess,"ax",%progbits
+  18              	 .align 1
+  19              	 .global XMC_PAU_EnablePeripheralAccess
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	XMC_PAU_EnablePeripheralAccess:
+  24              	.LFB50:
+  25              	 .file 1 "../Libraries/XMCLib/src/xmc_pau.c"
+   1:../Libraries/XMCLib/src/xmc_pau.c **** /**
+   2:../Libraries/XMCLib/src/xmc_pau.c ****  * @file xmc_pau.c
+   3:../Libraries/XMCLib/src/xmc_pau.c ****  * @date 2015-06-20
+   4:../Libraries/XMCLib/src/xmc_pau.c ****  *
+   5:../Libraries/XMCLib/src/xmc_pau.c ****  * @cond
+   6:../Libraries/XMCLib/src/xmc_pau.c ****  **************************************************************************************************
+   7:../Libraries/XMCLib/src/xmc_pau.c ****  * XMClib v2.1.24 - XMC Peripheral Driver Library 
+   8:../Libraries/XMCLib/src/xmc_pau.c ****  *
+   9:../Libraries/XMCLib/src/xmc_pau.c ****  * Copyright (c) 2015-2019, Infineon Technologies AG
+  10:../Libraries/XMCLib/src/xmc_pau.c ****  * All rights reserved.                        
+  11:../Libraries/XMCLib/src/xmc_pau.c ****  *                                             
+  12:../Libraries/XMCLib/src/xmc_pau.c ****  * Redistribution and use in source and binary forms, with or without modification,are permitted pr
+  13:../Libraries/XMCLib/src/xmc_pau.c ****  * following conditions are met:   
+  14:../Libraries/XMCLib/src/xmc_pau.c ****  *                                                                              
+  15:../Libraries/XMCLib/src/xmc_pau.c ****  * Redistributions of source code must retain the above copyright notice, this list of conditions a
+  16:../Libraries/XMCLib/src/xmc_pau.c ****  * disclaimer.                        
+  17:../Libraries/XMCLib/src/xmc_pau.c ****  * 
+  18:../Libraries/XMCLib/src/xmc_pau.c ****  * Redistributions in binary form must reproduce the above copyright notice, this list of condition
+  19:../Libraries/XMCLib/src/xmc_pau.c ****  * disclaimer in the documentation and/or other materials provided with the distribution.          
+  20:../Libraries/XMCLib/src/xmc_pau.c ****  * 
+  21:../Libraries/XMCLib/src/xmc_pau.c ****  * Neither the name of the copyright holders nor the names of its contributors may be used to endor
+  22:../Libraries/XMCLib/src/xmc_pau.c ****  * products derived from this software without specific prior written permission.                  
+  23:../Libraries/XMCLib/src/xmc_pau.c ****  *                                                                              
+  24:../Libraries/XMCLib/src/xmc_pau.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR I
+  25:../Libraries/XMCLib/src/xmc_pau.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTI
+  26:../Libraries/XMCLib/src/xmc_pau.c ****  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, IN
+  27:../Libraries/XMCLib/src/xmc_pau.c ****  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBS
+  28:../Libraries/XMCLib/src/xmc_pau.c ****  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+  29:../Libraries/XMCLib/src/xmc_pau.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+  30:../Libraries/XMCLib/src/xmc_pau.c ****  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                            
+  31:../Libraries/XMCLib/src/xmc_pau.c ****  *                                                                              
+  32:../Libraries/XMCLib/src/xmc_pau.c ****  * To improve the quality of the software, users are encouraged to share modifications, enhancement
+  33:../Libraries/XMCLib/src/xmc_pau.c ****  * Infineon Technologies AG dave@infineon.com).                                                    
+  34:../Libraries/XMCLib/src/xmc_pau.c ****  **************************************************************************************************
+  35:../Libraries/XMCLib/src/xmc_pau.c ****  *
+  36:../Libraries/XMCLib/src/xmc_pau.c ****  * Change History
+  37:../Libraries/XMCLib/src/xmc_pau.c ****  * --------------
+  38:../Libraries/XMCLib/src/xmc_pau.c ****  *
+  39:../Libraries/XMCLib/src/xmc_pau.c ****  * 2015-02-20:
+  40:../Libraries/XMCLib/src/xmc_pau.c ****  *     - Initial <br>
+  41:../Libraries/XMCLib/src/xmc_pau.c ****  *      
+  42:../Libraries/XMCLib/src/xmc_pau.c ****  * 2015-06-20:
+  43:../Libraries/XMCLib/src/xmc_pau.c ****  *     - Removed GetDriverVersion API
+  44:../Libraries/XMCLib/src/xmc_pau.c ****  * @endcond 
+  45:../Libraries/XMCLib/src/xmc_pau.c ****  *
+  46:../Libraries/XMCLib/src/xmc_pau.c ****  */
+  47:../Libraries/XMCLib/src/xmc_pau.c **** 
+  48:../Libraries/XMCLib/src/xmc_pau.c **** /**
+  49:../Libraries/XMCLib/src/xmc_pau.c ****  *
+  50:../Libraries/XMCLib/src/xmc_pau.c ****  * @brief PAU driver for XMC1 microcontroller family.
+  51:../Libraries/XMCLib/src/xmc_pau.c ****  *
+  52:../Libraries/XMCLib/src/xmc_pau.c ****  */
+  53:../Libraries/XMCLib/src/xmc_pau.c **** 
+  54:../Libraries/XMCLib/src/xmc_pau.c **** /**************************************************************************************************
+  55:../Libraries/XMCLib/src/xmc_pau.c ****  * HEADER FILES
+  56:../Libraries/XMCLib/src/xmc_pau.c ****  **************************************************************************************************
+  57:../Libraries/XMCLib/src/xmc_pau.c **** #include "xmc_pau.h"
+  58:../Libraries/XMCLib/src/xmc_pau.c **** 
+  59:../Libraries/XMCLib/src/xmc_pau.c **** #if defined(PAU)
+  60:../Libraries/XMCLib/src/xmc_pau.c **** 
+  61:../Libraries/XMCLib/src/xmc_pau.c **** /**************************************************************************************************
+  62:../Libraries/XMCLib/src/xmc_pau.c ****  * API IMPLEMENTATION
+  63:../Libraries/XMCLib/src/xmc_pau.c ****  **************************************************************************************************
+  64:../Libraries/XMCLib/src/xmc_pau.c **** 
+  65:../Libraries/XMCLib/src/xmc_pau.c **** /*
+  66:../Libraries/XMCLib/src/xmc_pau.c ****  * Enable peripheral access
+  67:../Libraries/XMCLib/src/xmc_pau.c ****  */
+  68:../Libraries/XMCLib/src/xmc_pau.c **** void XMC_PAU_EnablePeripheralAccess(XMC_PAU_PERIPHERAL_t peripheral)
+  69:../Libraries/XMCLib/src/xmc_pau.c **** {
+  26              	 .loc 1 69 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  70:../Libraries/XMCLib/src/xmc_pau.c ****   uint32_t reg_num;
+  71:../Libraries/XMCLib/src/xmc_pau.c ****   
+  72:../Libraries/XMCLib/src/xmc_pau.c ****   reg_num = ((uint32_t)peripheral & 0xf0000000U) >> 28U;
+  29              	 .loc 1 72 0
+  30 0000 030F     	 lsr r3,r0,#28
+  31              	.LVL1:
+  73:../Libraries/XMCLib/src/xmc_pau.c ****   XMC_PAU->PRIVDIS[reg_num] &= (uint32_t)~((uint32_t)peripheral & 0x0fffffffUL);
+  32              	 .loc 1 73 0
+  33 0002 044A     	 ldr r2,.L2
+  34 0004 9B00     	 lsl r3,r3,#2
+  35              	.LVL2:
+  36 0006 9B18     	 add r3,r3,r2
+  37 0008 DA6F     	 ldr r2,[r3,#124]
+  38 000a 0001     	 lsl r0,r0,#4
+  39              	.LVL3:
+  40 000c 0009     	 lsr r0,r0,#4
+  41 000e 8243     	 bic r2,r0
+  42 0010 DA67     	 str r2,[r3,#124]
+  74:../Libraries/XMCLib/src/xmc_pau.c **** }
+  43              	 .loc 1 74 0
+  44              	 
+  45 0012 7047     	 bx lr
+  46              	.L3:
+  47              	 .align 2
+  48              	.L2:
+  49 0014 04000040 	 .word 1073741828
+  50              	 .cfi_endproc
+  51              	.LFE50:
+  53              	 .section .text.XMC_PAU_DisablePeripheralAccess,"ax",%progbits
+  54              	 .align 1
+  55              	 .global XMC_PAU_DisablePeripheralAccess
+  56              	 .code 16
+  57              	 .thumb_func
+  59              	XMC_PAU_DisablePeripheralAccess:
+  60              	.LFB51:
+  75:../Libraries/XMCLib/src/xmc_pau.c **** 
+  76:../Libraries/XMCLib/src/xmc_pau.c **** /*
+  77:../Libraries/XMCLib/src/xmc_pau.c ****  * Disable peripheral access
+  78:../Libraries/XMCLib/src/xmc_pau.c ****  */
+  79:../Libraries/XMCLib/src/xmc_pau.c **** void XMC_PAU_DisablePeripheralAccess(XMC_PAU_PERIPHERAL_t peripheral)
+  80:../Libraries/XMCLib/src/xmc_pau.c **** {
+  61              	 .loc 1 80 0
+  62              	 .cfi_startproc
+  63              	.LVL4:
+  81:../Libraries/XMCLib/src/xmc_pau.c ****   uint32_t reg_num;
+  82:../Libraries/XMCLib/src/xmc_pau.c **** 
+  83:../Libraries/XMCLib/src/xmc_pau.c ****   reg_num = ((uint32_t)peripheral & 0xf0000000U) >> 28U;
+  64              	 .loc 1 83 0
+  65 0000 030F     	 lsr r3,r0,#28
+  66              	.LVL5:
+  84:../Libraries/XMCLib/src/xmc_pau.c ****   XMC_PAU->PRIVDIS[reg_num] |= (uint32_t)((uint32_t)peripheral & 0x0fffffffUL);
+  67              	 .loc 1 84 0
+  68 0002 044A     	 ldr r2,.L5
+  69 0004 9B00     	 lsl r3,r3,#2
+  70              	.LVL6:
+  71 0006 9B18     	 add r3,r3,r2
+  72 0008 DA6F     	 ldr r2,[r3,#124]
+  73 000a 0001     	 lsl r0,r0,#4
+  74              	.LVL7:
+  75 000c 0009     	 lsr r0,r0,#4
+  76 000e 1043     	 orr r0,r2
+  77 0010 D867     	 str r0,[r3,#124]
+  85:../Libraries/XMCLib/src/xmc_pau.c **** }
+  78              	 .loc 1 85 0
+  79              	 
+  80 0012 7047     	 bx lr
+  81              	.L6:
+  82              	 .align 2
+  83              	.L5:
+  84 0014 04000040 	 .word 1073741828
+  85              	 .cfi_endproc
+  86              	.LFE51:
+  88              	 .section .text.XMC_PAU_IsPeripheralAccessEnabled,"ax",%progbits
+  89              	 .align 1
+  90              	 .global XMC_PAU_IsPeripheralAccessEnabled
+  91              	 .code 16
+  92              	 .thumb_func
+  94              	XMC_PAU_IsPeripheralAccessEnabled:
+  95              	.LFB52:
+  86:../Libraries/XMCLib/src/xmc_pau.c **** 
+  87:../Libraries/XMCLib/src/xmc_pau.c **** /*
+  88:../Libraries/XMCLib/src/xmc_pau.c ****  * Check if peripheral access is enabled 
+  89:../Libraries/XMCLib/src/xmc_pau.c ****  */
+  90:../Libraries/XMCLib/src/xmc_pau.c **** bool XMC_PAU_IsPeripheralAccessEnabled(XMC_PAU_PERIPHERAL_t peripheral)
+  91:../Libraries/XMCLib/src/xmc_pau.c **** {
+  96              	 .loc 1 91 0
+  97              	 .cfi_startproc
+  98              	.LVL8:
+  92:../Libraries/XMCLib/src/xmc_pau.c ****   uint32_t reg_num;
+  93:../Libraries/XMCLib/src/xmc_pau.c **** 
+  94:../Libraries/XMCLib/src/xmc_pau.c ****   reg_num = ((uint32_t)peripheral & 0xf0000000U) >> 28U;
+  95:../Libraries/XMCLib/src/xmc_pau.c ****   return (bool)(XMC_PAU->PRIVDIS[reg_num] & ((uint32_t)peripheral & 0x0fffffffUL));
+  99              	 .loc 1 95 0
+ 100 0000 8022     	 mov r2,#128
+  94:../Libraries/XMCLib/src/xmc_pau.c ****   return (bool)(XMC_PAU->PRIVDIS[reg_num] & ((uint32_t)peripheral & 0x0fffffffUL));
+ 101              	 .loc 1 94 0
+ 102 0002 030F     	 lsr r3,r0,#28
+ 103              	.LVL9:
+ 104              	 .loc 1 95 0
+ 105 0004 2033     	 add r3,r3,#32
+ 106              	.LVL10:
+ 107 0006 D205     	 lsl r2,r2,#23
+ 108 0008 9B00     	 lsl r3,r3,#2
+ 109              	.LVL11:
+ 110 000a 9B58     	 ldr r3,[r3,r2]
+ 111 000c 0001     	 lsl r0,r0,#4
+ 112              	.LVL12:
+ 113 000e 0009     	 lsr r0,r0,#4
+ 114 0010 1840     	 and r0,r3
+ 115 0012 431E     	 sub r3,r0,#1
+ 116 0014 9841     	 sbc r0,r0,r3
+  96:../Libraries/XMCLib/src/xmc_pau.c **** }
+ 117              	 .loc 1 96 0
+ 118              	 
+  95:../Libraries/XMCLib/src/xmc_pau.c **** }
+ 119              	 .loc 1 95 0
+ 120 0016 C0B2     	 uxtb r0,r0
+ 121              	 .loc 1 96 0
+ 122 0018 7047     	 bx lr
+ 123              	 .cfi_endproc
+ 124              	.LFE52:
+ 126              	 .section .text.XMC_PAU_IsPeripheralAvailable,"ax",%progbits
+ 127              	 .align 1
+ 128              	 .global XMC_PAU_IsPeripheralAvailable
+ 129              	 .code 16
+ 130              	 .thumb_func
+ 132              	XMC_PAU_IsPeripheralAvailable:
+ 133              	.LFB53:
+  97:../Libraries/XMCLib/src/xmc_pau.c **** 
+  98:../Libraries/XMCLib/src/xmc_pau.c **** /*
+  99:../Libraries/XMCLib/src/xmc_pau.c ****  * Check if peripheral is available
+ 100:../Libraries/XMCLib/src/xmc_pau.c ****  */
+ 101:../Libraries/XMCLib/src/xmc_pau.c **** bool XMC_PAU_IsPeripheralAvailable(XMC_PAU_PERIPHERAL_t peripheral)
+ 102:../Libraries/XMCLib/src/xmc_pau.c **** {
+ 134              	 .loc 1 102 0
+ 135              	 .cfi_startproc
+ 136              	.LVL13:
+ 103:../Libraries/XMCLib/src/xmc_pau.c ****   uint32_t reg_num;
+ 104:../Libraries/XMCLib/src/xmc_pau.c **** 
+ 105:../Libraries/XMCLib/src/xmc_pau.c ****   reg_num = ((uint32_t)peripheral & 0xf0000000U) >> 28U;
+ 106:../Libraries/XMCLib/src/xmc_pau.c ****   return (bool)(XMC_PAU->AVAIL[reg_num] & ((uint32_t)peripheral & 0x0fffffffUL));
+ 137              	 .loc 1 106 0
+ 138 0000 8022     	 mov r2,#128
+ 105:../Libraries/XMCLib/src/xmc_pau.c ****   return (bool)(XMC_PAU->AVAIL[reg_num] & ((uint32_t)peripheral & 0x0fffffffUL));
+ 139              	 .loc 1 105 0
+ 140 0002 030F     	 lsr r3,r0,#28
+ 141              	.LVL14:
+ 142              	 .loc 1 106 0
+ 143 0004 1033     	 add r3,r3,#16
+ 144              	.LVL15:
+ 145 0006 D205     	 lsl r2,r2,#23
+ 146 0008 9B00     	 lsl r3,r3,#2
+ 147              	.LVL16:
+ 148 000a 9B58     	 ldr r3,[r3,r2]
+ 149 000c 0001     	 lsl r0,r0,#4
+ 150              	.LVL17:
+ 151 000e 0009     	 lsr r0,r0,#4
+ 152 0010 1840     	 and r0,r3
+ 153 0012 431E     	 sub r3,r0,#1
+ 154 0014 9841     	 sbc r0,r0,r3
+ 107:../Libraries/XMCLib/src/xmc_pau.c **** }
+ 155              	 .loc 1 107 0
+ 156              	 
+ 106:../Libraries/XMCLib/src/xmc_pau.c **** }
+ 157              	 .loc 1 106 0
+ 158 0016 C0B2     	 uxtb r0,r0
+ 159              	 .loc 1 107 0
+ 160 0018 7047     	 bx lr
+ 161              	 .cfi_endproc
+ 162              	.LFE53:
+ 164              	 .text
+ 165              	.Letext0:
+ 166              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 167              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 168              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_pau.h"
+ 169              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_pau.c
+    {standard input}:18     .text.XMC_PAU_EnablePeripheralAccess:00000000 $t
+    {standard input}:23     .text.XMC_PAU_EnablePeripheralAccess:00000000 XMC_PAU_EnablePeripheralAccess
+    {standard input}:49     .text.XMC_PAU_EnablePeripheralAccess:00000014 $d
+    {standard input}:54     .text.XMC_PAU_DisablePeripheralAccess:00000000 $t
+    {standard input}:59     .text.XMC_PAU_DisablePeripheralAccess:00000000 XMC_PAU_DisablePeripheralAccess
+    {standard input}:84     .text.XMC_PAU_DisablePeripheralAccess:00000014 $d
+    {standard input}:89     .text.XMC_PAU_IsPeripheralAccessEnabled:00000000 $t
+    {standard input}:94     .text.XMC_PAU_IsPeripheralAccessEnabled:00000000 XMC_PAU_IsPeripheralAccessEnabled
+    {standard input}:127    .text.XMC_PAU_IsPeripheralAvailable:00000000 $t
+    {standard input}:132    .text.XMC_PAU_IsPeripheralAvailable:00000000 XMC_PAU_IsPeripheralAvailable
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

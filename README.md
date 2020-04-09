@@ -56,7 +56,7 @@ In this guide you may find the following steps:
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
 <details> <summary> Sample output with `option 3` command  </summary> 
-  <img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_m_tera_term.jpg">
+  <img src="https://github.com/oscarcreativeshop/Assets/blob/master/Pictures/xmc_1400_optiga_trust_m_tera_term.png">
 </details>
 
 

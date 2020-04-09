@@ -52,10 +52,10 @@ In this guide you may find the following steps:
 1. Connect the micro USB cable between PC and micro USB (**X100** Port on the board).
 1. Open Tera Trem and select the COM port with name “Communications Port”. 
     1. **Note: We are using the same usb connectin for programming/debuging and VCOM.
-1. Configure COM port with 9600 8N1
+1. Configure COM port with 115200 8N1
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
-<details> <summary> Sample output with `optiga --selftest` command  </summary> 
+<details> <summary> Sample output with `option 3` command  </summary> 
   <img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_m_tera_term.jpg">
 </details>
 

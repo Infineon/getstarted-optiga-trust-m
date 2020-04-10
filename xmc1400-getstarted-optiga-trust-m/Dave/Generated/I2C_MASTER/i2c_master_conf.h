@@ -64,8 +64,8 @@
 #define I2C_MASTER_MINOR_VERSION 1U
 #define I2C_MASTER_PATCH_VERSION 30U
 
-#define i2c_master_0_TX_IRQN ((IRQn_Type)12)
-#define i2c_master_0_RX_IRQN ((IRQn_Type)10)
+#define i2c_master_0_TX_IRQN ((IRQn_Type)10)
+#define i2c_master_0_RX_IRQN ((IRQn_Type)9)
 #define I2C_MASTER_DMA_TX_ENABLED 0
 #define I2C_MASTER_DMA_RX_ENABLED 0
 #define I2C_MASTER_DIRECT_TX_ENABLED 0

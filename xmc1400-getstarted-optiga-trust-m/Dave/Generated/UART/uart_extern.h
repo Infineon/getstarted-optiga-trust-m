@@ -69,8 +69,6 @@ extern "C" {
   extern void cunit_console_uart_end_of_receive_callback(void);
 
   extern UART_t cunit_logger; 
-
-  extern UART_t esWiFi_com; 
                     
 #ifdef __cplusplus
 }

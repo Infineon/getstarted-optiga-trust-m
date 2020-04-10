@@ -25,6 +25,8 @@ extern void optiga_shell_begin(void);
 
 extern pal_logger_t cunit_console;
 
+#define TICKS_PER_SECOND	1000
+
 
 /**
  * This function is the entry point of sample.
@@ -51,6 +53,7 @@ int main(void)
 
         }
     }
+    SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);
 
     do
     {

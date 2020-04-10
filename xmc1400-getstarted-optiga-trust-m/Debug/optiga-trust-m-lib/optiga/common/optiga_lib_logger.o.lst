@@ -66,7 +66,7 @@
   43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
   44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** #define OPTIGA_LOGGER_NEW_LINE_CHAR          0x0D, 0x0A
   45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
-  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** extern pal_logger_t cunit_console;
+  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** extern pal_logger_t logger_console;
   47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
   48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** /*Convert Byte to HexString */
   49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** #define OPTIGA_LOGGER_CONVERT_BYTE_TO_HEX(hex_byte, p_hex_string, index) \
@@ -246,14 +246,11 @@
  125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     strcat(print_buffer,(char_t *)uint16t_conv_buffer); 
  126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
  127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     optiga_lib_print_string_with_newline(print_buffer);
- 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
+ 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
  129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_string(const char_t * p_log_string)
- 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
- 122              	 .loc 1 134 0
+ 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_string(const char_t * p_log_string)
+ 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
+ 122              	 .loc 1 131 0
  123              	 .cfi_startproc
  124              	.LVL16:
  125 0000 10B5     	 push {r4,lr}
@@ -261,18 +258,18 @@
  127              	 .cfi_def_cfa_offset 8
  128              	 .cfi_offset 4,-8
  129              	 .cfi_offset 14,-4
- 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (NULL == p_log_string)
- 130              	 .loc 1 135 0
+ 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (NULL == p_log_string)
+ 130              	 .loc 1 132 0
  131 0002 0028     	 cmp r0,#0
  132 0004 07D0     	 beq .L11
  133 0006 041C     	 mov r4,r0
- 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
- 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, (const uint8_t *)p_log_string, strlen(p_log_string));
- 134              	 .loc 1 141 0
+ 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
+ 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, (const uint8_t *)p_log_string, strlen(p_log_string));
+ 134              	 .loc 1 138 0
  135 0008 FFF7FEFF 	 bl strlen
  136              	.LVL17:
  137 000c 211C     	 mov r1,r4
@@ -281,14 +278,14 @@
  140 0012 FFF7FEFF 	 bl pal_logger_write
  141              	.LVL18:
  142              	.L11:
- 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 143              	 .loc 1 142 0
+ 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
+ 143              	 .loc 1 139 0
  144              	 
  145 0016 10BD     	 pop {r4,pc}
  146              	.L17:
  147              	 .align 2
  148              	.L16:
- 149 0018 00000000 	 .word cunit_console
+ 149 0018 00000000 	 .word logger_console
  150              	 .cfi_endproc
  151              	.LFE3:
  153              	 .section .text.optiga_lib_print_string_with_newline,"ax",%progbits
@@ -298,10 +295,10 @@
  157              	 .thumb_func
  159              	optiga_lib_print_string_with_newline:
  160              	.LFB4:
- 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_string_with_newline(const char_t * p_log_string)
- 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
- 161              	 .loc 1 145 0
+ 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_string_with_newline(const char_t * p_log_string)
+ 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
+ 161              	 .loc 1 142 0
  162              	 .cfi_startproc
  163              	.LVL19:
  164 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
@@ -313,28 +310,28 @@
  170              	 .cfi_offset 4,-12
  171              	 .cfi_offset 5,-8
  172              	 .cfi_offset 14,-4
- 173              	 .loc 1 145 0
+ 173              	 .loc 1 142 0
  174 0002 041C     	 mov r4,r0
- 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters [2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
- 175              	 .loc 1 146 0
+ 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters [2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
+ 175              	 .loc 1 143 0
  176 0004 0A49     	 ldr r1,.L24
  177 0006 01A8     	 add r0,sp,#4
  178              	.LVL20:
  179 0008 0222     	 mov r2,#2
  180 000a FFF7FEFF 	 bl memcpy
  181              	.LVL21:
- 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (NULL == p_log_string)
- 182              	 .loc 1 148 0
+ 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (NULL == p_log_string)
+ 182              	 .loc 1 145 0
  183 000e 002C     	 cmp r4,#0
  184 0010 0DD0     	 beq .L18
- 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
- 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, (const uint8_t *)p_log_string, strlen(p_log_string));
- 185              	 .loc 1 154 0
+ 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
+ 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, (const uint8_t *)p_log_string, strlen(p_log_string));
+ 185              	 .loc 1 151 0
  186 0012 201C     	 mov r0,r4
  187 0014 FFF7FEFF 	 bl strlen
  188              	.LVL22:
@@ -344,18 +341,18 @@
  192 001e 281C     	 mov r0,r5
  193 0020 FFF7FEFF 	 bl pal_logger_write
  194              	.LVL23:
- 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, new_line_characters, 2);
- 195              	 .loc 1 156 0
+ 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, new_line_characters, 2);
+ 195              	 .loc 1 153 0
  196 0024 281C     	 mov r0,r5
  197 0026 01A9     	 add r1,sp,#4
  198 0028 0222     	 mov r2,#2
  199 002a FFF7FEFF 	 bl pal_logger_write
  200              	.LVL24:
  201              	.L18:
- 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 202              	 .loc 1 158 0
+ 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
+ 202              	 .loc 1 155 0
  203              	 
  204              	.LVL25:
  205 002e 37BD     	 pop {r0,r1,r2,r4,r5,pc}
@@ -363,7 +360,7 @@
  207              	 .align 2
  208              	.L24:
  209 0030 00000000 	 .word .LANCHOR0
- 210 0034 00000000 	 .word cunit_console
+ 210 0034 00000000 	 .word logger_console
  211              	 .cfi_endproc
  212              	.LFE4:
  214              	 .section .text.optiga_lib_print_message,"ax",%progbits
@@ -373,12 +370,12 @@
  218              	 .thumb_func
  220              	optiga_lib_print_message:
  221              	.LFB5:
- 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_message(const char_t * p_log_string,
- 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                               const char_t * p_log_layer,
- 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                               const char_t * p_log_color)                                  
- 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
- 222              	 .loc 1 163 0
+ 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_message(const char_t * p_log_string,
+ 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                               const char_t * p_log_layer,
+ 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                               const char_t * p_log_color)                                  
+ 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
+ 222              	 .loc 1 160 0
  223              	 .cfi_startproc
  224              	.LVL26:
  225 0000 70B5     	 push {r4,r5,r6,lr}
@@ -391,12 +388,12 @@
  232 0002 E8B0     	 sub sp,sp,#416
  233              	.LCFI4:
  234              	 .cfi_def_cfa_offset 432
- 235              	 .loc 1 163 0
+ 235              	 .loc 1 160 0
  236 0004 061C     	 mov r6,r0
  237 0006 0C1C     	 mov r4,r1
  238 0008 151C     	 mov r5,r2
- 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
- 239              	 .loc 1 164 0
+ 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
+ 239              	 .loc 1 161 0
  240 000a 03A8     	 add r0,sp,#12
  241              	.LVL27:
  242 000c 1149     	 ldr r1,.L38
@@ -405,24 +402,24 @@
  245              	.LVL29:
  246 0010 FFF7FEFF 	 bl memcpy
  247              	.LVL30:
- 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t color_buffer[400];
- 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_string) || (NULL == p_log_layer) || (NULL == p_log_color))
- 248              	 .loc 1 167 0
+ 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t color_buffer[400];
+ 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_string) || (NULL == p_log_layer) || (NULL == p_log_color))
+ 248              	 .loc 1 164 0
  249 0014 002E     	 cmp r6,#0
  250 0016 1AD0     	 beq .L26
- 251              	 .loc 1 167 0 is_stmt 0 discriminator 1
+ 251              	 .loc 1 164 0 is_stmt 0 discriminator 1
  252 0018 002C     	 cmp r4,#0
  253 001a 18D0     	 beq .L26
- 254              	 .loc 1 167 0 discriminator 2
+ 254              	 .loc 1 164 0 discriminator 2
  255 001c 002D     	 cmp r5,#0
  256 001e 16D0     	 beq .L26
- 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
- 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     OPTIGA_LIB_LOGGER_PRINT_INFO(color_buffer, p_log_string, p_log_layer, p_log_color);
- 257              	 .loc 1 172 0 is_stmt 1
+ 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
+ 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     OPTIGA_LIB_LOGGER_PRINT_INFO(color_buffer, p_log_string, p_log_layer, p_log_color);
+ 257              	 .loc 1 169 0 is_stmt 1
  258 0020 0D4B     	 ldr r3,.L38+4
  259 0022 0E49     	 ldr r1,.L38+8
  260 0024 2A1C     	 mov r2,r5
@@ -432,9 +429,9 @@
  264 002c 04A8     	 add r0,sp,#16
  265 002e FFF7FEFF 	 bl sprintf
  266              	.LVL31:
- 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, (const uint8_t *)color_buffer, strlen(color_buffer));
- 267              	 .loc 1 174 0
+ 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, (const uint8_t *)color_buffer, strlen(color_buffer));
+ 267              	 .loc 1 171 0
  268 0032 04A8     	 add r0,sp,#16
  269 0034 FFF7FEFF 	 bl strlen
  270              	.LVL32:
@@ -445,17 +442,17 @@
  275 003e 201C     	 mov r0,r4
  276 0040 FFF7FEFF 	 bl pal_logger_write
  277              	.LVL34:
- 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, new_line_characters, 2);
- 278              	 .loc 1 176 0
+ 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, new_line_characters, 2);
+ 278              	 .loc 1 173 0
  279 0044 201C     	 mov r0,r4
  280 0046 03A9     	 add r1,sp,#12
  281 0048 0222     	 mov r2,#2
  282 004a FFF7FEFF 	 bl pal_logger_write
  283              	.LVL35:
  284              	.L26:
- 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 285              	 .loc 1 177 0
+ 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
+ 285              	 .loc 1 174 0
  286 004e 68B0     	 add sp,sp,#416
  287              	 
  288              	.LVL36:
@@ -467,7 +464,7 @@
  294 0054 00000000 	 .word .LANCHOR0
  295 0058 09000000 	 .word .LC7
  296 005c 00000000 	 .word .LC5
- 297 0060 00000000 	 .word cunit_console
+ 297 0060 00000000 	 .word logger_console
  298              	 .cfi_endproc
  299              	.LFE5:
  301              	 .section .text.optiga_lib_print_status,"ax",%progbits
@@ -477,12 +474,12 @@
  305              	 .thumb_func
  307              	optiga_lib_print_status:
  308              	.LFB6:
- 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_status(const char_t * p_log_layer,
- 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                              const char_t * p_log_color,
- 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                              uint16_t return_value)
- 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
- 309              	 .loc 1 182 0
+ 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_status(const char_t * p_log_layer,
+ 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                              const char_t * p_log_color,
+ 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                              uint16_t return_value)
+ 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
+ 309              	 .loc 1 179 0
  310              	 .cfi_startproc
  311              	.LVL38:
  312 0000 F0B5     	 push {r4,r5,r6,r7,lr}
@@ -498,11 +495,11 @@
  322 0006 A544     	 add sp,sp,r4
  323              	.LCFI6:
  324              	 .cfi_def_cfa_offset 568
- 325              	 .loc 1 182 0
+ 325              	 .loc 1 179 0
  326 0008 0E1C     	 mov r6,r1
  327 000a 171C     	 mov r7,r2
- 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
- 328              	 .loc 1 183 0
+ 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
+ 328              	 .loc 1 180 0
  329 000c 2649     	 ldr r1,.L52+4
  330              	.LVL39:
  331 000e 0222     	 mov r2,#2
@@ -511,96 +508,96 @@
  334              	.LVL41:
  335 0012 FFF7FEFF 	 bl memcpy
  336              	.LVL42:
- 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t uint16t_conv_buffer[10] = {0};
- 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t return_value_buffer[20] = {0};
- 337              	 .loc 1 185 0
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t uint16t_conv_buffer[10] = {0};
+ 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t return_value_buffer[20] = {0};
+ 337              	 .loc 1 182 0
  338 0016 06AC     	 add r4,sp,#24
- 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t uint16t_conv_buffer[10] = {0};
- 339              	 .loc 1 184 0
+ 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t uint16t_conv_buffer[10] = {0};
+ 339              	 .loc 1 181 0
  340 0018 0021     	 mov r1,#0
  341 001a 0A22     	 mov r2,#10
  342 001c 03A8     	 add r0,sp,#12
  343 001e FFF7FEFF 	 bl memset
  344              	.LVL43:
- 345              	 .loc 1 185 0
+ 345              	 .loc 1 182 0
  346 0022 0021     	 mov r1,#0
  347 0024 1422     	 mov r2,#20
  348 0026 201C     	 mov r0,r4
  349 0028 FFF7FEFF 	 bl memset
  350              	.LVL44:
- 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t string_buffer[100] = {0};
- 351              	 .loc 1 186 0
+ 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t string_buffer[100] = {0};
+ 351              	 .loc 1 183 0
  352 002c 0BA8     	 add r0,sp,#44
  353 002e 0021     	 mov r1,#0
  354 0030 6422     	 mov r2,#100
  355 0032 FFF7FEFF 	 bl memset
  356              	.LVL45:
- 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t color_buffer[400];
- 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_layer) || (NULL == p_log_color))
- 357              	 .loc 1 189 0
+ 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t color_buffer[400];
+ 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_layer) || (NULL == p_log_color))
+ 357              	 .loc 1 186 0
  358 0036 002D     	 cmp r5,#0
  359 0038 2FD0     	 beq .L40
- 360              	 .loc 1 189 0 is_stmt 0 discriminator 1
+ 360              	 .loc 1 186 0 is_stmt 0 discriminator 1
  361 003a 002E     	 cmp r6,#0
  362 003c 2DD0     	 beq .L40
- 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
- 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     // if return value is successful, log SUCCESS
- 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (OPTIGA_LIB_SUCCESS == return_value)
- 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,p_log_layer);
- 363              	 .loc 1 197 0 is_stmt 1
+ 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
+ 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     // if return value is successful, log SUCCESS
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if (OPTIGA_LIB_SUCCESS == return_value)
+ 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,p_log_layer);
+ 363              	 .loc 1 194 0 is_stmt 1
  364 003e 0BA8     	 add r0,sp,#44
  365 0040 291C     	 mov r1,r5
- 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 366              	 .loc 1 195 0
+ 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 366              	 .loc 1 192 0
  367 0042 002F     	 cmp r7,#0
  368 0044 04D1     	 bne .L42
- 369              	 .loc 1 197 0
+ 369              	 .loc 1 194 0
  370 0046 FFF7FEFF 	 bl strcat
  371              	.LVL46:
- 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,"Passed");
- 372              	 .loc 1 198 0
+ 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,"Passed");
+ 372              	 .loc 1 195 0
  373 004a 0BA8     	 add r0,sp,#44
  374 004c 1749     	 ldr r1,.L52+8
  375 004e 0BE0     	 b .L51
  376              	.LVL47:
  377              	.L42:
- 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,"");
- 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     else
- 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,p_log_layer);
- 378              	 .loc 1 203 0
+ 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,"");
+ 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     else
+ 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,p_log_layer);
+ 378              	 .loc 1 200 0
  379 0050 FFF7FEFF 	 bl strcat
  380              	.LVL48:
- 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,"Failed with return value - ");
- 381              	 .loc 1 204 0
+ 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(string_buffer,"Failed with return value - ");
+ 381              	 .loc 1 201 0
  382 0054 1649     	 ldr r1,.L52+12
  383 0056 0BA8     	 add r0,sp,#44
  384 0058 FFF7FEFF 	 bl strcat
  385              	.LVL49:
- 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,OPTIGA_HEX_BYTE_SEPERATOR);
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         optiga_lib_word_to_hex_string(return_value,uint16t_conv_buffer);
- 386              	 .loc 1 206 0
+ 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,OPTIGA_HEX_BYTE_SEPERATOR);
+ 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         optiga_lib_word_to_hex_string(return_value,uint16t_conv_buffer);
+ 386              	 .loc 1 203 0
  387 005c 381C     	 mov r0,r7
  388 005e 03A9     	 add r1,sp,#12
  389 0060 FFF7FEFF 	 bl optiga_lib_word_to_hex_string
  390              	.LVL50:
- 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,(char_t *)uint16t_conv_buffer);
- 391              	 .loc 1 207 0
+ 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         strcat(return_value_buffer,(char_t *)uint16t_conv_buffer);
+ 391              	 .loc 1 204 0
  392 0064 201C     	 mov r0,r4
  393 0066 03A9     	 add r1,sp,#12
  394              	.L51:
  395 0068 FFF7FEFF 	 bl strcat
  396              	.LVL51:
- 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     OPTIGA_LIB_LOGGER_PRINT_INFO(color_buffer, (char_t *)return_value_buffer, string_buffer, p_log_
- 397              	 .loc 1 210 0
+ 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     OPTIGA_LIB_LOGGER_PRINT_INFO(color_buffer, (char_t *)return_value_buffer, string_buffer, p_log_
+ 397              	 .loc 1 207 0
  398 006c 114B     	 ldr r3,.L52+16
  399 006e 1249     	 ldr r1,.L52+20
  400 0070 321C     	 mov r2,r6
@@ -610,10 +607,10 @@
  404 0078 0BAB     	 add r3,sp,#44
  405 007a FFF7FEFF 	 bl sprintf
  406              	.LVL52:
- 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, (const uint8_t *)color_buffer, strlen(color_buffer));
- 407              	 .loc 1 213 0
+ 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, (const uint8_t *)color_buffer, strlen(color_buffer));
+ 407              	 .loc 1 210 0
  408 007e 24A8     	 add r0,sp,#144
  409 0080 FFF7FEFF 	 bl strlen
  410              	.LVL53:
@@ -623,18 +620,18 @@
  414 008a 201C     	 mov r0,r4
  415 008c FFF7FEFF 	 bl pal_logger_write
  416              	.LVL54:
- 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //Print new line
- 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
- 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&cunit_console, new_line_characters, 2);
- 417              	 .loc 1 216 0
+ 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //Print new line
+ 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //lint --e{534} The return value is not used hence not checked*/
+ 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     pal_logger_write(&logger_console, new_line_characters, 2);
+ 417              	 .loc 1 213 0
  418 0090 201C     	 mov r0,r4
  419 0092 02A9     	 add r1,sp,#8
  420 0094 0222     	 mov r2,#2
  421 0096 FFF7FEFF 	 bl pal_logger_write
  422              	.LVL55:
  423              	.L40:
- 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 424              	 .loc 1 217 0
+ 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
+ 424              	 .loc 1 214 0
  425 009a 8923     	 mov r3,#137
  426 009c 9B00     	 lsl r3,r3,#2
  427 009e 9D44     	 add sp,sp,r3
@@ -651,7 +648,7 @@
  438 00b0 15000000 	 .word .LC13
  439 00b4 09000000 	 .word .LC7
  440 00b8 00000000 	 .word .LC5
- 441 00bc 00000000 	 .word cunit_console
+ 441 00bc 00000000 	 .word logger_console
  442              	 .cfi_endproc
  443              	.LFE6:
  445              	 .section .text.optiga_lib_print_array_hex_format,"ax",%progbits
@@ -661,12 +658,12 @@
  449              	 .thumb_func
  451              	optiga_lib_print_array_hex_format:
  452              	.LFB7:
- 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_array_hex_format(const uint8_t * p_log_string,
- 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                                        uint16_t length,
- 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                                        const char_t * p_log_color)
- 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
- 453              	 .loc 1 222 0
+ 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** void optiga_lib_print_array_hex_format(const uint8_t * p_log_string,
+ 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                                        uint16_t length,
+ 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****                                        const char_t * p_log_color)
+ 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** {
+ 453              	 .loc 1 219 0
  454              	 .cfi_startproc
  455              	.LVL58:
  456 0000 F0B5     	 push {r4,r5,r6,r7,lr}
@@ -681,18 +678,19 @@
  465 0004 A544     	 add sp,sp,r4
  466              	.LCFI8:
  467              	 .cfi_def_cfa_offset 752
- 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t temp_buffer[350];
- 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t output_buffer[350];
- 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint16_t index = 0;
- 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint16_t temp_length;
- 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
- 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t buffer_window = 32; // Alignment of 16 bytes per line
- 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_string) || (NULL == p_log_color))
- 468              	 .loc 1 230 0
+ 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t temp_buffer[350];
+ 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char_t output_buffer[350];
+ 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     char sprintf_buffer[350];
+ 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint16_t index = 0;
+ 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint16_t temp_length;
+ 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t new_line_characters[2] = {OPTIGA_LOGGER_NEW_LINE_CHAR};
+ 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     uint8_t buffer_window = 32; // Alignment of 16 bytes per line
+ 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     if ((NULL == p_log_string) || (NULL == p_log_color))
+ 468              	 .loc 1 228 0
  469 0006 0028     	 cmp r0,#0
  470 0008 79D0     	 beq .L54
- 471              	 .loc 1 230 0 is_stmt 0 discriminator 1
+ 471              	 .loc 1 228 0 is_stmt 0 discriminator 1
  472 000a 002A     	 cmp r2,#0
  473 000c 77D0     	 beq .L54
  474 000e 0D1C     	 mov r5,r1
@@ -730,67 +728,67 @@
  502 0032 5EA8     	 add r0,sp,#376
  503 0034 FFF7FEFF 	 bl strcat
  504              	.LVL66:
- 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
+ 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
  505              	 .loc 1 127 0
  506 0038 5EA8     	 add r0,sp,#376
  507 003a FFF7FEFF 	 bl optiga_lib_print_string_with_newline
  508              	.LVL67:
  509              	.LBE11:
  510              	.LBE10:
- 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
- 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         return;
+ 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
+ 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     optiga_lib_print_length_of_data(length);
  234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
- 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     optiga_lib_print_length_of_data(length);
- 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     
- 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //Logging the arrays in chunks of 16 bytes through chaining
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     for (index = 0; index < length; index+=buffer_window)
- 511              	 .loc 1 238 0
+ 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     //Logging the arrays in chunks of 16 bytes through chaining
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     for (index = 0; index < length; index+=buffer_window)
+ 511              	 .loc 1 236 0
  512 003e 0024     	 mov r4,#0
  513              	.LVL68:
  514              	.L56:
- 515              	 .loc 1 238 0 is_stmt 0 discriminator 1
+ 515              	 .loc 1 236 0 is_stmt 0 discriminator 1
  516 0040 AC42     	 cmp r4,r5
  517 0042 5CD2     	 bcs .L54
  518              	.LVL69:
- 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         temp_length = buffer_window;
- 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         if ((length - index) < buffer_window)
- 519              	 .loc 1 241 0 is_stmt 1
+ 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         temp_length = buffer_window;
+ 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         if ((length - index) < buffer_window)
+ 519              	 .loc 1 239 0 is_stmt 1
  520 0044 2B1B     	 sub r3,r5,r4
- 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         if ((length - index) < buffer_window)
- 521              	 .loc 1 240 0
+ 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         if ((length - index) < buffer_window)
+ 521              	 .loc 1 238 0
  522 0046 2026     	 mov r6,#32
- 523              	 .loc 1 241 0
+ 523              	 .loc 1 239 0
  524 0048 1F2B     	 cmp r3,#31
  525 004a 00DC     	 bgt .L57
- 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         {
- 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****             temp_length =  length - index;
- 526              	 .loc 1 243 0
+ 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         {
+ 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****             temp_length =  length - index;
+ 526              	 .loc 1 241 0
  527 004c 9EB2     	 uxth r6,r3
  528              	.LVL70:
  529              	.L57:
- 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         }
- 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_os_memset(temp_buffer, 0x00, sizeof(temp_buffer));
- 530              	 .loc 1 246 0 discriminator 2
+ 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         }
+ 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_os_memset(temp_buffer, 0x00, sizeof(temp_buffer));
+ 530              	 .loc 1 244 0 discriminator 2
  531 004e AF22     	 mov r2,#175
  532 0050 0021     	 mov r1,#0
  533 0052 5200     	 lsl r2,r2,#1
  534 0054 06A8     	 add r0,sp,#24
  535 0056 FFF7FEFF 	 bl memset
  536              	.LVL71:
- 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_os_memset(output_buffer, 0x00, sizeof(output_buffer));
- 537              	 .loc 1 247 0 discriminator 2
+ 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_os_memset(output_buffer, 0x00, sizeof(output_buffer));
+ 537              	 .loc 1 245 0 discriminator 2
  538 005a AF22     	 mov r2,#175
  539 005c 5EA8     	 add r0,sp,#376
  540 005e 0021     	 mov r1,#0
  541 0060 5200     	 lsl r2,r2,#1
  542 0062 FFF7FEFF 	 bl memset
  543              	.LVL72:
- 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         optiga_lib_byte_to_hex_string((uint8_t*)(p_log_string + index), temp_buffer, temp_length, F
- 544              	 .loc 1 249 0 discriminator 2
+ 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         optiga_lib_byte_to_hex_string((uint8_t*)(p_log_string + index), temp_buffer, temp_length, F
+ 544              	 .loc 1 247 0 discriminator 2
  545 0066 049B     	 ldr r3,[sp,#16]
  546 0068 1B19     	 add r3,r3,r4
  547 006a 0393     	 str r3,[sp,#12]
@@ -886,9 +884,9 @@
  627              	.L58:
  628              	.LBE13:
  629              	.LBE12:
- 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         OPTIGA_LIB_LOGGER_PRINT_ARRAY(output_buffer,temp_buffer, p_log_color);
- 630              	 .loc 1 251 0 discriminator 2
+ 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         OPTIGA_LIB_LOGGER_PRINT_ARRAY(output_buffer,temp_buffer, p_log_color);
+ 630              	 .loc 1 249 0 discriminator 2
  631 00c0 154B     	 ldr r3,.L78+16
  632 00c2 5EAE     	 add r6,sp,#376
  633 00c4 1549     	 ldr r1,.L78+20
@@ -898,49 +896,49 @@
  637 00cc 06AB     	 add r3,sp,#24
  638 00ce FFF7FEFF 	 bl sprintf
  639              	.LVL90:
- 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
- 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         // New line characted entered at the end of each segment
- 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         output_buffer[strlen(output_buffer)] = new_line_characters[0];
- 640              	 .loc 1 254 0 discriminator 2
+ 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** 
+ 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         // New line characted entered at the end of each segment
+ 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         output_buffer[strlen(output_buffer)] = new_line_characters[0];
+ 640              	 .loc 1 252 0 discriminator 2
  641 00d2 301C     	 mov r0,r6
  642 00d4 FFF7FEFF 	 bl strlen
  643              	.LVL91:
  644 00d8 0D23     	 mov r3,#13
  645 00da 3354     	 strb r3,[r6,r0]
- 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         output_buffer[strlen(output_buffer)+1] = new_line_characters[1];
- 646              	 .loc 1 255 0 discriminator 2
+ 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         output_buffer[strlen(output_buffer)+1] = new_line_characters[1];
+ 646              	 .loc 1 253 0 discriminator 2
  647 00dc 301C     	 mov r0,r6
  648 00de FFF7FEFF 	 bl strlen
  649              	.LVL92:
  650 00e2 0A23     	 mov r3,#10
  651 00e4 3018     	 add r0,r6,r0
  652 00e6 4370     	 strb r3,[r0,#1]
- 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         //lint --e{534} The return value is not used hence not checked*/
- 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_logger_write(&cunit_console, (const uint8_t *)output_buffer, strlen(output_buffer) + 2)
- 653              	 .loc 1 257 0 discriminator 2
+ 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         //lint --e{534} The return value is not used hence not checked*/
+ 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****         pal_logger_write(&logger_console, (const uint8_t *)output_buffer, strlen(output_buffer) + 2
+ 653              	 .loc 1 255 0 discriminator 2
  654 00e8 301C     	 mov r0,r6
  655 00ea FFF7FEFF 	 bl strlen
  656              	.LVL93:
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 657              	 .loc 1 238 0 discriminator 2
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 657              	 .loc 1 236 0 discriminator 2
  658 00ee 2034     	 add r4,r4,#32
  659              	.LVL94:
- 660              	 .loc 1 257 0 discriminator 2
+ 660              	 .loc 1 255 0 discriminator 2
  661 00f0 821C     	 add r2,r0,#2
  662 00f2 311C     	 mov r1,r6
  663 00f4 0A48     	 ldr r0,.L78+24
  664 00f6 FFF7FEFF 	 bl pal_logger_write
  665              	.LVL95:
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
- 666              	 .loc 1 238 0 discriminator 2
+ 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     {
+ 666              	 .loc 1 236 0 discriminator 2
  667 00fa A4B2     	 uxth r4,r4
  668              	.LVL96:
  669 00fc A0E7     	 b .L56
  670              	.LVL97:
  671              	.L54:
- 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
- 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
- 672              	 .loc 1 259 0
+ 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c ****     }
+ 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/common\optiga_lib_logger.c **** }
+ 672              	 .loc 1 257 0
  673 00fe B723     	 mov r3,#183
  674 0100 9B00     	 lsl r3,r3,#2
  675 0102 9D44     	 add sp,sp,r3
@@ -955,7 +953,7 @@
  684 0114 40FDFFFF 	 .word -704
  685 0118 09000000 	 .word .LC7
  686 011c 48000000 	 .word .LC24
- 687 0120 00000000 	 .word cunit_console
+ 687 0120 00000000 	 .word logger_console
  688              	 .cfi_endproc
  689              	.LFE7:
  691              	 .section .rodata
@@ -1027,7 +1025,7 @@ DEFINED SYMBOLS
 UNDEFINED SYMBOLS
 strlen
 pal_logger_write
-cunit_console
+logger_console
 memcpy
 sprintf
 memset

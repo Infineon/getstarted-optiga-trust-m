@@ -14,13 +14,13 @@
   14              	 .text
   15              	.Ltext0:
   16              	 .cfi_sections .debug_frame
-  17              	 .section .text.esWiFi_com_init,"ax",%progbits
+  17              	 .section .text.cunit_logger_init,"ax",%progbits
   18              	 .align 1
-  19              	 .global esWiFi_com_init
+  19              	 .global cunit_logger_init
   20              	 .code 16
   21              	 .thumb_func
-  23              	esWiFi_com_init:
-  24              	.LFB179:
+  23              	cunit_logger_init:
+  24              	.LFB176:
   25              	 .file 1 "../Dave/Generated/UART/uart_conf.c"
    1:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
    2:../Dave/Generated/UART/uart_conf.c **** * DAVE APP Name : UART       APP Version: 4.1.12
@@ -87,248 +87,100 @@
   63:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
   64:../Dave/Generated/UART/uart_conf.c **** 
   65:../Dave/Generated/UART/uart_conf.c **** /*
-  66:../Dave/Generated/UART/uart_conf.c ****  * Function implements the data transmission. It is called from the transmit interrupt service hand
-  67:../Dave/Generated/UART/uart_conf.c ****  * Function pushes data to the output block and releases control. It is called again when the previ
-  68:../Dave/Generated/UART/uart_conf.c ****  * transmitted. When transmit FIFO is used, the function sets the trigger limit based on the size o
-  69:../Dave/Generated/UART/uart_conf.c ****  * transmitted.
+  66:../Dave/Generated/UART/uart_conf.c ****  * Function implements the data reception. It is called from the receive interrupt service handler.
+  67:../Dave/Generated/UART/uart_conf.c ****  * Function reads data from the receive block and updates the user's buffer. It is called again whe
+  68:../Dave/Generated/UART/uart_conf.c ****  * received again. When receive FIFO is used, the function sets the trigger limit based on the size
+  69:../Dave/Generated/UART/uart_conf.c ****  * received.
   70:../Dave/Generated/UART/uart_conf.c ****  */
-  71:../Dave/Generated/UART/uart_conf.c **** extern void UART_lTransmitHandler(const UART_t * const handle);
+  71:../Dave/Generated/UART/uart_conf.c **** extern void UART_lReceiveHandler(const UART_t * const handle);
   72:../Dave/Generated/UART/uart_conf.c **** /*
-  73:../Dave/Generated/UART/uart_conf.c ****  * Function implements the data reception. It is called from the receive interrupt service handler.
-  74:../Dave/Generated/UART/uart_conf.c ****  * Function reads data from the receive block and updates the user's buffer. It is called again whe
-  75:../Dave/Generated/UART/uart_conf.c ****  * received again. When receive FIFO is used, the function sets the trigger limit based on the size
-  76:../Dave/Generated/UART/uart_conf.c ****  * received.
+  73:../Dave/Generated/UART/uart_conf.c ****  * Function monitors the configured protocol interrupt flags. It is called from the protocol interr
+  74:../Dave/Generated/UART/uart_conf.c ****  * service handler.
+  75:../Dave/Generated/UART/uart_conf.c ****  * Function reads the status of the USIC channel and checks for configured flags in the APP UI.
+  76:../Dave/Generated/UART/uart_conf.c ****  * If any callback function is provided in the APP UI, it will be called when the selected flag is 
   77:../Dave/Generated/UART/uart_conf.c ****  */
-  78:../Dave/Generated/UART/uart_conf.c **** extern void UART_lReceiveHandler(const UART_t * const handle);
-  79:../Dave/Generated/UART/uart_conf.c **** /*
-  80:../Dave/Generated/UART/uart_conf.c ****  * Function monitors the configured protocol interrupt flags. It is called from the protocol interr
-  81:../Dave/Generated/UART/uart_conf.c ****  * service handler.
-  82:../Dave/Generated/UART/uart_conf.c ****  * Function reads the status of the USIC channel and checks for configured flags in the APP UI.
-  83:../Dave/Generated/UART/uart_conf.c ****  * If any callback function is provided in the APP UI, it will be called when the selected flag is 
-  84:../Dave/Generated/UART/uart_conf.c ****  */
-  85:../Dave/Generated/UART/uart_conf.c **** extern void UART_lProtocolHandler(const UART_t * const handle);
-  86:../Dave/Generated/UART/uart_conf.c **** 
-  87:../Dave/Generated/UART/uart_conf.c **** 
-  88:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
-  89:../Dave/Generated/UART/uart_conf.c ****  * DATA STRUCTURES
-  90:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
-  91:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t cunit_logger_init(void);
-  92:../Dave/Generated/UART/uart_conf.c **** 
-  93:../Dave/Generated/UART/uart_conf.c **** /*USIC channel configuration*/
-  94:../Dave/Generated/UART/uart_conf.c **** const XMC_UART_CH_CONFIG_t cunit_logger_channel_config =
-  95:../Dave/Generated/UART/uart_conf.c **** {
-  96:../Dave/Generated/UART/uart_conf.c ****   .baudrate      = 115200U,
-  97:../Dave/Generated/UART/uart_conf.c ****   .data_bits     = 8U,
-  98:../Dave/Generated/UART/uart_conf.c ****   .frame_length  = 8U,
-  99:../Dave/Generated/UART/uart_conf.c ****   .stop_bits     = 1U,
- 100:../Dave/Generated/UART/uart_conf.c ****   .oversampling  = 16U,
- 101:../Dave/Generated/UART/uart_conf.c ****   .parity_mode   = XMC_USIC_CH_PARITY_MODE_NONE
- 102:../Dave/Generated/UART/uart_conf.c **** };
- 103:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration*/
- 104:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t cunit_logger_tx_pin_config   = 
- 105:../Dave/Generated/UART/uart_conf.c **** { 
- 106:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT7, 
- 107:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH
- 108:../Dave/Generated/UART/uart_conf.c **** };
- 109:../Dave/Generated/UART/uart_conf.c **** 
- 110:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration used for initializing*/
- 111:../Dave/Generated/UART/uart_conf.c **** const UART_TX_CONFIG_t cunit_logger_tx_pin = 
- 112:../Dave/Generated/UART/uart_conf.c **** {
- 113:../Dave/Generated/UART/uart_conf.c ****   .port = (XMC_GPIO_PORT_t *)PORT1_BASE,
- 114:../Dave/Generated/UART/uart_conf.c ****   .config = &cunit_logger_tx_pin_config,
- 115:../Dave/Generated/UART/uart_conf.c ****   .pin = 2U
- 116:../Dave/Generated/UART/uart_conf.c **** };
- 117:../Dave/Generated/UART/uart_conf.c **** 
- 118:../Dave/Generated/UART/uart_conf.c **** /*UART APP configuration structure*/
- 119:../Dave/Generated/UART/uart_conf.c **** const UART_CONFIG_t cunit_logger_config = 
- 120:../Dave/Generated/UART/uart_conf.c **** {
- 121:../Dave/Generated/UART/uart_conf.c ****   .channel_config   = &cunit_logger_channel_config,
- 122:../Dave/Generated/UART/uart_conf.c **** 
- 123:../Dave/Generated/UART/uart_conf.c **** 
- 124:../Dave/Generated/UART/uart_conf.c ****   .fptr_uart_config = cunit_logger_init,
- 125:../Dave/Generated/UART/uart_conf.c ****   .tx_cbhandler = cunit_console_uart_end_of_transmit_callback,
- 126:../Dave/Generated/UART/uart_conf.c ****   .rx_cbhandler = cunit_console_uart_end_of_receive_callback,  
- 127:../Dave/Generated/UART/uart_conf.c ****   .sync_error_cbhandler = NULL,  
- 128:../Dave/Generated/UART/uart_conf.c ****   .rx_noise_error_cbhandler = NULL,  
- 129:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit0_cbhandler = NULL,  
- 130:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit1_cbhandler = NULL,  
- 131:../Dave/Generated/UART/uart_conf.c ****   .collision_error_cbhandler = NULL,
- 132:../Dave/Generated/UART/uart_conf.c ****   .tx_pin_config    = &cunit_logger_tx_pin,
- 133:../Dave/Generated/UART/uart_conf.c ****   .mode             = UART_MODE_FULLDUPLEX,
- 134:../Dave/Generated/UART/uart_conf.c ****   .transmit_mode = UART_TRANSFER_MODE_INTERRUPT,
- 135:../Dave/Generated/UART/uart_conf.c ****   .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
- 136:../Dave/Generated/UART/uart_conf.c ****   .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 137:../Dave/Generated/UART/uart_conf.c ****   .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 138:../Dave/Generated/UART/uart_conf.c ****   .tx_sr   = 0x5U,
- 139:../Dave/Generated/UART/uart_conf.c **** };
- 140:../Dave/Generated/UART/uart_conf.c **** 
- 141:../Dave/Generated/UART/uart_conf.c **** /*Runtime handler*/
- 142:../Dave/Generated/UART/uart_conf.c **** UART_RUNTIME_t cunit_logger_runtime = 
- 143:../Dave/Generated/UART/uart_conf.c **** {
- 144:../Dave/Generated/UART/uart_conf.c ****   .tx_busy = false,  
- 145:../Dave/Generated/UART/uart_conf.c ****   .rx_busy = false,
- 146:../Dave/Generated/UART/uart_conf.c **** };
- 147:../Dave/Generated/UART/uart_conf.c **** 
- 148:../Dave/Generated/UART/uart_conf.c **** /*APP handle structure*/
- 149:../Dave/Generated/UART/uart_conf.c **** UART_t cunit_logger = 
- 150:../Dave/Generated/UART/uart_conf.c **** {
- 151:../Dave/Generated/UART/uart_conf.c ****   .channel = XMC_UART0_CH1,
- 152:../Dave/Generated/UART/uart_conf.c ****   .config  = &cunit_logger_config,
- 153:../Dave/Generated/UART/uart_conf.c ****   .runtime = &cunit_logger_runtime
- 154:../Dave/Generated/UART/uart_conf.c **** };
- 155:../Dave/Generated/UART/uart_conf.c **** 
- 156:../Dave/Generated/UART/uart_conf.c **** /*Receive pin configuration*/
- 157:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t cunit_logger_rx_pin_config   = {
- 158:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_INPUT_TRISTATE,
- 159:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
- 160:../Dave/Generated/UART/uart_conf.c ****   .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD
- 161:../Dave/Generated/UART/uart_conf.c **** };
- 162:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
- 163:../Dave/Generated/UART/uart_conf.c ****  * API IMPLEMENTATION
- 164:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
- 165:../Dave/Generated/UART/uart_conf.c **** /*Channel initialization function*/
- 166:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t cunit_logger_init()
- 167:../Dave/Generated/UART/uart_conf.c **** {
- 168:../Dave/Generated/UART/uart_conf.c ****   UART_STATUS_t status = UART_STATUS_SUCCESS;
- 169:../Dave/Generated/UART/uart_conf.c ****   /*Configure Receive pin*/
- 170:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT1_BASE, 3U, &cunit_logger_rx_pin_config);
- 171:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
- 172:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Init(XMC_UART0_CH1, &cunit_logger_channel_config);
- 173:../Dave/Generated/UART/uart_conf.c ****   /*Set input source path*/
- 174:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX0, 0U);
- 175:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX3, 0U);
- 176:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX5, 0U);
- 177:../Dave/Generated/UART/uart_conf.c ****   /*Configure transmit FIFO*/
- 178:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_TXFIFO_Configure(XMC_UART0_CH1,
- 179:../Dave/Generated/UART/uart_conf.c ****         16U,
- 180:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 181:../Dave/Generated/UART/uart_conf.c ****         1U);
- 182:../Dave/Generated/UART/uart_conf.c ****   /*Configure receive FIFO*/
- 183:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_Configure(XMC_UART0_CH1,
- 184:../Dave/Generated/UART/uart_conf.c ****         0U,
- 185:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 186:../Dave/Generated/UART/uart_conf.c ****         0U);
- 187:../Dave/Generated/UART/uart_conf.c ****   /* Start UART */
- 188:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Start(XMC_UART0_CH1);
- 189:../Dave/Generated/UART/uart_conf.c **** 
- 190:../Dave/Generated/UART/uart_conf.c ****   /* Initialize UART TX pin */
- 191:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT1_BASE, 2U, &cunit_logger_tx_pin_config);
- 192:../Dave/Generated/UART/uart_conf.c **** 
- 193:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for UART protocol events*/
- 194:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
- 195:../Dave/Generated/UART/uart_conf.c ****      0U);
- 196:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for tx FIFO transmit interrupt*/
- 197:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_TXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_TXFIFO_INTERRUPT_NODE_POINT
- 198:../Dave/Generated/UART/uart_conf.c ****       5U);
- 199:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for rx FIFO receive interrupt*/
- 200:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
- 201:../Dave/Generated/UART/uart_conf.c ****        0x4U);
- 202:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
- 203:../Dave/Generated/UART/uart_conf.c ****        0x4U);
- 204:../Dave/Generated/UART/uart_conf.c ****   /*Set priority and enable NVIC node for transmit interrupt*/
- 205:../Dave/Generated/UART/uart_conf.c ****   NVIC_SetPriority((IRQn_Type)14, 3U);
- 206:../Dave/Generated/UART/uart_conf.c ****   XMC_SCU_SetInterruptControl(14U, XMC_SCU_IRQCTRL_USIC0_SR5_IRQ14);
- 207:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)14);
- 208:../Dave/Generated/UART/uart_conf.c ****   /*Set priority and enable NVIC node for receive interrupt*/
- 209:../Dave/Generated/UART/uart_conf.c ****   NVIC_SetPriority((IRQn_Type)13, 3U);
- 210:../Dave/Generated/UART/uart_conf.c ****   XMC_SCU_SetInterruptControl(13U, XMC_SCU_IRQCTRL_USIC0_SR4_IRQ13);
- 211:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)13);
- 212:../Dave/Generated/UART/uart_conf.c ****   return status;
- 213:../Dave/Generated/UART/uart_conf.c **** }
- 214:../Dave/Generated/UART/uart_conf.c **** /*Interrupt handlers*/
- 215:../Dave/Generated/UART/uart_conf.c **** /*Transmit ISR*/
- 216:../Dave/Generated/UART/uart_conf.c **** void cunit_logger_TX_HANDLER()
- 217:../Dave/Generated/UART/uart_conf.c **** {
- 218:../Dave/Generated/UART/uart_conf.c ****   UART_lTransmitHandler(&cunit_logger);
- 219:../Dave/Generated/UART/uart_conf.c **** }
- 220:../Dave/Generated/UART/uart_conf.c **** 
- 221:../Dave/Generated/UART/uart_conf.c **** /*Receive ISR*/
- 222:../Dave/Generated/UART/uart_conf.c **** void cunit_logger_RX_HANDLER()
- 223:../Dave/Generated/UART/uart_conf.c **** {
- 224:../Dave/Generated/UART/uart_conf.c ****   UART_lReceiveHandler(&cunit_logger);
- 225:../Dave/Generated/UART/uart_conf.c **** }
- 226:../Dave/Generated/UART/uart_conf.c **** 
- 227:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
- 228:../Dave/Generated/UART/uart_conf.c ****  * DATA STRUCTURES
- 229:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
- 230:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t esWiFi_com_init(void);
- 231:../Dave/Generated/UART/uart_conf.c **** 
- 232:../Dave/Generated/UART/uart_conf.c **** /*USIC channel configuration*/
- 233:../Dave/Generated/UART/uart_conf.c **** const XMC_UART_CH_CONFIG_t esWiFi_com_channel_config =
- 234:../Dave/Generated/UART/uart_conf.c **** {
- 235:../Dave/Generated/UART/uart_conf.c ****   .baudrate      = 19200U,
- 236:../Dave/Generated/UART/uart_conf.c ****   .data_bits     = 8U,
- 237:../Dave/Generated/UART/uart_conf.c ****   .frame_length  = 8U,
- 238:../Dave/Generated/UART/uart_conf.c ****   .stop_bits     = 1U,
- 239:../Dave/Generated/UART/uart_conf.c ****   .oversampling  = 16U,
- 240:../Dave/Generated/UART/uart_conf.c ****   .parity_mode   = XMC_USIC_CH_PARITY_MODE_NONE
- 241:../Dave/Generated/UART/uart_conf.c **** };
- 242:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration*/
- 243:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t esWiFi_com_tx_pin_config   = 
- 244:../Dave/Generated/UART/uart_conf.c **** { 
- 245:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT6, 
- 246:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH
- 247:../Dave/Generated/UART/uart_conf.c **** };
- 248:../Dave/Generated/UART/uart_conf.c **** 
- 249:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration used for initializing*/
- 250:../Dave/Generated/UART/uart_conf.c **** const UART_TX_CONFIG_t esWiFi_com_tx_pin = 
- 251:../Dave/Generated/UART/uart_conf.c **** {
- 252:../Dave/Generated/UART/uart_conf.c ****   .port = (XMC_GPIO_PORT_t *)PORT4_BASE,
- 253:../Dave/Generated/UART/uart_conf.c ****   .config = &esWiFi_com_tx_pin_config,
- 254:../Dave/Generated/UART/uart_conf.c ****   .pin = 5U
- 255:../Dave/Generated/UART/uart_conf.c **** };
- 256:../Dave/Generated/UART/uart_conf.c **** 
- 257:../Dave/Generated/UART/uart_conf.c **** /*UART APP configuration structure*/
- 258:../Dave/Generated/UART/uart_conf.c **** const UART_CONFIG_t esWiFi_com_config = 
- 259:../Dave/Generated/UART/uart_conf.c **** {
- 260:../Dave/Generated/UART/uart_conf.c ****   .channel_config   = &esWiFi_com_channel_config,
- 261:../Dave/Generated/UART/uart_conf.c **** 
- 262:../Dave/Generated/UART/uart_conf.c **** 
- 263:../Dave/Generated/UART/uart_conf.c ****   .fptr_uart_config = esWiFi_com_init,
- 264:../Dave/Generated/UART/uart_conf.c ****   .tx_cbhandler = NULL,
- 265:../Dave/Generated/UART/uart_conf.c ****   .rx_cbhandler = NULL,  
- 266:../Dave/Generated/UART/uart_conf.c ****   .sync_error_cbhandler = NULL,  
- 267:../Dave/Generated/UART/uart_conf.c ****   .rx_noise_error_cbhandler = NULL,  
- 268:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit0_cbhandler = NULL,  
- 269:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit1_cbhandler = NULL,  
- 270:../Dave/Generated/UART/uart_conf.c ****   .collision_error_cbhandler = NULL,
- 271:../Dave/Generated/UART/uart_conf.c ****   .tx_pin_config    = &esWiFi_com_tx_pin,
- 272:../Dave/Generated/UART/uart_conf.c ****   .mode             = UART_MODE_FULLDUPLEX,
- 273:../Dave/Generated/UART/uart_conf.c ****   .transmit_mode = UART_TRANSFER_MODE_INTERRUPT,
- 274:../Dave/Generated/UART/uart_conf.c ****   .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
- 275:../Dave/Generated/UART/uart_conf.c ****   .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 276:../Dave/Generated/UART/uart_conf.c ****   .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 277:../Dave/Generated/UART/uart_conf.c ****   .tx_sr   = 0x2U,
- 278:../Dave/Generated/UART/uart_conf.c **** };
- 279:../Dave/Generated/UART/uart_conf.c **** 
- 280:../Dave/Generated/UART/uart_conf.c **** /*Runtime handler*/
- 281:../Dave/Generated/UART/uart_conf.c **** UART_RUNTIME_t esWiFi_com_runtime = 
- 282:../Dave/Generated/UART/uart_conf.c **** {
- 283:../Dave/Generated/UART/uart_conf.c ****   .tx_busy = false,  
- 284:../Dave/Generated/UART/uart_conf.c ****   .rx_busy = false,
- 285:../Dave/Generated/UART/uart_conf.c **** };
- 286:../Dave/Generated/UART/uart_conf.c **** 
- 287:../Dave/Generated/UART/uart_conf.c **** /*APP handle structure*/
- 288:../Dave/Generated/UART/uart_conf.c **** UART_t esWiFi_com = 
- 289:../Dave/Generated/UART/uart_conf.c **** {
- 290:../Dave/Generated/UART/uart_conf.c ****   .channel = XMC_UART1_CH0,
- 291:../Dave/Generated/UART/uart_conf.c ****   .config  = &esWiFi_com_config,
- 292:../Dave/Generated/UART/uart_conf.c ****   .runtime = &esWiFi_com_runtime
- 293:../Dave/Generated/UART/uart_conf.c **** };
- 294:../Dave/Generated/UART/uart_conf.c **** 
- 295:../Dave/Generated/UART/uart_conf.c **** /*Receive pin configuration*/
- 296:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t esWiFi_com_rx_pin_config   = {
- 297:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_INPUT_TRISTATE,
- 298:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
- 299:../Dave/Generated/UART/uart_conf.c ****   .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD
- 300:../Dave/Generated/UART/uart_conf.c **** };
- 301:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
- 302:../Dave/Generated/UART/uart_conf.c ****  * API IMPLEMENTATION
- 303:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
- 304:../Dave/Generated/UART/uart_conf.c **** /*Channel initialization function*/
- 305:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t esWiFi_com_init()
- 306:../Dave/Generated/UART/uart_conf.c **** {
-  26              	 .loc 1 306 0
+  78:../Dave/Generated/UART/uart_conf.c **** extern void UART_lProtocolHandler(const UART_t * const handle);
+  79:../Dave/Generated/UART/uart_conf.c **** 
+  80:../Dave/Generated/UART/uart_conf.c **** 
+  81:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
+  82:../Dave/Generated/UART/uart_conf.c ****  * DATA STRUCTURES
+  83:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
+  84:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t cunit_logger_init(void);
+  85:../Dave/Generated/UART/uart_conf.c **** 
+  86:../Dave/Generated/UART/uart_conf.c **** /*USIC channel configuration*/
+  87:../Dave/Generated/UART/uart_conf.c **** const XMC_UART_CH_CONFIG_t cunit_logger_channel_config =
+  88:../Dave/Generated/UART/uart_conf.c **** {
+  89:../Dave/Generated/UART/uart_conf.c ****   .baudrate      = 115200U,
+  90:../Dave/Generated/UART/uart_conf.c ****   .data_bits     = 8U,
+  91:../Dave/Generated/UART/uart_conf.c ****   .frame_length  = 8U,
+  92:../Dave/Generated/UART/uart_conf.c ****   .stop_bits     = 1U,
+  93:../Dave/Generated/UART/uart_conf.c ****   .oversampling  = 16U,
+  94:../Dave/Generated/UART/uart_conf.c ****   .parity_mode   = XMC_USIC_CH_PARITY_MODE_NONE
+  95:../Dave/Generated/UART/uart_conf.c **** };
+  96:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration*/
+  97:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t cunit_logger_tx_pin_config   = 
+  98:../Dave/Generated/UART/uart_conf.c **** { 
+  99:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT7, 
+ 100:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH
+ 101:../Dave/Generated/UART/uart_conf.c **** };
+ 102:../Dave/Generated/UART/uart_conf.c **** 
+ 103:../Dave/Generated/UART/uart_conf.c **** /*Transmit pin configuration used for initializing*/
+ 104:../Dave/Generated/UART/uart_conf.c **** const UART_TX_CONFIG_t cunit_logger_tx_pin = 
+ 105:../Dave/Generated/UART/uart_conf.c **** {
+ 106:../Dave/Generated/UART/uart_conf.c ****   .port = (XMC_GPIO_PORT_t *)PORT1_BASE,
+ 107:../Dave/Generated/UART/uart_conf.c ****   .config = &cunit_logger_tx_pin_config,
+ 108:../Dave/Generated/UART/uart_conf.c ****   .pin = 2U
+ 109:../Dave/Generated/UART/uart_conf.c **** };
+ 110:../Dave/Generated/UART/uart_conf.c **** 
+ 111:../Dave/Generated/UART/uart_conf.c **** /*UART APP configuration structure*/
+ 112:../Dave/Generated/UART/uart_conf.c **** const UART_CONFIG_t cunit_logger_config = 
+ 113:../Dave/Generated/UART/uart_conf.c **** {
+ 114:../Dave/Generated/UART/uart_conf.c ****   .channel_config   = &cunit_logger_channel_config,
+ 115:../Dave/Generated/UART/uart_conf.c **** 
+ 116:../Dave/Generated/UART/uart_conf.c **** 
+ 117:../Dave/Generated/UART/uart_conf.c ****   .fptr_uart_config = cunit_logger_init,
+ 118:../Dave/Generated/UART/uart_conf.c ****   .rx_cbhandler = cunit_console_uart_end_of_receive_callback,  
+ 119:../Dave/Generated/UART/uart_conf.c ****   .sync_error_cbhandler = NULL,  
+ 120:../Dave/Generated/UART/uart_conf.c ****   .rx_noise_error_cbhandler = NULL,  
+ 121:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit0_cbhandler = NULL,  
+ 122:../Dave/Generated/UART/uart_conf.c ****   .format_error_bit1_cbhandler = NULL,  
+ 123:../Dave/Generated/UART/uart_conf.c ****   .collision_error_cbhandler = NULL,
+ 124:../Dave/Generated/UART/uart_conf.c ****   .tx_pin_config    = &cunit_logger_tx_pin,
+ 125:../Dave/Generated/UART/uart_conf.c ****   .mode             = UART_MODE_FULLDUPLEX,
+ 126:../Dave/Generated/UART/uart_conf.c ****   .transmit_mode = UART_TRANSFER_MODE_DIRECT,
+ 127:../Dave/Generated/UART/uart_conf.c ****   .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
+ 128:../Dave/Generated/UART/uart_conf.c ****   .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
+ 129:../Dave/Generated/UART/uart_conf.c ****   .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
+ 130:../Dave/Generated/UART/uart_conf.c **** };
+ 131:../Dave/Generated/UART/uart_conf.c **** 
+ 132:../Dave/Generated/UART/uart_conf.c **** /*Runtime handler*/
+ 133:../Dave/Generated/UART/uart_conf.c **** UART_RUNTIME_t cunit_logger_runtime = 
+ 134:../Dave/Generated/UART/uart_conf.c **** {
+ 135:../Dave/Generated/UART/uart_conf.c ****   .tx_busy = false,  
+ 136:../Dave/Generated/UART/uart_conf.c ****   .rx_busy = false,
+ 137:../Dave/Generated/UART/uart_conf.c **** };
+ 138:../Dave/Generated/UART/uart_conf.c **** 
+ 139:../Dave/Generated/UART/uart_conf.c **** /*APP handle structure*/
+ 140:../Dave/Generated/UART/uart_conf.c **** UART_t cunit_logger = 
+ 141:../Dave/Generated/UART/uart_conf.c **** {
+ 142:../Dave/Generated/UART/uart_conf.c ****   .channel = XMC_UART0_CH1,
+ 143:../Dave/Generated/UART/uart_conf.c ****   .config  = &cunit_logger_config,
+ 144:../Dave/Generated/UART/uart_conf.c ****   .runtime = &cunit_logger_runtime
+ 145:../Dave/Generated/UART/uart_conf.c **** };
+ 146:../Dave/Generated/UART/uart_conf.c **** 
+ 147:../Dave/Generated/UART/uart_conf.c **** /*Receive pin configuration*/
+ 148:../Dave/Generated/UART/uart_conf.c **** const XMC_GPIO_CONFIG_t cunit_logger_rx_pin_config   = {
+ 149:../Dave/Generated/UART/uart_conf.c ****   .mode             = XMC_GPIO_MODE_INPUT_TRISTATE,
+ 150:../Dave/Generated/UART/uart_conf.c ****   .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
+ 151:../Dave/Generated/UART/uart_conf.c ****   .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD
+ 152:../Dave/Generated/UART/uart_conf.c **** };
+ 153:../Dave/Generated/UART/uart_conf.c **** /**************************************************************************************************
+ 154:../Dave/Generated/UART/uart_conf.c ****  * API IMPLEMENTATION
+ 155:../Dave/Generated/UART/uart_conf.c ****  **************************************************************************************************
+ 156:../Dave/Generated/UART/uart_conf.c **** /*Channel initialization function*/
+ 157:../Dave/Generated/UART/uart_conf.c **** UART_STATUS_t cunit_logger_init()
+ 158:../Dave/Generated/UART/uart_conf.c **** {
+  26              	 .loc 1 158 0
   27              	 .cfi_startproc
   28              	.LVL0:
   29 0000 70B5     	 push {r4,r5,r6,lr}
@@ -338,29 +190,29 @@
   33              	 .cfi_offset 5,-12
   34              	 .cfi_offset 6,-8
   35              	 .cfi_offset 14,-4
- 307:../Dave/Generated/UART/uart_conf.c ****   UART_STATUS_t status = UART_STATUS_SUCCESS;
- 308:../Dave/Generated/UART/uart_conf.c ****   /*Configure Receive pin*/
- 309:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT4_BASE, 4U, &esWiFi_com_rx_pin_config);
-  36              	 .loc 1 309 0
-  37 0002 314E     	 ldr r6,.L2
- 310:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
- 311:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Init(XMC_UART1_CH0, &esWiFi_com_channel_config);
-  38              	 .loc 1 311 0
-  39 0004 314C     	 ldr r4,.L2+4
- 309:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
-  40              	 .loc 1 309 0
+ 159:../Dave/Generated/UART/uart_conf.c ****   UART_STATUS_t status = UART_STATUS_SUCCESS;
+ 160:../Dave/Generated/UART/uart_conf.c ****   /*Configure Receive pin*/
+ 161:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT1_BASE, 3U, &cunit_logger_rx_pin_config);
+  36              	 .loc 1 161 0
+  37 0002 274E     	 ldr r6,.L2
+ 162:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
+ 163:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Init(XMC_UART0_CH1, &cunit_logger_channel_config);
+  38              	 .loc 1 163 0
+  39 0004 274C     	 ldr r4,.L2+4
+ 161:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
+  40              	 .loc 1 161 0
   41 0006 301C     	 mov r0,r6
-  42 0008 314A     	 ldr r2,.L2+8
-  43 000a 0421     	 mov r1,#4
+  42 0008 274A     	 ldr r2,.L2+8
+  43 000a 0321     	 mov r1,#3
   44 000c FFF7FEFF 	 bl XMC_GPIO_Init
   45              	.LVL1:
-  46              	 .loc 1 311 0
+  46              	 .loc 1 163 0
   47 0010 201C     	 mov r0,r4
-  48 0012 3049     	 ldr r1,.L2+12
+  48 0012 2649     	 ldr r1,.L2+12
   49 0014 FFF7FEFF 	 bl XMC_UART_CH_Init
   50              	.LVL2:
-  51              	.LBB34:
-  52              	.LBB35:
+  51              	.LBB20:
+  52              	.LBB21:
   53              	 .file 2 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_usic.h"
    1:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_usic.h **** /**
    2:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_usic.h ****  * @file xmc_usic.h
@@ -1151,69 +1003,48 @@
  787:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_usic.h ****   channel->DXCR[input] = (uint32_t)((channel->DXCR[input] & (uint32_t)(~USIC_CH_DXCR_DSEL_Msk)) |
   54              	 .loc 2 787 0
   55 0018 0722     	 mov r2,#7
-  56 001a 0225     	 mov r5,#2
-  57 001c E369     	 ldr r3,[r4,#28]
-  58              	.LBE35:
-  59              	.LBE34:
- 312:../Dave/Generated/UART/uart_conf.c ****   /*Set input source path*/
- 313:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX0, 2U);
- 314:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX3, 0U);
- 315:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX5, 0U);
- 316:../Dave/Generated/UART/uart_conf.c ****   /*Configure transmit FIFO*/
- 317:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_TXFIFO_Configure(XMC_UART1_CH0,
-  60              	 .loc 1 317 0
-  61 001e 201C     	 mov r0,r4
-  62              	.LBB37:
-  63              	.LBB36:
-  64              	 .loc 2 787 0
-  65 0020 9343     	 bic r3,r2
-  66 0022 2B43     	 orr r3,r5
-  67 0024 E361     	 str r3,[r4,#28]
-  68              	.LVL3:
-  69              	.LBE36:
-  70              	.LBE37:
-  71              	.LBB38:
-  72              	.LBB39:
-  73 0026 A36A     	 ldr r3,[r4,#40]
-  74              	.LBE39:
-  75              	.LBE38:
-  76              	 .loc 1 317 0
-  77 0028 3021     	 mov r1,#48
-  78              	.LBB41:
-  79              	.LBB40:
-  80              	 .loc 2 787 0
-  81 002a 9343     	 bic r3,r2
-  82 002c A362     	 str r3,[r4,#40]
-  83              	.LVL4:
-  84              	.LBE40:
-  85              	.LBE41:
-  86              	.LBB42:
-  87              	.LBB43:
-  88 002e 236B     	 ldr r3,[r4,#48]
-  89 0030 9343     	 bic r3,r2
-  90 0032 2363     	 str r3,[r4,#48]
-  91              	.LBE43:
-  92              	.LBE42:
-  93              	 .loc 1 317 0
-  94 0034 033A     	 sub r2,r2,#3
-  95 0036 0123     	 mov r3,#1
-  96 0038 FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_Configure
-  97              	.LVL5:
- 318:../Dave/Generated/UART/uart_conf.c ****         48U,
- 319:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 320:../Dave/Generated/UART/uart_conf.c ****         1U);
- 321:../Dave/Generated/UART/uart_conf.c ****   /*Configure receive FIFO*/
- 322:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_Configure(XMC_UART1_CH0,
-  98              	 .loc 1 322 0
-  99 003c 201C     	 mov r0,r4
- 100 003e 2021     	 mov r1,#32
- 101 0040 0422     	 mov r2,#4
- 102 0042 0023     	 mov r3,#0
- 103 0044 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_Configure
- 104              	.LVL6:
- 105              	.LBB44:
- 106              	.LBB45:
- 107              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_uart.h"
+  56 001a E369     	 ldr r3,[r4,#28]
+  57              	.LBE21:
+  58              	.LBE20:
+ 164:../Dave/Generated/UART/uart_conf.c ****   /*Set input source path*/
+ 165:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX0, 0U);
+ 166:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX3, 0U);
+ 167:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInputSource(XMC_UART0_CH1, XMC_USIC_CH_INPUT_DX5, 0U);
+ 168:../Dave/Generated/UART/uart_conf.c ****   /*Configure transmit FIFO*/
+ 169:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_TXFIFO_Configure(XMC_UART0_CH1,
+  59              	 .loc 1 169 0
+  60 001c 201C     	 mov r0,r4
+  61              	.LBB23:
+  62              	.LBB22:
+  63              	 .loc 2 787 0
+  64 001e 9343     	 bic r3,r2
+  65 0020 E361     	 str r3,[r4,#28]
+  66              	.LVL3:
+  67              	.LBE22:
+  68              	.LBE23:
+  69              	.LBB24:
+  70              	.LBB25:
+  71 0022 A36A     	 ldr r3,[r4,#40]
+  72              	.LBE25:
+  73              	.LBE24:
+  74              	 .loc 1 169 0
+  75 0024 1021     	 mov r1,#16
+  76              	.LBB27:
+  77              	.LBB26:
+  78              	 .loc 2 787 0
+  79 0026 9343     	 bic r3,r2
+  80 0028 A362     	 str r3,[r4,#40]
+  81              	.LVL4:
+  82              	.LBE26:
+  83              	.LBE27:
+  84              	.LBB28:
+  85              	.LBB29:
+  86 002a 236B     	 ldr r3,[r4,#48]
+  87              	.LBE29:
+  88              	.LBE28:
+  89              	.LBB31:
+  90              	.LBB32:
+  91              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_uart.h"
    1:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h ****  /**
    2:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h ****  * @file xmc_uart.h
    3:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h ****  * @date 2019-05-07
@@ -1500,51 +1331,93 @@
  284:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h **** __STATIC_INLINE void XMC_UART_CH_Start(XMC_USIC_CH_t *const channel)
  285:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h **** {
  286:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc\xmc_uart.h ****   channel->CCR = (uint32_t)(((channel->CCR) & (~USIC_CH_CCR_MODE_Msk)) | (uint32_t)XMC_USIC_CH_OPER
- 108              	 .loc 3 286 0
- 109 0048 0F22     	 mov r2,#15
- 110 004a 236C     	 ldr r3,[r4,#64]
- 111              	.LBE45:
- 112              	.LBE44:
- 323:../Dave/Generated/UART/uart_conf.c ****         32U,
- 324:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
- 325:../Dave/Generated/UART/uart_conf.c ****         0U);
- 326:../Dave/Generated/UART/uart_conf.c ****   /* Start UART */
- 327:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Start(XMC_UART1_CH0);
- 328:../Dave/Generated/UART/uart_conf.c **** 
- 329:../Dave/Generated/UART/uart_conf.c ****   /* Initialize UART TX pin */
- 330:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT4_BASE, 5U, &esWiFi_com_tx_pin_config);
- 113              	 .loc 1 330 0
- 114 004c 301C     	 mov r0,r6
- 115              	.LBB47:
- 116              	.LBB46:
+  92              	 .loc 3 286 0
+  93 002c 0225     	 mov r5,#2
+  94              	.LBE32:
+  95              	.LBE31:
+  96              	.LBB35:
+  97              	.LBB30:
+  98              	 .loc 2 787 0
+  99 002e 9343     	 bic r3,r2
+ 100 0030 2363     	 str r3,[r4,#48]
+ 101              	.LBE30:
+ 102              	.LBE35:
+ 103              	 .loc 1 169 0
+ 104 0032 033A     	 sub r2,r2,#3
+ 105 0034 0123     	 mov r3,#1
+ 106 0036 FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_Configure
+ 107              	.LVL5:
+ 170:../Dave/Generated/UART/uart_conf.c ****         16U,
+ 171:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
+ 172:../Dave/Generated/UART/uart_conf.c ****         1U);
+ 173:../Dave/Generated/UART/uart_conf.c ****   /*Configure receive FIFO*/
+ 174:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_Configure(XMC_UART0_CH1,
+ 108              	 .loc 1 174 0
+ 109 003a 0021     	 mov r1,#0
+ 110 003c 201C     	 mov r0,r4
+ 111 003e 0B1C     	 mov r3,r1
+ 112 0040 0422     	 mov r2,#4
+ 113 0042 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_Configure
+ 114              	.LVL6:
+ 115              	.LBB36:
+ 116              	.LBB33:
  117              	 .loc 3 286 0
- 118 004e 9343     	 bic r3,r2
- 119 0050 2B43     	 orr r3,r5
- 120 0052 2364     	 str r3,[r4,#64]
- 121              	.LBE46:
- 122              	.LBE47:
- 123              	 .loc 1 330 0
- 124 0054 0521     	 mov r1,#5
- 125 0056 204A     	 ldr r2,.L2+16
- 126 0058 FFF7FEFF 	 bl XMC_GPIO_Init
- 127              	.LVL7:
- 331:../Dave/Generated/UART/uart_conf.c **** 
- 332:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for UART protocol events*/
- 333:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
- 128              	 .loc 1 333 0
- 129 005c 201C     	 mov r0,r4
- 130 005e 1021     	 mov r1,#16
- 131 0060 0122     	 mov r2,#1
- 132 0062 FFF7FEFF 	 bl XMC_USIC_CH_SetInterruptNodePointer
- 133              	.LVL8:
- 334:../Dave/Generated/UART/uart_conf.c ****      1U);
- 335:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for tx FIFO transmit interrupt*/
- 336:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_TXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_TXFIFO_INTERRUPT_NODE_POINT
- 134              	 .loc 1 336 0
- 135 0066 2A1C     	 mov r2,r5
- 136              	.LBB48:
- 137              	.LBB49:
- 138              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/core_cm0.h"
+ 118 0046 0F22     	 mov r2,#15
+ 119 0048 236C     	 ldr r3,[r4,#64]
+ 120              	.LBE33:
+ 121              	.LBE36:
+ 175:../Dave/Generated/UART/uart_conf.c ****         0U,
+ 176:../Dave/Generated/UART/uart_conf.c ****         XMC_USIC_CH_FIFO_SIZE_16WORDS,
+ 177:../Dave/Generated/UART/uart_conf.c ****         0U);
+ 178:../Dave/Generated/UART/uart_conf.c ****   /* Start UART */
+ 179:../Dave/Generated/UART/uart_conf.c ****   XMC_UART_CH_Start(XMC_UART0_CH1);
+ 180:../Dave/Generated/UART/uart_conf.c **** 
+ 181:../Dave/Generated/UART/uart_conf.c ****   /* Initialize UART TX pin */
+ 182:../Dave/Generated/UART/uart_conf.c ****   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT1_BASE, 2U, &cunit_logger_tx_pin_config);
+ 122              	 .loc 1 182 0
+ 123 004a 301C     	 mov r0,r6
+ 124              	.LBB37:
+ 125              	.LBB34:
+ 126              	 .loc 3 286 0
+ 127 004c 9343     	 bic r3,r2
+ 128 004e 2B43     	 orr r3,r5
+ 129 0050 2364     	 str r3,[r4,#64]
+ 130              	.LBE34:
+ 131              	.LBE37:
+ 132              	 .loc 1 182 0
+ 133 0052 291C     	 mov r1,r5
+ 134 0054 164A     	 ldr r2,.L2+16
+ 135 0056 FFF7FEFF 	 bl XMC_GPIO_Init
+ 136              	.LVL7:
+ 183:../Dave/Generated/UART/uart_conf.c **** 
+ 184:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for UART protocol events*/
+ 185:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
+ 137              	 .loc 1 185 0
+ 138 005a 201C     	 mov r0,r4
+ 139 005c 1021     	 mov r1,#16
+ 140 005e 0022     	 mov r2,#0
+ 141 0060 FFF7FEFF 	 bl XMC_USIC_CH_SetInterruptNodePointer
+ 142              	.LVL8:
+ 186:../Dave/Generated/UART/uart_conf.c ****      0U);
+ 187:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for rx FIFO receive interrupt*/
+ 188:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
+ 143              	 .loc 1 188 0
+ 144 0064 201C     	 mov r0,r4
+ 145 0066 2A1C     	 mov r2,r5
+ 146 0068 1021     	 mov r1,#16
+ 147 006a FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
+ 148              	.LVL9:
+ 189:../Dave/Generated/UART/uart_conf.c ****        0x2U);
+ 190:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
+ 149              	 .loc 1 190 0
+ 150 006e 201C     	 mov r0,r4
+ 151 0070 2A1C     	 mov r2,r5
+ 152 0072 1321     	 mov r1,#19
+ 153 0074 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
+ 154              	.LVL10:
+ 155              	.LBB38:
+ 156              	.LBB39:
+ 157              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/core_cm0.h"
    1:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h **** /**************************************************************************//**
    2:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****  * @file     core_cm0.h
    3:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****  * @brief    CMSIS Cortex-M0 Core Peripheral Access Layer Header File
@@ -2281,733 +2154,205 @@
  734:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   if ((int32_t)(IRQn) >= 0)
  735:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   {
  736:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))
- 139              	 .loc 4 736 0
- 140 0068 C225     	 mov r5,#194
- 141              	.LBE49:
- 142              	.LBE48:
- 143              	 .loc 1 336 0
- 144 006a 201C     	 mov r0,r4
- 145 006c 1021     	 mov r1,#16
- 146 006e FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_SetInterruptNodePointer
- 147              	.LVL9:
- 337:../Dave/Generated/UART/uart_conf.c ****       2U);
- 338:../Dave/Generated/UART/uart_conf.c ****   /*Set service request for rx FIFO receive interrupt*/
- 339:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
- 148              	 .loc 1 339 0
- 149 0072 201C     	 mov r0,r4
- 150 0074 1021     	 mov r1,#16
- 151 0076 0022     	 mov r2,#0
- 152 0078 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
- 153              	.LVL10:
- 340:../Dave/Generated/UART/uart_conf.c ****        0x0U);
- 341:../Dave/Generated/UART/uart_conf.c ****   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINT
- 154              	 .loc 1 341 0
- 155 007c 201C     	 mov r0,r4
- 156 007e 1321     	 mov r1,#19
- 157 0080 0022     	 mov r2,#0
- 158 0082 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
- 159              	.LVL11:
- 160              	.LBB51:
- 161              	.LBB50:
- 162              	 .loc 4 736 0
- 163 0086 C022     	 mov r2,#192
- 164 0088 144C     	 ldr r4,.L2+20
- 165 008a AD00     	 lsl r5,r5,#2
- 166 008c 6359     	 ldr r3,[r4,r5]
- 167 008e 1206     	 lsl r2,r2,#24
- 168 0090 1B02     	 lsl r3,r3,#8
- 169 0092 1B0A     	 lsr r3,r3,#8
- 170 0094 1343     	 orr r3,r2
- 171 0096 6351     	 str r3,[r4,r5]
- 172              	.LBE50:
- 173              	.LBE51:
- 342:../Dave/Generated/UART/uart_conf.c ****        0x0U);
- 343:../Dave/Generated/UART/uart_conf.c ****   /*Set priority and enable NVIC node for transmit interrupt*/
- 344:../Dave/Generated/UART/uart_conf.c ****   NVIC_SetPriority((IRQn_Type)11, 3U);
- 345:../Dave/Generated/UART/uart_conf.c ****   XMC_SCU_SetInterruptControl(11U, XMC_SCU_IRQCTRL_USIC1_SR2_IRQ11);
- 174              	 .loc 1 345 0
- 175 0098 0B20     	 mov r0,#11
- 176 009a 1149     	 ldr r1,.L2+24
- 177 009c FFF7FEFF 	 bl XMC_SCU_SetInterruptControl
- 178              	.LVL12:
- 179              	.LBB52:
- 180              	.LBB53:
+ 158              	 .loc 4 736 0
+ 159 0078 C222     	 mov r2,#194
+ 160 007a C021     	 mov r1,#192
+ 161 007c 0D4C     	 ldr r4,.L2+20
+ 162 007e 9200     	 lsl r2,r2,#2
+ 163 0080 A358     	 ldr r3,[r4,r2]
+ 164 0082 0906     	 lsl r1,r1,#24
+ 165 0084 1B02     	 lsl r3,r3,#8
+ 166 0086 1B0A     	 lsr r3,r3,#8
+ 167 0088 0B43     	 orr r3,r1
+ 168              	.LBE39:
+ 169              	.LBE38:
+ 191:../Dave/Generated/UART/uart_conf.c ****        0x2U);
+ 192:../Dave/Generated/UART/uart_conf.c ****   /*Set priority and enable NVIC node for receive interrupt*/
+ 193:../Dave/Generated/UART/uart_conf.c ****   NVIC_SetPriority((IRQn_Type)11, 3U);
+ 194:../Dave/Generated/UART/uart_conf.c ****   XMC_SCU_SetInterruptControl(11U, XMC_SCU_IRQCTRL_USIC0_SR2_IRQ11);
+ 170              	 .loc 1 194 0
+ 171 008a B021     	 mov r1,#176
+ 172              	.LBB41:
+ 173              	.LBB40:
+ 174              	 .loc 4 736 0
+ 175 008c A350     	 str r3,[r4,r2]
+ 176              	.LBE40:
+ 177              	.LBE41:
+ 178              	 .loc 1 194 0
+ 179 008e 0B20     	 mov r0,#11
+ 180 0090 0901     	 lsl r1,r1,#4
+ 181 0092 FFF7FEFF 	 bl XMC_SCU_SetInterruptControl
+ 182              	.LVL11:
+ 183              	.LBB42:
+ 184              	.LBB43:
  627:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
- 181              	 .loc 4 627 0
+ 185              	 .loc 4 627 0
  628:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     __COMPILER_BARRIER();
- 182              	 .loc 4 628 0
- 183 00a0 8023     	 mov r3,#128
- 184 00a2 1B01     	 lsl r3,r3,#4
- 185 00a4 2360     	 str r3,[r4]
+ 186              	 .loc 4 628 0
+ 187 0096 8023     	 mov r3,#128
+ 188 0098 1B01     	 lsl r3,r3,#4
+ 189 009a 2360     	 str r3,[r4]
  629:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   }
- 186              	 .loc 4 629 0
- 187              	.LVL13:
- 188              	.LBE53:
- 189              	.LBE52:
- 190              	.LBB54:
- 191              	.LBB55:
- 192              	 .loc 4 736 0
- 193 00a6 0F4B     	 ldr r3,.L2+28
- 194 00a8 6259     	 ldr r2,[r4,r5]
- 195              	.LBE55:
- 196              	.LBE54:
- 346:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)11);
- 347:../Dave/Generated/UART/uart_conf.c ****   /*Set priority and enable NVIC node for receive interrupt*/
- 348:../Dave/Generated/UART/uart_conf.c ****   NVIC_SetPriority((IRQn_Type)9, 3U);
- 349:../Dave/Generated/UART/uart_conf.c ****   XMC_SCU_SetInterruptControl(9U, XMC_SCU_IRQCTRL_USIC1_SR0_IRQ9);
- 197              	 .loc 1 349 0
- 198 00aa 0920     	 mov r0,#9
- 199              	.LBB57:
- 200              	.LBB56:
- 201              	 .loc 4 736 0
- 202 00ac 1340     	 and r3,r2
- 203 00ae C022     	 mov r2,#192
- 204 00b0 1202     	 lsl r2,r2,#8
- 205 00b2 1343     	 orr r3,r2
- 206 00b4 6351     	 str r3,[r4,r5]
- 207              	.LBE56:
- 208              	.LBE57:
- 209              	 .loc 1 349 0
- 210 00b6 0C49     	 ldr r1,.L2+32
- 211 00b8 FFF7FEFF 	 bl XMC_SCU_SetInterruptControl
- 212              	.LVL14:
- 213              	.LBB58:
- 214              	.LBB59:
- 627:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
- 215              	 .loc 4 627 0
- 628:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     __COMPILER_BARRIER();
- 216              	 .loc 4 628 0
- 217 00bc 8023     	 mov r3,#128
- 218 00be 9B00     	 lsl r3,r3,#2
- 219 00c0 2360     	 str r3,[r4]
- 629:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   }
- 220              	 .loc 4 629 0
- 221              	.LBE59:
- 222              	.LBE58:
- 350:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)9);
- 351:../Dave/Generated/UART/uart_conf.c ****   return status;
- 352:../Dave/Generated/UART/uart_conf.c **** }
- 223              	 .loc 1 352 0
- 224 00c2 0020     	 mov r0,#0
- 225              	 
- 226 00c4 70BD     	 pop {r4,r5,r6,pc}
- 227              	.L3:
- 228 00c6 C046     	 .align 2
- 229              	.L2:
- 230 00c8 00040440 	 .word 1074004992
- 231 00cc 00400048 	 .word 1207975936
- 232 00d0 00000000 	 .word .LANCHOR0
- 233 00d4 00000000 	 .word .LANCHOR1
- 234 00d8 00000000 	 .word .LANCHOR2
- 235 00dc 00E100E0 	 .word -536813312
- 236 00e0 010B0000 	 .word 2817
- 237 00e4 FF00FFFF 	 .word -65281
- 238 00e8 01090000 	 .word 2305
- 239              	 .cfi_endproc
- 240              	.LFE179:
- 242              	 .section .text.cunit_logger_init,"ax",%progbits
- 243              	 .align 1
- 244              	 .global cunit_logger_init
- 245              	 .code 16
- 246              	 .thumb_func
- 248              	cunit_logger_init:
- 249              	.LFB176:
- 167:../Dave/Generated/UART/uart_conf.c ****   UART_STATUS_t status = UART_STATUS_SUCCESS;
- 250              	 .loc 1 167 0
- 251              	 .cfi_startproc
- 252              	.LVL15:
- 253 0000 38B5     	 push {r3,r4,r5,lr}
- 254              	.LCFI1:
- 255              	 .cfi_def_cfa_offset 16
- 256              	 .cfi_offset 3,-16
- 257              	 .cfi_offset 4,-12
- 258              	 .cfi_offset 5,-8
- 259              	 .cfi_offset 14,-4
- 170:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
- 260              	 .loc 1 170 0
- 261 0002 314D     	 ldr r5,.L5
- 172:../Dave/Generated/UART/uart_conf.c ****   /*Set input source path*/
- 262              	 .loc 1 172 0
- 263 0004 314C     	 ldr r4,.L5+4
- 170:../Dave/Generated/UART/uart_conf.c ****   /* Initialize USIC channel in UART mode*/
- 264              	 .loc 1 170 0
- 265 0006 281C     	 mov r0,r5
- 266 0008 314A     	 ldr r2,.L5+8
- 267 000a 0321     	 mov r1,#3
- 268 000c FFF7FEFF 	 bl XMC_GPIO_Init
- 269              	.LVL16:
- 172:../Dave/Generated/UART/uart_conf.c ****   /*Set input source path*/
- 270              	 .loc 1 172 0
- 271 0010 201C     	 mov r0,r4
- 272 0012 3049     	 ldr r1,.L5+12
- 273 0014 FFF7FEFF 	 bl XMC_UART_CH_Init
- 274              	.LVL17:
- 275              	.LBB80:
- 276              	.LBB81:
- 277              	 .loc 2 787 0
- 278 0018 0722     	 mov r2,#7
- 279 001a E369     	 ldr r3,[r4,#28]
- 280              	.LBE81:
- 281              	.LBE80:
- 178:../Dave/Generated/UART/uart_conf.c ****         16U,
- 282              	 .loc 1 178 0
- 283 001c 201C     	 mov r0,r4
- 284              	.LBB83:
- 285              	.LBB82:
- 286              	 .loc 2 787 0
- 287 001e 9343     	 bic r3,r2
- 288 0020 E361     	 str r3,[r4,#28]
- 289              	.LVL18:
- 290              	.LBE82:
- 291              	.LBE83:
- 292              	.LBB84:
- 293              	.LBB85:
- 294 0022 A36A     	 ldr r3,[r4,#40]
- 295              	.LBE85:
- 296              	.LBE84:
- 178:../Dave/Generated/UART/uart_conf.c ****         16U,
- 297              	 .loc 1 178 0
- 298 0024 1021     	 mov r1,#16
- 299              	.LBB87:
- 300              	.LBB86:
- 301              	 .loc 2 787 0
- 302 0026 9343     	 bic r3,r2
- 303 0028 A362     	 str r3,[r4,#40]
- 304              	.LVL19:
- 305              	.LBE86:
- 306              	.LBE87:
- 307              	.LBB88:
- 308              	.LBB89:
- 309 002a 236B     	 ldr r3,[r4,#48]
- 310 002c 9343     	 bic r3,r2
- 311 002e 2363     	 str r3,[r4,#48]
- 312              	.LBE89:
- 313              	.LBE88:
- 178:../Dave/Generated/UART/uart_conf.c ****         16U,
- 314              	 .loc 1 178 0
- 315 0030 033A     	 sub r2,r2,#3
- 316 0032 0123     	 mov r3,#1
- 317 0034 FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_Configure
- 318              	.LVL20:
- 183:../Dave/Generated/UART/uart_conf.c ****         0U,
- 319              	 .loc 1 183 0
- 320 0038 0021     	 mov r1,#0
- 321 003a 201C     	 mov r0,r4
- 322 003c 0B1C     	 mov r3,r1
- 323 003e 0422     	 mov r2,#4
- 324 0040 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_Configure
- 325              	.LVL21:
- 326              	.LBB90:
- 327              	.LBB91:
- 328              	 .loc 3 286 0
- 329 0044 0F22     	 mov r2,#15
- 330 0046 0221     	 mov r1,#2
- 331              	.LBE91:
- 332              	.LBE90:
- 191:../Dave/Generated/UART/uart_conf.c **** 
- 333              	 .loc 1 191 0
- 334 0048 281C     	 mov r0,r5
- 335              	.LBB94:
- 336              	.LBB95:
- 337              	 .loc 4 736 0
- 338 004a C325     	 mov r5,#195
- 339              	.LBE95:
- 340              	.LBE94:
- 341              	.LBB100:
- 342              	.LBB92:
- 343              	 .loc 3 286 0
- 344 004c 236C     	 ldr r3,[r4,#64]
- 345              	.LBE92:
- 346              	.LBE100:
- 347              	.LBB101:
- 348              	.LBB96:
- 349              	 .loc 4 736 0
- 350 004e AD00     	 lsl r5,r5,#2
- 351              	.LBE96:
- 352              	.LBE101:
- 353              	.LBB102:
- 354              	.LBB93:
- 355              	 .loc 3 286 0
- 356 0050 9343     	 bic r3,r2
- 357 0052 0B43     	 orr r3,r1
- 358 0054 2364     	 str r3,[r4,#64]
- 359              	.LBE93:
- 360              	.LBE102:
- 191:../Dave/Generated/UART/uart_conf.c **** 
- 361              	 .loc 1 191 0
- 362 0056 204A     	 ldr r2,.L5+16
- 363 0058 FFF7FEFF 	 bl XMC_GPIO_Init
- 364              	.LVL22:
- 194:../Dave/Generated/UART/uart_conf.c ****      0U);
- 365              	 .loc 1 194 0
- 366 005c 201C     	 mov r0,r4
- 367 005e 1021     	 mov r1,#16
- 368 0060 0022     	 mov r2,#0
- 369 0062 FFF7FEFF 	 bl XMC_USIC_CH_SetInterruptNodePointer
- 370              	.LVL23:
- 197:../Dave/Generated/UART/uart_conf.c ****       5U);
- 371              	 .loc 1 197 0
- 372 0066 201C     	 mov r0,r4
- 373 0068 1021     	 mov r1,#16
- 374 006a 0522     	 mov r2,#5
- 375 006c FFF7FEFF 	 bl XMC_USIC_CH_TXFIFO_SetInterruptNodePointer
- 376              	.LVL24:
- 200:../Dave/Generated/UART/uart_conf.c ****        0x4U);
- 377              	 .loc 1 200 0
- 378 0070 201C     	 mov r0,r4
- 379 0072 1021     	 mov r1,#16
- 380 0074 0422     	 mov r2,#4
- 381 0076 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
- 382              	.LVL25:
- 202:../Dave/Generated/UART/uart_conf.c ****        0x4U);
- 383              	 .loc 1 202 0
- 384 007a 201C     	 mov r0,r4
- 385              	.LBB103:
- 386              	.LBB97:
- 387              	 .loc 4 736 0
- 388 007c 174C     	 ldr r4,.L5+20
- 389              	.LBE97:
- 390              	.LBE103:
- 202:../Dave/Generated/UART/uart_conf.c ****        0x4U);
- 391              	 .loc 1 202 0
- 392 007e 1321     	 mov r1,#19
- 393 0080 0422     	 mov r2,#4
- 394 0082 FFF7FEFF 	 bl XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
- 395              	.LVL26:
- 396              	.LBB104:
- 397              	.LBB98:
- 398              	 .loc 4 736 0
- 399 0086 6259     	 ldr r2,[r4,r5]
- 400 0088 154B     	 ldr r3,.L5+24
- 401              	.LBE98:
- 402              	.LBE104:
- 206:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)14);
- 403              	 .loc 1 206 0
- 404 008a E021     	 mov r1,#224
- 405              	.LBB105:
- 406              	.LBB99:
- 407              	 .loc 4 736 0
- 408 008c 1340     	 and r3,r2
- 409 008e C022     	 mov r2,#192
- 410 0090 1204     	 lsl r2,r2,#16
- 411 0092 1343     	 orr r3,r2
- 412 0094 6351     	 str r3,[r4,r5]
- 413              	.LBE99:
- 414              	.LBE105:
- 206:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)14);
- 415              	 .loc 1 206 0
- 416 0096 0E20     	 mov r0,#14
- 417 0098 0901     	 lsl r1,r1,#4
- 418 009a FFF7FEFF 	 bl XMC_SCU_SetInterruptControl
- 419              	.LVL27:
- 420              	.LBB106:
- 421              	.LBB107:
- 627:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
- 422              	 .loc 4 627 0
- 628:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     __COMPILER_BARRIER();
- 423              	 .loc 4 628 0
- 424 009e 8023     	 mov r3,#128
- 425 00a0 DB01     	 lsl r3,r3,#7
- 426 00a2 2360     	 str r3,[r4]
- 629:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   }
- 427              	 .loc 4 629 0
- 428              	.LVL28:
- 429              	.LBE107:
- 430              	.LBE106:
- 431              	.LBB108:
- 432              	.LBB109:
- 433              	 .loc 4 736 0
- 434 00a4 0F4B     	 ldr r3,.L5+28
- 435 00a6 6259     	 ldr r2,[r4,r5]
- 436              	.LBE109:
- 437              	.LBE108:
- 210:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)13);
- 438              	 .loc 1 210 0
- 439 00a8 D021     	 mov r1,#208
- 440              	.LBB111:
- 441              	.LBB110:
- 442              	 .loc 4 736 0
- 443 00aa 1340     	 and r3,r2
- 444 00ac C022     	 mov r2,#192
- 445 00ae 1202     	 lsl r2,r2,#8
- 446 00b0 1343     	 orr r3,r2
- 447 00b2 6351     	 str r3,[r4,r5]
- 448              	.LBE110:
- 449              	.LBE111:
- 210:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)13);
- 450              	 .loc 1 210 0
- 451 00b4 0D20     	 mov r0,#13
- 452 00b6 0901     	 lsl r1,r1,#4
- 453 00b8 FFF7FEFF 	 bl XMC_SCU_SetInterruptControl
- 454              	.LVL29:
- 455              	.LBB112:
- 456              	.LBB113:
- 627:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
- 457              	 .loc 4 627 0
- 628:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****     __COMPILER_BARRIER();
- 458              	 .loc 4 628 0
- 459 00bc 8023     	 mov r3,#128
- 460 00be 9B01     	 lsl r3,r3,#6
- 461 00c0 2360     	 str r3,[r4]
- 629:C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include\core_cm0.h ****   }
- 462              	 .loc 4 629 0
- 463              	.LBE113:
- 464              	.LBE112:
- 213:../Dave/Generated/UART/uart_conf.c **** /*Interrupt handlers*/
- 465              	 .loc 1 213 0
- 466 00c2 0020     	 mov r0,#0
- 467              	 
- 468 00c4 38BD     	 pop {r3,r4,r5,pc}
- 469              	.L6:
- 470 00c6 C046     	 .align 2
- 471              	.L5:
- 472 00c8 00010440 	 .word 1074004224
- 473 00cc 00020048 	 .word 1207960064
- 474 00d0 00000000 	 .word .LANCHOR3
- 475 00d4 00000000 	 .word .LANCHOR4
- 476 00d8 00000000 	 .word .LANCHOR5
- 477 00dc 00E100E0 	 .word -536813312
- 478 00e0 FFFF00FF 	 .word -16711681
- 479 00e4 FF00FFFF 	 .word -65281
- 480              	 .cfi_endproc
- 481              	.LFE176:
- 483              	 .section .text.IRQ14_Handler,"ax",%progbits
- 484              	 .align 1
- 485              	 .global IRQ14_Handler
- 486              	 .code 16
- 487              	 .thumb_func
- 489              	IRQ14_Handler:
- 490              	.LFB177:
- 217:../Dave/Generated/UART/uart_conf.c ****   UART_lTransmitHandler(&cunit_logger);
- 491              	 .loc 1 217 0
- 492              	 .cfi_startproc
- 493 0000 08B5     	 push {r3,lr}
- 494              	.LCFI2:
- 495              	 .cfi_def_cfa_offset 8
- 496              	 .cfi_offset 3,-8
- 497              	 .cfi_offset 14,-4
- 218:../Dave/Generated/UART/uart_conf.c **** }
- 498              	 .loc 1 218 0
- 499 0002 0248     	 ldr r0,.L8
- 500 0004 FFF7FEFF 	 bl UART_lTransmitHandler
- 501              	.LVL30:
- 219:../Dave/Generated/UART/uart_conf.c **** 
- 502              	 .loc 1 219 0
- 503              	 
- 504 0008 08BD     	 pop {r3,pc}
- 505              	.L9:
- 506 000a C046     	 .align 2
- 507              	.L8:
- 508 000c 00000000 	 .word .LANCHOR6
- 509              	 .cfi_endproc
- 510              	.LFE177:
- 512              	 .section .text.IRQ13_Handler,"ax",%progbits
- 513              	 .align 1
- 514              	 .global IRQ13_Handler
- 515              	 .code 16
- 516              	 .thumb_func
- 518              	IRQ13_Handler:
- 519              	.LFB178:
- 223:../Dave/Generated/UART/uart_conf.c ****   UART_lReceiveHandler(&cunit_logger);
- 520              	 .loc 1 223 0
- 521              	 .cfi_startproc
- 522 0000 08B5     	 push {r3,lr}
- 523              	.LCFI3:
- 524              	 .cfi_def_cfa_offset 8
- 525              	 .cfi_offset 3,-8
- 526              	 .cfi_offset 14,-4
- 224:../Dave/Generated/UART/uart_conf.c **** }
- 527              	 .loc 1 224 0
- 528 0002 0248     	 ldr r0,.L11
- 529 0004 FFF7FEFF 	 bl UART_lReceiveHandler
- 530              	.LVL31:
- 225:../Dave/Generated/UART/uart_conf.c **** 
- 531              	 .loc 1 225 0
- 532              	 
- 533 0008 08BD     	 pop {r3,pc}
- 534              	.L12:
- 535 000a C046     	 .align 2
- 536              	.L11:
- 537 000c 00000000 	 .word .LANCHOR6
- 538              	 .cfi_endproc
- 539              	.LFE178:
- 541              	 .section .text.IRQ11_Handler,"ax",%progbits
- 542              	 .align 1
- 543              	 .global IRQ11_Handler
- 544              	 .code 16
- 545              	 .thumb_func
- 547              	IRQ11_Handler:
- 548              	.LFB180:
- 353:../Dave/Generated/UART/uart_conf.c **** /*Interrupt handlers*/
- 354:../Dave/Generated/UART/uart_conf.c **** /*Transmit ISR*/
- 355:../Dave/Generated/UART/uart_conf.c **** void esWiFi_com_TX_HANDLER()
- 356:../Dave/Generated/UART/uart_conf.c **** {
- 549              	 .loc 1 356 0
- 550              	 .cfi_startproc
- 551 0000 08B5     	 push {r3,lr}
- 552              	.LCFI4:
- 553              	 .cfi_def_cfa_offset 8
- 554              	 .cfi_offset 3,-8
- 555              	 .cfi_offset 14,-4
- 357:../Dave/Generated/UART/uart_conf.c ****   UART_lTransmitHandler(&esWiFi_com);
- 556              	 .loc 1 357 0
- 557 0002 0248     	 ldr r0,.L14
- 558 0004 FFF7FEFF 	 bl UART_lTransmitHandler
- 559              	.LVL32:
- 358:../Dave/Generated/UART/uart_conf.c **** }
- 560              	 .loc 1 358 0
- 561              	 
- 562 0008 08BD     	 pop {r3,pc}
- 563              	.L15:
- 564 000a C046     	 .align 2
- 565              	.L14:
- 566 000c 00000000 	 .word .LANCHOR7
- 567              	 .cfi_endproc
- 568              	.LFE180:
- 570              	 .section .text.IRQ9_Handler,"ax",%progbits
- 571              	 .align 1
- 572              	 .global IRQ9_Handler
- 573              	 .code 16
- 574              	 .thumb_func
- 576              	IRQ9_Handler:
- 577              	.LFB181:
- 359:../Dave/Generated/UART/uart_conf.c **** 
- 360:../Dave/Generated/UART/uart_conf.c **** /*Receive ISR*/
- 361:../Dave/Generated/UART/uart_conf.c **** void esWiFi_com_RX_HANDLER()
- 362:../Dave/Generated/UART/uart_conf.c **** {
- 578              	 .loc 1 362 0
- 579              	 .cfi_startproc
- 580 0000 08B5     	 push {r3,lr}
- 581              	.LCFI5:
- 582              	 .cfi_def_cfa_offset 8
- 583              	 .cfi_offset 3,-8
- 584              	 .cfi_offset 14,-4
- 363:../Dave/Generated/UART/uart_conf.c ****   UART_lReceiveHandler(&esWiFi_com);
- 585              	 .loc 1 363 0
- 586 0002 0248     	 ldr r0,.L17
- 587 0004 FFF7FEFF 	 bl UART_lReceiveHandler
- 588              	.LVL33:
- 364:../Dave/Generated/UART/uart_conf.c **** }
- 589              	 .loc 1 364 0
- 590              	 
- 591 0008 08BD     	 pop {r3,pc}
- 592              	.L18:
- 593 000a C046     	 .align 2
- 594              	.L17:
- 595 000c 00000000 	 .word .LANCHOR7
- 596              	 .cfi_endproc
- 597              	.LFE181:
- 599              	 .global esWiFi_com_rx_pin_config
- 600              	 .global esWiFi_com
- 601              	 .global esWiFi_com_runtime
- 602              	 .global esWiFi_com_config
- 603              	 .global esWiFi_com_tx_pin
- 604              	 .global esWiFi_com_tx_pin_config
- 605              	 .global esWiFi_com_channel_config
- 606              	 .global cunit_logger_rx_pin_config
- 607              	 .global cunit_logger
- 608              	 .global cunit_logger_runtime
- 609              	 .global cunit_logger_config
- 610              	 .global cunit_logger_tx_pin
- 611              	 .global cunit_logger_tx_pin_config
- 612              	 .global cunit_logger_channel_config
- 613              	 .section .data.esWiFi_com,"aw",%progbits
- 614              	 .align 2
- 615              	 .set .LANCHOR7,.+0
- 618              	esWiFi_com:
- 619 0000 00400048 	 .word 1207975936
- 620 0004 00000000 	 .word esWiFi_com_config
- 621 0008 00000000 	 .word esWiFi_com_runtime
- 622              	 .section .rodata.esWiFi_com_channel_config,"a",%progbits
- 623              	 .align 2
- 624              	 .set .LANCHOR1,.+0
- 627              	esWiFi_com_channel_config:
- 628 0000 004B0000 	 .word 19200
- 629 0004 00       	 .space 1
- 630 0005 08       	 .byte 8
- 631 0006 08       	 .byte 8
- 632 0007 01       	 .byte 1
- 633 0008 10       	 .byte 16
- 634 0009 00       	 .space 1
- 635 000a 0000     	 .short 0
- 636              	 .section .rodata.cunit_logger_config,"a",%progbits
- 637              	 .align 2
- 640              	cunit_logger_config:
- 641 0000 00000000 	 .word cunit_logger_channel_config
- 642 0004 00000000 	 .word cunit_logger_init
- 643 0008 00000000 	 .word cunit_console_uart_end_of_transmit_callback
- 644 000c 00000000 	 .word cunit_console_uart_end_of_receive_callback
- 645 0010 00000000 	 .word 0
- 646 0014 00000000 	 .word 0
- 647 0018 00000000 	 .word 0
- 648 001c 00000000 	 .word 0
- 649 0020 00000000 	 .word 0
- 650 0024 00000000 	 .word cunit_logger_tx_pin
- 651 0028 00       	 .byte 0
- 652 0029 00       	 .byte 0
- 653 002a 00       	 .byte 0
- 654 002b 04       	 .byte 4
- 655 002c 04       	 .byte 4
- 656 002d 05       	 .byte 5
- 657 002e 0000     	 .space 2
- 658              	 .section .rodata.cunit_logger_channel_config,"a",%progbits
- 659              	 .align 2
- 660              	 .set .LANCHOR4,.+0
- 663              	cunit_logger_channel_config:
- 664 0000 00C20100 	 .word 115200
- 665 0004 00       	 .space 1
- 666 0005 08       	 .byte 8
- 667 0006 08       	 .byte 8
- 668 0007 01       	 .byte 1
- 669 0008 10       	 .byte 16
- 670 0009 00       	 .space 1
- 671 000a 0000     	 .short 0
- 672              	 .section .rodata.esWiFi_com_tx_pin,"a",%progbits
- 673              	 .align 2
- 676              	esWiFi_com_tx_pin:
- 677 0000 00040440 	 .word 1074004992
- 678 0004 05       	 .byte 5
- 679 0005 000000   	 .space 3
- 680 0008 00000000 	 .word esWiFi_com_tx_pin_config
- 681              	 .section .rodata.cunit_logger_tx_pin,"a",%progbits
- 682              	 .align 2
- 685              	cunit_logger_tx_pin:
- 686 0000 00010440 	 .word 1074004224
- 687 0004 02       	 .byte 2
- 688 0005 000000   	 .space 3
- 689 0008 00000000 	 .word cunit_logger_tx_pin_config
- 690              	 .section .rodata.esWiFi_com_tx_pin_config,"a",%progbits
- 691              	 .align 2
- 692              	 .set .LANCHOR2,.+0
- 695              	esWiFi_com_tx_pin_config:
- 696 0000 98       	 .byte -104
- 697 0001 000000   	 .space 3
- 698 0004 01000000 	 .word 1
- 699              	 .section .data.cunit_logger,"aw",%progbits
- 700              	 .align 2
- 701              	 .set .LANCHOR6,.+0
- 704              	cunit_logger:
- 705 0000 00020048 	 .word 1207960064
- 706 0004 00000000 	 .word cunit_logger_config
- 707 0008 00000000 	 .word cunit_logger_runtime
- 708              	 .section .bss.cunit_logger_runtime,"aw",%nobits
- 709              	 .align 2
- 712              	cunit_logger_runtime:
- 713 0000 00000000 	 .space 28
- 713      00000000 
- 713      00000000 
- 713      00000000 
- 713      00000000 
- 714              	 .section .rodata.cunit_logger_tx_pin_config,"a",%progbits
- 715              	 .align 2
- 716              	 .set .LANCHOR5,.+0
- 719              	cunit_logger_tx_pin_config:
- 720 0000 9C       	 .byte -100
- 721 0001 000000   	 .space 3
- 722 0004 01000000 	 .word 1
- 723              	 .section .rodata.esWiFi_com_config,"a",%progbits
- 724              	 .align 2
- 727              	esWiFi_com_config:
- 728 0000 00000000 	 .word esWiFi_com_channel_config
- 729 0004 00000000 	 .word esWiFi_com_init
- 730 0008 00000000 	 .word 0
- 731 000c 00000000 	 .word 0
- 732 0010 00000000 	 .word 0
- 733 0014 00000000 	 .word 0
- 734 0018 00000000 	 .word 0
- 735 001c 00000000 	 .word 0
- 736 0020 00000000 	 .word 0
- 737 0024 00000000 	 .word esWiFi_com_tx_pin
- 738 0028 00       	 .byte 0
- 739 0029 00       	 .byte 0
- 740 002a 00       	 .byte 0
- 741 002b 04       	 .byte 4
- 742 002c 04       	 .byte 4
- 743 002d 02       	 .byte 2
- 744 002e 0000     	 .space 2
- 745              	 .section .rodata.esWiFi_com_rx_pin_config,"a",%progbits
- 746              	 .align 2
- 747              	 .set .LANCHOR0,.+0
- 750              	esWiFi_com_rx_pin_config:
- 751 0000 00       	 .byte 0
- 752 0001 00       	 .byte 0
- 753 0002 0000     	 .space 2
- 754 0004 01000000 	 .word 1
- 755              	 .section .bss.esWiFi_com_runtime,"aw",%nobits
- 756              	 .align 2
- 759              	esWiFi_com_runtime:
- 760 0000 00000000 	 .space 28
- 760      00000000 
- 760      00000000 
- 760      00000000 
- 760      00000000 
- 761              	 .section .rodata.cunit_logger_rx_pin_config,"a",%progbits
- 762              	 .align 2
- 763              	 .set .LANCHOR3,.+0
- 766              	cunit_logger_rx_pin_config:
- 767 0000 00       	 .byte 0
- 768 0001 00       	 .byte 0
- 769 0002 0000     	 .space 2
- 770 0004 01000000 	 .word 1
- 771              	 .text
- 772              	.Letext0:
- 773              	 .file 5 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
- 774              	 .file 6 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
- 775              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
- 776              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_scu.h"
- 777              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_gpio.h"
- 778              	 .file 10 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_gpio.h"
- 779              	 .file 11 "../Dave/Generated/UART/uart.h"
- 780              	 .file 12 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
- 781              	 .file 13 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+ 190              	 .loc 4 629 0
+ 191              	.LBE43:
+ 192              	.LBE42:
+ 195:../Dave/Generated/UART/uart_conf.c ****   NVIC_EnableIRQ((IRQn_Type)11);
+ 196:../Dave/Generated/UART/uart_conf.c ****   return status;
+ 197:../Dave/Generated/UART/uart_conf.c **** }
+ 193              	 .loc 1 197 0
+ 194 009c 0020     	 mov r0,#0
+ 195              	 
+ 196 009e 70BD     	 pop {r4,r5,r6,pc}
+ 197              	.L3:
+ 198              	 .align 2
+ 199              	.L2:
+ 200 00a0 00010440 	 .word 1074004224
+ 201 00a4 00020048 	 .word 1207960064
+ 202 00a8 00000000 	 .word .LANCHOR0
+ 203 00ac 00000000 	 .word .LANCHOR1
+ 204 00b0 00000000 	 .word .LANCHOR2
+ 205 00b4 00E100E0 	 .word -536813312
+ 206              	 .cfi_endproc
+ 207              	.LFE176:
+ 209              	 .section .text.IRQ11_Handler,"ax",%progbits
+ 210              	 .align 1
+ 211              	 .global IRQ11_Handler
+ 212              	 .code 16
+ 213              	 .thumb_func
+ 215              	IRQ11_Handler:
+ 216              	.LFB177:
+ 198:../Dave/Generated/UART/uart_conf.c **** /*Receive ISR*/
+ 199:../Dave/Generated/UART/uart_conf.c **** void cunit_logger_RX_HANDLER()
+ 200:../Dave/Generated/UART/uart_conf.c **** {
+ 217              	 .loc 1 200 0
+ 218              	 .cfi_startproc
+ 219 0000 08B5     	 push {r3,lr}
+ 220              	.LCFI1:
+ 221              	 .cfi_def_cfa_offset 8
+ 222              	 .cfi_offset 3,-8
+ 223              	 .cfi_offset 14,-4
+ 201:../Dave/Generated/UART/uart_conf.c ****   UART_lReceiveHandler(&cunit_logger);
+ 224              	 .loc 1 201 0
+ 225 0002 0248     	 ldr r0,.L5
+ 226 0004 FFF7FEFF 	 bl UART_lReceiveHandler
+ 227              	.LVL12:
+ 202:../Dave/Generated/UART/uart_conf.c **** }
+ 228              	 .loc 1 202 0
+ 229              	 
+ 230 0008 08BD     	 pop {r3,pc}
+ 231              	.L6:
+ 232 000a C046     	 .align 2
+ 233              	.L5:
+ 234 000c 00000000 	 .word .LANCHOR3
+ 235              	 .cfi_endproc
+ 236              	.LFE177:
+ 238              	 .global cunit_logger_rx_pin_config
+ 239              	 .global cunit_logger
+ 240              	 .global cunit_logger_runtime
+ 241              	 .global cunit_logger_config
+ 242              	 .global cunit_logger_tx_pin
+ 243              	 .global cunit_logger_tx_pin_config
+ 244              	 .global cunit_logger_channel_config
+ 245              	 .section .rodata.cunit_logger_config,"a",%progbits
+ 246              	 .align 2
+ 249              	cunit_logger_config:
+ 250 0000 00000000 	 .word cunit_logger_channel_config
+ 251 0004 00000000 	 .word cunit_logger_init
+ 252 0008 00000000 	 .word cunit_console_uart_end_of_receive_callback
+ 253 000c 00000000 	 .word 0
+ 254 0010 00000000 	 .word 0
+ 255 0014 00000000 	 .word 0
+ 256 0018 00000000 	 .word 0
+ 257 001c 00000000 	 .word 0
+ 258 0020 00000000 	 .word cunit_logger_tx_pin
+ 259 0024 00       	 .byte 0
+ 260 0025 02       	 .byte 2
+ 261 0026 00       	 .byte 0
+ 262 0027 04       	 .byte 4
+ 263 0028 04       	 .byte 4
+ 264 0029 000000   	 .space 3
+ 265              	 .section .rodata.cunit_logger_channel_config,"a",%progbits
+ 266              	 .align 2
+ 267              	 .set .LANCHOR1,.+0
+ 270              	cunit_logger_channel_config:
+ 271 0000 00C20100 	 .word 115200
+ 272 0004 00       	 .space 1
+ 273 0005 08       	 .byte 8
+ 274 0006 08       	 .byte 8
+ 275 0007 01       	 .byte 1
+ 276 0008 10       	 .byte 16
+ 277 0009 00       	 .space 1
+ 278 000a 0000     	 .short 0
+ 279              	 .section .rodata.cunit_logger_tx_pin,"a",%progbits
+ 280              	 .align 2
+ 283              	cunit_logger_tx_pin:
+ 284 0000 00010440 	 .word 1074004224
+ 285 0004 02       	 .byte 2
+ 286 0005 000000   	 .space 3
+ 287 0008 00000000 	 .word cunit_logger_tx_pin_config
+ 288              	 .section .bss.cunit_logger_runtime,"aw",%nobits
+ 289              	 .align 2
+ 292              	cunit_logger_runtime:
+ 293 0000 00000000 	 .space 28
+ 293      00000000 
+ 293      00000000 
+ 293      00000000 
+ 293      00000000 
+ 294              	 .section .rodata.cunit_logger_tx_pin_config,"a",%progbits
+ 295              	 .align 2
+ 296              	 .set .LANCHOR2,.+0
+ 299              	cunit_logger_tx_pin_config:
+ 300 0000 9C       	 .byte -100
+ 301 0001 000000   	 .space 3
+ 302 0004 01000000 	 .word 1
+ 303              	 .section .data.cunit_logger,"aw",%progbits
+ 304              	 .align 2
+ 305              	 .set .LANCHOR3,.+0
+ 308              	cunit_logger:
+ 309 0000 00020048 	 .word 1207960064
+ 310 0004 00000000 	 .word cunit_logger_config
+ 311 0008 00000000 	 .word cunit_logger_runtime
+ 312              	 .section .rodata.cunit_logger_rx_pin_config,"a",%progbits
+ 313              	 .align 2
+ 314              	 .set .LANCHOR0,.+0
+ 317              	cunit_logger_rx_pin_config:
+ 318 0000 00       	 .byte 0
+ 319 0001 00       	 .byte 0
+ 320 0002 0000     	 .space 2
+ 321 0004 01000000 	 .word 1
+ 322              	 .text
+ 323              	.Letext0:
+ 324              	 .file 5 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 325              	 .file 6 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 326              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/XMC1400.h"
+ 327              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_scu.h"
+ 328              	 .file 9 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_gpio.h"
+ 329              	 .file 10 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_gpio.h"
+ 330              	 .file 11 "../Dave/Generated/UART/uart.h"
+ 331              	 .file 12 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 332              	 .file 13 "C:/Workspace/DAVE-4.4.2-64Bit/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 uart_conf.c
-    {standard input}:18     .text.esWiFi_com_init:00000000 $t
-    {standard input}:23     .text.esWiFi_com_init:00000000 esWiFi_com_init
-    {standard input}:230    .text.esWiFi_com_init:000000c8 $d
-    {standard input}:243    .text.cunit_logger_init:00000000 $t
-    {standard input}:248    .text.cunit_logger_init:00000000 cunit_logger_init
-    {standard input}:472    .text.cunit_logger_init:000000c8 $d
-    {standard input}:484    .text.IRQ14_Handler:00000000 $t
-    {standard input}:489    .text.IRQ14_Handler:00000000 IRQ14_Handler
-    {standard input}:508    .text.IRQ14_Handler:0000000c $d
-    {standard input}:513    .text.IRQ13_Handler:00000000 $t
-    {standard input}:518    .text.IRQ13_Handler:00000000 IRQ13_Handler
-    {standard input}:537    .text.IRQ13_Handler:0000000c $d
-    {standard input}:542    .text.IRQ11_Handler:00000000 $t
-    {standard input}:547    .text.IRQ11_Handler:00000000 IRQ11_Handler
-    {standard input}:566    .text.IRQ11_Handler:0000000c $d
-    {standard input}:571    .text.IRQ9_Handler:00000000 $t
-    {standard input}:576    .text.IRQ9_Handler:00000000 IRQ9_Handler
-    {standard input}:595    .text.IRQ9_Handler:0000000c $d
-    {standard input}:750    .rodata.esWiFi_com_rx_pin_config:00000000 esWiFi_com_rx_pin_config
-    {standard input}:618    .data.esWiFi_com:00000000 esWiFi_com
-    {standard input}:759    .bss.esWiFi_com_runtime:00000000 esWiFi_com_runtime
-    {standard input}:727    .rodata.esWiFi_com_config:00000000 esWiFi_com_config
-    {standard input}:676    .rodata.esWiFi_com_tx_pin:00000000 esWiFi_com_tx_pin
-    {standard input}:695    .rodata.esWiFi_com_tx_pin_config:00000000 esWiFi_com_tx_pin_config
-    {standard input}:627    .rodata.esWiFi_com_channel_config:00000000 esWiFi_com_channel_config
-    {standard input}:766    .rodata.cunit_logger_rx_pin_config:00000000 cunit_logger_rx_pin_config
-    {standard input}:704    .data.cunit_logger:00000000 cunit_logger
-    {standard input}:712    .bss.cunit_logger_runtime:00000000 cunit_logger_runtime
-    {standard input}:640    .rodata.cunit_logger_config:00000000 cunit_logger_config
-    {standard input}:685    .rodata.cunit_logger_tx_pin:00000000 cunit_logger_tx_pin
-    {standard input}:719    .rodata.cunit_logger_tx_pin_config:00000000 cunit_logger_tx_pin_config
-    {standard input}:663    .rodata.cunit_logger_channel_config:00000000 cunit_logger_channel_config
-    {standard input}:614    .data.esWiFi_com:00000000 $d
-    {standard input}:623    .rodata.esWiFi_com_channel_config:00000000 $d
-    {standard input}:637    .rodata.cunit_logger_config:00000000 $d
-    {standard input}:659    .rodata.cunit_logger_channel_config:00000000 $d
-    {standard input}:673    .rodata.esWiFi_com_tx_pin:00000000 $d
-    {standard input}:682    .rodata.cunit_logger_tx_pin:00000000 $d
-    {standard input}:691    .rodata.esWiFi_com_tx_pin_config:00000000 $d
-    {standard input}:700    .data.cunit_logger:00000000 $d
-    {standard input}:709    .bss.cunit_logger_runtime:00000000 $d
-    {standard input}:715    .rodata.cunit_logger_tx_pin_config:00000000 $d
-    {standard input}:724    .rodata.esWiFi_com_config:00000000 $d
-    {standard input}:746    .rodata.esWiFi_com_rx_pin_config:00000000 $d
-    {standard input}:756    .bss.esWiFi_com_runtime:00000000 $d
-    {standard input}:762    .rodata.cunit_logger_rx_pin_config:00000000 $d
+    {standard input}:18     .text.cunit_logger_init:00000000 $t
+    {standard input}:23     .text.cunit_logger_init:00000000 cunit_logger_init
+    {standard input}:200    .text.cunit_logger_init:000000a0 $d
+    {standard input}:210    .text.IRQ11_Handler:00000000 $t
+    {standard input}:215    .text.IRQ11_Handler:00000000 IRQ11_Handler
+    {standard input}:234    .text.IRQ11_Handler:0000000c $d
+    {standard input}:317    .rodata.cunit_logger_rx_pin_config:00000000 cunit_logger_rx_pin_config
+    {standard input}:308    .data.cunit_logger:00000000 cunit_logger
+    {standard input}:292    .bss.cunit_logger_runtime:00000000 cunit_logger_runtime
+    {standard input}:249    .rodata.cunit_logger_config:00000000 cunit_logger_config
+    {standard input}:283    .rodata.cunit_logger_tx_pin:00000000 cunit_logger_tx_pin
+    {standard input}:299    .rodata.cunit_logger_tx_pin_config:00000000 cunit_logger_tx_pin_config
+    {standard input}:270    .rodata.cunit_logger_channel_config:00000000 cunit_logger_channel_config
+    {standard input}:246    .rodata.cunit_logger_config:00000000 $d
+    {standard input}:266    .rodata.cunit_logger_channel_config:00000000 $d
+    {standard input}:280    .rodata.cunit_logger_tx_pin:00000000 $d
+    {standard input}:289    .bss.cunit_logger_runtime:00000000 $d
+    {standard input}:295    .rodata.cunit_logger_tx_pin_config:00000000 $d
+    {standard input}:304    .data.cunit_logger:00000000 $d
+    {standard input}:313    .rodata.cunit_logger_rx_pin_config:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -3016,10 +2361,7 @@ XMC_UART_CH_Init
 XMC_USIC_CH_TXFIFO_Configure
 XMC_USIC_CH_RXFIFO_Configure
 XMC_USIC_CH_SetInterruptNodePointer
-XMC_USIC_CH_TXFIFO_SetInterruptNodePointer
 XMC_USIC_CH_RXFIFO_SetInterruptNodePointer
 XMC_SCU_SetInterruptControl
-UART_lTransmitHandler
 UART_lReceiveHandler
-cunit_console_uart_end_of_transmit_callback
 cunit_console_uart_end_of_receive_callback

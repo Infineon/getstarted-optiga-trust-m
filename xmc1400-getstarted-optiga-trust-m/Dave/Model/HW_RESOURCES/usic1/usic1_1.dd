@@ -788,7 +788,6 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#1" description="The baud rate generator interrupt is enabled. In case of a baud rate generator event, the service request output SRx indicated by INPR.PINP is activated."/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://resources/14.0.0/peripheral/usic/1/channel/0">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/UART/v4_1_12/UART_1.app#//@hwResources.0"/>
     <resourcesList name="brg" requiredResourceUri="http://resources/14.0.0/peripheral/usic/1/ch0_brg"/>
     <resourcesList name="byp" requiredResourceUri="http://resources/14.0.0/peripheral/usic/1/ch0_byp"/>
     <resourcesList name="bypcr" requiredResourceUri="http://resources/14.0.0/peripheral/usic/1/ch0_bypcr"/>

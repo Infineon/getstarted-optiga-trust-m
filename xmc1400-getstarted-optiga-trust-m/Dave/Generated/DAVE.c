@@ -114,11 +114,6 @@ __WEAK DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of UART APP instance esWiFi_com */
-	 init_status = (DAVE_STATUS_t)UART_Init(&esWiFi_com); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of I2C_MASTER APP instance i2c_master_0 */
 	 init_status = (DAVE_STATUS_t)I2C_MASTER_Init(&i2c_master_0); 
    }  

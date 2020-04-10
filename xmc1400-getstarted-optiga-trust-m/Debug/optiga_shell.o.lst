@@ -86,7 +86,7 @@
   63:../optiga_shell.c **** void example_pair_host_and_optiga_using_pre_shared_secret(void);
   64:../optiga_shell.c **** void example_optiga_util_hibernate_restore(void);
   65:../optiga_shell.c **** 
-  66:../optiga_shell.c **** extern pal_logger_t cunit_console;
+  66:../optiga_shell.c **** extern pal_logger_t logger_console;
   67:../optiga_shell.c **** /**
   68:../optiga_shell.c ****  * Callback when optiga_util_xxxx operation is completed asynchronously
   69:../optiga_shell.c ****  */
@@ -2729,7 +2729,7 @@
  494:../optiga_shell.c **** 
  495:../optiga_shell.c **** 	while(TRUE)
  496:../optiga_shell.c **** 	{
- 497:../optiga_shell.c **** 		if (0 == pal_logger_read(&cunit_console,&ch,1))
+ 497:../optiga_shell.c **** 		if (0 == pal_logger_read(&logger_console,&ch,1))
  2110              	 .loc 1 497 0
  2111 0020 324F     	 ldr r7,.L114+4
  2112 0022 311C     	 mov r1,r6
@@ -2922,7 +2922,7 @@
  509:../optiga_shell.c **** 			else
  510:../optiga_shell.c **** 			{
  511:../optiga_shell.c **** 				//keep adding
- 512:../optiga_shell.c **** 				pal_logger_write(&cunit_console, &ch, 1);
+ 512:../optiga_shell.c **** 				pal_logger_write(&logger_console, &ch, 1);
  2266              	 .loc 1 512 0
  2267 00d4 0122     	 mov r2,#1
  2268 00d6 381C     	 mov r0,r7
@@ -2941,7 +2941,7 @@
  2280              	 .align 2
  2281              	.L114:
  2282 00e8 6F0F0000 	 .word .LC217
- 2283 00ec 00000000 	 .word cunit_console
+ 2283 00ec 00000000 	 .word logger_console
  2284 00f0 400F0000 	 .word .LC202
  2285 00f4 00000000 	 .word .LANCHOR2
  2286 00f8 2A0F0000 	 .word .LC198
@@ -2994,7 +2994,7 @@
  2324              	.L118:
  524:../optiga_shell.c **** 	while(1U)
  525:../optiga_shell.c **** 	{
- 526:../optiga_shell.c **** 		pal_logger_read(&cunit_console,&ch,1);
+ 526:../optiga_shell.c **** 		pal_logger_read(&logger_console,&ch,1);
  2325              	 .loc 1 526 0
  2326 0012 0948     	 ldr r0,.L119+4
  2327 0014 291C     	 mov r1,r5
@@ -3035,7 +3035,7 @@
  2351              	 .align 2
  2352              	.L119:
  2353 0034 940F0000 	 .word .LC227
- 2354 0038 00000000 	 .word cunit_console
+ 2354 0038 00000000 	 .word logger_console
  2355              	 .cfi_endproc
  2356              	.LFE305:
  2358              	 .global optiga_cmds
@@ -4060,4 +4060,4 @@ pal_logger_read
 strlen
 strcpy
 pal_logger_write
-cunit_console
+logger_console

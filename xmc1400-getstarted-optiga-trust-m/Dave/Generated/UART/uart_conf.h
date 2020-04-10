@@ -61,11 +61,8 @@
 #define UART_PATCH_VERSION (12U)
 
 
-#define cunit_logger_TX_HANDLER  IRQ_Hdlr_14
-#define cunit_logger_RX_HANDLER  IRQ_Hdlr_13
-#define esWiFi_com_TX_HANDLER  IRQ_Hdlr_11
-#define esWiFi_com_RX_HANDLER  IRQ_Hdlr_9
-#define UART_TX_INTERRUPT_USED
+#define cunit_logger_RX_HANDLER  IRQ_Hdlr_11
+#define UART_TX_DIRECT_USED
 #define UART_RX_INTERRUPT_USED
 #define UART_IRQ_USED
 

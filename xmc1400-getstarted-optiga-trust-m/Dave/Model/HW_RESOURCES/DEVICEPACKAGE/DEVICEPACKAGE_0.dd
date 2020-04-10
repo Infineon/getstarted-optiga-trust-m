@@ -47,11 +47,9 @@
     <resourcesList name="pin" requiredResourceUri="http://resources/VQFN64.0.0/devicepackage/0/pin26"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="64" URI="http://resources/vqfn64.0.0/devicepackage/0/64">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/UART/v4_1_12/UART_1.app#//@hwResources.11"/>
     <resourcesList name="pin" requiredResourceUri="http://resources/VQFN64.0.0/devicepackage/0/pin64"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="63" URI="http://resources/vqfn64.0.0/devicepackage/0/63">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/UART/v4_1_12/UART_1.app#//@hwResources.10"/>
     <resourcesList name="pin" requiredResourceUri="http://resources/VQFN64.0.0/devicepackage/0/pin63"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="43" URI="http://resources/vqfn64.0.0/devicepackage/0/43">

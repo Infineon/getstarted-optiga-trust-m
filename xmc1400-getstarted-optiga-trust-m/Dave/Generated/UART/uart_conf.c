@@ -63,13 +63,6 @@
  ***********************************************************************************************************************/
 
 /*
- * Function implements the data transmission. It is called from the transmit interrupt service handler.
- * Function pushes data to the output block and releases control. It is called again when the previous data is
- * transmitted. When transmit FIFO is used, the function sets the trigger limit based on the size of data to be
- * transmitted.
- */
-extern void UART_lTransmitHandler(const UART_t * const handle);
-/*
  * Function implements the data reception. It is called from the receive interrupt service handler.
  * Function reads data from the receive block and updates the user's buffer. It is called again when the data is
  * received again. When receive FIFO is used, the function sets the trigger limit based on the size of data to be
@@ -122,7 +115,6 @@ const UART_CONFIG_t cunit_logger_config =
 
 
   .fptr_uart_config = cunit_logger_init,
-  .tx_cbhandler = cunit_console_uart_end_of_transmit_callback,
   .rx_cbhandler = cunit_console_uart_end_of_receive_callback,  
   .sync_error_cbhandler = NULL,  
   .rx_noise_error_cbhandler = NULL,  
@@ -131,11 +123,10 @@ const UART_CONFIG_t cunit_logger_config =
   .collision_error_cbhandler = NULL,
   .tx_pin_config    = &cunit_logger_tx_pin,
   .mode             = UART_MODE_FULLDUPLEX,
-  .transmit_mode = UART_TRANSFER_MODE_INTERRUPT,
+  .transmit_mode = UART_TRANSFER_MODE_DIRECT,
   .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
   .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
   .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
-  .tx_sr   = 0x5U,
 };
 
 /*Runtime handler*/
@@ -193,174 +184,21 @@ UART_STATUS_t cunit_logger_init()
   /*Set service request for UART protocol events*/
   XMC_USIC_CH_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
      0U);
-  /*Set service request for tx FIFO transmit interrupt*/
-  XMC_USIC_CH_TXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_TXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-      5U);
   /*Set service request for rx FIFO receive interrupt*/
   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-       0x4U);
+       0x2U);
   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART0_CH1, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_ALTERNATE,
-       0x4U);
-  /*Set priority and enable NVIC node for transmit interrupt*/
-  NVIC_SetPriority((IRQn_Type)14, 3U);
-  XMC_SCU_SetInterruptControl(14U, XMC_SCU_IRQCTRL_USIC0_SR5_IRQ14);
-  NVIC_EnableIRQ((IRQn_Type)14);
+       0x2U);
   /*Set priority and enable NVIC node for receive interrupt*/
-  NVIC_SetPriority((IRQn_Type)13, 3U);
-  XMC_SCU_SetInterruptControl(13U, XMC_SCU_IRQCTRL_USIC0_SR4_IRQ13);
-  NVIC_EnableIRQ((IRQn_Type)13);
+  NVIC_SetPriority((IRQn_Type)11, 3U);
+  XMC_SCU_SetInterruptControl(11U, XMC_SCU_IRQCTRL_USIC0_SR2_IRQ11);
+  NVIC_EnableIRQ((IRQn_Type)11);
   return status;
 }
-/*Interrupt handlers*/
-/*Transmit ISR*/
-void cunit_logger_TX_HANDLER()
-{
-  UART_lTransmitHandler(&cunit_logger);
-}
-
 /*Receive ISR*/
 void cunit_logger_RX_HANDLER()
 {
   UART_lReceiveHandler(&cunit_logger);
-}
-
-/**********************************************************************************************************************
- * DATA STRUCTURES
- **********************************************************************************************************************/
-UART_STATUS_t esWiFi_com_init(void);
-
-/*USIC channel configuration*/
-const XMC_UART_CH_CONFIG_t esWiFi_com_channel_config =
-{
-  .baudrate      = 19200U,
-  .data_bits     = 8U,
-  .frame_length  = 8U,
-  .stop_bits     = 1U,
-  .oversampling  = 16U,
-  .parity_mode   = XMC_USIC_CH_PARITY_MODE_NONE
-};
-/*Transmit pin configuration*/
-const XMC_GPIO_CONFIG_t esWiFi_com_tx_pin_config   = 
-{ 
-  .mode             = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT6, 
-  .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH
-};
-
-/*Transmit pin configuration used for initializing*/
-const UART_TX_CONFIG_t esWiFi_com_tx_pin = 
-{
-  .port = (XMC_GPIO_PORT_t *)PORT4_BASE,
-  .config = &esWiFi_com_tx_pin_config,
-  .pin = 5U
-};
-
-/*UART APP configuration structure*/
-const UART_CONFIG_t esWiFi_com_config = 
-{
-  .channel_config   = &esWiFi_com_channel_config,
-
-
-  .fptr_uart_config = esWiFi_com_init,
-  .tx_cbhandler = NULL,
-  .rx_cbhandler = NULL,  
-  .sync_error_cbhandler = NULL,  
-  .rx_noise_error_cbhandler = NULL,  
-  .format_error_bit0_cbhandler = NULL,  
-  .format_error_bit1_cbhandler = NULL,  
-  .collision_error_cbhandler = NULL,
-  .tx_pin_config    = &esWiFi_com_tx_pin,
-  .mode             = UART_MODE_FULLDUPLEX,
-  .transmit_mode = UART_TRANSFER_MODE_INTERRUPT,
-  .receive_mode = UART_TRANSFER_MODE_INTERRUPT,
-  .tx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
-  .rx_fifo_size     = XMC_USIC_CH_FIFO_SIZE_16WORDS,
-  .tx_sr   = 0x2U,
-};
-
-/*Runtime handler*/
-UART_RUNTIME_t esWiFi_com_runtime = 
-{
-  .tx_busy = false,  
-  .rx_busy = false,
-};
-
-/*APP handle structure*/
-UART_t esWiFi_com = 
-{
-  .channel = XMC_UART1_CH0,
-  .config  = &esWiFi_com_config,
-  .runtime = &esWiFi_com_runtime
-};
-
-/*Receive pin configuration*/
-const XMC_GPIO_CONFIG_t esWiFi_com_rx_pin_config   = {
-  .mode             = XMC_GPIO_MODE_INPUT_TRISTATE,
-  .output_level     = XMC_GPIO_OUTPUT_LEVEL_HIGH,
-  .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD
-};
-/**********************************************************************************************************************
- * API IMPLEMENTATION
- **********************************************************************************************************************/
-/*Channel initialization function*/
-UART_STATUS_t esWiFi_com_init()
-{
-  UART_STATUS_t status = UART_STATUS_SUCCESS;
-  /*Configure Receive pin*/
-  XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT4_BASE, 4U, &esWiFi_com_rx_pin_config);
-  /* Initialize USIC channel in UART mode*/
-  XMC_UART_CH_Init(XMC_UART1_CH0, &esWiFi_com_channel_config);
-  /*Set input source path*/
-  XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX0, 2U);
-  XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX3, 0U);
-  XMC_USIC_CH_SetInputSource(XMC_UART1_CH0, XMC_USIC_CH_INPUT_DX5, 0U);
-  /*Configure transmit FIFO*/
-  XMC_USIC_CH_TXFIFO_Configure(XMC_UART1_CH0,
-        48U,
-        XMC_USIC_CH_FIFO_SIZE_16WORDS,
-        1U);
-  /*Configure receive FIFO*/
-  XMC_USIC_CH_RXFIFO_Configure(XMC_UART1_CH0,
-        32U,
-        XMC_USIC_CH_FIFO_SIZE_16WORDS,
-        0U);
-  /* Start UART */
-  XMC_UART_CH_Start(XMC_UART1_CH0);
-
-  /* Initialize UART TX pin */
-  XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT4_BASE, 5U, &esWiFi_com_tx_pin_config);
-
-  /*Set service request for UART protocol events*/
-  XMC_USIC_CH_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
-     1U);
-  /*Set service request for tx FIFO transmit interrupt*/
-  XMC_USIC_CH_TXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_TXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-      2U);
-  /*Set service request for rx FIFO receive interrupt*/
-  XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-       0x0U);
-  XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_UART1_CH0, XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_ALTERNATE,
-       0x0U);
-  /*Set priority and enable NVIC node for transmit interrupt*/
-  NVIC_SetPriority((IRQn_Type)11, 3U);
-  XMC_SCU_SetInterruptControl(11U, XMC_SCU_IRQCTRL_USIC1_SR2_IRQ11);
-  NVIC_EnableIRQ((IRQn_Type)11);
-  /*Set priority and enable NVIC node for receive interrupt*/
-  NVIC_SetPriority((IRQn_Type)9, 3U);
-  XMC_SCU_SetInterruptControl(9U, XMC_SCU_IRQCTRL_USIC1_SR0_IRQ9);
-  NVIC_EnableIRQ((IRQn_Type)9);
-  return status;
-}
-/*Interrupt handlers*/
-/*Transmit ISR*/
-void esWiFi_com_TX_HANDLER()
-{
-  UART_lTransmitHandler(&esWiFi_com);
-}
-
-/*Receive ISR*/
-void esWiFi_com_RX_HANDLER()
-{
-  UART_lReceiveHandler(&esWiFi_com);
 }
 
 /*CODE_BLOCK_END*/

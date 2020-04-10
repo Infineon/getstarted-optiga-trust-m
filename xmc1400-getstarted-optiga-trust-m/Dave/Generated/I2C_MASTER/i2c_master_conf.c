@@ -155,9 +155,9 @@ const I2C_MASTER_CONFIG_t i2c_master_0_config =
 };
 I2C_MASTER_RUNTIME_t i2c_master_0_runtime =
 {
-  .tx_ack_sr = 0x3U,
+  .tx_ack_sr = 0x1U,
   .tx_busy = false,
-  .rx_sr = 0x1U,
+  .rx_sr = 0x0U,
   .rx_busy = false,
   .bus_acquired = false
 };
@@ -193,7 +193,7 @@ void i2c_master_0_init(void)
                                (uint32_t)1);
   XMC_USIC_CH_TXFIFO_SetInterruptNodePointer(XMC_I2C1_CH1,
                                                XMC_USIC_CH_TXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-                                             ((uint32_t)3));
+                                             ((uint32_t)1));
   XMC_USIC_CH_TXFIFO_EnableEvent(XMC_I2C1_CH1, tx_fifo_events);
   /* configure i2c rx fifo */
   XMC_USIC_CH_RXFIFO_Configure(XMC_I2C1_CH1,
@@ -202,10 +202,10 @@ void i2c_master_0_init(void)
                                 (uint32_t)(15));
   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_I2C1_CH1,
                                                XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_STANDARD,
-                                              ((uint32_t)0x1));
+                                              ((uint32_t)0x0));
   XMC_USIC_CH_RXFIFO_SetInterruptNodePointer(XMC_I2C1_CH1,
                                                XMC_USIC_CH_RXFIFO_INTERRUPT_NODE_POINTER_ALTERNATE,
-                                              ((uint32_t)0x1));
+                                              ((uint32_t)0x0));
   XMC_USIC_CH_RXFIFO_EnableEvent(XMC_I2C1_CH1, rx_fifo_events);
   XMC_USIC_CH_SetInterruptNodePointer(XMC_I2C1_CH1,
                                       XMC_USIC_CH_INTERRUPT_NODE_POINTER_PROTOCOL,
@@ -216,12 +216,12 @@ void i2c_master_0_init(void)
   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT2_BASE, (uint8_t)12, &i2c_master_0_sda_pin_config);
   XMC_GPIO_Init((XMC_GPIO_PORT_t *)PORT0_BASE, (uint8_t)1, &i2c_master_0_scl_pin_config);
 
-  NVIC_SetPriority((IRQn_Type)12, 3);
-  XMC_SCU_SetInterruptControl(12, XMC_SCU_IRQCTRL_USIC1_SR3_IRQ12);
-  NVIC_EnableIRQ((IRQn_Type)12);
   NVIC_SetPriority((IRQn_Type)10, 3);
   XMC_SCU_SetInterruptControl(10, XMC_SCU_IRQCTRL_USIC1_SR1_IRQ10);
-  NVIC_EnableIRQ((IRQn_Type)10);}
+  NVIC_EnableIRQ((IRQn_Type)10);
+  NVIC_SetPriority((IRQn_Type)9, 3);
+  XMC_SCU_SetInterruptControl(9, XMC_SCU_IRQCTRL_USIC1_SR0_IRQ9);
+  NVIC_EnableIRQ((IRQn_Type)9);}
 /*Transmit ISR*/
 void i2c_master_0_TX_HANDLER()
 {

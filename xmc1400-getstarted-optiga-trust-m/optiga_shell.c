@@ -63,7 +63,7 @@ void example_optiga_util_protected_update(void);
 void example_pair_host_and_optiga_using_pre_shared_secret(void);
 void example_optiga_util_hibernate_restore(void);
 
-extern pal_logger_t cunit_console;
+extern pal_logger_t logger_console;
 /**
  * Callback when optiga_util_xxxx operation is completed asynchronously
  */
@@ -494,7 +494,7 @@ void optiga_shell_begin(void)
 
 	while(TRUE)
 	{
-		if (0 == pal_logger_read(&cunit_console,&ch,1))
+		if (0 == pal_logger_read(&logger_console,&ch,1))
 		{
 
 			if(ch == 0x0d || ch == 0x0a)
@@ -509,7 +509,7 @@ void optiga_shell_begin(void)
 			else
 			{
 				//keep adding
-				pal_logger_write(&cunit_console, &ch, 1);
+				pal_logger_write(&logger_console, &ch, 1);
 				user_cmd[index++] = ch;
 			}
 		}
@@ -523,7 +523,7 @@ void optiga_shell_wait_for_user(void)
 	optiga_lib_print_string_with_newline("Press any key to start optiga mini shell");
 	while(1U)
 	{
-		pal_logger_read(&cunit_console,&ch,1);
+		pal_logger_read(&logger_console,&ch,1);
 		if (ch != 0)
 		{
 			break;

@@ -157,5 +157,10 @@
 			<type>2</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/optiga-trust-m-1/examples/optiga/include</locationURI>
 		</link>
+		<link>
+			<name>optiga-trust-m-lib/xmc1400_xtreme/pal_crypt_mbedtls.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/optiga-trust-m-1/pal/pal_crypt_mbedtls.c</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

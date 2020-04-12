@@ -1,0 +1,511 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "pal_logger.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.cunit_console_uart_end_of_transmit_callback,"ax",%progbits
+  18              	 .align 1
+  19              	 .global cunit_console_uart_end_of_transmit_callback
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	cunit_console_uart_end_of_transmit_callback:
+  24              	.LFB276:
+  25              	 .file 1 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c"
+   1://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** /**
+   2://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * \copyright
+   3://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * MIT License
+   4://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+   5://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+   7://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * of this software and associated documentation files (the "Software"), to deal
+   9://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * in the Software without restriction, including without limitation the rights
+  10://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * copies of the Software, and to permit persons to whom the Software is
+  12://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * furnished to do so, subject to the following conditions:
+  13://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+  14://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * The above copyright notice and this permission notice shall be included in all
+  15://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * copies or substantial portions of the Software.
+  16://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+  17://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * SOFTWARE
+  24://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+  25://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * \endcopyright
+  26://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** *
+  27://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** * \author Infineon Technologies AG
+  28://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  *
+  29://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  * \file    pal_logger.c
+  30://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  *
+  31://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  * \brief   This file provides the prototypes declarations for pal logger.
+  32://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  *
+  33://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  * \ingroup grPAL
+  34://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  *
+  35://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  * @{
+  36://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****  */
+  37://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** #include <DAVE.h>
+  38://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** #include "optiga/pal/pal_logger.h"
+  39://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  40://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** /// @cond hidden
+  41://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  42://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** extern uint32_t get_sys_tick_ms(void);
+  43://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  44://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** //lint --e{552,714} suppress "Accessed by user of this structure"
+  45://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_logger_t logger_console =
+  46://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+  47://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_config_ptr = (void*)(&cunit_logger),
+  48://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_rx_flag = 1,
+  49://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_tx_flag = 1
+  50://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** };
+  51://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** //lint --e{552} suppress "Accessed by user of this structure"
+  52://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_logger_t cunit_console =
+  53://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+  54://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_config_ptr = NULL,
+  55://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_rx_flag = 1,
+  56://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         .logger_tx_flag = 1
+  57://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** };
+  58://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  59://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** void cunit_console_uart_end_of_transmit_callback(void)
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+  26              	 .loc 1 60 0
+  27              	 .cfi_startproc
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 	logger_console.logger_tx_flag = 0;
+  28              	 .loc 1 61 0
+  29 0000 0022     	 mov r2,#0
+  30 0002 014B     	 ldr r3,.L2
+  62://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+  31              	 .loc 1 62 0
+  32              	 
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 	logger_console.logger_tx_flag = 0;
+  33              	 .loc 1 61 0
+  34 0004 5A71     	 strb r2,[r3,#5]
+  35              	 .loc 1 62 0
+  36 0006 7047     	 bx lr
+  37              	.L3:
+  38              	 .align 2
+  39              	.L2:
+  40 0008 00000000 	 .word .LANCHOR0
+  41              	 .cfi_endproc
+  42              	.LFE276:
+  44              	 .section .text.cunit_console_uart_end_of_receive_callback,"ax",%progbits
+  45              	 .align 1
+  46              	 .global cunit_console_uart_end_of_receive_callback
+  47              	 .code 16
+  48              	 .thumb_func
+  50              	cunit_console_uart_end_of_receive_callback:
+  51              	.LFB277:
+  63://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  64://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** void cunit_console_uart_end_of_receive_callback(void)
+  65://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+  52              	 .loc 1 65 0
+  53              	 .cfi_startproc
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 	logger_console.logger_rx_flag = 0;
+  54              	 .loc 1 66 0
+  55 0000 0022     	 mov r2,#0
+  56 0002 014B     	 ldr r3,.L5
+  67://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+  57              	 .loc 1 67 0
+  58              	 
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 	logger_console.logger_rx_flag = 0;
+  59              	 .loc 1 66 0
+  60 0004 1A71     	 strb r2,[r3,#4]
+  61              	 .loc 1 67 0
+  62 0006 7047     	 bx lr
+  63              	.L6:
+  64              	 .align 2
+  65              	.L5:
+  66 0008 00000000 	 .word .LANCHOR0
+  67              	 .cfi_endproc
+  68              	.LFE277:
+  70              	 .section .text.pal_logger_init,"ax",%progbits
+  71              	 .align 1
+  72              	 .global pal_logger_init
+  73              	 .code 16
+  74              	 .thumb_func
+  76              	pal_logger_init:
+  77              	.LFB278:
+  68://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  69://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** /// @endcond
+  70://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  71://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  72://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_status_t pal_logger_init(void * p_logger_context)
+  73://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+  78              	 .loc 1 73 0
+  79              	 .cfi_startproc
+  80              	.LVL0:
+  81 0000 08B5     	 push {r3,lr}
+  82              	.LCFI0:
+  83              	 .cfi_def_cfa_offset 8
+  84              	 .cfi_offset 3,-8
+  85              	 .cfi_offset 14,-4
+  74://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+  75://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_logger_t * p_log_context = p_logger_context;
+  76://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     DAVE_STATUS_t status;
+  77://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  78://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     do
+  79://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     {
+  80://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     	status = (DAVE_STATUS_t)UART_Init(&cunit_logger);
+  86              	 .loc 1 80 0
+  87 0002 0248     	 ldr r0,.L8
+  88              	.LVL1:
+  89 0004 FFF7FEFF 	 bl UART_Init
+  90              	.LVL2:
+  81://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 		return_status = PAL_STATUS_SUCCESS;
+  82://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     }while(FALSE);
+  83://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  84://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     return return_status;
+  85://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+  91              	 .loc 1 85 0
+  92              	 
+  93 0008 0020     	 mov r0,#0
+  94 000a 08BD     	 pop {r3,pc}
+  95              	.L9:
+  96              	 .align 2
+  97              	.L8:
+  98 000c 00000000 	 .word cunit_logger
+  99              	 .cfi_endproc
+ 100              	.LFE278:
+ 102              	 .section .text.pal_logger_deinit,"ax",%progbits
+ 103              	 .align 1
+ 104              	 .global pal_logger_deinit
+ 105              	 .code 16
+ 106              	 .thumb_func
+ 108              	pal_logger_deinit:
+ 109              	.LFB279:
+  86://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  87://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  88://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_status_t pal_logger_deinit(void * p_logger_context)
+  89://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+ 110              	 .loc 1 89 0
+ 111              	 .cfi_startproc
+ 112              	.LVL3:
+  90://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+  91://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_logger_t * p_log_context = p_logger_context;
+  92://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  93://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     do
+  94://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     {
+  95://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         // The instance of VMCOMS is internally declared
+  96://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         if(NULL == p_log_context->logger_config_ptr)
+  97://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+  98://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+  99://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = PAL_STATUS_SUCCESS;
+ 100://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 101://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         else
+ 102://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+ 103://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         	p_logger_context = NULL;
+ 104://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = PAL_STATUS_SUCCESS;
+ 105://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 106://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     }while(FALSE);
+ 107://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     return return_status;
+ 108://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+ 113              	 .loc 1 108 0
+ 114 0000 0020     	 mov r0,#0
+ 115              	.LVL4:
+ 116              	 
+ 117 0002 7047     	 bx lr
+ 118              	 .cfi_endproc
+ 119              	.LFE279:
+ 121              	 .section .text.pal_logger_write,"ax",%progbits
+ 122              	 .align 1
+ 123              	 .global pal_logger_write
+ 124              	 .code 16
+ 125              	 .thumb_func
+ 127              	pal_logger_write:
+ 128              	.LFB280:
+ 109://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 110://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 111://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_status_t pal_logger_write(void * p_logger_context, const uint8_t * p_log_data, uint32_t log_dat
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+ 129              	 .loc 1 112 0
+ 130              	 .cfi_startproc
+ 131              	.LVL5:
+ 113://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     int32_t return_status = PAL_STATUS_FAILURE;
+ 115://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_logger_t * p_log_context = p_logger_context;
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     volatile uint32_t time_out = 0;
+ 132              	 .loc 1 116 0
+ 133 0000 0023     	 mov r3,#0
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 134              	 .loc 1 112 0
+ 135 0002 F7B5     	 push {r0,r1,r2,r4,r5,r6,r7,lr}
+ 136              	.LCFI1:
+ 137              	 .cfi_def_cfa_offset 32
+ 138              	 .cfi_offset 0,-32
+ 139              	 .cfi_offset 1,-28
+ 140              	 .cfi_offset 2,-24
+ 141              	 .cfi_offset 4,-20
+ 142              	 .cfi_offset 5,-16
+ 143              	 .cfi_offset 6,-12
+ 144              	 .cfi_offset 7,-8
+ 145              	 .cfi_offset 14,-4
+ 117://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     static uint32_t len = 0;
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     len = log_data_length;
+ 146              	 .loc 1 118 0
+ 147 0004 0E4C     	 ldr r4,.L19
+ 119://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 120://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     UART_t  * UART;
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 122://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     UART = p_log_context->logger_config_ptr;
+ 148              	 .loc 1 122 0
+ 149 0006 0768     	 ldr r7,[r0]
+ 150              	.LVL6:
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 151              	 .loc 1 112 0
+ 152 0008 0E1C     	 mov r6,r1
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     static uint32_t len = 0;
+ 153              	 .loc 1 116 0
+ 154 000a 0193     	 str r3,[sp,#4]
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 155              	 .loc 1 118 0
+ 156 000c 2260     	 str r2,[r4]
+ 157 000e 0D1C     	 mov r5,r1
+ 123://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 124://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     do
+ 125://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     {
+ 126://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         // The instance of VMCOMS is internally declared
+ 127://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         if(NULL == p_log_context->logger_config_ptr)
+ 158              	 .loc 1 127 0
+ 159 0010 9F42     	 cmp r7,r3
+ 160 0012 12D0     	 beq .L16
+ 161              	.LVL7:
+ 162              	.L14:
+ 163              	.LBB2:
+ 128://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+ 129://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 130://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = PAL_STATUS_SUCCESS;
+ 131://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 132://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         else
+ 133://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+ 134://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 			for (size_t i = 0; i < len; ++i)
+ 164              	 .loc 1 134 0 discriminator 1
+ 165 0014 2268     	 ldr r2,[r4]
+ 166 0016 AB1B     	 sub r3,r5,r6
+ 167              	.LVL8:
+ 168 0018 9342     	 cmp r3,r2
+ 169 001a 0ED2     	 bcs .L16
+ 135://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 			{
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 				time_out = 0;
+ 170              	 .loc 1 136 0
+ 171 001c 0023     	 mov r3,#0
+ 172              	.LVL9:
+ 137://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 				XMC_UART_CH_Transmit(UART->channel, *(const uint8_t *)p_log_data);
+ 173              	 .loc 1 137 0
+ 174 001e 2978     	 ldrb r1,[r5]
+ 175 0020 3868     	 ldr r0,[r7]
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 				XMC_UART_CH_Transmit(UART->channel, *(const uint8_t *)p_log_data);
+ 176              	 .loc 1 136 0
+ 177 0022 0193     	 str r3,[sp,#4]
+ 178              	 .loc 1 137 0
+ 179 0024 FFF7FEFF 	 bl XMC_UART_CH_Transmit
+ 180              	.LVL10:
+ 138://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 				p_log_data++;
+ 181              	 .loc 1 138 0
+ 182 0028 0135     	 add r5,r5,#1
+ 183              	.LVL11:
+ 184              	.L13:
+ 139://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 				while(time_out++ < 0x1f5);
+ 185              	 .loc 1 139 0 discriminator 1
+ 186 002a 019B     	 ldr r3,[sp,#4]
+ 187 002c 5A1C     	 add r2,r3,#1
+ 188 002e 0192     	 str r2,[sp,#4]
+ 189 0030 FA22     	 mov r2,#250
+ 190 0032 5200     	 lsl r2,r2,#1
+ 191 0034 9342     	 cmp r3,r2
+ 192 0036 F8D9     	 bls .L13
+ 193 0038 ECE7     	 b .L14
+ 194              	.LVL12:
+ 195              	.L16:
+ 196              	.LBE2:
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 			}
+ 141://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 			return_status = PAL_STATUS_SUCCESS;
+ 142://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     } while(0);
+ 144://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     time_out = 0;
+ 197              	 .loc 1 144 0
+ 198 003a 0020     	 mov r0,#0
+ 199 003c 0190     	 str r0,[sp,#4]
+ 145://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     return ((pal_status_t)return_status);
+ 146://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+ 200              	 .loc 1 146 0
+ 201              	 
+ 202              	.LVL13:
+ 203              	.LVL14:
+ 204 003e FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
+ 205              	.L20:
+ 206              	 .align 2
+ 207              	.L19:
+ 208 0040 00000000 	 .word .LANCHOR1
+ 209              	 .cfi_endproc
+ 210              	.LFE280:
+ 212              	 .section .text.pal_logger_read,"ax",%progbits
+ 213              	 .align 1
+ 214              	 .global pal_logger_read
+ 215              	 .code 16
+ 216              	 .thumb_func
+ 218              	pal_logger_read:
+ 219              	.LFB281:
+ 147://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 148://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** pal_status_t pal_logger_read(void * p_logger_context, uint8_t * p_log_data, uint32_t log_data_lengt
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** {
+ 220              	 .loc 1 149 0
+ 221              	 .cfi_startproc
+ 222              	.LVL15:
+ 150://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 151://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     int32_t return_status = PAL_STATUS_FAILURE;
+ 152://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     pal_logger_t * p_log_context = p_logger_context;
+ 153://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 154://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     do
+ 155://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     {
+ 156://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         // The instance of VMCOMS is internally declared
+ 157://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         if(NULL == p_log_context->logger_config_ptr)
+ 223              	 .loc 1 157 0
+ 224 0000 0368     	 ldr r3,[r0]
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 225              	 .loc 1 149 0
+ 226 0002 10B5     	 push {r4,lr}
+ 227              	.LCFI2:
+ 228              	 .cfi_def_cfa_offset 8
+ 229              	 .cfi_offset 4,-8
+ 230              	 .cfi_offset 14,-4
+ 231              	 .loc 1 157 0
+ 232 0004 002B     	 cmp r3,#0
+ 233 0006 01D1     	 bne .L22
+ 234              	.LVL16:
+ 235              	.L25:
+ 158://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+ 159://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** 
+ 160://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = PAL_STATUS_SUCCESS;
+ 236              	 .loc 1 160 0
+ 237 0008 0020     	 mov r0,#0
+ 238 000a 0BE0     	 b .L23
+ 239              	.LVL17:
+ 240              	.L22:
+ 241 000c 041C     	 mov r4,r0
+ 161://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 162://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         else
+ 163://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         {
+ 164://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             p_log_context->logger_rx_flag = 1U;
+ 242              	 .loc 1 164 0
+ 243 000e 0120     	 mov r0,#1
+ 244              	.LVL18:
+ 245 0010 2071     	 strb r0,[r4,#4]
+ 165://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = (int32_t)UART_Receive(p_log_context->logger_config_ptr, p_log_data, log
+ 246              	 .loc 1 165 0
+ 247 0012 181C     	 mov r0,r3
+ 248 0014 FFF7FEFF 	 bl UART_Receive
+ 249              	.LVL19:
+ 166://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             if (return_status != PAL_STATUS_SUCCESS)
+ 250              	 .loc 1 166 0
+ 251 0018 0028     	 cmp r0,#0
+ 252 001a 03D1     	 bne .L23
+ 253              	.L24:
+ 167://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             {
+ 168://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****                 break;
+ 169://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             }
+ 170://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             while (p_log_context->logger_rx_flag)
+ 254              	 .loc 1 170 0 discriminator 1
+ 255 001c 2379     	 ldrb r3,[r4,#4]
+ 256 001e 002B     	 cmp r3,#0
+ 257 0020 FCD1     	 bne .L24
+ 258 0022 F1E7     	 b .L25
+ 259              	.LVL20:
+ 260              	.L23:
+ 171://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             {
+ 172://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             }
+ 173://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****             return_status = PAL_STATUS_SUCCESS;
+ 174://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****         }
+ 175://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     } while(0);
+ 176://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c ****     return ((pal_status_t)return_status);
+ 261              	 .loc 1 176 0
+ 262 0024 80B2     	 uxth r0,r0
+ 263              	.LVL21:
+ 177://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_logger.c **** }
+ 264              	 .loc 1 177 0
+ 265              	 
+ 266 0026 10BD     	 pop {r4,pc}
+ 267              	 .cfi_endproc
+ 268              	.LFE281:
+ 270              	 .global cunit_console
+ 271              	 .global logger_console
+ 272              	 .section .data.cunit_console,"aw",%progbits
+ 273              	 .align 2
+ 276              	cunit_console:
+ 277 0000 00000000 	 .word 0
+ 278 0004 01       	 .byte 1
+ 279 0005 01       	 .byte 1
+ 280 0006 0000     	 .space 2
+ 281              	 .section .data.logger_console,"aw",%progbits
+ 282              	 .align 2
+ 283              	 .set .LANCHOR0,.+0
+ 286              	logger_console:
+ 287 0000 00000000 	 .word cunit_logger
+ 288 0004 01       	 .byte 1
+ 289 0005 01       	 .byte 1
+ 290 0006 0000     	 .space 2
+ 291              	 .section .bss.len.9081,"aw",%nobits
+ 292              	 .align 2
+ 293              	 .set .LANCHOR1,.+0
+ 296              	len.9081:
+ 297 0000 00000000 	 .space 4
+ 298              	 .text
+ 299              	.Letext0:
+ 300              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
+ 301              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 302              	 .file 4 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 303              	 .file 5 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_gpio.h"
+ 304              	 .file 6 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc1_gpio.h"
+ 305              	 .file 7 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_usic.h"
+ 306              	 .file 8 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/XMCLib/inc/xmc_uart.h"
+ 307              	 .file 9 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Dave/Generated/UART/uart.h"
+ 308              	 .file 10 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Dave/Generated/DAVE.h"
+ 309              	 .file 11 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal.h"
+ 310              	 .file 12 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal_logger.h"
+ 311              	 .file 13 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 312              	 .file 14 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Libraries/CMSIS/Infineon/XMC1400_series/Include/system_XMC1400.h"
+ 313              	 .file 15 "//MAC/Home/Downloads/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m/Dave/Generated/UART/uart_extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 pal_logger.c
+    {standard input}:18     .text.cunit_console_uart_end_of_transmit_callback:00000000 $t
+    {standard input}:23     .text.cunit_console_uart_end_of_transmit_callback:00000000 cunit_console_uart_end_of_transmit_callback
+    {standard input}:40     .text.cunit_console_uart_end_of_transmit_callback:00000008 $d
+    {standard input}:45     .text.cunit_console_uart_end_of_receive_callback:00000000 $t
+    {standard input}:50     .text.cunit_console_uart_end_of_receive_callback:00000000 cunit_console_uart_end_of_receive_callback
+    {standard input}:66     .text.cunit_console_uart_end_of_receive_callback:00000008 $d
+    {standard input}:71     .text.pal_logger_init:00000000 $t
+    {standard input}:76     .text.pal_logger_init:00000000 pal_logger_init
+    {standard input}:98     .text.pal_logger_init:0000000c $d
+    {standard input}:103    .text.pal_logger_deinit:00000000 $t
+    {standard input}:108    .text.pal_logger_deinit:00000000 pal_logger_deinit
+    {standard input}:122    .text.pal_logger_write:00000000 $t
+    {standard input}:127    .text.pal_logger_write:00000000 pal_logger_write
+    {standard input}:208    .text.pal_logger_write:00000040 $d
+    {standard input}:213    .text.pal_logger_read:00000000 $t
+    {standard input}:218    .text.pal_logger_read:00000000 pal_logger_read
+    {standard input}:276    .data.cunit_console:00000000 cunit_console
+    {standard input}:286    .data.logger_console:00000000 logger_console
+    {standard input}:273    .data.cunit_console:00000000 $d
+    {standard input}:282    .data.logger_console:00000000 $d
+    {standard input}:292    .bss.len.9081:00000000 $d
+    {standard input}:296    .bss.len.9081:00000000 len.9081
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+UART_Init
+cunit_logger
+XMC_UART_CH_Transmit
+UART_Receive

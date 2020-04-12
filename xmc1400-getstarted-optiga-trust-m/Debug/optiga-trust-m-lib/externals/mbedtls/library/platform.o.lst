@@ -21,347 +21,347 @@
   21              	 .thumb_func
   23              	mbedtls_platform_setup:
   24              	.LFB0:
-  25              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/platform.c"
-   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
-   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  Platform abstraction layer
-   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *
-   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  Copyright (C) 2006-2016, ARM Limited, All Rights Reserved
-   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  SPDX-License-Identifier: Apache-2.0
-   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *
-   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
-   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  not use this file except in compliance with the License.
-   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  You may obtain a copy of the License at
-  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *
-  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
-  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *
-  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  Unless required by applicable law or agreed to in writing, software
-  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  See the License for the specific language governing permissions and
-  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  limitations under the License.
-  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *
-  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
-  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
-  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_CONFIG_FILE)
-  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #include "mbedtls/config.h"
-  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #else
-  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #include MBEDTLS_CONFIG_FILE
-  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif
-  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_C)
-  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #include "mbedtls/platform.h"
-  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #include "mbedtls/platform_util.h"
-  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /* The compile time configuration of memory allocation via the macros
-  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * MBEDTLS_PLATFORM_{FREE/CALLOC}_MACRO takes precedence over the runtime
-  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * configuration via mbedtls_platform_set_calloc_free(). So, omit everything
-  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * related to the latter if MBEDTLS_PLATFORM_{FREE/CALLOC}_MACRO are defined. */
-  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_MEMORY) &&                 \
-  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     !( defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&        \
-  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****        defined(MBEDTLS_PLATFORM_FREE_MACRO) )
-  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_CALLOC)
-  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static void *platform_calloc_uninit( size_t n, size_t size )
-  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) n);
-  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) size);
-  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( NULL );
-  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
-  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_CALLOC   platform_calloc_uninit
-  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_CALLOC */
-  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_FREE)
-  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static void platform_free_uninit( void *ptr )
-  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) ptr);
-  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
-  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_FREE     platform_free_uninit
-  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_FREE */
-  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static void * (*mbedtls_calloc_func)( size_t, size_t ) = MBEDTLS_PLATFORM_STD_CALLOC;
-  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static void (*mbedtls_free_func)( void * ) = MBEDTLS_PLATFORM_STD_FREE;
-  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** void * mbedtls_calloc( size_t nmemb, size_t size )
-  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return (*mbedtls_calloc_func)( nmemb, size );
-  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
-  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** void mbedtls_free( void * ptr )
-  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     (*mbedtls_free_func)( ptr );
-  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
-  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_calloc_free( void * (*calloc_func)( size_t, size_t ),
-  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                               void (*free_func)( void * ) )
-  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_calloc_func = calloc_func;
-  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_free_func = free_func;
-  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
-  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
-  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_MEMORY &&
-  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****           !( defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&
-  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****              defined(MBEDTLS_PLATFORM_FREE_MACRO) ) */
-  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(_WIN32)
-  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #include <stdarg.h>
-  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_win32_snprintf( char *s, size_t n, const char *fmt, ... )
-  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
-  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     int ret;
-  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     va_list argp;
-  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     /* Avoid calling the invalid parameter handler by checking ourselves */
-  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( s == NULL || n == 0 || fmt == NULL )
-  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         return( -1 );
-  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
-  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     va_start( argp, fmt );
-  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(_TRUNCATE) && !defined(__MINGW32__)
-  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ret = _vsnprintf_s( s, n, _TRUNCATE, fmt, argp );
-  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #else
- 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ret = _vsnprintf( s, n, fmt, argp );
- 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( ret < 0 || (size_t) ret == n )
- 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     {
- 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         s[n-1] = '\0';
- 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         ret = -1;
- 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     }
- 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif
- 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     va_end( argp );
- 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( ret );
- 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif
- 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_SNPRINTF_ALT)
- 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_SNPRINTF)
- 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static int platform_snprintf_uninit( char * s, size_t n,
- 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                                      const char * format, ... )
- 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) s);
- 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) n);
- 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) format);
- 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_SNPRINTF    platform_snprintf_uninit
- 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_SNPRINTF */
- 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int (*mbedtls_snprintf)( char * s, size_t n,
- 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                           const char * format,
- 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                           ... ) = MBEDTLS_PLATFORM_STD_SNPRINTF;
- 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_snprintf( int (*snprintf_func)( char * s, size_t n,
- 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                                                  const char * format,
- 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                                                  ... ) )
- 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_snprintf = snprintf_func;
- 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_SNPRINTF_ALT */
- 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_PRINTF_ALT)
- 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_PRINTF)
- 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static int platform_printf_uninit( const char *format, ... )
- 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) format);
- 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_PRINTF    platform_printf_uninit
- 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_PRINTF */
- 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int (*mbedtls_printf)( const char *, ... ) = MBEDTLS_PLATFORM_STD_PRINTF;
- 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_printf( int (*printf_func)( const char *, ... ) )
- 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_printf = printf_func;
- 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_PRINTF_ALT */
- 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_FPRINTF_ALT)
- 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_FPRINTF)
- 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static int platform_fprintf_uninit( FILE *stream, const char *format, ... )
- 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) stream);
- 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) format);
- 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_FPRINTF   platform_fprintf_uninit
- 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_FPRINTF */
- 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int (*mbedtls_fprintf)( FILE *, const char *, ... ) =
- 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****                                         MBEDTLS_PLATFORM_STD_FPRINTF;
- 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_fprintf( int (*fprintf_func)( FILE *, const char *, ... ) )
- 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_fprintf = fprintf_func;
- 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_FPRINTF_ALT */
- 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_EXIT_ALT)
- 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_EXIT)
- 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static void platform_exit_uninit( int status )
- 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) status);
- 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_EXIT   platform_exit_uninit
- 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_EXIT */
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** void (*mbedtls_exit)( int status ) = MBEDTLS_PLATFORM_STD_EXIT;
- 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_exit( void (*exit_func)( int status ) )
- 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_exit = exit_func;
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_EXIT_ALT */
- 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_HAVE_TIME)
- 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_TIME_ALT)
- 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_TIME)
- 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static mbedtls_time_t platform_time_uninit( mbedtls_time_t* timer )
- 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) timer);
- 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_TIME   platform_time_uninit
- 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_TIME */
- 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** mbedtls_time_t (*mbedtls_time)( mbedtls_time_t* timer ) = MBEDTLS_PLATFORM_STD_TIME;
- 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_time( mbedtls_time_t (*time_func)( mbedtls_time_t* timer ) )
- 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_time = time_func;
- 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_TIME_ALT */
- 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_HAVE_TIME */
- 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_ENTROPY_NV_SEED)
- 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_NO_STD_FUNCTIONS) && defined(MBEDTLS_FS_IO)
- 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /* Default implementations for the platform independent seed functions use
- 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * standard libc file functions to read from and write to a pre-defined filename
- 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_std_nv_seed_read( unsigned char *buf, size_t buf_len )
- 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     FILE *file;
- 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     size_t n;
- 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( ( file = fopen( MBEDTLS_PLATFORM_STD_NV_SEED_FILE, "rb" ) ) == NULL )
- 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         return( -1 );
- 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( ( n = fread( buf, 1, buf_len, file ) ) != buf_len )
- 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     {
- 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         fclose( file );
- 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         mbedtls_platform_zeroize( buf, buf_len );
- 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         return( -1 );
- 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     }
- 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     fclose( file );
- 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( (int)n );
- 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_std_nv_seed_write( unsigned char *buf, size_t buf_len )
- 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     FILE *file;
- 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     size_t n;
- 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( ( file = fopen( MBEDTLS_PLATFORM_STD_NV_SEED_FILE, "w" ) ) == NULL )
- 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         return -1;
- 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     if( ( n = fwrite( buf, 1, buf_len, file ) ) != buf_len )
- 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     {
- 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         fclose( file );
- 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         return -1;
- 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     }
- 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     fclose( file );
- 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( (int)n );
- 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_NO_STD_FUNCTIONS */
- 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if defined(MBEDTLS_PLATFORM_NV_SEED_ALT)
- 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_NV_SEED_READ)
- 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static int platform_nv_seed_read_uninit( unsigned char *buf, size_t buf_len )
- 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) buf);
- 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) buf_len);
- 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( -1 );
- 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_NV_SEED_READ   platform_nv_seed_read_uninit
- 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_NV_SEED_READ */
- 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_NV_SEED_WRITE)
- 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Make dummy function to prevent NULL pointer dereferences
- 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** static int platform_nv_seed_write_uninit( unsigned char *buf, size_t buf_len )
- 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) buf);
- 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     ((void) buf_len);
- 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( -1 );
- 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #define MBEDTLS_PLATFORM_STD_NV_SEED_WRITE   platform_nv_seed_write_uninit
- 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_NV_SEED_WRITE */
- 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int (*mbedtls_nv_seed_read)( unsigned char *buf, size_t buf_len ) =
- 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****             MBEDTLS_PLATFORM_STD_NV_SEED_READ;
- 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int (*mbedtls_nv_seed_write)( unsigned char *buf, size_t buf_len ) =
- 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****             MBEDTLS_PLATFORM_STD_NV_SEED_WRITE;
- 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_set_nv_seed(
- 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         int (*nv_seed_read_func)( unsigned char *buf, size_t buf_len ),
- 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****         int (*nv_seed_write_func)( unsigned char *buf, size_t buf_len ) )
- 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
- 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_nv_seed_read = nv_seed_read_func;
- 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     mbedtls_nv_seed_write = nv_seed_write_func;
- 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
- 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_PLATFORM_NV_SEED_ALT */
- 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #endif /* MBEDTLS_ENTROPY_NV_SEED */
- 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** #if !defined(MBEDTLS_PLATFORM_SETUP_TEARDOWN_ALT)
- 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Placeholder platform setup that does nothing by default
- 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** int mbedtls_platform_setup( mbedtls_platform_context *ctx )
- 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
+  25              	 .file 1 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c"
+   1://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+   2://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  Platform abstraction layer
+   3://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *
+   4://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  Copyright (C) 2006-2016, ARM Limited, All Rights Reserved
+   5://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  SPDX-License-Identifier: Apache-2.0
+   6://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *
+   7://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+   8://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  not use this file except in compliance with the License.
+   9://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  You may obtain a copy of the License at
+  10://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *
+  11://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  12://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *
+  13://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  Unless required by applicable law or agreed to in writing, software
+  14://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  15://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  16://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  See the License for the specific language governing permissions and
+  17://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  limitations under the License.
+  18://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *
+  19://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  20://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+  21://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  22://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  23://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #include "mbedtls/config.h"
+  24://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #else
+  25://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #include MBEDTLS_CONFIG_FILE
+  26://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif
+  27://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  28://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_C)
+  29://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  30://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #include "mbedtls/platform.h"
+  31://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #include "mbedtls/platform_util.h"
+  32://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  33://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /* The compile time configuration of memory allocation via the macros
+  34://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * MBEDTLS_PLATFORM_{FREE/CALLOC}_MACRO takes precedence over the runtime
+  35://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * configuration via mbedtls_platform_set_calloc_free(). So, omit everything
+  36://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * related to the latter if MBEDTLS_PLATFORM_{FREE/CALLOC}_MACRO are defined. */
+  37://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_MEMORY) &&                 \
+  38://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     !( defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&        \
+  39://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****        defined(MBEDTLS_PLATFORM_FREE_MACRO) )
+  40://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  41://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_CALLOC)
+  42://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static void *platform_calloc_uninit( size_t n, size_t size )
+  43://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  44://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) n);
+  45://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) size);
+  46://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( NULL );
+  47://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+  48://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  49://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_CALLOC   platform_calloc_uninit
+  50://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_CALLOC */
+  51://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  52://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_FREE)
+  53://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static void platform_free_uninit( void *ptr )
+  54://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  55://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) ptr);
+  56://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+  57://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  58://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_FREE     platform_free_uninit
+  59://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_FREE */
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static void * (*mbedtls_calloc_func)( size_t, size_t ) = MBEDTLS_PLATFORM_STD_CALLOC;
+  62://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static void (*mbedtls_free_func)( void * ) = MBEDTLS_PLATFORM_STD_FREE;
+  63://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  64://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** void * mbedtls_calloc( size_t nmemb, size_t size )
+  65://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return (*mbedtls_calloc_func)( nmemb, size );
+  67://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+  68://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  69://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** void mbedtls_free( void * ptr )
+  70://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  71://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     (*mbedtls_free_func)( ptr );
+  72://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+  73://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  74://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_calloc_free( void * (*calloc_func)( size_t, size_t ),
+  75://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                               void (*free_func)( void * ) )
+  76://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  77://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_calloc_func = calloc_func;
+  78://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_free_func = free_func;
+  79://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+  80://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+  81://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_MEMORY &&
+  82://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****           !( defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&
+  83://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****              defined(MBEDTLS_PLATFORM_FREE_MACRO) ) */
+  84://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  85://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(_WIN32)
+  86://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #include <stdarg.h>
+  87://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_win32_snprintf( char *s, size_t n, const char *fmt, ... )
+  88://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+  89://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     int ret;
+  90://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     va_list argp;
+  91://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  92://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     /* Avoid calling the invalid parameter handler by checking ourselves */
+  93://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( s == NULL || n == 0 || fmt == NULL )
+  94://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         return( -1 );
+  95://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+  96://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     va_start( argp, fmt );
+  97://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(_TRUNCATE) && !defined(__MINGW32__)
+  98://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ret = _vsnprintf_s( s, n, _TRUNCATE, fmt, argp );
+  99://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #else
+ 100://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ret = _vsnprintf( s, n, fmt, argp );
+ 101://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( ret < 0 || (size_t) ret == n )
+ 102://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     {
+ 103://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         s[n-1] = '\0';
+ 104://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         ret = -1;
+ 105://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     }
+ 106://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif
+ 107://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     va_end( argp );
+ 108://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 109://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( ret );
+ 110://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 111://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 113://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_SNPRINTF_ALT)
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_SNPRINTF)
+ 115://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 117://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static int platform_snprintf_uninit( char * s, size_t n,
+ 119://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                                      const char * format, ... )
+ 120://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) s);
+ 122://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) n);
+ 123://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) format);
+ 124://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 125://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 126://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 127://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_SNPRINTF    platform_snprintf_uninit
+ 128://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_SNPRINTF */
+ 129://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 130://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int (*mbedtls_snprintf)( char * s, size_t n,
+ 131://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                           const char * format,
+ 132://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                           ... ) = MBEDTLS_PLATFORM_STD_SNPRINTF;
+ 133://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 134://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_snprintf( int (*snprintf_func)( char * s, size_t n,
+ 135://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                                                  const char * format,
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                                                  ... ) )
+ 137://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 138://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_snprintf = snprintf_func;
+ 139://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 141://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_SNPRINTF_ALT */
+ 142://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_PRINTF_ALT)
+ 144://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_PRINTF)
+ 145://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 146://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 147://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 148://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static int platform_printf_uninit( const char *format, ... )
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 150://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) format);
+ 151://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 152://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 153://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 154://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_PRINTF    platform_printf_uninit
+ 155://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_PRINTF */
+ 156://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 157://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int (*mbedtls_printf)( const char *, ... ) = MBEDTLS_PLATFORM_STD_PRINTF;
+ 158://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 159://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_printf( int (*printf_func)( const char *, ... ) )
+ 160://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 161://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_printf = printf_func;
+ 162://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 163://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 164://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_PRINTF_ALT */
+ 165://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 166://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_FPRINTF_ALT)
+ 167://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_FPRINTF)
+ 168://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 169://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 170://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 171://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static int platform_fprintf_uninit( FILE *stream, const char *format, ... )
+ 172://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 173://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) stream);
+ 174://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) format);
+ 175://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 176://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 177://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 178://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_FPRINTF   platform_fprintf_uninit
+ 179://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_FPRINTF */
+ 180://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 181://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int (*mbedtls_fprintf)( FILE *, const char *, ... ) =
+ 182://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****                                         MBEDTLS_PLATFORM_STD_FPRINTF;
+ 183://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 184://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_fprintf( int (*fprintf_func)( FILE *, const char *, ... ) )
+ 185://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 186://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_fprintf = fprintf_func;
+ 187://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 188://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 189://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_FPRINTF_ALT */
+ 190://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 191://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_EXIT_ALT)
+ 192://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_EXIT)
+ 193://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 194://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 195://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 196://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static void platform_exit_uninit( int status )
+ 197://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 198://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) status);
+ 199://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 200://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 201://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_EXIT   platform_exit_uninit
+ 202://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_EXIT */
+ 203://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 204://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** void (*mbedtls_exit)( int status ) = MBEDTLS_PLATFORM_STD_EXIT;
+ 205://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 206://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_exit( void (*exit_func)( int status ) )
+ 207://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 208://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_exit = exit_func;
+ 209://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 210://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 211://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_EXIT_ALT */
+ 212://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 213://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_HAVE_TIME)
+ 214://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 215://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_TIME_ALT)
+ 216://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_TIME)
+ 217://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 218://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 219://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 220://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static mbedtls_time_t platform_time_uninit( mbedtls_time_t* timer )
+ 221://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 222://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) timer);
+ 223://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 224://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 225://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 226://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_TIME   platform_time_uninit
+ 227://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_TIME */
+ 228://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 229://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** mbedtls_time_t (*mbedtls_time)( mbedtls_time_t* timer ) = MBEDTLS_PLATFORM_STD_TIME;
+ 230://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 231://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_time( mbedtls_time_t (*time_func)( mbedtls_time_t* timer ) )
+ 232://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 233://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_time = time_func;
+ 234://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 235://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 236://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_TIME_ALT */
+ 237://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 238://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_HAVE_TIME */
+ 239://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 240://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_ENTROPY_NV_SEED)
+ 241://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_NO_STD_FUNCTIONS) && defined(MBEDTLS_FS_IO)
+ 242://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /* Default implementations for the platform independent seed functions use
+ 243://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * standard libc file functions to read from and write to a pre-defined filename
+ 244://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 245://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_std_nv_seed_read( unsigned char *buf, size_t buf_len )
+ 246://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 247://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     FILE *file;
+ 248://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     size_t n;
+ 249://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 250://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( ( file = fopen( MBEDTLS_PLATFORM_STD_NV_SEED_FILE, "rb" ) ) == NULL )
+ 251://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         return( -1 );
+ 252://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 253://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( ( n = fread( buf, 1, buf_len, file ) ) != buf_len )
+ 254://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     {
+ 255://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         fclose( file );
+ 256://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         mbedtls_platform_zeroize( buf, buf_len );
+ 257://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         return( -1 );
+ 258://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     }
+ 259://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 260://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     fclose( file );
+ 261://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( (int)n );
+ 262://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 263://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 264://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_std_nv_seed_write( unsigned char *buf, size_t buf_len )
+ 265://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 266://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     FILE *file;
+ 267://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     size_t n;
+ 268://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 269://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( ( file = fopen( MBEDTLS_PLATFORM_STD_NV_SEED_FILE, "w" ) ) == NULL )
+ 270://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         return -1;
+ 271://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 272://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     if( ( n = fwrite( buf, 1, buf_len, file ) ) != buf_len )
+ 273://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     {
+ 274://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         fclose( file );
+ 275://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         return -1;
+ 276://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     }
+ 277://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 278://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     fclose( file );
+ 279://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( (int)n );
+ 280://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 281://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_NO_STD_FUNCTIONS */
+ 282://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 283://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if defined(MBEDTLS_PLATFORM_NV_SEED_ALT)
+ 284://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_NV_SEED_READ)
+ 285://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 286://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 287://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 288://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static int platform_nv_seed_read_uninit( unsigned char *buf, size_t buf_len )
+ 289://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 290://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) buf);
+ 291://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) buf_len);
+ 292://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( -1 );
+ 293://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 294://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 295://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_NV_SEED_READ   platform_nv_seed_read_uninit
+ 296://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_NV_SEED_READ */
+ 297://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 298://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_STD_NV_SEED_WRITE)
+ 299://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 300://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Make dummy function to prevent NULL pointer dereferences
+ 301://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 302://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** static int platform_nv_seed_write_uninit( unsigned char *buf, size_t buf_len )
+ 303://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 304://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) buf);
+ 305://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     ((void) buf_len);
+ 306://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( -1 );
+ 307://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 308://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 309://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #define MBEDTLS_PLATFORM_STD_NV_SEED_WRITE   platform_nv_seed_write_uninit
+ 310://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* !MBEDTLS_PLATFORM_STD_NV_SEED_WRITE */
+ 311://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 312://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int (*mbedtls_nv_seed_read)( unsigned char *buf, size_t buf_len ) =
+ 313://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****             MBEDTLS_PLATFORM_STD_NV_SEED_READ;
+ 314://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int (*mbedtls_nv_seed_write)( unsigned char *buf, size_t buf_len ) =
+ 315://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****             MBEDTLS_PLATFORM_STD_NV_SEED_WRITE;
+ 316://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 317://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_set_nv_seed(
+ 318://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         int (*nv_seed_read_func)( unsigned char *buf, size_t buf_len ),
+ 319://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****         int (*nv_seed_write_func)( unsigned char *buf, size_t buf_len ) )
+ 320://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
+ 321://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_nv_seed_read = nv_seed_read_func;
+ 322://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     mbedtls_nv_seed_write = nv_seed_write_func;
+ 323://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 324://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
+ 325://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_PLATFORM_NV_SEED_ALT */
+ 326://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #endif /* MBEDTLS_ENTROPY_NV_SEED */
+ 327://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 328://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** #if !defined(MBEDTLS_PLATFORM_SETUP_TEARDOWN_ALT)
+ 329://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 330://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Placeholder platform setup that does nothing by default
+ 331://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 332://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** int mbedtls_platform_setup( mbedtls_platform_context *ctx )
+ 333://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
   26              	 .loc 1 333 0
   27              	 .cfi_startproc
   28              	.LVL0:
- 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     (void)ctx;
- 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     return( 0 );
- 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
+ 334://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     (void)ctx;
+ 335://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 336://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     return( 0 );
+ 337://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
   29              	 .loc 1 337 0
   30 0000 0020     	 mov r0,#0
   31              	.LVL1:
@@ -376,17 +376,17 @@
   41              	 .thumb_func
   43              	mbedtls_platform_teardown:
   44              	.LFB1:
- 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** 
- 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** /*
- 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  * Placeholder platform teardown that does nothing by default
- 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****  */
- 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** void mbedtls_platform_teardown( mbedtls_platform_context *ctx )
- 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** {
+ 338://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** 
+ 339://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** /*
+ 340://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  * Placeholder platform teardown that does nothing by default
+ 341://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****  */
+ 342://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** void mbedtls_platform_teardown( mbedtls_platform_context *ctx )
+ 343://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** {
   45              	 .loc 1 343 0
   46              	 .cfi_startproc
   47              	.LVL2:
- 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c ****     (void)ctx;
- 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\platform.c **** }
+ 344://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c ****     (void)ctx;
+ 345://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/platform.c **** }
   48              	 .loc 1 345 0
   49              	 
   50 0000 7047     	 bx lr
@@ -394,7 +394,7 @@
   52              	.LFE1:
   54              	 .text
   55              	.Letext0:
-  56              	 .file 2 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/platform.h"
+  56              	 .file 2 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/platform.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 platform.c
     {standard input}:18     .text.mbedtls_platform_setup:00000000 $t

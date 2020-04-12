@@ -20,448 +20,448 @@
   20              	 .thumb_func
   22              	sha224_process_wrap:
   23              	.LFB7:
-  24              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/md_wrap.c"
-   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** /**
-   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  * \file md_wrap.c
-   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  * \brief Generic message digest wrapper for mbed TLS
-   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  * \author Adriaan de Jong <dejong@fox-it.com>
-   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
-   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  SPDX-License-Identifier: Apache-2.0
-  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
-  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  not use this file except in compliance with the License.
-  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  You may obtain a copy of the License at
-  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
-  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  Unless required by applicable law or agreed to in writing, software
-  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  See the License for the specific language governing permissions and
-  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  limitations under the License.
-  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *
-  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
-  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  */
-  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if !defined(MBEDTLS_CONFIG_FILE)
-  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/config.h"
-  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #else
-  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include MBEDTLS_CONFIG_FILE
-  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD_C)
-  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/md_internal.h"
-  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD2_C)
-  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/md2.h"
-  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD4_C)
-  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/md4.h"
-  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD5_C)
-  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/md5.h"
-  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_RIPEMD160_C)
-  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/ripemd160.h"
-  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_SHA1_C)
-  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/sha1.h"
-  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_SHA256_C)
-  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/sha256.h"
-  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_SHA512_C)
-  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/sha512.h"
-  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_PLATFORM_C)
-  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include "mbedtls/platform.h"
-  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #else
-  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #include <stdlib.h>
-  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #define mbedtls_calloc    calloc
-  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #define mbedtls_free       free
-  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif
-  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD2_C)
-  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md2_starts_wrap( void *ctx )
-  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
-  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md2_starts_ret( (mbedtls_md2_context *) ctx ) );
-  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
-  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md2_update_wrap( void *ctx, const unsigned char *input,
-  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                              size_t ilen )
-  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
-  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md2_update_ret( (mbedtls_md2_context *) ctx, input, ilen ) );
-  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
-  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md2_finish_wrap( void *ctx, unsigned char *output )
-  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
-  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md2_finish_ret( (mbedtls_md2_context *) ctx, output ) );
-  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
-  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *md2_ctx_alloc( void )
-  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
-  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md2_context ) );
-  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
-  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_md2_init( (mbedtls_md2_context *) ctx );
-  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
-  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
-  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
-  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md2_ctx_free( void *ctx )
- 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md2_free( (mbedtls_md2_context *) ctx );
- 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md2_clone_wrap( void *dst, const void *src )
- 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md2_clone( (mbedtls_md2_context *) dst,
- 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                  (const mbedtls_md2_context *) src );
- 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md2_process_wrap( void *ctx, const unsigned char *data )
- 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ((void) data);
- 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_md2_process( (mbedtls_md2_context *) ctx ) );
- 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_md2_info = {
- 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_MD2,
- 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "MD2",
- 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     16,
- 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     16,
- 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_starts_wrap,
- 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_update_wrap,
- 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_finish_wrap,
- 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md2_ret,
- 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_ctx_alloc,
- 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_ctx_free,
- 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_clone_wrap,
- 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md2_process_wrap,
- 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif /* MBEDTLS_MD2_C */
- 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD4_C)
- 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md4_starts_wrap( void *ctx )
- 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md4_starts_ret( (mbedtls_md4_context *) ctx ) );
- 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md4_update_wrap( void *ctx, const unsigned char *input,
- 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                              size_t ilen )
- 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md4_update_ret( (mbedtls_md4_context *) ctx, input, ilen ) );
- 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md4_finish_wrap( void *ctx, unsigned char *output )
- 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md4_finish_ret( (mbedtls_md4_context *) ctx, output ) );
- 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *md4_ctx_alloc( void )
- 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md4_context ) );
- 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
- 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_md4_init( (mbedtls_md4_context *) ctx );
- 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
- 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md4_ctx_free( void *ctx )
- 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md4_free( (mbedtls_md4_context *) ctx );
- 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md4_clone_wrap( void *dst, const void *src )
- 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md4_clone( (mbedtls_md4_context *) dst,
- 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                        (const mbedtls_md4_context *) src );
- 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md4_process_wrap( void *ctx, const unsigned char *data )
- 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_md4_process( (mbedtls_md4_context *) ctx, data ) );
- 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_md4_info = {
- 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_MD4,
- 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "MD4",
- 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     16,
- 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     64,
- 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_starts_wrap,
- 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_update_wrap,
- 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_finish_wrap,
- 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md4_ret,
- 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_ctx_alloc,
- 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_ctx_free,
- 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_clone_wrap,
- 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md4_process_wrap,
- 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif /* MBEDTLS_MD4_C */
- 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_MD5_C)
- 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md5_starts_wrap( void *ctx )
- 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md5_starts_ret( (mbedtls_md5_context *) ctx ) );
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md5_update_wrap( void *ctx, const unsigned char *input,
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                              size_t ilen )
- 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md5_update_ret( (mbedtls_md5_context *) ctx, input, ilen ) );
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md5_finish_wrap( void *ctx, unsigned char *output )
- 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_md5_finish_ret( (mbedtls_md5_context *) ctx, output ) );
- 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *md5_ctx_alloc( void )
- 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md5_context ) );
- 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
- 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_md5_init( (mbedtls_md5_context *) ctx );
- 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
- 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md5_ctx_free( void *ctx )
- 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md5_free( (mbedtls_md5_context *) ctx );
- 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void md5_clone_wrap( void *dst, const void *src )
- 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md5_clone( (mbedtls_md5_context *) dst,
- 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                        (const mbedtls_md5_context *) src );
- 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int md5_process_wrap( void *ctx, const unsigned char *data )
- 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_md5_process( (mbedtls_md5_context *) ctx, data ) );
- 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_md5_info = {
- 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_MD5,
- 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "MD5",
- 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     16,
- 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     64,
- 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_starts_wrap,
- 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_update_wrap,
- 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_finish_wrap,
- 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_md5_ret,
- 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_ctx_alloc,
- 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_ctx_free,
- 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_clone_wrap,
- 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     md5_process_wrap,
- 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif /* MBEDTLS_MD5_C */
- 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_RIPEMD160_C)
- 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int ripemd160_starts_wrap( void *ctx )
- 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_ripemd160_starts_ret( (mbedtls_ripemd160_context *) ctx ) );
- 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int ripemd160_update_wrap( void *ctx, const unsigned char *input,
- 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                    size_t ilen )
- 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_ripemd160_update_ret( (mbedtls_ripemd160_context *) ctx,
- 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                           input, ilen ) );
- 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int ripemd160_finish_wrap( void *ctx, unsigned char *output )
- 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_ripemd160_finish_ret( (mbedtls_ripemd160_context *) ctx,
- 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                           output ) );
- 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *ripemd160_ctx_alloc( void )
- 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_ripemd160_context ) );
- 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
- 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_ripemd160_init( (mbedtls_ripemd160_context *) ctx );
- 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
- 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void ripemd160_ctx_free( void *ctx )
- 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_ripemd160_free( (mbedtls_ripemd160_context *) ctx );
- 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void ripemd160_clone_wrap( void *dst, const void *src )
- 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_ripemd160_clone( (mbedtls_ripemd160_context *) dst,
- 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                        (const mbedtls_ripemd160_context *) src );
- 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int ripemd160_process_wrap( void *ctx, const unsigned char *data )
- 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_ripemd160_process(
- 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                 (mbedtls_ripemd160_context *) ctx, data ) );
- 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_ripemd160_info = {
- 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_RIPEMD160,
- 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "RIPEMD160",
- 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     20,
- 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     64,
- 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_starts_wrap,
- 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_update_wrap,
- 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_finish_wrap,
- 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_ripemd160_ret,
- 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_ctx_alloc,
- 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_ctx_free,
- 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_clone_wrap,
- 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     ripemd160_process_wrap,
- 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif /* MBEDTLS_RIPEMD160_C */
- 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_SHA1_C)
- 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha1_starts_wrap( void *ctx )
- 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha1_starts_ret( (mbedtls_sha1_context *) ctx ) );
- 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha1_update_wrap( void *ctx, const unsigned char *input,
- 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                               size_t ilen )
- 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha1_update_ret( (mbedtls_sha1_context *) ctx,
- 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                      input, ilen ) );
- 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha1_finish_wrap( void *ctx, unsigned char *output )
- 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha1_finish_ret( (mbedtls_sha1_context *) ctx, output ) );
- 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *sha1_ctx_alloc( void )
- 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha1_context ) );
- 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
- 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_sha1_init( (mbedtls_sha1_context *) ctx );
- 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
- 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void sha1_clone_wrap( void *dst, const void *src )
- 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha1_clone( (mbedtls_sha1_context *) dst,
- 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                   (const mbedtls_sha1_context *) src );
- 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void sha1_ctx_free( void *ctx )
- 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha1_free( (mbedtls_sha1_context *) ctx );
- 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha1_process_wrap( void *ctx, const unsigned char *data )
- 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_sha1_process( (mbedtls_sha1_context *) ctx,
- 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                            data ) );
- 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_sha1_info = {
- 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_SHA1,
- 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "SHA1",
- 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     20,
- 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     64,
- 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_starts_wrap,
- 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_update_wrap,
- 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_finish_wrap,
- 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha1_ret,
- 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_ctx_alloc,
- 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_ctx_free,
- 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_clone_wrap,
- 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha1_process_wrap,
- 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #endif /* MBEDTLS_SHA1_C */
- 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** /*
- 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  * Wrappers for generic message digests
- 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****  */
- 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** #if defined(MBEDTLS_SHA256_C)
- 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha224_starts_wrap( void *ctx )
- 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 1 ) );
- 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha224_update_wrap( void *ctx, const unsigned char *input,
- 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                 size_t ilen )
- 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_update_ret( (mbedtls_sha256_context *) ctx,
- 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                        input, ilen ) );
- 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha224_finish_wrap( void *ctx, unsigned char *output )
- 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_finish_ret( (mbedtls_sha256_context *) ctx,
- 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                        output ) );
- 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha224_wrap( const unsigned char *input, size_t ilen,
- 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                         unsigned char *output )
- 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 1 ) );
- 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void *sha224_ctx_alloc( void )
- 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha256_context ) );
- 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     if( ctx != NULL )
- 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_sha256_init( (mbedtls_sha256_context *) ctx );
- 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( ctx );
- 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void sha224_ctx_free( void *ctx )
- 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
- 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
- 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static void sha224_clone_wrap( void *dst, const void *src )
- 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha256_clone( (mbedtls_sha256_context *) dst,
- 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                     (const mbedtls_sha256_context *) src );
- 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha224_process_wrap( void *ctx, const unsigned char *data )
- 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
+  24              	 .file 1 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c"
+   1://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** /**
+   2://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  * \file md_wrap.c
+   3://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+   4://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  * \brief Generic message digest wrapper for mbed TLS
+   5://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+   6://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  * \author Adriaan de Jong <dejong@fox-it.com>
+   7://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+   8://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   9://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  SPDX-License-Identifier: Apache-2.0
+  10://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+  11://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  12://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  not use this file except in compliance with the License.
+  13://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  You may obtain a copy of the License at
+  14://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+  15://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  16://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+  17://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  Unless required by applicable law or agreed to in writing, software
+  18://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  19://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  20://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  See the License for the specific language governing permissions and
+  21://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  limitations under the License.
+  22://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *
+  23://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  24://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  */
+  25://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  26://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  27://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/config.h"
+  28://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #else
+  29://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include MBEDTLS_CONFIG_FILE
+  30://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  31://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  32://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD_C)
+  33://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  34://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/md_internal.h"
+  35://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  36://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD2_C)
+  37://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/md2.h"
+  38://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  39://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  40://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD4_C)
+  41://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/md4.h"
+  42://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  43://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  44://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD5_C)
+  45://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/md5.h"
+  46://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  47://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  48://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_RIPEMD160_C)
+  49://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/ripemd160.h"
+  50://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  51://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  52://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_SHA1_C)
+  53://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/sha1.h"
+  54://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  55://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  56://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_SHA256_C)
+  57://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/sha256.h"
+  58://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  59://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_SHA512_C)
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/sha512.h"
+  62://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  63://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  64://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_PLATFORM_C)
+  65://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include "mbedtls/platform.h"
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #else
+  67://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #include <stdlib.h>
+  68://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #define mbedtls_calloc    calloc
+  69://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #define mbedtls_free       free
+  70://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif
+  71://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  72://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD2_C)
+  73://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  74://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md2_starts_wrap( void *ctx )
+  75://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+  76://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md2_starts_ret( (mbedtls_md2_context *) ctx ) );
+  77://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+  78://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  79://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md2_update_wrap( void *ctx, const unsigned char *input,
+  80://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                              size_t ilen )
+  81://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+  82://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md2_update_ret( (mbedtls_md2_context *) ctx, input, ilen ) );
+  83://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+  84://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  85://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md2_finish_wrap( void *ctx, unsigned char *output )
+  86://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+  87://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md2_finish_ret( (mbedtls_md2_context *) ctx, output ) );
+  88://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+  89://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  90://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *md2_ctx_alloc( void )
+  91://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+  92://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md2_context ) );
+  93://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  94://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+  95://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_md2_init( (mbedtls_md2_context *) ctx );
+  96://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+  97://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+  98://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+  99://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 100://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md2_ctx_free( void *ctx )
+ 101://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 102://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md2_free( (mbedtls_md2_context *) ctx );
+ 103://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 104://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 105://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 106://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md2_clone_wrap( void *dst, const void *src )
+ 107://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 108://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md2_clone( (mbedtls_md2_context *) dst,
+ 109://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                  (const mbedtls_md2_context *) src );
+ 110://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 111://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md2_process_wrap( void *ctx, const unsigned char *data )
+ 113://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ((void) data);
+ 115://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_md2_process( (mbedtls_md2_context *) ctx ) );
+ 117://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 119://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_md2_info = {
+ 120://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_MD2,
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "MD2",
+ 122://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     16,
+ 123://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     16,
+ 124://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_starts_wrap,
+ 125://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_update_wrap,
+ 126://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_finish_wrap,
+ 127://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md2_ret,
+ 128://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_ctx_alloc,
+ 129://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_ctx_free,
+ 130://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_clone_wrap,
+ 131://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md2_process_wrap,
+ 132://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 133://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 134://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif /* MBEDTLS_MD2_C */
+ 135://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD4_C)
+ 137://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 138://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md4_starts_wrap( void *ctx )
+ 139://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md4_starts_ret( (mbedtls_md4_context *) ctx ) );
+ 141://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 142://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md4_update_wrap( void *ctx, const unsigned char *input,
+ 144://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                              size_t ilen )
+ 145://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 146://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md4_update_ret( (mbedtls_md4_context *) ctx, input, ilen ) );
+ 147://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 148://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md4_finish_wrap( void *ctx, unsigned char *output )
+ 150://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 151://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md4_finish_ret( (mbedtls_md4_context *) ctx, output ) );
+ 152://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 153://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 154://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *md4_ctx_alloc( void )
+ 155://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 156://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md4_context ) );
+ 157://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 158://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+ 159://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_md4_init( (mbedtls_md4_context *) ctx );
+ 160://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 161://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+ 162://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 163://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 164://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md4_ctx_free( void *ctx )
+ 165://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 166://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md4_free( (mbedtls_md4_context *) ctx );
+ 167://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 168://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 169://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 170://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md4_clone_wrap( void *dst, const void *src )
+ 171://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 172://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md4_clone( (mbedtls_md4_context *) dst,
+ 173://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                        (const mbedtls_md4_context *) src );
+ 174://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 175://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 176://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md4_process_wrap( void *ctx, const unsigned char *data )
+ 177://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 178://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_md4_process( (mbedtls_md4_context *) ctx, data ) );
+ 179://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 180://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 181://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_md4_info = {
+ 182://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_MD4,
+ 183://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "MD4",
+ 184://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     16,
+ 185://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     64,
+ 186://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_starts_wrap,
+ 187://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_update_wrap,
+ 188://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_finish_wrap,
+ 189://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md4_ret,
+ 190://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_ctx_alloc,
+ 191://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_ctx_free,
+ 192://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_clone_wrap,
+ 193://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md4_process_wrap,
+ 194://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 195://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 196://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif /* MBEDTLS_MD4_C */
+ 197://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 198://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_MD5_C)
+ 199://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 200://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md5_starts_wrap( void *ctx )
+ 201://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 202://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md5_starts_ret( (mbedtls_md5_context *) ctx ) );
+ 203://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 204://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 205://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md5_update_wrap( void *ctx, const unsigned char *input,
+ 206://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                              size_t ilen )
+ 207://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 208://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md5_update_ret( (mbedtls_md5_context *) ctx, input, ilen ) );
+ 209://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 210://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 211://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md5_finish_wrap( void *ctx, unsigned char *output )
+ 212://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 213://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_md5_finish_ret( (mbedtls_md5_context *) ctx, output ) );
+ 214://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 215://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 216://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *md5_ctx_alloc( void )
+ 217://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 218://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_md5_context ) );
+ 219://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 220://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+ 221://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_md5_init( (mbedtls_md5_context *) ctx );
+ 222://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 223://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+ 224://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 225://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 226://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md5_ctx_free( void *ctx )
+ 227://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 228://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md5_free( (mbedtls_md5_context *) ctx );
+ 229://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 230://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 231://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 232://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void md5_clone_wrap( void *dst, const void *src )
+ 233://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 234://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md5_clone( (mbedtls_md5_context *) dst,
+ 235://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                        (const mbedtls_md5_context *) src );
+ 236://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 237://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 238://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int md5_process_wrap( void *ctx, const unsigned char *data )
+ 239://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 240://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_md5_process( (mbedtls_md5_context *) ctx, data ) );
+ 241://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 242://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 243://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_md5_info = {
+ 244://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_MD5,
+ 245://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "MD5",
+ 246://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     16,
+ 247://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     64,
+ 248://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_starts_wrap,
+ 249://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_update_wrap,
+ 250://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_finish_wrap,
+ 251://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_md5_ret,
+ 252://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_ctx_alloc,
+ 253://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_ctx_free,
+ 254://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_clone_wrap,
+ 255://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     md5_process_wrap,
+ 256://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 257://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 258://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif /* MBEDTLS_MD5_C */
+ 259://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 260://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_RIPEMD160_C)
+ 261://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 262://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int ripemd160_starts_wrap( void *ctx )
+ 263://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 264://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_ripemd160_starts_ret( (mbedtls_ripemd160_context *) ctx ) );
+ 265://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 266://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 267://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int ripemd160_update_wrap( void *ctx, const unsigned char *input,
+ 268://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                    size_t ilen )
+ 269://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 270://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_ripemd160_update_ret( (mbedtls_ripemd160_context *) ctx,
+ 271://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                           input, ilen ) );
+ 272://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 273://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 274://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int ripemd160_finish_wrap( void *ctx, unsigned char *output )
+ 275://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 276://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_ripemd160_finish_ret( (mbedtls_ripemd160_context *) ctx,
+ 277://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                           output ) );
+ 278://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 279://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 280://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *ripemd160_ctx_alloc( void )
+ 281://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 282://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_ripemd160_context ) );
+ 283://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 284://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+ 285://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_ripemd160_init( (mbedtls_ripemd160_context *) ctx );
+ 286://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 287://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+ 288://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 289://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 290://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void ripemd160_ctx_free( void *ctx )
+ 291://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 292://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_ripemd160_free( (mbedtls_ripemd160_context *) ctx );
+ 293://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 294://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 295://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 296://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void ripemd160_clone_wrap( void *dst, const void *src )
+ 297://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 298://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_ripemd160_clone( (mbedtls_ripemd160_context *) dst,
+ 299://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                        (const mbedtls_ripemd160_context *) src );
+ 300://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 301://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 302://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int ripemd160_process_wrap( void *ctx, const unsigned char *data )
+ 303://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 304://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_ripemd160_process(
+ 305://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                 (mbedtls_ripemd160_context *) ctx, data ) );
+ 306://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 307://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 308://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_ripemd160_info = {
+ 309://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_RIPEMD160,
+ 310://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "RIPEMD160",
+ 311://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     20,
+ 312://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     64,
+ 313://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_starts_wrap,
+ 314://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_update_wrap,
+ 315://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_finish_wrap,
+ 316://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_ripemd160_ret,
+ 317://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_ctx_alloc,
+ 318://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_ctx_free,
+ 319://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_clone_wrap,
+ 320://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     ripemd160_process_wrap,
+ 321://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 322://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 323://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif /* MBEDTLS_RIPEMD160_C */
+ 324://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 325://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_SHA1_C)
+ 326://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 327://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha1_starts_wrap( void *ctx )
+ 328://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 329://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha1_starts_ret( (mbedtls_sha1_context *) ctx ) );
+ 330://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 331://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 332://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha1_update_wrap( void *ctx, const unsigned char *input,
+ 333://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                               size_t ilen )
+ 334://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 335://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha1_update_ret( (mbedtls_sha1_context *) ctx,
+ 336://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                      input, ilen ) );
+ 337://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 338://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 339://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha1_finish_wrap( void *ctx, unsigned char *output )
+ 340://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 341://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha1_finish_ret( (mbedtls_sha1_context *) ctx, output ) );
+ 342://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 343://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 344://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *sha1_ctx_alloc( void )
+ 345://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 346://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha1_context ) );
+ 347://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 348://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+ 349://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_sha1_init( (mbedtls_sha1_context *) ctx );
+ 350://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 351://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+ 352://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 353://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 354://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void sha1_clone_wrap( void *dst, const void *src )
+ 355://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 356://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha1_clone( (mbedtls_sha1_context *) dst,
+ 357://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                   (const mbedtls_sha1_context *) src );
+ 358://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 359://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 360://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void sha1_ctx_free( void *ctx )
+ 361://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 362://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha1_free( (mbedtls_sha1_context *) ctx );
+ 363://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 364://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 365://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 366://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha1_process_wrap( void *ctx, const unsigned char *data )
+ 367://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 368://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_sha1_process( (mbedtls_sha1_context *) ctx,
+ 369://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                            data ) );
+ 370://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 371://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 372://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_sha1_info = {
+ 373://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_SHA1,
+ 374://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "SHA1",
+ 375://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     20,
+ 376://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     64,
+ 377://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_starts_wrap,
+ 378://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_update_wrap,
+ 379://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_finish_wrap,
+ 380://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha1_ret,
+ 381://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_ctx_alloc,
+ 382://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_ctx_free,
+ 383://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_clone_wrap,
+ 384://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha1_process_wrap,
+ 385://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 386://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 387://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #endif /* MBEDTLS_SHA1_C */
+ 388://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 389://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** /*
+ 390://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  * Wrappers for generic message digests
+ 391://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****  */
+ 392://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** #if defined(MBEDTLS_SHA256_C)
+ 393://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 394://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha224_starts_wrap( void *ctx )
+ 395://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 396://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 1 ) );
+ 397://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 398://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 399://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha224_update_wrap( void *ctx, const unsigned char *input,
+ 400://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                 size_t ilen )
+ 401://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 402://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_update_ret( (mbedtls_sha256_context *) ctx,
+ 403://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                        input, ilen ) );
+ 404://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 405://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 406://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha224_finish_wrap( void *ctx, unsigned char *output )
+ 407://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 408://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_finish_ret( (mbedtls_sha256_context *) ctx,
+ 409://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                        output ) );
+ 410://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 411://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 412://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha224_wrap( const unsigned char *input, size_t ilen,
+ 413://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                         unsigned char *output )
+ 414://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 415://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 1 ) );
+ 416://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 417://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 418://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void *sha224_ctx_alloc( void )
+ 419://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 420://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha256_context ) );
+ 421://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 422://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     if( ctx != NULL )
+ 423://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_sha256_init( (mbedtls_sha256_context *) ctx );
+ 424://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 425://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( ctx );
+ 426://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 427://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 428://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void sha224_ctx_free( void *ctx )
+ 429://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 430://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
+ 431://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
+ 432://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 433://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 434://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static void sha224_clone_wrap( void *dst, const void *src )
+ 435://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 436://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha256_clone( (mbedtls_sha256_context *) dst,
+ 437://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                     (const mbedtls_sha256_context *) src );
+ 438://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 439://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 440://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha224_process_wrap( void *ctx, const unsigned char *data )
+ 441://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
   25              	 .loc 1 441 0
   26              	 .cfi_startproc
   27              	.LVL0:
@@ -470,12 +470,12 @@
   30              	 .cfi_def_cfa_offset 8
   31              	 .cfi_offset 3,-8
   32              	 .cfi_offset 14,-4
- 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_internal_sha256_process( (mbedtls_sha256_context *) ctx,
+ 442://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_internal_sha256_process( (mbedtls_sha256_context *) ctx,
   33              	 .loc 1 442 0
   34 0002 FFF7FEFF 	 bl mbedtls_internal_sha256_process
   35              	.LVL1:
- 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                              data ) );
- 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 443://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                              data ) );
+ 444://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
   36              	 .loc 1 444 0
   37              	 
   38 0006 08BD     	 pop {r3,pc}
@@ -487,7 +487,7 @@
   45              	 .thumb_func
   47              	sha224_clone_wrap:
   48              	.LFB6:
- 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha256_clone( (mbedtls_sha256_context *) dst,
+ 435://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha256_clone( (mbedtls_sha256_context *) dst,
   49              	 .loc 1 435 0
   50              	 .cfi_startproc
   51              	.LVL2:
@@ -496,11 +496,11 @@
   54              	 .cfi_def_cfa_offset 8
   55              	 .cfi_offset 3,-8
   56              	 .cfi_offset 14,-4
- 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                     (const mbedtls_sha256_context *) src );
+ 436://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                     (const mbedtls_sha256_context *) src );
   57              	 .loc 1 436 0
   58 0002 FFF7FEFF 	 bl mbedtls_sha256_clone
   59              	.LVL3:
- 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 438://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
   60              	 .loc 1 438 0
   61              	 
   62 0006 08BD     	 pop {r3,pc}
@@ -512,7 +512,7 @@
   69              	 .thumb_func
   71              	sha224_ctx_free:
   72              	.LFB5:
- 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
+ 429://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
   73              	 .loc 1 429 0
   74              	 .cfi_startproc
   75              	.LVL4:
@@ -521,19 +521,19 @@
   78              	 .cfi_def_cfa_offset 8
   79              	 .cfi_offset 4,-8
   80              	 .cfi_offset 14,-4
- 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
+ 429://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_sha256_free( (mbedtls_sha256_context *) ctx );
   81              	 .loc 1 429 0
   82 0002 041C     	 mov r4,r0
- 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     mbedtls_free( ctx );
+ 430://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     mbedtls_free( ctx );
   83              	 .loc 1 430 0
   84 0004 FFF7FEFF 	 bl mbedtls_sha256_free
   85              	.LVL5:
- 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 431://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
   86              	 .loc 1 431 0
   87 0008 201C     	 mov r0,r4
   88 000a FFF7FEFF 	 bl free
   89              	.LVL6:
- 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 432://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
   90              	 .loc 1 432 0
   91              	 
   92              	.LVL7:
@@ -546,7 +546,7 @@
  100              	 .thumb_func
  102              	sha224_ctx_alloc:
  103              	.LFB4:
- 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha256_context ) );
+ 419://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     void *ctx = mbedtls_calloc( 1, sizeof( mbedtls_sha256_context ) );
  104              	 .loc 1 419 0
  105              	 .cfi_startproc
  106 0000 10B5     	 push {r4,lr}
@@ -554,7 +554,7 @@
  108              	 .cfi_def_cfa_offset 8
  109              	 .cfi_offset 4,-8
  110              	 .cfi_offset 14,-4
- 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 420://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  111              	 .loc 1 420 0
  112 0002 0120     	 mov r0,#1
  113 0004 6C21     	 mov r1,#108
@@ -562,15 +562,15 @@
  115              	.LVL8:
  116 000a 041E     	 sub r4,r0,#0
  117              	.LVL9:
- 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****         mbedtls_sha256_init( (mbedtls_sha256_context *) ctx );
+ 422://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****         mbedtls_sha256_init( (mbedtls_sha256_context *) ctx );
  118              	 .loc 1 422 0
  119 000c 01D0     	 beq .L5
- 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 423://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  120              	 .loc 1 423 0
  121 000e FFF7FEFF 	 bl mbedtls_sha256_init
  122              	.LVL10:
  123              	.L5:
- 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 426://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  124              	 .loc 1 426 0
  125 0012 201C     	 mov r0,r4
  126              	 
@@ -584,7 +584,7 @@
  135              	 .thumb_func
  137              	sha224_wrap:
  138              	.LFB3:
- 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 1 ) );
+ 414://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 1 ) );
  139              	 .loc 1 414 0
  140              	 .cfi_startproc
  141              	.LVL12:
@@ -593,12 +593,12 @@
  144              	 .cfi_def_cfa_offset 8
  145              	 .cfi_offset 3,-8
  146              	 .cfi_offset 14,-4
- 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 415://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
  147              	 .loc 1 415 0
  148 0002 0123     	 mov r3,#1
  149 0004 FFF7FEFF 	 bl mbedtls_sha256_ret
  150              	.LVL13:
- 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 416://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  151              	 .loc 1 416 0
  152              	 
  153 0008 08BD     	 pop {r3,pc}
@@ -610,30 +610,30 @@
  160              	 .thumb_func
  162              	sha256_wrap:
  163              	.LFB9:
- 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** const mbedtls_md_info_t mbedtls_sha224_info = {
- 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     MBEDTLS_MD_SHA224,
- 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     "SHA224",
- 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     28,
- 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     64,
- 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_starts_wrap,
- 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_update_wrap,
- 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_finish_wrap,
- 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_wrap,
- 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_ctx_alloc,
- 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_ctx_free,
- 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_clone_wrap,
- 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     sha224_process_wrap,
- 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** };
- 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha256_starts_wrap( void *ctx )
- 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
- 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 0 ) );
- 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
- 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
- 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** static int sha256_wrap( const unsigned char *input, size_t ilen,
- 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                         unsigned char *output )
- 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** {
+ 445://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 446://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** const mbedtls_md_info_t mbedtls_sha224_info = {
+ 447://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     MBEDTLS_MD_SHA224,
+ 448://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     "SHA224",
+ 449://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     28,
+ 450://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     64,
+ 451://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_starts_wrap,
+ 452://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_update_wrap,
+ 453://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_finish_wrap,
+ 454://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_wrap,
+ 455://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_ctx_alloc,
+ 456://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_ctx_free,
+ 457://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_clone_wrap,
+ 458://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     sha224_process_wrap,
+ 459://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** };
+ 460://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 461://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha256_starts_wrap( void *ctx )
+ 462://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
+ 463://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 0 ) );
+ 464://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
+ 465://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
+ 466://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** static int sha256_wrap( const unsigned char *input, size_t ilen,
+ 467://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                         unsigned char *output )
+ 468://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** {
  164              	 .loc 1 468 0
  165              	 .cfi_startproc
  166              	.LVL14:
@@ -642,12 +642,12 @@
  169              	 .cfi_def_cfa_offset 8
  170              	 .cfi_offset 3,-8
  171              	 .cfi_offset 14,-4
- 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 0 ) );
+ 469://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_ret( input, ilen, output, 0 ) );
  172              	 .loc 1 469 0
  173 0002 0023     	 mov r3,#0
  174 0004 FFF7FEFF 	 bl mbedtls_sha256_ret
  175              	.LVL15:
- 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 470://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
  176              	 .loc 1 470 0
  177              	 
  178 0008 08BD     	 pop {r3,pc}
@@ -659,7 +659,7 @@
  185              	 .thumb_func
  187              	sha224_finish_wrap:
  188              	.LFB2:
- 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_finish_ret( (mbedtls_sha256_context *) ctx,
+ 407://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_finish_ret( (mbedtls_sha256_context *) ctx,
  189              	 .loc 1 407 0
  190              	 .cfi_startproc
  191              	.LVL16:
@@ -668,11 +668,11 @@
  194              	 .cfi_def_cfa_offset 8
  195              	 .cfi_offset 3,-8
  196              	 .cfi_offset 14,-4
- 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                        output ) );
+ 408://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                        output ) );
  197              	 .loc 1 408 0
  198 0002 FFF7FEFF 	 bl mbedtls_sha256_finish_ret
  199              	.LVL17:
- 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 410://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  200              	 .loc 1 410 0
  201              	 
  202 0006 08BD     	 pop {r3,pc}
@@ -684,7 +684,7 @@
  209              	 .thumb_func
  211              	sha224_update_wrap:
  212              	.LFB1:
- 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_update_ret( (mbedtls_sha256_context *) ctx,
+ 401://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_update_ret( (mbedtls_sha256_context *) ctx,
  213              	 .loc 1 401 0
  214              	 .cfi_startproc
  215              	.LVL18:
@@ -693,11 +693,11 @@
  218              	 .cfi_def_cfa_offset 8
  219              	 .cfi_offset 3,-8
  220              	 .cfi_offset 14,-4
- 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****                                        input, ilen ) );
+ 402://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****                                        input, ilen ) );
  221              	 .loc 1 402 0
  222 0002 FFF7FEFF 	 bl mbedtls_sha256_update_ret
  223              	.LVL19:
- 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 404://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  224              	 .loc 1 404 0
  225              	 
  226 0006 08BD     	 pop {r3,pc}
@@ -709,7 +709,7 @@
  233              	 .thumb_func
  235              	sha224_starts_wrap:
  236              	.LFB0:
- 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 1 ) );
+ 395://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 1 ) );
  237              	 .loc 1 395 0
  238              	 .cfi_startproc
  239              	.LVL20:
@@ -718,12 +718,12 @@
  242              	 .cfi_def_cfa_offset 8
  243              	 .cfi_offset 3,-8
  244              	 .cfi_offset 14,-4
- 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 396://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
  245              	 .loc 1 396 0
  246 0002 0121     	 mov r1,#1
  247 0004 FFF7FEFF 	 bl mbedtls_sha256_starts_ret
  248              	.LVL21:
- 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 397://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  249              	 .loc 1 397 0
  250              	 
  251 0008 08BD     	 pop {r3,pc}
@@ -735,7 +735,7 @@
  258              	 .thumb_func
  260              	sha256_starts_wrap:
  261              	.LFB8:
- 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 0 ) );
+ 462://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c ****     return( mbedtls_sha256_starts_ret( (mbedtls_sha256_context *) ctx, 0 ) );
  262              	 .loc 1 462 0
  263              	 .cfi_startproc
  264              	.LVL22:
@@ -744,12 +744,12 @@
  267              	 .cfi_def_cfa_offset 8
  268              	 .cfi_offset 3,-8
  269              	 .cfi_offset 14,-4
- 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** }
+ 463://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** }
  270              	 .loc 1 463 0
  271 0002 0021     	 mov r1,#0
  272 0004 FFF7FEFF 	 bl mbedtls_sha256_starts_ret
  273              	.LVL23:
- 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\md_wrap.c **** 
+ 464://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/md_wrap.c **** 
  274              	 .loc 1 464 0
  275              	 
  276 0008 08BD     	 pop {r3,pc}
@@ -799,11 +799,11 @@
  323              	 .text
  324              	.Letext0:
  325              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
- 326              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/md.h"
- 327              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/md_internal.h"
+ 326              	 .file 3 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/md.h"
+ 327              	 .file 4 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/md_internal.h"
  328              	 .file 5 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
  329              	 .file 6 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
- 330              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/sha256.h"
+ 330              	 .file 7 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/sha256.h"
  331              	 .file 8 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdlib.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 md_wrap.c

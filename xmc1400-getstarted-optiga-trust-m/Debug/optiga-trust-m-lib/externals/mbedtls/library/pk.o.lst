@@ -21,80 +21,80 @@
   21              	 .thumb_func
   23              	mbedtls_pk_init:
   24              	.LFB2:
-  25              	 .file 1 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library/pk.c"
-   1:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
-   2:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  Public Key abstraction layer
-   3:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *
-   4:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
-   5:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  SPDX-License-Identifier: Apache-2.0
-   6:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *
-   7:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
-   8:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  not use this file except in compliance with the License.
-   9:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  You may obtain a copy of the License at
-  10:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *
-  11:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
-  12:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *
-  13:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  Unless required by applicable law or agreed to in writing, software
-  14:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-  15:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  16:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  See the License for the specific language governing permissions and
-  17:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  limitations under the License.
-  18:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *
-  19:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
-  20:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
-  21:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  22:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if !defined(MBEDTLS_CONFIG_FILE)
-  23:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/config.h"
-  24:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #else
-  25:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include MBEDTLS_CONFIG_FILE
-  26:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
-  27:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  28:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_PK_C)
-  29:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/pk.h"
-  30:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/pk_internal.h"
-  31:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  32:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/platform_util.h"
-  33:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  34:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_RSA_C)
-  35:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/rsa.h"
-  36:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
-  37:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECP_C)
-  38:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/ecp.h"
-  39:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
-  40:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C)
-  41:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include "mbedtls/ecdsa.h"
-  42:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
-  43:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  44:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include <limits.h>
-  45:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #include <stdint.h>
-  46:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  47:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /* Parameter validation macros based on platform_util.h */
-  48:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #define PK_VALIDATE_RET( cond )    \
-  49:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     MBEDTLS_INTERNAL_VALIDATE_RET( cond, MBEDTLS_ERR_PK_BAD_INPUT_DATA )
-  50:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #define PK_VALIDATE( cond )        \
-  51:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     MBEDTLS_INTERNAL_VALIDATE( cond )
-  52:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  53:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
-  54:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Initialise a mbedtls_pk_context
-  55:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
-  56:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** void mbedtls_pk_init( mbedtls_pk_context *ctx )
-  57:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+  25              	 .file 1 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c"
+   1://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+   2://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  Public Key abstraction layer
+   3://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *
+   4://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+   5://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  SPDX-License-Identifier: Apache-2.0
+   6://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *
+   7://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+   8://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  not use this file except in compliance with the License.
+   9://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  You may obtain a copy of the License at
+  10://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *
+  11://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  http://www.apache.org/licenses/LICENSE-2.0
+  12://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *
+  13://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  Unless required by applicable law or agreed to in writing, software
+  14://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  15://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  16://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  See the License for the specific language governing permissions and
+  17://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  limitations under the License.
+  18://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *
+  19://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  *  This file is part of mbed TLS (https://tls.mbed.org)
+  20://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+  21://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  22://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if !defined(MBEDTLS_CONFIG_FILE)
+  23://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/config.h"
+  24://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #else
+  25://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include MBEDTLS_CONFIG_FILE
+  26://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+  27://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  28://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_PK_C)
+  29://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/pk.h"
+  30://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/pk_internal.h"
+  31://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  32://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/platform_util.h"
+  33://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  34://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_RSA_C)
+  35://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/rsa.h"
+  36://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+  37://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECP_C)
+  38://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/ecp.h"
+  39://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+  40://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C)
+  41://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include "mbedtls/ecdsa.h"
+  42://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+  43://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  44://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include <limits.h>
+  45://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #include <stdint.h>
+  46://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  47://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /* Parameter validation macros based on platform_util.h */
+  48://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #define PK_VALIDATE_RET( cond )    \
+  49://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     MBEDTLS_INTERNAL_VALIDATE_RET( cond, MBEDTLS_ERR_PK_BAD_INPUT_DATA )
+  50://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #define PK_VALIDATE( cond )        \
+  51://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     MBEDTLS_INTERNAL_VALIDATE( cond )
+  52://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  53://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+  54://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Initialise a mbedtls_pk_context
+  55://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+  56://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** void mbedtls_pk_init( mbedtls_pk_context *ctx )
+  57://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
   26              	 .loc 1 57 0
   27              	 .cfi_startproc
   28              	.LVL0:
-  58:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE( ctx != NULL );
-  59:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = NULL;
+  58://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE( ctx != NULL );
+  59://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = NULL;
   29              	 .loc 1 60 0
   30 0000 0023     	 mov r3,#0
-  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_ctx = NULL;
-  62:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_ctx = NULL;
+  62://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
   31              	 .loc 1 62 0
   32              	 
-  60:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_ctx = NULL;
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_ctx = NULL;
   33              	 .loc 1 60 0
   34 0002 0360     	 str r3,[r0]
-  61:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_ctx = NULL;
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_ctx = NULL;
   35              	 .loc 1 61 0
   36 0004 4360     	 str r3,[r0,#4]
   37              	 .loc 1 62 0
@@ -108,12 +108,12 @@
   46              	 .thumb_func
   48              	mbedtls_pk_free:
   49              	.LFB3:
-  63:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  64:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
-  65:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Free (the components of) a mbedtls_pk_context
-  66:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
-  67:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** void mbedtls_pk_free( mbedtls_pk_context *ctx )
-  68:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+  63://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  64://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+  65://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Free (the components of) a mbedtls_pk_context
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+  67://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** void mbedtls_pk_free( mbedtls_pk_context *ctx )
+  68://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
   50              	 .loc 1 68 0
   51              	 .cfi_startproc
   52              	.LVL1:
@@ -122,19 +122,19 @@
   55              	 .cfi_def_cfa_offset 8
   56              	 .cfi_offset 4,-8
   57              	 .cfi_offset 14,-4
-  69:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL )
+  69://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL )
   58              	 .loc 1 69 0
   59 0002 0028     	 cmp r0,#0
   60 0004 0AD0     	 beq .L2
-  70:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return;
-  71:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  72:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if ( ctx->pk_info != NULL )
+  70://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return;
+  71://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  72://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if ( ctx->pk_info != NULL )
   61              	 .loc 1 72 0
   62 0006 0368     	 ldr r3,[r0]
   63 0008 041C     	 mov r4,r0
   64 000a 002B     	 cmp r3,#0
   65 000c 02D0     	 beq .L4
-  73:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ctx->pk_info->ctx_free_func( ctx->pk_ctx );
+  73://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ctx->pk_info->ctx_free_func( ctx->pk_ctx );
   66              	 .loc 1 73 0
   67 000e 9B6A     	 ldr r3,[r3,#40]
   68 0010 4068     	 ldr r0,[r0,#4]
@@ -142,15 +142,15 @@
   70 0012 9847     	 blx r3
   71              	.LVL3:
   72              	.L4:
-  74:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  75:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     mbedtls_platform_zeroize( ctx, sizeof( mbedtls_pk_context ) );
+  74://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  75://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     mbedtls_platform_zeroize( ctx, sizeof( mbedtls_pk_context ) );
   73              	 .loc 1 75 0
   74 0014 201C     	 mov r0,r4
   75 0016 0821     	 mov r1,#8
   76 0018 FFF7FEFF 	 bl mbedtls_platform_zeroize
   77              	.LVL4:
   78              	.L2:
-  76:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+  76://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
   79              	 .loc 1 76 0
   80              	 
   81 001c 10BD     	 pop {r4,pc}
@@ -163,82 +163,82 @@
   89              	 .thumb_func
   91              	mbedtls_pk_info_from_type:
   92              	.LFB4:
-  77:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  78:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
-  79:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
-  80:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Initialize a restart context
-  81:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
-  82:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** void mbedtls_pk_restart_init( mbedtls_pk_restart_ctx *ctx )
-  83:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
-  84:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE( ctx != NULL );
-  85:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = NULL;
-  86:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->rs_ctx = NULL;
-  87:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
-  88:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
-  89:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
-  90:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Free the components of a restart context
-  91:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
-  92:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** void mbedtls_pk_restart_free( mbedtls_pk_restart_ctx *ctx )
-  93:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
-  94:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL ||
-  95:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ctx->pk_info->rs_free_func == NULL )
-  96:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
-  97:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return;
-  98:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
-  99:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 100:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info->rs_free_func( ctx->rs_ctx );
- 101:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 102:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = NULL;
- 103:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->rs_ctx = NULL;
- 104:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
- 105:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 106:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 107:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 108:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Get pk_info structure from type
- 109:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 110:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** const mbedtls_pk_info_t * mbedtls_pk_info_from_type( mbedtls_pk_type_t pk_type )
- 111:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+  77://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  78://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
+  79://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+  80://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Initialize a restart context
+  81://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+  82://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** void mbedtls_pk_restart_init( mbedtls_pk_restart_ctx *ctx )
+  83://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
+  84://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE( ctx != NULL );
+  85://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = NULL;
+  86://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->rs_ctx = NULL;
+  87://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
+  88://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+  89://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+  90://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Free the components of a restart context
+  91://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+  92://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** void mbedtls_pk_restart_free( mbedtls_pk_restart_ctx *ctx )
+  93://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
+  94://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL ||
+  95://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ctx->pk_info->rs_free_func == NULL )
+  96://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+  97://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return;
+  98://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+  99://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 100://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info->rs_free_func( ctx->rs_ctx );
+ 101://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 102://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = NULL;
+ 103://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->rs_ctx = NULL;
+ 104://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
+ 105://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 106://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 107://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 108://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Get pk_info structure from type
+ 109://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 110://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** const mbedtls_pk_info_t * mbedtls_pk_info_from_type( mbedtls_pk_type_t pk_type )
+ 111://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
   93              	 .loc 1 111 0
   94              	 .cfi_startproc
   95              	.LVL5:
- 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     switch( pk_type ) {
- 113:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_RSA_C)
- 114:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         case MBEDTLS_PK_RSA:
- 115:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( &mbedtls_rsa_info );
- 116:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
- 117:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECP_C)
- 118:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         case MBEDTLS_PK_ECKEY:
- 119:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( &mbedtls_eckey_info );
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     switch( pk_type ) {
+ 113://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_RSA_C)
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         case MBEDTLS_PK_RSA:
+ 115://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( &mbedtls_rsa_info );
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+ 117://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECP_C)
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         case MBEDTLS_PK_ECKEY:
+ 119://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( &mbedtls_eckey_info );
   96              	 .loc 1 119 0
   97 0000 054A     	 ldr r2,.L17
- 112:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     switch( pk_type ) {
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     switch( pk_type ) {
   98              	 .loc 1 112 0
   99 0002 0228     	 cmp r0,#2
  100 0004 05D0     	 beq .L14
- 120:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         case MBEDTLS_PK_ECKEY_DH:
- 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( &mbedtls_eckeydh_info );
- 122:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
- 123:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C)
- 124:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         case MBEDTLS_PK_ECDSA:
- 125:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( &mbedtls_ecdsa_info );
- 126:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
- 127:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         /* MBEDTLS_PK_RSA_ALT omitted on purpose */
- 128:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         default:
- 129:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( NULL );
+ 120://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         case MBEDTLS_PK_ECKEY_DH:
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( &mbedtls_eckeydh_info );
+ 122://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+ 123://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C)
+ 124://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         case MBEDTLS_PK_ECDSA:
+ 125://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( &mbedtls_ecdsa_info );
+ 126://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
+ 127://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         /* MBEDTLS_PK_RSA_ALT omitted on purpose */
+ 128://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         default:
+ 129://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( NULL );
  101              	 .loc 1 129 0
  102 0006 C31E     	 sub r3,r0,#3
  103 0008 5842     	 neg r0,r3
  104 000a 4341     	 adc r3,r3,r0
  105              	.LVL6:
- 121:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif
  106              	 .loc 1 121 0
  107 000c 034A     	 ldr r2,.L17+4
  108              	 .loc 1 129 0
  109 000e 5B42     	 neg r3,r3
  110 0010 1A40     	 and r2,r3
  111              	.L14:
- 130:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 131:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 130://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 131://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  112              	 .loc 1 131 0
  113 0012 101C     	 mov r0,r2
  114              	 
@@ -257,12 +257,12 @@
  128              	 .thumb_func
  130              	mbedtls_pk_setup:
  131              	.LFB5:
- 132:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 133:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 134:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Initialise context
- 135:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 136:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_setup( mbedtls_pk_context *ctx, const mbedtls_pk_info_t *info )
- 137:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 132://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 133://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 134://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Initialise context
+ 135://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_setup( mbedtls_pk_context *ctx, const mbedtls_pk_info_t *info )
+ 137://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  132              	 .loc 1 137 0
  133              	 .cfi_startproc
  134              	.LVL7:
@@ -273,8 +273,8 @@
  139              	 .cfi_offset 5,-12
  140              	 .cfi_offset 6,-8
  141              	 .cfi_offset 14,-4
- 138:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 139:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( info == NULL || ctx->pk_info != NULL )
+ 138://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 139://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( info == NULL || ctx->pk_info != NULL )
  142              	 .loc 1 139 0
  143 0002 0029     	 cmp r1,#0
  144 0004 0CD0     	 beq .L22
@@ -282,9 +282,9 @@
  146 0006 0468     	 ldr r4,[r0]
  147 0008 002C     	 cmp r4,#0
  148 000a 09D1     	 bne .L22
- 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 141:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 142:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ( ctx->pk_ctx = info->ctx_alloc_func() ) == NULL )
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 141://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 142://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ( ctx->pk_ctx = info->ctx_alloc_func() ) == NULL )
  149              	 .loc 1 142 0 is_stmt 1
  150 000c 4B6A     	 ldr r3,[r1,#36]
  151 000e 051C     	 mov r5,r0
@@ -294,31 +294,31 @@
  155 0014 6860     	 str r0,[r5,#4]
  156 0016 0028     	 cmp r0,#0
  157 0018 04D0     	 beq .L23
- 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
- 144:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 145:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = info;
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
+ 144://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 145://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = info;
  158              	 .loc 1 145 0
  159 001a 2E60     	 str r6,[r5]
- 146:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 147:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
+ 146://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 147://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
  160              	 .loc 1 147 0
  161 001c 201C     	 mov r0,r4
  162 001e 02E0     	 b .L20
  163              	.LVL9:
  164              	.L22:
- 140:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
  165              	 .loc 1 140 0
  166 0020 0148     	 ldr r0,.L24
  167              	.LVL10:
  168 0022 00E0     	 b .L20
  169              	.LVL11:
  170              	.L23:
- 143:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
  171              	 .loc 1 143 0
  172 0024 0148     	 ldr r0,.L24+4
  173              	.LVL12:
  174              	.L20:
- 148:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 148://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  175              	 .loc 1 148 0
  176              	 
  177 0026 70BD     	 pop {r4,r5,r6,pc}
@@ -336,44 +336,44 @@
  190              	 .thumb_func
  192              	mbedtls_pk_can_do:
  193              	.LFB6:
- 149:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 150:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_PK_RSA_ALT_SUPPORT)
- 151:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 152:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Initialize an RSA-alt context
- 153:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 154:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_setup_rsa_alt( mbedtls_pk_context *ctx, void * key,
- 155:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                          mbedtls_pk_rsa_alt_decrypt_func decrypt_func,
- 156:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                          mbedtls_pk_rsa_alt_sign_func sign_func,
- 157:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                          mbedtls_pk_rsa_alt_key_len_func key_len_func )
- 158:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
- 159:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     mbedtls_rsa_alt_context *rsa_alt;
- 160:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     const mbedtls_pk_info_t *info = &mbedtls_rsa_alt_info;
- 161:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 162:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 163:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info != NULL )
- 164:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 165:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 166:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ( ctx->pk_ctx = info->ctx_alloc_func() ) == NULL )
- 167:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
- 168:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 169:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = info;
- 170:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 171:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     rsa_alt = (mbedtls_rsa_alt_context *) ctx->pk_ctx;
- 172:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 173:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     rsa_alt->key = key;
- 174:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     rsa_alt->decrypt_func = decrypt_func;
- 175:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     rsa_alt->sign_func = sign_func;
- 176:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     rsa_alt->key_len_func = key_len_func;
- 177:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 178:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
- 179:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
- 180:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_PK_RSA_ALT_SUPPORT */
- 181:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 182:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 183:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Tell if a PK can do the operations of the given type
- 184:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 185:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_can_do( const mbedtls_pk_context *ctx, mbedtls_pk_type_t type )
- 186:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 150://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_PK_RSA_ALT_SUPPORT)
+ 151://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 152://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Initialize an RSA-alt context
+ 153://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 154://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_setup_rsa_alt( mbedtls_pk_context *ctx, void * key,
+ 155://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                          mbedtls_pk_rsa_alt_decrypt_func decrypt_func,
+ 156://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                          mbedtls_pk_rsa_alt_sign_func sign_func,
+ 157://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                          mbedtls_pk_rsa_alt_key_len_func key_len_func )
+ 158://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
+ 159://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     mbedtls_rsa_alt_context *rsa_alt;
+ 160://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     const mbedtls_pk_info_t *info = &mbedtls_rsa_alt_info;
+ 161://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 162://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 163://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info != NULL )
+ 164://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 165://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 166://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ( ctx->pk_ctx = info->ctx_alloc_func() ) == NULL )
+ 167://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
+ 168://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 169://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = info;
+ 170://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 171://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     rsa_alt = (mbedtls_rsa_alt_context *) ctx->pk_ctx;
+ 172://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 173://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     rsa_alt->key = key;
+ 174://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     rsa_alt->decrypt_func = decrypt_func;
+ 175://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     rsa_alt->sign_func = sign_func;
+ 176://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     rsa_alt->key_len_func = key_len_func;
+ 177://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 178://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
+ 179://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
+ 180://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_PK_RSA_ALT_SUPPORT */
+ 181://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 182://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 183://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Tell if a PK can do the operations of the given type
+ 184://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 185://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_can_do( const mbedtls_pk_context *ctx, mbedtls_pk_type_t type )
+ 186://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  194              	 .loc 1 186 0
  195              	 .cfi_startproc
  196              	.LVL13:
@@ -384,30 +384,30 @@
  201              	 .cfi_offset 14,-4
  202              	 .loc 1 186 0
  203 0002 031E     	 sub r3,r0,#0
- 187:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* A context with null pk_info is not set up yet and can't do anything.
- 188:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****      * For backward compatibility, also accept NULL instead of a context
- 189:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****      * pointer. */
- 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 187://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* A context with null pk_info is not set up yet and can't do anything.
+ 188://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****      * For backward compatibility, also accept NULL instead of a context
+ 189://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****      * pointer. */
+ 190://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  204              	 .loc 1 190 0
  205 0004 05D0     	 beq .L27
  206              	 .loc 1 190 0 is_stmt 0 discriminator 1
  207 0006 1B68     	 ldr r3,[r3]
- 191:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 191://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  208              	 .loc 1 191 0 is_stmt 1 discriminator 1
  209 0008 181E     	 sub r0,r3,#0
  210              	.LVL14:
- 190:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 190://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  211              	 .loc 1 190 0 discriminator 1
  212 000a 02D0     	 beq .L27
  213 000c 081C     	 mov r0,r1
- 192:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 193:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->can_do( type ) );
+ 192://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 193://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->can_do( type ) );
  214              	 .loc 1 193 0
  215 000e DB68     	 ldr r3,[r3,#12]
  216 0010 9847     	 blx r3
  217              	.LVL15:
  218              	.L27:
- 194:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 194://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  219              	 .loc 1 194 0
  220              	 
  221 0012 08BD     	 pop {r3,pc}
@@ -420,57 +420,57 @@
  229              	 .thumb_func
  231              	mbedtls_pk_verify_restartable:
  232              	.LFB8:
- 195:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 196:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 197:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Helper for mbedtls_pk_sign and mbedtls_pk_verify
- 198:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 199:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** static inline int pk_hashlen_helper( mbedtls_md_type_t md_alg, size_t *hash_len )
- 200:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
- 201:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     const mbedtls_md_info_t *md_info;
- 202:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( *hash_len != 0 )
- 204:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
- 205:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ( md_info = mbedtls_md_info_from_type( md_alg ) ) == NULL )
- 207:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( -1 );
- 208:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     *hash_len = mbedtls_md_get_size( md_info );
- 210:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
- 211:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
- 212:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 213:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
- 214:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 215:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Helper to set up a restart context if needed
- 216:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 217:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** static int pk_restart_setup( mbedtls_pk_restart_ctx *ctx,
- 218:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                              const mbedtls_pk_info_t *info )
- 219:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
- 220:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* Don't do anything if already set up or invalid */
- 221:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info != NULL )
- 222:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
- 223:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 224:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* Should never happen when we're called */
- 225:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( info->rs_alloc_func == NULL || info->rs_free_func == NULL )
- 226:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 227:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 228:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ( ctx->rs_ctx = info->rs_alloc_func() ) == NULL )
- 229:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
- 230:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 231:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info = info;
- 232:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 233:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
- 234:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
- 235:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 236:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 237:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 238:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Verify a signature (restartable)
- 239:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 240:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_verify_restartable( mbedtls_pk_context *ctx,
- 241:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                mbedtls_md_type_t md_alg,
- 242:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                const unsigned char *hash, size_t hash_len,
- 243:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                const unsigned char *sig, size_t sig_len,
- 244:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                mbedtls_pk_restart_ctx *rs_ctx )
- 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 195://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 196://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 197://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Helper for mbedtls_pk_sign and mbedtls_pk_verify
+ 198://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 199://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** static inline int pk_hashlen_helper( mbedtls_md_type_t md_alg, size_t *hash_len )
+ 200://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
+ 201://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     const mbedtls_md_info_t *md_info;
+ 202://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 203://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( *hash_len != 0 )
+ 204://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
+ 205://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 206://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ( md_info = mbedtls_md_info_from_type( md_alg ) ) == NULL )
+ 207://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( -1 );
+ 208://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 209://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     *hash_len = mbedtls_md_get_size( md_info );
+ 210://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
+ 211://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
+ 212://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 213://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
+ 214://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 215://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Helper to set up a restart context if needed
+ 216://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 217://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** static int pk_restart_setup( mbedtls_pk_restart_ctx *ctx,
+ 218://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                              const mbedtls_pk_info_t *info )
+ 219://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
+ 220://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* Don't do anything if already set up or invalid */
+ 221://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info != NULL )
+ 222://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
+ 223://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 224://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* Should never happen when we're called */
+ 225://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( info->rs_alloc_func == NULL || info->rs_free_func == NULL )
+ 226://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 227://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 228://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ( ctx->rs_ctx = info->rs_alloc_func() ) == NULL )
+ 229://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_ALLOC_FAILED );
+ 230://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 231://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info = info;
+ 232://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 233://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
+ 234://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
+ 235://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 236://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 237://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 238://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Verify a signature (restartable)
+ 239://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 240://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_verify_restartable( mbedtls_pk_context *ctx,
+ 241://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                mbedtls_md_type_t md_alg,
+ 242://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                const unsigned char *hash, size_t hash_len,
+ 243://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                const unsigned char *sig, size_t sig_len,
+ 244://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                mbedtls_pk_restart_ctx *rs_ctx )
+ 245://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  233              	 .loc 1 245 0
  234              	 .cfi_startproc
  235              	.LVL16:
@@ -487,16 +487,16 @@
  246              	 .cfi_offset 14,-4
  247              	 .loc 1 245 0
  248 0002 161C     	 mov r6,r2
- 246:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 247:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
- 248:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                      hash != NULL );
- 249:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( sig != NULL );
- 250:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 251:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL ||
+ 246://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 247://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
+ 248://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                      hash != NULL );
+ 249://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( sig != NULL );
+ 250://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 251://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL ||
  249              	 .loc 1 251 0
  250 0004 0268     	 ldr r2,[r0]
  251              	.LVL17:
- 245:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 245://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
  252              	 .loc 1 245 0
  253 0006 041C     	 mov r4,r0
  254 0008 0D1C     	 mov r5,r1
@@ -505,8 +505,8 @@
  257 000c 01D1     	 bne .L31
  258              	.LVL18:
  259              	.L34:
- 252:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         pk_hashlen_helper( md_alg, &hash_len ) != 0 )
- 253:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 252://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         pk_hashlen_helper( md_alg, &hash_len ) != 0 )
+ 253://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  260              	 .loc 1 253 0
  261 000e 0D48     	 ldr r0,.L43
  262 0010 17E0     	 b .L40
@@ -514,14 +514,14 @@
  264              	.L31:
  265              	.LBB6:
  266              	.LBB7:
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 203://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  267              	 .loc 1 203 0
  268 0012 002B     	 cmp r3,#0
  269 0014 07D1     	 bne .L33
  270              	.LVL20:
  271              	.LBB8:
  272              	.LBB9:
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( -1 );
+ 206://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( -1 );
  273              	 .loc 1 206 0
  274 0016 081C     	 mov r0,r1
  275              	.LVL21:
@@ -529,7 +529,7 @@
  277              	.LVL22:
  278 001c 0028     	 cmp r0,#0
  279 001e F6D0     	 beq .L34
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
+ 209://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
  280              	 .loc 1 209 0
  281 0020 FFF7FEFF 	 bl mbedtls_md_get_size
  282              	.LVL23:
@@ -540,39 +540,39 @@
  287              	.LBE8:
  288              	.LBE7:
  289              	.LBE6:
- 254:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 255:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
- 256:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* optimization: use non-restartable version if restart disabled */
- 257:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( rs_ctx != NULL &&
- 258:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         mbedtls_ecp_restart_is_enabled() &&
- 259:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ctx->pk_info->verify_rs_func != NULL )
- 260:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 261:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         int ret;
- 262:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 263:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( ( ret = pk_restart_setup( rs_ctx, ctx->pk_info ) ) != 0 )
- 264:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( ret );
- 265:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 266:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ret = ctx->pk_info->verify_rs_func( ctx->pk_ctx,
- 267:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                    md_alg, hash, hash_len, sig, sig_len, rs_ctx->rs_ctx );
- 268:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 269:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( ret != MBEDTLS_ERR_ECP_IN_PROGRESS )
- 270:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             mbedtls_pk_restart_free( rs_ctx );
- 271:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 272:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( ret );
- 273:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 274:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #else /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 275:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     (void) rs_ctx;
- 276:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 277:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 278:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info->verify_func == NULL )
+ 254://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 255://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
+ 256://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* optimization: use non-restartable version if restart disabled */
+ 257://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( rs_ctx != NULL &&
+ 258://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         mbedtls_ecp_restart_is_enabled() &&
+ 259://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ctx->pk_info->verify_rs_func != NULL )
+ 260://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 261://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         int ret;
+ 262://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 263://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( ( ret = pk_restart_setup( rs_ctx, ctx->pk_info ) ) != 0 )
+ 264://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( ret );
+ 265://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 266://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ret = ctx->pk_info->verify_rs_func( ctx->pk_ctx,
+ 267://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                    md_alg, hash, hash_len, sig, sig_len, rs_ctx->rs_ctx );
+ 268://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 269://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( ret != MBEDTLS_ERR_ECP_IN_PROGRESS )
+ 270://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             mbedtls_pk_restart_free( rs_ctx );
+ 271://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 272://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( ret );
+ 273://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 274://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #else /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 275://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     (void) rs_ctx;
+ 276://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 277://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 278://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info->verify_func == NULL )
  290              	 .loc 1 278 0
  291 0026 2268     	 ldr r2,[r4]
  292 0028 1769     	 ldr r7,[r2,#16]
  293 002a 002F     	 cmp r7,#0
  294 002c 08D0     	 beq .L42
- 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 280:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 281:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->verify_func( ctx->pk_ctx, md_alg, hash, hash_len,
+ 279://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 280://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 281://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->verify_func( ctx->pk_ctx, md_alg, hash, hash_len,
  295              	 .loc 1 281 0
  296 002e 089A     	 ldr r2,[sp,#32]
  297 0030 6068     	 ldr r0,[r4,#4]
@@ -586,13 +586,13 @@
  305 003e 00E0     	 b .L40
  306              	.LVL26:
  307              	.L42:
- 279:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 279://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  308              	 .loc 1 279 0
  309 0040 0148     	 ldr r0,.L43+4
  310              	.LVL27:
  311              	.L40:
- 282:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                                        sig, sig_len ) );
- 283:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 282://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                                        sig, sig_len ) );
+ 283://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  312              	 .loc 1 283 0
  313              	 
  314              	.LVL28:
@@ -612,14 +612,14 @@
  329              	 .thumb_func
  331              	mbedtls_pk_verify:
  332              	.LFB9:
- 284:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 285:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 286:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Verify a signature
- 287:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 288:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_verify( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
- 289:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                const unsigned char *hash, size_t hash_len,
- 290:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                const unsigned char *sig, size_t sig_len )
- 291:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 284://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 285://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 286://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Verify a signature
+ 287://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 288://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_verify( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
+ 289://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                const unsigned char *hash, size_t hash_len,
+ 290://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                const unsigned char *sig, size_t sig_len )
+ 291://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  333              	 .loc 1 291 0
  334              	 .cfi_startproc
  335              	.LVL30:
@@ -632,7 +632,7 @@
  342              	 .cfi_offset 3,-12
  343              	 .cfi_offset 4,-8
  344              	 .cfi_offset 14,-4
- 292:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( mbedtls_pk_verify_restartable( ctx, md_alg, hash, hash_len,
+ 292://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( mbedtls_pk_verify_restartable( ctx, md_alg, hash, hash_len,
  345              	 .loc 1 292 0
  346 0002 069C     	 ldr r4,[sp,#24]
  347 0004 0094     	 str r4,[sp]
@@ -642,8 +642,8 @@
  351 000c 0294     	 str r4,[sp,#8]
  352 000e FFF7FEFF 	 bl mbedtls_pk_verify_restartable
  353              	.LVL31:
- 293:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                                            sig, sig_len, NULL ) );
- 294:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 293://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                                            sig, sig_len, NULL ) );
+ 294://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  354              	 .loc 1 294 0
  355 0012 04B0     	 add sp,sp,#16
  356              	 
@@ -657,15 +657,15 @@
  365              	 .thumb_func
  367              	mbedtls_pk_verify_ext:
  368              	.LFB10:
- 295:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 296:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 297:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Verify a signature with options
- 298:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 299:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_verify_ext( mbedtls_pk_type_t type, const void *options,
- 300:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                    mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
- 301:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                    const unsigned char *hash, size_t hash_len,
- 302:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                    const unsigned char *sig, size_t sig_len )
- 303:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 295://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 296://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 297://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Verify a signature with options
+ 298://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 299://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_verify_ext( mbedtls_pk_type_t type, const void *options,
+ 300://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                    mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
+ 301://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                    const unsigned char *hash, size_t hash_len,
+ 302://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                    const unsigned char *sig, size_t sig_len )
+ 303://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  369              	 .loc 1 303 0
  370              	 .cfi_startproc
  371              	.LVL32:
@@ -680,19 +680,19 @@
  380              	 .cfi_offset 6,-12
  381              	 .cfi_offset 7,-8
  382              	 .cfi_offset 14,-4
- 304:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 305:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
- 306:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                      hash != NULL );
- 307:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( sig != NULL );
- 308:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 309:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL )
+ 304://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 305://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
+ 306://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                      hash != NULL );
+ 307://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( sig != NULL );
+ 308://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 309://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL )
  383              	 .loc 1 309 0
  384 0002 1468     	 ldr r4,[r2]
  385 0004 002C     	 cmp r4,#0
  386 0006 01D1     	 bne .L47
  387              	.LVL33:
  388              	.L49:
- 310:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 310://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  389              	 .loc 1 310 0
  390 0008 0F48     	 ldr r0,.L52
  391 000a 1BE0     	 b .L48
@@ -700,8 +700,8 @@
  393              	.L47:
  394 000c 051C     	 mov r5,r0
  395 000e 0F1C     	 mov r7,r1
- 311:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 312:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ! mbedtls_pk_can_do( ctx, type ) )
+ 311://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 312://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ! mbedtls_pk_can_do( ctx, type ) )
  396              	 .loc 1 312 0
  397 0010 101C     	 mov r0,r2
  398              	.LVL35:
@@ -713,56 +713,56 @@
  404              	.LVL37:
  405 001c 0028     	 cmp r0,#0
  406 001e 0ED0     	 beq .L50
- 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 314:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 315:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( type == MBEDTLS_PK_RSASSA_PSS )
+ 313://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 314://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 315://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( type == MBEDTLS_PK_RSASSA_PSS )
  407              	 .loc 1 315 0
  408 0020 062D     	 cmp r5,#6
  409 0022 0ED0     	 beq .L51
- 316:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 317:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_PKCS1_V21)
- 318:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         int ret;
- 319:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         const mbedtls_pk_rsassa_pss_options *pss_opts;
- 320:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 321:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if SIZE_MAX > UINT_MAX
- 322:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( md_alg == MBEDTLS_MD_NONE && UINT_MAX < hash_len )
- 323:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 324:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* SIZE_MAX > UINT_MAX */
- 325:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 326:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( options == NULL )
- 327:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 328:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 329:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         pss_opts = (const mbedtls_pk_rsassa_pss_options *) options;
- 330:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 331:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( sig_len < mbedtls_pk_get_len( ctx ) )
- 332:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_RSA_VERIFY_FAILED );
- 333:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 334:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ret = mbedtls_rsa_rsassa_pss_verify_ext( mbedtls_pk_rsa( *ctx ),
- 335:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 NULL, NULL, MBEDTLS_RSA_PUBLIC,
- 336:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 md_alg, (unsigned int) hash_len, hash,
- 337:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 pss_opts->mgf1_hash_id,
- 338:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 pss_opts->expected_salt_len,
- 339:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 sig );
- 340:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( ret != 0 )
- 341:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( ret );
- 342:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 343:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( sig_len > mbedtls_pk_get_len( ctx ) )
- 344:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_SIG_LEN_MISMATCH );
- 345:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 346:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
- 347:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #else
- 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_FEATURE_UNAVAILABLE );
- 349:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_RSA_C && MBEDTLS_PKCS1_V21 */
- 350:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 351:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 352:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* General case: no options */
- 353:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( options != NULL )
+ 316://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 317://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_PKCS1_V21)
+ 318://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         int ret;
+ 319://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         const mbedtls_pk_rsassa_pss_options *pss_opts;
+ 320://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 321://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if SIZE_MAX > UINT_MAX
+ 322://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( md_alg == MBEDTLS_MD_NONE && UINT_MAX < hash_len )
+ 323://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 324://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* SIZE_MAX > UINT_MAX */
+ 325://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 326://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( options == NULL )
+ 327://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 328://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 329://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         pss_opts = (const mbedtls_pk_rsassa_pss_options *) options;
+ 330://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 331://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( sig_len < mbedtls_pk_get_len( ctx ) )
+ 332://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_RSA_VERIFY_FAILED );
+ 333://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 334://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ret = mbedtls_rsa_rsassa_pss_verify_ext( mbedtls_pk_rsa( *ctx ),
+ 335://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 NULL, NULL, MBEDTLS_RSA_PUBLIC,
+ 336://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 md_alg, (unsigned int) hash_len, hash,
+ 337://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 pss_opts->mgf1_hash_id,
+ 338://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 pss_opts->expected_salt_len,
+ 339://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 sig );
+ 340://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( ret != 0 )
+ 341://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( ret );
+ 342://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 343://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( sig_len > mbedtls_pk_get_len( ctx ) )
+ 344://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_SIG_LEN_MISMATCH );
+ 345://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 346://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
+ 347://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #else
+ 348://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_FEATURE_UNAVAILABLE );
+ 349://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_RSA_C && MBEDTLS_PKCS1_V21 */
+ 350://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 351://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 352://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* General case: no options */
+ 353://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( options != NULL )
  410              	 .loc 1 353 0
  411 0024 002F     	 cmp r7,#0
  412 0026 EFD1     	 bne .L49
- 354:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 355:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 356:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( mbedtls_pk_verify( ctx, md_alg, hash, hash_len, sig, sig_len ) );
+ 354://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 355://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 356://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( mbedtls_pk_verify( ctx, md_alg, hash, hash_len, sig, sig_len ) );
  413              	 .loc 1 356 0
  414 0028 0A9B     	 ldr r3,[sp,#40]
  415 002a 201C     	 mov r0,r4
@@ -776,17 +776,17 @@
  423              	.LVL38:
  424 003c 02E0     	 b .L48
  425              	.L50:
- 313:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
+ 313://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
  426              	 .loc 1 313 0
  427 003e 0348     	 ldr r0,.L52+4
  428 0040 00E0     	 b .L48
  429              	.L51:
- 348:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_RSA_C && MBEDTLS_PKCS1_V21 */
+ 348://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_RSA_C && MBEDTLS_PKCS1_V21 */
  430              	 .loc 1 348 0
  431 0042 0348     	 ldr r0,.L52+8
  432              	.LVL39:
  433              	.L48:
- 357:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 357://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  434              	 .loc 1 357 0
  435              	 
  436 0044 FEBD     	 pop {r1,r2,r3,r4,r5,r6,r7,pc}
@@ -805,17 +805,17 @@
  450              	 .thumb_func
  452              	mbedtls_pk_sign_restartable:
  453              	.LFB11:
- 358:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 359:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 360:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Make a signature (restartable)
- 361:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 362:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_sign_restartable( mbedtls_pk_context *ctx,
- 363:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              mbedtls_md_type_t md_alg,
- 364:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              const unsigned char *hash, size_t hash_len,
- 365:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              unsigned char *sig, size_t *sig_len,
- 366:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng,
- 367:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              mbedtls_pk_restart_ctx *rs_ctx )
- 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 358://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 359://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 360://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Make a signature (restartable)
+ 361://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 362://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_sign_restartable( mbedtls_pk_context *ctx,
+ 363://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              mbedtls_md_type_t md_alg,
+ 364://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              const unsigned char *hash, size_t hash_len,
+ 365://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              unsigned char *sig, size_t *sig_len,
+ 366://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng,
+ 367://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              mbedtls_pk_restart_ctx *rs_ctx )
+ 368://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  454              	 .loc 1 368 0
  455              	 .cfi_startproc
  456              	.LVL40:
@@ -828,21 +828,21 @@
  463              	 .cfi_offset 7,-8
  464              	 .cfi_offset 14,-4
  465 0002 161C     	 mov r6,r2
- 369:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 370:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
- 371:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                      hash != NULL );
- 372:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( sig != NULL );
- 373:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 374:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL ||
+ 369://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 370://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ( md_alg == MBEDTLS_MD_NONE && hash_len == 0 ) ||
+ 371://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                      hash != NULL );
+ 372://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( sig != NULL );
+ 373://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 374://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL ||
  466              	 .loc 1 374 0
  467 0004 0268     	 ldr r2,[r0]
  468              	.LVL41:
- 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 368://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
  469              	 .loc 1 368 0
  470 0006 85B0     	 sub sp,sp,#20
  471              	.LCFI7:
  472              	 .cfi_def_cfa_offset 40
- 368:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 368://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
  473              	 .loc 1 368 0
  474 0008 041C     	 mov r4,r0
  475 000a 0D1C     	 mov r5,r1
@@ -851,8 +851,8 @@
  478 000e 01D1     	 bne .L55
  479              	.LVL42:
  480              	.L58:
- 375:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         pk_hashlen_helper( md_alg, &hash_len ) != 0 )
- 376:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 375://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         pk_hashlen_helper( md_alg, &hash_len ) != 0 )
+ 376://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  481              	 .loc 1 376 0
  482 0010 0F48     	 ldr r0,.L67
  483 0012 1BE0     	 b .L64
@@ -860,14 +860,14 @@
  485              	.L55:
  486              	.LBB14:
  487              	.LBB15:
- 203:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 203://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  488              	 .loc 1 203 0
  489 0014 002B     	 cmp r3,#0
  490 0016 07D1     	 bne .L57
  491              	.LVL44:
  492              	.LBB16:
  493              	.LBB17:
- 206:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( -1 );
+ 206://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( -1 );
  494              	 .loc 1 206 0
  495 0018 081C     	 mov r0,r1
  496              	.LVL45:
@@ -875,7 +875,7 @@
  498              	.LVL46:
  499 001e 0028     	 cmp r0,#0
  500 0020 F6D0     	 beq .L58
- 209:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
+ 209://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
  501              	 .loc 1 209 0
  502 0022 FFF7FEFF 	 bl mbedtls_md_get_size
  503              	.LVL47:
@@ -886,39 +886,39 @@
  508              	.LBE16:
  509              	.LBE15:
  510              	.LBE14:
- 377:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 378:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
- 379:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* optimization: use non-restartable version if restart disabled */
- 380:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( rs_ctx != NULL &&
- 381:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         mbedtls_ecp_restart_is_enabled() &&
- 382:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ctx->pk_info->sign_rs_func != NULL )
- 383:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 384:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         int ret;
- 385:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 386:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( ( ret = pk_restart_setup( rs_ctx, ctx->pk_info ) ) != 0 )
- 387:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( ret );
- 388:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 389:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         ret = ctx->pk_info->sign_rs_func( ctx->pk_ctx, md_alg,
- 390:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 hash, hash_len, sig, sig_len, f_rng, p_rng, rs_ctx->rs_ctx );
- 391:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 392:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( ret != MBEDTLS_ERR_ECP_IN_PROGRESS )
- 393:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             mbedtls_pk_restart_free( rs_ctx );
- 394:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 395:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( ret );
- 396:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 397:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #else /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 398:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     (void) rs_ctx;
- 399:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
- 400:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 401:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info->sign_func == NULL )
+ 377://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 378://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #if defined(MBEDTLS_ECDSA_C) && defined(MBEDTLS_ECP_RESTARTABLE)
+ 379://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* optimization: use non-restartable version if restart disabled */
+ 380://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( rs_ctx != NULL &&
+ 381://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         mbedtls_ecp_restart_is_enabled() &&
+ 382://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ctx->pk_info->sign_rs_func != NULL )
+ 383://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 384://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         int ret;
+ 385://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 386://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( ( ret = pk_restart_setup( rs_ctx, ctx->pk_info ) ) != 0 )
+ 387://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( ret );
+ 388://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 389://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         ret = ctx->pk_info->sign_rs_func( ctx->pk_ctx, md_alg,
+ 390://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 hash, hash_len, sig, sig_len, f_rng, p_rng, rs_ctx->rs_ctx );
+ 391://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 392://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( ret != MBEDTLS_ERR_ECP_IN_PROGRESS )
+ 393://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             mbedtls_pk_restart_free( rs_ctx );
+ 394://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 395://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( ret );
+ 396://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 397://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #else /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 398://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     (void) rs_ctx;
+ 399://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
+ 400://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 401://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info->sign_func == NULL )
  511              	 .loc 1 401 0
  512 0028 2268     	 ldr r2,[r4]
  513 002a 5769     	 ldr r7,[r2,#20]
  514 002c 002F     	 cmp r7,#0
  515 002e 0CD0     	 beq .L66
- 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 403:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 404:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->sign_func( ctx->pk_ctx, md_alg, hash, hash_len,
+ 402://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 403://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 404://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->sign_func( ctx->pk_ctx, md_alg, hash, hash_len,
  516              	 .loc 1 404 0
  517 0030 0A9A     	 ldr r2,[sp,#40]
  518 0032 6068     	 ldr r0,[r4,#4]
@@ -936,13 +936,13 @@
  530 0048 00E0     	 b .L64
  531              	.LVL50:
  532              	.L66:
- 402:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 402://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  533              	 .loc 1 402 0
  534 004a 0248     	 ldr r0,.L67+4
  535              	.LVL51:
  536              	.L64:
- 405:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                                      sig, sig_len, f_rng, p_rng ) );
- 406:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 405://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                                      sig, sig_len, f_rng, p_rng ) );
+ 406://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  537              	 .loc 1 406 0
  538 004c 05B0     	 add sp,sp,#20
  539              	 
@@ -963,15 +963,15 @@
  555              	 .thumb_func
  557              	mbedtls_pk_sign:
  558              	.LFB12:
- 407:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 408:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 409:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Make a signature
- 410:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 411:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_sign( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
- 412:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              const unsigned char *hash, size_t hash_len,
- 413:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              unsigned char *sig, size_t *sig_len,
- 414:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
- 415:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 407://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 408://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 409://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Make a signature
+ 410://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 411://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_sign( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
+ 412://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              const unsigned char *hash, size_t hash_len,
+ 413://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              unsigned char *sig, size_t *sig_len,
+ 414://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
+ 415://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  559              	 .loc 1 415 0
  560              	 .cfi_startproc
  561              	.LVL54:
@@ -983,7 +983,7 @@
  567 0002 86B0     	 sub sp,sp,#24
  568              	.LCFI9:
  569              	 .cfi_def_cfa_offset 32
- 416:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( mbedtls_pk_sign_restartable( ctx, md_alg, hash, hash_len,
+ 416://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( mbedtls_pk_sign_restartable( ctx, md_alg, hash, hash_len,
  570              	 .loc 1 416 0
  571 0004 089C     	 ldr r4,[sp,#32]
  572 0006 0094     	 str r4,[sp]
@@ -997,8 +997,8 @@
  580 0016 0494     	 str r4,[sp,#16]
  581 0018 FFF7FEFF 	 bl mbedtls_pk_sign_restartable
  582              	.LVL55:
- 417:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                                          sig, sig_len, f_rng, p_rng, NULL ) );
- 418:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 417://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                                          sig, sig_len, f_rng, p_rng, NULL ) );
+ 418://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  583              	 .loc 1 418 0
  584 001c 06B0     	 add sp,sp,#24
  585              	 
@@ -1012,15 +1012,15 @@
  594              	 .thumb_func
  596              	mbedtls_pk_decrypt:
  597              	.LFB13:
- 419:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 420:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 421:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Decrypt message
- 422:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 423:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_decrypt( mbedtls_pk_context *ctx,
- 424:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 const unsigned char *input, size_t ilen,
- 425:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 unsigned char *output, size_t *olen, size_t osize,
- 426:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
- 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 419://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 420://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 421://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Decrypt message
+ 422://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 423://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_decrypt( mbedtls_pk_context *ctx,
+ 424://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 const unsigned char *input, size_t ilen,
+ 425://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 unsigned char *output, size_t *olen, size_t osize,
+ 426://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
+ 427://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  598              	 .loc 1 427 0
  599              	 .cfi_startproc
  600              	.LVL56:
@@ -1030,15 +1030,15 @@
  604              	 .cfi_offset 4,-12
  605              	 .cfi_offset 5,-8
  606              	 .cfi_offset 14,-4
- 428:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 429:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( input != NULL || ilen == 0 );
- 430:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( output != NULL || osize == 0 );
- 431:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( olen != NULL );
- 432:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 433:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL )
+ 428://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 429://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( input != NULL || ilen == 0 );
+ 430://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( output != NULL || osize == 0 );
+ 431://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( olen != NULL );
+ 432://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 433://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL )
  607              	 .loc 1 433 0
  608 0002 0468     	 ldr r4,[r0]
- 427:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 427://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
  609              	 .loc 1 427 0
  610 0004 85B0     	 sub sp,sp,#20
  611              	.LCFI11:
@@ -1046,16 +1046,16 @@
  613              	 .loc 1 433 0
  614 0006 002C     	 cmp r4,#0
  615 0008 0DD0     	 beq .L72
- 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 435:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 436:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info->decrypt_func == NULL )
+ 434://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 435://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 436://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info->decrypt_func == NULL )
  616              	 .loc 1 436 0
  617 000a A469     	 ldr r4,[r4,#24]
  618 000c 002C     	 cmp r4,#0
  619 000e 0CD0     	 beq .L73
- 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 438:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 439:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->decrypt_func( ctx->pk_ctx, input, ilen,
+ 437://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 438://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 439://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->decrypt_func( ctx->pk_ctx, input, ilen,
  620              	 .loc 1 439 0
  621 0010 089D     	 ldr r5,[sp,#32]
  622 0012 0095     	 str r5,[sp]
@@ -1072,20 +1072,20 @@
  633 0024 02E0     	 b .L71
  634              	.LVL59:
  635              	.L72:
- 434:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 434://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  636              	 .loc 1 434 0
  637 0026 0248     	 ldr r0,.L74
  638              	.LVL60:
  639 0028 00E0     	 b .L71
  640              	.LVL61:
  641              	.L73:
- 437:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 437://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  642              	 .loc 1 437 0
  643 002a 0248     	 ldr r0,.L74+4
  644              	.LVL62:
  645              	.L71:
- 440:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 output, olen, osize, f_rng, p_rng ) );
- 441:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 440://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 output, olen, osize, f_rng, p_rng ) );
+ 441://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  646              	 .loc 1 441 0
  647 002c 05B0     	 add sp,sp,#20
  648              	 
@@ -1104,15 +1104,15 @@
  662              	 .thumb_func
  664              	mbedtls_pk_encrypt:
  665              	.LFB14:
- 442:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 443:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 444:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Encrypt message
- 445:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 446:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_encrypt( mbedtls_pk_context *ctx,
- 447:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 const unsigned char *input, size_t ilen,
- 448:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 unsigned char *output, size_t *olen, size_t osize,
- 449:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
- 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 442://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 443://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 444://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Encrypt message
+ 445://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 446://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_encrypt( mbedtls_pk_context *ctx,
+ 447://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 const unsigned char *input, size_t ilen,
+ 448://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 unsigned char *output, size_t *olen, size_t osize,
+ 449://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng )
+ 450://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  666              	 .loc 1 450 0
  667              	 .cfi_startproc
  668              	.LVL63:
@@ -1122,15 +1122,15 @@
  672              	 .cfi_offset 4,-12
  673              	 .cfi_offset 5,-8
  674              	 .cfi_offset 14,-4
- 451:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 452:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( input != NULL || ilen == 0 );
- 453:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( output != NULL || osize == 0 );
- 454:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( olen != NULL );
- 455:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 456:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL )
+ 451://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 452://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( input != NULL || ilen == 0 );
+ 453://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( output != NULL || osize == 0 );
+ 454://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( olen != NULL );
+ 455://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 456://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL )
  675              	 .loc 1 456 0
  676 0002 0468     	 ldr r4,[r0]
- 450:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 450://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
  677              	 .loc 1 450 0
  678 0004 85B0     	 sub sp,sp,#20
  679              	.LCFI13:
@@ -1138,16 +1138,16 @@
  681              	 .loc 1 456 0
  682 0006 002C     	 cmp r4,#0
  683 0008 0DD0     	 beq .L78
- 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 458:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 459:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info->encrypt_func == NULL )
+ 457://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 458://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 459://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info->encrypt_func == NULL )
  684              	 .loc 1 459 0
  685 000a E469     	 ldr r4,[r4,#28]
  686 000c 002C     	 cmp r4,#0
  687 000e 0CD0     	 beq .L79
- 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 461:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 462:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->encrypt_func( ctx->pk_ctx, input, ilen,
+ 460://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 461://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 462://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->encrypt_func( ctx->pk_ctx, input, ilen,
  688              	 .loc 1 462 0
  689 0010 089D     	 ldr r5,[sp,#32]
  690 0012 0095     	 str r5,[sp]
@@ -1164,20 +1164,20 @@
  701 0024 02E0     	 b .L77
  702              	.LVL66:
  703              	.L78:
- 457:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 457://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  704              	 .loc 1 457 0
  705 0026 0248     	 ldr r0,.L80
  706              	.LVL67:
  707 0028 00E0     	 b .L77
  708              	.LVL68:
  709              	.L79:
- 460:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 460://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  710              	 .loc 1 460 0
  711 002a 0248     	 ldr r0,.L80+4
  712              	.LVL69:
  713              	.L77:
- 463:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****                 output, olen, osize, f_rng, p_rng ) );
- 464:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 463://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****                 output, olen, osize, f_rng, p_rng ) );
+ 464://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  714              	 .loc 1 464 0
  715 002c 05B0     	 add sp,sp,#20
  716              	 
@@ -1196,22 +1196,22 @@
  730              	 .thumb_func
  732              	mbedtls_pk_check_pair:
  733              	.LFB15:
- 465:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 466:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 467:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Check public-private key pair
- 468:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 469:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_check_pair( const mbedtls_pk_context *pub, const mbedtls_pk_context *prv )
- 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 465://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 466://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 467://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Check public-private key pair
+ 468://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 469://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_check_pair( const mbedtls_pk_context *pub, const mbedtls_pk_context *prv )
+ 470://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  734              	 .loc 1 470 0
  735              	 .cfi_startproc
  736              	.LVL70:
- 471:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( pub != NULL );
- 472:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( prv != NULL );
- 473:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( pub->pk_info == NULL ||
+ 471://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( pub != NULL );
+ 472://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( prv != NULL );
+ 473://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 474://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( pub->pk_info == NULL ||
  737              	 .loc 1 474 0
  738 0000 0268     	 ldr r2,[r0]
- 470:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( pub != NULL );
+ 470://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( pub != NULL );
  739              	 .loc 1 470 0
  740 0002 38B5     	 push {r3,r4,r5,lr}
  741              	.LCFI14:
@@ -1223,50 +1223,50 @@
  747              	 .loc 1 474 0
  748 0004 002A     	 cmp r2,#0
  749 0006 12D0     	 beq .L88
- 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         prv->pk_info == NULL ||
+ 475://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         prv->pk_info == NULL ||
  750              	 .loc 1 475 0 discriminator 1
  751 0008 0B68     	 ldr r3,[r1]
- 474:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         prv->pk_info == NULL ||
+ 474://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         prv->pk_info == NULL ||
  752              	 .loc 1 474 0 discriminator 1
  753 000a 002B     	 cmp r3,#0
  754 000c 0FD0     	 beq .L88
- 476:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         prv->pk_info->check_pair_func == NULL )
+ 476://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         prv->pk_info->check_pair_func == NULL )
  755              	 .loc 1 476 0
  756 000e 1C6A     	 ldr r4,[r3,#32]
- 475:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         prv->pk_info == NULL ||
+ 475://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         prv->pk_info == NULL ||
  757              	 .loc 1 475 0
  758 0010 002C     	 cmp r4,#0
  759 0012 0CD0     	 beq .L88
- 477:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 479:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 480:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 481:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( prv->pk_info->type == MBEDTLS_PK_RSA_ALT )
+ 477://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 478://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 479://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 480://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 481://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( prv->pk_info->type == MBEDTLS_PK_RSA_ALT )
  760              	 .loc 1 481 0
  761 0014 1D78     	 ldrb r5,[r3]
  762 0016 052D     	 cmp r5,#5
  763 0018 03D1     	 bne .L84
- 482:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 483:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( pub->pk_info->type != MBEDTLS_PK_RSA )
+ 482://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 483://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( pub->pk_info->type != MBEDTLS_PK_RSA )
  764              	 .loc 1 483 0
  765 001a 1378     	 ldrb r3,[r2]
  766 001c 012B     	 cmp r3,#1
  767 001e 02D0     	 beq .L85
  768 0020 07E0     	 b .L90
  769              	.L84:
- 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 485:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 486:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     else
- 487:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     {
- 488:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         if( pub->pk_info != prv->pk_info )
+ 484://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 485://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 486://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     else
+ 487://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     {
+ 488://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         if( pub->pk_info != prv->pk_info )
  770              	 .loc 1 488 0
  771 0022 9A42     	 cmp r2,r3
  772 0024 05D1     	 bne .L90
  773              	.L85:
- 489:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 490:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
- 491:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 492:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( prv->pk_info->check_pair_func( pub->pk_ctx, prv->pk_ctx ) );
+ 489://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 490://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
+ 491://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 492://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( prv->pk_info->check_pair_func( pub->pk_ctx, prv->pk_ctx ) );
  774              	 .loc 1 492 0
  775 0026 4968     	 ldr r1,[r1,#4]
  776              	.LVL71:
@@ -1277,19 +1277,19 @@
  781 002c 02E0     	 b .L83
  782              	.LVL74:
  783              	.L88:
- 478:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     }
+ 478://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     }
  784              	 .loc 1 478 0
  785 002e 0248     	 ldr r0,.L91
  786              	.LVL75:
  787 0030 00E0     	 b .L83
  788              	.LVL76:
  789              	.L90:
- 484:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 484://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****             return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  790              	 .loc 1 484 0
  791 0032 0248     	 ldr r0,.L91+4
  792              	.LVL77:
  793              	.L83:
- 493:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 493://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  794              	 .loc 1 493 0
  795              	 
  796 0034 38BD     	 pop {r3,r4,r5,pc}
@@ -1307,12 +1307,12 @@
  809              	 .thumb_func
  811              	mbedtls_pk_get_bitlen:
  812              	.LFB16:
- 494:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 495:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 496:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Get key size in bits
- 497:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 498:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** size_t mbedtls_pk_get_bitlen( const mbedtls_pk_context *ctx )
- 499:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 494://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 495://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 496://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Get key size in bits
+ 497://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 498://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** size_t mbedtls_pk_get_bitlen( const mbedtls_pk_context *ctx )
+ 499://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  813              	 .loc 1 499 0
  814              	 .cfi_startproc
  815              	.LVL78:
@@ -1323,29 +1323,29 @@
  820              	 .cfi_offset 14,-4
  821              	 .loc 1 499 0
  822 0002 031E     	 sub r3,r0,#0
- 500:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     /* For backward compatibility, accept NULL or a context that
- 501:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****      * isn't set up yet, and return a fake value that should be safe. */
- 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 500://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     /* For backward compatibility, accept NULL or a context that
+ 501://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****      * isn't set up yet, and return a fake value that should be safe. */
+ 502://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  823              	 .loc 1 502 0
  824 0004 05D0     	 beq .L94
  825              	 .loc 1 502 0 is_stmt 0 discriminator 1
  826 0006 1A68     	 ldr r2,[r3]
- 503:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 503://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  827              	 .loc 1 503 0 is_stmt 1 discriminator 1
  828 0008 101E     	 sub r0,r2,#0
  829              	.LVL79:
- 502:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( 0 );
+ 502://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( 0 );
  830              	 .loc 1 502 0 discriminator 1
  831 000a 02D0     	 beq .L94
- 504:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 505:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->get_bitlen( ctx->pk_ctx ) );
+ 504://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 505://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->get_bitlen( ctx->pk_ctx ) );
  832              	 .loc 1 505 0
  833 000c 9268     	 ldr r2,[r2,#8]
  834 000e 5868     	 ldr r0,[r3,#4]
  835 0010 9047     	 blx r2
  836              	.LVL80:
  837              	.L94:
- 506:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 506://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  838              	 .loc 1 506 0
  839              	 
  840 0012 08BD     	 pop {r3,pc}
@@ -1358,12 +1358,12 @@
  848              	 .thumb_func
  850              	mbedtls_pk_debug:
  851              	.LFB17:
- 507:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 508:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 509:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Export debug information
- 510:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 511:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** int mbedtls_pk_debug( const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items )
- 512:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 507://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 508://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 509://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Export debug information
+ 510://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 511://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** int mbedtls_pk_debug( const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items )
+ 512://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  852              	 .loc 1 512 0
  853              	 .cfi_startproc
  854              	.LVL81:
@@ -1372,46 +1372,46 @@
  857              	 .cfi_def_cfa_offset 8
  858              	 .cfi_offset 3,-8
  859              	 .cfi_offset 14,-4
- 513:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     PK_VALIDATE_RET( ctx != NULL );
- 514:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info == NULL )
+ 513://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     PK_VALIDATE_RET( ctx != NULL );
+ 514://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info == NULL )
  860              	 .loc 1 514 0
  861 0002 0368     	 ldr r3,[r0]
  862 0004 002B     	 cmp r3,#0
  863 0006 06D0     	 beq .L99
- 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
- 516:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 517:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx->pk_info->debug_func == NULL )
+ 515://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 516://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 517://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx->pk_info->debug_func == NULL )
  864              	 .loc 1 517 0
  865 0008 DB6A     	 ldr r3,[r3,#44]
  866 000a 002B     	 cmp r3,#0
  867 000c 05D0     	 beq .L100
- 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
- 519:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 520:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     ctx->pk_info->debug_func( ctx->pk_ctx, items );
+ 518://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 519://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 520://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     ctx->pk_info->debug_func( ctx->pk_ctx, items );
  868              	 .loc 1 520 0
  869 000e 4068     	 ldr r0,[r0,#4]
  870              	.LVL82:
  871 0010 9847     	 blx r3
  872              	.LVL83:
- 521:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( 0 );
+ 521://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( 0 );
  873              	 .loc 1 521 0
  874 0012 0020     	 mov r0,#0
  875 0014 02E0     	 b .L98
  876              	.LVL84:
  877              	.L99:
- 515:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
+ 515://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_BAD_INPUT_DATA );
  878              	 .loc 1 515 0
  879 0016 0248     	 ldr r0,.L101
  880              	.LVL85:
  881 0018 00E0     	 b .L98
  882              	.LVL86:
  883              	.L100:
- 518:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
+ 518://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_ERR_PK_TYPE_MISMATCH );
  884              	 .loc 1 518 0
  885 001a 0248     	 ldr r0,.L101+4
  886              	.LVL87:
  887              	.L98:
- 522:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 522://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  888              	 .loc 1 522 0
  889              	 
  890 001c 08BD     	 pop {r3,pc}
@@ -1429,34 +1429,34 @@
  903              	 .thumb_func
  905              	mbedtls_pk_get_name:
  906              	.LFB18:
- 523:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 524:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 525:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Access the PK type name
- 526:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 527:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** const char *mbedtls_pk_get_name( const mbedtls_pk_context *ctx )
- 528:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 523://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 524://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 525://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Access the PK type name
+ 526://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 527://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** const char *mbedtls_pk_get_name( const mbedtls_pk_context *ctx )
+ 528://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  907              	 .loc 1 528 0
  908              	 .cfi_startproc
  909              	.LVL88:
- 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
- 530:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( "invalid PK" );
+ 529://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 530://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( "invalid PK" );
  910              	 .loc 1 530 0
  911 0000 044B     	 ldr r3,.L107
- 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 529://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  912              	 .loc 1 529 0
  913 0002 0028     	 cmp r0,#0
  914 0004 03D0     	 beq .L104
- 529:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 529://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  915              	 .loc 1 529 0 is_stmt 0 discriminator 1
  916 0006 0268     	 ldr r2,[r0]
  917 0008 002A     	 cmp r2,#0
  918 000a 00D0     	 beq .L104
- 531:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 532:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->name );
+ 531://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 532://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->name );
  919              	 .loc 1 532 0 is_stmt 1
  920 000c 5368     	 ldr r3,[r2,#4]
  921              	.L104:
- 533:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 533://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  922              	 .loc 1 533 0
  923 000e 181C     	 mov r0,r3
  924              	.LVL89:
@@ -1475,36 +1475,36 @@
  938              	 .thumb_func
  940              	mbedtls_pk_get_type:
  941              	.LFB19:
- 534:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 535:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** /*
- 536:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  * Access the PK type
- 537:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****  */
- 538:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** mbedtls_pk_type_t mbedtls_pk_get_type( const mbedtls_pk_context *ctx )
- 539:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** {
+ 534://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 535://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** /*
+ 536://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  * Access the PK type
+ 537://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****  */
+ 538://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** mbedtls_pk_type_t mbedtls_pk_get_type( const mbedtls_pk_context *ctx )
+ 539://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** {
  942              	 .loc 1 539 0
  943              	 .cfi_startproc
  944              	.LVL90:
- 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
- 541:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****         return( MBEDTLS_PK_NONE );
+ 540://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 541://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****         return( MBEDTLS_PK_NONE );
  945              	 .loc 1 541 0
  946 0000 031E     	 sub r3,r0,#0
- 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 540://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  947              	 .loc 1 540 0
  948 0002 03D0     	 beq .L110
- 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 540://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  949              	 .loc 1 540 0 is_stmt 0 discriminator 1
  950 0004 0268     	 ldr r2,[r0]
  951              	 .loc 1 541 0 is_stmt 1 discriminator 1
  952 0006 131E     	 sub r3,r2,#0
- 540:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
+ 540://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     if( ctx == NULL || ctx->pk_info == NULL )
  953              	 .loc 1 540 0 discriminator 1
  954 0008 00D0     	 beq .L110
- 542:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** 
- 543:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c ****     return( ctx->pk_info->type );
+ 542://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** 
+ 543://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c ****     return( ctx->pk_info->type );
  955              	 .loc 1 543 0
  956 000a 1378     	 ldrb r3,[r2]
  957              	.L110:
- 544:C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/library\pk.c **** }
+ 544://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/library/pk.c **** }
  958              	 .loc 1 544 0
  959 000c 181C     	 mov r0,r3
  960              	.LVL91:
@@ -1520,10 +1520,10 @@
  969              	 .text
  970              	.Letext0:
  971              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\lib\\gcc\\arm-none-eabi\\4.9.3\\include\\stddef.h"
- 972              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/md.h"
- 973              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/pk.h"
- 974              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/pk_internal.h"
- 975              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/externals/mbedtls/include/mbedtls/platform_util.h"
+ 972              	 .file 3 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/md.h"
+ 973              	 .file 4 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/pk.h"
+ 974              	 .file 5 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/pk_internal.h"
+ 975              	 .file 6 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/externals/mbedtls/include/mbedtls/platform_util.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 pk.c
     {standard input}:18     .text.mbedtls_pk_init:00000000 $t

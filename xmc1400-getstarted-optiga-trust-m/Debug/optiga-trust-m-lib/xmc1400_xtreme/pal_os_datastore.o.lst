@@ -1,0 +1,369 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "pal_os_datastore.c"
+  14              	 .text
+  15              	.Ltext0:
+  16              	 .cfi_sections .debug_frame
+  17              	 .section .text.pal_os_datastore_write,"ax",%progbits
+  18              	 .align 1
+  19              	 .global pal_os_datastore_write
+  20              	 .code 16
+  21              	 .thumb_func
+  23              	pal_os_datastore_write:
+  24              	.LFB0:
+  25              	 .file 1 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c"
+   1://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** /**
+   2://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \copyright
+   3://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * MIT License
+   4://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+   5://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * Copyright (c) 2019 Infineon Technologies AG
+   6://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+   7://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * of this software and associated documentation files (the "Software"), to deal
+   9://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * in the Software without restriction, including without limitation the rights
+  10://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * copies of the Software, and to permit persons to whom the Software is
+  12://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * furnished to do so, subject to the following conditions:
+  13://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  14://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * The above copyright notice and this permission notice shall be included in all
+  15://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * copies or substantial portions of the Software.
+  16://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  17://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  23://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * SOFTWARE
+  24://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  25://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \endcopyright
+  26://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  27://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \author Infineon Technologies AG
+  28://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  29://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \file pal_os_datastore.c
+  30://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  31://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \brief   This file implements the platform abstraction layer APIs for data store.
+  32://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  33://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * \ingroup  grPAL
+  34://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** *
+  35://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** * @{
+  36://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** */
+  37://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  38://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** #include "optiga/pal/pal_os_datastore.h"
+  39://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  40://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** /// @endcond
+  41://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** /// Size of data store buffer
+  42://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** #define DATA_STORE_BUFFERSIZE      (0x42)
+  43://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  44://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** /// Maximum shared secret length
+  45://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** #define SHARED_SECRET_MAX_LENGTH   (0x40U)
+  46://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  47://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** //Internal buffer to store manage context data use for data store
+  48://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** uint8_t data_store_buffer [DATA_STORE_BUFFERSIZE];
+  49://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  50://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** //Internal buffer to store application context data use for data store
+  51://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** uint8_t data_store_app_context_buffer [APP_CONTEXT_SIZE];
+  52://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  53://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** //Internal buffer to store the generated shared secret on Host
+  54://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** uint8_t optiga_platform_binding_shared_secret [SHARED_SECRET_MAX_LENGTH] = {0x00};
+  55://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  56://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  57://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** pal_status_t pal_os_datastore_write(uint16_t datastore_id,
+  58://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                                     const uint8_t * p_buffer,
+  59://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                                     uint16_t length)
+  60://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** {
+  26              	 .loc 1 60 0
+  27              	 .cfi_startproc
+  28              	.LVL0:
+  29 0000 08B5     	 push {r3,lr}
+  30              	.LCFI0:
+  31              	 .cfi_def_cfa_offset 8
+  32              	 .cfi_offset 3,-8
+  33              	 .cfi_offset 14,-4
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+  62://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  63://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     switch(datastore_id)
+  34              	 .loc 1 63 0
+  35 0002 2228     	 cmp r0,#34
+  36 0004 08D0     	 beq .L3
+  37 0006 3328     	 cmp r0,#51
+  38 0008 0BD0     	 beq .L4
+  39 000a 1128     	 cmp r0,#17
+  40 000c 0BD1     	 bne .L8
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+  41              	 .loc 1 61 0
+  42 000e 1038     	 sub r0,r0,#16
+  43              	.LVL1:
+  64://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     {
+  65://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_PLATFORM_BINDING_SHARED_SECRET_ID:
+  66://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+  67://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+  68://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only, in case of updating
+  69://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // the platform binding shared secret during the runtime into NVM.
+  70://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // In current implementation, platform binding shared secret is
+  71://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // stored in RAM.
+  72://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             if (length <= sizeof(optiga_platform_binding_shared_secret))
+  44              	 .loc 1 72 0
+  45 0010 402A     	 cmp r2,#64
+  46 0012 09D8     	 bhi .L2
+  73://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             {
+  74://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                 memcpy(optiga_platform_binding_shared_secret, p_buffer, length);
+  47              	 .loc 1 74 0
+  48 0014 0548     	 ldr r0,.L11
+  49 0016 00E0     	 b .L9
+  50              	.LVL2:
+  51              	.L3:
+  75://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                 return_status = PAL_STATUS_SUCCESS;
+  76://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             }
+  77://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+  78://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+  79://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_COMMS_MANAGE_CONTEXT_ID:
+  80://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+  81://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+  82://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only, in case of storing 
+  83://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // the manage context information in non-volatile memory 
+  84://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // to reuse for later during hard reset scenarios where the 
+  85://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // RAM gets flushed out.
+  86://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             memcpy(data_store_buffer,p_buffer,length);
+  52              	 .loc 1 86 0
+  53 0018 0548     	 ldr r0,.L11+4
+  54              	.LVL3:
+  55              	.L9:
+  56 001a FFF7FEFF 	 bl memcpy
+  57              	.LVL4:
+  87://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             return_status = PAL_STATUS_SUCCESS;
+  58              	 .loc 1 87 0
+  59 001e 0020     	 mov r0,#0
+  88://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+  60              	 .loc 1 88 0
+  61 0020 02E0     	 b .L2
+  62              	.LVL5:
+  63              	.L4:
+  89://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+  90://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_HIBERNATE_CONTEXT_ID:
+  91://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+  92://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+  93://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only, in case of storing 
+  94://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // the application context information in non-volatile memory 
+  95://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // to reuse for later during hard reset scenarios where the 
+  96://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // RAM gets flushed out.
+  97://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             memcpy(data_store_app_context_buffer,p_buffer,length);
+  64              	 .loc 1 97 0
+  65 0022 0448     	 ldr r0,.L11+8
+  66              	.LVL6:
+  67 0024 F9E7     	 b .L9
+  68              	.LVL7:
+  69              	.L8:
+  61://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+  70              	 .loc 1 61 0
+  71 0026 0120     	 mov r0,#1
+  72              	.LVL8:
+  73              	.L2:
+  98://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             return_status = PAL_STATUS_SUCCESS;
+  99://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 100://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 101://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         default:
+ 102://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+ 103://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 104://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 105://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     }
+ 106://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     return return_status;
+ 107://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** }
+  74              	 .loc 1 107 0
+  75              	 
+  76 0028 08BD     	 pop {r3,pc}
+  77              	.L12:
+  78 002a C046     	 .align 2
+  79              	.L11:
+  80 002c 00000000 	 .word .LANCHOR0
+  81 0030 00000000 	 .word data_store_buffer
+  82 0034 00000000 	 .word data_store_app_context_buffer
+  83              	 .cfi_endproc
+  84              	.LFE0:
+  86              	 .section .text.pal_os_datastore_read,"ax",%progbits
+  87              	 .align 1
+  88              	 .global pal_os_datastore_read
+  89              	 .code 16
+  90              	 .thumb_func
+  92              	pal_os_datastore_read:
+  93              	.LFB1:
+ 108://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 109://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 110://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** pal_status_t pal_os_datastore_read(uint16_t datastore_id, 
+ 111://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                                    uint8_t * p_buffer, 
+ 112://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                                    uint16_t * p_buffer_length)
+ 113://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** {
+  94              	 .loc 1 113 0
+  95              	 .cfi_startproc
+  96              	.LVL9:
+  97 0000 38B5     	 push {r3,r4,r5,lr}
+  98              	.LCFI1:
+  99              	 .cfi_def_cfa_offset 16
+ 100              	 .cfi_offset 3,-16
+ 101              	 .cfi_offset 4,-12
+ 102              	 .cfi_offset 5,-8
+ 103              	 .cfi_offset 14,-4
+ 104              	 .loc 1 113 0
+ 105 0002 031C     	 mov r3,r0
+ 106 0004 141C     	 mov r4,r2
+ 107 0006 081C     	 mov r0,r1
+ 108              	.LVL10:
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+ 115://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 116://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     switch(datastore_id)
+ 109              	 .loc 1 116 0
+ 110 0008 222B     	 cmp r3,#34
+ 111 000a 0ED0     	 beq .L15
+ 112 000c 332B     	 cmp r3,#51
+ 113 000e 12D0     	 beq .L16
+ 114 0010 112B     	 cmp r3,#17
+ 115 0012 13D1     	 bne .L20
+ 117://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     {
+ 118://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_PLATFORM_BINDING_SHARED_SECRET_ID:
+ 119://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+ 120://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+ 121://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only,
+ 122://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // if the platform binding shared secret is stored in non-volatile 
+ 123://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // memory with a specific location and not as a const text segement 
+ 124://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // else updating the share secret content is good enough.
+ 125://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 126://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             if (*p_buffer_length >= sizeof(optiga_platform_binding_shared_secret))
+ 116              	 .loc 1 126 0
+ 117 0014 1288     	 ldrh r2,[r2]
+ 118              	.LVL11:
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     pal_status_t return_status = PAL_STATUS_FAILURE;
+ 119              	 .loc 1 114 0
+ 120 0016 103B     	 sub r3,r3,#16
+ 121              	 .loc 1 126 0
+ 122 0018 3F2A     	 cmp r2,#63
+ 123 001a 10D9     	 bls .L14
+ 127://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             {
+ 128://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                 memcpy(p_buffer,optiga_platform_binding_shared_secret, 
+ 124              	 .loc 1 128 0
+ 125 001c 4025     	 mov r5,#64
+ 126 001e 0949     	 ldr r1,.L23
+ 127              	.LVL12:
+ 128 0020 2A1C     	 mov r2,r5
+ 129 0022 FFF7FEFF 	 bl memcpy
+ 130              	.LVL13:
+ 129://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                        sizeof(optiga_platform_binding_shared_secret));
+ 130://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                 *p_buffer_length = sizeof(optiga_platform_binding_shared_secret);
+ 131              	 .loc 1 130 0
+ 132 0026 2580     	 strh r5,[r4]
+ 133              	.LVL14:
+ 134 0028 03E0     	 b .L21
+ 135              	.LVL15:
+ 136              	.L15:
+ 131://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****                 return_status = PAL_STATUS_SUCCESS;
+ 132://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             }
+ 133://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 134://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 135://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_COMMS_MANAGE_CONTEXT_ID:
+ 136://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+ 137://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+ 138://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only,
+ 139://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // if manage context information is stored in NVM during the hibernate, 
+ 140://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // else this is not required to be enhanced.
+ 141://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             memcpy(p_buffer,data_store_buffer,*p_buffer_length);
+ 137              	 .loc 1 141 0
+ 138 002a 1288     	 ldrh r2,[r2]
+ 139              	.LVL16:
+ 140 002c 0649     	 ldr r1,.L23+4
+ 141              	.L22:
+ 142 002e FFF7FEFF 	 bl memcpy
+ 143              	.LVL17:
+ 144              	.L21:
+ 142://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             return_status = PAL_STATUS_SUCCESS;
+ 145              	 .loc 1 142 0
+ 146 0032 0023     	 mov r3,#0
+ 143://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 147              	 .loc 1 143 0
+ 148 0034 03E0     	 b .L14
+ 149              	.LVL18:
+ 150              	.L16:
+ 144://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 145://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         case OPTIGA_HIBERNATE_CONTEXT_ID:
+ 146://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+ 147://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // !!!OPTIGA_LIB_PORTING_REQUIRED
+ 148://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // This has to be enhanced by user only,
+ 149://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // if application context information is stored in NVM during the hibernate, 
+ 150://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             // else this is not required to be enhanced.
+ 151://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             memcpy(p_buffer,data_store_app_context_buffer,*p_buffer_length);
+ 151              	 .loc 1 151 0
+ 152 0036 1288     	 ldrh r2,[r2]
+ 153              	.LVL19:
+ 154 0038 0449     	 ldr r1,.L23+8
+ 155 003a F8E7     	 b .L22
+ 156              	.LVL20:
+ 157              	.L20:
+ 114://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 158              	 .loc 1 114 0
+ 159 003c 0123     	 mov r3,#1
+ 160              	.LVL21:
+ 161              	.L14:
+ 152://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             return_status = PAL_STATUS_SUCCESS;
+ 153://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 154://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 155://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         default:
+ 156://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         {
+ 157://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****             break;
+ 158://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****         }
+ 159://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     }
+ 160://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** 
+ 161://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c ****     return return_status;
+ 162://MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/pal/xmc1400_xtreme/pal_os_datastore.c **** }
+ 162              	 .loc 1 162 0
+ 163 003e 181C     	 mov r0,r3
+ 164              	 
+ 165              	.LVL22:
+ 166 0040 38BD     	 pop {r3,r4,r5,pc}
+ 167              	.L24:
+ 168 0042 C046     	 .align 2
+ 169              	.L23:
+ 170 0044 00000000 	 .word .LANCHOR0
+ 171 0048 00000000 	 .word data_store_buffer
+ 172 004c 00000000 	 .word data_store_app_context_buffer
+ 173              	 .cfi_endproc
+ 174              	.LFE1:
+ 176              	 .global optiga_platform_binding_shared_secret
+ 177              	 .comm data_store_app_context_buffer,8,1
+ 178              	 .comm data_store_buffer,66,1
+ 179              	 .section .bss.optiga_platform_binding_shared_secret,"aw",%nobits
+ 180              	 .set .LANCHOR0,.+0
+ 183              	optiga_platform_binding_shared_secret:
+ 184 0000 00000000 	 .space 64
+ 184      00000000 
+ 184      00000000 
+ 184      00000000 
+ 184      00000000 
+ 185              	 .text
+ 186              	.Letext0:
+ 187              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 188              	 .file 3 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 189              	 .file 4 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 pal_os_datastore.c
+    {standard input}:18     .text.pal_os_datastore_write:00000000 $t
+    {standard input}:23     .text.pal_os_datastore_write:00000000 pal_os_datastore_write
+    {standard input}:80     .text.pal_os_datastore_write:0000002c $d
+                            *COM*:00000042 data_store_buffer
+                            *COM*:00000008 data_store_app_context_buffer
+    {standard input}:87     .text.pal_os_datastore_read:00000000 $t
+    {standard input}:92     .text.pal_os_datastore_read:00000000 pal_os_datastore_read
+    {standard input}:170    .text.pal_os_datastore_read:00000044 $d
+    {standard input}:183    .bss.optiga_platform_binding_shared_secret:00000000 optiga_platform_binding_shared_secret
+    {standard input}:184    .bss.optiga_platform_binding_shared_secret:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memcpy

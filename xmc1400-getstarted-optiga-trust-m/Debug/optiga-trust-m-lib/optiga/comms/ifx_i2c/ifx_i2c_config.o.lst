@@ -45,12 +45,12 @@
   45              	.Letext0:
   46              	 .file 1 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
   47              	 .file 2 "c:\\dave_4-4-2_64bit\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
-  48              	 .file 3 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/common/optiga_lib_types.h"
-  49              	 .file 4 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_i2c.h"
-  50              	 .file 5 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_gpio.h"
-  51              	 .file 6 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h"
-  52              	 .file 7 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/include/optiga/pal/pal_ifx_i2c_config.h"
-  53              	 .file 8 "C:/Workspace/DAVE-4.4.2-64Bit/optiga-trust-m/optiga/comms/ifx_i2c/ifx_i2c_config.c"
+  48              	 .file 3 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/common/optiga_lib_types.h"
+  49              	 .file 4 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal_i2c.h"
+  50              	 .file 5 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal_gpio.h"
+  51              	 .file 6 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h"
+  52              	 .file 7 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/include/optiga/pal/pal_ifx_i2c_config.h"
+  53              	 .file 8 "//MAC/Home/Downloads/getstarted-optiga-trust-m/optiga-trust-m-1/optiga/comms/ifx_i2c/ifx_i2c_config.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 ifx_i2c_config.c
     {standard input}:33     .data.ifx_i2c_context_0:00000000 ifx_i2c_context_0

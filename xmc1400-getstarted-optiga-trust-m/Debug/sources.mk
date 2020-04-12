@@ -40,5 +40,5 @@ optiga-trust-m-lib/optiga/comms/ifx_i2c \
 optiga-trust-m-lib/optiga/comms \
 optiga-trust-m-lib/optiga/crypt \
 optiga-trust-m-lib/optiga/util \
-optiga-trust-m-lib/xmc-dave \
+optiga-trust-m-lib/xmc1400_xtreme \
 

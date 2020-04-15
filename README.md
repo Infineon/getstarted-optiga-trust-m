@@ -112,7 +112,7 @@ In this guide you may find the following steps:
 
 ## Compile and Debug
 
-The guidance on how to compile and debug the setup you can find [here](https://github.com/oscarcreativeshop/getstarted-optiga-trust-m/wiki)
+The guidance on how to compile and debug the setup you can find [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 
 
 ## Contributing

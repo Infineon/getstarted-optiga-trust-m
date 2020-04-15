@@ -42,9 +42,9 @@ In this guide you may find the following steps:
 
 1. Power up the kit by connecting Micro USB cable between PC and Debugger micro USB (**X101** Port on the board).
 1. Run JFlashLite.exe from JLink installation folder. It shows a notice window. Click OK.
-1. Click on **Device** to select a target device
-    1. For XMC1400 Connectivity Kit: Select Infineon as Manufacturer and Device as XMC1404-0200, and then click OK
-    1. For XMC4800: Select Infineon as Manufacturer and Device as XMC4800-2048, and then click OK
+1. Click on **Device** to select a target device: Select Infineon as Manufacturer
+    1. For XMC1400 Connectivity Kit: Device as XMC1404-0200, and then click OK
+    1. For XMC4800: Device as XMC4800-2048, and then click OK
 1. Select hex file to be flashed under **Data File** and click on **Program Device**. It then shows the programming progress window.
     1. For XMC1400 Connectivity Kit: (`bin/xmc1400-getstarted-optiga-trust-m.hex`) 
     1. For XMC4800: (`bin/xmc4800_optiga_example.hex`)

@@ -46,8 +46,8 @@ In this guide you may find the following steps:
     1. For XMC1400 Connectivity Kit: Device as XMC1404-0200, and then click OK
     1. For XMC4800: Device as XMC4800-2048, and then click OK
 1. Select hex file to be flashed under **Data File** and click on **Program Device**. It then shows the programming progress window.
-    1. For XMC1400 Connectivity Kit: (`bin/xmc1400-getstarted-optiga-trust-m.hex`) 
-    1. For XMC4800: (`bin/xmc4800_optiga_example.hex`)
+    1. **For XMC1400 Connectivity Kit:** (`bin/xmc1400-getstarted-optiga-trust-m.hex`) 
+    1. **For XMC4800:** (`bin/xmc4800_optiga_example.hex`)
 1. Flash download completed
 
 ### Logger setup
@@ -56,8 +56,8 @@ In this guide you may find the following steps:
 1. Open Tera Trem and select the COM port with name “Communications Port”. 
     1. **Note: We are using the same usb connectin for programming/debuging and VCOM.
 1. Configure COM port 
-    1. For XMC1400 Connectivity Kit: 115200 8N1
-    1. For XMC4800: 9600 8N1
+    1. **For XMC1400 Connectivity Kit:** 115200 8N1
+    1. **For XMC4800:** 9600 8N1
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
 <details> <summary> Sample output with `option 3` command  </summary> 

@@ -27,7 +27,7 @@ In this guide you may find the following steps:
 <img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
 
 ### XMC1400 XTREME Connectivity Kit
-<img src="https://github.com/oscarcreativeshop/Assets/blob/master/Pictures/xtreme-connectivity-kit.png" title="XCM1400 XTREME End-to-End Security Connectivity Kit" width="400">
+<img src="https://github.com/Infineon/Assets/raw/master/Pictures/xtreme-connectivity-kit.png" title="XCM1400 XTREME End-to-End Security Connectivity Kit" width="400">
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
     * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)
@@ -56,7 +56,7 @@ In this guide you may find the following steps:
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
 <details> <summary> Sample output with `option 3` command  </summary> 
-  <img src="https://github.com/oscarcreativeshop/Assets/blob/master/Pictures/xmc_1400_optiga_trust_m_tera_term.png">
+  <img src="https://github.com/Infineon/Assets/raw/master/Pictures/xmc_1400_optiga_trust_m_tera_term.png">
 </details>
 
 

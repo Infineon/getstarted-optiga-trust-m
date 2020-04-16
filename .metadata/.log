@@ -162,3 +162,163 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -application com.ifx.d
 
 !ENTRY SOLVER 1 0 2020-04-15 17:25:07.715
 !MESSAGE USER_ACTION : Solver Status: DISCONNECTED
+!SESSION 2020-04-15 17:28:58.082 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -application com.ifx.davex.product.daveApplication -showlocation
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -application com.ifx.davex.product.daveApplication -showlocation
+
+!ENTRY SOLVER 1 0 2020-04-15 17:29:09.239
+!MESSAGE USER_ACTION : Default solver exe path is: C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\Solver\lib\i386_nt\eclipse.exe
+
+!ENTRY SOLVER 1 0 2020-04-15 17:29:09.323
+!MESSAGE USER_ACTION : GlobalSize= 750MB; LocalSize: 128MB
+
+!ENTRY SOLVER 1 0 2020-04-15 17:29:09.328
+!MESSAGE USER_ACTION : Creating OutOfProcessEclipse instance...
+
+!ENTRY SOLVER 1 0 2020-04-15 17:29:09.463
+!MESSAGE USER_ACTION : Solver Status: CONNECTED
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:29:10.039
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/Examples/XMC_IFX/v4.1//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:29:12.568
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/XMC_IFX/v4.4//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:29:17.081
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/Contributed/v4.4//daveSite.xml
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:32:24.092
+!MESSAGE Resource '/xmc1400-getstarted-optiga-trust-m' is not open.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2020-04-15 17:32:25.862
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY Import 1 0 2020-04-15 17:32:25.955
+!MESSAGE USER_ACTION : Time taken for importing project: xmc1400-getstarted-optiga-trust-m into workspace is : 1885 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:32:26.121
+!MESSAGE Resource '/xmc1400-getstarted-optiga-trust-m' is not open.
+
+!ENTRY APPSTORE 1 0 2020-04-15 17:32:26.522
+!MESSAGE USER_ACTION : Time taken for loading LibraryStore data for SoftwareId [XMC1.4.04.Q064.ALL] is: 283 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:26.533
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 4 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:27.002
+!MESSAGE USER_ACTION : Active project:xmc1400-getstarted-optiga-trust-m[ Software ID:XMC1.4.04.Q064.ALL]
+
+!ENTRY COMMON 1 0 2020-04-15 17:32:28.592
+!MESSAGE Time Taken By De-Serialization  : 941 ms :: C:\Workspace\getstarted-optiga-trust-m\xmc1400-getstarted-optiga-trust-m\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:32:28.601
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:28.737
+!MESSAGE USER_ACTION : Time taken for initializing Application Model is: 1736 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:28.753
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(updateQuery): 9 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:28.767
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(getSolutionQuery): 9 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:28.774
+!MESSAGE USER_ACTION : Time taken for updating views is: 0 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:29.937
+!MESSAGE USER_ACTION : Time taken for rendering views is: 1159 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:32:30.394
+!MESSAGE USER_ACTION : Total time taken for setting project as active is: 3865 msec 
+
+!ENTRY org.eclipse.cdt.core 1 0 2020-04-15 17:32:31.471
+!MESSAGE Indexed 'xmc1400-getstarted-optiga-trust-m' (172 sources, 168 headers) in 5.02 sec: 18,944 declarations; 68,451 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-04-15 17:34:03.065
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-04-15 17:34:03.071
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:34:06.123
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:34:07.069
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY org.eclipse.ui 4 4 2020-04-15 17:34:12.308
+!MESSAGE Conflicting handlers for org.eclipse.debug.ui.commands.DebugLast: {ActionDelegateHandlerProxy(null,com.dave.activeproject.ui.actions.ActiveProjDebugLastAction in com.dave.activeproject)} vs {ActionDelegateHandlerProxy(null,org.eclipse.debug.internal.ui.actions.DebugLastAction in org.eclipse.debug.ui)}
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:36:48.228
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:36:48.996
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:40:35.016
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:40:35.785
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:42:24.655
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:42:25.436
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:42:57.457
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:42:58.191
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:45:20.626
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:45:21.428
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:50:45.911
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:50:46.627
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:52:00.365
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:52:01.113
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:53:26.132
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:53:26.884
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY APP_CONFIGURATOR 1 0 2020-04-15 17:55:51.665
+!MESSAGE USER_ACTION : Time taken for opening editor is: 671 msec 
+
+!ENTRY CODEGEN 1 0 2020-04-15 17:56:06.716
+!MESSAGE Code generation started...
+
+!ENTRY CODEGEN 1 0 2020-04-15 17:56:07.654
+!MESSAGE Code generation completed...
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:56:19.389
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:56:20.156
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:58:57.065
+!MESSAGE C:/Program Files (x86)/SEGGER/JLink_V640/JLinkGDBServerCL.exe -if swd -device XMC1404-Q064x0200 -endian little -speed 1000 -port 2331 -swoport 2332 -telnetport 2333 -vd -ir -localhostonly 1 -singlerun -strict -timeout 0
+
+!ENTRY ilg.gnuarmeclipse.debug.gdbjtag.jlink 4 1 2020-04-15 17:58:57.828
+!MESSAGE C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\ARM-GCC-49/bin/arm-none-eabi-gdb --interpreter=mi2 --nx

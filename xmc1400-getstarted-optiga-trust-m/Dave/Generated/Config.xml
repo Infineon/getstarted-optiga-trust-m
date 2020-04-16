@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="xmc1400-getstarted-optiga-trust-m" Path="C:\Workspace\DAVE-4.4.2-64Bit\xmc1400-getstarted-optiga-trust-m">
+<Project MotherSystem_Version="" Name="xmc1400-getstarted-optiga-trust-m" Path="C:\Workspace\getstarted-optiga-trust-m\xmc1400-getstarted-optiga-trust-m">
     <COMPILER>
         <Name>ARM_GCC_HOME</Name>
         <Version/>
@@ -239,10 +239,6 @@
         <Path/>
         <Path>\Dave\Generated</Path>
         <Path>\Libraries</Path>
-        <Path>\TrustM1\externals\mbedtls\include</Path>
-        <Path>\TrustM1\optiga\include</Path>
-        <Path>\TrustM1\examples\cmd_process</Path>
-        <Path>\Source\pal</Path>
         <Path>\optiga-trust-m-lib\examples\include</Path>
         <Path>\optiga-trust-m-lib\externals\mbedtls\include</Path>
         <Path>\optiga-trust-m-lib\optiga\include</Path>

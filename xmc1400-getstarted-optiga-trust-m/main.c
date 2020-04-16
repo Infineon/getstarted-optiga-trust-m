@@ -23,7 +23,7 @@ INFINEON_OPTIGA_SOURCE_CODE_BOILER_PLATE
 extern void optiga_shell_wait_for_user(void);
 extern void optiga_shell_begin(void);
 
-extern pal_logger_t cunit_console;
+extern pal_logger_t logger_console;
 
 #define TICKS_PER_SECOND	1000
 
@@ -53,12 +53,10 @@ int main(void)
 
         }
     }
-    SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);
-
     do
     {
 
-        if(PAL_STATUS_SUCCESS != pal_logger_init(&cunit_console))
+        if(PAL_STATUS_SUCCESS != pal_logger_init(&logger_console))
         {
             break;
         }

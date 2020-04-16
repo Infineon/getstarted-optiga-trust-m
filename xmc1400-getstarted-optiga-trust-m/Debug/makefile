@@ -61,7 +61,7 @@ LIST_FILES = $(addsuffix .o.lst, $(basename $(OBJS)))
 MAP_FILE = "xmc1400-getstarted-optiga-trust-m.map"
 
 TOOLCHAIN_ROOT=C:/DAVE_4-4-2_64bit/DAVE-IDE-4.4.2-64Bit/eclipse/ARM-GCC-49
-PROJECT_LOC=C:/Workspace/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m
+PROJECT_LOC=C:/Workspace/DAVE-4.4.2-64Bit/getstarted-optiga-trust-m/xmc1400-getstarted-optiga-trust-m
 
 # All Target
 all: xmc1400-getstarted-optiga-trust-m.elf secondary-outputs

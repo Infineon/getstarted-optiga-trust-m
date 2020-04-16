@@ -1,0 +1,76 @@
+!SESSION 2020-04-15 17:10:34.073 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -application com.ifx.davex.product.daveApplication -showlocation
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -application com.ifx.davex.product.daveApplication -showlocation
+
+!ENTRY SOLVER 1 0 2020-04-15 17:10:53.664
+!MESSAGE USER_ACTION : Default solver exe path is: C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\Solver\lib\i386_nt\eclipse.exe
+
+!ENTRY SOLVER 1 0 2020-04-15 17:10:53.747
+!MESSAGE USER_ACTION : GlobalSize= 750MB; LocalSize: 128MB
+
+!ENTRY SOLVER 1 0 2020-04-15 17:10:53.752
+!MESSAGE USER_ACTION : Creating OutOfProcessEclipse instance...
+
+!ENTRY SOLVER 1 0 2020-04-15 17:10:53.889
+!MESSAGE USER_ACTION : Solver Status: CONNECTED
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:10:54.344
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/Examples/XMC_IFX/v4.1//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:10:56.953
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/XMC_IFX/v4.4//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:11:01.213
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/Contributed/v4.4//daveSite.xml
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:11:20.827
+!MESSAGE Resource '/xmc1400-getstarted-optiga-trust-m' is not open.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2020-04-15 17:11:22.657
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY Import 1 0 2020-04-15 17:11:22.783
+!MESSAGE USER_ACTION : Time taken for importing project: xmc1400-getstarted-optiga-trust-m into workspace is : 1970 msec 
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:11:22.946
+!MESSAGE Resource '/xmc1400-getstarted-optiga-trust-m' is not open.
+
+!ENTRY APPSTORE 1 0 2020-04-15 17:11:23.532
+!MESSAGE USER_ACTION : Time taken for loading LibraryStore data for SoftwareId [XMC1.4.04.Q064.ALL] is: 430 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:23.584
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 7 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:24.466
+!MESSAGE USER_ACTION : Active project:xmc1400-getstarted-optiga-trust-m[ Software ID:XMC1.4.04.Q064.ALL]
+
+!ENTRY COMMON 1 0 2020-04-15 17:11:26.278
+!MESSAGE Time Taken By De-Serialization  : 889 ms :: C:\Workspace\getstarted-optiga-trust-m\xmc1400-getstarted-optiga-trust-m\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:11:26.300
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:26.450
+!MESSAGE USER_ACTION : Time taken for initializing Application Model is: 1985 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:26.469
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(updateQuery): 11 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:26.488
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(getSolutionQuery): 13 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:26.495
+!MESSAGE USER_ACTION : Time taken for updating views is: 1 msec 
+
+!ENTRY org.eclipse.cdt.core 1 0 2020-04-15 17:11:26.722
+!MESSAGE Indexed 'xmc1400-getstarted-optiga-trust-m' (47 sources, 107 headers) in 3.47 sec: 11,403 declarations; 29,181 references; 16 unresolved inclusions; 0 syntax errors; 127 unresolved names (0.31%)
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:27.898
+!MESSAGE USER_ACTION : Time taken for rendering views is: 1397 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:28.394
+!MESSAGE USER_ACTION : Total time taken for setting project as active is: 4817 msec 

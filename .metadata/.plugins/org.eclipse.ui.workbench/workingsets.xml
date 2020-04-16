@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1586995883074_1" label="ActiveProject" name="ActiveProject">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/xmc1400-getstarted-optiga-trust-m" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1586995852861_0" label="Window Working Set" name="Aggregate for window 1586995852860">
+<workingSet IMemento.internal.id="ActiveProject"/>
+</workingSet>
+</workingSetManager>

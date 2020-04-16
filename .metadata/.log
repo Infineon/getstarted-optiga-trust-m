@@ -74,3 +74,91 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -application com.ifx.d
 
 !ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:11:28.394
 !MESSAGE USER_ACTION : Total time taken for setting project as active is: 4817 msec 
+!SESSION 2020-04-15 17:24:16.555 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -application com.ifx.davex.product.daveApplication -showlocation
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -application com.ifx.davex.product.daveApplication -showlocation
+
+!ENTRY org.eclipse.core.resources 2 10035 2020-04-15 17:24:21.653
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2020-04-15 17:24:22.789
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY SOLVER 1 0 2020-04-15 17:24:25.551
+!MESSAGE USER_ACTION : Default solver exe path is: C:\DAVE_4-4-2_64bit\DAVE-IDE-4.4.2-64Bit\eclipse\Solver\lib\i386_nt\eclipse.exe
+
+!ENTRY SOLVER 1 0 2020-04-15 17:24:25.615
+!MESSAGE USER_ACTION : GlobalSize= 750MB; LocalSize: 128MB
+
+!ENTRY SOLVER 1 0 2020-04-15 17:24:25.619
+!MESSAGE USER_ACTION : Creating OutOfProcessEclipse instance...
+
+!ENTRY SOLVER 1 0 2020-04-15 17:24:25.760
+!MESSAGE USER_ACTION : Solver Status: CONNECTED
+
+!ENTRY APPSTORE 1 0 2020-04-15 17:24:29.227
+!MESSAGE USER_ACTION : Time taken for loading LibraryStore data for SoftwareId [XMC1.4.04.Q064.ALL] is: 266 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:29.335
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 4 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:29.582
+!MESSAGE USER_ACTION : Active project:xmc1400-getstarted-optiga-trust-m[ Software ID:XMC1.4.04.Q064.ALL]
+
+!ENTRY COMMON 1 0 2020-04-15 17:24:30.853
+!MESSAGE Time Taken By De-Serialization  : 758 ms :: C:\Workspace\getstarted-optiga-trust-m\xmc1400-getstarted-optiga-trust-m\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:24:30.864
+!MESSAGE *************Serializing EMF and Groovy data to RAM*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:31.009
+!MESSAGE USER_ACTION : Time taken for initializing Application Model is: 1428 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:31.028
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(updateQuery): 10 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:31.055
+!MESSAGE USER_ACTION : Time taken for reloadLastSolverResult(getSolutionQuery): 11 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:31.062
+!MESSAGE USER_ACTION : Time taken for updating views is: 1 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:32.234
+!MESSAGE USER_ACTION : Time taken for rendering views is: 1165 msec 
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:24:32.584
+!MESSAGE USER_ACTION : Total time taken for setting project as active is: 3252 msec 
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:24:33.132
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/Examples/XMC_IFX/v4.1//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:24:36.106
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/XMC_IFX/v4.4//daveSite.xml
+
+!ENTRY com.ifx.dave.LibraryManager 4 0 2020-04-15 17:24:40.404
+!MESSAGE Reading file: http://dave.infineon.com/Libraries/DAVE_Libs/Contributed/v4.4//daveSite.xml
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:25:06.862
+!MESSAGE *************Saving EMF data into file system*******************
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:25:07.046
+!MESSAGE *************Saving Groovy data into file system*******************
+
+!ENTRY COMMON 1 0 2020-04-15 17:25:07.179
+!MESSAGE Time Taken By Serialization  : 129 ms :: C:\Workspace\getstarted-optiga-trust-m\xmc1400-getstarted-optiga-trust-m\Dave\Model\projectData.bin
+
+!ENTRY com.dave.mbs.common 1 0 2020-04-15 17:25:07.405
+!MESSAGE ****************Cleaning project data:xmc1400-getstarted-optiga-trust-m*******************
+
+!ENTRY APPLICATION_MODEL 1 0 2020-04-15 17:25:07.451
+!MESSAGE USER_ACTION : Time taken for disposing objects for memory cleanup: 212 msec 
+
+!ENTRY SOLVER 1 0 2020-04-15 17:25:07.458
+!MESSAGE Solver exited (0)
+
+!ENTRY SOLVER 1 0 2020-04-15 17:25:07.715
+!MESSAGE USER_ACTION : Solver Status: DISCONNECTED

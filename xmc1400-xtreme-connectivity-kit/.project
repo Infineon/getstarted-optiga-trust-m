@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>xmc1400-getstarted-optiga-trust-m</name>
+	<name>xmc1400-xtreme-connectivity-kit</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -160,7 +160,7 @@
 		<link>
 			<name>optiga-trust-m-lib/xmc1400_xtreme/pal_crypt_mbedtls.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/pal_crypt_mbedtls.c</locationURI>
+			<location>C:/Workspace/DAVE-4.4.2-64Bit/getstarted-optiga-trust-m/optiga-trust-m/pal/pal_crypt_mbedtls.c</location>
 		</link>
 	</linkedResources>
 	<variableList>

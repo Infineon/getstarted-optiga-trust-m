@@ -64,6 +64,7 @@ void example_pair_host_and_optiga_using_pre_shared_secret(void);
 void example_optiga_util_hibernate_restore(void);
 
 extern pal_logger_t logger_console;
+extern uint8_t init_flag;
 /**
  * Callback when optiga_util_xxxx operation is completed asynchronously
  */
@@ -372,33 +373,33 @@ static void optiga_shell_show_usage();
 
 optiga_example_cmd_t optiga_cmds [] =
 {
-		{"",                                        "help",			optiga_shell_show_usage},
-		{"    initialize optiga         : ","1",	optiga_shell_init},
-		{"    de-initialize optiga      : ","2",	optiga_shell_deinit},
-		{"    run all tests at once     : ","3",	optiga_shell_selftest},
-		{"    read data                 : ","4",	optiga_shell_util_read_data},
-		{"    write data                : ","5",	optiga_shell_util_write_data},
-		{"    binding host with optiga  : ","6",	optiga_shell_pair_host_optiga},
-		{"    hibernate and restore     : ","7",	optiga_shell_util_hibernate_restore},
-		{"    update counter            : ","8",	optiga_shell_util_update_count},
-		{"    protected update          : ","9",	optiga_shell_util_protected_update},
+		{"",                                        "help",			    optiga_shell_show_usage},
+		{"    initialize optiga         : "OPTIGA_SHELL,"init",			optiga_shell_init},
+		{"    de-initialize optiga      : "OPTIGA_SHELL,"deinit",		optiga_shell_deinit},
+		{"    run all tests at once     : "OPTIGA_SHELL,"selftest",		optiga_shell_selftest},
+		{"    read data                 : "OPTIGA_SHELL,"readdata",		optiga_shell_util_read_data},
+		{"    write data                : "OPTIGA_SHELL,"writedata",	optiga_shell_util_write_data},
+		{"    binding host with optiga  : "OPTIGA_SHELL,"bind",			optiga_shell_pair_host_optiga},
+		{"    hibernate and restore     : "OPTIGA_SHELL,"hibernate",	optiga_shell_util_hibernate_restore},
+		{"    update counter            : "OPTIGA_SHELL,"counter",		optiga_shell_util_update_count},
+		{"    protected update          : "OPTIGA_SHELL,"protected",	optiga_shell_util_protected_update},
 
-		{"    hashing of data           : ","10",	optiga_shell_crypt_hash},
-		{"    tls pfr sha256            : ","11",	optiga_shell_crypt_tls_prf_sha256},
-		{"    random number generation  : ","12",	optiga_shell_crypt_random},
+		{"    hashing of data           : "OPTIGA_SHELL,"hash",			optiga_shell_crypt_hash},
+		{"    tls prf sha256            : "OPTIGA_SHELL,"prf",			optiga_shell_crypt_tls_prf_sha256},
+		{"    random number generation  : "OPTIGA_SHELL,"random",		optiga_shell_crypt_random},
 
-		{"    ecc key pair generation   : ","13",	optiga_shell_crypt_ecc_generate_keypair},
-		{"    ecdsa sign                : ","14",	optiga_shell_crypt_ecdsa_sign},
-		{"    ecdsa verify sign         : ","15",	optiga_shell_crypt_ecdsa_verify},
-		{"    ecc diffie hellman        : ","16",	optiga_shell_crypt_ecdh},
+		{"    ecc key pair generation   : "OPTIGA_SHELL,"ecckeygen",	optiga_shell_crypt_ecc_generate_keypair},
+		{"    ecdsa sign                : "OPTIGA_SHELL,"ecdsasign",	optiga_shell_crypt_ecdsa_sign},
+		{"    ecdsa verify sign         : "OPTIGA_SHELL,"ecdsaverify",	optiga_shell_crypt_ecdsa_verify},
+		{"    ecc diffie hellman        : "OPTIGA_SHELL,"ecdh",			optiga_shell_crypt_ecdh},
 
-		{"    rsa key pair generation   : ","17",	optiga_shell_crypt_generate_keypair},
-		{"    rsa sign                  : ","18",	optiga_shell_crypt_rsa_sign},
-		{"    rsa verify sign           : ","19",	optiga_shell_crypt_rsa_verify},
-		{"    rsa encrypt message       : ","20",	optiga_shell_crypt_rsa_encrypt_message},
-		{"    rsa encrypt session       : ","21",	optiga_shell_crypt_rsa_encrypt_session},
-		{"    rsa decrypt and store     : ","22",	optiga_shell_crypt_rsa_decrypt_and_store},
-		{"    rsa decrypt and export    : ","23",	optiga_shell_crypt_rsa_decrypt_and_export},
+		{"    rsa key pair generation   : "OPTIGA_SHELL,"rsakeygen",	optiga_shell_crypt_generate_keypair},
+		{"    rsa sign                  : "OPTIGA_SHELL,"rsasign",		optiga_shell_crypt_rsa_sign},
+		{"    rsa verify sign           : "OPTIGA_SHELL,"rsaverify",	optiga_shell_crypt_rsa_verify},
+		{"    rsa encrypt message       : "OPTIGA_SHELL,"rsaencmsg",	optiga_shell_crypt_rsa_encrypt_message},
+		{"    rsa encrypt session       : "OPTIGA_SHELL,"rsaencsession",optiga_shell_crypt_rsa_encrypt_session},
+		{"    rsa decrypt and store     : "OPTIGA_SHELL,"rsadecstore",	optiga_shell_crypt_rsa_decrypt_and_store},
+		{"    rsa decrypt and export    : "OPTIGA_SHELL,"rsaencexp",	optiga_shell_crypt_rsa_decrypt_and_export},
 };
 
 #define OPTIGA_SIZE_OF_CMDS			(sizeof(optiga_cmds)/sizeof(optiga_example_cmd_t))
@@ -488,6 +489,7 @@ void optiga_shell_begin(void)
 	char_t user_cmd[50];
 	uint8_t index = 0;
 
+	init_flag = 1;
 	optiga_shell_show_prompt();
 	optiga_shell_show_usage();
 	optiga_shell_show_prompt();
@@ -531,7 +533,6 @@ void optiga_shell_wait_for_user(void)
 		else
 		{
 			optiga_lib_print_string_with_newline("Press any key to start optiga mini shell");
-			pal_os_timer_delay_in_milliseconds(2000);
 		}
 	}
 }

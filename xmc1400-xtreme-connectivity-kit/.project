@@ -160,7 +160,7 @@
 		<link>
 			<name>optiga-trust-m-lib/xmc1400_xtreme/pal_crypt_mbedtls.c</name>
 			<type>1</type>
-			<location>C:/Workspace/DAVE-4.4.2-64Bit/getstarted-optiga-trust-m/optiga-trust-m/pal/pal_crypt_mbedtls.c</location>
+			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/pal_crypt_mbedtls.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>

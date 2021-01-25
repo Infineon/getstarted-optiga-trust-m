@@ -21,13 +21,10 @@ In this guide you may find the following steps:
 
 ## Hardware and Software
 
-* This get started guide uses the OPTIGA™ Trust M evaluation kit or the XCM1400 XTREME End-to-End Security Connectivity Kit
+* This get started guide uses the OPTIGA™ Trust M evaluation kit
 
 ### OPTIGA™ Trust M evaluation kit
 <img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
-
-### XMC1400 XTREME Connectivity Kit
-<img src="https://github.com/Infineon/Assets/raw/master/Pictures/xtreme-connectivity-kit.png" title="XCM1400 XTREME End-to-End Security Connectivity Kit" width="400">
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
     * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)
@@ -43,10 +40,8 @@ In this guide you may find the following steps:
 1. Power up the kit by connecting Micro USB cable between PC and Debugger micro USB (**X101** Port on the board).
 1. Run JFlashLite.exe from JLink installation folder. It shows a notice window. Click OK.
 1. Click on **Device** to select a target device: Select Infineon as Manufacturer
-    1. **For XMC1400 Connectivity Kit:** Device as XMC1404-0200, and then click OK
     1. **For XMC4800:** Device as XMC4800-2048, and then click OK
 1. Select hex file to be flashed under **Data File** and click on **Program Device**. It then shows the programming progress window.
-    1. **For XMC1400 Connectivity Kit:** (`bin/xmc1400-getstarted-optiga-trust-m.hex`) 
     1. **For XMC4800:** (`bin/xmc4800_optiga_example.hex`)
 1. Flash download completed
 
@@ -56,13 +51,9 @@ In this guide you may find the following steps:
 1. Open Tera Trem and select the COM port with name “Communications Port”. 
     1. **Note: We are using the same usb connectin for programming/debuging and VCOM.
 1. Configure COM port 
-    1. **For XMC1400 Connectivity Kit:** 115200 8N1
     1. **For XMC4800:** 9600 8N1
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
-<details> <summary> Sample output with `option 3` command  </summary> 
-  <img src="https://github.com/Infineon/Assets/raw/master/Pictures/xmc_1400_optiga_trust_m_tera_term.png">
-</details>
 
 #### Available commands
 
@@ -71,6 +62,7 @@ In this guide you may find the following steps:
 * `optiga --deinit`       - de-initialize optiga
 * `optiga --readdata`     - read data
 * `optiga --writedata`    - write data
+* `optiga --coprocid`     - read Co-processor UID
 * `optiga --bind`         - binding host with optiga
 * `optiga --hibernate`    - hibernate and restore
 * `optiga --counter`      - update counter
@@ -89,6 +81,13 @@ In this guide you may find the following steps:
 * `optiga --rsaencsession`- rsa encrypt session
 * `optiga --rsadecstore`  - rsa decrypt and store data on chip
 * `optiga --rsaencexp`    - rsa decrypt and export data
+* `optiga --ecbencdec`    - symmetric AES ECB mode encrypt and decrypt
+* `optiga --cbcencdec`    - symmetric AES CBC mode encrypt and decrypt
+* `optiga --cbcmacenc`    - symmetric AES CBC MAC mode encrypt
+* `optiga --hmac`         - HMAC-SHA256 generation
+* `optiga --hmacverify`   - Verify HMAC
+* `optiga --hkdf`         - HKDF-SHA256 key dereviation
+* `optiga --clrautostate` - clear auto state
 
 ## Compile and Debug
 

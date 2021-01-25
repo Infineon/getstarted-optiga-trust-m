@@ -39,112 +39,162 @@
 		<link>
 			<name>main_xmc4800_example.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/main_xmc4800_example.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/main_xmc4800_example.c</locationURI>
 		</link>
 		<link>
-			<name>optiga_shell.c</name>
+			<name>examples/optiga_shell.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/optiga_shell.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga_shell.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_clear_auto_state.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_clear_auto_state.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_ecc_generate_keypair.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_ecc_generate_keypair.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_ecc_generate_keypair.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_ecdh.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_ecdh.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_ecdh.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_ecdsa_sign.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_ecdsa_sign.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_ecdsa_sign.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_ecdsa_verify.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_ecdsa_verify.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_ecdsa_verify.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_hash.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_hash.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_hash.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_hkdf.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_hkdf.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_hmac.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_hmac.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_random.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_random.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_random.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_decrypt.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_decrypt.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_decrypt.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_encrypt_message.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_encrypt_message.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_encrypt_message.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_encrypt_session.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_encrypt_session.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_encrypt_session.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_generate_keypair.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_generate_keypair.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_generate_keypair.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_sign.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_sign.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_sign.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_rsa_verify.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_rsa_verify.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_rsa_verify.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_symmetric_encrypt_decrypt.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_symmetric_encrypt_decrypt.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_symmetric_encrypt_decrypt_ecb.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_symmetric_encrypt_decrypt_ecb.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_crypt_symmetric_generate_key.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_symmetric_generate_key.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_crypt_tls_prf_sha256.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_crypt_tls_prf_sha256.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_crypt_tls_prf_sha256.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_hibernate_restore.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/usecases/example_optiga_hibernate_restore.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/usecases/example_optiga_hibernate_restore.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_hmac_verify_with_authorization_reference.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/usecases/example_optiga_hmac_verify_with_authorization_reference.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_util_protected_update.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_util_protected_update.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_util_protected_update.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_util_read_data.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_util_read_data.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_util_read_data.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_util_update_count.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_util_update_count.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_util_update_count.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_optiga_util_write_data.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/example_optiga_util_write_data.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_util_write_data.c</locationURI>
 		</link>
 		<link>
 			<name>examples/example_pair_host_and_optiga_using_pre_shared_secret.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/usecases/example_pair_host_and_optiga_using_pre_shared_secret.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/usecases/example_pair_host_and_optiga_using_pre_shared_secret.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_read_coprocessor_id.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/usecases/example_read_coprocessor_id.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_utilities.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_utilities.c</locationURI>
+		</link>
+		<link>
+			<name>examples/example_optiga_init_deinit.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/example_optiga_init_deinit.c</locationURI>
 		</link>
 		<link>
 			<name>examples/include</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/examples/optiga/include</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/examples/optiga/include</locationURI>
 		</link>
 		<link>
 			<name>lib/externals</name>
@@ -154,7 +204,7 @@
 		<link>
 			<name>lib/optiga</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/optiga</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/optiga</locationURI>
 		</link>
 		<link>
 			<name>lib/pal</name>
@@ -174,57 +224,62 @@
 		<link>
 			<name>lib/pal/pal.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_crypt_mbedtls.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/pal_crypt_mbedtls.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/pal_crypt_mbedtls.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_gpio.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_gpio.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_gpio.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_i2c.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_i2c.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_i2c.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_ifx_i2c_config.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_ifx_i2c_config.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_ifx_i2c_config.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_logger.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_logger.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_logger.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_os_datastore.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_os_datastore.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_os_datastore.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_os_event.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_os_event.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_os_event.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_os_lock.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_os_lock.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_os_lock.c</locationURI>
+		</link>
+		<link>
+			<name>lib/pal/pal_os_memory.c</name>
+			<type>1</type>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_os_memory.c</locationURI>
 		</link>
 		<link>
 			<name>lib/pal/pal_os_timer.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/pal/xmc4800/pal_os_timer.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/pal/xmc4800/pal_os_timer.c</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/CMSIS</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Libraries/CMSIS</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Libraries/CMSIS</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/Dave</name>
@@ -234,7 +289,7 @@
 		<link>
 			<name>lib/xmc/Newlib</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Libraries/Newlib</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Libraries/Newlib</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/Startup</name>
@@ -244,78 +299,78 @@
 		<link>
 			<name>lib/xmc/XMCLib</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Libraries/XMCLib</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Libraries/XMCLib</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/aes.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/aes.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/aes.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/ccm.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/ccm.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/ccm.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/cipher.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/cipher.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/cipher.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/cipher_wrap.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/cipher_wrap.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/cipher_wrap.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/include</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/include</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/include</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/md.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/md.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/md.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/md_wrap.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/md_wrap.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/md_wrap.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/platform_util.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/platform_util.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/platform_util.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/sha256.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/sha256.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/sha256.c</locationURI>
 		</link>
 		<link>
 			<name>lib/externals/mbedtls/ssl_ciphersuites.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/optiga-trust-m/externals/mbedtls/library/ssl_ciphersuites.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/externals/mbedtls/library/ssl_ciphersuites.c</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/Dave/Generated</name>
 			<type>2</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Dave/Generated</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Dave/Generated</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/Startup/startup_XMC4800.S</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Startup/startup_XMC4800.S</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Startup/startup_XMC4800.S</locationURI>
 		</link>
 		<link>
 			<name>lib/xmc/Startup/system_XMC4800.c</name>
 			<type>1</type>
-			<locationURI>OPTIGA_DAVE_PROJ/xmc4800_iot_kit/common/Startup/system_XMC4800.c</locationURI>
+			<locationURI>OPTIGA_DAVE_PROJ/projects/xmc4800_iot_kit/common/Startup/system_XMC4800.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
 			<name>OPTIGA_DAVE_PROJ</name>
-			<value>$%7BPARENT-2-PROJECT_LOC%7D</value>
+			<value>$%7BPARENT-3-PROJECT_LOC%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>

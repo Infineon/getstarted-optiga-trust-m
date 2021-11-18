@@ -22,10 +22,12 @@ In this guide you may find the following steps:
 
 ## Hardware and Software
 
-* This get started guide uses the OPTIGA™ Trust M evaluation kit
 
-### OPTIGA™ Trust M evaluation kit
-<img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
+| OPTIGA&trade; Trust M Evaluation Kit | OPTIGA&trade; Trust IoT Security Development Kit |
+|     :---:      |     :---:      |
+| <a href="https://github.com/Infineon/optiga-trust-m#description"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="480" height="360"></a>   | <a href="https://github.com/Infineon/optiga-trust-m#description"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_iot_secdevkit.png" width="480" height="360"></a>     |
+
+### OPTIGA&trade; Trust M Evaluation Kit
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
     * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)
@@ -35,8 +37,9 @@ In this guide you may find the following steps:
     * Link to download manual: J-Link manual [Download](https://www.segger.com/downloads/jlink/)
 * Download and install [Tera Term](https://osdn.net/projects/ttssh2/releases/) (recommended)
 * Download this repository either via a direct [Download](https://github.com/Infineon/getstarted-optiga-trust-m/releases) or clone using `git clone --recursive`.
-## Quickstart 
-### Flash the binary
+
+#### Quickstart 
+##### Flash the binary
 
 1. Power up the kit by connecting Micro USB cable between PC and Debugger micro USB (**X101** Port on the board).
 1. Run JFlashLite.exe from JLink installation folder. It shows a notice window. Click OK.
@@ -46,7 +49,7 @@ In this guide you may find the following steps:
     1. **For XMC4800:** (`bin/xmc4800_optiga_example.hex`)
 1. Flash download completed
 
-### Logger setup
+##### Logger setup
 
 1. Connect the micro USB cable between PC and micro USB (**X100** Port on the board).
 1. Open Tera Trem and select the COM port with name “Communications Port”. 
@@ -56,7 +59,7 @@ In this guide you may find the following steps:
 1. Once connected, the terminal displays the text press any key to start example demonstration.
 1. The logs of the example execution are displayed along with status of each example as Passed or Failed
 
-#### Available commands
+##### Available commands
 
 * `optiga --selftest`     - run all tests at once with performance output
 * `optiga --init`         - initialize optiga
@@ -90,7 +93,7 @@ In this guide you may find the following steps:
 * `optiga --hkdf`         - HKDF-SHA256 key dereviation
 * `optiga --clrautostate` - clear auto state
 
-## Compile and Debug
+#### Compile and Debug
 
 The guidance on how to compile and debug the setup you can find [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 

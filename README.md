@@ -16,8 +16,8 @@ Note: Please be aware that a direct download of the repository as zip **will NOT
 In this guide you may find the following steps:
 * How to import this project into the respective IDE
 * How to build the software and flash the development board (described below)
-* How to debug and run examples for all Tool Box functions
-* Follow the guide [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki#debug-optiga-trust-m-example-application-project-with-dave) to import and compile in Dave 
+* How to debug and run examples
+* Choose your respective board [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki#debug-optiga-trust-m-example-application-project-with-dave).
 
 ## Hardware and Software
 

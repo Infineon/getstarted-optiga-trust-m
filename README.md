@@ -10,9 +10,9 @@ Two kits are supported and listed here:
 1. [OPTIGA™ Trust M evaluation kit](https://www.infineon.com/cms/de/product/evaluation-boards/optiga-trust-m-eval-kit/)
 2. [OPTIGA™ Trust M IoT Security Development Kit](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-m-iot-kit/)
 
-| [OPTIGA&trade; Trust M Evaluation Kit](https://github.com/Infineon/getstarted-optiga-trust-m/wiki/Get-Started-with-OPTIGA%E2%84%A2-Trust-M-Evaluation-Kit) | [OPTIGA&trade; Trust M IoT Security Development Kit](https://github.com/Infineon/getstarted-optiga-trust-m/wiki/Get-Started-with-OPTIGA%E2%84%A2-Trust-M-IoT-Security-Development-Kit) |
+| [OPTIGA&trade; Trust M Evaluation Kit](xmc4800_evaluation_kit/README.md) | [OPTIGA&trade; Trust M IoT Security Development Kit](psoc62_secure_development_kit/README.md) |
 |     :---:      |     :---:      |
-| <a href="https://github.com/Infineon/getstarted-optiga-trust-m/wiki/Get-Started-with-OPTIGA%E2%84%A2-Trust-M-Evaluation-Kit"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="480" height="326"></a>   | <a href="https://github.com/Infineon/getstarted-optiga-trust-m/wiki/Get-Started-with-OPTIGA%E2%84%A2-Trust-M-IoT-Security-Development-Kit"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_iot_secdevkit.png" width="480" height="318"></a>     |
+| <a href="xmc4800_evaluation_kit/README.md"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="480" height="326"></a>   | <a href="psoc62_secure_development_kit/README.md"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_iot_secdevkit.png" width="480" height="318"></a>     |
 
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.

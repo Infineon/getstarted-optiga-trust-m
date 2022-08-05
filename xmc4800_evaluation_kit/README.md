@@ -1,4 +1,6 @@
-# Get Started Guide for OPTIGA™ Trust M Evaluation Kit
+# Get Started Guide for </br>OPTIGA™ Trust M Evaluation Kit
+
+<img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
 
 ## Description
 
@@ -25,7 +27,6 @@ In this guide you may find the following steps:
 * This get started guide uses the OPTIGA™ Trust M evaluation kit
 
 ### OPTIGA™ Trust M evaluation kit
-<img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" title="OPTIGA™ Trust M evaluation kit" width="600"> 
 
 * (optional, required for debugging) DAVE 4.4.2 and device feature 2.2.4, which can be downloaded from Infineon website. 
     * Link to download DAVE 4.4.2: [Dave Download](https://infineoncommunity.com/dave-download_ID645)

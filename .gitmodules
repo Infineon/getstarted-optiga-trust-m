@@ -1,0 +1,3 @@
+[submodule "xmc4800_evaluation_kit/optiga-trust-m"]
+	path = xmc4800_evaluation_kit/optiga-trust-m
+	url = https://github.com/Infineon/optiga-trust-m.git

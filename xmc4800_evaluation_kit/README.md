@@ -1,4 +1,4 @@
-# OPTIGA&trade; Trust M Get Started Guide
+# Get Started Guide for OPTIGA™ Trust M Evaluation Kit
 
 ## Description
 

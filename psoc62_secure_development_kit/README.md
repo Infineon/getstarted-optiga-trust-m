@@ -1,4 +1,4 @@
-# Get Started Guide for OPTIGA™ Trust M IoT Security Development Kit
+# Get Started Guide for </br>OPTIGA™ Trust M IoT Security Development Kit
 <img src="https://user-images.githubusercontent.com/12692378/182646635-f5963c06-bf5e-46f5-a6e7-ac2c38270e19.png" width="450" height="300"></a>
 
 ## Description

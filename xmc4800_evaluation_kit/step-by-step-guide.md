@@ -8,7 +8,7 @@ Below you can find the instructions on how to compile the code yourself and flas
 *Be aware that the interactive shall is very primitive. You need to type in the commands in one go without using the delete key.*
 
 * You can find more information about the security chip in the core [repository](https://github.com/Infineon/optiga-trust-m)
-* Below you can find the Quickstart guide, [step-by-step guidance](step-by-step-guide.md) demontsrates a more detailed explanation and manual
+* Below you can find the Quickstart guide, on wiki a [step-by-step guidance](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 
 Note: Please be aware that a direct download of the repository as zip **will NOT work** please see section [Hardware and Software](#hardware-and-software) below for details.
 
@@ -18,7 +18,7 @@ In this guide you may find the following steps:
 * How to build the software and flash the development board (described below)
 * How to run shell user interface
 * How to debug and run examples for all Tool Box functions
-* Follow the guide [here](step-by-step-guide.md#debug-optiga-trust-m-example-application-project-with-dave) to import and compile in Dave 
+* Follow the guide [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki#debug-optiga-trust-m-example-application-project-with-dave) to import and compile in Dave 
 
 ## Hardware and Software
 
@@ -92,7 +92,7 @@ In this guide you may find the following steps:
 
 ## Compile and Debug
 
-The guidance on how to compile and debug the setup you can find [here](step-by-step-guide.md)
+The guidance on how to compile and debug the setup you can find [here](https://github.com/Infineon/getstarted-optiga-trust-m/wiki)
 
 
 ## Contributing

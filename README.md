@@ -3,7 +3,7 @@
 ## Description
 
 This repository contains one of Application Notes for [OPTIGA™ Trust M](https://github.com/Infineon/optiga-trust-m) security chip.
-Note: Please be aware that a direct download of the repository as zip **will NOT work**. Instead download either a release or use `git clone --recurse-submodules https://github.com/Infineon/getstarted-optiga-trust-m` command to pull all the submodules. 
+Note: Please be aware that a direct download of the repository as zip **will NOT work**. Instead download either a [release](https://github.com/Infineon/getstarted-optiga-trust-m/releases/download/v1.3/getstarted-optiga-trust-m.zip) or use `git clone --recurse-submodules https://github.com/Infineon/getstarted-optiga-trust-m` command to pull all the submodules. 
 
 Two kits are supported and listed here: 
 

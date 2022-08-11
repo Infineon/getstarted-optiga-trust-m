@@ -1,4 +1,3 @@
-# Get Started Guide for </br>OPTIGA™ Trust M IoT Security Development Kit
 <img src="https://user-images.githubusercontent.com/12692378/182646635-f5963c06-bf5e-46f5-a6e7-ac2c38270e19.png" width="450" height="300"></a>
 
 ## Description
@@ -11,8 +10,9 @@ You can find more information about the security chip on the product [web page](
 
 - [Step 1. Unpack the Kit](#step-1-kit-content)
 - [Step 2. Experience AWS IoT MQTT Demo](#step-2-experience-the-aws-iot-mqtt-demo)
+    - [Re-flash the Kit with the AWS IoT MQTT Demo Application](#re-flash-the-kit-with-the-aws-iot-mqtt-demo-application)
 - [Step 3. Experience CIRRENT™ Cloud ID](#step-3-experience-cirrent™-cloud-id)
-- [Step 4. Develop your own ModusToolbox Application for OPTIGA Trust M](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
+- [Step 4. Develop your own ModusToolbox™ Application for OPTIGA Trust M](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
 - [Support material](#support-material)
 - [Troubleshooting](#troubleshooting)
 
@@ -50,6 +50,13 @@ A Short Youtube video of a kit unpack experience
 
     <img src="https://user-images.githubusercontent.com/12692378/182862492-bad98156-cf8a-442f-bfa0-3b503fe20034.png" width="300" height="357"></a>
 
+### Re-flash the Kit with the AWS IoT MQTT Demo Application 
+
+1. Install the ModusToolbox™ as described in the [Step 4](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
+2. Go to the Windows Start menu and find the `modus-shell` tool, open it
+3. Go to the folder where you have downloaded the following application image - [mtb-example-optiga-mqtt-client-demo.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/psoc62_secure_development_kit/mtb-example-optiga-mqtt-client-demo.hex)
+4. Run the following comamnd `<path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/bin/openocd -s <path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program mtb-example-anycloud-mqtt-client.hex verify reset exit;"`
+where `<path_to_the_ModusToolbox>` is the installation path for the ModusToolbox™
 
 
 ## Step 3. Experience CIRRENT™ Cloud ID

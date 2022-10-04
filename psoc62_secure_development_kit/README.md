@@ -89,6 +89,7 @@ There are currently three released Code Examples for OPTIGA™ Trust M:
 1. [OPTIGA™ Trust M: Cryptography](https://github.com/Infineon/mtb-example-optiga-crypto)
 2. [OPTIGA™ Trust M: MQTT Client](https://github.com/Infineon/mtb-example-optiga-mqtt-client)
 3. [OPTIGA™ Trust M: Power management](https://github.com/Infineon/mtb-example-optiga-power-management)
+4. [OPTIGA™ Trust M: Data and certificates management](https://github.com/Infineon/mtb-example-optiga-data-management)
 
 In the nutshell, the sequence below demonstrates generic steps to make the code example run, for other than **[OPTIGA™ Trust M: Cryptography](https://github.com/Infineon/mtb-example-optiga-crypto)** examples the process is similar apart from the example name. For settings and individual examples steps please refer to their README's on GitHub
 

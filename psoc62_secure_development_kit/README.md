@@ -106,7 +106,7 @@ Click on **Next** to continue.
 ![image](https://user-images.githubusercontent.com/39588888/154307440-1f58615d-bbaf-4a1f-8d65-24b8871d7dc7.png)
 
 * Choose Peripherals and find the **OPTIGA Cryptography** example.
-![trustm_iot_sdk_mtb_crypto](https://user-images.githubusercontent.com/12692378/182874698-731bdb1d-67c7-49b9-9bbe-779590a146e8.png)
+![trustm_iot_sdk_mtb_crypto](https://user-images.githubusercontent.com/12692378/193780378-3d8bb47f-8b2b-411b-baa6-b50887dbed91.png)
 
  * Compile and run. See the [README.md](https://github.com/Infineon/mtb-example-optiga-crypto/blob/master/README.md) for more information about the example
 

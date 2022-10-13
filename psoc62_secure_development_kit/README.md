@@ -57,7 +57,7 @@ A Short Youtube video of a kit unpack experience
 1. Install the ModusToolbox™ as described in the [Step 4](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
 2. Go to the Windows Start menu and find the `modus-shell` tool, open it
 3. Go to the folder where you have downloaded the following application image - [mtb-example-optiga-mqtt-client-demo.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/psoc62_secure_development_kit/mtb-example-optiga-mqtt-client-demo.hex) (right-click and Save as...)
-4. Run the following comamnd 
+4. Run the following command 
 ```
 <path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/bin/openocd -s <path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program mtb-example-optiga-mqtt-client-demo.hex verify reset exit;"
 ```

@@ -18,22 +18,7 @@ You can find more information about the security chip on the product [web page](
   - [Step 1. Kit content](#step-1-kit-content)
   - [Step 2. Flash Kit with pre-compiled Matter Application](#step-2-flash-kit-with-pre-compiled-matter-application)
   - [Step 3. Experience the Matter Demo](#step-3-experience-the-matter-demo)
-    - [Demo Setup](#demo-setup)
-    - [Setting up Chip tool](#setting-up-chip-tool)
-    - [Commissioning over BLE](#commissioning-over-ble)
-      - [Notes](#notes)
-    - [Cluster control](#cluster-control)
-    - [Platform Setup](#platform-setup)
-    - [Add Device to Home](#add-device-to-home)
-    - [Control Device](#control-device)
-    - [Add CD to your Google Developer Console](#add-cd-to-your-google-developer-console)
-    - [Add Device to Home](#add-device-to-home-1)
-    - [Factory Reset](#factory-reset)
-    - [Traces](#traces)
-    - [How it works](#how-it-works)
   - [Step 4. Retrieve Matter Productive Credentials from Kudelski Keystream](#step-4-retrieve-matter-productive-credentials-from-kudelski-keystream)
-    - [Retrieval Process](#retrieval-process)
-    - [Late-stage Provisioning](#late-stage-provisioning)
   - [Step 5. Develop your own Matter Application for OPTIGA™ Trust M MTR](#step-5-develop-your-own-matter-application-for-optiga-trust-m-mtr)
   - [Support material](#support-material)
   - [Troubleshooting](#troubleshooting)
@@ -109,6 +94,7 @@ Unfold one of the following sections, depending on your platform setup:
 
 > [!NOTE]
 > [Original see here](https://github.com/project-chip/connectedhomeip/tree/master/examples/lock-app/infineon/psoc6#commissioning-and-cluster-control)
+> 
 > The guide assumes that you have a complete installation of the Matter SDK on your Raspberry Pi 4B.
 
 ### Setting up Chip tool

@@ -28,7 +28,8 @@ For the OPTIGA&trade; Trust M MTR Shield and Matter applications, an additional,
 
 > [!NOTE]
 > This has been tested with ModusToolox™ Version 3.0.
-> 
+
+> [!WARNING]
 > Currently, the PSOC™ 62S2 Wi-Fi BT Pioneer Kit (target `CY8CKIT-062S2-43012`) is not listed as one of the supported kits for OPTIGA Trust M Example Applications.
 > However, it is possible to start with one of the supported kits and change the Board Support Pacakge (BSP) to this specific kit. This is experimental and is not fully tested.
 

@@ -231,9 +231,11 @@ Follow the steps from "Resources" to "Develop". Then, in the "Setup" field, choo
 
 ![Google Home Console: Add Test Device](/assets/google_home_console.png)
 
-The Vendor-ID must be set to "Test-VID" with the value 0xFFF1.
+The Device type must be set to `Lock`.
 
-The Product ID (PID) must be set to 0x8006.
+The Vendor-ID (VID) must be set to "Test-VID" with the value `0xFFF1`.
+
+The Product ID (PID) must be set to `0x8006`.
 
 Press "Save and Continue" and follow the remaining steps. Skip the "Field Trial" and "Certify" and directly go to "Launch".
 
@@ -271,10 +273,16 @@ Essential is the URL line pointing to the QR Code for the Device Commissioning p
 
 Open this URL and Scan the presented QR Code via your Android Device, after selecting the tab "Devices" and clicking "Add Device" in your Google Home App.
 
+If the Google Home App does not directly find your device, select "Matter-enabled device" in the device type section.
 
+### Control Device
 
+You can now "lock" and "unlock" the PSoC62 Kit via your Google Home App.
 
-### Add Device to Home
+- "Unlocked" State is when the User LED (red) is off
+- "Locked" State is when the User LED (red) is on
+
+The device will automatically "lock" itself again after a certain time.
 
 </details>
 
@@ -414,20 +422,15 @@ CHIP:DL: BLEManagerImpl::SetAdvertisingData err:Success
 
 </details>
 
-### How it works
-
 ## Step 4. Retrieve Matter Productive Credentials from Kudelski Keystream
 
 ### Retrieval Process
-<!-- CIRRENT™ Cloud ID is a unique  approach to device-to-cloud authentication, making it easier, more cost effective, and more secure by automating cloud provisioning of device certificates.  In the past, device authentication has been an expensive, custom IT process on the manufacturing line. With Cloud ID, it can now be a simple, robust, flexible, and secure cloud-to-cloud provisioning process.
 
-Each OPTIGA™ Trust M IoT Security Development Kit comes with a Reel Registration QR Code which shall provide an initial experience for claiming a real OPTIGA™ Trust M reel ordered from Infineon or its distribution partners. The Figure below depicts a Sample Code
+Go to [www.infineon.com/optiga-trust-m-mtr](www.infineon.com/optiga-trust-m-mtr).
 
-<img src="https://user-images.githubusercontent.com/12692378/182866136-0ed356cf-7dbf-4cca-9d75-d52a97fe0e6c.png" width="396" height="300"></a>
+Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM.
 
-Please mark your QR Code as it's uniquely identifies your board and can be used to retrive the certificate stored on the OPTIGA Trust M device as part of the step-by-step guidance. The latter demonstrates how to use that QR code and get your certificate in the [Steps to complete the virtual developer kit](https://documentation.infineon.com/html/cirrent-support-documentation/en/latest/cid/quick-start-cloud-id-virtual-dev-kit.html?_ga=2.12903347.546913535.1659539165-201647719.1625866144&_gac=1.150676036.1657878950.CjwKCAjwoMSWBhAdEiwAVJ2ndt4HH3aEUiRkYC1b1-ZXCXhuE9XQR2hSvms_0YGrF-LGvR1xmGyZbhoCBPsQAvD_BwE#steps-to-complete-the-virtual-developer-kit) of the official **CIRRENT™ Cloud ID Quick Start Guide**
-
-Find more information about CIRRENT™ Cloud ID on the [official product page](https://www.infineon.com/cms/en/design-support/service/cloud/cirrent-cloud-id/) -->
+As input you will need your Reel-ID. The QR Code on the side of the packaging box of the OPTIGA Trust M MTR Shield contains this Reel-ID for your shield.
 
 ### Late-stage Provisioning
 

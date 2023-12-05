@@ -426,7 +426,7 @@ CHIP:DL: BLEManagerImpl::SetAdvertisingData err:Success
 
 ### Retrieval Process
 
-Go to [www.infineon.com/optiga-trust-m-mtr](www.infineon.com/optiga-trust-m-mtr).
+Go to [www.infineon.com/optiga-trust-m-mtr](https://www.infineon.com/optiga-trust-m-mtr).
 
 Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM.
 

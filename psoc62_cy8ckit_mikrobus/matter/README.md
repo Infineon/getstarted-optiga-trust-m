@@ -436,7 +436,7 @@ As input you will need your Reel-ID. The QR Code on the side of the packaging bo
 
 We have prepared a separate application guide for the late-stage provisioning mechanism. For this, you will need a Raspberry Pi as provisioning harness.
 
-Find the Application Guide here: [www.github.com/Infineon/linux-optiga-trust-m/matter_provisioning](https://github.com/Infineon/linux-optiga-trust-m/tree/matter_provisioning/scripts/matter_provisioning)
+Find the Application Guide here: [www.github.com/Infineon/linux-optiga-trust-m/tree/development_v3/scripts/matter_provisioning](https://github.com/Infineon/linux-optiga-trust-m/tree/development_v3/scripts/matter_provisioning)
 
 <!-- Once we have a version 2 of Trust M MTR, add python-provisioning option! -->
 

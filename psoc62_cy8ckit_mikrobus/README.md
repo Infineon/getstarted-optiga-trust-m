@@ -96,3 +96,4 @@ Find more information about CIRRENT™ Cloud ID on the [official product page](h
 * [PSoC&trade; 62S2 Wi-Fi BT Pioneer Kit Quickstart Guide](https://www.infineon.com/dgdl/Infineon-CY8CKIT-062S2-43012_PSoC_62S2_Wi-Fi_BT_Pioneer_Kit_Quick_Start_Guide-UserManual-v01_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f01cf1d192c)
 * [OPTIGA&trade; Trust Adapter Schematics (preliminary version)]()
 * [OPTIGA&trade; Trust M Shield Schematics (preliminary version)](../assets/optiga_trust_m_shield_schematics.pdf)
+* [OPTIGA&trade; Trust M Host-Software & Documentation](https://www.github.com/Infineon/optiga-trust-m)

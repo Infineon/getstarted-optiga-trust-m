@@ -21,7 +21,6 @@ You can find more information about the security chip on the product [web page](
   - [Step 4. Retrieve Matter Productive Credentials from Kudelski Keystream](#step-4-retrieve-matter-productive-credentials-from-kudelski-keystream)
   - [Step 5. Develop your own Matter Application for OPTIGA™ Trust M MTR](#step-5-develop-your-own-matter-application-for-optiga-trust-m-mtr)
   - [Support material](#support-material)
-  - [Troubleshooting](#troubleshooting)
 
 ## Step 1. Kit content
 
@@ -42,6 +41,23 @@ A list of tested Hubs is:
 
 TODO: Change to Link to Video once it exists!
 [![OPTIGA™ Trust M MTR Experience](https://img.youtube.com/vi/TSQBHB7JaWg/0.jpg)](https://www.youtube.com/watch?v=TSQBHB7JaWg) -->
+
+### OPTIGA&trade; Trust M MTR Shield Configuration upon arrival
+
+To make the evaluation process simpler, we have pre-configured the OPTIGA Trust M MTR chip on the shield with Matter Development credentials.
+
+| Object ID | OPTIGA&trade; Trust M MTR Configuration (Default)                                                                    | OPTIGA&trade; Trust M MTR Configuration (Shield)                                                                                                                                                                                              |
+| --------: | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    0xE0F0 | ECC NIST P256 Private Key 1                                                                                          | ECC NIST P256 Private Key 1                                                                                                                                                                                                                     |
+|    0xE0F1 | ECC NIST P256 Private Key 2                                                                                          | ECC NIST P256 Private Key 2                                                                                                                                                                                                                    |
+|    0xE0FC | RSA 2048 Private Key                                                                                                 | RSA 2048 Private Key                                                                                                                                                                                                                          |
+|    0xE0E0 | ECC Certificate 1, signed by [IFX Int. CA 306](https://pki.infineon.com/OptigaTrustEccCA306/OptigaTrustEccCA306.crt) | Matter DAC Certificate, signed by [Matter Development PAI FFF1](https://github.com/project-chip/connectedhomeip/blob/4db8c38845ed915657c3dc7ff87dcf09b7efcf6d/credentials/development/attestation/Matter-Development-PAI-FFF1-noPID-Cert.pem) |
+|    0xE0E1 | ECC Certificate 2, signed by [IFX Int. CA 306](https://pki.infineon.com/OptigaTrustEccCA306/OptigaTrustEccCA306.crt) | ECC Certificate 2, signed by [IFX Int. CA 306](https://pki.infineon.com/OptigaTrustEccCA306/OptigaTrustEccCA306.crt)                                                                                                                          |
+|    0xE0E2 | RSA Certificate 1, signed by [IFX Int. CA 309](https://pki.infineon.com/OptigaTrustRsaCA309/OptigaTrustRsaCA309.crt) | RSA Certificate 1, signed by [IFX Int. CA 309](https://pki.infineon.com/OptigaTrustRsaCA309/OptigaTrustRsaCA309.crt)                                                                                                                          |
+|    0xE0E8 | empty                                                                                                                | [Matter Development PAI FFF1 Certificate](https://github.com/project-chip/connectedhomeip/blob/4db8c38845ed915657c3dc7ff87dcf09b7efcf6d/credentials/development/attestation/Matter-Development-PAI-FFF1-noPID-Cert.pem)                       |
+|    0xE140 | Plattform Binding Secret                                                                                             | Plattform Binding Secret                                                 |
+|    0xF1D0 | Authorization Reference                                                                                              | Authorization Reference                                                 |
+|    0xF1E0 | empty                                                                                             |  [Matter Test Certificate Declaration](https://github.com/project-chip/connectedhomeip/blob/4db8c38845ed915657c3dc7ff87dcf09b7efcf6d/credentials/development/cd-certs/Chip-Test-CD-Cert.pem)                                                |
 
 ## Step 2. Flash Kit with pre-compiled Matter Application
 
@@ -430,7 +446,7 @@ Go to [www.infineon.com/optiga-trust-m-mtr](https://www.infineon.com/optiga-trus
 
 Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM.
 
-As input you will need your Reel-ID. The QR Code on the side of the packaging box of the OPTIGA Trust M MTR Shield contains this Reel-ID for your shield.
+As input you will need your Reel-ID. The QR Code on the backside of the packaging box of the OPTIGA&trade; Trust M MTR Shield contains this Reel-ID for your shield.
 
 ### Late-stage Provisioning
 
@@ -450,9 +466,4 @@ To start developing a Matter Application for the OPTIGA&trade; Trust M MTR toget
 
 [See here](../README.md#support-material)
 
-## Troubleshooting
-<!-- In case you run into a problem and no live data can be seen on the dashboard follow the steps below to see where things go wrong.
-* Make sure that the WiFi hotspot is open (scan with your computer to see the available SSID)
-* Make sure there is no typo in the password
-* Be sure that the USB port that you use can supply enough power to run the board (try another port)
-* If you still run into problems download teraterm and connect to the virtual Com port of the board to see the output. Use this output and create an accident on our [Community Forum](https://community.infineon.com/t5/OPTIGA-Trust/bd-p/OPTIGA) -->
+<!-- ## Troubleshooting -->

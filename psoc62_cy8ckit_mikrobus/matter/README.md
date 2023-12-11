@@ -63,7 +63,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA Trust 
 
 ## Step 2. Flash Kit with pre-compiled Matter Application
 
-1. Download the attached [chip-psoc6-lock-example.hex](/assets/chip-psoc6-lock-example.hex) (right-click and Save as...) hex-file do your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA&trade; Trust MTR.
+1. Download the attached [chip-psoc6-lock-example.hex](/assets/chip-psoc6-lock-example.hex) (open link and "Download raw file") hex-file do your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA&trade; Trust MTR.
 2. Install the ModusToolbox™ toolset:
 
 > [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.

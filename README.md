@@ -7,7 +7,7 @@ Note: Please be aware that a direct download of the repository as zip **will NOT
 
 Three kits are supported and listed here:
 
-1. [OPTIGA™ Trust M evaluation kit](https://www.infineon.com/cms/de/product/evaluation-boards/optiga-trust-m-eval-kit/)
+1. [OPTIGA™ Trust M Evaluation Kit](https://www.infineon.com/cms/de/product/evaluation-boards/optiga-trust-m-eval-kit/)
 2. [OPTIGA™ Trust M IoT Security Development Kit](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-m-iot-kit/)
 3. [PSoC&trade; 62S2 Wi-Fi BT Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012/) in combination with the [OPTIGA&trade; Trust Adapter](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-adapter/) and any [OPTIGA&trade; Trust M Shield](https://www.infineon.com/cms/en/product/security-smart-card-solutions/optiga-embedded-security-solutions/optiga-trust/optiga-trust-m-sls32aia/)
 

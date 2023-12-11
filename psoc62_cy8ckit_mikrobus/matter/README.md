@@ -24,7 +24,7 @@ You can find more information about the security chip on the product [web page](
 
 ## Step 1. Kit content
 
-The Kit consists of 3 separate pieces of Hardware:
+The Kit consists of 3 separate pieces of Hardware. If not done already, all three pieces need to be ordered separately.
 
 1. PSoC62S2 Pioneer Kit: [CY8CKIT-062S2-43012](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012)
 2. [OPTIGA&trade; Trust Adapter](https://www.infineon.com/optiga-trust-adapter)
@@ -34,8 +34,10 @@ You will additionally need a Matter enabled smart-home hub to translate the BLE 
 A list of tested Hubs is:
 
 - Raspberry Pi 4B running the [CHIP Tool](https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/chip_tool_guide.md)
-- [Apple HomePod Mini](https://www.apple.com/de/homepod-mini/), Needs an iPhone or iPad as controller
+- [Apple HomePod Mini](https://www.apple.com/de/homepod-mini/), Needs an Apple iPhone or iPad with iOS 16.1 or later as controller
 - [Google Nest Mini, Gen 2](https://store.google.com/de/product/google_nest_mini)
+
+Additionally, a working WiFi Connection is required, to which all devices (Evaluation Kit, Matter Hub & Controller) can connect.
 
 <!-- A Short Youtube video of the kit unpack experience:
 
@@ -70,14 +72,14 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA Trust 
 
 3. Go to the Windows Start menu and find the `modus-shell` tool, open it
 4. Go to the folder where you have downloaded the hex-file.
-5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable.
+5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
 6. Assuming you have installed Modustoolbox version 3.1 in the default location, run the following command:
 
 ```shell
 ~/ModusToolbox/tools_3.1/openocd/bin/openocd -s ~/ModusToolbox/tools_3.1/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program chip-psoc6-lock-example.hex verify reset exit;"
 ```
 
-If your installation directory or MTB version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.1>` with the correct version.
+If your installation directory or ModustToolbox&trade; version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.1>` with the correct version.
 
 Your PSoC62S2 Pioneer Kit should now be flashed with the application image to run as Matter v1.1 Smart-Lock Device.
 <!-- 
@@ -311,6 +313,21 @@ The device will automatically "lock" itself again after a certain time.
 
 - Pressing the button again within 5 seconds will cancel the factory reset of
     the board.
+
+### How it works
+
+The demo just showed the "Device Commissioning" phase of the Matter Protocol.
+As written in the Matter Specification v1.1, the Device Commissioning consists of 7 steps, which the Evaluation Kit (Device / Commissionee) goes trough. The Phone and Smart Home Hub work together (Commissioner) to translate protocols and onboard the device.
+
+1. **Device Discovery**: The PSoC6 advertises itself through Bluetooth Low Energy, and the Comissionier finds them. The Passcode is obtained through scanning the QR-Code.
+2. **Security Setup wirth PASE**: Based on the obtained passcode, encryption keys are established between Commissioner and Commissionee using Passcode-Authenticated Session Establishment (PASE).
+3. **Device Attestation verification**: The Comissioner establishes the authenticity of the Comissionee as a certified device. Here, the OPTIGA&trade; Trust M MTR helps the PSoC 62, as it holds the relevant keys and certificates. (see Figure below)
+4. **Information Configuration**: The Commissioner provides the device information like UTC time and Operational Certificate. Again, the OPTIGA&trade; Trust M MTR can help with establishing the new NOC Keyset. (see Figure below)
+5. **Join Network**: The device is triggered to connect to the operational network (i.e. the local Wi-Fi network). The Commissioner discovers and uses the Devices IPv6 Adress for further communication.
+6. **Security Setup with CASE**: A new set of encryption keys is derived using CASE (Certificate Authenticated Session Establishment) between the Device and Commissioner.
+7. **Commissioning Complete**: The commissioning is complete and a success-message exchange is triggered using the new CASE-derived keys.
+
+<img src="../../assets/sequence_commissioning.png" width="600">
 
 ### Traces
 

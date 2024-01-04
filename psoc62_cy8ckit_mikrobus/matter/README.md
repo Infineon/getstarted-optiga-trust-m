@@ -6,7 +6,7 @@
 
 This repository contains instructions on how to get started with the [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) together with the [PSoC62S2 Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012) ( `CY8CKIT-062S2-43012`). The goal is to replicate a Matter Smart-Lock application.
 
-The PSoC6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA&trade; Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via am Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSoC Board will turn off.
+The PSoC6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA&trade; Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via a Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSoC Board will turn off.
 
 You can find more information about the security chip on the product [web page](https://www.infineon.com/optiga-trust-m-mtr)
 
@@ -63,7 +63,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA Trust 
 
 ## Step 2. Flash Kit with pre-compiled Matter Application
 
-1. Download the attached [chip-psoc6-lock-example.hex](/assets/chip-psoc6-lock-example.hex) (open link and "Download raw file") hex-file do your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA&trade; Trust MTR.
+1. Download the attached [chip-psoc6-lock-example.hex](/assets/chip-psoc6-lock-example.hex) (open link and "Download raw file") hex-file do your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA&trade; Trust M MTR.
 2. Install the ModusToolbox™ toolset:
 
 > [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.
@@ -82,25 +82,6 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA Trust 
 If your installation directory or ModustToolbox&trade; version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.1>` with the correct version.
 
 Your PSoC62S2 Pioneer Kit should now be flashed with the application image to run as Matter v1.1 Smart-Lock Device.
-<!-- 
-1. Create a Wi-Fi hotspot with the following credentials: SSID - **Infineon**, Password - **tischtennis**
-    - Go to the **Settings** of your smartphone
-        - Android: Select **Connections** -> Select **Mobile Hotspot and Tethering** -> Turn **Mobile Hotspot** on (switch) -> Put the **Network** name: _Infineon_ and **Password**: _tischtennis_, use 2.4 GHz for the connection
-        - iOS (1/2): Select **General** -> Select **About** -> Select **Name** -> Put the name: Infineon
-        - iOS (2/2): Select **Personal Hotspot** -> Turn **Allow Others to Join** on and set **Wi-Fi Password** to be _tischtennis_
-2. Connect the Board to a power source using a micro USB cable comming with the Kit as the figure below depicts (marked as **1**)
-
-    ![trustm_iot_sdk_mqtt_demo_1](https://user-images.githubusercontent.com/12692378/182861562-c4139f77-95c5-4f03-b5c7-aba55d021ed9.png)
-
-3. Wait for 20 seconds, in case you use your smartphone as the hotspot your phone will highlight if the board connects
-
-4. Scan with your smartphone the QR Code on the Board (marked as **2** on the Figure above)
-
-5. Push the user button (labeled: USR_BTN) that you can find just down left from the QR code (marked as **3** on the Figure above)
-
-6. If you push the button a few times you will see the button status is reflected in the graph of the dashboard.
-
-    <img src="https://user-images.githubusercontent.com/12692378/182862492-bad98156-cf8a-442f-bfa0-3b503fe20034.png" width="300" height="357"></a> -->
 
 ## Step 3. Experience the Matter Demo
 
@@ -459,11 +440,11 @@ CHIP:DL: BLEManagerImpl::SetAdvertisingData err:Success
 
 ### Retrieval Process
 
-Go to [www.infineon.com/optiga-trust-m-mtr](https://www.infineon.com/optiga-trust-m-mtr).
+Go to [www.infineon.com/optiga-trust-m-mtr](https://osts.infineon.com/trustm/home). You will need to register with Infineon's OSTS (Online Tools and Services).
 
-Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM.
+Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM. Additionally, you will find more documentation and application notes on the use and integration of the OPTIGA&trade; Trust M MTR.
 
-As input you will need your Reel-ID. The QR Code on the backside of the packaging box of the OPTIGA&trade; Trust M MTR Shield contains this Reel-ID for your shield.
+As input for the claiming you will need your Reel-ID. The QR Code on the backside of the packaging box of the OPTIGA&trade; Trust M MTR Shield contains this Reel-ID for your shield. Either scan the QR Code with your phone to retrieve the ID or manually type the ID as printed next to the QR Code.
 
 ### Late-stage Provisioning
 

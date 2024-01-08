@@ -11,13 +11,13 @@
 
 This section is based on the [PSoC&trade; 62S2 Wi-Fi BT Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012/) in combination with the [OPTIGA&trade; Trust Adapter](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-adapter/).
 
-<img src="../assets/psoc62_matter_kit.png" width="450">
+<img src="../assets/images/psoc62_matter_kit.png" width="450">
 
 Addtionally, any one of the following OPTIGA&trade; Trust M Shields is needed:
 
 |                                                  [OPTIGA&trade; Trust M Shield2Go](https://www.infineon.com/cms/en/product/evaluation-boards/s2go-security-optiga-m/)                                                   |                                          [OPTIGA&trade; Trust M Express Shield](https://www.infineon.com/optiga-trust-m-express-shield)                                           | [OPTIGA&trade; Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-| <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/S2Go.png" height="300"></a> | <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/Optiga_Trust_M_Express-Front.png" width="300"></a> |      <a href="matter/README.md"><img src="../assets/Optiga_Trust_M_Matter-Front.png" width="300"></a>       |
+| <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/S2Go.png" height="300"></a> | <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/Optiga_Trust_M_Express-Front.png" width="300"></a> |      <a href="matter/README.md"><img src="../assets/images/Optiga_Trust_M_Matter-Front.png" width="300"></a>       |
 
 One of these shields needs to be plugged into its designated slot on the OPTIGA&trade; Trust Adapter.
 
@@ -58,11 +58,11 @@ In the nutshell, the sequence below demonstrates generic steps to make the code 
 Type "DEV-01" into the dialog and choose **CYSBSYSKIT-DEV-01**.
 Click on **Next** to continue.
 
-![Select Board](../assets/mtb_project_creator_1.png)
+![Select Board](../assets/images/mtb_project_creator_1.png)
 
 * Choose Peripherals and find the **OPTIGA Cryptography** example.
 
-![Select Application](../assets/mtb_project_creator_2.png)
+![Select Application](../assets/images/mtb_project_creator_2.png)
 
 * Select your example application and change the used Board Support Package (BSP)
   1. Launch the Library Manager via the MTB Quick Panel
@@ -71,7 +71,7 @@ Click on **Next** to continue.
   4. Select the "APP_CY8CKIT-062S2-43012" as Active BSP by clicking on it and then "Update"
   5. After it completes, "Close" the window
 
-![Library Manager](../assets/mtb_library_manager.png)
+![Library Manager](../assets/images/mtb_library_manager.png)
 
 * Compile and run. See the [README.md](https://github.com/Infineon/mtb-example-optiga-crypto/blob/master/README.md) for more information about the example
 
@@ -81,7 +81,7 @@ CIRRENT™ Cloud ID is a unique  approach to device-to-cloud authentication, mak
 
 Each OPTIGA™ Trust M Express Shield comes with a Reel Registration QR Code which shall provide an initial experience for claiming a real OPTIGA™ Trust M Express reel ordered from Infineon or its distribution partners. The Figure below depicts a Sample Code:
 
-<img src="../assets/express_code.png" height="150"></a>
+<img src="../assets/images/express_code.png" height="150"></a>
 
 Please mark your QR Code as it's uniquely identifies your board and can be used to retrive the certificate stored on the OPTIGA Trust M device as part of the step-by-step guidance. The latter demonstrates how to use that QR code and get your certificate in the [Steps to complete the virtual developer kit](https://documentation.infineon.com/cirrent/docs/cid/quick-start-cloud-id-virtual-dev-kit#steps-to-complete-the-virtual-developer-kit) of the official **CIRRENT™ Cloud ID Quick Start Guide**
 
@@ -91,9 +91,9 @@ Find more information about CIRRENT™ Cloud ID on the [official product page](h
 
 ### OPTIGA Trust M \<*Configuration*\> Shield Layout
 
-![shield_top_bottom_view](../assets/optiga_trust_m_shield_layout.png)
+![shield_top_bottom_view](../assets/images/optiga_trust_m_shield_layout.png)
 
 * [PSoC&trade; 62S2 Wi-Fi BT Pioneer Kit Quickstart Guide](https://www.infineon.com/dgdl/Infineon-CY8CKIT-062S2-43012_PSoC_62S2_Wi-Fi_BT_Pioneer_Kit_Quick_Start_Guide-UserManual-v01_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f01cf1d192c)
-* [OPTIGA&trade; Trust Adapter Schematics (preliminary version)](../assets/IFXCSS-0058_OPTIGA_Trust-Adapter_1v1_SCH.PDF)
-* [OPTIGA&trade; Trust M Shield Schematics](../assets/optiga_trust_m_shield_schematics.pdf)
+* [OPTIGA&trade; Trust Adapter Schematics (preliminary version)](../assets/documents/IFXCSS-0058_OPTIGA_Trust-Adapter_1v1_SCH.PDF)
+* [OPTIGA&trade; Trust M Shield Schematics](../assets/documents/optiga_trust_m_shield_schematics.pdf)
 * [OPTIGA&trade; Trust M Host-Software & Documentation](https://www.github.com/Infineon/optiga-trust-m)

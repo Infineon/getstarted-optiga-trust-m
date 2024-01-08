@@ -10,13 +10,15 @@ You can find more information about the security chip on the product [web page](
 
 ## Table of content
 
-- [Step 1. Unpack the Kit](#step-1-kit-content)
-- [Step 2. Experience AWS IoT MQTT Demo](#step-2-experience-the-aws-iot-mqtt-demo)
-    - [Re-flash the Kit with the AWS IoT MQTT Demo Application](#re-flash-the-kit-with-the-aws-iot-mqtt-demo-application)
-- [Step 3. Experience CIRRENT™ Cloud ID](#step-3-experience-cirrent™-cloud-id)
-- [Step 4. Develop your own ModusToolbox™ Application for OPTIGA Trust M](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
-- [Support material](#support-material)
-- [Troubleshooting](#troubleshooting)
+- [Get Started with OPTIGA™ Trust M IoT Security Development Kit](#get-started-with-optiga-trust-m-iot-security-development-kit)
+  - [Description](#description)
+  - [Table of content](#table-of-content)
+  - [Step 1. Kit content](#step-1-kit-content)
+  - [Step 2. Experience the AWS IoT MQTT Demo](#step-2-experience-the-aws-iot-mqtt-demo)
+  - [Step 3. Experience CIRRENT™ Cloud ID](#step-3-experience-cirrent-cloud-id)
+  - [Step 4. Develop your own ModusToolbox™ Application for OPTIGA™ Trust M](#step-4-develop-your-own-modustoolbox-application-for-optiga-trust-m)
+  - [Support material](#support-material)
+  - [Troubleshooting](#troubleshooting)
 
 ## Step 1. Kit content
 
@@ -56,7 +58,7 @@ A Short Youtube video of a kit unpack experience
 
 1. Install the ModusToolbox™ as described in the [Step 4](#step-4-develop-your-own-modustoolbox™-application-for-optiga™-trust-m)
 2. Go to the Windows Start menu and find the `modus-shell` tool, open it
-3. Go to the folder where you have downloaded the following application image - [mtb-example-optiga-mqtt-client-demo.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/psoc62_secure_development_kit/mtb-example-optiga-mqtt-client-demo.hex) (right-click and Save as...)
+3. Go to the folder where you have downloaded the following application image - [mtb-example-optiga-mqtt-client-demo.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/mtb-example-optiga-mqtt-client-demo.hex) (right-click and Save as...)
 4. Run the following command 
 ```
 <path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/bin/openocd -s <path_to_the_ModusToolbox>/ModusToolbox/tools_2.4/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program mtb-example-optiga-mqtt-client-demo.hex verify reset exit;"

@@ -30,7 +30,7 @@ For the OPTIGA&trade; Trust M MTR Shield and Matter applications, an additional,
 > This has been tested with ModusToolox™ Version 3.0.
 
 > [!WARNING]
-> Currently, the PSOC™ 62S2 Wi-Fi BT Pioneer Kit (target `CY8CKIT-062S2-43012`) is not listed as one of the supported kits for OPTIGA Trust M Example Applications.
+> Currently, the PSOC™ 62S2 Wi-Fi BT Pioneer Kit (target `CY8CKIT-062S2-43012`) is not listed as one of the supported kits for OPTIGA&trade;Trust M Example Applications.
 > However, it is possible to start with one of the supported kits and change the Board Support Pacakge (BSP) to this specific kit. This is experimental and is not fully tested.
 
 [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.
@@ -83,13 +83,13 @@ Each OPTIGA™ Trust M Express Shield comes with a Reel Registration QR Code whi
 
 <img src="../assets/images/express_code.png" height="150"></a>
 
-Please mark your QR Code as it's uniquely identifies your board and can be used to retrive the certificate stored on the OPTIGA Trust M device as part of the step-by-step guidance. The latter demonstrates how to use that QR code and get your certificate in the [Steps to complete the virtual developer kit](https://documentation.infineon.com/cirrent/docs/cid/quick-start-cloud-id-virtual-dev-kit#steps-to-complete-the-virtual-developer-kit) of the official **CIRRENT™ Cloud ID Quick Start Guide**
+Please mark your QR Code as it's uniquely identifies your board and can be used to retrive the certificate stored on the OPTIGA&trade;Trust M device as part of the step-by-step guidance. The latter demonstrates how to use that QR code and get your certificate in the [Steps to complete the virtual developer kit](https://documentation.infineon.com/cirrent/docs/cid/quick-start-cloud-id-virtual-dev-kit#steps-to-complete-the-virtual-developer-kit) of the official **CIRRENT™ Cloud ID Quick Start Guide**
 
 Find more information about CIRRENT™ Cloud ID on the [official product page](https://www.infineon.com/cms/en/design-support/service/cloud/cirrent-cloud-id/)
 
 ## Support material
 
-### OPTIGA Trust M \<*Configuration*\> Shield Layout
+### OPTIGA&trade;Trust M \<*Configuration*\> Shield Layout
 
 ![shield_top_bottom_view](../assets/images/optiga_trust_m_shield_layout.png)
 

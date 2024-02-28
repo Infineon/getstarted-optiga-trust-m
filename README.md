@@ -14,8 +14,6 @@ Three kits are supported and listed here:
 |                                                  [OPTIGA&trade; Trust M Evaluation Kit](xmc4800_evaluation_kit/README.md)                                                   |                                          [OPTIGA&trade; Trust M IoT Security Development Kit](psoc62_secure_development_kit/README.md)                                           | [OPTIGA&trade; Trust M Shields in Combination with PSoC&trade; 62S2 Wi-Fi BT Pioneer Kit](psoc62_cy8ckit_mikrobus/README.md) |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
 | <a href="xmc4800_evaluation_kit/README.md"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/OPTIGA_Trust_M_Eval_Kit%2002.jpg" width="400"></a> | <a href="psoc62_secure_development_kit/README.md"><img src="https://github.com/Infineon/Assets/raw/master/Pictures/optiga_trust_iot_secdevkit.png" width="400"></a> |  <a href="psoc62_cy8ckit_mikrobus/README.md"><img src="assets/images/psoc62_matter_kit.png" width="400"></a>
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Creative Commons License - see the [LICENSE](LICENSE) file for details

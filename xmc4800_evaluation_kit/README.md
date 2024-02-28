@@ -95,9 +95,5 @@ In this guide you may find the following steps:
 
 The guidance on how to compile and debug the setup you can find [here](step-by-step-guide.md)
 
-
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Creative Commons License - see the [LICENSE](../LICENSE) file for details

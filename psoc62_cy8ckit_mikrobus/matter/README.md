@@ -1,12 +1,12 @@
 # Get Started with OPTIGA™ Trust M MTR and the PSoC62S2 Pioneer Kit
 
-![PSoC62 CY8CKIT and OPTIGA&trade;Trust M MTR](/assets/images/psoc62_matter_kit.png)
+![PSoC62 CY8CKIT and OPTIGA™Trust M MTR](/assets/images/psoc62_matter_kit.png)
 
 ## Description
 
 This repository contains instructions on how to get started with the [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) together with the [PSoC62S2 Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012) ( `CY8CKIT-062S2-43012`). The goal is to replicate a Matter Smart-Lock application.
 
-The PSoC6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA&trade; Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via a Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSoC Board will turn off.
+The PSoC6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA™ Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via a Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSoC Board will turn off.
 
 You can find more information about the security chip on the product [web page](https://www.infineon.com/optiga-trust-m-mtr)
 
@@ -27,8 +27,8 @@ You can find more information about the security chip on the product [web page](
 The Kit consists of 3 separate pieces of Hardware. If not done already, all three pieces need to be ordered separately.
 
 1. PSoC62S2 Pioneer Kit: [CY8CKIT-062S2-43012](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012)
-2. [OPTIGA&trade; Trust Adapter](https://www.infineon.com/optiga-trust-adapter)
-3. [OPTIGA&trade; Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield)
+2. [OPTIGA™ Trust Adapter](https://www.infineon.com/optiga-trust-adapter)
+3. [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield)
 
 You will additionally need a Matter enabled smart-home hub to translate the BLE commissioning signal to your phone and add the "Smart-Lock" to your home fabric.
 A list of tested Hubs is:
@@ -44,11 +44,11 @@ Additionally, a working WiFi Connection is required, to which all devices (Evalu
 TODO: Change to Link to Video once it exists!
 [![OPTIGA™ Trust M MTR Experience](https://img.youtube.com/vi/TSQBHB7JaWg/0.jpg)](https://www.youtube.com/watch?v=TSQBHB7JaWg) -->
 
-### OPTIGA&trade; Trust M MTR Shield Configuration upon arrival
+### OPTIGA™ Trust M MTR Shield Configuration upon arrival
 
-To make the evaluation process simpler, we have pre-configured the OPTIGA&trade;Trust M MTR chip on the shield with Matter Development credentials.
+To make the evaluation process simpler, we have pre-configured the OPTIGA™Trust M MTR chip on the shield with Matter Development credentials.
 
-| Object ID | OPTIGA&trade; Trust M MTR Configuration (Default)                                                                    | OPTIGA&trade; Trust M MTR Configuration (Shield)                                                                                                                                                                                              |
+| Object ID | OPTIGA™ Trust M MTR Configuration (Default)                                                                    | OPTIGA™ Trust M MTR Configuration (Shield)                                                                                                                                                                                              |
 | --------: | :-------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |    0xE0F0 | ECC NIST P256 Private Key 1                                                                                          | ECC NIST P256 Private Key 1                                                                                                                                                                                                                     |
 |    0xE0F1 | ECC NIST P256 Private Key 2                                                                                          | ECC NIST P256 Private Key 2                                                                                                                                                                                                                    |
@@ -63,7 +63,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA&trade;
 
 ## Step 2. Flash Kit with pre-compiled Matter Application
 
-1. Download the attached [chip-psoc6-lock-example.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/chip-psoc6-lock-example.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA&trade; Trust M MTR.
+1. Download the attached [chip-psoc6-lock-example.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/chip-psoc6-lock-example.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA™ Trust M MTR.
 2. Install the ModusToolbox™ toolset:
 
 > [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.
@@ -73,13 +73,13 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA&trade;
 3. Go to the Windows Start menu and find the `modus-shell` tool, open it
 4. Inside the modus-shell, navigate to the folder where you have downloaded the hex-file. E.g.: `cd ~/Downloads`
 5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
-6. Assuming you have installed Modustoolbox version 3.1 in the default location, run the following command:
+6. Assuming you have installed Modustoolbox version 3.2 in the default location, run the following command:
 
 ```shell
-~/ModusToolbox/tools_3.1/openocd/bin/openocd -s ~/ModusToolbox/tools_3.1/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program chip-psoc6-lock-example.hex verify reset exit;"
+~/ModusToolbox/tools_3.2/openocd/bin/openocd -s ~/ModusToolbox/tools_3.2/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program chip-psoc6-lock-example.hex verify reset exit;"
 ```
 
-If your installation directory or ModustToolbox&trade; version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.1>` with the correct version.
+If your installation directory or ModustToolbox™ version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.2>` with the correct version.
 
 Your PSoC62S2 Pioneer Kit should now be flashed with the application image to run as Matter v1.1 Smart-Lock Device.
 
@@ -154,7 +154,7 @@ commands. These power cycle the BlueTooth hardware and disable BR/EDR mode.
 <summary>Apple Homepod Mini: Commissioning via Apple Home</summary>
 
 ### Platform Setup
-Apart from the flashed PSoC62 Pioneer Kit + OPTIGA&trade; Trust M MTR you will need a  Matter enabled Apple Hub (e.g. HomePod Mini, HomePod 2nd Gen) and an iPhone or iPad with iOS 16.1 or later to connect to the Apple Smart-home Hub.
+Apart from the flashed PSoC62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a  Matter enabled Apple Hub (e.g. HomePod Mini, HomePod 2nd Gen) and an iPhone or iPad with iOS 16.1 or later to connect to the Apple Smart-home Hub.
 
 Add the Apple HomePod to your Smart-Home system and WiFi. Complete the setup as instructed by Apple and the Home app.
 
@@ -195,7 +195,7 @@ Open this URL and Scan the presented QR Code via your iPhone, after clicking "Ad
 You will now see additional logging output being generated by the PSoC62 Kit, as it now enters the Device Attestation Phase. In parallel, follow the instructions in the Apple Home App to add the new Matter Accessory to your Matter Smart Home.
 
 > ℹ
-> The Home App will ask you, if you want to add the Device even though the "Device has not been certified to work with your home". Press "Add Anyway", as this is related to the Matter Development Credentials, which are pre-provisioned to the OPTIGA&trade;Trust M MTR Shield. As soon as you provision your productive credentials, this message will not show anymore.
+> The Home App will ask you, if you want to add the Device even though the "Device has not been certified to work with your home". Press "Add Anyway", as this is related to the Matter Development Credentials, which are pre-provisioned to the OPTIGA™Trust M MTR Shield. As soon as you provision your productive credentials, this message will not show anymore.
 
 ### Control Device
 
@@ -213,11 +213,11 @@ The device will automatically "lock" itself again after a certain time.
 
 ### Platform Setup
 
-Apart from the flashed PSoC62 Pioneer Kit + OPTIGA&trade; Trust M MTR you will need a Matter enabled Google Nest (e.g. Nest Mini, Nest Hub) and an Android Phone or Tablet with Android 9.0 or later.
+Apart from the flashed PSoC62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a Matter enabled Google Nest (e.g. Nest Mini, Nest Hub) and an Android Phone or Tablet with Android 9.0 or later.
 
 Add the Google Nest to your Smart-Home system and WiFi. Complete the setup as instructed by Google and the Home app.
 
-### Add VID to your Google Developer Console
+### OPTIONAL: Add VID to your Google Developer Console
 
 Google Home only allows Matter devices, which are already registered in the Matter Distributed Compliance Ledger.
 One can however add development devices in the Google Developer Console. 
@@ -302,8 +302,8 @@ As written in the Matter Specification v1.1, the Device Commissioning consists o
 
 1. **Device Discovery**: The PSoC6 advertises itself through Bluetooth Low Energy, and the Comissionier finds them. The Passcode is obtained through scanning the QR-Code.
 2. **Security Setup wirth PASE**: Based on the obtained passcode, encryption keys are established between Commissioner and Commissionee using Passcode-Authenticated Session Establishment (PASE).
-3. **Device Attestation verification**: The Comissioner establishes the authenticity of the Comissionee as a certified device. Here, the OPTIGA&trade; Trust M MTR helps the PSoC 62, as it holds the relevant keys and certificates. (see Figure below)
-4. **Information Configuration**: The Commissioner provides the device information like UTC time and Operational Certificate. Again, the OPTIGA&trade; Trust M MTR can help with establishing the new NOC Keyset. (see Figure below)
+3. **Device Attestation verification**: The Comissioner establishes the authenticity of the Comissionee as a certified device. Here, the OPTIGA™ Trust M MTR helps the PSoC 62, as it holds the relevant keys and certificates. (see Figure below)
+4. **Information Configuration**: The Commissioner provides the device information like UTC time and Operational Certificate. Again, the OPTIGA™ Trust M MTR can help with establishing the new NOC Keyset. (see Figure below)
 5. **Join Network**: The device is triggered to connect to the operational network (i.e. the local Wi-Fi network). The Commissioner discovers and uses the Devices IPv6 Adress for further communication.
 6. **Security Setup with CASE**: A new set of encryption keys is derived using CASE (Certificate Authenticated Session Establishment) between the Device and Commissioner.
 7. **Commissioning Complete**: The commissioning is complete and a success-message exchange is triggered using the new CASE-derived keys.
@@ -436,29 +436,80 @@ CHIP:DL: BLEManagerImpl::SetAdvertisingData err:Success
 
 </details>
 
-## Step 4. Retrieve Matter Productive Credentials from Kudelski Keystream
+## Step 4. Retrieve Matter Test Credentials from Kudelski Keystream
 
 ### Retrieval Process
 
 Go to [www.osts.infineon.com/trustm/home](https://osts.infineon.com/trustm/home). You will need to register with Infineon's OSTS (Online Tools and Services).
 
-Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM. Additionally, you will find more documentation and application notes on the use and integration of the OPTIGA&trade; Trust M MTR.
+Here you will find the instructions to register with Infineon and our partner Kudelski IoT. After a complete registration, you can claim your device certificates from Kudelski keySTREAM. Additionally, you will find more documentation and application notes on the use and integration of the OPTIGA™ Trust M MTR.
 
-As input for the claiming you will need your Reel-ID. The QR Code on the backside of the packaging box of the OPTIGA&trade; Trust M MTR Shield contains this Reel-ID for your shield. Either scan the QR Code with your phone to retrieve the ID or manually type the ID as printed next to the QR Code.
+As input for the claiming you will need your Reel-ID. The QR Code on the backside of the packaging box of the OPTIGA™ Trust M MTR Shield contains this Reel-ID for your shield. Either scan the QR Code with your phone to retrieve the ID or manually type the ID as printed next to the QR Code.
 
 ### Late-stage Provisioning
+Two options exist to provision Matter Credentials from Kudelski IoT to the OPTIGA™ Trust M MTR. 
 
-We have prepared a separate application guide for the late-stage provisioning mechanism. For this, you will need a Raspberry Pi as provisioning harness.
+The first option ([Evaluation Solution](#evaluation-solution-psoc-6-only)) is based on the PSoC 62S2 WiFi-BT Pioneer Kit and the OPTIGA™ Trust Python Library. With this solution, you are able to provision a single OPTIGA™ Trust M MTR Chip. It is perfect for the evaluation phase, as it does not require any extra hardware.
+
+The second option ([Productive Solution](#productive-solution-requries-raspberry-pi-or-other-linux-system)) is more advanced and powerful, but requires a Raspberry Pi as "Provisioning Harness". If you have advanced from the Evaluation Phase, this is the way to go.
+
+#### Evaluation solution (PSoC 6 only)
+
+> [!NOTE]
+> This only works out-of-the-box with OPTIGA™ Trust M MTR Shields with HW-Rev > 2.1
+
+##### 1. Flash the OPTIGA™ Trust M Data Management Example
+
+1. Download the attached [mtb-example-optiga-data-management-cy8ckit.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/mtb-example-optiga-data-management-cy8ckit.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board based on the [OPTIGA™ Trust M Data Managment MTB Example](https://github.com/Infineon/mtb-example-optiga-data-management). 
+2. ModusToolbox™ should already be installed. If not, check [Step 2](#step-2-flash-kit-with-pre-compiled-matter-application) for instructions
+3. Go to the Windows Start menu and find the `modus-shell` tool, open it
+4. Inside the modus-shell, navigate to the folder where you have downloaded the hex-file. E.g.: `cd ~/Downloads`
+5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
+6. Assuming you have installed Modustoolbox version 3.2 in the default location, run the following command:
+
+```shell
+~/ModusToolbox/tools_3.2/openocd/bin/openocd -s ~/ModusToolbox/tools_3.2/openocd/scripts -c "source [find interface/kitprog3.cfg]; ; source [find target/psoc6_2m.cfg]; psoc6 allow_efuse_program off; psoc6 sflash_restrictions 1; program mtb-example-optiga-data-management-cy8ckit.hex verify reset exit;"
+```
+
+If your installation directory or ModustToolbox™ version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.2>` with the correct version.
+
+##### 2. Programm Matter Credentials using OPTIGA™ Trust Python Library
+
+Python 3 has to be installed. Follow the instructions here https://www.python.org/downloads/ to install.
+Additionally, download the [write_matter_credentials.py](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/scripts/write_matter_credentials.py) Python script and the [requirements.txt](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/scripts/requirments.txt) file. 
+
+Open a new terminal window and locate the downloaded files (e.g. at ~/Downloads). Install the Python Requirements (py7zr, optigatrust and PyOpenSSL).
+
+```shell
+python -m pip install -r requirements.txt
+```
+
+The `write_matter_credentials.py` script expects a matching bundle file from Kudelski IoT in the same location where the script is executed. The Bundle File for your Shield can be retrieved using the QR-Code on the Shields Box and the instructions [above](#retrieval-process). 
+
+Optionally, you can replace the Certificate Declaration inside the OPTIGA™ Trust M MTR. The [Test Certificate Declaration](https://github.com/Infineon/linux-optiga-trust-m/blob/development_v3/scripts/matter_provisioning/credentials/Chip-Test-CD-Cert.bin) is already installed. If you want to write the CD, supply the path to the CD Binary File after the scripts name.
+
+```shell
+python write_matter_credentials.py [path/to/CD.bin]
+```
+
+##### 3. Re-flash the PSoC with the Matter Application
+
+The PSoC needs to be reflashed with the Matter Application Image. 
+
+Follow the instructions in [Step 2](#step-2-flash-kit-with-pre-compiled-matter-application) or develop your own Matter Application in [Step 5](#step-5-develop-your-own-matter-application-for-optiga-trust-m-mtr)
+
+#### Productive solution (Requries Raspberry Pi or other Linux System)
+We have prepared a separate application guide for the late-stage provisioning mechanism. For this, you will need a Raspberry Pi as provisioning harness. This solution is primarly built for Raspberry Pi, but is able to run on any Linux system with little adapations.
 
 Find the Application Guide here: [www.github.com/Infineon/linux-optiga-trust-m/tree/development_v3/scripts/matter_provisioning](https://github.com/Infineon/linux-optiga-trust-m/tree/development_v3/scripts/matter_provisioning)
 
 <!-- Once we have a version 2 of Trust M MTR, add python-provisioning option! -->
 
-## Step 5. Develop your own Matter Application for OPTIGA&trade; Trust M MTR
+## Step 5. Develop your own Matter Application for OPTIGA™ Trust M MTR
 
 Developing a new Matter application most likely starts with the Matter SDK.
 
-To start developing a Matter Application for the OPTIGA&trade; Trust M MTR together with PSoC6, see the [CHIP Matter SDK Repository](https://github.com/project-chip/connectedhomeip/tree/master/examples/lock-app/infineon/psoc6).
+To start developing a Matter Application for the OPTIGA™ Trust M MTR together with PSoC6, see the [CHIP Matter SDK Repository](https://github.com/project-chip/connectedhomeip/tree/master/examples/lock-app/infineon/psoc6).
 
 ## Support material
 

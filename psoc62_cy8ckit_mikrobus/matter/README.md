@@ -1,18 +1,18 @@
-# Get Started with OPTIGA™ Trust M MTR and the PSoC62S2 Pioneer Kit
+# Get Started with OPTIGA™ Trust M MTR and the PSOC™ 62S2 Pioneer Kit
 
-![PSoC62 CY8CKIT and OPTIGA™Trust M MTR](/assets/images/psoc62_matter_kit.png)
+![PSOC™ 62 CY8CKIT and OPTIGA™Trust M MTR](/assets/images/psoc62_matter_kit.png)
 
 ## Description
 
-This repository contains instructions on how to get started with the [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) together with the [PSoC62S2 Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012) ( `CY8CKIT-062S2-43012`). The goal is to replicate a Matter Smart-Lock application.
+This repository contains instructions on how to get started with the [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) together with the [PSOC™ 62S2 Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012) ( `CY8CKIT-062S2-43012`). The goal is to replicate a Matter Smart-Lock application.
 
-The PSoC6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA™ Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via a Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSoC Board will turn off.
+The PSOC™ 6 board needs to be flashed with a specific software image. Then it will use the pre-provisioned Matter Development Credentials on the [OPTIGA™ Trust M MTR](https://www.infineon.com/optiga-trust-m-mtr) to attestate itself as a valid Matter Smart-Lock. The device can be added to your Smart-Home ecosystem via a Matter enabled Smart-Home hub and can then be controlled via your phone. If you "unlock" the Smart-Lock on the controller, the LED on the PSOC™ Board will turn off.
 
 You can find more information about the security chip on the product [web page](https://www.infineon.com/optiga-trust-m-mtr)
 
 ## Table of content
 
-- [Get Started with OPTIGA™ Trust M MTR and the PSoC62S2 Pioneer Kit](#get-started-with-optiga-trust-m-mtr-and-the-psoc62s2-pioneer-kit)
+- [Get Started with OPTIGA™ Trust M MTR and the PSOC™ 62S2 Pioneer Kit](#get-started-with-optiga-trust-m-mtr-and-the-psoc62s2-pioneer-kit)
   - [Description](#description)
   - [Table of content](#table-of-content)
   - [Step 1. Kit content](#step-1-kit-content)
@@ -26,7 +26,7 @@ You can find more information about the security chip on the product [web page](
 
 The Kit consists of 3 separate pieces of Hardware. If not done already, all three pieces need to be ordered separately.
 
-1. PSoC62S2 Pioneer Kit: [CY8CKIT-062S2-43012](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012)
+1. PSOC™ 62S2 Pioneer Kit: [CY8CKIT-062S2-43012](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012)
 2. [OPTIGA™ Trust Adapter](https://www.infineon.com/optiga-trust-adapter)
 3. [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield)
 
@@ -63,7 +63,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA™Trus
 
 ## Step 2. Flash Kit with pre-compiled Matter Application
 
-1. Download the attached [chip-psoc6-lock-example.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/chip-psoc6-lock-example.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA™ Trust M MTR.
+1. Download the attached [chip-psoc6-lock-example.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/chip-psoc6-lock-example.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSOC™ 62S2 Board, based on the Matter SDK v1.1. It will use the Matter credentials stored on the OPTIGA™ Trust M MTR.
 2. Install the ModusToolbox™ toolset:
 
 > [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.
@@ -72,7 +72,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA™Trus
 
 3. Go to the Windows Start menu and find the `modus-shell` tool, open it
 4. Inside the modus-shell, navigate to the folder where you have downloaded the hex-file. E.g.: `cd ~/Downloads`
-5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
+5. Connect the PSOC™ 62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
 6. Assuming you have installed Modustoolbox version 3.2 in the default location, run the following command:
 
 ```shell
@@ -81,7 +81,7 @@ To make the evaluation process simpler, we have pre-configured the OPTIGA™Trus
 
 If your installation directory or ModustToolbox™ version differs, replace `<~>` with the installation path for the ModusToolbox™ and `<tools_3.2>` with the correct version.
 
-Your PSoC62S2 Pioneer Kit should now be flashed with the application image to run as Matter v1.1 Smart-Lock Device.
+Your PSOC™ 62S2 Pioneer Kit should now be flashed with the application image to run as Matter v1.1 Smart-Lock Device.
 
 ## Step 3. Experience the Matter Demo
 
@@ -99,7 +99,7 @@ Unfold one of the following sections, depending on your platform setup:
 
 ### Setting up Chip tool
 
-Once PSoC6 is up and running, we need to set up chip-tool on Raspberry Pi 4 to
+Once PSOC™ 6 is up and running, we need to set up chip-tool on Raspberry Pi 4 to
 perform commissioning and cluster control.
 
 -   Set up python controller.
@@ -154,15 +154,15 @@ commands. These power cycle the BlueTooth hardware and disable BR/EDR mode.
 <summary>Apple Homepod Mini: Commissioning via Apple Home</summary>
 
 ### Platform Setup
-Apart from the flashed PSoC62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a  Matter enabled Apple Hub (e.g. HomePod Mini, HomePod 2nd Gen) and an iPhone or iPad with iOS 16.1 or later to connect to the Apple Smart-home Hub.
+Apart from the flashed PSOC™ 62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a  Matter enabled Apple Hub (e.g. HomePod Mini, HomePod 2nd Gen) and an iPhone or iPad with iOS 16.1 or later to connect to the Apple Smart-home Hub.
 
 Add the Apple HomePod to your Smart-Home system and WiFi. Complete the setup as instructed by Apple and the Home app.
 
 ### Add Device to Home
 
-Connect the PSoC62 Pioneer Kit to your PC using the included micro USB cable. Start tracing the UART log-output via your favorite terminal (e.g. PuTTY, TeraTerm) and the virtual COM Port.
+Connect the PSOC™ 62 Pioneer Kit to your PC using the included micro USB cable. Start tracing the UART log-output via your favorite terminal (e.g. PuTTY, TeraTerm) and the virtual COM Port.
 
-Reset the PSoC62 Pioneer Kit once by pressing the black "XRES" button.
+Reset the PSOC™ 62 Pioneer Kit once by pressing the black "XRES" button.
 
 The full output trace can be seen [below](#traces).
 
@@ -192,14 +192,14 @@ Open this URL and Scan the presented QR Code via your iPhone, after clicking "Ad
 
 ![iPhone: Add Matter Accessory](/assets/images/iphone_matter_onboarding.png)
 
-You will now see additional logging output being generated by the PSoC62 Kit, as it now enters the Device Attestation Phase. In parallel, follow the instructions in the Apple Home App to add the new Matter Accessory to your Matter Smart Home.
+You will now see additional logging output being generated by the PSOC™ 62 Kit, as it now enters the Device Attestation Phase. In parallel, follow the instructions in the Apple Home App to add the new Matter Accessory to your Matter Smart Home.
 
 > ℹ
 > The Home App will ask you, if you want to add the Device even though the "Device has not been certified to work with your home". Press "Add Anyway", as this is related to the Matter Development Credentials, which are pre-provisioned to the OPTIGA™Trust M MTR Shield. As soon as you provision your productive credentials, this message will not show anymore.
 
 ### Control Device
 
-You can now "lock" and "unlock" the PSoC62 Kit via your Apple Home App.
+You can now "lock" and "unlock" the PSOC™ 62 Kit via your Apple Home App.
 
 - "Unlocked" State is when the User LED (red) is off
 - "Locked" State is when the User LED (red) is on
@@ -213,7 +213,7 @@ The device will automatically "lock" itself again after a certain time.
 
 ### Platform Setup
 
-Apart from the flashed PSoC62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a Matter enabled Google Nest (e.g. Nest Mini, Nest Hub) and an Android Phone or Tablet with Android 9.0 or later.
+Apart from the flashed PSOC™ 62 Pioneer Kit + OPTIGA™ Trust M MTR you will need a Matter enabled Google Nest (e.g. Nest Mini, Nest Hub) and an Android Phone or Tablet with Android 9.0 or later.
 
 Add the Google Nest to your Smart-Home system and WiFi. Complete the setup as instructed by Google and the Home app.
 
@@ -242,9 +242,9 @@ Your Google Home Account should now be ready to accept the Smart Lock.
 
 ### Add Device to Home
 
-Connect the PSoC62 Pioneer Kit to your PC using the included micro USB cable. Start tracing the UART log-output via your favorite terminal (e.g. PuTTY, TeraTerm) and the virtual COM Port.
+Connect the PSOC™ 62 Pioneer Kit to your PC using the included micro USB cable. Start tracing the UART log-output via your favorite terminal (e.g. PuTTY, TeraTerm) and the virtual COM Port.
 
-Reset the PSoC62 Pioneer Kit once by pressing the black "XRES" button.
+Reset the PSOC™ 62 Pioneer Kit once by pressing the black "XRES" button.
 
 The full output trace can be seen [below](#traces).
 
@@ -276,7 +276,7 @@ If the Google Home App does not directly find your device, select "Matter-enable
 
 ### Control Device
 
-You can now "lock" and "unlock" the PSoC62 Kit via your Google Home App.
+You can now "lock" and "unlock" the PSOC™ 62 Kit via your Google Home App.
 
 - "Unlocked" State is when the User LED (red) is off
 - "Locked" State is when the User LED (red) is on
@@ -300,9 +300,9 @@ The device will automatically "lock" itself again after a certain time.
 The demo just showed the "Device Commissioning" phase of the Matter Protocol.
 As written in the Matter Specification v1.1, the Device Commissioning consists of 7 steps, which the Evaluation Kit (Device / Commissionee) goes trough. The Phone and Smart Home Hub work together (Commissioner) to translate protocols and onboard the device.
 
-1. **Device Discovery**: The PSoC6 advertises itself through Bluetooth Low Energy, and the Comissionier finds them. The Passcode is obtained through scanning the QR-Code.
+1. **Device Discovery**: The PSOC™ 6 advertises itself through Bluetooth Low Energy, and the Comissionier finds them. The Passcode is obtained through scanning the QR-Code.
 2. **Security Setup wirth PASE**: Based on the obtained passcode, encryption keys are established between Commissioner and Commissionee using Passcode-Authenticated Session Establishment (PASE).
-3. **Device Attestation verification**: The Comissioner establishes the authenticity of the Comissionee as a certified device. Here, the OPTIGA™ Trust M MTR helps the PSoC 62, as it holds the relevant keys and certificates. (see Figure below)
+3. **Device Attestation verification**: The Comissioner establishes the authenticity of the Comissionee as a certified device. Here, the OPTIGA™ Trust M MTR helps the PSOC™ 62, as it holds the relevant keys and certificates. (see Figure below)
 4. **Information Configuration**: The Commissioner provides the device information like UTC time and Operational Certificate. Again, the OPTIGA™ Trust M MTR can help with establishing the new NOC Keyset. (see Figure below)
 5. **Join Network**: The device is triggered to connect to the operational network (i.e. the local Wi-Fi network). The Commissioner discovers and uses the Devices IPv6 Adress for further communication.
 6. **Security Setup with CASE**: A new set of encryption keys is derived using CASE (Certificate Authenticated Session Establishment) between the Device and Commissioner.
@@ -449,22 +449,22 @@ As input for the claiming you will need your Reel-ID. The QR Code on the backsid
 ### Late-stage Provisioning
 Two options exist to provision Matter Credentials from Kudelski IoT to the OPTIGA™ Trust M MTR. 
 
-The first option ([Evaluation Solution](#evaluation-solution-psoc-6-only)) is based on the PSoC 62S2 WiFi-BT Pioneer Kit and the OPTIGA™ Trust Python Library. With this solution, you are able to provision a single OPTIGA™ Trust M MTR Chip. It is perfect for the evaluation phase, as it does not require any extra hardware.
+The first option ([Evaluation Solution](#evaluation-solution-psoc-6-only)) is based on the PSOC™ 62S2 WiFi-BT Pioneer Kit and the OPTIGA™ Trust Python Library. With this solution, you are able to provision a single OPTIGA™ Trust M MTR Chip. It is perfect for the evaluation phase, as it does not require any extra hardware.
 
 The second option ([Productive Solution](#productive-solution-requries-raspberry-pi-or-other-linux-system)) is more advanced and powerful, but requires a Raspberry Pi as "Provisioning Harness". If you have advanced from the Evaluation Phase, this is the way to go.
 
-#### Evaluation solution (PSoC 6 only)
+#### Evaluation solution (PSOC™ 6 only)
 
 > [!NOTE]
 > This only works out-of-the-box with OPTIGA™ Trust M MTR Shields with HW-Rev > 2.1
 
 ##### 1. Flash the OPTIGA™ Trust M Data Management Example
 
-1. Download the attached [mtb-example-optiga-data-management-cy8ckit.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/mtb-example-optiga-data-management-cy8ckit.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSoC62S2 Board based on the [OPTIGA™ Trust M Data Managment MTB Example](https://github.com/Infineon/mtb-example-optiga-data-management). 
+1. Download the attached [mtb-example-optiga-data-management-cy8ckit.hex](https://github.com/Infineon/getstarted-optiga-trust-m/raw/main/assets/binaries/mtb-example-optiga-data-management-cy8ckit.hex) (right-click and Save as...) hex-file to your PC. This hex-file is a pre-compiled image for the PSOC™ 62S2 Board based on the [OPTIGA™ Trust M Data Managment MTB Example](https://github.com/Infineon/mtb-example-optiga-data-management). 
 2. ModusToolbox™ should already be installed. If not, check [Step 2](#step-2-flash-kit-with-pre-compiled-matter-application) for instructions
 3. Go to the Windows Start menu and find the `modus-shell` tool, open it
 4. Inside the modus-shell, navigate to the folder where you have downloaded the hex-file. E.g.: `cd ~/Downloads`
-5. Connect the PSoC62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
+5. Connect the PSOC™ 62 Pioneer Kit to your PC via the Micro-USB Cable. Use the Micro-USB port labeled `KITPROG3` on the left side of the board.
 6. Assuming you have installed Modustoolbox version 3.2 in the default location, run the following command:
 
 ```shell
@@ -492,9 +492,9 @@ Optionally, you can replace the Certificate Declaration inside the OPTIGA™ Tru
 python write_matter_credentials.py [path/to/CD.bin]
 ```
 
-##### 3. Re-flash the PSoC with the Matter Application
+##### 3. Re-flash the PSOC™ with the Matter Application
 
-The PSoC needs to be reflashed with the Matter Application Image. 
+The PSOC™ needs to be reflashed with the Matter Application Image. 
 
 Follow the instructions in [Step 2](#step-2-flash-kit-with-pre-compiled-matter-application) or develop your own Matter Application in [Step 5](#step-5-develop-your-own-matter-application-for-optiga-trust-m-mtr)
 
@@ -509,7 +509,7 @@ Find the Application Guide here: [www.github.com/Infineon/linux-optiga-trust-m/t
 
 Developing a new Matter application most likely starts with the Matter SDK.
 
-To start developing a Matter Application for the OPTIGA™ Trust M MTR together with PSoC6, see the [CHIP Matter SDK Repository](https://github.com/project-chip/connectedhomeip/tree/master/examples/lock-app/infineon/psoc6).
+To start developing a Matter Application for the OPTIGA™ Trust M MTR together with PSOC™ 6, see the [CHIP Matter SDK Repository](https://github.com/project-chip/connectedhomeip/tree/master/examples/lock-app/infineon/psoc6).
 
 ## Support material
 

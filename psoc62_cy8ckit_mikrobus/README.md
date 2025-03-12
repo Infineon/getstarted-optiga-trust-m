@@ -1,6 +1,6 @@
-# Get Started with OPTIGA™ Trust M Shields and the PSoC™ 62S2 Wi-Fi BT Pioneer Kit
+# Get Started with OPTIGA™ Trust M Shields and the PSOC™ 62S2 Wi-Fi BT Pioneer Kit
 
-- [Get Started with OPTIGA™ Trust M Shields and the PSoC™ 62S2 Wi-Fi BT Pioneer Kit](#get-started-with-optiga-trust-m-shields-and-the-psoc-62s2-wi-fi-bt-pioneer-kit)
+- [Get Started with OPTIGA™ Trust M Shields and the PSOC™ 62S2 Wi-Fi BT Pioneer Kit](#get-started-with-optiga-trust-m-shields-and-the-psoc-62s2-wi-fi-bt-pioneer-kit)
   - [Introduction](#introduction)
   - [Develop your own ModusToolbox™ Application for OPTIGA™ Trust M (*OPTIGA™ Trust M v3/Express/MTR*)](#develop-your-own-modustoolbox-application-for-optiga-trust-m-optiga-trust-m-v3expressmtr)
   - [Experience CIRRENT™ Cloud-ID (*OPTIGA™ Trust M Express Only*)](#experience-cirrent-cloud-id-optiga-trust-m-express-only)
@@ -9,15 +9,15 @@
 
 ## Introduction
 
-This section is based on the [PSoC™ 62S2 Wi-Fi BT Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012/) in combination with the [OPTIGA™ Trust Adapter](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-adapter/).
+This section is based on the [PSOC™ 62S2 Wi-Fi BT Pioneer Kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012/) in combination with the [OPTIGA™ Trust Adapter](https://www.infineon.com/cms/en/product/evaluation-boards/optiga-trust-adapter/).
 
 <img src="../assets/images/psoc62_matter_kit.png" width="450">
 
 Addtionally, any one of the following OPTIGA™ Trust M Shields is needed:
 
-|                                                  [OPTIGA™ Trust M Shield2Go](https://www.infineon.com/cms/en/product/evaluation-boards/s2go-security-optiga-m/)                                                   |                                          [OPTIGA™ Trust M Express Shield](https://www.infineon.com/optiga-trust-m-express-shield)                                           | [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-| <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/S2Go.png" height="300"></a> | <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/Optiga_Trust_M_Express-Front.png" width="300"></a> |      <a href="matter/README.md"><img src="../assets/images/Optiga_Trust_M_Matter-Front.png" width="300"></a>       |
+| [OPTIGA™ Trust M Shield]() |                                                  [OPTIGA™ Trust M Shield2Go](https://www.infineon.com/cms/en/product/evaluation-boards/s2go-security-optiga-m/)                                                   |                                          [OPTIGA™ Trust M Express Shield](https://www.infineon.com/optiga-trust-m-express-shield)                                           | [OPTIGA™ Trust M MTR Shield](https://www.infineon.com/optiga-trust-m-mtr-shield) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+| <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/Optiga_Trust_M_v3-Front.png" width="150"></a> | <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/S2Go.png" height="300"></a> | <a href="#develop-your-own-modustoolbox™-application-for-optiga™-trust-m-optiga™-trust-m-v3expressmtr"><img src="../assets/images/Optiga_Trust_M_Express-Front.png" width="300"></a> |      <a href="matter/README.md"><img src="../assets/images/Optiga_Trust_M_Matter-Front.png" width="300"></a>       |
 
 One of these shields needs to be plugged into its designated slot on the OPTIGA™ Trust Adapter.
 
@@ -27,26 +27,26 @@ For the OPTIGA™ Trust M MTR Shield and Matter applications, an additional, sep
 ## Develop your own ModusToolbox™ Application for OPTIGA™ Trust M (*OPTIGA™ Trust M v3/Express/MTR*)
 
 > [!NOTE]
-> This has been tested with ModusToolox™ Version 3.0.
+> This has been tested with ModusToolox™ Version 3.2.
 
-> [!WARNING]
-> Currently, the PSOC™ 62S2 Wi-Fi BT Pioneer Kit (target `CY8CKIT-062S2-43012`) is not listed as one of the supported kits for OPTIGA™Trust M Example Applications.
-> However, it is possible to start with one of the supported kits and change the Board Support Pacakge (BSP) to this specific kit. This is experimental and is not fully tested.
+<!-- > [!WARNING]
+> Currently, the PSOC™ 62S2 Wi-Fi BT Pioneer Kit (target `CY8CKIT-062S2-43012`) is not listed as one of the supported kits for OPTIGA™ Trust M Example Applications.
+> However, it is possible to start with one of the supported kits and change the Board Support Pacakge (BSP) to this specific kit. This is experimental and is not fully tested. -->
 
 [Infineon ModusToolbox™](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/) is a collection of easy-to-use software and tools enabling rapid development of Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC™ Wi-Fi, AIROC™ Bluetooth® and AIROC™ Wi-Fi and Combo devices.
-In order to experience all available code examples demonstrating the usage of OPTIGA™ Trust M on the IoT Security Development Kit you need to download and install the software. Please refer for this to the followig documents:
+In order to experience all available code examples demonstrating the usage of OPTIGA™ Trust M on the PSOC™ 62S2 WiFi-BT Pioneer Kit you need to download and install the software. Please refer for this to the following documents:
 
 1. [ModusToolbox™ Installation Guide](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/#!?fileId=8ac78c8c7d718a49017d99a20342316d)
 2. [Eclipse IDE for ModusToolbox™ Quick Start Guide](https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/#!?fileId=8ac78c8c7d718a49017d99a11923313b)
 
-There are currently three released Code Examples for OPTIGA™ Trust M:
+There are currently four released Code Examples for OPTIGA™ Trust M:
 
 1. [OPTIGA™ Trust M: Cryptography](https://github.com/Infineon/mtb-example-optiga-crypto)
 2. [OPTIGA™ Trust M: MQTT Client](https://github.com/Infineon/mtb-example-optiga-mqtt-client)
 3. [OPTIGA™ Trust M: Power management](https://github.com/Infineon/mtb-example-optiga-power-management)
 4. [OPTIGA™ Trust M: Data and certificates management](https://github.com/Infineon/mtb-example-optiga-data-management)
 
-In the nutshell, the sequence below demonstrates generic steps to make the code example run, for other than **[OPTIGA™ Trust M: Cryptography](https://github.com/Infineon/mtb-example-optiga-crypto)** examples the process is similar apart from the example name. For settings and individual examples steps please refer to their README's on GitHub
+In a nutshell, the sequence below demonstrates generic steps to make the code example run, for other than **[OPTIGA™ Trust M: Cryptography](https://github.com/Infineon/mtb-example-optiga-crypto)** examples the process is similar apart from the example name. For settings and individual examples steps please refer to their README's on GitHub.
 
 * Start Eclipse IDE for ModusToolbox™
 
@@ -55,7 +55,7 @@ In the nutshell, the sequence below demonstrates generic steps to make the code 
 ![image](https://user-images.githubusercontent.com/39588888/154308211-ab27a95e-35c2-4350-ac98-41d4472b4d11.png)
 
 * Choose your BSP:
-Type "DEV-01" into the dialog and choose **CYSBSYSKIT-DEV-01**.
+Type "CY8CKIT-062S2-43012" into the dialog and choose **CY8CKIT-062S2-43012**.
 Click on **Next** to continue.
 
 ![Select Board](../assets/images/mtb_project_creator_1.png)
@@ -64,16 +64,21 @@ Click on **Next** to continue.
 
 ![Select Application](../assets/images/mtb_project_creator_2.png)
 
+* Compile and run. See the [README.md](https://github.com/Infineon/mtb-example-optiga-crypto/blob/master/README.md) for more information about the example
+
+[!WARNING]
+> Currently, there are only a few PSOC™ 6 Kits listed as supported kits for OPTIGA™ Trust M Example Applications.
+> However, it is possible to start with one of the supported kits (e.g. with CY8CKIT-062S2-43012) and change the Board Support Pacakge (BSP) to this specific kit. This is experimental and is not fully tested.
+> For a detailed description, refer to [this KBA](https://community.infineon.com/t5/Knowledge-Base-Articles/OPTIGA-Trust-M-Interfacing-OPTIGA-Trust-M-with-a-PSoC-6-device)
+
 * Select your example application and change the used Board Support Package (BSP)
   1. Launch the Library Manager via the MTB Quick Panel
   2. Click "Add BSP"
-  3. In the new window, search for `CY8CKIT-062S2-43012`, select the correct BSP and click "OK"
+  3. In the new window, search for your chosen BSP (e.g `CY8CKIT-062S2-43012`), select the correct BSP and click "OK"
   4. Select the "APP_CY8CKIT-062S2-43012" as Active BSP by clicking on it and then "Update"
   5. After it completes, "Close" the window
 
 ![Library Manager](../assets/images/mtb_library_manager.png)
-
-* Compile and run. See the [README.md](https://github.com/Infineon/mtb-example-optiga-crypto/blob/master/README.md) for more information about the example
 
 ## Experience CIRRENT™ Cloud-ID (*OPTIGA™ Trust M Express Only*)
 
@@ -97,6 +102,6 @@ Find more information about CIRRENT™ Cloud ID on the [official product page](h
 
 ![shield_top_bottom_view](../assets/images/optiga_trust_m_shield_layout.png)
 
-* [PSoC™ 62S2 Wi-Fi BT Pioneer Kit Quickstart Guide](https://www.infineon.com/dgdl/Infineon-CY8CKIT-062S2-43012_PSoC_62S2_Wi-Fi_BT_Pioneer_Kit_Quick_Start_Guide-UserManual-v01_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f01cf1d192c)
-* [OPTIGA™ Trust Adapter Schematics (preliminary version)](../assets/documents/IFXCSS-0058_OPTIGA_Trust-Adapter_1v1_SCH.PDF)
+* [PSOC™ 62S2 Wi-Fi BT Pioneer Kit Quickstart Guide](https://www.infineon.com/dgdl/Infineon-CY8CKIT-062S2-43012_PSoC_62S2_Wi-Fi_BT_Pioneer_Kit_Quick_Start_Guide-UserManual-v01_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f01cf1d192c)
+* [OPTIGA™ Trust Adapter Schematics](../assets/documents/optiga_trust_adapter_schematics.pdf)
 * [OPTIGA™ Trust M Shield Schematics](../assets/documents/optiga_trust_m_shield_schematics.pdf)
